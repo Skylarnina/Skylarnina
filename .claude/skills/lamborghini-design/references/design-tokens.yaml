@@ -1,0 +1,195 @@
+colors:
+  primary: "#FFC000"
+  primary-hover: "#917300"
+  primary-text-variant: "#FFCE3E"
+  on-primary: "#000000"
+  cyan-pulse: "#29ABE2"
+  link-blue: "#3860BE"
+  teal-action-hover: "#1EAEDB"
+  canvas: "#000000"
+  charcoal: "#202020"
+  dark-iron: "#181818"
+  overlay-black: "rgba(0,0,0,0.7)"
+  overlay-mid: "rgba(0,0,0,0.5)"
+  overlay-mist: "rgba(0,0,0,0.25)"
+  near-white-surface: "#F8F8F8"
+  mist-surface: "#E6E6E6"
+  on-dark: "#FFFFFF"
+  on-dark-secondary: "#F5F5F5"
+  graphite: "#494949"
+  ash: "#7D7D7D"
+  steel: "#969696"
+  slate: "#666666"
+  iron: "#555555"
+  shadow-text: "#313131"
+
+typography:
+  hero-display:
+    fontFamily: LamboType
+    fallback: "Roboto, Helvetica Neue, Arial"
+    fontSize: 120px
+    fontWeight: 400
+    lineHeight: 0.92
+    letterSpacing: normal
+    textTransform: uppercase
+  display-2:
+    fontFamily: LamboType
+    fontSize: 80px
+    fontWeight: 400
+    lineHeight: 1.13
+    textTransform: uppercase
+  section-title:
+    fontFamily: LamboType
+    fontSize: 54px
+    fontWeight: 400
+    lineHeight: 1.19
+    textTransform: uppercase
+  sub-section:
+    fontFamily: LamboType
+    fontSize: 40px
+    fontWeight: 400
+    lineHeight: 1.15
+    textTransform: uppercase
+  feature-heading:
+    fontFamily: LamboType
+    fontSize: 27px
+    fontWeight: 400
+    lineHeight: 1.37
+    textTransform: uppercase
+  card-title:
+    fontFamily: LamboType
+    fontSize: 24px
+    fontWeight: 400
+  body-large:
+    fontFamily: LamboType
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 1.56
+  body-ui:
+    fontFamily: LamboType
+    fontSize: 16px
+    fontWeight: "400/700"
+    lineHeight: 1.50
+    letterSpacing: "normal/0.16px"
+  button-large:
+    fontFamily: LamboType
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.50
+  button-standard:
+    fontFamily: LamboType
+    fontSize: 14.4px
+    fontWeight: "300/700"
+    lineHeight: 1.00
+    letterSpacing: "0.14-0.2px"
+    textTransform: uppercase
+  button-small:
+    fontFamily: LamboType
+    fontSize: 13px
+    fontWeight: "300/500"
+    lineHeight: 1.20
+    letterSpacing: "0.13-0.2px"
+  caption:
+    fontFamily: LamboType
+    fontSize: 14px
+    fontWeight: "600/700"
+    lineHeight: "1.14-1.50"
+    letterSpacing: -0.42px
+    textTransform: uppercase
+  label:
+    fontFamily: LamboType
+    fontSize: 12px
+    fontWeight: "400/500"
+    lineHeight: 1.83
+    letterSpacing: 0.96px
+    textTransform: uppercase
+  micro:
+    fontFamily: LamboType
+    fontSize: 10px
+    fontWeight: 400
+    lineHeight: "1.00-2.00"
+    letterSpacing: 0.225px
+    textTransform: uppercase
+
+rounded:
+  none: 0px
+  span: 1px
+  badge: 2px
+  toggle: 20px
+
+spacing:
+  scale: [2px, 4px, 5px, 8px, 10px, 12px, 15px, 16px, 20px, 24px, 32px, 40px, 48px, 56px]
+  base-unit: 8px
+  button-padding-ghost: 16px
+  button-padding-accent: 24px
+  section-padding-vertical: "48-56px"
+  section-padding-horizontal: 40px
+
+breakpoints:
+  mobile-small: "<425px"
+  mobile: "425-576px"
+  tablet-small: "576-768px"
+  tablet: "768-1024px"
+  desktop: "1024-1280px"
+  desktop-large: "1280-1440px"
+  wide: ">1440px"
+
+components:
+  button-gold-accent:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.button-large}"
+    padding: 24px
+    rounded: "{rounded.none}"
+    border: none
+  button-gold-accent-hover:
+    backgroundColor: "{colors.primary-hover}"
+    textColor: "{colors.on-primary}"
+  button-transparent-ghost:
+    backgroundColor: transparent
+    textColor: "{colors.on-dark}"
+    border: "1px solid {colors.on-dark}"
+    opacity: 0.5
+    padding: 16px
+    rounded: "{rounded.none}"
+  button-transparent-ghost-hover:
+    backgroundColor: "{colors.teal-action-hover}"
+    textColor: "{colors.on-dark}"
+    opacity: 0.7
+  button-transparent-ghost-focus:
+    backgroundColor: "{colors.teal-action-hover}"
+    border: "1px solid {colors.canvas}"
+    outline: "2px solid {colors.canvas}"
+  button-white-filled:
+    backgroundColor: "{colors.on-dark}"
+    textColor: "{colors.charcoal}"
+    border: none
+    rounded: "{rounded.none}"
+  button-black-filled:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.charcoal}"
+    rounded: "{rounded.none}"
+  button-gray-neutral:
+    backgroundColor: "{colors.steel}"
+    textColor: "{colors.charcoal}"
+    rounded: "{rounded.none}"
+  card-dark:
+    backgroundColor: "{colors.charcoal}"
+    rounded: "{rounded.none}"
+    borderBottom: "1px solid {colors.charcoal}"
+  toggle-switch:
+    rounded: "{rounded.toggle}"
+    border: "1px solid #DDDDDD"
+  badge-tag:
+    backgroundColor: "{colors.steel}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.micro}"
+    padding: 8px
+    fontSize: 10px
+    rounded: "{rounded.badge}"
+  hexagonal-pause-button:
+    shape: hexagon-outline
+    stroke: "{colors.on-dark}"
+  progress-bar:
+    backgroundColor: "{colors.on-dark}"
+    height: thin

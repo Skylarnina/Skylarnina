@@ -1,0 +1,248 @@
+colors:
+  starbucks-green: "#006241"
+  green-accent: "#00754A"
+  house-green: "#1E3932"
+  green-uplift: "#2b5148"
+  green-light: "#d4e9e2"
+  gold: "#cba258"
+  gold-light: "#dfc49d"
+  gold-lightest: "#faf6ee"
+  white: "#ffffff"
+  neutral-cool: "#f9f9f9"
+  neutral-warm: "#f2f0eb"
+  ceramic: "#edebe9"
+  black: "#000000"
+  text-black: "rgba(0, 0, 0, 0.87)"
+  text-black-soft: "rgba(0, 0, 0, 0.58)"
+  text-white: "rgba(255, 255, 255, 1)"
+  text-white-soft: "rgba(255, 255, 255, 0.70)"
+  rewards-green: "#33433d"
+  semantic-red: "#c82014"
+  semantic-yellow: "#fbbc05"
+  green-light-tint: "hsl(160 32% 87% / 33%)"
+  red-tint: "hsl(4 82% 43% / 5%)"
+
+alphaLadders:
+  black: "rgba(0,0,0,0.06) through rgba(0,0,0,0.90) in 10% steps"
+  white: "rgba(255,255,255,0.10) through rgba(255,255,255,0.90) in 10% steps"
+
+typography:
+  display-10:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 5.0rem
+    fontSizePx: 80px
+    fontWeight: 400-600
+    lineHeight: 1.2
+    letterSpacing: -0.16px
+  display-9:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 3.6rem
+    fontSizePx: 58px
+    fontWeight: 400-600
+    lineHeight: 1.2
+    letterSpacing: -0.16px
+  display-8:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 2.8rem
+    fontSizePx: 45px
+    fontWeight: 400-600
+    lineHeight: 1.2-1.5
+    letterSpacing: -0.16px
+  h1:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 24px
+    fontWeight: 600
+    lineHeight: 36px
+    letterSpacing: -0.16px
+    color: "{colors.starbucks-green}"
+  h2:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 24px
+    fontWeight: 400
+    lineHeight: 36px
+    letterSpacing: -0.16px
+    color: "{colors.text-black}"
+  body-lg:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 19px
+    fontWeight: 400-600
+    lineHeight: 33.25px
+    letterSpacing: -0.16px
+  body-3:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 1.6rem
+    fontSizePx: 16px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: -0.01em
+  small-2:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 1.4rem
+    fontSizePx: 14px
+    fontWeight: 400-600
+    lineHeight: 1.5
+    letterSpacing: -0.01em
+  micro-1:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 1.3rem
+    fontSizePx: 13px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: -0.01em
+  button-label:
+    fontFamily: "SoDoSans, Helvetica Neue, Helvetica, Arial, sans-serif"
+    fontSize: 14-16px
+    fontWeight: 400-600
+    lineHeight: 1.2
+    letterSpacing: -0.01em
+  rewards-serif:
+    fontFamily: '"Lander Tall", "Iowan Old Style", Georgia, serif'
+    use: "Rewards-page headline moments"
+  careers-script:
+    fontFamily: '"Kalam", "Comic Sans MS", cursive'
+    use: "Careers-page cup-name decorative touches"
+
+letterSpacingTokens:
+  normal: -0.01em
+  loose: 0.1em
+  looser: 0.15em
+
+lineHeightTokens:
+  normal: 1.5
+  compact: 1.2
+
+rounded:
+  card: 12px
+  feedback-tab: "12px 12px 0px 0px"
+  button: 50px
+  circle: 50%
+  svc-elliptical: "3.3333%/5.298%"
+
+spacing:
+  space-1: { rem: 0.4rem, px: 4px }
+  space-2: { rem: 0.8rem, px: 8px }
+  space-3: { rem: 1.6rem, px: 16px }
+  space-4: { rem: 2.4rem, px: 24px }
+  space-5: { rem: 3.2rem, px: 32px }
+  space-6: { rem: 4rem, px: 40px }
+  space-7: { rem: 4.8rem, px: 48px }
+  space-8: { rem: 5.6rem, px: 56px }
+  space-9: { rem: 6.4rem, px: 64px }
+  outerGutter: 1.6rem
+  outerGutterMedium: 2.4rem
+  outerGutterLarge: 4.0rem
+
+components:
+  button-primary-filled:
+    backgroundColor: "{colors.green-accent}"
+    textColor: "{colors.white}"
+    border: "1px solid {colors.green-accent}"
+    rounded: "{rounded.button}"
+    padding: 7px 16px
+    typography: "SoDoSans 16px weight 600, letter-spacing -0.01em"
+    activeState: "transform: scale(0.95)"
+    transition: "all 0.2s ease"
+  button-primary-outlined:
+    backgroundColor: transparent
+    textColor: "{colors.green-accent}"
+    border: "1px solid {colors.green-accent}"
+    rounded: "{rounded.button}"
+    padding: 7px 16px
+  button-black-filled:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.white}"
+    border: "1px solid {colors.black}"
+    rounded: "{rounded.button}"
+    padding: 7px 16px
+    typography: "14px weight 600"
+  button-dark-outlined:
+    backgroundColor: transparent
+    textColor: "{colors.text-black}"
+    border: "1px solid {colors.text-black}"
+    rounded: "{rounded.button}"
+    padding: 7px 16px
+    typography: "14px weight 600"
+  button-green-on-green-inverted:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.green-accent}"
+    border: "1px solid {colors.white}"
+  button-outlined-on-dark:
+    backgroundColor: transparent
+    textColor: "{colors.white}"
+    border: "1px solid {colors.white}"
+  frap-floating-button:
+    backgroundColor: "{colors.green-accent}"
+    iconColor: "{colors.white}"
+    size: "5.6rem / 56px (standard), 4rem / 40px (mini)"
+    rounded: "{rounded.circle}"
+    shadow: "0 0 6px rgba(0,0,0,0.24) + 0 8px 12px rgba(0,0,0,0.14)"
+    touchOffset: "-0.8rem"
+  feedback-tab:
+    backgroundColor: "{colors.green-accent}"
+    textColor: "{colors.white}"
+    rounded: "{rounded.feedback-tab}"
+    padding: 8px 16px
+    typography: "14px weight 400"
+  content-card:
+    backgroundColor: "{colors.white}"
+    rounded: "{rounded.card}"
+    shadow: "0px 0px .5px 0px rgba(0,0,0,0.14), 0px 1px 1px 0px rgba(0,0,0,0.24)"
+  gift-card-tile:
+    backgroundColor: "illustrated photography fill"
+    rounded: "~12px"
+  rewards-status-card:
+    backgroundColor: "{colors.house-green}"
+    layout: "3-column grid, numbered level badge, title in SoDoSans weight 600"
+  partnership-card:
+    backgroundColor: "{colors.gold-lightest}"
+  dropdown-menu:
+    backgroundColor: "{colors.neutral-cool}"
+    itemTypography: "24px weight 400 in text-black"
+  modal:
+    padding: 2.4rem
+    topPadding: 8.8rem
+    rounded: "{rounded.card}"
+  floating-label-input:
+    fieldPadding: 12px
+    formHorizontalPadding: 1.6rem
+    validTint: "rgba(green-light, 0.33)"
+    invalidTint: "rgba(red, 0.05)"
+  global-nav:
+    heights: "64px xs / 72px mobile / 83px tablet / 99px desktop"
+    shadow: "0 1px 3px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.06), 0 0 2px rgba(0,0,0,0.07)"
+  size-options-selector:
+    layout: "4 cup-icon buttons (Tall/Grande/Venti/Trenta)"
+    activeRing: "2px solid {colors.green-accent}"
+  add-in-select:
+    backgroundColor: "{colors.white}"
+    border: "1px solid #d6dbde"
+    rounded: 4px
+    labelTypography: "13/700 uppercase, 0.325px letter-spacing"
+  numeric-stepper:
+    buttonSize: "32x32px circular"
+    border: "1px solid #d6dbde"
+  customize-button:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.green-accent}"
+    border: "1.5px solid {colors.green-accent}"
+    rounded: "{rounded.button}"
+    padding: 14px 40px
+  add-to-order-button:
+    backgroundColor: "{colors.green-accent}"
+    textColor: "{colors.white}"
+    rounded: "{rounded.button}"
+    padding: 14px 32px
+  rewards-cost-pill:
+    backgroundColor: transparent
+    border: "1px solid {colors.gold}"
+    textColor: "{colors.gold}"
+    rounded: "{rounded.button}"
+    padding: 4px 12px
+    typography: "Proxima Nova 13/700, 0.5px letter-spacing"
+  product-description-band:
+    backgroundColor: "{colors.house-green}"
+    padding: "32px vertical"
+  store-availability-selector:
+    backgroundColor: "transparent-white interior"
+    rounded: 4px
+    height: "~48px"
