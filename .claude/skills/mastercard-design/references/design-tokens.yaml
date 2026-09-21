@@ -1,0 +1,167 @@
+colors:
+  logo-red: "#EB001B"
+  logo-yellow: "#F79E1B"
+  ink-black: "#141413"
+  signal-orange: "#CF4500"
+  light-signal-orange: "#F37338"
+  clay-brown: "#9A3A0A"
+  canvas-cream: "#F3F0EE"
+  lifted-cream: "#FCFBFA"
+  white: "#FFFFFF"
+  soft-bone: "#F4F4F4"
+  charcoal: "#262627"
+  slate-gray: "#696969"
+  granite: "#555555"
+  graphite: "#565656"
+  dust-taupe: "#D1CDC7"
+  link-blue: "#3860BE"
+
+typography:
+  h1-hero:
+    fontFamily: MarkForMC
+    fontSize: 64px
+    fontWeight: 500
+    lineHeight: 64px
+    letterSpacing: -1.28px
+  h2-section:
+    fontFamily: MarkForMC
+    fontSize: 36px
+    fontWeight: 500
+    lineHeight: 44px
+    letterSpacing: -0.72px
+  h3-card-title:
+    fontFamily: MarkForMC
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: 28.8px
+    letterSpacing: -0.48px
+  h4-subhead:
+    fontFamily: MarkForMC
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 18.2px
+    letterSpacing: normal
+  eyebrow-h5:
+    fontFamily: MarkForMC
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 14px
+    letterSpacing: 0.56px
+    textTransform: uppercase
+  body-paragraph:
+    fontFamily: MarkForMC
+    fontSize: 16px
+    fontWeight: 450
+    lineHeight: 22.4px
+    letterSpacing: normal
+  nav-link-button:
+    fontFamily: MarkForMC
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 16px
+    letterSpacing: -0.48px
+  footer-link:
+    fontFamily: MarkForMC
+    fontSize: 14px
+    fontWeight: 450
+    lineHeight: ~20px
+    letterSpacing: normal
+  footer-column-header:
+    fontFamily: MarkForMC
+    fontSize: 12-14px
+    fontWeight: 700
+    lineHeight: 14px
+    letterSpacing: 0.56px
+    textTransform: uppercase
+
+rounded:
+  micro: 3-6px
+  button: 20px
+  consent-pill: 24px
+  hero: 40px
+  circle: 50%
+  pill: 999-1000px
+
+spacing:
+  base: 8px
+  sm: 16px
+  md: 24px
+  lg: 32px
+  xl: 48px
+  section-sm: 64px
+  section: 96px
+  section-lg: 128px
+
+components:
+  button-primary-ink-pill:
+    backgroundColor: "{colors.ink-black}"
+    textColor: "{colors.canvas-cream}"
+    border: "1.5px solid {colors.ink-black}"
+    rounded: "{rounded.button}"
+    padding: "6px 24px"
+    typography: "{typography.nav-link-button}"
+  button-secondary-outlined-pill:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.ink-black}"
+    border: "1.5px solid {colors.ink-black}"
+    rounded: "{rounded.button}"
+    padding: "6px 24px"
+  button-consent-orange-pill:
+    backgroundColor: "{colors.signal-orange}"
+    textColor: "{colors.white}"
+    rounded: "{rounded.consent-pill}"
+    padding: "1px 30px"
+    fontSize: 13px
+    fontWeight: 400
+    letterSpacing: 0.13px
+  satellite-circular-micro-cta:
+    backgroundColor: "{colors.white}"
+    iconColor: "{colors.ink-black}"
+    rounded: "{rounded.circle}"
+    size: "50-60px"
+  icon-only-circle-button:
+    backgroundColor: "transparent or white"
+    border: "1px solid {colors.ink-black} (on cream) or none (on media)"
+    rounded: "{rounded.circle}"
+    size: "40px min (80px hero video play)"
+  hero-media-frame-stadium:
+    backgroundColor: "dark video or imagery, typically #000000 or #2B2B2B"
+    rounded: "{rounded.hero}"
+    width: "full viewport minus ~48px gutter"
+    height: "~60-70% viewport"
+  service-portrait-card:
+    shape: "circle or ellipse"
+    rounded: "50% or 999-1000px"
+    diameter: "260-340px desktop, ~220px mobile"
+    imageCrop: square-to-circle
+  pill-carousel-card:
+    rounded: "1000px or 40px corners"
+    width: "40-60% viewport"
+    height: "380-420px"
+  ghost-watermark-text-block:
+    fontFamily: MarkForMC
+    fontSize: 72-128px
+    fontWeight: 500
+    letterSpacing: -2%
+    textColor: "cream slightly darkened, e.g. #E8E2DA"
+  search-input:
+    initialState: "48px circular button with magnifier icon"
+    expandedState:
+      border: "1px solid {colors.ink-black} at ~50% opacity"
+      rounded: "999px"
+      padding: "12px 24px"
+      backgroundColor: "{colors.white}"
+  country-language-selector-footer:
+    backgroundColor: "{colors.ink-black}"
+    textColor: "{colors.white}"
+    border: "1px solid rgba(255,255,255,0.4)"
+    rounded: "999px"
+  floating-nav-pill-desktop:
+    backgroundColor: "white-to-translucent-white"
+    rounded: "999-1000px"
+    padding: "16px 40px"
+    shadow: "rgba(0,0,0,0.04) 0px 4px 24px 0px"
+  footer:
+    backgroundColor: "{colors.ink-black}"
+    textColor: "{colors.white}"
+    padding: "48px horizontal 100px, bottom 148px"
