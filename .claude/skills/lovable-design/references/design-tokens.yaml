@@ -1,0 +1,185 @@
+colors:
+  cream: "#f7f4ed"
+  charcoal: "#1c1c1c"
+  off-white: "#fcfbf8"
+  charcoal-83: "rgba(28,28,28,0.83)"
+  charcoal-82: "rgba(28,28,28,0.82)"
+  muted-gray: "#5f5f5d"
+  charcoal-40: "rgba(28,28,28,0.4)"
+  charcoal-4: "rgba(28,28,28,0.04)"
+  charcoal-3: "rgba(28,28,28,0.03)"
+  light-cream: "#eceae4"
+  cream-surface: "#f7f4ed"
+  ring-blue: "rgba(59,130,246,0.5)"
+
+typography:
+  display-hero:
+    fontFamily: Camera Plain Variable
+    fontSize: 60px
+    fontWeight: 600
+    lineHeight: 1.00-1.10
+    letterSpacing: -1.5px
+  display-alt:
+    fontFamily: Camera Plain Variable
+    fontSize: 60px
+    fontWeight: 480
+    lineHeight: 1.00
+    letterSpacing: normal
+  section-heading:
+    fontFamily: Camera Plain Variable
+    fontSize: 48px
+    fontWeight: 600
+    lineHeight: 1.00
+    letterSpacing: -1.2px
+  sub-heading:
+    fontFamily: Camera Plain Variable
+    fontSize: 36px
+    fontWeight: 600
+    lineHeight: 1.10
+    letterSpacing: -0.9px
+  card-title:
+    fontFamily: Camera Plain Variable
+    fontSize: 20px
+    fontWeight: 400
+    lineHeight: 1.25
+    letterSpacing: normal
+  body-lg:
+    fontFamily: Camera Plain Variable
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 1.38
+    letterSpacing: normal
+  body:
+    fontFamily: Camera Plain Variable
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+  button:
+    fontFamily: Camera Plain Variable
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+  button-sm:
+    fontFamily: Camera Plain Variable
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+  link:
+    fontFamily: Camera Plain Variable
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+    textDecoration: underline
+  link-sm:
+    fontFamily: Camera Plain Variable
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+  caption:
+    fontFamily: Camera Plain Variable
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+
+rounded:
+  micro: 4px
+  standard: 6px
+  comfortable: 8px
+  card: 12px
+  container: 16px
+  full: 9999px
+
+spacing:
+  base: 8px
+  xs: 10px
+  sm: 12px
+  md: 16px
+  lg: 24px
+  xl: 32px
+  xxl: 40px
+  xxxl: 56px
+  section-sm: 80px
+  section: 96px
+  section-lg: 128px
+  section-xl: 176px
+  hero: 192px
+  hero-lg: 208px
+
+components:
+  button-primary-dark:
+    backgroundColor: "{colors.charcoal}"
+    textColor: "{colors.off-white}"
+    typography: "{typography.button}"
+    rounded: "{rounded.standard}"
+    padding: "8px 16px"
+    shadow: "rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px"
+  button-primary-dark-active:
+    backgroundColor: "{colors.charcoal}"
+    textColor: "{colors.off-white}"
+    opacity: 0.8
+  button-ghost:
+    backgroundColor: transparent
+    textColor: "{colors.charcoal}"
+    typography: "{typography.button}"
+    rounded: "{rounded.standard}"
+    padding: "8px 16px"
+    border: "1px solid {colors.charcoal-40}"
+  button-cream-surface:
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.charcoal}"
+    typography: "{typography.button}"
+    rounded: "{rounded.standard}"
+    padding: "8px 16px"
+  button-pill-icon:
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.charcoal}"
+    rounded: "{rounded.full}"
+    shadow: "rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px"
+    opacity: "0.5 default, 0.8 active"
+  card-standard:
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.charcoal}"
+    rounded: "{rounded.card}"
+    border: "1px solid {colors.light-cream}"
+  card-compact:
+    backgroundColor: "{colors.cream}"
+    rounded: "{rounded.comfortable}"
+    border: "1px solid {colors.light-cream}"
+  card-featured:
+    backgroundColor: "{colors.cream}"
+    rounded: "{rounded.container}"
+    border: "1px solid {colors.light-cream}"
+  text-input:
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.charcoal}"
+    rounded: "{rounded.standard}"
+    border: "1px solid {colors.light-cream}"
+    placeholderColor: "{colors.muted-gray}"
+  text-input-focused:
+    outline: "{colors.ring-blue}"
+  link-inline:
+    textColor: "{colors.charcoal}"
+    typography: "{typography.link}"
+    textDecoration: underline
+  ai-chat-input:
+    backgroundColor: "{colors.cream}"
+    border: "soft, {colors.light-cream}"
+    description: "Large prompt input area with suggestion pills and pill-shaped voice/plan-mode toggle buttons"
+  template-gallery-card:
+    backgroundColor: "{colors.cream}"
+    rounded: "{rounded.card}"
+    border: "1px solid {colors.light-cream}"
+  stats-bar-number:
+    textColor: "{colors.charcoal}"
+    typography: "{typography.section-heading}"
+  nav-cta:
+    backgroundColor: "{colors.charcoal}"
+    textColor: "{colors.off-white}"
+    rounded: "{rounded.standard}"
+    shadow: "inset button pattern"
