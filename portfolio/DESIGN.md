@@ -13,6 +13,48 @@ enquiry inside 90 seconds of scrolling.
 
 ---
 
+## 0. Benchmark read — what the reference does, and what I took
+
+The reference (a founder/designer/artist personal site) is a dark, image-led
+editorial portfolio. Watching it scroll, the quality comes from five things:
+
+| What it does | Read |
+|---|---|
+| Near-black ground, light type, no chrome | The imagery supplies all the colour; the UI disappears |
+| Serif italic as the signature voice | Name, pull quotes and emphasis words are serif; everything else is a neutral grotesk |
+| A scattered image cluster in the hero that moves on scroll | The first interaction is *scroll-driven*, not a loop — it rewards the first gesture |
+| A "Things I've Built" list where hovering a row pops a preview at the cursor | Density without clutter — 8 more projects in the height of one card |
+| An oversized name wordmark closing the page | The last frame is the brand, not a nav |
+| Weighted, slightly-lagging scroll | Everything feels heavier and more deliberate than native scroll |
+
+**Taken** (as interaction classes, rebuilt with this site's own content):
+
+- Dark as the default theme, with a toggle — the site's brand is dark, but the
+  light palette stays fully designed and the viewer's choice sticks.
+- A scroll-driven hero cluster: three site plates fanned at rest that square up
+  and separate as you scroll out of the hero. Their subject is mine — the thing
+  I sell is websites, so the cluster is three sites, not a photo collage.
+- The hover-preview list, as **Also shipped** under the case studies: five more
+  projects in one screen, each popping a CSS preview beside the cursor.
+- A cursor-following `Case study` badge over each project's media.
+- Serif italic promoted from emphasis-word duty to one full **statement** line.
+- The oversized wordmark closing the footer, masked and rising on entry.
+- Weighted scroll (Lenis, eased deltas over native scroll).
+
+**Deliberately not taken:**
+
+- Its collage hero and gallery-led work section. That structure sells *taste* —
+  right for an artist, wrong here. A buyer evaluating a conversion developer
+  needs problem → solution → number, which is text-led by nature.
+- Its particle/noise field behind the wordmark — that's its signature, and
+  copying a signature is how a portfolio starts looking like a template.
+- Serif for the name itself. The identity here stays grotesk; serif is reserved
+  for the moments where the voice shifts, which keeps it meaningful.
+- Centred composition. This page stays left-aligned on a 12-column grid, because
+  it's an argument being read, not a gallery being browsed.
+
+---
+
 ## 0. Design system
 
 ### Palette — monochrome with one signal colour
@@ -31,6 +73,13 @@ neutrals are pulled slightly off-axis (a green-grey bias) so they look chosen.
 
 The signal colour appears on maybe 1% of the page. That restraint is what makes
 a metric chip read as *a result* rather than decoration.
+
+**Dark is the default.** The page ships `data-theme="dark"` on load and a toggle
+in the nav flips it; the choice is written to `localStorage` (wrapped in
+try/catch — it throws in private windows). With JS off, the tokens fall back to
+`prefers-color-scheme`, so the page still resolves to a complete, designed theme
+either way. Both themes are built from the same token set; nothing is defined
+only inside a media query.
 
 ### Typography — three roles, one voice
 
@@ -80,11 +129,13 @@ Two structural devices carry the whole page:
 │ Your website is a sales rep.                                       │ display, 15ch max
 │ Mine hit quota.                          ← serif italic line       │
 │                                                                    │
-│ ┌──────────────── 7 col ───────────┐  ┌──── 5 col ─────┐           │
-│ │ Lead paragraph, 34ch             │  │ ──────────────  │           │
-│ │                                  │  │ THE SHORT VERSION│          │
-│ │ [Start a project →] [View work]  │  │ Supporting note  │          │
-│ └──────────────────────────────────┘  └─────────────────┘           │
+│ ┌──────── 6 col ───────────┐  ┌──────── 6 col ────────┐           │
+│ │ Lead paragraph, 34ch      │  │     ╭──────────╮       │           │
+│ │ [Start a project →][Work] │  │   ╭─┴────────╮ │ ← 3 site plates,  │
+│ │ ─────────────────────     │  │ ╭─┴────────╮ │ │   fanned, scroll- │
+│ │ THE SHORT VERSION         │  │ │  ▮▮▮▮▮   │ │ │   driven          │
+│ │ Supporting note           │  │ ╰──────────╯ ╯ ╯       │           │
+│ └───────────────────────────┘  └───────────────────────┘           │
 │                                                                    │
 │ ┌────────┬────────┬────────┬────────┐                              │
 │ │ +41%   │ 0.8s   │ 3 wks  │ 47     │  ← proof strip, hairline grid │
@@ -121,6 +172,11 @@ high-performing websites" is interchangeable with 10,000 other portfolios.
   italic line lands third: the punchline gets its own line.
 - The availability dot is the page's first use of the signal colour and the only
   looping animation on the page.
+- The plate cluster is the hero's visual layer: three abstract site previews
+  (SaaS / agency / service — the three audiences), stacked back-to-front at 58%,
+  66% and 74% width, rotated −3.2° / +2.4° / +5.2°. It sits slightly above the
+  text baseline (`margin-top: -6vh`) so it reads as one object with the headline
+  rather than a sidebar. Below 860px it drops to two plates and moves under the copy.
 
 ### Animation
 
@@ -130,6 +186,8 @@ high-performing websites" is interchangeable with 10,000 other portfolios.
 | Eyebrow, lead, CTAs, aside | `y: 18 → 0`, opacity | `0.8s`, `power3.out`, stagger `0.08`, delay `0.18` |
 | Proof cells | `y: 22 → 0`, opacity | stagger `0.07`, delay `0.42` |
 | Proof numbers | Count from 0 to value, tabular figures | `1.4s`, `power2.out`, delay `0.5` |
+| Plate cluster (load) | `y: 40 → 0`, opacity, back to front | `1.1s`, `expo.out`, stagger `0.09`, delay `0.3` |
+| Plate cluster (scroll) | Rotation to `0°` and separation (`y: -10 / -26 / -42`), scrubbed across the hero | `scrub: 0.5`, `ease: "none"` |
 | Availability dot | 2.8s box-shadow pulse | infinite, the only loop |
 
 The whole hero sequence finishes in ~1.6s. Nothing waits on a scroll event, and
@@ -159,7 +217,21 @@ fails or JS is off, the page still reads.
 │ Read the case study →        │
 └──────────────────────────────┘
         ↕ next project flips media to the left
+
+ALSO SHIPPED                                          2023 — 2025
+─────────────────────────────────────────────────────────────────
+Pricing page that stopped leaking trials   NORTHBEAM LABS · SAAS
+Careers site, briefed Monday, live Thursday  PAYLOAD NINE · AGENCY   ┌──────┐
+Docs shell and changelog the team owns        BASEFOLD · DEV TOOL    │preview│ ← follows
+62-page Webflow to Framer migration        VERDANT STUDIO · AGENCY   └──────┘   the cursor
+Booking flow rebuilt around one action         REM HEALTH · CLINICS
 ```
+
+**Also shipped** is the density device: five more projects in the height of one
+case study. Row left, client/sector right in mono, hairline between. Hovering a
+row dims every other row to 38%, indents the hovered one 12px, and pops a CSS
+site preview beside the cursor with that project's domain in the plate chrome.
+It answers "is this all you've done?" without spending a section on it.
 
 ### Copy pattern
 
@@ -197,6 +269,9 @@ work section *is* the proof for the services section.
 | Plate | `y: 34 → 0`, opacity, offset `0.08s` behind the text | `0.95s` |
 | Plate (scroll) | Parallax `yPercent: 4 → -4`, scrubbed, desktop only | `scrub: 0.6`, `ease: "none"` |
 | Plate (hover) | Card `translateY(-6px)` + border darkens, inner UI `scale(1.025)` | `0.8s`, `cubic-bezier(.22,1,.36,1)` |
+| `Case study` badge | Follows the cursor inside the media box via `gsap.quickTo`, fades + scales `0.7 → 1` on enter | follow `0.5s` `power3`, in `0.4s`, out `0.3s` |
+| Also-shipped rows | Siblings to `opacity: .38`, hovered row indents 12px (CSS only) | `0.4s` / `0.5s`, same ease |
+| Cursor preview | Pops at `scale 0.9 → 1`, then trails the cursor, clamped 232px from the right edge | in `0.45s` `power3.out`, follow `0.65s` |
 
 Two hover speeds on purpose: the arrow in "Read the case study" moves at `0.45s`
 (responsive, feels direct), the plate at `0.8s` (slow, feels heavy and expensive).
@@ -221,6 +296,12 @@ Two hover speeds on purpose: the arrow in "Read the case study" moves at `0.45s`
 │ without opening a ticket │ measured on a mid phone  │
 └──────────────────────────┴──────────────────────────┘
 ```
+
+Above the grid sits the page's one **statement**: *"Anyone can make it look
+expensive. The work is making it earn — and that decision gets made in the
+wireframe, not the final polish."* Set at `clamp(1.35rem, 2.25rem)`, 26ch measure,
+with "expensive" and "earn" in serif italic. This is the only place the serif
+carries whole words rather than a phrase, which is what makes it land.
 
 Each cell is mono label → heading (16ch) → paragraph (42ch). The heading states
 the *benefit*; the paragraph gives one concrete, checkable detail — "No layer
@@ -296,6 +377,14 @@ reads as a hard stop rather than another section.
 Turning work away in the CTA is the strongest available trust signal for
 high-ticket work: only someone with a pipeline can afford to say it.
 
+### Footer
+
+Mark, mono bracket links (`[ EMAIL ] [ LINKEDIN ] [ READ.CV ]`), colophon — then
+the name at `clamp(2.9rem, 15vw, 13rem)`, tracking `-.055em`, cropped ~14% at the
+baseline by its container so it reads as a mark rather than a heading. It rises
+`yPercent: 108 → 0` behind that crop on entry (`1.2s`, `expo.out`, once). The
+last thing on the page is the brand, not navigation.
+
 **Animation:** headline word reveal, then the meta row fades up. The band edge
 itself doesn't animate — the colour flip is already the transition.
 
@@ -313,6 +402,9 @@ itself doesn't animate — the colour flip is already the transition.
 | `Plate` | — | Replace the CSS mock with a real image + `Scale 1.025` hover on an inner frame, parent `overflow: hidden`. |
 | `Chip` | — | Text layer, mono, `tabular-nums` on. |
 | `StepRow`, `OfferCard` | — | Both CMS-connected so they can be reordered without touching layout. |
+| `HeroCluster` | — | Three stacked `Plate` instances, rotation set per layer, animated by a scroll transform. |
+| `MoreRow` | Default / Hovered | CMS-connected. Hovered dims siblings — in Framer this needs a parent variant or an override, since Framer has no sibling selector. |
+| `ThemeToggle` | Dark / Light | Writes `localStorage` and stamps `data-theme` on the document via an override. |
 
 ### CMS collections
 
@@ -339,7 +431,7 @@ Native effects cover ~80% of this page:
   ±4% — keep it under 6% or it looks like drift.)
 - **Hover** on `ProjectRow`: variant transition, `0.8s`, same ease.
 
-Two things need a code override:
+Six things need a code override:
 
 1. **Masked word reveal for headlines** — Framer has no word-level split. A small
    override that splits `textContent` into `overflow: hidden` spans and animates
@@ -349,9 +441,25 @@ Two things need a code override:
    four proof figures, easing `power2.out` over `1.4s`. Format with
    `toLocaleString()` and keep the font `tabular-nums` so the strip doesn't
    reflow while counting.
+3. **Cursor-following badge and preview** — one shared override: read
+   `e.clientX/Y` on `mousemove`, drive a motion value with a spring
+   (`stiffness: 220, damping: 30`) or `gsap.quickTo`. Never animate `left`/`top`,
+   only `x`/`y`. Clamp the preview against the viewport's right edge.
+4. **Sibling dimming on the Also-shipped list** — Framer variants only affect the
+   hovered instance, so hold the hovered index in state on the list component and
+   pass each row an `isDimmed` prop.
+5. **Theme toggle** — stamp `data-theme` on `document.documentElement`, read and
+   write `localStorage` inside try/catch, and define both palettes as Framer color
+   styles so every layer inherits the flip.
+6. **Weighted scroll** — Lenis, initialised once in a site-wide override, skipped
+   when `prefers-reduced-motion: reduce` matches.
 
-Skip a smooth-scroll library. Lenis or Locomotive adds 15–20KB, fights native
-scroll on trackpads, and this page has nothing that needs it.
+On Lenis specifically: it modifies native scroll deltas rather than transforming a
+wrapper, so `position: sticky` and `position: fixed` keep working and ScrollTrigger
+only needs `lenis.on('scroll', ScrollTrigger.update)`. That is the whole reason to
+pick it over Locomotive. It is still ~9KB gzipped bought purely for feel — if the
+performance budget gets tight, this is the first thing to cut, and the page is
+designed to lose it without anything breaking.
 
 ### Breakpoints
 
@@ -389,13 +497,17 @@ with a responsive `srcset`, `loading="lazy"` + `decoding="async"` on everything
 below the fold, and `fetchpriority="high"` on nothing — the LCP element here is
 text, which is exactly where you want it.
 
-**JavaScript** — GSAP core + ScrollTrigger (~38KB gzipped, from cdnjs, pinned to
-3.12.5). No jQuery, no smooth-scroll library, no cursor library, no analytics
-until after launch. If the budget gets tight, the entire hero can be rewritten with
-CSS `@keyframes` and the rest with `IntersectionObserver` for ~1KB.
+**JavaScript** — GSAP core + ScrollTrigger (~38KB gzipped, cdnjs, pinned to
+3.12.5) and Lenis (~9KB gzipped, jsDelivr, pinned to 1.3.26). No jQuery, no cursor
+library, no analytics until after launch. ~47KB of behaviour, all deferred below
+the fold's critical path, and every piece degrades to a working page if it fails
+to load. The `Case study` badge and the cursor preview are gated behind
+`(hover: hover)`, so touch devices never register those listeners at all.
 
 **Animation cost** — `transform` and `opacity` only; nothing animates `width`,
-`height`, `top` or `box-shadow` during scroll. Every scroll reveal uses
+`height`, `top` or `box-shadow` during scroll. Cursor-followers use
+`gsap.quickTo`, which reuses one tween instead of allocating a new one per
+`mousemove`. Every scroll reveal uses
 `once: true` so ScrollTrigger kills its listener after firing. The one scrubbed
 animation (plate parallax) is registered inside `ScrollTrigger.matchMedia` at
 `min-width: 901px`, so phones run zero scroll-linked work. `will-change` is set on
@@ -410,4 +522,7 @@ plate chrome; contrast ≥ 7:1 for body text in both themes.
 **Fallbacks** — every reveal uses `gsap.from()`, never a CSS `opacity: 0` resting
 state, so a blocked CDN or a JS error leaves a fully readable page instead of a
 blank one. That single choice is the difference between a slow first paint and a
-lost lead.
+lost lead. Verified by rendering the page with all three CDNs blocked: the hero,
+the cluster, every case study and the footer wordmark all sit in their resting
+positions, the theme falls back to the OS preference, anchor links use native
+smooth scroll, and the only things missing are the two hover previews.

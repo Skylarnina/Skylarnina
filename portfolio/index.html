@@ -63,6 +63,7 @@ body{
   overflow-x:hidden;
 }
 img{max-width:100%;display:block}
+[hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
 :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
@@ -129,8 +130,8 @@ p.body{max-width:62ch;color:var(--ink-2)}
 .hero h1{font-size:var(--t-display);margin-top:clamp(20px,3vw,34px);max-width:15ch}
 .word{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em;margin-bottom:-.06em}
 .word i{display:inline-block;font-style:inherit}
-.hero__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,4vw,72px);align-items:end;margin-top:clamp(32px,4vw,56px)}
-.hero__aside{border-top:1px solid var(--line);padding-top:16px;max-width:34ch}
+.hero__grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(28px,4vw,72px);align-items:start;margin-top:clamp(28px,3.4vw,44px)}
+.hero__aside{border-top:1px solid var(--line);padding-top:16px;max-width:38ch;margin-top:clamp(28px,3.4vw,42px)}
 .hero__aside p+p{margin-top:12px;font-size:var(--t-small);color:var(--ink-2);line-height:1.6}
 .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 @media (max-width:860px){.hero__grid{grid-template-columns:1fr;align-items:start}}
@@ -240,6 +241,79 @@ p.body{max-width:62ch;color:var(--ink-2)}
 .foot__links a:hover{color:var(--ink)}
 .foot__note{margin-top:22px;font-size:var(--t-micro);color:var(--ink-2);max-width:70ch;line-height:1.6}
 
+/* ── smooth scroll (Lenis) ── */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* ── theme toggle ── */
+.toggle{
+  width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);
+  border-radius:999px;background:transparent;color:var(--ink);cursor:pointer;flex:none;
+  transition:border-color .3s,transform .45s var(--ease);
+}
+.toggle:hover{border-color:var(--ink);transform:rotate(18deg)}
+.toggle svg{width:14px;height:14px;display:block}
+
+/* ── hero plate cluster ── */
+.cluster{position:relative;aspect-ratio:1/.74;max-width:470px;margin:-6vh 0 0 auto;width:100%}
+.cluster .plate{position:absolute;inset:auto 0 0 0;aspect-ratio:4/3;box-shadow:0 24px 60px -30px rgba(0,0,0,.55)}
+.cluster .plate:nth-child(1){width:74%;left:0;bottom:0;z-index:3}
+.cluster .plate:nth-child(2){width:66%;left:24%;bottom:22%;z-index:2;opacity:.82}
+.cluster .plate:nth-child(3){width:58%;left:42%;bottom:44%;z-index:1;opacity:.6}
+@media (max-width:860px){
+  .cluster{max-width:none;margin:16px 0 0;aspect-ratio:4/2.6}
+  .cluster .plate:nth-child(3){display:none}
+  .cluster .plate:nth-child(1){width:78%}
+  .cluster .plate:nth-child(2){width:64%;left:34%;bottom:26%}
+}
+
+/* ── hover badge over project media ── */
+.proj__media{position:relative}
+.badge{
+  position:absolute;top:0;left:0;z-index:4;pointer-events:none;
+  padding:.62em 1.05em;border-radius:999px;background:var(--ink);color:var(--paper);
+  font-family:var(--f-mono);font-size:var(--t-micro);letter-spacing:.12em;text-transform:uppercase;
+  opacity:0;transform:translate(-50%,-50%) scale(.7);white-space:nowrap;
+}
+
+/* ── statement (serif-accented) ── */
+.statement{
+  font-size:clamp(1.35rem,1rem + 1.6vw,2.25rem);line-height:1.32;letter-spacing:-.025em;
+  max-width:26ch;margin-top:26px;color:var(--ink);font-weight:500;text-wrap:balance;
+}
+.statement .em{font-weight:400}
+
+/* ── "also shipped" list with cursor preview ── */
+.more{margin-top:clamp(56px,7vw,104px);border-top:1px solid var(--line)}
+.more__head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:baseline;padding-block:22px;color:var(--ink-2)}
+.rows{position:relative}
+.row{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;
+  padding-block:clamp(16px,2vw,24px);border-bottom:1px solid var(--line-2);
+  transition:opacity .4s var(--ease),padding-left .5s var(--ease);
+}
+.rows:hover .row{opacity:.38}
+.rows .row:hover{opacity:1;padding-left:12px}
+.row__t{font-size:clamp(1.05rem,.95rem + .5vw,1.4rem);letter-spacing:-.025em;font-weight:500;max-width:34ch}
+.row__m{font-family:var(--f-mono);font-size:var(--t-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);text-align:right}
+.peek{
+  position:fixed;top:0;left:0;z-index:30;width:210px;pointer-events:none;opacity:0;
+  transform:translate(-50%,-50%) scale(.9);will-change:transform;
+}
+.peek .plate{aspect-ratio:4/3;box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
+@media (max-width:760px){.row{grid-template-columns:1fr;gap:6px}.row__m{text-align:left}.peek{display:none}}
+
+/* ── footer wordmark ── */
+.wordmark{overflow:hidden;margin-top:clamp(40px,7vw,84px);margin-bottom:-.14em;line-height:.86}
+.wordmark span{
+  display:block;font-size:clamp(2.9rem,15vw,13rem);font-weight:600;letter-spacing:-.055em;
+  color:var(--ink);white-space:nowrap;
+}
+.foot__links a{position:relative}
+.bracket::before{content:"[ ";color:var(--ink-2)}
+.bracket::after{content:" ]";color:var(--ink-2)}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 }
@@ -256,7 +330,13 @@ p.body{max-width:62ch;color:var(--ink-2)}
       <a href="#process">Process</a>
       <a href="#services">Services</a>
     </nav>
-    <a class="btn" href="#start">Start a project <span class="arrow" aria-hidden="true">→</span></a>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="toggle" id="theme" type="button" aria-label="Switch to light theme">
+        <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" hidden><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+      </button>
+      <a class="btn" href="#start">Start a project <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </header>
 
@@ -275,10 +355,24 @@ p.body{max-width:62ch;color:var(--ink-2)}
           <a class="btn" href="#start">Start a project <span class="arrow" aria-hidden="true">→</span></a>
           <a class="btn btn--ghost" href="#work">View selected work</a>
         </div>
+        <div class="hero__aside" data-rise>
+          <p class="mono muted">The short version</p>
+          <p>Ten years of conversion work, compressed into a three-week build. No page builders held together with tape, and no handoff you can't maintain.</p>
+        </div>
       </div>
-      <div data-rise class="hero__aside">
-        <p class="mono muted">The short version</p>
-        <p>Ten years of conversion work, compressed into a three-week build. No page builders held together with tape, and no handoff you can't maintain.</p>
+      <div class="cluster" data-cluster aria-hidden="true">
+        <div class="plate"><div class="plate__grid"></div>
+          <div class="plate__bar"><i></i><i></i><i></i><em>saas</em></div>
+          <div class="plate__ui"><div class="bar" style="width:72%"></div><div class="bar bar--3" style="width:88%"></div><div class="plate__pill"></div><div class="plate__cols"><div></div><div></div><div></div></div></div>
+        </div>
+        <div class="plate"><div class="plate__grid"></div>
+          <div class="plate__bar"><i></i><i></i><i></i><em>agency</em></div>
+          <div class="plate__ui"><div class="bar" style="width:58%"></div><div class="bar bar--2" style="width:80%"></div><div class="bar bar--4" style="width:64%"></div><div class="plate__pill"></div></div>
+        </div>
+        <div class="plate"><div class="plate__grid"></div>
+          <div class="plate__bar"><i></i><i></i><i></i><em>service</em></div>
+          <div class="plate__ui"><div class="bar" style="width:84%"></div><div class="bar bar--3" style="width:60%"></div><div class="bar bar--4" style="width:74%"></div></div>
+        </div>
       </div>
     </div>
 
@@ -329,6 +423,7 @@ p.body{max-width:62ch;color:var(--ink-2)}
             <a class="proj__link" href="#start">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="proj__media" data-parallax>
+            <span class="badge" aria-hidden="true">Case study</span>
             <div class="plate"><div class="plate__grid" aria-hidden="true"></div>
               <div class="plate__bar"><i></i><i></i><i></i><em>northbeam.io</em></div>
               <div class="plate__ui"><div class="bar" style="width:76%"></div><div class="bar bar--2" style="width:54%"></div><div class="bar bar--3" style="width:88%"></div><div class="bar bar--4" style="width:66%"></div><div class="plate__pill"></div><div class="plate__cols"><div></div><div></div><div></div></div></div>
@@ -354,6 +449,7 @@ p.body{max-width:62ch;color:var(--ink-2)}
             <a class="proj__link" href="#start">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="proj__media" data-parallax>
+            <span class="badge" aria-hidden="true">Case study</span>
             <div class="plate"><div class="plate__grid" aria-hidden="true"></div>
               <div class="plate__bar"><i></i><i></i><i></i><em>quorumhq.com</em></div>
               <div class="plate__ui"><div class="bar" style="width:62%"></div><div class="bar bar--3" style="width:80%"></div><div class="plate__cols"><div></div><div></div><div></div></div><div class="bar bar--2" style="width:44%"></div><div class="plate__pill"></div></div>
@@ -379,6 +475,7 @@ p.body{max-width:62ch;color:var(--ink-2)}
             <a class="proj__link" href="#start">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="proj__media" data-parallax>
+            <span class="badge" aria-hidden="true">Case study</span>
             <div class="plate"><div class="plate__grid" aria-hidden="true"></div>
               <div class="plate__bar"><i></i><i></i><i></i><em>tandemlegal.co</em></div>
               <div class="plate__ui"><div class="bar" style="width:84%"></div><div class="bar bar--2" style="width:58%"></div><div class="plate__pill"></div><div class="bar bar--4" style="width:72%"></div><div class="bar bar--4" style="width:48%"></div></div>
@@ -404,6 +501,7 @@ p.body{max-width:62ch;color:var(--ink-2)}
             <a class="proj__link" href="#start">Read the case study <span class="arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="proj__media" data-parallax>
+            <span class="badge" aria-hidden="true">Case study</span>
             <div class="plate"><div class="plate__grid" aria-hidden="true"></div>
               <div class="plate__bar"><i></i><i></i><i></i><em>basefold.dev</em></div>
               <div class="plate__ui"><div class="bar" style="width:70%"></div><div class="bar bar--3" style="width:92%"></div><div class="bar bar--3" style="width:64%"></div><div class="plate__cols"><div></div><div></div><div></div></div><div class="plate__pill"></div></div>
@@ -411,6 +509,27 @@ p.body{max-width:62ch;color:var(--ink-2)}
           </div>
         </article>
 
+      </div>
+
+      <div class="more">
+        <div class="more__head">
+          <p class="mono">Also shipped</p>
+          <p class="mono">2023 — 2025</p>
+        </div>
+        <div class="rows" data-rows>
+          <a class="row" href="#start" data-bars="74,52,86" data-domain="northbeam.io"><span class="row__t">Pricing page that stopped leaking trials</span><span class="row__m">Northbeam Labs · SaaS</span></a>
+          <a class="row" href="#start" data-bars="62,84,48" data-domain="payloadnine.com"><span class="row__t">Careers site, briefed Monday, live Thursday</span><span class="row__m">Payload Nine · Agency</span></a>
+          <a class="row" href="#start" data-bars="88,58,72" data-domain="basefold.dev"><span class="row__t">Docs shell and changelog the team owns</span><span class="row__m">Basefold · Dev tool</span></a>
+          <a class="row" href="#start" data-bars="56,78,64" data-domain="verdant.studio"><span class="row__t">62-page Webflow to Framer migration</span><span class="row__m">Verdant Studio · Agency</span></a>
+          <a class="row" href="#start" data-bars="80,46,90" data-domain="rem-health.co"><span class="row__t">Booking flow rebuilt around one action</span><span class="row__m">Rem Health · Clinics</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="peek" data-peek aria-hidden="true">
+      <div class="plate"><div class="plate__grid"></div>
+        <div class="plate__bar"><i></i><i></i><i></i><em data-peek-domain>site</em></div>
+        <div class="plate__ui"><div class="bar" data-peek-bar style="width:74%"></div><div class="bar bar--3" data-peek-bar style="width:52%"></div><div class="bar bar--4" data-peek-bar style="width:86%"></div><div class="plate__pill"></div></div>
       </div>
     </div>
   </section>
@@ -422,7 +541,8 @@ p.body{max-width:62ch;color:var(--ink-2)}
         <p class="label mono">02 — The edge</p>
         <div>
           <h2 data-split>Most sites are designed. Yours gets engineered to sell.</h2>
-          <p class="body" style="margin-top:22px">You can hire someone to make it look expensive. The harder part is making it earn. Four things I do differently.</p>
+          <p class="statement">Anyone can make it look <span class="em">expensive</span>. The work is making it <span class="em">earn</span> — and that decision gets made in the wireframe, not the final polish.</p>
+          <p class="body" style="margin-top:22px">Four things I do differently, and the proof for each.</p>
         </div>
       </div>
 
@@ -575,22 +695,43 @@ p.body{max-width:62ch;color:var(--ink-2)}
   <div class="wrap">
     <div class="foot__in">
       <a class="mark" href="#top">Skylar Nina <span>Framer / Webflow</span></a>
-      <nav class="foot__links" aria-label="Elsewhere">
-        <a href="#work">Work</a><a href="#services">Services</a>
-        <a href="mailto:hello@skylarnina.com">Email</a><a href="#top">LinkedIn</a><a href="#top">Twitter</a>
+      <nav class="foot__links mono" aria-label="Elsewhere">
+        <a class="bracket" href="mailto:hello@skylarnina.com">Email</a>
+        <a class="bracket" href="#top">LinkedIn</a>
+        <a class="bracket" href="#top">Read.cv</a>
       </nav>
       <p class="mono muted">© 2026 — Built in Framer</p>
     </div>
+    <div class="wordmark" data-wordmark><span>Skylar Nina</span></div>
     <p class="foot__note">Template note: the case studies, client names and metrics on this page are sample content used to demonstrate the layout. Replace them with real, verifiable results before this site goes live.</p>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function () {
   var hasGSAP = typeof window.gsap !== "undefined";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- theme: dark is the brand default, the viewer's choice wins and sticks ---- */
+  var root = document.documentElement, tBtn = document.getElementById("theme");
+  var moon = document.getElementById("ico-moon"), sun = document.getElementById("ico-sun");
+  function paint(mode) {
+    root.setAttribute("data-theme", mode);
+    var dark = mode === "dark";
+    moon.hidden = !dark; sun.hidden = dark;
+    tBtn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("sn-theme"); } catch (e) {}
+  paint(saved === "light" ? "light" : "dark");
+  tBtn.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    paint(next);
+    try { localStorage.setItem("sn-theme", next); } catch (e) {}
+  });
 
   /* ---- nav: hairline + blur once the page has moved ---- */
   var nav = document.getElementById("nav");
@@ -676,6 +817,91 @@ p.body{max-width:62ch;color:var(--ink-2)}
       });
     }
   });
+
+  /* ---- weighted scroll: native scroll, eased deltas (sticky/fixed keep working) ---- */
+  var lenis = null;
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 0.95, smoothWheel: true, syncTouch: false });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href");
+      var t = id === "#top" ? document.body : document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(t, { offset: -76, duration: 1.1 });
+      else t.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  /* ---- hero cluster: three site plates, fanned at rest, squaring up on scroll ---- */
+  var cluster = document.querySelector("[data-cluster]");
+  if (cluster) {
+    var plates = cluster.querySelectorAll(".plate");
+    gsap.set(plates, { rotate: function (i) { return [-3.2, 2.4, 5.2][i]; }, transformOrigin: "50% 100%" });
+    gsap.from(plates, { y: 40, opacity: 0, duration: 1.1, stagger: 0.09, delay: 0.3, ease: "expo.out" });
+    gsap.to(plates, {
+      rotate: 0, y: function (i) { return [-10, -26, -42][i]; }, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 }
+    });
+  }
+
+  /* ---- project media: badge follows the cursor ---- */
+  gsap.utils.toArray(".proj__media").forEach(function (media) {
+    var badge = media.querySelector(".badge");
+    if (!badge || !window.matchMedia("(hover: hover)").matches) return;
+    gsap.set(badge, { xPercent: -50, yPercent: -50, scale: 0.7 });
+    var x = gsap.quickTo(badge, "x", { duration: 0.5, ease: "power3" });
+    var y = gsap.quickTo(badge, "y", { duration: 0.5, ease: "power3" });
+    media.addEventListener("mouseenter", function (e) {
+      var r = media.getBoundingClientRect();
+      gsap.set(badge, { x: e.clientX - r.left, y: e.clientY - r.top });
+      gsap.to(badge, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" });
+    });
+    media.addEventListener("mousemove", function (e) {
+      var r = media.getBoundingClientRect();
+      x(e.clientX - r.left); y(e.clientY - r.top);
+    });
+    media.addEventListener("mouseleave", function () {
+      gsap.to(badge, { opacity: 0, scale: 0.7, duration: 0.3, ease: "power2.in" });
+    });
+  });
+
+  /* ---- "also shipped": row hover pops a preview at the cursor ---- */
+  var peek = document.querySelector("[data-peek]");
+  if (peek && window.matchMedia("(hover: hover)").matches) {
+    var pBars = peek.querySelectorAll("[data-peek-bar]");
+    var pDom = peek.querySelector("[data-peek-domain]");
+    gsap.set(peek, { yPercent: -50, scale: 0.9 });
+    var clampX = function (v) { return Math.min(v + 26, window.innerWidth - 232); };
+    var px = gsap.quickTo(peek, "x", { duration: 0.65, ease: "power3" });
+    var py = gsap.quickTo(peek, "y", { duration: 0.65, ease: "power3" });
+    gsap.utils.toArray("[data-rows] .row").forEach(function (row) {
+      row.addEventListener("mouseenter", function (e) {
+        var w = (row.getAttribute("data-bars") || "70,55,85").split(",");
+        pBars.forEach(function (b, i) { b.style.width = w[i] + "%"; });
+        pDom.textContent = row.getAttribute("data-domain") || "";
+        gsap.set(peek, { x: clampX(e.clientX), y: e.clientY });
+        gsap.to(peek, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" });
+      });
+      row.addEventListener("mousemove", function (e) { px(clampX(e.clientX)); py(e.clientY); });
+      row.addEventListener("mouseleave", function () {
+        gsap.to(peek, { opacity: 0, scale: 0.9, duration: 0.3, ease: "power2.in" });
+      });
+    });
+  }
+
+  /* ---- footer wordmark: masked rise, once ---- */
+  var wm = document.querySelector("[data-wordmark] span");
+  if (wm) {
+    gsap.from(wm, {
+      yPercent: 108, duration: 1.2, ease: "expo.out",
+      scrollTrigger: { trigger: wm, start: "top 96%", once: true }
+    });
+  }
 
   /* proof numbers count in once */
   gsap.utils.toArray(".proof__n").forEach(function (el) {

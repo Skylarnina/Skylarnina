@@ -7,8 +7,10 @@ aimed at SaaS, agency and service-brand buyers.
   layout and type system, per-section animation notes, Framer/Webflow
   implementation plan, and the performance budget.
 - **`index.html`** — a working prototype of the spec. Self-contained: open it in a
-  browser, no build step. GSAP + ScrollTrigger from a CDN, Google Fonts,
-  zero image payload (project previews are drawn in CSS).
+  browser, no build step. GSAP + ScrollTrigger and Lenis from a CDN, Google Fonts,
+  zero image payload (project previews are drawn in CSS). Dark by default with a
+  toggle; scroll-driven hero cluster, cursor-following project badge and
+  hover-preview project list; falls back to a fully readable page with JS off.
 
 Sections: Hero → Selected Work (4 case studies) → Value/Edge → Process →
 Services → Final CTA.
