@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Schedule Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Geist:wght@400..650&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* ───────────── Tokens ─────────────
+   Single dark world by design (brand is dark-only), so there is no light palette. */
+:root {
+  color-scheme: dark;
+  --ground: #0D0C0B;          /* Carbon — warm near-black */
+  --surface: #171513;         /* Graphite — option cards */
+  --surface-2: #211E1B;       /* Graphite raised — hover */
+  --line: rgba(255, 236, 220, .09);
+  --line-strong: rgba(255, 236, 220, .18);
+  --text: #F6F2EE;            /* Chalk */
+  --muted: #A39A91;           /* Ash */
+  --faint: #756D66;
+  --ember: #FF6B1A;           /* Accent */
+  --ember-hi: #FF8A47;
+  --ember-ink: #1A0900;       /* Text on accent */
+  --ember-soft: rgba(255, 107, 26, .11);
+  --ember-line: rgba(255, 107, 26, .6);
+
+  --r-lg: 18px;
+  --r-md: 14px;
+  --r-sm: 9px;
+  --shadow: inset 0 1px 0 rgba(255, 255, 255, .035), 0 10px 28px -14px rgba(0, 0, 0, .7);
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --heat: 0;                  /* 0 → 1 as the user progresses; drives the ambient glow */
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font: 400 16px/1.5 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* Ambient ember glow — warms up as progress increases */
+body::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: -38vh;
+  width: 140vmax;
+  height: 80vh;
+  translate: -50% 0;
+  background: radial-gradient(closest-side, rgba(255, 107, 26, .28), rgba(255, 107, 26, .06) 55%, transparent 75%);
+  opacity: calc(.28 + var(--heat) * .72);
+  transition: opacity 1.2s var(--ease-out);
+  animation: drift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes drift {
+  from { transform: translateX(-3%) scale(1); }
+  to   { transform: translateX(3%) scale(1.08); }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ───────────── Shell ───────────── */
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 3;
+  height: 60px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+}
+.bar[data-mode="brand"] { display: flex; justify-content: space-between; }
+.bar[data-mode="brand"] .back,
+.bar[data-mode="brand"] .progress,
+.bar[data-mode="brand"] .count { display: none; }
+.bar[data-mode="progress"] .brand,
+.bar[data-mode="progress"] .pill { display: none; }
+.bar.no-back .back { visibility: hidden; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 12.5px/1 var(--f-mono);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.mark {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--ember);
+  color: var(--ember-ink);
+  display: grid; place-items: center;
+}
+.pill {
+  font: 500 11px/1 var(--f-mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+}
+
+.back {
+  all: unset;
+  box-sizing: border-box;
+  width: 44px; height: 44px;
+  margin-left: -10px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.back:hover { background: var(--surface); color: var(--text); }
+.back:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+.seg {
+  position: relative;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+.seg::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--ember);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s var(--ease-out);
+}
+.seg.done::after { transform: scaleX(1); }
+.seg.now::after { transform: scaleX(.4); animation: breathe 1.8s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .45; } }
+
+.count {
+  font: 500 12.5px/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-block: 10px 0;
+}
+
+/* ───────────── Type ───────────── */
+.eyebrow {
+  margin: 0;
+  font: 500 12px/1.2 var(--f-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+.eyebrow .dim { color: var(--faint); }
+.display, .display-sm, .q-title {
+  font-family: var(--f-display);
+  font-stretch: 112%;
+  font-weight: 750;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+  margin: 0;
+}
+.display { font-size: clamp(38px, 10.6vw, 56px); line-height: 1.02; margin-top: 16px; }
+.display-sm { font-size: clamp(28px, 7.6vw, 38px); line-height: 1.08; }
+.q-title { font-size: clamp(27px, 7.4vw, 36px); line-height: 1.1; margin-top: 14px; }
+h1:focus { outline: none; }
+.ember { color: var(--ember); }
+.lede {
+  margin: 16px 0 0;
+  max-width: 34em;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.q-help { margin: 10px 0 0; color: var(--muted); font-size: 15.5px; }
+.label {
+  margin: 0 0 10px;
+  font: 500 11.5px/1 var(--f-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ───────────── Buttons ───────────── */
+.btn {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 58px;
+  padding: 0 22px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: 16px;
+  background: var(--ember);
+  color: var(--ember-ink);
+  font: 620 17px/1 var(--f-body);
+  letter-spacing: -.005em;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 16px 36px -16px rgba(255, 107, 26, .75);
+  transition: background .2s, transform .12s var(--ease-out), box-shadow .2s;
+  user-select: none;
+}
+.btn .arr { transition: transform .25s var(--ease-out); }
+@media (hover: hover) {
+  .btn:hover { background: var(--ember-hi); }
+  .btn:hover .arr { transform: translateX(3px); }
+}
+.btn:active { transform: scale(.975); }
+.btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+.btn-text {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 6px auto 0;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  color: var(--muted);
+  font: 500 15px/44px var(--f-body);
+  cursor: pointer;
+  transition: color .2s;
+}
+.btn-text:hover { color: var(--text); }
+.btn-text:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+
+/* Bottom action dock — sticky in the thumb zone on phones */
+.dock {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  margin-top: auto;
+  padding-block: 28px calc(16px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(rgba(13, 12, 11, 0), var(--ground) 40%);
+}
+.meta {
+  margin: 14px 0 0;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 6px 16px;
+  font: 500 11.5px/1 var(--f-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.meta span { display: inline-flex; align-items: center; gap: 6px; }
+.meta span + span::before { content: "·"; margin-right: 10px; color: var(--line-strong); }
+.hint {
+  margin: 0;
+  min-height: 58px;
+  display: grid; place-items: center;
+  text-align: center;
+  font-size: 14px;
+  color: var(--faint);
+}
+.hint { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.kbd { display: none; font: 500 11px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; }
+@media (hover: hover) and (pointer: fine) { .kbd { display: block; } }
+
+/* ───────────── Intro ───────────── */
+.intro .eyebrow { margin-top: 18px; }
+.profiles { margin-top: 30px; }
+.profile-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.profile-grid li {
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(23, 21, 19, .6);
+  display: flex; flex-direction: column; gap: 3px;
+}
+.p-name {
+  font: 700 15px/1.2 var(--f-display);
+  font-stretch: 110%;
+  letter-spacing: -.01em;
+}
+.p-who { font-size: 13px; line-height: 1.3; color: var(--muted); }
+
+/* ───────────── Answer options ───────────── */
+.opts {
+  margin-top: 26px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.opt {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 68px;
+  padding: 13px 16px 13px 14px;
+  display: grid;
+  grid-template-columns: 32px 1fr 22px;
+  align-items: center;
+  gap: 14px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: border-color .2s, background-color .2s, box-shadow .3s, opacity .25s, transform .14s var(--ease-out);
+}
+@media (hover: hover) {
+  .opt:hover { background: var(--surface-2); border-color: var(--line-strong); }
+}
+.opt:active { transform: scale(.982); }
+.opt:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+.opt[aria-checked="true"] {
+  border-color: var(--ember-line);
+  background: linear-gradient(var(--ember-soft), var(--ember-soft)), var(--surface);
+  box-shadow: inset 0 0 0 1px var(--ember-line), 0 14px 32px -16px rgba(255, 107, 26, .55);
+}
+.opts.committing .opt:not([aria-checked="true"]) { opacity: .42; }
+
+.opt-key {
+  width: 32px; height: 32px;
+  border-radius: var(--r-sm);
+  display: grid; place-items: center;
+  font: 500 13px/1 var(--f-mono);
+  color: var(--muted);
+  background: var(--ground);
+  border: 1px solid var(--line);
+  transition: background .2s, color .2s, border-color .2s;
+}
+.opt[aria-checked="true"] .opt-key { background: var(--ember); border-color: var(--ember); color: var(--ember-ink); }
+.opt-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.opt-label { font-size: 16.5px; font-weight: 560; line-height: 1.3; }
+.opt-sub { font-size: 14px; line-height: 1.35; color: var(--muted); }
+.opt-check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  box-sizing: border-box;
+  display: grid; place-items: center;
+  color: var(--ember-ink);
+  transition: background .2s, border-color .2s;
+}
+.opt-check path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .3s .06s var(--ease-out); }
+.opt[aria-checked="true"] .opt-check {
+  background: var(--ember);
+  border-color: var(--ember);
+  animation: pop .38s var(--ease-out);
+}
+.opt[aria-checked="true"] .opt-check path { stroke-dashoffset: 0; }
+@keyframes pop {
+  0% { transform: scale(.55); }
+  60% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+
+/* ───────────── Midpoint + processing ───────────── */
+.centered { align-items: center; text-align: center; }
+.centered .lede { margin-inline: auto; }
+.centered .dock { align-self: stretch; }
+.ring {
+  position: relative;
+  width: 104px; height: 104px;
+  margin: 8vh auto 26px;
+}
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.ring circle { fill: none; stroke-width: 5; }
+.ring-track { stroke: var(--line-strong); }
+.ring-fill {
+  stroke: var(--ember);
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  filter: drop-shadow(0 0 6px rgba(255, 107, 26, .55));
+}
+.ring-mid .ring-fill { transition: stroke-dashoffset 1s .15s var(--ease-out); }
+.ring-pct {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font: 500 20px/1 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+}
+.insight {
+  margin: 26px 0 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 18px 20px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.insight p:last-child { margin: 0; font-size: 16.5px; line-height: 1.45; }
+
+.steps {
+  list-style: none;
+  margin: 28px auto 0; padding: 0;
+  display: flex; flex-direction: column; gap: 14px;
+  text-align: left;
+}
+.steps li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 15.5px;
+  color: var(--faint);
+  transition: color .3s;
+}
+.step-dot {
+  flex: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  box-sizing: border-box;
+  display: grid; place-items: center;
+  color: var(--ember-ink);
+  transition: background .25s, border-color .25s;
+}
+.step-dot svg { opacity: 0; transition: opacity .2s; }
+.steps li.active { color: var(--text); }
+.steps li.active .step-dot { border-color: var(--ember); border-top-color: transparent; animation: spin .7s linear infinite; }
+.steps li.done { color: var(--text); }
+.steps li.done .step-dot { background: var(--ember); border-color: var(--ember); animation: pop .35s var(--ease-out); }
+.steps li.done .step-dot svg { opacity: 1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ───────────── Result preview (handoff) ───────────── */
+.match { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.match-row { display: grid; grid-template-columns: 7.5em 1fr 3em; align-items: center; gap: 12px; font-size: 14px; }
+.match-row .name { color: var(--muted); }
+.match-row .pct { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--muted); }
+.match-row.top .name, .match-row.top .pct { color: var(--text); }
+.track { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.track i { display: block; height: 100%; border-radius: 3px; background: var(--faint); transform-origin: left; animation: grow .9s .25s var(--ease-out) backwards; }
+.match-row.top .track i { background: var(--ember); }
+@keyframes grow { from { transform: scaleX(0); } }
+
+.handoff {
+  margin-top: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgba(23, 21, 19, .6);
+}
+.handoff summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  font: 500 12px/1.2 var(--f-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.handoff summary:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; border-radius: var(--r-md); }
+.handoff pre {
+  margin: 0;
+  padding: 0 16px 16px;
+  overflow-x: auto;
+  font: 400 12.5px/1.55 var(--f-mono);
+  color: var(--muted);
+}
+.note {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.note code { font-family: var(--f-mono); color: var(--text); }
+
+/* ───────────── Larger screens: centre the block, dock sits under content ───────────── */
+@media (min-width: 720px) and (min-height: 700px) {
+  .screen { justify-content: center; padding-block: 24px 48px; }
+  .dock { position: static; margin-top: 30px; padding-block: 0; background: none; }
+  .ring { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+  .seg.now::after { animation: none; }
+  .opt[aria-checked="true"] .opt-check, .steps li.done .step-dot { animation: none; }
+  .track i { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="bar" id="bar" data-mode="brand">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 18l8-12 8 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Momentum</span>
+    </div>
+    <span class="pill">60-sec test</span>
+    <button class="back" id="back" type="button" aria-label="Previous question">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="progress" id="progress" role="progressbar" aria-label="Test progress" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"></div>
+    <div class="count" id="count" aria-hidden="true"></div>
+  </header>
+  <main class="stage" id="stage"></main>
+  <div class="sr-only" id="live" aria-live="polite"></div>
+</div>
+
+<script>
+/* ═══════════════ Configuration ═══════════════ */
+const CONFIG = {
+  autoAdvanceMs: 380,        // pause after a tap so the selection registers before moving on
+  processingMs: 2000,        // "Analyzing…" duration (keep 1.5–2.5s)
+  midpointAfter: 4,          // show the "halfway" moment after this many questions
+  resultUrl: null,           // e.g. '/result/{profile}?goal={goal}' — when set, redirects instead of showing the preview
+  storageKey: 'schedule-test:v1'
+};
+
+/* ═══════════════ Profiles ═══════════════ */
+const PROFILES = {
+  operator: {
+    name: 'The Operator',
+    who: 'Founders & owners',
+    blurb: 'Your calendar changes daily, so your training can’t depend on it. You need short, high-return sessions that survive any schedule — and zero decisions about what to do next.',
+    early: 'Your calendar is running you. That’s the #1 reason standard programs fail — we’re accounting for it.'
+  },
+  rotator: {
+    name: 'The Rotator',
+    who: 'Shift workers',
+    blurb: 'Your body clock moves with your rota. You need a plan that syncs training, sleep and food to whichever shift you’re on this week.',
+    early: 'Your body clock keeps moving. Most plans assume a 9-to-5 — yours won’t.'
+  },
+  nomad: {
+    name: 'The Nomad',
+    who: 'Frequent travelers',
+    blurb: 'Every trip resets your routine. You need a system that works in any hotel room, any time zone, with or without a gym.',
+    early: 'Your routine resets every trip. We’ll build around the road, not against it.'
+  },
+  grinder: {
+    name: 'The Grinder',
+    who: 'Long desk days',
+    blurb: 'Your hours are predictable but long, and sitting is costing you. You need to undo the desk and build real strength around your workday.',
+    early: 'Long seated hours are locking you in place. That’s very fixable.'
+  }
+};
+
+/* ═══════════════ Questions ═══════════════
+   w = weight added to each profile when chosen. Q1 is also the tie-breaker. */
+const QUESTIONS = [
+  { id: 'work', eyebrow: 'Your work', title: 'What does your work look like?', options: [
+    { label: 'I run my own business', sub: 'Founder, owner, self-employed', w: { operator: 3 } },
+    { label: 'I work shifts', sub: 'Nights, rotations, on-call', w: { rotator: 3 } },
+    { label: 'I travel a lot for work', sub: 'Flights, hotels, time zones', w: { nomad: 3 } },
+    { label: 'Long desk days', sub: 'Office or remote, 9+ hours seated', w: { grinder: 3 } }
+  ]},
+  { id: 'week', eyebrow: 'Your week', title: 'How predictable is a normal week?', options: [
+    { label: 'Different every day', sub: 'Meetings and fires I can’t plan', w: { operator: 2 } },
+    { label: 'It rotates', sub: 'My shift pattern changes', w: { rotator: 2 } },
+    { label: 'Depends where I am', sub: 'Home one week, away the next', w: { nomad: 2 } },
+    { label: 'Predictable — just long', sub: 'Same hours, little left over', w: { grinder: 2 } }
+  ]},
+  { id: 'sleep', eyebrow: 'Recovery', title: 'How much do you sleep on a normal night?', options: [
+    { label: 'Under 5 hours', sub: 'Running on fumes', w: { rotator: 2, operator: 1 } },
+    { label: '5–6 hours', sub: 'Getting by', w: { operator: 2, rotator: 1 } },
+    { label: '6–7 hours', sub: 'Mostly fine', w: { nomad: 1, grinder: 1 } },
+    { label: '7+ hours', sub: 'Well rested', w: { grinder: 1 } }
+  ]},
+  { id: 'window', eyebrow: 'Timing', title: 'When could you realistically train?', options: [
+    { label: 'Before the day starts', sub: 'Early, before anyone needs me', w: { operator: 2 } },
+    { label: 'Whenever my shift allows', sub: 'The time changes, so does my energy', w: { rotator: 2 } },
+    { label: 'Wherever I land', sub: 'Hotel gym, room or outdoors', w: { nomad: 2 } },
+    { label: 'Lunch or after work', sub: 'Around fixed office hours', w: { grinder: 2 } }
+  ]},
+  { id: 'time', eyebrow: 'Session length', title: 'How much time can you give each session?', options: [
+    { label: '15–20 minutes', sub: 'Short and sharp', w: { operator: 1, nomad: 1 } },
+    { label: '30 minutes', sub: 'One solid block', w: { rotator: 1, nomad: 1 } },
+    { label: '45 minutes', sub: 'Room to train properly', w: { grinder: 1 } },
+    { label: '60+ minutes', sub: 'I can commit real time', w: { grinder: 1 } }
+  ]},
+  { id: 'blocker', eyebrow: 'Obstacles', title: 'What usually knocks you off track?', options: [
+    { label: 'Too many decisions', sub: 'By evening I’m mentally done', w: { operator: 2 } },
+    { label: 'Constant fatigue', sub: 'My body clock is all over the place', w: { rotator: 2 } },
+    { label: 'Losing my routine', sub: 'Every trip resets my progress', w: { nomad: 2 } },
+    { label: 'Sitting all day', sub: 'Stiff, sluggish, weight creeping on', w: { grinder: 2 } }
+  ]},
+  { id: 'goal', eyebrow: 'Your goal', title: 'What do you want most in the next 90 days?', options: [
+    { label: 'Lose body fat', sub: 'Leaner, lighter, visible change', tag: 'fat-loss' },
+    { label: 'Build strength & muscle', sub: 'Look and feel more powerful', tag: 'strength' },
+    { label: 'More daily energy', sub: 'Stop crashing mid-afternoon', tag: 'energy' },
+    { label: 'All of it, sustainably', sub: 'A body that keeps up with my life', tag: 'recomp' }
+  ]},
+  { id: 'food', eyebrow: 'Nutrition', title: 'How do you eat on a typical day?', options: [
+    { label: 'Skip meals, then grab anything', sub: 'Food comes last', w: { operator: 1 } },
+    { label: 'At odd hours', sub: 'Whenever my shift lets me', w: { rotator: 1 } },
+    { label: 'Mostly eating out', sub: 'Restaurants, airports, room service', w: { nomad: 1 } },
+    { label: 'Desk lunches and snacking', sub: 'Grazing through the day', w: { grinder: 1 } }
+  ]}
+];
+
+const STEPS = ['Mapping your weekly schedule', 'Weighing sleep and recovery', 'Matching your lifestyle profile'];
+
+/* ═══════════════ Icons ═══════════════ */
+const ICON = {
+  arrow: '<svg class="arr" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+};
+
+/* ═══════════════ State ═══════════════ */
+const state = { screen: 'intro', index: 0, answers: {}, startedAt: null, midSeen: false };
+const $ = (sel, root = document) => root.querySelector(sel);
+const stage = $('#stage'), bar = $('#bar'), count = $('#count'), live = $('#live'), progress = $('#progress');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let busy = false, advanceTimer = null, questionShownAt = 0;
+let histDepth = 0, awaitingPop = false, popFallback = null;
+
+progress.innerHTML = QUESTIONS.map(() => '<span class="seg"></span>').join('');
+const segs = [...progress.children];
+
+const store = {
+  load() { try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)); } catch (e) { return null; } },
+  save() { try { localStorage.setItem(CONFIG.storageKey, JSON.stringify({ answers: state.answers, startedAt: state.startedAt, midSeen: state.midSeen })); } catch (e) {} },
+  clear() { try { localStorage.removeItem(CONFIG.storageKey); } catch (e) {} }
+};
+
+function track(event, data = {}) {
+  try { (window.dataLayer = window.dataLayer || []).push({ event: 'schedule_test_' + event, ...data }); } catch (e) {}
+}
+
+const answeredCount = () => QUESTIONS.filter(q => state.answers[q.id] != null).length;
+const firstUnanswered = () => { const i = QUESTIONS.findIndex(q => state.answers[q.id] == null); return i < 0 ? QUESTIONS.length - 1 : i; };
+
+/* ═══════════════ Scoring ═══════════════ */
+function scoreUpTo(n) {
+  const s = { operator: 0, rotator: 0, nomad: 0, grinder: 0 };
+  QUESTIONS.slice(0, n).forEach(q => {
+    const a = state.answers[q.id];
+    if (a == null) return;
+    const w = q.options[a].w || {};
+    for (const k in w) s[k] += w[k];
+  });
+  return s;
+}
+function leader(scores) {
+  const tieBreak = Object.keys(PROFILES)[state.answers.work ?? 0];
+  const max = Math.max(...Object.values(scores));
+  const top = Object.keys(scores).filter(k => scores[k] === max);
+  return top.includes(tieBreak) ? tieBreak : top[0];
+}
+function buildResult() {
+  const scores = scoreUpTo(QUESTIONS.length);
+  const goalQ = QUESTIONS.find(q => q.id === 'goal');
+  return {
+    profile: leader(scores),
+    goal: goalQ.options[state.answers.goal]?.tag ?? null,
+    scores,
+    answers: Object.fromEntries(QUESTIONS.map(q => [q.id, q.options[state.answers[q.id]]?.label ?? null])),
+    durationSec: state.startedAt ? Math.round((Date.now() - state.startedAt) / 1000) : null
+  };
+}
+
+/* ═══════════════ Screens ═══════════════ */
+function introHTML() {
+  const resuming = answeredCount() > 0;
+  const next = firstUnanswered() + 1;
+  return `<section class="screen intro">
+    <p class="eyebrow" data-stagger>The Schedule Test</p>
+    <h1 class="display" tabindex="-1" data-stagger>Your schedule isn’t the problem. <span class="ember">Your plan is.</span></h1>
+    <p class="lede" data-stagger>Eight quick questions about how you actually live. Get your lifestyle profile — and a training plan built around it, not the other way round.</p>
+    <div class="profiles" data-stagger>
+      <p class="label">Which one are you?</p>
+      <ul class="profile-grid">
+        ${Object.values(PROFILES).map(p => `<li><span class="p-name">${p.name}</span><span class="p-who">${p.who}</span></li>`).join('')}
+      </ul>
+    </div>
+    <div class="dock">
+      ${resuming
+        ? `<button class="btn" id="resume" type="button">Pick up at question ${next} ${ICON.arrow}</button>
+           <button class="btn-text" id="fresh" type="button">Start over</button>`
+        : `<button class="btn" id="start" type="button">Start the test ${ICON.arrow}</button>`}
+      <p class="meta"><span>${ICON.clock} 60 seconds</span><span>8 questions</span><span>No sign-up</span></p>
+    </div>
+  </section>`;
+}
+
+function questionHTML(i) {
+  const q = QUESTIONS[i];
+  const sel = state.answers[q.id];
+  const last = i === QUESTIONS.length - 1;
+  const focusIdx = sel ?? 0;
+  return `<section class="screen question">
+    <p class="eyebrow" data-stagger>${String(i + 1).padStart(2, '0')} <span class="dim">/ 08</span> · ${q.eyebrow}</p>
+    <h1 class="q-title" id="q-title" tabindex="-1" data-stagger>${q.title}</h1>
+    <div class="opts" role="radiogroup" aria-labelledby="q-title">
+      ${q.options.map((o, k) => `<button type="button" class="opt" role="radio" id="${q.id}-${k}" data-k="${k}"
+          aria-checked="${sel === k}" tabindex="${focusIdx === k ? 0 : -1}" data-stagger>
+        <span class="opt-key" aria-hidden="true">${'ABCD'[k]}</span>
+        <span class="opt-text"><span class="opt-label">${o.label}</span>${o.sub ? `<span class="opt-sub">${o.sub}</span>` : ''}</span>
+        <span class="opt-check" aria-hidden="true">${ICON.check}</span>
+      </button>`).join('')}
+    </div>
+    <div class="dock">
+      ${sel != null
+        ? `<button class="btn" id="next" type="button">${last ? 'See my result' : 'Continue'} ${ICON.arrow}</button>`
+        : `<p class="hint">${i === 0 ? 'Tap an answer — you’ll move on automatically' : 'Tap the one that fits best'}<span class="kbd">Keys A–D work too</span></p>`}
+    </div>
+  </section>`;
+}
+
+function midHTML() {
+  const p = PROFILES[leader(scoreUpTo(CONFIG.midpointAfter))];
+  const left = QUESTIONS.length - CONFIG.midpointAfter;
+  return `<section class="screen mid centered">
+    <div class="ring ring-mid" data-stagger>
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ring-track" cx="50" cy="50" r="46"/><circle class="ring-fill" cx="50" cy="50" r="46" pathLength="100"/></svg>
+      <span class="ring-pct">50%</span>
+    </div>
+    <h1 class="display-sm" tabindex="-1" data-stagger>Halfway there.</h1>
+    <div class="insight" data-stagger>
+      <p class="label">Early read</p>
+      <p>${p.early}</p>
+    </div>
+    <div class="dock">
+      <button class="btn" id="next" type="button">Keep going ${ICON.arrow}</button>
+      <p class="meta"><span>${left} questions left</span><span>About 30 seconds</span></p>
+    </div>
+  </section>`;
+}
+
+function processingHTML() {
+  return `<section class="screen processing centered" aria-busy="true">
+    <div class="ring" data-stagger>
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ring-track" cx="50" cy="50" r="46"/><circle class="ring-fill" cx="50" cy="50" r="46" pathLength="100"/></svg>
+      <span class="ring-pct" id="pct">0%</span>
+    </div>
+    <h1 class="display-sm" tabindex="-1" data-stagger>Analyzing your responses…</h1>
+    <ul class="steps">
+      ${STEPS.map(s => `<li data-stagger><span class="step-dot">${ICON.check}</span>${s}</li>`).join('')}
+    </ul>
+  </section>`;
+}
+
+function resultHTML(r) {
+  const p = PROFILES[r.profile];
+  const max = Math.max(...Object.values(r.scores)) || 1;
+  const total = Object.values(r.scores).reduce((a, b) => a + b, 0) || 1;
+  const rows = Object.entries(r.scores).sort((a, b) => b[1] - a[1]);
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  return `<section class="screen result">
+    <p class="eyebrow" data-stagger>Your profile</p>
+    <h1 class="display" tabindex="-1" data-stagger>${p.name}</h1>
+    <p class="lede" data-stagger>${p.blurb}</p>
+    <div class="match" data-stagger>
+      <p class="label">Match breakdown</p>
+      ${rows.map(([k, v]) => `<div class="match-row${k === r.profile ? ' top' : ''}">
+        <span class="name">${PROFILES[k].name.replace('The ', '')}</span>
+        <span class="track"><i style="width:${(v / max) * 100}%"></i></span>
+        <span class="pct">${Math.round((v / total) * 100)}%</span>
+      </div>`).join('')}
+    </div>
+    <details class="handoff" data-stagger>
+      <summary>Handoff data for the result page</summary>
+      <pre>${esc(JSON.stringify(r, null, 2))}</pre>
+    </details>
+    <div class="dock">
+      <button class="btn" id="to-result" type="button">See my plan ${ICON.arrow}</button>
+      <p class="note" id="note" hidden>Prototype: in production this opens <code>/result/${r.profile}?goal=${r.goal}</code> — guide, video, then WhatsApp.</p>
+      <button class="btn-text" id="restart" type="button">Retake the test</button>
+    </div>
+  </section>`;
+}
+
+function render() {
+  switch (state.screen) {
+    case 'intro': return introHTML();
+    case 'q': return questionHTML(state.index);
+    case 'mid': return midHTML();
+    case 'processing': return processingHTML();
+    case 'result': return resultHTML(state.result);
+  }
+}
+
+/* ═══════════════ Chrome ═══════════════ */
+function updateBar() {
+  const s = state.screen;
+  const n = QUESTIONS.length;
+  bar.dataset.mode = (s === 'intro' || s === 'result') ? 'brand' : 'progress';
+  bar.classList.toggle('no-back', !(s === 'q' || s === 'mid'));
+  const done = s === 'q' ? state.index : s === 'mid' ? CONFIG.midpointAfter : n;
+  segs.forEach((el, i) => {
+    el.classList.toggle('done', i < done);
+    el.classList.toggle('now', s === 'q' && i === state.index);
+  });
+  progress.setAttribute('aria-valuenow', done);
+  count.textContent = s === 'q' ? `${state.index + 1}/${n}` : `${done}/${n}`;
+  document.body.style.setProperty('--heat', (done / n).toFixed(3));
+}
+
+async function swap(html, dir, animate) {
+  const old = stage.firstElementChild;
+  const canAnimate = animate && typeof stage.animate === 'function';
+  const dx = reduced ? 0 : 28;
+  if (old && canAnimate) {
+    try {
+      await old.animate(
+        [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${-dir * dx * .6}px)` }],
+        { duration: reduced ? 120 : 170, easing: 'cubic-bezier(.4,0,1,1)', fill: 'forwards' }
+      ).finished;
+    } catch (e) {}
+  }
+  stage.innerHTML = html;
+  window.scrollTo(0, 0);
+  const el = stage.firstElementChild;
+  if (!canAnimate) return;
+  el.animate(
+    [{ opacity: 0, transform: `translateX(${dir * dx}px)` }, { opacity: 1, transform: 'none' }],
+    { duration: reduced ? 160 : 380, easing: 'cubic-bezier(.2,.8,.2,1)' }
+  );
+  if (!reduced) {
+    el.querySelectorAll('[data-stagger]').forEach((n, i) => n.animate(
+      [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 380, delay: 50 + i * 45, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' }
+    ));
+  }
+}
+
+async function show(screen, index, dir, animate = true) {
+  if (busy) return;
+  busy = true;
+  clearTimeout(advanceTimer);
+  state.screen = screen;
+  state.index = index;
+  if (dir > 0 && (screen === 'q' || screen === 'mid')) pushHistory();
+  updateBar();
+  await swap(render(), dir, animate);
+  busy = false;
+
+  if (animate) $('h1', stage)?.focus({ preventScroll: true });
+  if (screen === 'q') {
+    live.textContent = `Question ${index + 1} of ${QUESTIONS.length}`;
+    questionShownAt = performance.now();
+    track('question_view', { question: QUESTIONS[index].id, step: index + 1 });
+  } else if (screen === 'mid') {
+    live.textContent = 'Halfway there';
+    const ring = $('.ring-fill', stage);
+    requestAnimationFrame(() => requestAnimationFrame(() => { ring.style.strokeDashoffset = 50; }));
+  } else if (screen === 'processing') {
+    live.textContent = 'Analyzing your responses';
+    runProcessing();
+  } else if (screen === 'result') {
+    live.textContent = `Your profile: ${PROFILES[state.result.profile].name}`;
+  }
+}
+
+/* ═══════════════ Flow ═══════════════ */
+function start(fresh) {
+  if (fresh) { state.answers = {}; state.midSeen = false; state.startedAt = null; store.clear(); }
+  state.startedAt = state.startedAt || Date.now();
+  track(fresh === false ? 'resume' : 'start');
+  show('q', fresh ? 0 : firstUnanswered(), 1);
+}
+
+function select(k) {
+  if (busy || state.screen !== 'q') return;
+  const q = QUESTIONS[state.index];
+  if (k >= q.options.length) return;
+  state.answers[q.id] = k;
+  store.save();
+  const opts = $('.opts', stage);
+  opts.classList.add('committing');
+  opts.querySelectorAll('.opt').forEach((b, j) => {
+    b.setAttribute('aria-checked', j === k);
+    b.tabIndex = j === k ? 0 : -1;
+  });
+  try { navigator.vibrate && navigator.vibrate(8); } catch (e) {}
+  track('answer', { question: q.id, step: state.index + 1, answer: q.options[k].label, ms: Math.round(performance.now() - questionShownAt) });
+  clearTimeout(advanceTimer);
+  advanceTimer = setTimeout(next, reduced ? 220 : CONFIG.autoAdvanceMs);
+}
+
+function next() {
+  clearTimeout(advanceTimer);
+  if (state.screen === 'q') {
+    if (state.answers[QUESTIONS[state.index].id] == null) return;
+    if (state.index === QUESTIONS.length - 1) return show('processing', state.index, 1);
+    if (state.index === CONFIG.midpointAfter - 1 && !state.midSeen) {
+      state.midSeen = true; store.save();
+      return show('mid', state.index, 1);
+    }
+    return show('q', state.index + 1, 1);
+  }
+  if (state.screen === 'mid') return show('q', CONFIG.midpointAfter, 1);
+}
+
+function goBack() {
+  if (busy) { setTimeout(goBack, 120); return; }
+  clearTimeout(advanceTimer);
+  if (state.screen === 'q') {
+    track('back', { from: state.index + 1 });
+    return state.index === 0 ? show('intro', 0, -1) : show('q', state.index - 1, -1);
+  }
+  if (state.screen === 'mid') return show('q', CONFIG.midpointAfter - 1, -1);
+}
+
+function runProcessing() {
+  const D = reduced ? 1200 : CONFIG.processingMs;
+  const fill = $('.ring-fill', stage), pct = $('#pct', stage);
+  const items = [...stage.querySelectorAll('.steps li')];
+  const marks = [.3, .62, .92];
+  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  const t0 = performance.now();
+  (function tick(now) {
+    const t = Math.min(1, (now - t0) / D);
+    const e = ease(t);
+    fill.style.strokeDashoffset = 100 - e * 100;
+    pct.textContent = Math.round(e * 100) + '%';
+    items.forEach((li, i) => {
+      const done = t >= marks[i];
+      li.classList.toggle('done', done);
+      li.classList.toggle('active', !done && (i === 0 || t >= marks[i - 1]));
+    });
+    if (t < 1) requestAnimationFrame(tick);
+    else setTimeout(finish, 300);
+  })(t0);
+}
+
+function finish() {
+  const r = buildResult();
+  track('complete', r);
+  store.clear();
+  window.dispatchEvent(new CustomEvent('scheduletest:complete', { detail: r }));
+  if (CONFIG.resultUrl) {
+    location.assign(CONFIG.resultUrl.replace('{profile}', r.profile).replace('{goal}', r.goal ?? ''));
+    return;
+  }
+  state.result = r;
+  show('result', state.index, 1);
+}
+
+function restart() {
+  state.answers = {}; state.midSeen = false; state.startedAt = null; state.result = null;
+  store.clear();
+  show('intro', 0, -1);
+}
+
+/* Hardware / browser back steps through questions instead of leaving the test */
+function pushHistory() {
+  try { history.pushState({ scheduleTest: true }, ''); histDepth++; } catch (e) {}
+}
+window.addEventListener('popstate', () => {
+  if (histDepth > 0) histDepth--;
+  if (awaitingPop) { awaitingPop = false; clearTimeout(popFallback); }
+  goBack();
+});
+function onBack() {
+  if (histDepth > 0) {
+    awaitingPop = true;
+    popFallback = setTimeout(() => { if (awaitingPop) { awaitingPop = false; histDepth = 0; goBack(); } }, 300);
+    try { history.back(); } catch (e) { awaitingPop = false; clearTimeout(popFallback); goBack(); }
+  } else {
+    goBack();
+  }
+}
+
+/* ═══════════════ Events ═══════════════ */
+$('#back').addEventListener('click', onBack);
+
+stage.addEventListener('click', e => {
+  const opt = e.target.closest('.opt');
+  if (opt) return select(+opt.dataset.k);
+  const id = e.target.closest('button')?.id;
+  if (id === 'start') start(true);
+  else if (id === 'fresh') start(true);
+  else if (id === 'resume') start(false);
+  else if (id === 'next') next();
+  else if (id === 'restart') restart();
+  else if (id === 'to-result') { const n = $('#note', stage); n.hidden = false; }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey || busy) return;
+  const s = state.screen;
+  const onControl = e.target.closest?.('button, summary, a');
+  if (s === 'q') {
+    const map = { 1: 0, 2: 1, 3: 2, 4: 3, a: 0, b: 1, c: 2, d: 3 };
+    const k = map[e.key.toLowerCase()];
+    if (k != null) { e.preventDefault(); select(k); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      const opts = [...stage.querySelectorAll('.opt')];
+      const cur = opts.indexOf(document.activeElement);
+      const to = cur < 0 ? 0 : (cur + (e.key === 'ArrowDown' ? 1 : -1) + opts.length) % opts.length;
+      opts.forEach((o, j) => { o.tabIndex = j === to ? 0 : -1; });
+      opts[to].focus();
+      e.preventDefault();
+      return;
+    }
+  }
+  if ((s === 'q' || s === 'mid') && (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'ArrowLeft')) {
+    e.preventDefault(); onBack(); return;
+  }
+  if (e.key === 'Enter' && !onControl) {
+    if (s === 'intro') $('#resume, #start', stage)?.click();
+    else if (s === 'q' || s === 'mid') next();
+  }
+});
+
+/* ═══════════════ Boot ═══════════════ */
+const saved = store.load();
+if (saved && saved.answers) {
+  state.answers = saved.answers;
+  state.startedAt = saved.startedAt || null;
+  state.midSeen = !!saved.midSeen;
+}
+show('intro', 0, 1, false);
+</script>
+</body>
+</html>
