@@ -123,6 +123,15 @@ All screens share the same base:
 
 - **Why dark.** Saffron on Porcelain is only ≈1.5:1 contrast and can't be read as text. On Charcoal, Saffron reaches ≈12:1 and Porcelain ≈17:1. The funnel therefore uses the brand's Dark variant.
 
+### Background photo
+A full-bleed training photo (`assets/allenamento.jpg`, set via `CONFIG.backgroundImage`) sits behind every screen:
+
+- **Black and white** (`grayscale(1) contrast(1.12)`), so Saffron stays the only colour on the page.
+- **Charcoal scrim:** 72% dark at the top, 58–70% behind the headline, 86% by mid-screen and solid `#050505` at the bottom where cards and buttons sit. It was tested with a bright white stand-in image and the text stayed readable.
+- **Strength per screen:** entry 95% → questions and email 38% → analysis 55% → result 70%. The photo sells the brand on the first screen, then steps back so the questions stay the focus.
+- It fades in only once loaded. If the file is missing or slow, the plain Charcoal background is shown and nothing is blocked.
+- `CONFIG.backgroundFocus` sets which part of the photo stays in frame on narrow phones.
+
 ### Typography: Manrope
 
 | Role | Size | Weight | Tracking |

@@ -60,7 +60,45 @@ body::before {
   opacity: calc(.2 + var(--heat, 0) * .8);
   transition: opacity 1.2s var(--ease-out);
   pointer-events: none;
+  z-index: 1;
+}
+
+/* ───────────── Background photo ─────────────
+   Full-bleed training photo behind every screen. Shown in black and white so Saffron stays the only colour,
+   under a Charcoal gradient that deepens toward the bottom, where answers and buttons sit.
+   Strength changes per screen: strongest on the entry screen, quiet behind the questions. */
+.photo {
+  position: fixed; inset: 0;
   z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .9s var(--ease-out);
+}
+.photo.ready { opacity: var(--photo-strength, .9); }
+.photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--photo-focus, 50% 30%);
+  filter: grayscale(1) contrast(1.12) brightness(.92);
+}
+.photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, .72) 0%, rgba(5, 5, 5, .58) 18%, rgba(5, 5, 5, .7) 34%, rgba(5, 5, 5, .86) 55%, #050505 84%),
+    radial-gradient(130% 90% at 50% 25%, transparent 40%, rgba(5, 5, 5, .7));
+}
+body[data-screen="intro"]      { --photo-strength: .95; }
+body[data-screen="q"],
+body[data-screen="email"]      { --photo-strength: .38; }
+body[data-screen="processing"] { --photo-strength: .55; }
+body[data-screen="result"]     { --photo-strength: .7; }
+@media (min-width: 720px) {
+  .photo::after {
+    background:
+      linear-gradient(180deg, rgba(5, 5, 5, .55), rgba(5, 5, 5, .72) 60%, rgba(5, 5, 5, .9)),
+      radial-gradient(60% 90% at 50% 45%, rgba(5, 5, 5, .55), transparent 90%);
+  }
 }
 
 .sr-only {
@@ -70,7 +108,7 @@ body::before {
 
 /* ───────────── Shell ───────────── */
 .app {
-  position: relative; z-index: 1;
+  position: relative; z-index: 2;
   min-height: 100%;
   max-width: 560px;
   margin: 0 auto;
@@ -429,6 +467,7 @@ h1:focus { outline: none; }
 </style>
 </head>
 <body>
+<div class="photo" id="photo" aria-hidden="true"><img id="photo-img" alt="" decoding="async"></div>
 <div class="app">
   <header class="bar" id="bar" data-mode="brand">
     <svg class="wordmark" role="img" aria-label="Oltresoglia" fill="currentColor" viewBox="0 0 695.70 58.79"><path transform="translate(77.35 0.02)" fill-rule="nonzero" d="M21.32 11.85L23.4 0L10.37 0L0 58.75L49.22 58.75L51.06 48.33L14.88 48.33L21.32 11.85Z"/><path transform="translate(125.92 0.02)" fill-rule="nonzero" d="M59.21 0L1.84 0L0 10.42L22.13 10.42L13.6 58.75L26.73 58.75L35.25 10.42L57.38 10.42L59.21 0Z"/><path transform="translate(183.13 0.00)" fill-rule="nonzero" d="M62.64 0.02L10.36 0.02L0 58.78L13.04 58.78L21.56 10.44L52.91 10.44C54.14 10.44 55.2 10.94 55.97 11.87C56.73 12.81 57.01 13.93 56.79 15.12L55.57 22.04C55.36 23.23 54.78 24.23 53.81 25C52.87 25.75 51.85 26.14 50.74 26.14L42.6 26.14C36.38 26.14 31.07 30.57 29.96 36.69L47.18 58.77L62.7 58.77L45.37 36.64L55.57 36.64C58.39 36.64 61.05 35.6 63.47 33.53C65.89 31.47 67.38 28.96 67.89 26.06L70.74 9.88C71.23 7.17 70.67 4.81 69.09 2.89C67.49 0.94 65.37 0 62.64 0L62.64 0.02Z"/><path transform="translate(258.85 0.06)" fill-rule="nonzero" d="M11.35 3.07C8.93 5.12 7.45 7.61 6.95 10.45L0.17 48.84C-0.32 51.61 0.24 53.9 1.84 55.85C3.4 57.76 5.58 58.73 8.28 58.73L55.83 58.73L57.67 48.32L18.02 48.32C16.8 48.32 15.74 47.83 14.96 46.9C14.2 45.99 13.91 44.85 14.13 43.64L15.72 34.57L54.76 34.57L56.6 24.16L17.56 24.16L19.26 14.51C19.46 13.39 20.03 12.42 20.98 11.61C21.92 10.82 22.97 10.42 24.08 10.42L64.35 10.42L66.19 0L19.24 0C16.42 0 13.76 1.05 11.34 3.1L11.35 3.07Z"/><path transform="translate(325.45 0.04)" fill-rule="nonzero" d="M12.31 3.08C9.89 5.13 8.41 7.62 7.9 10.46L5.39 24.68C4.91 27.46 5.46 29.84 7.04 31.72C8.64 33.63 10.76 34.56 13.5 34.56L45.05 34.56C46.33 34.56 47.45 35.08 48.18 36.03C48.9 36.96 49.17 38.07 48.94 39.24L48.06 44.23C47.87 45.33 47.32 46.29 46.42 47.08C45.5 47.9 44.43 48.32 43.23 48.32L1.84 48.32L0 58.73L48.07 58.73C50.96 58.73 53.62 57.7 56.01 55.64C58.41 53.58 59.88 51.09 60.39 48.26L62.88 34.03C63.38 31.22 62.86 28.92 61.27 26.99C59.71 25.08 57.58 24.15 54.77 24.15L23.22 24.15C21.98 24.15 20.92 23.65 20.16 22.72C19.4 21.82 19.11 20.69 19.33 19.47L20.2 14.51C20.4 13.39 20.97 12.42 21.92 11.61C22.86 10.82 23.91 10.42 25.04 10.42L65.72 10.42L67.55 0L20.19 0C17.37 0 14.71 1.05 12.29 3.1L12.31 3.08Z"/><path transform="translate(395.38 0.02)" fill-rule="nonzero" d="M65.7 0L19.25 0C16.43 0 13.77 1.05 11.35 3.1C8.93 5.16 7.45 7.64 6.94 10.49L0.17 48.88C-0.32 51.6 0.25 53.95 1.82 55.88C3.42 57.82 5.54 58.77 8.28 58.77L54.73 58.77C57.55 58.77 60.21 57.73 62.63 55.66C65.06 53.6 66.55 51.11 67.04 48.28L73.82 9.89C74.31 7.12 73.76 4.83 72.16 2.89C70.59 0.97 68.42 0 65.71 0L65.7 0ZM59.86 15.1L54.72 44.26C54.51 45.36 53.94 46.32 53.01 47.12C52.06 47.92 51.01 48.33 49.9 48.33L18.01 48.33C16.79 48.33 15.74 47.84 14.96 46.91C14.19 45.98 13.9 44.84 14.13 43.65L19.26 14.52C19.46 13.4 20.03 12.43 20.97 11.63C21.91 10.83 22.96 10.42 24.09 10.42L55.97 10.42C57.18 10.42 58.24 10.92 59.04 11.85C59.79 12.77 60.08 13.9 59.86 15.1Z"/><path transform="translate(473.37 0.02)" fill-rule="nonzero" d="M19.28 14.52C19.47 13.4 20.05 12.43 20.99 11.63C21.93 10.83 22.98 10.42 24.11 10.42L68.08 10.42L69.91 0L19.26 0C16.44 0 13.78 1.05 11.35 3.1C8.92 5.17 7.44 7.64 6.94 10.49L0.18 48.88C-0.32 51.64 0.23 53.93 1.84 55.88C3.43 57.81 5.55 58.77 8.3 58.77L51.75 58.77C54.57 58.77 57.23 57.73 59.66 55.66C62.09 53.59 63.57 51.11 64.07 48.28L68.31 24.17L36.71 24.17L34.87 34.58L53.44 34.58L51.73 44.27C51.53 45.37 50.95 46.34 50.02 47.13C49.07 47.93 48.02 48.34 46.91 48.34L18.01 48.34C16.79 48.34 15.74 47.86 14.98 46.93C14.21 46.01 13.91 44.88 14.12 43.65L19.27 14.52L19.28 14.52Z"/><path transform="translate(547.50 0.02)" fill-rule="nonzero" d="M23.4 0L10.37 0L0 58.75L49.22 58.75L51.06 48.33L14.88 48.33L23.4 0Z"/><path transform="translate(605.09 0.02)" fill-rule="nonzero" d="M10.37 0L0 58.75L13.04 58.75L23.39 0L10.37 0Z"/><path transform="translate(626.89 0.02)" fill-rule="nonzero" d="M53.57 0L35.97 0L0 58.75L12.5 58.75L20.22 46.24L52.53 46.24L55.84 58.75L68.81 58.75L53.57 0ZM26.6 35.72L42.92 9.13L49.85 35.72L26.6 35.72Z"/><path transform="translate(-0.00 0.28)" fill-rule="nonzero" d="M59.92 26.09L56.73 44.2C56.5 45.31 55.91 46.27 54.97 47.07C53.97 47.92 52.86 48.34 51.67 48.34L17.76 48.34C16.47 48.34 15.34 47.81 14.49 46.82C13.68 45.85 13.38 44.65 13.6 43.35L18.73 14.18C18.95 13.03 19.55 12 20.54 11.16C21.53 10.32 22.64 9.89 23.83 9.89L46.33 9.89C52.24 9.89 57.4 6.61 59.78 1.3L60.36 0L18.99 0C16.23 0 13.63 1.02 11.26 3.04C8.88 5.07 7.43 7.49 6.95 10.26L0.17 48.66C-0.31 51.34 0.22 53.55 1.78 55.45C3.29 57.3 5.39 58.24 8.02 58.24L56.51 58.24C59.27 58.24 61.87 57.21 64.24 55.2C66.58 53.22 68.03 50.84 68.53 48.13L74.58 13.84L73.4 13.92C66.64 14.41 61.1 19.42 59.92 26.11L59.92 26.09Z"/></svg>
@@ -449,6 +488,8 @@ const CONFIG = {
   processingMs: 2000,          // "Stiamo analizzando…" (keep 1.5–2.5s)
   resultUrl: null,             // e.g. '/risultato/{profile}' — when set, redirects instead of showing the preview
   privacyUrl: '#privacy',      // link to the privacy notice
+  backgroundImage: 'assets/allenamento.jpg',   // training photo behind the test (null = no photo)
+  backgroundFocus: '50% 30%',  // which part of the photo stays in frame on narrow phones
   storageKey: 'oltresoglia-test:v1',
   /* Replace with the real ESP / CRM call. Runs in parallel with the processing animation. */
   submitLead: async payload => { await new Promise(r => setTimeout(r, 400)); return { ok: true }; }
@@ -587,7 +628,7 @@ function introHTML() {
         ? `<button class="btn" id="resume" type="button">Riprendi dalla domanda ${firstUnanswered() + 1} ${ICON.arrow}</button>
            <button class="btn-text" id="fresh" type="button">Ricomincia da capo</button>`
         : `<button class="btn" id="start" type="button">Inizia il test ${ICON.arrow}</button>`}
-      <p class="meta"><span>Risultato immediato</span><span>Nessuna app da scaricare</span></p>
+      <p class="meta"><span>Risultato immediato</span><span>Nessuna app</span></p>
     </div>
   </section>`;
 }
@@ -690,6 +731,7 @@ function updateBar() {
   progress.setAttribute('aria-valuenow', done);
   count.textContent = s === 'q' ? `${state.index + 1}/${N}` : `${N}/${N}`;
   document.body.style.setProperty('--heat', (done / N).toFixed(3));
+  document.body.dataset.screen = s;
 }
 
 async function swap(html, dir, animate) {
@@ -942,6 +984,12 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════ Boot ═══════════════ */
+if (CONFIG.backgroundImage) {
+  const photo = $('#photo'), img = $('#photo-img');
+  document.body.style.setProperty('--photo-focus', CONFIG.backgroundFocus);
+  img.onload = () => photo.classList.add('ready');   // fades in only once loaded; a missing file leaves the plain Charcoal ground
+  img.src = CONFIG.backgroundImage;
+}
 const saved = store.load();
 if (saved && saved.answers) { state.answers = saved.answers; state.startedAt = saved.startedAt || null; }
 show('intro', 0, 1, false);
