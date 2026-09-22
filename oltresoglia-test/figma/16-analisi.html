@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Analisi in corso — Test Oltresoglia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&amp;display=swap">
+<style>
+/* ───────────── Oltresoglia tokens ─────────────
+   Brand colours come from "Source Files – Oltresoglia" (Figma):
+   Dark Charcoal #050505 · Saffron Mango #EFC04D · Porcelain #EBF0F2 · BlackOut #000 · WhiteOut #FFF.
+   Typeface: Manrope. The funnel commits to the Dark Charcoal variant of the brand. */
+:root {
+  color-scheme: dark;
+  --charcoal: #050505;        /* ground */
+  --surface: #0F1112;         /* cards — charcoal lifted, cool bias toward Porcelain */
+  --surface-2: #171A1C;       /* hover */
+  --line: rgba(235, 240, 242, .10);
+  --line-strong: rgba(235, 240, 242, .22);
+  --porcelain: #EBF0F2;       /* text */
+  --muted: #9CA3A7;           /* Porcelain at reading-grey */
+  --faint: #697075;
+  --saffron: #EFC04D;         /* accent */
+  --saffron-hi: #F5CF6E;
+  --saffron-soft: rgba(239, 192, 77, .09);
+  --saffron-line: rgba(239, 192, 77, .62);
+  --error: #FF7A6B;
+
+  --r-card: 12px;
+  --r-btn: 12px;
+  --r-tile: 8px;
+  --slant: -10deg;            /* forward lean of the wordmark and icon */
+  --shadow: inset 0 1px 0 rgba(235, 240, 242, .04), 0 12px 30px -16px rgba(0, 0, 0, .9);
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+
+  --f: "Manrope", "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--charcoal);
+  color: var(--porcelain);
+  font: 450 16px/1.5 var(--f);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* Faint saffron light at the top that grows with progress */
+body::before {
+  content: "";
+  position: fixed;
+  left: 50%; top: -42vh;
+  width: 130vmax; height: 80vh;
+  translate: -50% 0;
+  background: radial-gradient(closest-side, rgba(239, 192, 77, .16), rgba(239, 192, 77, .04) 55%, transparent 75%);
+  opacity: calc(.2 + var(--heat, 0) * .8);
+  transition: opacity 1.2s var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ───────────── Background photo ─────────────
+   Full-bleed training photo behind every screen. Shown in black and white so Saffron stays the only colour,
+   under a Charcoal gradient that deepens toward the bottom, where answers and buttons sit.
+   Strength changes per screen: strongest on the entry screen, quiet behind the questions. */
+.photo {
+  position: fixed; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .9s var(--ease-out);
+}
+.photo.ready { opacity: var(--photo-strength, .9); }
+.photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--photo-focus, 50% 30%);
+  filter: grayscale(1) contrast(1.12) brightness(.92);
+}
+.photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, .72) 0%, rgba(5, 5, 5, .58) 18%, rgba(5, 5, 5, .7) 34%, rgba(5, 5, 5, .86) 55%, #050505 84%),
+    radial-gradient(130% 90% at 50% 25%, transparent 40%, rgba(5, 5, 5, .7));
+}
+body[data-screen="intro"]      { --photo-strength: 1; }
+/* Entry: the people sit in the empty band between the profile chips and the button, so the scrim opens up there */
+body[data-screen="intro"] .photo::after {
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, .86) 0%, rgba(5, 5, 5, .8) 40%, rgba(5, 5, 5, .38) 60%, rgba(5, 5, 5, .4) 76%, rgba(5, 5, 5, .92) 88%, #050505 100%),
+    radial-gradient(120% 70% at 60% 65%, transparent 45%, rgba(5, 5, 5, .55));
+}
+body[data-screen="q"],
+body[data-screen="email"]      { --photo-strength: .38; }
+body[data-screen="processing"] { --photo-strength: .55; }
+body[data-screen="result"]     { --photo-strength: .7; }
+@media (min-width: 720px) {
+  .photo::after {
+    background:
+      linear-gradient(180deg, rgba(5, 5, 5, .55), rgba(5, 5, 5, .72) 60%, rgba(5, 5, 5, .9)),
+      radial-gradient(60% 90% at 50% 45%, rgba(5, 5, 5, .55), transparent 90%);
+  }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ───────────── Shell ───────────── */
+.app {
+  position: relative; z-index: 2;
+  min-height: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  box-sizing: border-box;
+  display: flex; flex-direction: column;
+}
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 3;
+  height: 64px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 14px;
+}
+.bar[data-mode="brand"] { display: flex; justify-content: space-between; }
+.bar[data-mode="brand"] .back,
+.bar[data-mode="brand"] .progress,
+.bar[data-mode="brand"] .count { display: none; }
+.bar[data-mode="progress"] .wordmark { display: none; }
+.bar.no-back .back { visibility: hidden; }
+
+.wordmark { width: 148px; height: auto; color: var(--porcelain); display: block; }
+
+.back {
+  all: unset; box-sizing: border-box;
+  width: 44px; height: 44px; margin-left: -10px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.back:hover { background: var(--surface); color: var(--porcelain); }
+.back:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+
+/* Progress: one slanted segment per question, leaning like the wordmark */
+.progress { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; padding-inline: 2px; }
+.seg {
+  position: relative;
+  height: 5px;
+  transform: skewX(var(--slant));
+  border-radius: 1.5px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+.seg::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--saffron);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .5s var(--ease-out);
+}
+.seg.done::after { transform: scaleX(1); }
+.seg.now::after { transform: scaleX(.4); animation: breathe 1.8s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .45; } }
+.count {
+  font: 700 13px/1 var(--f);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.stage { flex: 1; display: flex; flex-direction: column; }
+.screen { flex: 1; display: flex; flex-direction: column; padding-block: 8px 0; }
+
+/* ───────────── Type ───────────── */
+.eyebrow {
+  margin: 0;
+  font: 700 12px/1.2 var(--f);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--saffron);
+}
+.eyebrow .dim { color: var(--faint); }
+.display, .h2, .q-title {
+  margin: 0;
+  font-family: var(--f);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.display { font-size: clamp(34px, 9.4vw, 50px); line-height: 1.04; margin-top: 16px; }
+.h2 { font-size: clamp(27px, 7.4vw, 36px); line-height: 1.1; }
+.q-title { font-size: clamp(24px, 6.6vw, 32px); line-height: 1.16; margin-top: 12px; }
+h1:focus { outline: none; }
+.saffron { color: var(--saffron); }
+.lede {
+  margin: 14px 0 0;
+  max-width: 32em;
+  font-size: 17px; line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.label {
+  margin: 0 0 10px;
+  font: 700 11.5px/1 var(--f);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ───────────── Buttons ───────────── */
+.btn {
+  all: unset; box-sizing: border-box;
+  width: 100%; min-height: 58px; padding: 0 22px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: var(--r-btn);
+  background: var(--saffron);
+  color: var(--charcoal);
+  font: 800 17px/1 var(--f);
+  letter-spacing: -.01em;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 16px 34px -18px rgba(239, 192, 77, .7);
+  transition: background .2s, transform .12s var(--ease-out), opacity .2s;
+  user-select: none;
+}
+.btn .arr { transition: transform .25s var(--ease-out); }
+@media (hover: hover) {
+  .btn:hover { background: var(--saffron-hi); }
+  .btn:hover .arr { transform: translateX(3px); }
+}
+.btn:active { transform: scale(.975); }
+.btn:focus-visible { outline: 2px solid var(--porcelain); outline-offset: 3px; }
+.btn[aria-busy="true"] { opacity: .75; pointer-events: none; }
+
+.btn-text {
+  all: unset; box-sizing: border-box;
+  display: block; margin: 6px auto 0;
+  min-height: 44px; padding: 0 14px;
+  border-radius: 10px;
+  color: var(--muted);
+  font: 600 15px/44px var(--f);
+  cursor: pointer;
+}
+.btn-text:hover { color: var(--porcelain); }
+.btn-text:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+
+.dock {
+  position: sticky; bottom: 0; z-index: 2;
+  margin-top: auto;
+  padding-block: 28px calc(16px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(rgba(5, 5, 5, 0), var(--charcoal) 40%);
+}
+.meta {
+  margin: 14px 0 0;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 6px 10px;
+  font: 700 11px/1 var(--f);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.meta span + span::before { content: "·"; margin-right: 10px; color: var(--line-strong); }
+.hint {
+  margin: 0; min-height: 58px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--faint);
+}
+.kbd { display: none; font: 700 10.5px/1 var(--f); letter-spacing: .12em; text-transform: uppercase; }
+@media (hover: hover) and (pointer: fine) { .kbd { display: block; } }
+
+/* ───────────── Entry ───────────── */
+.intro .eyebrow { margin-top: 22px; }
+.profiles { margin-top: 30px; }
+.profile-row {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+}
+.profile-row li {
+  padding: 14px 4px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: 800 12.5px/1 var(--f);
+  letter-spacing: .12em;
+  color: var(--porcelain);
+  background: rgba(15, 17, 18, .7);
+}
+
+/* ───────────── Answer cards ───────────── */
+.opts { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  all: unset; box-sizing: border-box;
+  min-height: 64px;
+  padding: 14px 16px 14px 14px;
+  display: grid;
+  grid-template-columns: 30px 1fr 22px;
+  align-items: center;
+  gap: 14px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: border-color .2s, background-color .2s, box-shadow .3s, opacity .25s, transform .14s var(--ease-out);
+}
+@media (hover: hover) {
+  .opt:hover { background: var(--surface-2); border-color: var(--line-strong); }
+}
+.opt:active { transform: scale(.982); }
+.opt:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+.opt[aria-checked="true"] {
+  border-color: var(--saffron-line);
+  background: linear-gradient(var(--saffron-soft), var(--saffron-soft)), var(--surface);
+  box-shadow: inset 0 0 0 1px var(--saffron-line), 0 14px 32px -18px rgba(239, 192, 77, .5);
+}
+.opts.committing .opt:not([aria-checked="true"]) { opacity: .4; }
+
+.opt-key {
+  width: 30px; height: 30px;
+  border-radius: var(--r-tile);
+  display: grid; place-items: center;
+  font: 800 13px/1 var(--f);
+  color: var(--muted);
+  background: var(--charcoal);
+  border: 1px solid var(--line);
+  transition: background .2s, color .2s, border-color .2s;
+}
+.opt[aria-checked="true"] .opt-key { background: var(--saffron); border-color: var(--saffron); color: var(--charcoal); }
+.opt-text { font-size: 16px; line-height: 1.38; color: var(--porcelain); font-weight: 450; text-wrap: pretty; }
+.opt-text strong { font-weight: 700; }
+.opt-check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  box-sizing: border-box;
+  display: grid; place-items: center;
+  color: var(--charcoal);
+  transition: background .2s, border-color .2s;
+}
+.opt-check path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .3s .06s var(--ease-out); }
+.opt[aria-checked="true"] .opt-check { background: var(--saffron); border-color: var(--saffron); animation: pop .38s var(--ease-out); }
+.opt[aria-checked="true"] .opt-check path { stroke-dashoffset: 0; }
+@keyframes pop { 0% { transform: scale(.55); } 60% { transform: scale(1.14); } 100% { transform: scale(1); } }
+
+/* ───────────── Email ───────────── */
+.email .h2 { margin-top: 12px; }
+.form { margin-top: 26px; display: flex; flex-direction: column; gap: 10px; }
+.field-label { font-weight: 700; font-size: 14px; color: var(--porcelain); }
+.input {
+  box-sizing: border-box;
+  width: 100%; height: 58px;
+  padding: 0 16px;
+  border-radius: var(--r-card);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--porcelain);
+  font: 500 17px/1 var(--f);     /* ≥16px stops iOS zooming on focus */
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.input::placeholder { color: var(--faint); }
+.input:focus { border-color: var(--saffron); box-shadow: 0 0 0 4px rgba(239, 192, 77, .16); }
+.input[aria-invalid="true"] { border-color: var(--error); box-shadow: 0 0 0 4px rgba(255, 122, 107, .14); }
+.field-msg { margin: 0; min-height: 20px; font-size: 14px; color: var(--error); }
+.suggest {
+  all: unset; cursor: pointer;
+  font-size: 14px; color: var(--muted);
+  border-radius: 6px;
+}
+.suggest b { color: var(--saffron); font-weight: 700; }
+.suggest:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+.form .btn { margin-top: 6px; }
+.reassure {
+  margin: 14px 0 0;
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13.5px; line-height: 1.45;
+  color: var(--muted);
+}
+.reassure svg { flex: none; margin-top: 2px; color: var(--saffron); }
+.reassure a { color: var(--porcelain); text-underline-offset: 3px; }
+.shake { animation: shake .36s var(--ease-out); }
+@keyframes shake { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+
+/* ───────────── Processing ───────────── */
+.centered { align-items: center; text-align: center; }
+.mark-loader { width: 112px; margin: 9vh auto 30px; }
+.mark-loader svg { width: 100%; height: auto; overflow: visible; display: block; }
+.mark-loader path {
+  fill: var(--saffron);
+  fill-opacity: 0;
+  stroke: var(--saffron);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.mark-loader.run path { animation: draw 1.4s var(--ease-out) forwards, fillin .5s 1.25s ease forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fillin { to { fill-opacity: 1; } }
+.steps {
+  list-style: none; margin: 26px auto 0; padding: 0;
+  display: flex; flex-direction: column; gap: 14px;
+  text-align: left;
+}
+.steps li { display: flex; align-items: center; gap: 12px; font-size: 15.5px; color: var(--faint); transition: color .3s; }
+.step-dot {
+  flex: none; width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  box-sizing: border-box;
+  display: grid; place-items: center;
+  color: var(--charcoal);
+  transition: background .25s, border-color .25s;
+}
+.step-dot svg { opacity: 0; transition: opacity .2s; }
+.steps li.active, .steps li.done { color: var(--porcelain); }
+.steps li.active .step-dot { border-color: var(--saffron); border-top-color: transparent; animation: spin .7s linear infinite; }
+.steps li.done .step-dot { background: var(--saffron); border-color: var(--saffron); animation: pop .35s var(--ease-out); }
+.steps li.done .step-dot svg { opacity: 1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ───────────── Result preview (handoff) ───────────── */
+.profile-name {
+  margin: 14px 0 0;
+  font: 800 clamp(48px, 15vw, 76px)/1 var(--f);
+  letter-spacing: .04em;
+  font-style: normal;
+  color: var(--saffron);
+}
+.scores { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; }
+.score-row { display: grid; grid-template-columns: 5.6em 1fr 2.4em; align-items: center; gap: 12px; font: 700 13px/1 var(--f); letter-spacing: .1em; }
+.score-row .name { color: var(--muted); }
+.score-row .pts { text-align: right; font-variant-numeric: tabular-nums; letter-spacing: 0; color: var(--muted); }
+.score-row.top .name, .score-row.top .pts { color: var(--porcelain); }
+.track { height: 6px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--faint); transform-origin: left; animation: grow .9s .25s var(--ease-out) backwards; }
+.score-row.top .track i { background: var(--saffron); }
+@keyframes grow { from { transform: scaleX(0); } }
+.handoff { margin-top: 28px; border: 1px solid var(--line); border-radius: var(--r-card); background: rgba(15, 17, 18, .7); }
+.handoff summary { cursor: pointer; padding: 14px 16px; font: 700 12px/1.2 var(--f); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.handoff summary:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; border-radius: var(--r-card); }
+.handoff pre { margin: 0; padding: 0 16px 16px; overflow-x: auto; font: 500 12.5px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); }
+.note { margin: 12px 0 0; text-align: center; font-size: 13.5px; color: var(--muted); }
+.note code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--porcelain); }
+
+/* ───────────── Larger screens ───────────── */
+@media (min-width: 720px) and (min-height: 700px) {
+  .screen { justify-content: center; padding-block: 24px 56px; }
+  .dock { position: static; margin-top: 30px; padding-block: 0; background: none; }
+  .mark-loader { margin-top: 0; }
+  .wordmark { width: 170px; }
+}
+
+@media (min-width: 720px) {
+  /* Wide screens: the photo shows edge to edge, with a darker column behind the centred text */
+  body[data-screen="intro"] .photo::after {
+    background:
+      linear-gradient(90deg, rgba(5, 5, 5, .35) 0%, rgba(5, 5, 5, .82) 32%, rgba(5, 5, 5, .86) 50%, rgba(5, 5, 5, .82) 68%, rgba(5, 5, 5, .35) 100%),
+      linear-gradient(180deg, rgba(5, 5, 5, .5), transparent 30%, transparent 70%, #050505);
+  }
+  .photo img { object-position: 50% 45%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seg.now::after, .steps li.active .step-dot { animation: none; }
+  .opt[aria-checked="true"] .opt-check, .steps li.done .step-dot, .track i, .shake { animation: none; }
+  .mark-loader path { stroke-dashoffset: 0; fill-opacity: 1; }
+  .mark-loader.run path { animation: none; }
+}
+</style>
+<style id="figma-freeze">
+*, *::before, *::after { animation: none !important; transition: none !important; }
+.mark-loader path { stroke-dashoffset: 0 !important; fill-opacity: 1 !important; }
+</style>
+</head>
+<body data-screen="processing" style="--photo-focus: 68% 50%; --heat: 1.000;">
+<div class="photo ready" id="photo" aria-hidden="true"><img id="photo-img" alt="" decoding="async" src="../assets/allenamento.jpg"></div>
+<div class="app">
+  <header class="bar no-back" id="bar" data-mode="progress">
+    <svg class="wordmark" role="img" aria-label="Oltresoglia" fill="currentColor" viewBox="0 0 695.70 58.79"><path transform="translate(77.35 0.02)" fill-rule="nonzero" d="M21.32 11.85L23.4 0L10.37 0L0 58.75L49.22 58.75L51.06 48.33L14.88 48.33L21.32 11.85Z"></path><path transform="translate(125.92 0.02)" fill-rule="nonzero" d="M59.21 0L1.84 0L0 10.42L22.13 10.42L13.6 58.75L26.73 58.75L35.25 10.42L57.38 10.42L59.21 0Z"></path><path transform="translate(183.13 0.00)" fill-rule="nonzero" d="M62.64 0.02L10.36 0.02L0 58.78L13.04 58.78L21.56 10.44L52.91 10.44C54.14 10.44 55.2 10.94 55.97 11.87C56.73 12.81 57.01 13.93 56.79 15.12L55.57 22.04C55.36 23.23 54.78 24.23 53.81 25C52.87 25.75 51.85 26.14 50.74 26.14L42.6 26.14C36.38 26.14 31.07 30.57 29.96 36.69L47.18 58.77L62.7 58.77L45.37 36.64L55.57 36.64C58.39 36.64 61.05 35.6 63.47 33.53C65.89 31.47 67.38 28.96 67.89 26.06L70.74 9.88C71.23 7.17 70.67 4.81 69.09 2.89C67.49 0.94 65.37 0 62.64 0L62.64 0.02Z"></path><path transform="translate(258.85 0.06)" fill-rule="nonzero" d="M11.35 3.07C8.93 5.12 7.45 7.61 6.95 10.45L0.17 48.84C-0.32 51.61 0.24 53.9 1.84 55.85C3.4 57.76 5.58 58.73 8.28 58.73L55.83 58.73L57.67 48.32L18.02 48.32C16.8 48.32 15.74 47.83 14.96 46.9C14.2 45.99 13.91 44.85 14.13 43.64L15.72 34.57L54.76 34.57L56.6 24.16L17.56 24.16L19.26 14.51C19.46 13.39 20.03 12.42 20.98 11.61C21.92 10.82 22.97 10.42 24.08 10.42L64.35 10.42L66.19 0L19.24 0C16.42 0 13.76 1.05 11.34 3.1L11.35 3.07Z"></path><path transform="translate(325.45 0.04)" fill-rule="nonzero" d="M12.31 3.08C9.89 5.13 8.41 7.62 7.9 10.46L5.39 24.68C4.91 27.46 5.46 29.84 7.04 31.72C8.64 33.63 10.76 34.56 13.5 34.56L45.05 34.56C46.33 34.56 47.45 35.08 48.18 36.03C48.9 36.96 49.17 38.07 48.94 39.24L48.06 44.23C47.87 45.33 47.32 46.29 46.42 47.08C45.5 47.9 44.43 48.32 43.23 48.32L1.84 48.32L0 58.73L48.07 58.73C50.96 58.73 53.62 57.7 56.01 55.64C58.41 53.58 59.88 51.09 60.39 48.26L62.88 34.03C63.38 31.22 62.86 28.92 61.27 26.99C59.71 25.08 57.58 24.15 54.77 24.15L23.22 24.15C21.98 24.15 20.92 23.65 20.16 22.72C19.4 21.82 19.11 20.69 19.33 19.47L20.2 14.51C20.4 13.39 20.97 12.42 21.92 11.61C22.86 10.82 23.91 10.42 25.04 10.42L65.72 10.42L67.55 0L20.19 0C17.37 0 14.71 1.05 12.29 3.1L12.31 3.08Z"></path><path transform="translate(395.38 0.02)" fill-rule="nonzero" d="M65.7 0L19.25 0C16.43 0 13.77 1.05 11.35 3.1C8.93 5.16 7.45 7.64 6.94 10.49L0.17 48.88C-0.32 51.6 0.25 53.95 1.82 55.88C3.42 57.82 5.54 58.77 8.28 58.77L54.73 58.77C57.55 58.77 60.21 57.73 62.63 55.66C65.06 53.6 66.55 51.11 67.04 48.28L73.82 9.89C74.31 7.12 73.76 4.83 72.16 2.89C70.59 0.97 68.42 0 65.71 0L65.7 0ZM59.86 15.1L54.72 44.26C54.51 45.36 53.94 46.32 53.01 47.12C52.06 47.92 51.01 48.33 49.9 48.33L18.01 48.33C16.79 48.33 15.74 47.84 14.96 46.91C14.19 45.98 13.9 44.84 14.13 43.65L19.26 14.52C19.46 13.4 20.03 12.43 20.97 11.63C21.91 10.83 22.96 10.42 24.09 10.42L55.97 10.42C57.18 10.42 58.24 10.92 59.04 11.85C59.79 12.77 60.08 13.9 59.86 15.1Z"></path><path transform="translate(473.37 0.02)" fill-rule="nonzero" d="M19.28 14.52C19.47 13.4 20.05 12.43 20.99 11.63C21.93 10.83 22.98 10.42 24.11 10.42L68.08 10.42L69.91 0L19.26 0C16.44 0 13.78 1.05 11.35 3.1C8.92 5.17 7.44 7.64 6.94 10.49L0.18 48.88C-0.32 51.64 0.23 53.93 1.84 55.88C3.43 57.81 5.55 58.77 8.3 58.77L51.75 58.77C54.57 58.77 57.23 57.73 59.66 55.66C62.09 53.59 63.57 51.11 64.07 48.28L68.31 24.17L36.71 24.17L34.87 34.58L53.44 34.58L51.73 44.27C51.53 45.37 50.95 46.34 50.02 47.13C49.07 47.93 48.02 48.34 46.91 48.34L18.01 48.34C16.79 48.34 15.74 47.86 14.98 46.93C14.21 46.01 13.91 44.88 14.12 43.65L19.27 14.52L19.28 14.52Z"></path><path transform="translate(547.50 0.02)" fill-rule="nonzero" d="M23.4 0L10.37 0L0 58.75L49.22 58.75L51.06 48.33L14.88 48.33L23.4 0Z"></path><path transform="translate(605.09 0.02)" fill-rule="nonzero" d="M10.37 0L0 58.75L13.04 58.75L23.39 0L10.37 0Z"></path><path transform="translate(626.89 0.02)" fill-rule="nonzero" d="M53.57 0L35.97 0L0 58.75L12.5 58.75L20.22 46.24L52.53 46.24L55.84 58.75L68.81 58.75L53.57 0ZM26.6 35.72L42.92 9.13L49.85 35.72L26.6 35.72Z"></path><path transform="translate(-0.00 0.28)" fill-rule="nonzero" d="M59.92 26.09L56.73 44.2C56.5 45.31 55.91 46.27 54.97 47.07C53.97 47.92 52.86 48.34 51.67 48.34L17.76 48.34C16.47 48.34 15.34 47.81 14.49 46.82C13.68 45.85 13.38 44.65 13.6 43.35L18.73 14.18C18.95 13.03 19.55 12 20.54 11.16C21.53 10.32 22.64 9.89 23.83 9.89L46.33 9.89C52.24 9.89 57.4 6.61 59.78 1.3L60.36 0L18.99 0C16.23 0 13.63 1.02 11.26 3.04C8.88 5.07 7.43 7.49 6.95 10.26L0.17 48.66C-0.31 51.34 0.22 53.55 1.78 55.45C3.29 57.3 5.39 58.24 8.02 58.24L56.51 58.24C59.27 58.24 61.87 57.21 64.24 55.2C66.58 53.22 68.03 50.84 68.53 48.13L74.58 13.84L73.4 13.92C66.64 14.41 61.1 19.42 59.92 26.11L59.92 26.09Z"></path></svg>
+    <button class="back" id="back" type="button" aria-label="Torna alla domanda precedente">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <div class="progress" id="progress" role="progressbar" aria-label="Avanzamento del test" aria-valuemin="0" aria-valuemax="8" aria-valuenow="8"><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span><span class="seg done"></span></div>
+    <div class="count" id="count" aria-hidden="true">8/8</div>
+  </header>
+  <main class="stage" id="stage"><section class="screen processing centered" aria-busy="true">
+    <div class="mark-loader run" data-stagger=""><svg viewBox="-2 -2 153.15 120.47" aria-hidden="true"><path pathLength="1" d="M119.84 52.17L113.46 88.41C113 90.61 111.81 92.54 109.93 94.14C107.94 95.85 105.72 96.69 103.34 96.69L35.51 96.69C32.94 96.69 30.67 95.63 28.98 93.64C27.36 91.69 26.76 89.29 27.19 86.7L37.46 28.37C37.89 26.05 39.1 24 41.07 22.31C43.06 20.65 45.29 19.78 47.67 19.78L92.66 19.78C104.48 19.78 114.8 13.21 119.55 2.59L120.72 0L37.98 0C32.47 0 27.25 2.03 22.52 6.08C17.76 10.14 14.87 14.98 13.89 20.52L0.34 97.32C-0.61 102.68 0.45 107.11 3.56 110.89C6.59 114.59 10.78 116.47 16.03 116.47L113.02 116.47C118.54 116.47 123.75 114.42 128.48 110.4C133.15 106.44 136.05 101.68 137.07 96.26L149.15 27.67L146.8 27.85C133.28 28.82 122.19 38.83 119.84 52.21L119.84 52.17Z"></path></svg></div>
+    <h1 class="h2" tabindex="-1" data-stagger="">Stiamo analizzando le tue risposte…</h1>
+    <ul class="steps"><li data-stagger="" class="done"><span class="step-dot"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path></svg></span>Incrocio orari, turni e trasferte</li><li data-stagger="" class="active"><span class="step-dot"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path></svg></span>Calcolo quanto pesa davvero la tua giornata</li><li data-stagger="" class=""><span class="step-dot"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path></svg></span>Individuo il tuo profilo</li></ul>
+  </section></main>
+  <div class="sr-only" id="live" aria-live="polite">Stiamo analizzando le tue risposte</div>
+</div>
+
+
+
+
+</body></html>
