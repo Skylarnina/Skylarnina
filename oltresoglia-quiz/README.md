@@ -8,6 +8,7 @@ npm install
 npm run dev       # local dev server
 npm test          # scoring + data-integrity tests
 npm run build     # typecheck + production build
+npm run build:preview  # one self-contained HTML file → dist-preview/preview.html (open it directly, no server)
 ```
 
 ## Where things live
@@ -18,6 +19,7 @@ npm run build     # typecheck + production build
 | `src/quiz/quizData.ts` | Verbatim copy, per-option scoring, totals, tie-break |
 | `src/quiz/onQuizComplete.ts` | **Placeholder** submit hook — connect the email platform here |
 | `src/index.css` | Brand tokens (`--oltre-*`) and the `Bounded` `@font-face` rules |
+| `src/assets/backgrounds/` | Background artwork: `soglia` (intro + questions) and one per result profile |
 | `public/fonts/` | Drop `bounded-black.ttf`, `bounded-regular.ttf`, `bounded-extralight.ttf` here |
 
 ## Still to supply
@@ -26,6 +28,8 @@ npm run build     # typecheck + production build
 - **Result copy per profile** → `RESULT_COPY` in `OltresogliaQuiz.tsx` (`[PIETRO TO PROVIDE …]`).
 - **GDPR consent wording + privacy link** → email screen, marked `[PIETRO TO PROVIDE …]`.
 - **WhatsApp link** → `whatsappHref` in `RESULT_COPY` (currently `#`).
+- **Background photography (optional)** → swap `BACKGROUND_QUIZ` / `BACKGROUND_RESULT` in `OltresogliaQuiz.tsx`.
+  Any image is shown in grayscale under a Dark Charcoal overlay (`OVERLAY_OPACITY`), so it stays on-palette.
 - **Email platform** → `onQuizComplete` (or pass `onQuizComplete` as a prop). It receives
   `{ answers, totals, result, email, consentedAt }`; throw/reject on failure to show the retry state.
 

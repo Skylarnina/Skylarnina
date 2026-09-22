@@ -10,6 +10,11 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from 'react'
+import afelioBg from '../assets/backgrounds/afelio.svg'
+import eclissiBg from '../assets/backgrounds/eclissi.svg'
+import orbitaBg from '../assets/backgrounds/orbita.svg'
+import sogliaBg from '../assets/backgrounds/soglia.svg'
+import zenitBg from '../assets/backgrounds/zenit.svg'
 import { onQuizComplete as placeholderOnQuizComplete, type OnQuizComplete } from './onQuizComplete'
 import {
   PROFILE_NAMES,
@@ -49,6 +54,23 @@ const RESULT_COPY: Record<ProfileId, ResultCopy> = {
   AFELIO: { definingLine: null, narratedDay: null, whatChanges: null, whatsappLabel: 'Scrivici su WhatsApp', whatsappHref: '#' },
   ECLISSI: { definingLine: null, narratedDay: null, whatChanges: null, whatsappLabel: 'Scrivici su WhatsApp', whatsappHref: '#' },
 }
+
+/* ------------------------------------------------------------------ */
+/* Background imagery                                                  */
+/* ------------------------------------------------------------------ */
+
+// Swap any of these for brand photography: every image is shown in grayscale under a
+// Dark Charcoal overlay, so it stays inside the palette whatever its original colours.
+const BACKGROUND_QUIZ = sogliaBg
+const BACKGROUND_RESULT: Record<ProfileId, string> = {
+  ORBITA: orbitaBg,
+  ZENIT: zenitBg,
+  AFELIO: afelioBg,
+  ECLISSI: eclissiBg,
+}
+
+// Overlay strength per screen: light where there is little text, heavier behind the questions.
+const OVERLAY_OPACITY: Record<Step['kind'], number> = { intro: 0.2, question: 0.6, email: 0.6, result: 0.3 }
 
 /* ------------------------------------------------------------------ */
 /* Persistence — answers only, never totals or the result.            */
@@ -257,8 +279,12 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="flex min-h-dvh flex-col bg-charcoal font-sans text-porcelain">
-        <header className="mx-auto w-full max-w-2xl px-4 pt-5 sm:px-8 sm:pt-8">
+      <div className="relative isolate flex min-h-dvh flex-col bg-charcoal font-sans text-porcelain">
+        <Backdrop
+          src={step.kind === 'result' ? BACKGROUND_RESULT[step.profile] : BACKGROUND_QUIZ}
+          overlay={OVERLAY_OPACITY[step.kind]}
+        />
+        <header className="relative mx-auto w-full max-w-2xl px-4 pt-5 sm:px-8 sm:pt-8">
           {/* Text wordmark in Whiteout — swap for the official logo SVG when available. */}
           <p className="font-display text-sm font-black tracking-[0.22em] text-whiteout">OLTRESOGLIA</p>
           {(step.kind === 'question' || step.kind === 'email') && <Progress step={step} />}
@@ -269,7 +295,7 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
           )}
         </header>
 
-        <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col overflow-x-clip px-4 sm:px-8">
+        <main className="relative mx-auto flex w-full max-w-2xl flex-1 flex-col overflow-x-clip px-4 sm:px-8">
           <AnimatePresence mode="wait" initial={false} custom={direction}>
             <motion.div
               key={stepKey(step)}
@@ -292,6 +318,32 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
 /* ------------------------------------------------------------------ */
 /* Shared pieces                                                       */
 /* ------------------------------------------------------------------ */
+
+/** Full-bleed background image with a charcoal overlay; crossfades when the image changes. */
+function Backdrop({ src, overlay }: { src: string; overlay: number }) {
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-charcoal">
+      <AnimatePresence initial={false}>
+        <motion.img
+          key={src}
+          src={src}
+          alt=""
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6 }}
+          className="absolute inset-0 size-full object-cover grayscale"
+        />
+      </AnimatePresence>
+      <motion.div
+        className="absolute inset-0 bg-charcoal"
+        initial={false}
+        animate={{ opacity: overlay }}
+        transition={{ duration: 0.4 }}
+      />
+    </div>
+  )
+}
 
 /** Moves focus to the screen's heading (and the page to the top) when it mounts. */
 function useScreenHeading(focusOnMount: boolean) {
@@ -384,7 +436,7 @@ function Progress({ step }: { step: Extract<Step, { kind: 'question' } | { kind:
 /** Keeps the step's actions in view on small screens, however long the content. */
 function ActionBar({ children }: { children: ReactNode }) {
   return (
-    <div className="sticky bottom-0 -mx-4 mt-auto border-t border-porcelain/10 bg-charcoal px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:static sm:mx-0 sm:border-0 sm:px-0 sm:pb-12">
+    <div className="sticky bottom-0 -mx-4 mt-auto border-t border-porcelain/10 bg-charcoal/85 px-4 backdrop-blur-md pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:pb-12 sm:backdrop-blur-none">
       {children}
     </div>
   )
@@ -510,7 +562,7 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
               aria-checked={isSelected}
               onClick={() => choose(i)}
               onKeyDown={(e) => onOptionKeyDown(e, i)}
-              className={`flex min-h-14 w-full cursor-pointer items-start gap-4 rounded-xl border px-4 py-4 text-left transition-[border-color,background-color,box-shadow] duration-200 sm:px-5 ${focusRingTight} ${
+              className={`flex min-h-14 w-full cursor-pointer items-start gap-4 rounded-xl border px-4 py-4 text-left backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-200 sm:px-5 ${focusRingTight} ${
                 isSelected
                   ? 'border-saffron bg-porcelain/[0.06] shadow-[inset_0_0_0_1px_var(--oltre-saffron-mango)]'
                   : 'border-porcelain/15 bg-porcelain/[0.03] hover:border-porcelain/40 hover:bg-porcelain/[0.05]'
@@ -674,7 +726,7 @@ function EmailScreen({
             }}
             aria-invalid={emailError ? true : undefined}
             aria-describedby={emailError ? emailErrorId : undefined}
-            className={`mt-2 block min-h-14 w-full rounded-xl border bg-porcelain/[0.04] px-4 text-base text-porcelain transition-colors duration-200 placeholder:text-porcelain/35 focus:outline-2 focus:outline-offset-2 focus:outline-saffron ${
+            className={`mt-2 block min-h-14 w-full rounded-xl border bg-porcelain/[0.04] px-4 backdrop-blur-sm text-base text-porcelain transition-colors duration-200 placeholder:text-porcelain/35 focus:outline-2 focus:outline-offset-2 focus:outline-saffron ${
               emailError ? 'border-saffron' : emailValid ? 'border-porcelain/40' : 'border-porcelain/20'
             }`}
           />
@@ -805,7 +857,9 @@ function ResultScreen({ focusOnMount, profile }: { focusOnMount: boolean; profil
       </h1>
 
       <div
-        className={`mt-10 space-y-6 ${hasMissingCopy ? 'rounded-2xl border border-dashed border-porcelain/30 p-5 sm:p-7' : ''}`}
+        className={`mt-10 space-y-6 rounded-2xl bg-charcoal/60 p-5 backdrop-blur-md sm:p-7 ${
+          hasMissingCopy ? 'border border-dashed border-porcelain/30' : ''
+        }`}
       >
         {hasMissingCopy && (
           <p className="text-xs font-semibold tracking-wide text-porcelain/70 uppercase">
