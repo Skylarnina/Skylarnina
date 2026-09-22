@@ -128,7 +128,8 @@ A full-bleed training photo (`assets/allenamento.jpg`, set via `CONFIG.backgroun
 
 - **Black and white** (`grayscale(1) contrast(1.12)`), so Saffron stays the only colour on the page.
 - **Charcoal scrim:** 72% dark at the top, 58–70% behind the headline, 86% by mid-screen and solid `#050505` at the bottom where cards and buttons sit. It was tested with a bright white stand-in image and the text stayed readable.
-- **Strength per screen:** entry 95% → questions and email 38% → analysis 55% → result 70%. The photo sells the brand on the first screen, then steps back so the questions stay the focus.
+- **Strength per screen:** entry 100% → questions and email 38% → analysis 55% → result 70%. The photo sells the brand on the first screen, then steps back so the questions stay the focus.
+- **Entry-screen scrim follows the photo.** On phones it opens up in the empty band between the profile chips and the button, where the coach and client are, and stays dark behind the headline. On wide screens a dark centre column sits behind the text and the gym stays visible on both sides. Framing: `backgroundFocus: '68% 50%'` (phones), `50% 45%` (desktop).
 - It fades in only once loaded. If the file is missing or slow, the plain Charcoal background is shown and nothing is blocked.
 - `CONFIG.backgroundFocus` sets which part of the photo stays in frame on narrow phones.
 
