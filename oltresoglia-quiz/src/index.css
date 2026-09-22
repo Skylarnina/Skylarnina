@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/* Bounded — licensed brand display font (files go in /public/fonts). */
+/* The files' internal metadata reports every weight as "Regular", so */
+/* each file is declared as its own face with an explicit weight.     */
+/* ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'Bounded';
+  src: url('/fonts/bounded-extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bounded';
+  src: url('/fonts/bounded-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bounded';
+  src: url('/fonts/bounded-black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------ */
+/* OLTRESOGLIA brand palette — exact hex from the official logo files. */
+/* Nothing outside this palette is used anywhere on the page.         */
+/* ------------------------------------------------------------------ */
+:root {
+  --oltre-blackout: #000000;
+  --oltre-dark-charcoal: #050505;
+  --oltre-porcelain: #ebf0f2;
+  --oltre-whiteout: #ffffff;
+  --oltre-saffron-mango: #efc04d;
+
+  color-scheme: dark;
+}
+
+/* Expose the brand tokens as Tailwind utilities: bg-charcoal, text-porcelain, border-saffron … */
+@theme inline {
+  --color-blackout: var(--oltre-blackout);
+  --color-charcoal: var(--oltre-dark-charcoal);
+  --color-porcelain: var(--oltre-porcelain);
+  --color-whiteout: var(--oltre-whiteout);
+  --color-saffron: var(--oltre-saffron-mango);
+
+  /* 'Archivo Black' is the temporary stand-in until the Bounded files are supplied. */
+  --font-display: 'Bounded', 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background-color: var(--oltre-dark-charcoal);
+  color: var(--oltre-porcelain);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--oltre-saffron-mango);
+  color: var(--oltre-dark-charcoal);
+}
