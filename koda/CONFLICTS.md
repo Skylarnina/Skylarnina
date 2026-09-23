@@ -1,7 +1,8 @@
 # Kóda landing page: source conflicts
 
-Status: **Phase 1, waiting for client confirmation.**
+Status: **v2 brief, Step 1, waiting for client confirmation.**
 Each item names the rule applied in the prototype. Anything marked **Confirm** needs a yes or no from the client before the Framer build.
+Sections A–E come from the first brief. **Section F adds the conflicts introduced by the v2 brief** ("Dusk falls as you scroll", the two motion levels, the reference-driven sections). Where F replaces an earlier item, it says so.
 
 ## Which document decides what
 
@@ -138,7 +139,107 @@ The brand book says "place and atmosphere rather than people" and allows "a figu
 
 ---
 
+## F. v2 brief vs. the brand book
+
+Brand mode follows the brand book exactly. Enhanced mode is the client's to approve, and every enhanced-only item below is off in brand mode and whenever `prefers-reduced-motion` is set.
+
+**F1. The background changes colour as you scroll.** *Confirm (enhanced only).*
+The brand book says there are six colours and nothing else, and no gradients. Blending the background from Paper through Bone and Blue-rich to Navy while scrolling shows every colour in between (for example the mix of Bone and Blue-rich), so across time it works like a gradient.
+**Applied:**
+- Brand mode: each section sits on one flat brand colour, and the colour changes at section edges only.
+- Enhanced mode: the background blends continuously, but it is always one flat colour on screen at any moment, never a gradient.
+- Text colour switches from navy to bone at a fixed point in the sequence, so text never sits on a halfway colour with poor contrast.
+
+**F2. Blue-rich as a full section background.** *Confirm.*
+The brand book reserves Blue-rich for "sub-surfaces inside dark sections only". The v2 brief blends to Blue-rich across all of Section 4.
+**Applied:** Blue-rich is used only as a background colour inside the dusk stretch, always with bone text. Measured: bone 100% on Blue-rich is 9.80:1 and bone 62% is 4.81:1, so text passes. Stone labels on Blue-rich are 6.21:1.
+
+**F3. One italic phrase in every headline.** *Confirm.* (This widens B2.)
+The brand book allows Cormorant italic 400 only for placeholders; B2 already asks to extend it to the founder's note. The v2 brief puts an italic phrase in every display headline, as Wispr does.
+**Applied:** italic 400 on the last phrase of display headlines, and on the founder's note. Never in body copy, labels or buttons. The fallback, if refused, is all upright Cormorant 300.
+
+**F4. Headline size.** *Confirm.*
+The brand book says desktop hero type is 64–76px. The v2 brief allows 64–96px.
+**Applied:** the hero stays at 76px. Only the closing "Everyone *home.*" goes to 96px, as the one moment of maximum scale. Labels stay at 9.5–11px.
+
+**F5. Enhanced motion as a whole.** *Confirm (enhanced only).*
+The brand book forbids parallax and entrance choreography and allows one 220ms colour or opacity transition plus 200–400ms fades. Enhanced mode adds:
+- smooth scrolling;
+- the route line drawing itself as you scroll;
+- text drifting along the hero path;
+- the pinned scroll story;
+- panels sliding over earlier sections;
+- 600ms crossfades.
+
+None of these use bounce, spin, scale or blur.
+**Applied:** all of these run in enhanced mode only, behind the `MOTION` toggle. Brand mode is static apart from the allowed fades and the hero film. The 600ms tile crossfade is the only duration above 400ms.
+
+**F6. A 28px top radius on sliding panels.** *Confirm (enhanced only).*
+The brand book says everything that isn't tappable has square corners.
+**Applied:** 28px top radius in enhanced mode, 0px in brand mode.
+
+**F7. FAQ rows animate their height, and use "+" / "−".** *Confirm.*
+The brand book allows only colour and opacity transitions, and no iconography "beyond the tracked initial and the serif step numeral".
+**Applied:**
+- Brand mode: the answer appears at once and fades in over 220ms.
+- Enhanced mode: the height also animates over 300ms.
+- "+" and "−" are Inter 300 text characters, following the v2 brief.
+
+**F8. Hero film.** Resolved.
+The brand book allows landing-page imagery (graded cool, mostly shadow, full-bleed), and a muted, looping film counts as that imagery. v2 fixes the hero at golden hour, so **the v1 day/night hero switch (B1) is retired.** The live Barcelona time moves to the top bar.
+
+**F9. The wordmark would sit on the film.** *Confirm.*
+The brand book says never to place the wordmark on a photograph. In the v2 brief, the top bar is transparent over the hero film, with the wordmark in the centre.
+**Applied:** the top bar is solid Paper from the start, and the film begins directly below it. So the wordmark never touches the film, and the bar doesn't change on scroll. The alternative, if the client wants the transparent bar: hide the wordmark while the bar is over the film and fade it in (220ms) when the bar turns Paper.
+
+**F10. The hero headline drops "with your group".** *Confirm.*
+The homepage line is "Someone who knows the city, with your group, start to finish." The v2 brief shortens it to "Someone who knows the city, / *start to finish.*" Copy direction belongs to the homepage.
+**Applied:** the v2 wording, because the italic split reads better, but it's flagged. "With your group" moves into the supporting line.
+
+**F11. Contrast of text on film.** Resolved, as a constraint.
+Bone text over moving footage can't be guaranteed to pass contrast.
+**Applied:** every piece of hero text sits inside the flat navy 60% block on the bottom third. The route-path text also stays inside that block, or sits over the film at bone 100% with nothing essential in it: it repeats the timeline, so it isn't the only place that information appears.
+
+**F12. Dimmed lines at 38%.** *Confirm.* (This extends C2.)
+In the pinned story index and the Section 6 list, inactive items sit at 38% (bone at 38% on Navy is 3.15:1), which fails 4.5:1.
+**Applied:** 38% for inactive items is accepted, because the same text reaches 100% when active and brand mode shows everything at full strength. For stricter compliance, use 62% for inactive items (6.17:1 on Navy).
+
+**F13. "Four to eight hours."** *Confirm against the pricing spec.*
+Section 6's copy states a duration range. My summary of the spec only covers the Weekend windows.
+**Applied:** the text is shown in the prototype, marked `[confirm against spec]`.
+
+**F14. Otter's framed panel vs. the full-bleed hero.** *Confirm.*
+The brief takes both "a big framed hero panel" (Otter) and "a full-bleed cinematic hero" (Ooshot and Squarespace), and they can't both be the hero.
+**Applied:** the hero is full-bleed, per the section spec. The framed-panel idea goes to the Section 5 Navy panel (inset from the viewport edges).
+
+**F15. The drifting city-lights dots.** *Confirm (enhanced only).*
+The brand book bans texture, and in brand mode the only thing that moves is fades.
+**Applied:** 60 or fewer flat bone dots with no glow. Static in brand mode, drifting very slowly in enhanced mode, and paused when off screen or when `prefers-reduced-motion` is set.
+
+**F16. A photo of the founder.** *Confirm.*
+The brand book says "no faces of named people, no posed portraits". The v2 brief asks for a large candid photo of Ana.
+**Applied:** a placeholder slot marked `[founder photo — candid, not posed; confirm the brand book allows the founder's face]`. If not allowed, use a candid shot of her hands, from behind, or at a distance, or fall back to the brand book's tracked serif initial.
+
+**F17. More people in the photos.** *Confirm the image selection.*
+Otter's "candid human warmth" pulls towards people. The brand book puts place and atmosphere first.
+**Applied:** people only in motion, from behind or far away, never the subject of the frame. Warmth comes from light, hands and doorways.
+
+**F18. Booking overlay: "1 / 8" vs. a pre-set kind.** *Confirm.* (This replaces E2's count.)
+The v2 brief says the overlay shows "Back" and "1 / 8". With `?kind=` passed, the Kind question is already answered.
+**Applied:** the count is always 1 / 8 and the flow opens on "What do you need a Kóda for?". The pre-set kind shows as a quiet eyebrow ("KÓDA NIGHT"). "Back" closes the overlay on the first question.
+
+**F19. GSAP and Locomotive in a Framer spec.** Resolved, as a note.
+Framer can't run GSAP or Locomotive.
+**Applied:** the prototype uses them only to demonstrate the motion. `FRAMER-NOTES.md` will map every effect to Framer's own tools: scroll transforms, sticky, the Smooth Scroll component, variants, the video component and overlays. Nothing is built that Framer can't reproduce. The published preview loads GSAP from cdnjs, because the preview host can only load scripts from there.
+
+**F20. "Everyone gets home." then "Everyone home."** A copy note.
+The Section 2 statement and the closing headline use nearly the same line.
+**Applied:** both are kept as written; the repetition works as a bookend. Tell me if you'd rather change one of them.
+
+---
+
 ## Housekeeping
 
 - The brand book PDF was **not committed** because this repository is public. Put the source files in `koda/source/` only if the repo becomes private, or keep them outside git.
+- The reference captures (Wispr, Ooshot, Squarespace, Otter, Adomate) are kept locally in `koda/references/`, which is git-ignored because they are other companies' pages and this repository is public.
 - The banned-word check will be run on `koda/` only. The repo's installed skills legitimately contain some of those words, and changing them is out of scope.
