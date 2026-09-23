@@ -11,18 +11,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --page-bg: #F7F6F2;
-    --soft-bg: #F1F0EC;
-    --card-bg: #ECEBE7;
-    --card-bg-light: #F8F7F4;
-    --black: #181818;
-    --deep-black: #141414;
-    --text: #1B1B1B;
-    --muted: #89857E;
-    --muted-light: #BDB9B1;
-    --line: #D8D6CF;
-    --white: #FFFFFF;
-    --rail: #C8C5BD;
+    --page-bg: #F5F3EF;
+    --panel-bg: #EFEEE9;
+    --soft-card: #E8E7E2;
+    --text: #191919;
+    --muted: #8B877F;
+    --muted-light: #BCB8AF;
+    --line: #D6D3CB;
+    --black: #171717;
+    --white-soft: #FAF9F6;
+    --rail: #C9C5BC;
+    --hairline: #ECEAE4;
 
     --canvas: 1728px;
     --gutter: 118px;
@@ -60,9 +59,9 @@
     transition: background-color .3s var(--ease), color .3s var(--ease), opacity .3s var(--ease), border-color .3s var(--ease);
   }
   .btn--dark { background: var(--black); color: var(--page-bg); }
-  .btn--dark:hover { background: #2B2A27; }
+  .btn--dark:hover { background: #2A2926; }
   .btn--light { background: var(--page-bg); color: var(--black); }
-  .btn--light:hover { background: #E7E5DF; }
+  .btn--light:hover { background: #E6E3DC; }
   .btn--ghost { background: transparent; color: var(--page-bg); border: 1px solid var(--page-bg); }
   .btn--ghost:hover { background: var(--page-bg); color: var(--black); }
   .btn--sm { padding: 0 16px; }
@@ -99,7 +98,7 @@
 
   .nav--light { background: var(--page-bg); color: var(--black); }
   .nav--light .btn--light { background: var(--black); color: var(--page-bg); }
-  .nav--light .btn--light:hover { background: #2B2A27; }
+  .nav--light .btn--light:hover { background: #2A2926; }
   .nav.is-hidden { opacity: 0; pointer-events: none; }
   .nav .btn { height: 34px; padding: 0 16px; }
 
@@ -118,7 +117,7 @@
   .hero .btn { margin-top: 38px; }
   .hero__card {
     position: absolute; left: 118px; top: 720px; width: 1492px; height: 520px;
-    border-radius: 82px 82px 22px 22px; overflow: hidden; background: var(--card-bg);
+    border-radius: 82px 82px 22px 22px; overflow: hidden; background: var(--soft-card);
   }
   .hero__card img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -139,14 +138,14 @@
 
   /* ------------------------------------------------------------ 3 · Collage */
   .collage { height: 1200px; overflow: hidden; }
-  .tile { position: absolute; overflow: hidden; border-radius: 12px; background: var(--card-bg); will-change: transform; }
+  .tile { position: absolute; overflow: hidden; border-radius: 12px; background: var(--soft-card); will-change: transform; }
   .tile img { width: 100%; height: 100%; object-fit: cover; }
   .collage__mark { left: 749px; top: 295px; width: 230px; height: 230px; z-index: 3; }
   .collage__mark .mark { width: 230px; height: 230px; --ring: 4px; --stem: 5.5px; }
 
   .chip {
     position: absolute; display: flex; align-items: center; gap: 10px;
-    background: var(--card-bg-light); color: var(--text);
+    background: var(--white-soft); color: var(--text);
     font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
   }
   .chip__dot { width: 8px; height: 8px; border-radius: 50%; background: #5C7A55; flex: none; }
@@ -160,7 +159,7 @@
   .comment {
     position: absolute; left: 585px; top: 800px; width: 305px; height: 62px; z-index: 2;
     display: flex; align-items: center; gap: 12px; padding: 0 16px 0 12px;
-    background: var(--soft-bg); border-radius: 10px; font-size: 14px; will-change: transform;
+    background: var(--panel-bg); border-radius: 10px; font-size: 14px; will-change: transform;
   }
   .comment__avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; overflow: hidden; background: #CDBFAE; }
   .comment__avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -177,9 +176,8 @@
     color: var(--text);
   }
   .manifesto .w { transition: color .5s var(--ease); }
-  .js .manifesto .w { color: #CFCBC3; }
-  .js .manifesto .w.is-lit { color: var(--text); }
-
+  .js .manifesto .w.is-dim { color: #B9B5AC; }
+  
   /* ------------------------------------------------------------ Shared: feature tabs */
   .tabs { display: flex; flex-direction: column; gap: 44px; }
   .tab { display: grid; grid-template-columns: 8px 1fr; column-gap: 28px; cursor: pointer; }
@@ -218,7 +216,7 @@
   .os__btn { left: 118px; top: 208px; }
   .mock {
     position: absolute; overflow: hidden; border-radius: 9px;
-    background: linear-gradient(180deg, #EDECE8 0%, #EAE9E4 60%, #E6E5E0 100%);
+    background: linear-gradient(180deg, #EFEEE9 0%, #ECEBE6 60%, #E8E7E2 100%);
   }
   .os__mock { left: 118px; top: 300px; width: 730px; height: 600px; }
   .os__meta {
@@ -232,12 +230,12 @@
             mask-image: linear-gradient(180deg, #000 30%, rgba(0,0,0,.08) 100%);
   }
   .file {
-    height: 54px; border-radius: 5px; background: var(--white);
+    height: 54px; border-radius: 5px; background: var(--white-soft);
     display: flex; align-items: center; gap: 14px; padding: 0 16px 0 12px;
     font-size: 15px; color: var(--text); letter-spacing: -0.01em;
   }
   .file__thumb {
-    width: 30px; height: 30px; border-radius: 4px; background: var(--card-bg); flex: none;
+    width: 30px; height: 30px; border-radius: 4px; background: var(--soft-card); flex: none;
     display: grid; align-content: center; gap: 3px; padding: 0 7px;
   }
   .file__thumb i { display: block; height: 2px; border-radius: 1px; background: var(--muted-light); }
@@ -253,7 +251,7 @@
     font-size: 14px; color: var(--muted);
   }
   .upload__btn {
-    width: 56px; height: 56px; border-radius: 50%; background: var(--white);
+    width: 56px; height: 56px; border-radius: 50%; background: var(--white-soft);
     display: grid; place-items: center; color: var(--text);
     transition: transform .3s var(--ease);
   }
@@ -280,13 +278,13 @@
   .ask__hello { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 22px; letter-spacing: -0.03em; color: var(--muted); }
   .ask {
     position: absolute; left: 100px; top: 206px; width: 520px;
-    background: var(--white); border-radius: 8px; padding: 18px 16px 14px 20px;
+    background: var(--white-soft); border-radius: 8px; padding: 18px 16px 14px 20px;
   }
   .ask__text { font-size: 16px; color: var(--text); letter-spacing: -0.01em; }
   .ask__row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
   .ask__tag {
     display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px;
-    border-radius: 6px; background: var(--soft-bg); font-size: 13px; color: var(--text);
+    border-radius: 6px; background: var(--panel-bg); font-size: 13px; color: var(--text);
   }
   .ask__icon { color: var(--muted); display: grid; place-items: center; }
   .ask__go {
@@ -294,12 +292,12 @@
     background: var(--black); color: var(--page-bg); display: grid; place-items: center;
   }
   .canvas-frames { position: absolute; left: 90px; top: 90px; width: 540px; height: 290px; }
-  .frame { position: absolute; border-radius: 6px; overflow: hidden; background: var(--white); }
+  .frame { position: absolute; border-radius: 6px; overflow: hidden; background: var(--white-soft); }
   .frame img { width: 100%; height: 100%; object-fit: cover; }
   .frame__label { position: absolute; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
-  .projects { position: absolute; left: 150px; top: 110px; width: 420px; background: var(--white); border-radius: 8px; padding: 8px 0; }
+  .projects { position: absolute; left: 150px; top: 110px; width: 420px; background: var(--white-soft); border-radius: 8px; padding: 8px 0; }
   .project { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 18px; font-size: 15px; letter-spacing: -0.01em; }
-  .project + .project { border-top: 1px solid #EFEEEA; }
+  .project + .project { border-top: 1px solid var(--hairline); }
   .project__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--black); }
   .project__dot--mute { background: var(--rail); }
   .project__meta { margin-left: auto; font-size: 13px; color: var(--muted); }
@@ -320,18 +318,18 @@
   .pill.is-active { background: var(--black); border-color: var(--black); color: var(--page-bg); }
   .team-cards { left: 140px; top: 385px; display: grid; grid-template-columns: repeat(4, 335px); gap: 36px; transition: opacity .35s var(--ease); }
   .team-cards.is-swapping { opacity: 0; }
-  .tcard__img { position: relative; width: 335px; height: 420px; border-radius: 9px; overflow: hidden; background: var(--card-bg); }
+  .tcard__img { position: relative; width: 335px; height: 420px; border-radius: 9px; overflow: hidden; background: var(--soft-card); }
   .tcard h3 { margin-top: 28px; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
   .tcard p { margin-top: 18px; font-size: 19px; line-height: 1.38; color: var(--muted); letter-spacing: -0.015em; }
 
-  .ui-card { position: absolute; background: var(--white); border-radius: 8px; }
+  .ui-card { position: absolute; background: var(--white-soft); border-radius: 8px; }
   .fw { left: 40px; top: 70px; width: 255px; padding: 18px 18px 8px; }
   .fw__head { font-size: 12px; color: var(--muted); letter-spacing: .03em; margin-bottom: 10px; }
-  .fw__row { display: flex; align-items: center; gap: 12px; height: 40px; font-size: 13px; color: var(--text); border-top: 1px solid #F0EFEB; }
+  .fw__row { display: flex; align-items: center; gap: 12px; height: 40px; font-size: 13px; color: var(--text); border-top: 1px solid var(--hairline); }
   .fw__row span:first-child { color: var(--muted-light); font-variant-numeric: tabular-nums; width: 18px; }
   .fw__row em { margin-left: auto; font-style: normal; width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
   .fw__row.is-on em { background: var(--black); }
-  .fw__foot { position: absolute; left: 40px; top: 346px; width: 255px; height: 38px; border-radius: 8px; background: var(--card-bg-light); display: flex; align-items: center; padding: 0 14px; gap: 8px; font-size: 12px; color: var(--muted); }
+  .fw__foot { position: absolute; left: 40px; top: 346px; width: 255px; height: 38px; border-radius: 8px; background: var(--white-soft); display: flex; align-items: center; padding: 0 14px; gap: 8px; font-size: 12px; color: var(--muted); }
 
   .doc { left: 44px; top: 56px; width: 248px; height: 420px; padding: 24px 22px; border-radius: 6px; }
   .doc h4 { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; }
@@ -340,7 +338,7 @@
   .doc__note { position: absolute; left: 150px; top: 292px; width: 150px; background: var(--black); color: var(--page-bg); font-size: 11px; line-height: 1.4; padding: 9px 11px; border-radius: 6px; }
 
   .deck { left: 34px; top: 96px; width: 267px; padding: 12px 12px 16px; }
-  .deck__slide { height: 150px; border-radius: 5px; background: var(--deep-black); position: relative; overflow: hidden; }
+  .deck__slide { height: 150px; border-radius: 5px; background: var(--black); position: relative; overflow: hidden; }
   .deck__slide .mark { position: absolute; left: 14px; top: 14px; width: 18px; height: 18px; --ring: 1px; --stem: 1.2px; }
   .deck__slide b { position: absolute; left: 14px; bottom: 30px; font-size: 16px; font-weight: 500; letter-spacing: -0.03em; color: var(--page-bg); line-height: 1.1; }
   .deck__slide small { position: absolute; left: 14px; bottom: 14px; font-size: 8px; letter-spacing: .1em; color: #77746E; }
@@ -348,16 +346,16 @@
   .deck__cap { margin-top: 14px; font-size: 13px; font-weight: 500; letter-spacing: -0.01em; }
   .deck__sub { margin-top: 4px; font-size: 12px; color: var(--muted); }
   .deck__thumbs { display: flex; gap: 6px; margin-top: 14px; }
-  .deck__thumbs span { flex: 1; height: 34px; border-radius: 3px; background: var(--card-bg); }
-  .deck__thumbs span:first-child { background: var(--deep-black); }
+  .deck__thumbs span { flex: 1; height: 34px; border-radius: 3px; background: var(--soft-card); }
+  .deck__thumbs span:first-child { background: var(--black); }
 
   .soft-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; filter: blur(3px) saturate(.8); transform: scale(1.05); }
   .summary { left: 36px; top: 150px; width: 263px; padding: 18px; }
   .summary__tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .summary h4 { margin-top: 10px; font-size: 16px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
   .summary p { margin-top: 10px; font-size: 12px; line-height: 1.5; color: var(--muted); }
-  .summary__src { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #F0EFEB; font-size: 11px; color: var(--muted); }
-  .summary__src i { width: 16px; height: 16px; border-radius: 50%; background: var(--card-bg); }
+  .summary__src { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hairline); font-size: 11px; color: var(--muted); }
+  .summary__src i { width: 16px; height: 16px; border-radius: 50%; background: var(--soft-card); }
 
   /* ------------------------------------------------------------ 8 · Testimonial */
   .quote { height: 760px; }
@@ -382,7 +380,7 @@
   .updates { height: 900px; }
   .updates__title { left: 118px; top: 155px; font-size: 50px; line-height: 1.1; font-weight: 450; letter-spacing: -0.045em; }
   .updates__row { left: 118px; top: 300px; display: grid; grid-template-columns: repeat(3, 450px); gap: 48px; }
-  .post__img { position: relative; width: 450px; height: 450px; border-radius: 9px; overflow: hidden; background: var(--card-bg); }
+  .post__img { position: relative; width: 450px; height: 450px; border-radius: 9px; overflow: hidden; background: var(--soft-card); }
   .post__img > img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
   .post:hover .post__img > img { transform: scale(1.025); }
   .post h3 { margin-top: 28px; font-size: 25px; line-height: 1.18; font-weight: 450; letter-spacing: -0.03em; color: var(--text); max-width: 430px; }
@@ -390,13 +388,13 @@
 
   .del { left: 70px; top: 110px; width: 310px; padding: 10px 0; }
   .del__row { display: flex; align-items: center; gap: 12px; height: 50px; padding: 0 18px; font-size: 14px; letter-spacing: -0.01em; }
-  .del__row + .del__row { border-top: 1px solid #F0EFEB; }
-  .del__row i { width: 26px; height: 26px; border-radius: 4px; background: var(--card-bg); flex: none; }
-  .del__row.is-hover { background: var(--soft-bg); }
+  .del__row + .del__row { border-top: 1px solid var(--hairline); }
+  .del__row i { width: 26px; height: 26px; border-radius: 4px; background: var(--soft-card); flex: none; }
+  .del__row.is-hover { background: var(--panel-bg); }
   .del__row span:last-child { margin-left: auto; color: var(--muted-light); }
-  .pop { left: 250px; top: 196px; width: 150px; padding: 6px; border-radius: 8px; background: var(--white); box-shadow: 0 1px 0 rgba(24,24,24,.04), 0 10px 30px rgba(24,24,24,.06); }
+  .pop { left: 250px; top: 196px; width: 150px; padding: 6px; border-radius: 8px; background: var(--white-soft); box-shadow: 0 1px 0 rgba(24,24,24,.04), 0 10px 30px rgba(24,24,24,.06); }
   .pop div { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border-radius: 5px; font-size: 13px; color: var(--text); }
-  .pop div.is-on { background: var(--soft-bg); }
+  .pop div.is-on { background: var(--panel-bg); }
   .pop div svg { color: var(--muted); }
   .cursor { position: absolute; left: 330px; top: 300px; }
   .post__overlay { position: absolute; left: 32px; bottom: 30px; color: #FBF8F3; }
@@ -431,16 +429,10 @@
   .status i { width: 7px; height: 7px; border-radius: 50%; background: #6DBB7A; box-shadow: 0 0 0 3px rgba(109,187,122,.18); }
 
   /* ------------------------------------------------------------ Motion */
-  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
-  .js .reveal.is-in { opacity: 1; transform: none; }
-  .js .abs.reveal { transform: translateY(18px); }
-  .js .abs.reveal.is-in { transform: none; }
   .js .team-cards.is-swapping { opacity: 0; transition-duration: .3s; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .js .reveal { opacity: 1; transform: none; transition: none; }
-    .js .manifesto .w { color: var(--text); }
     * { transition-duration: 0s !important; }
     .marquee__track { animation: none; }
   }
@@ -493,7 +485,7 @@
 <!-- 2 · Trust strip -->
 <section class="section trust" aria-label="Customers">
   <div class="canvas" style="height:100%">
-    <p class="abs trust__label reveal">Built with lorem ipsum leaders from</p>
+    <p class="abs trust__label">Built with lorem ipsum leaders from</p>
     <div class="abs marquee">
       <div class="marquee__track">
         <div class="marquee__group">
@@ -562,10 +554,10 @@
 <!-- 5 · Lumio OS -->
 <section class="section os" id="product">
   <div class="canvas" style="height:100%">
-    <h2 class="abs section-title os__title reveal"><span class="ink">Lumio OS</span><br>The intelligence layer for your brand</h2>
-    <a class="abs btn btn--dark btn--sm os__btn reveal" href="#demo">Learn more</a>
+    <h2 class="abs section-title os__title"><span class="ink">Lumio OS</span><br>The intelligence layer for your brand</h2>
+    <a class="abs btn btn--dark btn--sm os__btn" href="#demo">Learn more</a>
 
-    <div class="mock os__mock reveal" aria-hidden="true">
+    <div class="mock os__mock" aria-hidden="true">
       <div class="os__meta"><span>Sources</span><span>5 files · synced</span></div>
       <div class="files">
         <div class="file"><span class="file__thumb file__thumb--dark"><i></i><i></i><i></i></span><span class="file__name">Lumio_Strategy_2026_Global_Vision.docx</span><span class="file__size">2.4 MB</span><svg class="file__more" width="18" height="18"><use href="#i-more"/></svg></div>
@@ -580,7 +572,7 @@
       </div>
     </div>
 
-    <div class="abs tabs os__tabs reveal" role="tablist" aria-label="Lumio OS capabilities">
+    <div class="abs tabs os__tabs" role="tablist" aria-label="Lumio OS capabilities">
       <div class="tab is-active" role="tab" tabindex="0" aria-selected="true">
         <span class="tab__rail"></span>
         <div><h3 class="tab__title">Brand Foundation</h3>
@@ -618,10 +610,10 @@
 <!-- 6 · Lumio Studio -->
 <section class="section studio" id="studio">
   <div class="canvas" style="height:100%">
-    <h2 class="abs studio__title reveal"><span class="ink">Lumio Studio</span><br>Where brand intelligence meets human craft</h2>
-    <a class="abs btn btn--dark btn--sm studio__btn reveal" href="#demo">Learn more</a>
+    <h2 class="abs studio__title"><span class="ink">Lumio Studio</span><br>Where brand intelligence meets human craft</h2>
+    <a class="abs btn btn--dark btn--sm studio__btn" href="#demo">Learn more</a>
 
-    <div class="abs tabs studio__tabs reveal" role="tablist" aria-label="Lumio Studio tools" data-panes="studio-panes">
+    <div class="abs tabs studio__tabs" role="tablist" aria-label="Lumio Studio tools" data-panes="studio-panes">
       <div class="tab is-active" role="tab" tabindex="0" aria-selected="true">
         <span class="tab__rail"></span>
         <div><h3 class="tab__title">Assistant</h3>
@@ -642,7 +634,7 @@
       </div>
     </div>
 
-    <div class="mock studio__mock reveal" id="studio-panes" aria-hidden="true">
+    <div class="mock studio__mock" id="studio-panes" aria-hidden="true">
       <div class="pane is-active">
         <p class="ask__hello">What should we make today?</p>
         <div class="ask">
@@ -681,8 +673,8 @@
 <!-- 7 · Teams -->
 <section class="section teams" id="teams">
   <div class="canvas" style="height:100%">
-    <h2 class="abs teams__title reveal">One truth. Every team. Every time.</h2>
-    <div class="abs pills reveal" role="tablist" aria-label="Teams">
+    <h2 class="abs teams__title">One truth. Every team. Every time.</h2>
+    <div class="abs pills" role="tablist" aria-label="Teams">
       <button class="pill is-active" role="tab" aria-selected="true">Strategy</button>
       <button class="pill" role="tab" aria-selected="false">Marketing</button>
       <button class="pill" role="tab" aria-selected="false">Creative</button>
@@ -691,7 +683,7 @@
       <button class="pill" role="tab" aria-selected="false">Sales Enablement</button>
     </div>
 
-    <div class="abs team-cards reveal" id="team-cards">
+    <div class="abs team-cards" id="team-cards">
       <article class="tcard">
         <div class="tcard__img" aria-hidden="true">
           <div class="ui-card fw">
@@ -803,9 +795,9 @@
 <!-- 9 · Updates -->
 <section class="section updates" id="updates">
   <div class="canvas" style="height:100%">
-    <h2 class="abs updates__title reveal">Updates and insights</h2>
+    <h2 class="abs updates__title">Updates and insights</h2>
     <div class="abs updates__row">
-      <a class="post reveal" href="#updates">
+      <a class="post" href="#updates">
         <div class="post__img" aria-hidden="true">
           <div class="ui-card del">
             <div class="del__row"><i></i><span>Brand_Architecture_v3</span><span>•••</span></div>
@@ -818,17 +810,17 @@
             <div><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M10 4V2.5A.5.5 0 0 0 9.5 2h-7a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5H4"/></svg>Duplicate</div>
             <div class="is-on"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2.5 4h9M5.5 4V2.5h3V4M3.5 4l.6 7.5h5.8l.6-7.5"/></svg>Delete</div>
           </div>
-          <svg class="cursor" width="22" height="26" viewBox="0 0 22 26"><path d="M3 2v18l5-4.5 3.4 7.5 3-1.4-3.4-7.3H18z" fill="#181818" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <svg class="cursor" width="22" height="26" viewBox="0 0 22 26"><path d="M3 2v18l5-4.5 3.4 7.5 3-1.4-3.4-7.3H18z" fill="#171717" stroke="#FAF9F6" stroke-width="1.4" stroke-linejoin="round"/></svg>
         </div>
         <h3>Why most lorem pilots never leave the lab</h3>
         <p class="post__meta">Infrastructure · Apr 2026</p>
       </a>
-      <a class="post reveal" href="#updates">
+      <a class="post" href="#updates">
         <div class="post__img"><img src="assets/network.svg" alt="Monochrome network map of connected brand knowledge"></div>
         <h3>Lumio engineers: The role that did not exist until now</h3>
         <p class="post__meta">Infrastructure · Mar 2026</p>
       </a>
-      <a class="post reveal" href="#updates">
+      <a class="post" href="#updates">
         <div class="post__img">
           <img src="assets/warm-profile.svg" alt="Warm portrait in profile">
           <div class="post__overlay"><svg class="mark" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg><b>How teams<br>are using Lumio</b></div>
@@ -843,10 +835,10 @@
 <!-- 10 · Demo CTA -->
 <section class="section demo" id="demo">
   <div class="canvas" style="height:100%">
-    <div class="abs demo__icon reveal"><svg class="mark mark--light" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
-    <h2 class="abs reveal">Get a personalized demo<br>for your team</h2>
-    <p class="abs reveal">See how Lumio helps your team turn lorem ipsum into high-impact work.</p>
-    <a class="abs btn btn--dark reveal" href="#demo">Book a demo</a>
+    <div class="abs demo__icon"><svg class="mark mark--light" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
+    <h2 class="abs">Get a personalized demo<br>for your team</h2>
+    <p class="abs">See how Lumio helps your team turn lorem ipsum into high-impact work.</p>
+    <a class="abs btn btn--dark" href="#demo">Book a demo</a>
   </div>
 </section>
 </main>
@@ -899,12 +891,6 @@
   fit();
   addEventListener('resize', fit);
 
-  /* Reveal on scroll */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
   /* Manifesto: words ink in as you read */
   const text = document.getElementById('manifesto-text');
   text.innerHTML = text.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
@@ -951,8 +937,10 @@
   const update = () => {
     ticking = false;
     const vh = innerHeight;
+    /* If the frame is as tall as the page (nothing to scroll), leave everything at rest. */
+    const scrolls = document.documentElement.scrollHeight > vh + 200;
 
-    if (!reduce) {
+    if (!reduce && scrolls) {
       drifters.forEach((el) => {
         const r = el.getBoundingClientRect();
         const offset = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.speed);
@@ -962,13 +950,13 @@
       const r = text.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, (vh * 0.78 - r.top) / (r.height + vh * 0.28)));
       const lit = Math.round(progress * words.length);
-      words.forEach((w, i) => w.classList.toggle('is-lit', i < lit));
+      words.forEach((w, i) => w.classList.toggle('is-dim', i >= lit));
     }
 
     /* Once the footer's own (inverted) nav is on screen, the floating nav steps aside. */
     const navBottom = nav.getBoundingClientRect().bottom;
     const footTop = footer.getBoundingClientRect().top;
-    nav.classList.toggle('is-hidden', footTop + navBottom < vh);
+    nav.classList.toggle('is-hidden', scrolls && footTop + navBottom < vh);
   };
 
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
