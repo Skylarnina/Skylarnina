@@ -1,0 +1,131 @@
+colors:
+  primary: "#7132f5"
+  primary-dark: "#5741d8"
+  primary-deep: "#5b1ecf"
+  primary-subtle: "rgba(133,91,251,0.16)"
+  ink: "#101114"
+  cool-gray: "#686b82"
+  cool-gray-border: "rgba(104,107,130,0.24)"
+  silver-blue: "#9497a9"
+  canvas: "#ffffff"
+  hairline: "#dedee5"
+  gray-subtle-bg: "rgba(148,151,169,0.08)"
+  success: "#149e61"
+  success-subtle: "rgba(20,158,97,0.16)"
+  success-dark: "#026b3f"
+  neutral-badge-bg: "rgba(104,107,130,0.12)"
+  neutral-badge-text: "#484b5e"
+
+typography:
+  display-hero:
+    fontFamily: Kraken-Brand
+    fallback: "IBM Plex Sans, Helvetica, Arial"
+    fontSize: 48px
+    fontWeight: 700
+    lineHeight: 1.17
+    letterSpacing: -1px
+  section-heading:
+    fontFamily: Kraken-Brand
+    fontSize: 36px
+    fontWeight: 700
+    lineHeight: 1.22
+    letterSpacing: -0.5px
+  sub-heading:
+    fontFamily: Kraken-Brand
+    fontSize: 28px
+    fontWeight: 700
+    lineHeight: 1.29
+    letterSpacing: -0.5px
+  feature-title:
+    fontFamily: Kraken-Product
+    fallback: "Helvetica Neue, Helvetica, Arial"
+    fontSize: 22px
+    fontWeight: 600
+    lineHeight: 1.20
+  body:
+    fontFamily: Kraken-Product
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.38
+  body-medium:
+    fontFamily: Kraken-Product
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 1.38
+  button:
+    fontFamily: Kraken-Product
+    fontSize: 16px
+    fontWeight: "500-600"
+    lineHeight: 1.38
+  caption:
+    fontFamily: Kraken-Product
+    fontSize: 14px
+    fontWeight: "400-700"
+    lineHeight: "1.43-1.71"
+  small:
+    fontFamily: Kraken-Product
+    fontSize: 12px
+    fontWeight: "400-500"
+    lineHeight: 1.33
+  micro:
+    fontFamily: Kraken-Product
+    fontSize: 7px
+    fontWeight: 500
+    lineHeight: 1.00
+    textTransform: uppercase
+
+rounded:
+  xs: 3px
+  sm: 6px
+  md: 8px
+  button-white: 10px
+  button: 12px
+  card: 16px
+  full: 9999px
+  circle: 50%
+
+spacing:
+  scale: [1px, 2px, 3px, 4px, 5px, 6px, 8px, 10px, 12px, 13px, 15px, 16px, 20px, 24px, 25px]
+
+shadow:
+  subtle: "rgba(0,0,0,0.03) 0px 4px 24px"
+  micro: "rgba(16,24,40,0.04) 0px 1px 4px"
+
+breakpoints:
+  scale: [375px, 425px, 640px, 768px, 1024px, 1280px, 1536px]
+
+components:
+  button-primary-purple:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.canvas}"
+    typography: "{typography.button}"
+    padding: "13px 16px"
+    rounded: "{rounded.button}"
+  button-purple-outlined:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.primary-dark}"
+    border: "1px solid {colors.primary-dark}"
+    typography: "{typography.button}"
+    rounded: "{rounded.button}"
+  button-purple-subtle:
+    backgroundColor: "{colors.primary-subtle}"
+    textColor: "{colors.primary}"
+    padding: "8px"
+    rounded: "{rounded.button}"
+  button-white:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.button-white}"
+    shadow: "{shadow.subtle}"
+  button-secondary-gray:
+    backgroundColor: "{colors.gray-subtle-bg}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.button}"
+  badge-success:
+    backgroundColor: "{colors.success-subtle}"
+    textColor: "{colors.success-dark}"
+    rounded: "{rounded.sm}"
+  badge-neutral:
+    backgroundColor: "{colors.neutral-badge-bg}"
+    textColor: "{colors.neutral-badge-text}"
+    rounded: "{rounded.md}"

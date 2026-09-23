@@ -1,0 +1,273 @@
+colors:
+  primary: "#e91d2a"
+  on-primary: "#ffffff"
+  canvas: "#ffffff"
+  surface: "#ffffff"
+  ink: "#000000"
+  frame-ink: "#000000"
+  yellow-sticker: "#fcc20f"
+  purple-stripe: "#6a26a4"
+  link: "#0000ee"
+
+  # Ribbon-card tint family (one per product line)
+  tint-olive: "#8e8a25"
+  tint-sage: "#b3bd95"
+  tint-salmon: "#d77a7a"
+  tint-peach: "#e6915d"
+  tint-lime: "#c0d4a7"
+  tint-sky: "#9ab6c8"
+  tint-steel: "#a5b8c0"
+  tint-periwinkle: "#8c9ae0"
+
+typography:
+  display:
+    fontFamily: Arial Black
+    fontSize: 36px
+    fontWeight: 900
+    lineHeight: 1.0
+    letterSpacing: 0
+  heading-1:
+    fontFamily: Arial Black
+    fontSize: 24px
+    fontWeight: 900
+    lineHeight: 1.05
+    letterSpacing: 0
+  heading-2:
+    fontFamily: Helvetica
+    fontSize: 16px
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: 0
+  heading-3:
+    fontFamily: Helvetica
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: 0
+  body:
+    fontFamily: Times New Roman
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: 0
+  body-sm:
+    fontFamily: Times New Roman
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: 0
+  caption:
+    fontFamily: Times New Roman
+    fontSize: 11px
+    fontWeight: 400
+    lineHeight: 1.35
+    letterSpacing: 0
+  button:
+    fontFamily: Helvetica
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 1.0
+    letterSpacing: 0
+  link:
+    fontFamily: Times New Roman
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: 0
+  ui-label:
+    fontFamily: Helvetica
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 1.0
+    letterSpacing: 0
+
+rounded:
+  none: 0px
+  full: 9999px
+
+spacing:
+  xxs: 2px
+  xs: 4px
+  s: 6px
+  sm: 8px
+  m: 10px
+  md: 12px
+  lg: 16px
+  xl: 20px
+  xxl: 24px
+  section-sm: 32px
+  section: 40px
+  section-lg: 48px
+
+components:
+  page-frame:
+    backgroundColor: "{colors.frame-ink}"
+    textColor: "{colors.canvas}"
+    rounded: "{rounded.none}"
+    padding: 8px
+
+  top-banner:
+    backgroundColor: "{colors.frame-ink}"
+    textColor: "{colors.canvas}"
+    typography: "{typography.heading-2}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  section-eyebrow-olive:
+    backgroundColor: "{colors.tint-olive}"
+    textColor: "{colors.ink}"
+    typography: "{typography.display}"
+    rounded: "{rounded.none}"
+    padding: 24px 16px
+
+  section-eyebrow-salmon:
+    backgroundColor: "{colors.tint-salmon}"
+    textColor: "{colors.ink}"
+    typography: "{typography.display}"
+    rounded: "{rounded.none}"
+    padding: 24px 16px
+
+  ribbon-card-title:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.heading-3}"
+    rounded: "{rounded.none}"
+    padding: 6px 12px
+
+  ribbon-card-body-sage:
+    backgroundColor: "{colors.tint-sage}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  ribbon-card-body-salmon:
+    backgroundColor: "{colors.tint-salmon}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  ribbon-card-body-peach:
+    backgroundColor: "{colors.tint-peach}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  ribbon-card-body-lime:
+    backgroundColor: "{colors.tint-lime}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  ribbon-card-body-sky:
+    backgroundColor: "{colors.tint-sky}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  ribbon-card-body-steel:
+    backgroundColor: "{colors.tint-steel}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  ribbon-card-body-periwinkle:
+    backgroundColor: "{colors.tint-periwinkle}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 12px 16px
+
+  cta-block-red:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 16px
+
+  phone-callout:
+    backgroundColor: "{colors.frame-ink}"
+    textColor: "{colors.primary}"
+    typography: "{typography.heading-2}"
+    rounded: "{rounded.none}"
+    padding: 4px 8px
+
+  buy-a-dell-sticker:
+    backgroundColor: "{colors.yellow-sticker}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.button}"
+    rounded: "{rounded.none}"
+    padding: 4px 8px
+
+  new-burst-sticker:
+    backgroundColor: "{colors.yellow-sticker}"
+    textColor: "{colors.ink}"
+    typography: "{typography.button}"
+    rounded: "{rounded.none}"
+    padding: 4px 8px
+
+  cert-seal:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.canvas}"
+    typography: "{typography.button}"
+    rounded: "{rounded.full}"
+    size: 64px
+
+  icon-label-nav:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.ui-label}"
+    rounded: "{rounded.none}"
+    padding: 8px
+
+  text-input:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.none}"
+    padding: 4px 6px
+
+  button-primary:
+    backgroundColor: "{colors.frame-ink}"
+    textColor: "{colors.on-primary}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.button}"
+    rounded: "{rounded.none}"
+    padding: 6px 16px
+
+  button-secondary:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.button}"
+    rounded: "{rounded.none}"
+    padding: 6px 16px
+
+  button-text-link:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.link}"
+    typography: "{typography.link}"
+    rounded: "{rounded.none}"
+
+  footer-band:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.frame-ink}"
+    typography: "{typography.body-sm}"
+    padding: 16px

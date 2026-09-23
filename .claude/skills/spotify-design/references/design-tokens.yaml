@@ -1,0 +1,173 @@
+colors:
+  brand-green: "#1ed760"
+  near-black: "#121212"
+  dark-surface: "#181818"
+  mid-dark: "#1f1f1f"
+  text-white: "#ffffff"
+  text-silver: "#b3b3b3"
+  text-near-white: "#cbcbcb"
+  text-light: "#fdfdfd"
+  semantic-negative: "#f3727f"
+  semantic-warning: "#ffa42b"
+  semantic-announcement: "#539df5"
+  dark-card: "#252525"
+  mid-card: "#272727"
+  border-gray: "#4d4d4d"
+  light-border: "#7c7c7c"
+  separator: "#b3b3b3"
+  light-surface: "#eeeeee"
+  green-border: "#1db954"
+
+shadows:
+  heavy: "rgba(0,0,0,0.5) 0px 8px 24px"
+  medium: "rgba(0,0,0,0.3) 0px 8px 8px"
+  inset-border: "rgb(18,18,18) 0px 1px 0px, rgb(124,124,124) 0px 0px 0px 1px inset"
+
+typography:
+  section-title:
+    fontFamily: SpotifyMixUITitle
+    fontSize: 24px
+    fontWeight: 700
+    lineHeight: normal
+    letterSpacing: normal
+  feature-heading:
+    fontFamily: SpotifyMixUI
+    fontSize: 18px
+    fontWeight: 600
+    lineHeight: 1.30
+    letterSpacing: normal
+  body-bold:
+    fontFamily: SpotifyMixUI
+    fontSize: 16px
+    fontWeight: 700
+    lineHeight: normal
+    letterSpacing: normal
+  body:
+    fontFamily: SpotifyMixUI
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: normal
+    letterSpacing: normal
+  button-uppercase:
+    fontFamily: SpotifyMixUI
+    fontSize: 14px
+    fontWeight: 600-700
+    lineHeight: 1.00
+    letterSpacing: 1.4px-2px
+    textTransform: uppercase
+  button:
+    fontFamily: SpotifyMixUI
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: normal
+    letterSpacing: 0.14px
+  nav-link-bold:
+    fontFamily: SpotifyMixUI
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: normal
+    letterSpacing: normal
+  nav-link:
+    fontFamily: SpotifyMixUI
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: normal
+    letterSpacing: normal
+  caption-bold:
+    fontFamily: SpotifyMixUI
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 1.50-1.54
+    letterSpacing: normal
+  caption:
+    fontFamily: SpotifyMixUI
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: normal
+    letterSpacing: normal
+  small-bold:
+    fontFamily: SpotifyMixUI
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 1.50
+    letterSpacing: normal
+  small:
+    fontFamily: SpotifyMixUI
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: normal
+    letterSpacing: normal
+  badge:
+    fontFamily: SpotifyMixUI
+    fontSize: 10.5px
+    fontWeight: 600
+    lineHeight: 1.33
+    letterSpacing: normal
+    textTransform: capitalize
+  micro:
+    fontFamily: SpotifyMixUI
+    fontSize: 10px
+    fontWeight: 400
+    lineHeight: normal
+    letterSpacing: normal
+
+fontFamilies:
+  title: "SpotifyMixUITitle, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, Helvetica Neue, helvetica, arial, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, MS Gothic"
+  ui: "SpotifyMixUI, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, Helvetica Neue, helvetica, arial, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, MS Gothic"
+
+rounded:
+  minimal: 2px
+  subtle: 4px
+  standard: 6px
+  comfortable: 8px
+  medium: 10px-20px
+  large: 100px
+  pill: 500px
+  full-pill: 9999px
+  circle: 50%
+
+spacing:
+  base-unit: 8px
+  scale: [1px, 2px, 3px, 4px, 5px, 6px, 8px, 10px, 12px, 14px, 15px, 16px, 20px]
+
+components:
+  button-dark-pill:
+    backgroundColor: "{colors.mid-dark}"
+    textColor: "{colors.text-white}"
+    padding: 8px 16px
+    rounded: "{rounded.full-pill}"
+  button-dark-large-pill:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.text-white}"
+    padding: 0px 43px
+    rounded: "{rounded.pill}"
+  button-light-pill:
+    backgroundColor: "{colors.light-surface}"
+    textColor: "{colors.dark-surface}"
+    rounded: "{rounded.pill}"
+  button-outlined-pill:
+    backgroundColor: transparent
+    textColor: "{colors.text-white}"
+    borderColor: "{colors.light-border}"
+    border: 1px solid
+    padding: 4px 16px 4px 36px
+    rounded: "{rounded.full-pill}"
+  button-circular-play:
+    backgroundColor: "{colors.mid-dark}"
+    textColor: "{colors.text-white}"
+    padding: 12px
+    rounded: "{rounded.circle}"
+  card:
+    backgroundColor: "{colors.dark-surface} or {colors.mid-dark}"
+    rounded: "6px-8px"
+    shadow: "{shadows.medium}"
+  search-input:
+    backgroundColor: "{colors.mid-dark}"
+    textColor: "{colors.text-white}"
+    rounded: "{rounded.pill}"
+    padding: 12px 96px 12px 48px
+  nav-sidebar:
+    backgroundColor: "{colors.near-black}"
+    activeTextColor: "{colors.text-white}"
+    inactiveTextColor: "{colors.text-silver}"
+    typography: "{typography.nav-link-bold} / {typography.nav-link}"

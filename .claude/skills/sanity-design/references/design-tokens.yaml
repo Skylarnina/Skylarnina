@@ -1,0 +1,261 @@
+# Extracted from the Sanity design analysis in voltagent/awesome-design-md
+# (design-md/sanity/DESIGN.md). Source document has no machine-readable
+# frontmatter block; values below are transcribed from its prose/tables
+# and organized to match this skill collection's token shape.
+
+colors:
+  # Primary brand
+  sanity-black: "#0b0b0b"
+  pure-black: "#000000"
+  sanity-red: "#f36458"
+  # Accent & interactive
+  electric-blue: "#0052ef"
+  light-blue: "#55beff"
+  light-blue-soft: "#afe3ff"
+  neon-green-p3: "color(display-p3 .270588 1 0)"
+  neon-green-srgb-fallback: "#19d600"
+  accent-magenta-p3: "color(display-p3 .960784 0 1)"
+  # Surface & background
+  near-black: "#0b0b0b"
+  dark-gray: "#212121"
+  medium-dark: "#353535"
+  pure-white: "#ffffff"
+  light-gray: "#ededed"
+  # Neutrals & text
+  white: "#ffffff"
+  silver: "#b9b9b9"
+  medium-gray: "#797979"
+  charcoal: "#212121"
+  near-black-text: "#0b0b0b"
+  # Semantic
+  error-red: "#dd0000"
+  gpc-green: "#37cd84"
+  focus-ring-blue: "#0052ef"
+  # Border system
+  dark-border: "#0b0b0b"
+  subtle-border: "#212121"
+  medium-border: "#353535"
+  light-border: "#ffffff"
+  orange-border-p3: "color(display-p3 1 0.3333 0)"
+
+typography:
+  display-hero:
+    fontFamily: waldenburgNormal
+    fontSize: 112px
+    fontWeight: 400
+    lineHeight: 1.00
+    letterSpacing: -4.48px
+    notes: "Maximum impact, compressed tracking"
+  hero-secondary:
+    fontFamily: waldenburgNormal
+    fontSize: 72px
+    fontWeight: 400
+    lineHeight: 1.05
+    letterSpacing: -2.88px
+    notes: "Large section headers"
+  section-heading:
+    fontFamily: waldenburgNormal
+    fontSize: 48px
+    fontWeight: 400
+    lineHeight: 1.08
+    letterSpacing: -1.68px
+    notes: "Primary section anchors"
+  heading-large:
+    fontFamily: waldenburgNormal
+    fontSize: 38px
+    fontWeight: 400
+    lineHeight: 1.10
+    letterSpacing: -1.14px
+    notes: "Feature section titles"
+  heading-medium:
+    fontFamily: waldenburgNormal
+    fontSize: 32px
+    fontWeight: 425
+    lineHeight: 1.24
+    letterSpacing: -0.32px
+    notes: "Card titles, subsection headers"
+  heading-small:
+    fontFamily: waldenburgNormal
+    fontSize: 24px
+    fontWeight: 425
+    lineHeight: 1.24
+    letterSpacing: -0.24px
+    notes: "Smaller feature headings"
+  subheading:
+    fontFamily: waldenburgNormal
+    fontSize: 20px
+    fontWeight: 425
+    lineHeight: 1.13
+    letterSpacing: -0.2px
+    notes: "Sub-section markers"
+  body-large:
+    fontFamily: waldenburgNormal
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: -0.18px
+    notes: "Intro paragraphs, descriptions"
+  body:
+    fontFamily: waldenburgNormal
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+    notes: "Standard body text"
+  body-small:
+    fontFamily: waldenburgNormal
+    fontSize: 15px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: -0.15px
+    notes: "Compact body text"
+  caption:
+    fontFamily: waldenburgNormal
+    fontSize: 13px
+    fontWeight: "400-500"
+    lineHeight: "1.30-1.50"
+    letterSpacing: -0.13px
+    notes: "Metadata, descriptions, tags"
+  small-caption:
+    fontFamily: waldenburgNormal
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: -0.12px
+    notes: "Footnotes, timestamps"
+  micro-label:
+    fontFamily: waldenburgNormal
+    fontSize: 11px
+    fontWeight: "500-600"
+    lineHeight: "1.00-1.50"
+    letterSpacing: normal
+    notes: "Uppercase labels, tiny badges"
+  code-body:
+    fontFamily: IBM Plex Mono
+    fontSize: 15px
+    fontWeight: 400
+    lineHeight: 1.50
+    letterSpacing: normal
+    notes: "Code blocks, technical content"
+  code-caption:
+    fontFamily: IBM Plex Mono
+    fontSize: 13px
+    fontWeight: "400-500"
+    lineHeight: "1.30-1.50"
+    letterSpacing: normal
+    notes: "Inline code, small technical labels"
+  code-micro:
+    fontFamily: IBM Plex Mono
+    fontSize: "10-12px"
+    fontWeight: 400
+    lineHeight: "1.30-1.50"
+    letterSpacing: normal
+    notes: "Tiny code labels, uppercase tags"
+  openTypeFeatures:
+    display: '"cv01", "cv11", "cv12", "cv13", "ss07"'
+    body: '"calt" 0'
+
+rounded:
+  xs: 3px    # inputs, textareas, subtle rounding
+  sm: "4-5px"  # secondary buttons, small cards, tags
+  md: 6px    # standard cards, containers
+  lg: 12px   # large cards, feature containers, forms
+  pill: 99999px  # primary buttons, badges, nav pills
+
+spacing:
+  space-1: 1px
+  space-2: 2px
+  space-3: 4px
+  space-4: 6px
+  space-5: 8px    # base unit
+  space-6: 12px
+  space-7: 16px
+  space-8: 24px
+  space-9: 32px
+  space-10: 48px
+  space-11: 64px
+  space-12: "96-120px"
+
+components:
+  button-primary-pill:
+    backgroundColor: "{colors.sanity-red}"
+    textColor: "{colors.white}"
+    padding: 8px 16px
+    rounded: "{rounded.pill}"
+    hover: "backgroundColor {colors.electric-blue}, textColor white"
+    typography: "16px waldenburgNormal weight 400"
+  button-secondary-dark-pill:
+    backgroundColor: "{colors.near-black}"
+    textColor: "{colors.silver}"
+    padding: 8px 12px
+    rounded: "{rounded.pill}"
+    hover: "backgroundColor {colors.electric-blue}, textColor white"
+  button-outlined-light-pill:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.near-black}"
+    padding: 8px
+    rounded: "{rounded.pill}"
+    border: "1px solid {colors.near-black}"
+    hover: "backgroundColor {colors.electric-blue}, textColor white"
+  button-ghost-subtle:
+    backgroundColor: "{colors.dark-gray}"
+    textColor: "{colors.silver}"
+    padding: 0px 12px
+    rounded: 5px
+    border: "1px solid {colors.dark-gray}"
+    hover: "backgroundColor {colors.electric-blue}, textColor white"
+  button-uppercase-label:
+    typography: "11px waldenburgNormal weight 600 uppercase"
+    backgroundColor: "transparent or {colors.dark-gray}"
+    textColor: "{colors.silver}"
+    letterSpacing: normal
+    notes: "Used for tab-like navigation and filter controls"
+  card-dark-content:
+    backgroundColor: "{colors.dark-gray}"
+    border: "1px solid {colors.medium-dark} or {colors.dark-gray}"
+    rounded: 6px
+    padding: 24px
+    titleColor: "{colors.white}"
+    bodyColor: "{colors.silver}"
+  card-feature-full-bleed:
+    backgroundColor: "{colors.sanity-black} or full-bleed image/gradient"
+    border: "none or 1px solid {colors.dark-gray}"
+    rounded: 12px
+    padding: "32-48px"
+  input-text:
+    backgroundColor: "{colors.near-black}"
+    textColor: "{colors.silver}"
+    border: "1px solid {colors.dark-gray}"
+    padding: 8px 12px
+    rounded: 3px
+    focus: "2px solid focus-ring-color (blue) outline; focus background shifts to #072227"
+  input-search:
+    backgroundColor: "{colors.near-black}"
+    textColor: "{colors.silver}"
+    padding: 0px 12px
+    rounded: 3px
+    placeholderColor: "{colors.medium-gray}"
+  nav-top:
+    backgroundColor: "{colors.near-black} with backdrop blur"
+    linkColor: "{colors.silver}"
+    linkHover: "electric blue"
+    ctaButton: "Sanity Red pill button right-aligned"
+    borderBottom: "1px solid {colors.dark-gray}"
+  footer:
+    backgroundColor: "{colors.near-black}"
+    linkColor: "{colors.silver}"
+    linkHover: blue
+    sectionHeaderColor: "{colors.white}"
+    sectionHeaderTypography: "13px uppercase IBM Plex Mono"
+  badge-neutral-subtle:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.near-black}"
+    padding: 8px
+    typography: 13px
+    rounded: "{rounded.pill}"
+  badge-neutral-filled:
+    backgroundColor: "{colors.near-black}"
+    textColor: "{colors.white}"
+    padding: 8px
+    typography: 13px
+    rounded: "{rounded.pill}"

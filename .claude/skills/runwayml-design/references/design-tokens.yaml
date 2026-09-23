@@ -1,0 +1,137 @@
+# Extracted from the Runway design analysis in voltagent/awesome-design-md
+# (design-md/runwayml/DESIGN.md). Source document has no machine-readable
+# frontmatter block; values below are transcribed from its prose/tables
+# and organized to match this skill collection's token shape.
+
+colors:
+  # Primary
+  runway-black: "#000000"
+  deep-black: "#030303"
+  dark-surface: "#1a1a1a"
+  pure-white: "#ffffff"
+  # Surface & background
+  near-white: "#fefefe"
+  cool-cloud: "#e9ecf2"
+  border-dark: "#27272a"
+  # Neutrals & text
+  charcoal: "#404040"
+  near-charcoal: "#3f3f3f"
+  cool-slate: "#767d88"
+  mid-slate: "#7d848e"
+  muted-gray: "#a7a7a7"
+  cool-silver: "#c9ccd1"
+  light-silver: "#d0d4d4"
+  tailwind-gray: "#6b7280"
+  dark-link: "#0c0c0c"
+  footer-gray: "#999999"
+
+typography:
+  display-hero:
+    fontFamily: abcNormal
+    fontSize: 48px
+    fontWeight: 400
+    lineHeight: 1.00
+    letterSpacing: -1.2px
+    notes: "Maximum size, film-title presence"
+  section-heading:
+    fontFamily: abcNormal
+    fontSize: 40px
+    fontWeight: 400
+    lineHeight: "1.00-1.10"
+    letterSpacing: "-1px to 0px"
+    notes: "Feature section titles"
+  sub-heading:
+    fontFamily: abcNormal
+    fontSize: 36px
+    fontWeight: 400
+    lineHeight: 1.00
+    letterSpacing: -0.9px
+    notes: "Secondary section markers"
+  card-title:
+    fontFamily: abcNormal
+    fontSize: 24px
+    fontWeight: 400
+    lineHeight: 1.00
+    letterSpacing: normal
+    notes: "Article and card headings"
+  feature-title:
+    fontFamily: abcNormal
+    fontSize: 20px
+    fontWeight: 400
+    lineHeight: 1.00
+    letterSpacing: normal
+    notes: "Small headings"
+  body-button:
+    fontFamily: abcNormal
+    fontSize: 16px
+    fontWeight: "400-600"
+    lineHeight: "1.30-1.50"
+    letterSpacing: "-0.16px to normal"
+    notes: "Standard body, nav links"
+  caption-label:
+    fontFamily: abcNormal
+    fontSize: 14px
+    fontWeight: "500-600"
+    lineHeight: "1.25-1.43"
+    letterSpacing: 0.35px
+    textTransform: uppercase
+    notes: "Metadata, section labels"
+  small:
+    fontFamily: abcNormal
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 1.30
+    letterSpacing: "-0.16px to -0.26px"
+    notes: "Compact descriptions"
+  micro-tag:
+    fontFamily: abcNormal
+    fontSize: 11px
+    fontWeight: 450
+    lineHeight: 1.30
+    letterSpacing: normal
+    textTransform: uppercase
+    notes: "Uppercase tags, tiny labels"
+
+rounded:
+  sharp: 4px      # buttons, small interactive elements
+  subtle: 6px     # links, small containers
+  comfortable: 8px  # standard containers, image cards, product screenshots
+  generous: 16px  # alert-style containers, featured elements
+
+spacing:
+  scale: [4px, 6px, 8px, 12px, 16px, 20px, 24px, 28px, 32px, 48px, 64px, 78px]
+  base-unit: 8px
+  section-vertical: "48-78px"
+  component-gap: "16-24px"
+
+components:
+  button:
+    textColor: "{colors.pure-white}"
+    typography: "14px abcNormal weight 600"
+    backgroundColor: "transparent or dark, minimal border"
+    rounded: "{rounded.sharp}"
+    notes: "Extremely restrained — no heavy fills or borders detected; interactive elements blend into the editorial flow"
+  card:
+    backgroundColor: "transparent or {colors.dark-surface}"
+    border: "1px solid {colors.border-dark} (dark mode) — barely visible containment"
+    rounded: "4-8px functional elements; 16px alert-style containers"
+    shadow: none
+    notes: "Cards are primarily photographic — the image IS the card"
+  navigation:
+    backgroundColor: "transparent over hero content"
+    logo: "Runway wordmark in white/black"
+    linkTypography: "abcNormal 16px, weight 400-600"
+    hover: "text shifts to white or higher opacity"
+  image-treatment:
+    notes: "Full-bleed cinematic photography and video dominate; AI-generated content shown at large scale; mixed-size editorial magazine grids; dark overlays on hero images for text readability; product screenshots with subtle 8px rounded corners"
+  cinematic-hero:
+    layout: "full-viewport image or video with text overlay"
+    headline: "48px abcNormal, white on dark imagery"
+  research-article-card:
+    layout: "photographic thumbnails with article titles, mixed-size grid (large feature + smaller supporting), text overlay or below-image caption"
+  trust-bar:
+    content: "company logos, clean monochrome treatment, horizontal layout with generous spacing"
+  mission-statement:
+    backgroundColor: "{colors.runway-black}"
+    textColor: "{colors.pure-white}"
+    notes: "The emotional close — artistic and philosophical"
