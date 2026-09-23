@@ -120,16 +120,13 @@ html[data-motion="enhanced"] .hero-slide{ transition:opacity 1200ms cubic-bezier
 .hero-slide video.is-playing{ opacity:1; }
 .hero-slide .ph-note{ top:24px; left:var(--gut); max-width:40ch; }
 .hero-word{
-  position:absolute; z-index:2; left:0; right:0; top:15%; text-align:center; white-space:nowrap; pointer-events:none;
+  position:absolute; z-index:2; left:0; right:0; top:12%; text-align:center; white-space:nowrap; pointer-events:none;
   font:300 var(--word,12.4vw)/.8 var(--serif); letter-spacing:.2em; margin-right:-.2em; text-transform:uppercase; color:var(--bone);
 }
 .hero-fg{ position:absolute; inset:0; z-index:3; pointer-events:none; }
-.hero-fg img{ visibility:hidden; position:absolute; left:0; right:0; bottom:0; width:100%; height:100%; object-fit:cover; object-position:50% 100%; }
-.hero-fg svg{ position:absolute; left:0; bottom:0; width:100%; height:100%; }
-.hero-fg.has-media svg{ display:none; }
-.hero-fg.has-media img{ visibility:visible; }
-.hero-fg .fg-shape{ fill:var(--navy); }
-.hero-fg .fg-label{ font:500 9.5px var(--sans); letter-spacing:.18em; fill:var(--stone); text-transform:uppercase; }
+.fg-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 220ms ease; }
+html[data-motion="enhanced"] .fg-img{ transition:opacity 1200ms cubic-bezier(.76,0,.24,1); }
+.fg-img.is-active{ opacity:1; }
 .hero-copy{ position:absolute; z-index:4; left:0; bottom:0; width:min(640px,46%); background:rgba(13,31,45,.6); padding:40px 48px 40px var(--gut); color:var(--bone); }
 .hero-copy .eyebrow{ color:var(--stone); margin-bottom:20px; }
 .hero h1{ font:300 clamp(40px,3.9vw,58px)/1.02 var(--serif); letter-spacing:-.01em; color:var(--bone); text-wrap:balance; }
@@ -148,7 +145,7 @@ html[data-motion="enhanced"] .hero-slide{ transition:opacity 1200ms cubic-bezier
 .hero-index button[aria-current="true"] .mk{ border-top-color:var(--stone); }
 @media (max-width:899px){
   .hero{ height:max(640px, calc(100svh - var(--bar))); }
-  .hero-word{ top:12%; }
+  .hero-word{ top:17%; }
   .hero-copy{ width:calc(100% - 32px); padding:26px 22px 26px var(--gut); }
   .hero h1{ font-size:38px; }
   .hero-sub{ font-size:15px; }
@@ -482,24 +479,20 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
 <!-- ============================ 1 · HERO — depth-layered type ============================ -->
 <section class="hero theme-dark" id="top" aria-label="Kóda, Barcelona">
   <div class="hero-bg">
-    <div class="hero-slide is-active" data-cap="Carrer del Bisbe · 21:10">
-      <div class="ph" data-src="media/hero.jpg" style="position:absolute;inset:0"><p class="ph-note"><b>Shot 01 · Hero film + still</b>A small group from behind, walking up a narrow lit street in the Gòtic at blue hour. 8–12s loop, locked-off; still = one frame of it.</p></div>
+    <div class="hero-slide is-active" data-cap="The Gòtic from above · 20:40">
+      <div class="ph" data-src="media/hero-cathedral.jpg" style="position:absolute;inset:0"></div>
       <video muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"><source src="media/hero.mp4" type="video/mp4"></video>
     </div>
-    <div class="hero-slide" data-cap="Plaça de Sant Felip Neri · 21:25"><div class="ph" data-src="media/hero-2.jpg" style="position:absolute;inset:0;background-color:var(--navy)"><p class="ph-note"><b>Shot 01b · Clip 2 of 5</b>The small square at blue hour, two figures crossing it from behind.</p></div></div>
-    <div class="hero-slide" data-cap="Passeig del Born · 21:40"><div class="ph" data-src="media/hero-3.jpg" style="position:absolute;inset:0"><p class="ph-note"><b>Shot 01c · Clip 3 of 5</b>Street lamps coming on, a couple walking away under them.</p></div></div>
-    <div class="hero-slide" data-cap="Carrer de Montcada · 21:55"><div class="ph" data-src="media/hero-4.jpg" style="position:absolute;inset:0;background-color:var(--navy)"><p class="ph-note"><b>Shot 01d · Clip 4 of 5</b>A medieval lane, a small group turning the corner ahead of camera.</p></div></div>
-    <div class="hero-slide" data-cap="Plaça del Rei · 22:10"><div class="ph" data-src="media/hero-5.jpg" style="position:absolute;inset:0"><p class="ph-note"><b>Shot 01e · Clip 5 of 5</b>Stone steps, figures at a distance, the last blue in the sky.</p></div></div>
+    <div class="hero-slide" data-cap="Eixample rooftops · 20:55"><div class="ph" data-src="media/hero-rooftops.jpg" style="position:absolute;inset:0"></div></div>
+    <div class="hero-slide" data-cap="Eixample · 21:20"><div class="ph" data-src="media/hero-street.jpg" data-pos="50% 60%" style="position:absolute;inset:0"></div></div>
   </div>
 
   <p class="hero-word" aria-hidden="true">Barcelona</p>
 
   <div class="hero-fg" aria-hidden="true">
-    <img src="media/hero-fg.png" alt="">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
-      <path class="fg-shape" d="M0 900 V600 H120 V585 H260 V610 H380 V560 H396 V518 H424 V560 H560 V540 H700 V470 H766 V332 L784 296 L802 332 V470 H884 V360 H906 V302 L941 118 L976 302 V360 H998 V470 H1086 V340 L1104 306 L1122 340 V470 H1180 V560 H1236 V526 H1262 V560 H1300 V590 H1440 V900 Z"/>
-      <text class="fg-label" x="720" y="520">Shot 02 · foreground cut-out (PNG) · placeholder</text>
-    </svg>
+    <img class="fg-img is-active" src="media/hero-cathedral-fg.webp" alt="">
+    <img class="fg-img" src="media/hero-rooftops-fg.webp" alt="">
+    <span class="fg-img"></span>
   </div>
 
   <div class="hero-copy">
@@ -514,13 +507,11 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
   </div>
 
   <div class="hero-meta">
-    <span class="hero-cap" id="hero-cap">Carrer del Bisbe · 21:10</span>
+    <span class="hero-cap" id="hero-cap">The Gòtic from above · 20:40</span>
     <div class="hero-index" role="group" aria-label="Hero scenes">
-      <button id="hi-1" aria-current="true" aria-label="Scene 1">01<span class="mk"></span></button>
-      <button id="hi-2" aria-current="false" aria-label="Scene 2">02<span class="mk"></span></button>
-      <button id="hi-3" aria-current="false" aria-label="Scene 3">03<span class="mk"></span></button>
-      <button id="hi-4" aria-current="false" aria-label="Scene 4">04<span class="mk"></span></button>
-      <button id="hi-5" aria-current="false" aria-label="Scene 5">05<span class="mk"></span></button>
+      <button id="hi-1" aria-current="true" aria-label="Scene 1, the Gòtic from above">01<span class="mk"></span></button>
+      <button id="hi-2" aria-current="false" aria-label="Scene 2, Eixample rooftops">02<span class="mk"></span></button>
+      <button id="hi-3" aria-current="false" aria-label="Scene 3, an Eixample street">03<span class="mk"></span></button>
     </div>
   </div>
 </section>
@@ -559,22 +550,22 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
     <div class="car-track" id="car-track" tabindex="0" aria-label="Three ways to book. Use the left and right arrow keys to move between them.">
       <article class="slide is-l" data-i="0" aria-labelledby="w-day">
         <div class="tile">
-          <div class="ph ph-warm" data-src="media/day.jpg"><p class="ph-note"><b>Shot 12 · Day</b>Gràcia plaça, 17:00, low sun: two or three people crossing away from camera.</p></div>
-          <div class="ph ph-later" data-src="media/day-later.jpg"><p class="ph-note"><b>Shot 13 · Day, later</b>Same plaça, same spot, 19:30, lamps just on.</p></div>
+          <div class="ph ph-warm" data-src="media/eixample-day.jpg" data-pos="50% 62%"><p class="ph-note"><b>Shot 12 · Day</b>Gràcia plaça, 17:00, low sun: two or three people crossing away from camera.</p></div>
+          <div class="ph ph-later" data-src="media/born-market.jpg"><p class="ph-note"><b>Shot 13 · Day, later</b>Same plaça, same spot, 19:30, lamps just on.</p></div>
           <div class="slide-label"><span class="eyebrow k">Kóda</span><span class="name" id="w-day">Day</span><span class="price-note" data-price-note>[PRICE — pending client]</span><button class="btn btn-stone btn-sm" id="book-day" data-book data-kind="day">Plan your day</button></div>
         </div>
       </article>
       <article class="slide is-c" data-i="1" aria-labelledby="w-night">
         <div class="tile">
-          <div class="ph" data-src="media/night.jpg"><p class="ph-note"><b>Shot 14 · Night</b>El Born, 22:30: four people leaving a restaurant door into a narrow lit street, from behind.</p></div>
-          <div class="ph ph-later" data-src="media/night-later.jpg" style="background-color:var(--navy)"><p class="ph-note"><b>Shot 15 · Night, later</b>Same street, same spot, 00:30: nearly empty, two figures far down it.</p></div>
+          <div class="ph" data-src="media/neon-street.jpg" data-pos="30% 50%"><p class="ph-note"><b>Shot 14 · Night</b>El Born, 22:30: four people leaving a restaurant door into a narrow lit street, from behind.</p></div>
+          <div class="ph ph-later" data-src="media/strip-next.jpg" style="background-color:var(--navy)"><p class="ph-note"><b>Shot 15 · Night, later</b>Same street, same spot, 00:30: nearly empty, two figures far down it.</p></div>
           <div class="slide-label"><span class="eyebrow k">Kóda</span><span class="name" id="w-night">Night</span><span class="price-note" data-price-note>[PRICE — pending client]</span><button class="btn btn-stone btn-sm" id="book-night" data-book data-kind="night">Plan your night</button></div>
         </div>
       </article>
       <article class="slide is-r" data-i="2" aria-labelledby="w-weekend">
         <div class="tile">
-          <div class="ph ph-warm" data-src="media/weekend.jpg"><p class="ph-note"><b>Shot 16 · Weekend</b>Passeig Marítim sea wall, 20:15: a small group walking along it from behind. No towers.</p></div>
-          <div class="ph ph-later" data-src="media/weekend-later.jpg"><p class="ph-note"><b>Shot 17 · Weekend, later</b>Same wall, 22:00, dark sea, promenade lights.</p></div>
+          <div class="ph ph-warm" data-src="media/coast.jpg"><p class="ph-note"><b>Shot 16 · Weekend</b>Passeig Marítim sea wall, 20:15: a small group walking along it from behind. No towers.</p></div>
+          <div class="ph ph-later" data-src="media/hero-cathedral.jpg" data-pos="50% 70%"><p class="ph-note"><b>Shot 17 · Weekend, later</b>Same wall, 22:00, dark sea, promenade lights.</p></div>
           <div class="slide-label"><span class="eyebrow k">Kóda</span><span class="name" id="w-weekend">Weekend</span><span class="price-note" data-price-note>[PRICE — pending client]</span><button class="btn btn-stone btn-sm" id="book-weekend" data-book data-kind="weekend">Plan your weekend</button></div>
         </div>
       </article>
@@ -611,14 +602,14 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
   <!-- enhanced · desktop: pinned -->
   <div class="story-stage" id="story-stage" aria-hidden="true">
     <div class="stage-img">
-      <div class="ph is-active" data-src="media/story-2030.jpg"><p class="ph-note"><b>Shot 06 · 20:30</b>Hotel entrance from the pavement at dusk: glass door, warm lobby, a figure in a coat stepping in, seen from behind. Vertical.</p></div>
-      <div class="ph" data-src="media/story-2215.jpg"><p class="ph-note"><b>Shot 07 · 22:15</b>A restaurant door held open from inside, two guests leaving into the street, backs to camera, warm spill on the pavement. Vertical.</p></div>
-      <div class="ph" data-src="media/story-0040.jpg"><p class="ph-note"><b>Shot 08 · 00:40</b>Narrow Barri Gòtic lane, a wall lamp, three figures walking away, slight motion blur. Vertical.</p></div>
-      <div class="ph" data-src="media/story-0210.jpg"><p class="ph-note"><b>Shot 09 · 02:10</b>Taxi at the kerb, rear three-quarter, one person holding the door for another. No plates or readable signs. Vertical.</p></div>
-      <div class="ph" data-src="media/story-0230.jpg"><p class="ph-note"><b>Shot 10 · 02:30</b>An Eixample portal, heavy wooden door ajar, hallway light on, one figure stepping in from behind. Vertical.</p></div>
+      <div class="ph is-active" data-src="media/lobby.jpg" data-pos="40% 50%"><p class="ph-note"><b>Shot 06 · 20:30</b>Hotel entrance from the pavement at dusk: glass door, warm lobby, a figure in a coat stepping in, seen from behind. Vertical.</p></div>
+      <div class="ph" data-src="media/strip-dinner.jpg" data-pos="72% 50%"><p class="ph-note"><b>Shot 07 · 22:15</b>A restaurant door held open from inside, two guests leaving into the street, backs to camera, warm spill on the pavement. Vertical.</p></div>
+      <div class="ph" data-src="media/lane-vertical.jpg"><p class="ph-note"><b>Shot 08 · 00:40</b>Narrow Barri Gòtic lane, a wall lamp, three figures walking away, slight motion blur. Vertical.</p></div>
+      <div class="ph" data-src="media/taxi-night.jpg" data-pos="72% 50%"><p class="ph-note"><b>Shot 09 · 02:10</b>Taxi at the kerb, rear three-quarter, one person holding the door for another. No plates or readable signs. Vertical.</p></div>
+      <div class="ph" data-src="media/strip-home.jpg" data-pos="42% 50%"><p class="ph-note"><b>Shot 10 · 02:30</b>An Eixample portal, heavy wooden door ajar, hallway light on, one figure stepping in from behind. Vertical.</p></div>
       <div class="cap-box">
-        <span class="cap is-active">Hotel entrance, Eixample · 20:30</span>
-        <span class="cap">Restaurant, El Born · 22:15</span>
+        <span class="cap is-active">Hotel lobby, Eixample · 20:30</span>
+        <span class="cap">A terrace, El Born · 22:15</span>
         <span class="cap">Carrer del Bisbe · 00:40</span>
         <span class="cap">Via Laietana · 02:10</span>
         <span class="cap">A portal, Eixample · 02:30</span>
@@ -649,11 +640,11 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
 
   <!-- brand mode (all widths) + enhanced mobile: stacked -->
   <ol class="story-steps theme-dark" id="story-steps">
-    <li class="step" data-step="0"><div class="ph" data-src="media/story-2030.jpg"><p class="ph-note"><b>Shot 06 · 20:30</b>Hotel entrance at dusk, a figure stepping in from behind.</p></div><div class="txt"><span class="t">20:30</span><p class="s">Your Kóda meets you in the hotel lobby. The table is under your name.</p><span class="cap">Hotel entrance, Eixample · 20:30</span></div></li>
-    <li class="step" data-step="1"><div class="ph" data-src="media/story-2215.jpg"><p class="ph-note"><b>Shot 07 · 22:15</b>Restaurant door held open, two guests leaving.</p></div><div class="txt"><span class="t">22:15</span><p class="s">Dinner runs long. They've already spoken to the next place.</p><span class="cap">Restaurant, El Born · 22:15</span></div></li>
-    <li class="step" data-step="2"><div class="ph" data-src="media/story-0040.jpg"><p class="ph-note"><b>Shot 08 · 00:40</b>Gòtic lane, wall lamp, three figures walking away.</p></div><div class="txt"><span class="t">00:40</span><p class="s">The street is unfamiliar. It doesn't feel that way.</p><span class="cap">Carrer del Bisbe · 00:40</span></div></li>
-    <li class="step" data-step="3"><div class="ph" data-src="media/story-0210.jpg"><p class="ph-note"><b>Shot 09 · 02:10</b>Taxi at the kerb, a door held open.</p></div><div class="txt"><span class="t">02:10</span><p class="s">A taxi, an address confirmed, everyone counted in.</p><span class="cap">Via Laietana · 02:10</span></div></li>
-    <li class="step" data-step="4"><div class="ph" data-src="media/story-0230.jpg"><p class="ph-note"><b>Shot 10 · 02:30</b>Eixample portal ajar, hallway light on.</p></div><div class="txt"><span class="t">02:30</span><p class="s">Everyone home. The evening simply ended well.</p><span class="cap">A portal, Eixample · 02:30</span></div></li>
+    <li class="step" data-step="0"><div class="ph" data-src="media/lobby.jpg" data-pos="40% 50%"><p class="ph-note"><b>Shot 06 · 20:30</b>Hotel entrance at dusk, a figure stepping in from behind.</p></div><div class="txt"><span class="t">20:30</span><p class="s">Your Kóda meets you in the hotel lobby. The table is under your name.</p><span class="cap">Hotel lobby, Eixample · 20:30</span></div></li>
+    <li class="step" data-step="1"><div class="ph" data-src="media/strip-dinner.jpg" data-pos="72% 50%"><p class="ph-note"><b>Shot 07 · 22:15</b>Restaurant door held open, two guests leaving.</p></div><div class="txt"><span class="t">22:15</span><p class="s">Dinner runs long. They've already spoken to the next place.</p><span class="cap">A terrace, El Born · 22:15</span></div></li>
+    <li class="step" data-step="2"><div class="ph" data-src="media/lane-vertical.jpg"><p class="ph-note"><b>Shot 08 · 00:40</b>Gòtic lane, wall lamp, three figures walking away.</p></div><div class="txt"><span class="t">00:40</span><p class="s">The street is unfamiliar. It doesn't feel that way.</p><span class="cap">Carrer del Bisbe · 00:40</span></div></li>
+    <li class="step" data-step="3"><div class="ph" data-src="media/taxi-night.jpg" data-pos="72% 50%"><p class="ph-note"><b>Shot 09 · 02:10</b>Taxi at the kerb, a door held open.</p></div><div class="txt"><span class="t">02:10</span><p class="s">A taxi, an address confirmed, everyone counted in.</p><span class="cap">Via Laietana · 02:10</span></div></li>
+    <li class="step" data-step="4"><div class="ph" data-src="media/strip-home.jpg" data-pos="42% 50%"><p class="ph-note"><b>Shot 10 · 02:30</b>Eixample portal ajar, hallway light on.</p></div><div class="txt"><span class="t">02:30</span><p class="s">Everyone home. The evening simply ended well.</p><span class="cap">A portal, Eixample · 02:30</span></div></li>
   </ol>
 </section>
 
@@ -670,10 +661,10 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
 <!-- ============================ 6 · WHO A KÓDA IS — frame within a frame ============================ -->
 <section class="who theme-dark" id="who" aria-labelledby="who-h">
   <div class="who-scene">
-    <div class="ph" data-src="media/who-night.jpg" style="background-color:var(--navy)"><p class="ph-note"><b>Shot 18 · Night background</b>A wide Gòtic street at night, wall lamps, stone, nobody close to camera. Full-bleed.</p></div>
+    <div class="ph" data-src="media/hero-street.jpg" style="background-color:var(--navy)"><p class="ph-note"><b>Shot 18 · Night background</b>A wide Gòtic street at night, wall lamps, stone, nobody close to camera. Full-bleed.</p></div>
     <figure class="who-window">
-      <div class="frame"><div class="ph" data-src="media/who-doorway.jpg"><p class="ph-note"><b>Shot 19 · Window</b>A figure seen from behind, standing in a lit doorway. Vertical 2:3.</p></div></div>
-      <figcaption class="cap">A portal, Eixample · 23:50</figcaption>
+      <div class="frame"><div class="ph" data-src="media/lane-vertical.jpg" data-pos="50% 70%"><p class="ph-note"><b>Shot 19 · Window</b>A figure seen from behind, standing in a lit doorway. Vertical 2:3.</p></div></div>
+      <figcaption class="cap">Carrer del Bisbe · 23:50</figcaption>
     </figure>
     <div class="who-copy">
       <p class="eyebrow"><span class="ix">06</span>Who a Kóda is</p>
@@ -841,11 +832,7 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
     img.onload = () => { ph.style.backgroundImage = 'url("' + ph.dataset.src + '")'; if (ph.dataset.pos) ph.style.backgroundPosition = ph.dataset.pos; ph.classList.add('has-media'); };
     img.src = ph.dataset.src;
   });
-  const fgImg = $('.hero-fg img');
-  if (fgImg) {
-    const ok = () => fgImg.parentNode.classList.add('has-media');
-    if (fgImg.complete) { if (fgImg.naturalWidth) ok(); else fgImg.remove(); } else { fgImg.addEventListener('load', ok); fgImg.addEventListener('error', () => fgImg.remove()); }
-  }
+  $$('img.fg-img').forEach(im => im.addEventListener('error', () => { im.style.display = 'none'; }));
   const video = $('.hero-slide video');
   if (video) {
     video.addEventListener('playing', () => video.classList.add('is-playing'));
@@ -866,11 +853,12 @@ footer{ position:relative; z-index:2; border-top:.5px solid rgba(240,235,227,.22
   });
 
   /* ---------- hero: five scenes, vertical 01–05 index ---------- */
-  const heroSlides = $$('.hero-slide'), heroBtns = $$('.hero-index button'), heroCap = $('#hero-cap');
+  const heroSlides = $$('.hero-slide'), heroBtns = $$('.hero-index button'), heroCap = $('#hero-cap'), heroFg = $$('.fg-img');
   let hi = 0, heroTimer = null;
   function showHero(i){
     hi = i;
     heroSlides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+    heroFg.forEach((f, k) => f.classList.toggle('is-active', k === i));
     heroBtns.forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
     heroCap.textContent = heroSlides[i].dataset.cap;
   }

@@ -1,5 +1,28 @@
 # Kóda: shot list (round 3)
 
+## Status after your uploads
+
+Your 14 photos are in `koda/media/` as the originals. Graded web versions are in `koda/site/v2/media/`: one grade across the set (cool shadows, saturation down about 40%, a whisper of warmth in the highlights, fine grain of about 3%), plus two cut-outs for the depth hero.
+
+| Slot | Now using | Notes |
+|---|---|---|
+| Hero scene 01 + cut-out | `hero.jpg` → `hero-cathedral.jpg` + `hero-cathedral-fg.webp` | BARCELONA sits behind the Collserola ridge, and the cathedral spire crosses the "E". It's a skyline, but it's the strongest depth frame, so it opens the page. |
+| Hero scene 02 + cut-out | `hero-foreground.jpg` → `hero-rooftops.jpg` + `hero-rooftops-fg.webp` | Rooftop cut-out. The tall central block hides "LO", so it's second. |
+| Hero scene 03 | `hero 1.jpg` → `hero-street.jpg` | People walking away down a lit street at dusk. This is the brief's hero shot as a still, but it has no cut-out yet (see below). |
+| Strips | `strip-dinner`, `strip-next-place`, `strip-walk-home 1`, `strip-home` | All four filled. |
+| Three ways | Day `story-taxi.jpg` → later `day.jpg` (El Born market) · Night `night.jpg` → later `strip-next-place` · Weekend `weekend.jpg` → later `hero.jpg` | None of the pairs is the same place at two times yet, so the hover crossfade changes the scene rather than the hour. |
+| Story | 20:30 `story-lobby` · 22:15 `strip-dinner` · 00:40 `strip-walk-home` · 02:10 `story-taxi 1` · 02:30 `strip-home` | The 02:10 taxi is a daylight photo graded "day for night". A real night taxi shot would be better. |
+| Who a Kóda is | Background `hero 1` (the dusk street) · window `strip-walk-home` (a figure walking away up a lamp-lit lane) | The window repeats the 00:40 frame. |
+
+**Still to source (in priority order):**
+1. **Hero film** `hero.mp4`: a Gòtic lane at blue hour with a small group walking away, 8–12s. Scene 03 is a still until then.
+2. **Three "same place, later" shots** for Day, Night and Weekend (shots 13, 15 and 17 below).
+3. **A night taxi** (shot 10) and **a doorway with a figure** for the "who" window (shot 19), so neither repeats another frame.
+4. **Against the brief:** `story-lobby.jpg` and `strip-dinner.jpg` show empty furniture, `weekend.jpg` is a coastline rather than Barcelona, and `hero.jpg` is a skyline. They're used for now; swap them when better frames exist.
+5. The founder photo (Ana's own).
+
+---
+
 **This is one shoot: warm Barcelona dusk into night.** Every frame has real texture and fine grain, and all share the same grade. People appear only from behind or at a distance, in motion.
 
 Save each file in `koda/site/v2/media/` under the file name listed. The page swaps it in automatically, and until then a labelled placeholder shows in its slot.
