@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1492 520" width="1492" height="520" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.480 -0.192"/>
+</filter>
+
+<radialGradient id="wall" cx="0.62" cy="0.35" r="0.75">
+  <stop offset="0" stop-color="#E6E1D8"/><stop offset="0.55" stop-color="#D3CCC1"/><stop offset="1" stop-color="#B9B1A4"/>
+</radialGradient>
+<linearGradient id="skin" x1="0" y1="0" x2="1" y2="0.15">
+  <stop offset="0" stop-color="#5A5049"/><stop offset="0.7" stop-color="#6F645B"/><stop offset="1" stop-color="#8C8074"/>
+</linearGradient>
+<linearGradient id="coat" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#3C3834"/><stop offset="1" stop-color="#57514A"/>
+</linearGradient>
+<filter id="b3" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="b24" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="24"/></filter><filter id="b6" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+
+</defs>
+
+<rect width="1492" height="520" fill="url(#wall)"/>
+<ellipse cx="1010" cy="200" rx="200" ry="260" fill="#F2EEE7" opacity="0.55" filter="url(#b24)"/>
+<g transform="translate(470 -196) scale(0.74)" filter="url(#b3)">
+  <path d="M 90 0 L 540 0 C 572 60 584 130 588 200 C 592 250 598 292 616 330 C 642 378 676 418 692 450 C 702 470 692 486 666 492 C 650 496 648 512 656 526 C 668 540 664 556 650 566 C 662 578 660 596 640 606 C 630 614 628 626 636 642 C 646 684 626 722 580 736 C 540 748 512 764 506 806 L 500 900 L 260 900 C 250 820 180 760 110 700 C 30 560 10 300 60 100 C 70 60 80 30 90 0 Z" fill="url(#skin)"/>
+  <path d="M 90 0 L 470 0 C 430 90 380 160 330 240 C 290 310 250 420 250 560 C 230 640 170 700 110 700 C 30 560 10 300 60 100 C 70 60 80 30 90 0 Z" fill="#2E2925"/>
+  <path d="M 592 210 C 596 262 606 300 624 336 C 650 384 684 424 698 452" stroke="#EFE8DC" stroke-width="6" fill="none" opacity="0.5"/>
+  <path d="M -80 1100 C -60 930 110 870 250 862 C 330 880 450 884 530 866 C 600 900 660 940 700 980 C 740 1010 780 1060 800 1100 Z" fill="url(#coat)"/>
+</g>
+
+<rect width="1492" height="520" filter="url(#grain)" opacity="1"/>
+</svg>

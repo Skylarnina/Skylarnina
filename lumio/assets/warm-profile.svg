@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" preserveAspectRatio="xMidYMid slice">
+<defs>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0.600 -0.240"/>
+</filter>
+
+<radialGradient id="bg" cx="0.8" cy="0.4" r="0.8">
+  <stop offset="0" stop-color="#EBD9C3"/><stop offset="0.5" stop-color="#D2B596"/><stop offset="1" stop-color="#A88667"/>
+</radialGradient>
+<linearGradient id="skin" x1="0" y1="0" x2="1" y2="0.2">
+  <stop offset="0" stop-color="#4E3A2E"/><stop offset="0.75" stop-color="#6E5140"/><stop offset="1" stop-color="#9A745A"/>
+</linearGradient>
+<filter id="b3" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter><filter id="b16" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+
+</defs>
+
+<rect width="900" height="900" fill="url(#bg)"/>
+<g filter="url(#b3)">
+  <path d="M 90 0 L 540 0 C 572 60 584 130 588 200 C 592 250 598 292 616 330 C 642 378 676 418 692 450 C 702 470 692 486 666 492 C 650 496 648 512 656 526 C 668 540 664 556 650 566 C 662 578 660 596 640 606 C 630 614 628 626 636 642 C 646 684 626 722 580 736 C 540 748 512 764 506 806 L 500 900 L 260 900 C 250 820 180 760 110 700 C 30 560 10 300 60 100 C 70 60 80 30 90 0 Z" fill="url(#skin)"/>
+  <path d="M 90 0 L 470 0 C 430 90 380 160 330 240 C 290 310 250 420 250 560 C 230 640 170 700 110 700 C 30 560 10 300 60 100 C 70 60 80 30 90 0 Z" fill="#2B211B"/>
+</g>
+<path d="M 592 210 C 596 262 606 300 624 336 C 650 384 684 424 698 452" stroke="#F4E3CC" stroke-width="7" fill="none" opacity="0.55" filter="url(#b3)"/>
+<ellipse cx="780" cy="300" rx="120" ry="220" fill="#F7EBDA" opacity="0.35" filter="url(#b16)"/>
+
+<rect width="900" height="900" filter="url(#grain)" opacity="1"/>
+</svg>

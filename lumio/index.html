@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumio — The operating system for modern brand work</title>
+<meta name="description" content="Lumio turns brand knowledge, strategy, and signals into structured intelligence that powers every team, tool, and agent.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='16' fill='%23F7F6F2' stroke='%23181818' stroke-width='1.5'/%3E%3Cpath d='M14.3 10.9V23.1H21.8' fill='none' stroke='%23181818' stroke-width='1.9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #F7F6F2;
+    --soft-bg: #F1F0EC;
+    --card-bg: #ECEBE7;
+    --card-bg-light: #F8F7F4;
+    --black: #181818;
+    --deep-black: #141414;
+    --text: #1B1B1B;
+    --muted: #89857E;
+    --muted-light: #BDB9B1;
+    --line: #D8D6CF;
+    --white: #FFFFFF;
+    --rail: #C8C5BD;
+
+    --canvas: 1728px;
+    --gutter: 118px;
+    --ease: cubic-bezier(.22, .61, .36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--page-bg); overflow-x: hidden; scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-optical-sizing: auto;
+    color: var(--text);
+    background: var(--page-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  .canvas { width: var(--canvas); margin: 0 auto; position: relative; }
+  .section { position: relative; background: var(--page-bg); }
+  .abs { position: absolute; }
+
+  /* ------------------------------------------------------------ Mark */
+  .mark { display: block; overflow: visible; color: var(--black); --ring: 1.5px; --stem: 1.8px; }
+  .mark--light { color: var(--page-bg); }
+
+  /* ------------------------------------------------------------ Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 48px; width: 148px; border-radius: 7px;
+    font-size: 16px; font-weight: 500; letter-spacing: -0.005em;
+    transition: background-color .3s var(--ease), color .3s var(--ease), opacity .3s var(--ease), border-color .3s var(--ease);
+  }
+  .btn--dark { background: var(--black); color: var(--page-bg); }
+  .btn--dark:hover { background: #2B2A27; }
+  .btn--light { background: var(--page-bg); color: var(--black); }
+  .btn--light:hover { background: #E7E5DF; }
+  .btn--ghost { background: transparent; color: var(--page-bg); border: 1px solid var(--page-bg); }
+  .btn--ghost:hover { background: var(--page-bg); color: var(--black); }
+  .btn--sm { width: 136px; height: 50px; }
+
+  .link-u {
+    display: inline-block; font-size: 21px; color: var(--muted);
+    text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px;
+    transition: color .25s var(--ease);
+  }
+  .link-u:hover { color: var(--text); }
+
+  /* ------------------------------------------------------------ Navigation */
+  .nav {
+    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    width: 1130px; height: 72px; z-index: 100;
+    display: flex; align-items: center;
+    padding: 0 12px 0 24px;
+    background: var(--black); color: var(--page-bg);
+    border-radius: 16px;
+    transition: background-color .35s var(--ease), color .35s var(--ease), opacity .25s var(--ease);
+  }
+  .nav__logo { display: flex; margin-right: 48px; }
+  .nav__badge {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--page-bg);
+    display: grid; place-items: center;
+    transition: background-color .35s var(--ease);
+  }
+  .nav__badge .mark { width: 30px; height: 30px; }
+  .nav__links { display: flex; gap: 42px; }
+  .nav__links a, .nav__login { font-size: 16px; font-weight: 400; opacity: 1; transition: opacity .2s; }
+  .nav__links a:hover, .nav__login:hover { opacity: .62; }
+  .nav__login { margin-left: auto; margin-right: 34px; }
+
+  .nav--light { background: var(--page-bg); color: var(--black); }
+  .nav--light .btn--light { background: var(--black); color: var(--page-bg); }
+  .nav--light .btn--light:hover { background: #2B2A27; }
+  .nav.is-hidden { opacity: 0; pointer-events: none; }
+
+  /* ------------------------------------------------------------ 1 · Hero */
+  .hero { height: 1290px; text-align: center; }
+  .hero__inner { width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+  .hero h1 {
+    margin-top: 250px; width: 950px;
+    font-size: 82px; line-height: .98; font-weight: 650; letter-spacing: -0.055em;
+    color: var(--text);
+  }
+  .hero p {
+    margin-top: 34px; width: 670px;
+    font-size: 21px; line-height: 1.35; font-weight: 400; color: var(--muted); letter-spacing: -0.01em;
+  }
+  .hero .btn { margin-top: 42px; }
+  .hero__card {
+    position: absolute; left: 118px; top: 720px; width: 1492px; height: 520px;
+    border-radius: 82px 82px 22px 22px; overflow: hidden; background: var(--card-bg);
+  }
+  .hero__card img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ------------------------------------------------------------ 2 · Trust strip */
+  .trust { height: 520px; }
+  .trust__label { left: 118px; top: 160px; font-size: 15px; letter-spacing: .04em; color: var(--muted); }
+  .trust__logo { top: 275px; height: 42px; display: flex; align-items: center; color: var(--rail); opacity: .75; }
+  .trust__logo svg { height: 100%; width: auto; display: block; }
+
+  /* ------------------------------------------------------------ 3 · Collage */
+  .collage { height: 1200px; overflow: hidden; }
+  .tile { position: absolute; overflow: hidden; border-radius: 12px; background: var(--card-bg); will-change: transform; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; }
+  .collage__mark { left: 749px; top: 295px; width: 230px; height: 230px; z-index: 3; }
+  .collage__mark .mark { width: 230px; height: 230px; --ring: 4px; --stem: 5.5px; }
+
+  .chip {
+    position: absolute; display: flex; align-items: center; gap: 10px;
+    background: var(--card-bg-light); color: var(--text);
+    font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
+  }
+  .chip__dot { width: 8px; height: 8px; border-radius: 50%; background: #5C7A55; flex: none; }
+  .chip--guide { left: 16px; bottom: 16px; width: 170px; height: 38px; border-radius: 7px; padding: 0 14px; }
+  .chip--voice { left: 16px; top: 16px; height: 40px; border-radius: 8px; padding: 0 14px 0 8px; }
+  .chip__num {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--black); color: var(--page-bg);
+    font-size: 12px; font-weight: 500; display: grid; place-items: center;
+  }
+
+  .comment {
+    position: absolute; left: 585px; top: 800px; width: 305px; height: 62px; z-index: 2;
+    display: flex; align-items: center; gap: 12px; padding: 0 16px 0 12px;
+    background: var(--soft-bg); border-radius: 10px; font-size: 14px; will-change: transform;
+  }
+  .comment__avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; overflow: hidden; background: #CDBFAE; }
+  .comment__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .comment__user { font-weight: 500; color: var(--text); }
+  .comment__text { color: var(--muted); margin-left: 6px; }
+  .comment__time { margin-left: auto; font-size: 13px; color: var(--muted-light); }
+
+  /* ------------------------------------------------------------ 4 · Manifesto */
+  .manifesto { height: 780px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .manifesto__globe { left: 1380px; top: -40px; width: 170px; height: 170px; opacity: .4; filter: grayscale(1); }
+  .manifesto p {
+    width: 900px; text-align: center;
+    font-size: 49px; line-height: 1.12; font-weight: 450; letter-spacing: -0.045em;
+    color: var(--text);
+  }
+  .manifesto .w { transition: color .5s var(--ease); }
+  .js .manifesto .w { color: #CFCBC3; }
+  .js .manifesto .w.is-lit { color: var(--text); }
+
+  /* ------------------------------------------------------------ Shared: feature tabs */
+  .tabs { display: flex; flex-direction: column; gap: 44px; }
+  .tab { display: grid; grid-template-columns: 8px 1fr; column-gap: 28px; cursor: pointer; }
+  .tab__rail {
+    position: relative; width: 8px; height: 8px; margin-top: 13px;
+    border-radius: 4px; background: var(--rail);
+    transition: height .45s var(--ease), margin-top .45s var(--ease);
+  }
+  .tab__rail::before {
+    content: ""; position: absolute; left: 0; top: 0; width: 8px; height: 0;
+    border-radius: 4px; background: var(--black);
+    transition: height .45s var(--ease);
+  }
+  .tab.is-active .tab__rail { height: auto; margin-top: 2px; align-self: stretch; }
+  .tab.is-active .tab__rail::before { height: 30px; }
+  .tab__title { font-size: 28px; line-height: 34px; font-weight: 450; letter-spacing: -0.03em; color: var(--text); transition: opacity .2s; }
+  .tab:not(.is-active):hover .tab__title { opacity: .6; }
+  .tab.is-active .tab__title { font-weight: 500; }
+  .tab__body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+  .tab__body > div { overflow: hidden; }
+  .tab.is-active .tab__body { grid-template-rows: 1fr; }
+  .tab__body p {
+    margin-top: 14px; width: 560px;
+    font-size: 21px; line-height: 1.4; color: var(--muted); letter-spacing: -0.01em;
+  }
+  .tab__body .link-u { margin-top: 18px; }
+
+  .section-title {
+    font-size: 64px; line-height: 1; font-weight: 450; letter-spacing: -0.05em; color: var(--muted);
+  }
+  .section-title .ink { color: var(--text); }
+
+  /* ------------------------------------------------------------ 5 · Lumio OS */
+  .os { height: 980px; }
+  .os__title { left: 118px; top: 40px; width: 1200px; }
+  .os__btn { left: 118px; top: 208px; }
+  .mock {
+    position: absolute; overflow: hidden; border-radius: 9px;
+    background: linear-gradient(180deg, #EDECE8 0%, #EAE9E4 60%, #E6E5E0 100%);
+  }
+  .os__mock { left: 118px; top: 300px; width: 730px; height: 600px; }
+  .os__meta {
+    position: absolute; left: 115px; top: 56px; width: 500px;
+    display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); letter-spacing: .02em;
+  }
+  .files {
+    position: absolute; left: 115px; top: 96px; width: 500px;
+    display: flex; flex-direction: column; gap: 8px;
+    -webkit-mask-image: linear-gradient(180deg, #000 30%, rgba(0,0,0,.08) 100%);
+            mask-image: linear-gradient(180deg, #000 30%, rgba(0,0,0,.08) 100%);
+  }
+  .file {
+    height: 54px; border-radius: 5px; background: var(--white);
+    display: flex; align-items: center; gap: 14px; padding: 0 16px 0 12px;
+    font-size: 15px; color: var(--text); letter-spacing: -0.01em;
+  }
+  .file__thumb {
+    width: 30px; height: 30px; border-radius: 4px; background: var(--card-bg); flex: none;
+    display: grid; align-content: center; gap: 3px; padding: 0 7px;
+  }
+  .file__thumb i { display: block; height: 2px; border-radius: 1px; background: var(--muted-light); }
+  .file__thumb i:nth-child(2) { width: 70%; }
+  .file__thumb--dark { background: var(--black); }
+  .file__thumb--dark i { background: #55534F; }
+  .file__name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file__size { font-size: 13px; color: var(--muted-light); }
+  .file__more { color: var(--muted-light); width: 18px; }
+  .upload {
+    position: absolute; left: 50%; top: 452px; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--muted);
+  }
+  .upload__btn {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--white);
+    display: grid; place-items: center; color: var(--text);
+    transition: transform .3s var(--ease);
+  }
+  .upload:hover .upload__btn { transform: translateY(-2px); }
+  .os__tabs { left: 980px; top: 358px; width: 620px; }
+
+  /* ------------------------------------------------------------ 6 · Studio */
+  .studio { height: 1000px; }
+  .studio__title {
+    left: 118px; top: 120px; width: 650px;
+    font-size: 51px; line-height: 1.08; font-weight: 450; letter-spacing: -0.045em; color: var(--muted);
+  }
+  .studio__title .ink { color: var(--text); }
+  .studio__btn { left: 118px; top: 360px; }
+  .studio__tabs { left: 118px; top: 670px; width: 600px; }
+  .studio__tabs .tab__title { font-size: 27px; }
+  .studio__tabs .tab.is-active .tab__rail::before { height: 38px; }
+  .studio__tabs .tab__body p { font-size: 21px; line-height: 1.42; width: 510px; }
+  .studio__mock { left: 840px; top: 520px; width: 720px; height: 460px; }
+
+  .pane { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility 0s .45s; }
+  .pane.is-active { opacity: 1; visibility: visible; transition: opacity .45s var(--ease), visibility 0s; }
+
+  .ask__hello { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 22px; letter-spacing: -0.03em; color: var(--muted); }
+  .ask {
+    position: absolute; left: 100px; top: 206px; width: 520px;
+    background: var(--white); border-radius: 8px; padding: 18px 16px 14px 20px;
+  }
+  .ask__text { font-size: 16px; color: var(--text); letter-spacing: -0.01em; }
+  .ask__row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .ask__tag {
+    display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px;
+    border-radius: 6px; background: var(--soft-bg); font-size: 13px; color: var(--text);
+  }
+  .ask__icon { color: var(--muted); display: grid; place-items: center; }
+  .ask__go {
+    margin-left: auto; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--black); color: var(--page-bg); display: grid; place-items: center;
+  }
+  .canvas-frames { position: absolute; left: 90px; top: 90px; width: 540px; height: 290px; }
+  .frame { position: absolute; border-radius: 6px; overflow: hidden; background: var(--white); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; }
+  .frame__label { position: absolute; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
+  .projects { position: absolute; left: 150px; top: 110px; width: 420px; background: var(--white); border-radius: 8px; padding: 8px 0; }
+  .project { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 18px; font-size: 15px; letter-spacing: -0.01em; }
+  .project + .project { border-top: 1px solid #EFEEEA; }
+  .project__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--black); }
+  .project__dot--mute { background: var(--rail); }
+  .project__meta { margin-left: auto; font-size: 13px; color: var(--muted); }
+
+  /* ------------------------------------------------------------ 7 · Teams */
+  .teams { height: 1040px; }
+  .teams__title {
+    left: 0; right: 0; top: 120px; text-align: center;
+    font-size: 48px; line-height: 1.1; font-weight: 450; letter-spacing: -0.045em;
+  }
+  .pills { left: 0; right: 0; top: 230px; display: flex; justify-content: center; gap: 10px; }
+  .pill {
+    height: 46px; padding: 0 28px; border-radius: 23px;
+    border: 1px solid var(--line); color: var(--text); font-size: 16px;
+    transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .pill:hover { border-color: var(--muted-light); }
+  .pill.is-active { background: var(--black); border-color: var(--black); color: var(--page-bg); }
+  .team-cards { left: 140px; top: 385px; display: grid; grid-template-columns: repeat(4, 335px); gap: 36px; transition: opacity .35s var(--ease); }
+  .team-cards.is-swapping { opacity: 0; }
+  .tcard__img { position: relative; width: 335px; height: 420px; border-radius: 9px; overflow: hidden; background: var(--card-bg); }
+  .tcard h3 { margin-top: 28px; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
+  .tcard p { margin-top: 18px; font-size: 19px; line-height: 1.38; color: var(--muted); letter-spacing: -0.015em; }
+
+  .ui-card { position: absolute; background: var(--white); border-radius: 8px; }
+  .fw { left: 40px; top: 70px; width: 255px; padding: 18px 18px 8px; }
+  .fw__head { font-size: 12px; color: var(--muted); letter-spacing: .03em; margin-bottom: 10px; }
+  .fw__row { display: flex; align-items: center; gap: 12px; height: 40px; font-size: 13px; color: var(--text); border-top: 1px solid #F0EFEB; }
+  .fw__row span:first-child { color: var(--muted-light); font-variant-numeric: tabular-nums; width: 18px; }
+  .fw__row em { margin-left: auto; font-style: normal; width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+  .fw__row.is-on em { background: var(--black); }
+  .fw__foot { position: absolute; left: 40px; top: 346px; width: 255px; height: 38px; border-radius: 8px; background: var(--card-bg-light); display: flex; align-items: center; padding: 0 14px; gap: 8px; font-size: 12px; color: var(--muted); }
+
+  .doc { left: 44px; top: 56px; width: 248px; height: 420px; padding: 24px 22px; border-radius: 6px; }
+  .doc h4 { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .doc p { font-size: 10.5px; line-height: 1.6; color: var(--muted); margin-bottom: 10px; letter-spacing: 0; }
+  .doc mark { background: #E6DDCB; color: var(--text); padding: 1px 2px; border-radius: 2px; }
+  .doc__note { position: absolute; left: 150px; top: 292px; width: 150px; background: var(--black); color: var(--page-bg); font-size: 11px; line-height: 1.4; padding: 9px 11px; border-radius: 6px; }
+
+  .deck { left: 34px; top: 96px; width: 267px; padding: 12px 12px 16px; }
+  .deck__slide { height: 150px; border-radius: 5px; background: var(--deep-black); position: relative; overflow: hidden; }
+  .deck__slide .mark { position: absolute; left: 14px; top: 14px; width: 18px; height: 18px; --ring: 1px; --stem: 1.2px; }
+  .deck__slide b { position: absolute; left: 14px; bottom: 30px; font-size: 16px; font-weight: 500; letter-spacing: -0.03em; color: var(--page-bg); line-height: 1.1; }
+  .deck__slide small { position: absolute; left: 14px; bottom: 14px; font-size: 8px; letter-spacing: .1em; color: #77746E; }
+  .deck__slide i { position: absolute; right: -30px; top: -30px; width: 120px; height: 120px; border-radius: 50%; border: 1px solid #3A3936; }
+  .deck__cap { margin-top: 14px; font-size: 13px; font-weight: 500; letter-spacing: -0.01em; }
+  .deck__sub { margin-top: 4px; font-size: 12px; color: var(--muted); }
+  .deck__thumbs { display: flex; gap: 6px; margin-top: 14px; }
+  .deck__thumbs span { flex: 1; height: 34px; border-radius: 3px; background: var(--card-bg); }
+  .deck__thumbs span:first-child { background: var(--deep-black); }
+
+  .soft-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; filter: blur(3px) saturate(.8); transform: scale(1.05); }
+  .summary { left: 36px; top: 150px; width: 263px; padding: 18px; }
+  .summary__tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .summary h4 { margin-top: 10px; font-size: 16px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+  .summary p { margin-top: 10px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+  .summary__src { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #F0EFEB; font-size: 11px; color: var(--muted); }
+  .summary__src i { width: 16px; height: 16px; border-radius: 50%; background: var(--card-bg); }
+
+  /* ------------------------------------------------------------ 8 · Testimonial */
+  .quote { height: 760px; }
+  .quote__stage { left: 0; right: 0; top: 180px; height: 330px; }
+  .quote__item {
+    position: absolute; left: 50%; top: 0; width: 1120px; transform: translateX(-50%);
+    text-align: center; opacity: 0; visibility: hidden;
+    transition: opacity .6s var(--ease), visibility 0s .6s;
+  }
+  .quote__item.is-active { opacity: 1; visibility: visible; transition: opacity .6s var(--ease) .1s, visibility 0s; }
+  .quote blockquote { font-size: 72px; line-height: 1.08; font-weight: 450; letter-spacing: -0.055em; color: var(--text); }
+  .quote__by { position: absolute; left: 50%; transform: translateX(-50%); top: 380px; display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+  .quote__avatar { width: 58px; height: 58px; border-radius: 50%; background: var(--black); display: grid; place-items: center; flex: none; }
+  .quote__avatar .mark { width: 30px; height: 30px; --ring: 1.2px; --stem: 1.6px; }
+  .quote__name { font-size: 16px; color: var(--text); text-align: left; }
+  .quote__role { font-size: 16px; color: var(--muted); margin-top: 3px; text-align: left; }
+  .dots { left: 0; right: 0; top: 675px; display: flex; justify-content: center; align-items: center; gap: 11px; }
+  .dot { width: 9px; height: 9px; border-radius: 5px; background: var(--rail); transition: width .45s var(--ease), background-color .45s var(--ease); }
+  .dot.is-active { width: 34px; height: 8px; border-radius: 4px; background: var(--black); }
+
+  /* ------------------------------------------------------------ 9 · Updates */
+  .updates { height: 900px; }
+  .updates__title { left: 118px; top: 155px; font-size: 50px; line-height: 1.1; font-weight: 450; letter-spacing: -0.045em; }
+  .updates__row { left: 118px; top: 300px; display: grid; grid-template-columns: repeat(3, 450px); gap: 48px; }
+  .post__img { position: relative; width: 450px; height: 450px; border-radius: 9px; overflow: hidden; background: var(--card-bg); }
+  .post__img > img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .post:hover .post__img > img { transform: scale(1.025); }
+  .post h3 { margin-top: 28px; font-size: 25px; line-height: 1.18; font-weight: 450; letter-spacing: -0.03em; color: var(--text); max-width: 430px; }
+  .post__meta { margin-top: 16px; font-size: 16px; letter-spacing: .04em; color: var(--muted); }
+
+  .del { left: 70px; top: 110px; width: 310px; padding: 10px 0; }
+  .del__row { display: flex; align-items: center; gap: 12px; height: 50px; padding: 0 18px; font-size: 14px; letter-spacing: -0.01em; }
+  .del__row + .del__row { border-top: 1px solid #F0EFEB; }
+  .del__row i { width: 26px; height: 26px; border-radius: 4px; background: var(--card-bg); flex: none; }
+  .del__row.is-hover { background: var(--soft-bg); }
+  .del__row span:last-child { margin-left: auto; color: var(--muted-light); }
+  .pop { left: 250px; top: 196px; width: 150px; padding: 6px; border-radius: 8px; background: var(--white); box-shadow: 0 1px 0 rgba(24,24,24,.04), 0 10px 30px rgba(24,24,24,.06); }
+  .pop div { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border-radius: 5px; font-size: 13px; color: var(--text); }
+  .pop div.is-on { background: var(--soft-bg); }
+  .pop div svg { color: var(--muted); }
+  .cursor { position: absolute; left: 330px; top: 300px; }
+  .post__overlay { position: absolute; left: 32px; bottom: 30px; color: #FBF8F3; }
+  .post__overlay .mark { width: 26px; height: 26px; color: #FBF8F3; --ring: 1.2px; --stem: 1.5px; margin-bottom: 16px; }
+  .post__overlay b { display: block; font-size: 34px; line-height: 1.02; font-weight: 500; letter-spacing: -0.045em; }
+
+  /* ------------------------------------------------------------ 10 · Demo CTA */
+  .demo { height: 820px; text-align: center; }
+  .demo__icon { left: 799px; top: 230px; width: 130px; height: 130px; border-radius: 28px; background: var(--black); display: grid; place-items: center; }
+  .demo__icon .mark { width: 72px; height: 72px; --ring: 2px; --stem: 2.6px; }
+  .demo h2 { left: 439px; top: 390px; width: 850px; font-size: 61px; line-height: 1.04; font-weight: 450; letter-spacing: -0.055em; }
+  .demo p { left: 514px; top: 530px; width: 700px; font-size: 20px; line-height: 1.4; color: var(--muted); letter-spacing: -0.01em; }
+  .demo .btn { left: 790px; top: 610px; }
+
+  /* ------------------------------------------------------------ 11 · Footer */
+  .footer { background: var(--black); color: var(--page-bg); }
+  .footer .canvas { height: 860px; }
+  .footer .nav { position: absolute; }
+  .footer__mark { left: 779px; top: 190px; width: 170px; height: 170px; }
+  .footer__mark .mark { width: 170px; height: 170px; --ring: 3px; --stem: 4px; }
+  .footer__slogan { left: 0; right: 0; top: 410px; text-align: center; font-size: 30px; font-weight: 400; letter-spacing: -0.035em; }
+  .footer__btn { left: 790px; top: 470px; }
+  .footer__cols { left: 118px; right: 118px; top: 620px; display: grid; grid-template-columns: repeat(6, 1fr) 1.25fr; gap: 24px; }
+  .footer__cols h4 { font-size: 16px; font-weight: 500; color: var(--page-bg); line-height: 1.9; }
+  .footer__cols a { display: block; font-size: 16px; line-height: 1.9; color: var(--page-bg); transition: opacity .2s; }
+  .footer__cols a:hover { opacity: .6; }
+  .footer__copy { font-size: 16px; line-height: 1.9; }
+  .status {
+    margin-top: 10px; width: 128px; height: 34px; border-radius: 17px; background: #3A3935;
+    display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: var(--page-bg);
+  }
+  .status i { width: 7px; height: 7px; border-radius: 50%; background: #6DBB7A; box-shadow: 0 0 0 3px rgba(109,187,122,.18); }
+
+  /* ------------------------------------------------------------ Motion */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+  .js .reveal.is-in { opacity: 1; transform: none; }
+  .js .abs.reveal { transform: translateY(18px); }
+  .js .abs.reveal.is-in { transform: none; }
+  .js .team-cards.is-swapping { opacity: 0; transition-duration: .3s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .js .manifesto .w { color: var(--text); }
+    * { transition-duration: 0s !important; }
+  }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lumio-mark" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" vector-effect="non-scaling-stroke" style="stroke-width: var(--ring)"/>
+    <path d="M42 32V68H64" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-linecap="butt" vector-effect="non-scaling-stroke" style="stroke-width: var(--stem)"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-more" viewBox="0 0 18 18"><circle cx="4" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="14" cy="9" r="1.3" fill="currentColor"/></symbol>
+</svg>
+
+<!-- Global navigation -->
+<header class="nav" id="nav">
+  <a class="nav__logo" href="#top" aria-label="Lumio home">
+    <span class="nav__badge"><svg class="mark" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#product">Product</a>
+    <a href="#teams">Solutions</a>
+    <a href="#studio">Security</a>
+    <a href="#manifesto">Company</a>
+    <a href="#demo">Careers</a>
+    <a href="#updates">Blog</a>
+  </nav>
+  <a class="nav__login" href="#demo">Log in</a>
+  <a class="btn btn--light" href="#demo">Book a demo</a>
+</header>
+
+<main>
+<!-- 1 · Hero -->
+<section class="section hero" id="top">
+  <div class="canvas" style="height:100%">
+    <div class="hero__inner">
+      <h1 class="reveal">The operating system for<br>modern Lumio work</h1>
+      <p class="reveal">Turn lorem ipsum, strategy, and signals into structured intelligence that powers every team, tool, and agent.</p>
+      <a class="btn btn--dark reveal" href="#demo">Book a demo</a>
+    </div>
+    <div class="hero__card reveal">
+      <img src="assets/hero-portrait.svg" alt="Editorial portrait in soft natural light">
+    </div>
+  </div>
+</section>
+
+<!-- 2 · Trust strip -->
+<section class="section trust" aria-label="Customers">
+  <div class="canvas" style="height:100%">
+    <p class="abs trust__label reveal">Built with lorem ipsum leaders from</p>
+
+    <div class="abs trust__logo reveal" style="left:130px" aria-label="Lorem">
+      <svg viewBox="0 0 150 42"><circle cx="21" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="21" cy="21" r="4.5" fill="currentColor"/><text x="46" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="-1" fill="currentColor">lorem</text></svg>
+    </div>
+    <div class="abs trust__logo reveal" style="left:380px" aria-label="Ipsum">
+      <svg viewBox="0 0 170 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="7" fill="currentColor">IPSUM</text></svg>
+    </div>
+    <div class="abs trust__logo reveal" style="left:660px" aria-label="Dolor Studio">
+      <svg viewBox="0 0 230 42"><rect x="2" y="9" width="18" height="18" fill="currentColor"/><rect x="12" y="15" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"/><text x="44" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="23" font-weight="500" letter-spacing="-0.6" fill="currentColor">Dolor Studio</text></svg>
+    </div>
+    <div class="abs trust__logo reveal" style="left:1020px" aria-label="amet and co">
+      <svg viewBox="0 0 170 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="-1.6" fill="currentColor">amet&amp;co.</text></svg>
+    </div>
+    <div class="abs trust__logo reveal" style="left:1380px" aria-label="Consecta">
+      <svg viewBox="0 0 210 42"><path d="M4 33 L17 9 L30 33 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><text x="42" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3.5" fill="currentColor">CONSECTA</text></svg>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · Collage -->
+<section class="section collage" aria-label="Brand artifacts orbiting the Lumio identity">
+  <div class="canvas" style="height:100%">
+    <div class="tile" data-speed="-0.05" style="left:130px; top:-20px; width:270px; height:210px"><img src="assets/vessel.svg" alt=""></div>
+    <div class="tile" data-speed="-0.07" style="left:1300px; top:-40px; width:290px; height:260px"><img src="assets/globe.svg" alt=""></div>
+
+    <div class="tile" data-speed="0.04" style="left:135px; top:470px; width:330px; height:200px">
+      <img src="assets/leaves.svg" alt="">
+      <span class="chip chip--guide"><i class="chip__dot"></i>Content Guidelines</span>
+    </div>
+
+    <div class="tile" data-speed="-0.04" style="left:1435px; top:250px; width:250px; height:330px; border-radius:10px"><img src="assets/audience.svg" alt=""></div>
+
+    <div class="tile" data-speed="0.02" style="left:810px; top:560px; width:370px; height:250px; border-radius:10px"><img src="assets/poster.svg" alt=""></div>
+
+    <div class="abs collage__mark"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
+
+    <div class="comment" data-speed="0.06">
+      <span class="comment__avatar"><img src="assets/warm-profile.svg" alt=""></span>
+      <span><span class="comment__user">lorem_d</span><span class="comment__text">game changing!</span></span>
+      <span class="comment__time">1h</span>
+    </div>
+
+    <div class="tile" data-speed="0.08" style="left:40px; top:880px; width:340px; height:250px">
+      <img src="assets/event.svg" alt="">
+      <span class="chip chip--voice"><span class="chip__num">3</span>Brand Voice</span>
+    </div>
+
+    <div class="tile" data-speed="0.06" style="left:1250px; top:840px; width:410px; height:300px"><img src="assets/sky.svg" alt=""></div>
+  </div>
+</section>
+
+<!-- 4 · Manifesto -->
+<section class="section manifesto" id="manifesto">
+  <div class="canvas" style="height:100%; display:flex; align-items:center; justify-content:center">
+    <img class="abs manifesto__globe" src="assets/globe-bare.svg" alt="">
+    <p id="manifesto-text">As lorem ipsum agents expand across your organization, they all need shared context. Lumio structures your brand knowledge into machine-readable intelligence. Lumio Studio turns that intelligence into on-brand work at scale.</p>
+  </div>
+</section>
+
+<!-- 5 · Lumio OS -->
+<section class="section os" id="product">
+  <div class="canvas" style="height:100%">
+    <h2 class="abs section-title os__title reveal"><span class="ink">Lumio OS</span><br>The intelligence layer for your brand</h2>
+    <a class="abs btn btn--dark btn--sm os__btn reveal" href="#demo">Learn more</a>
+
+    <div class="mock os__mock reveal" aria-hidden="true">
+      <div class="os__meta"><span>Sources</span><span>5 files · synced</span></div>
+      <div class="files">
+        <div class="file"><span class="file__thumb file__thumb--dark"><i></i><i></i><i></i></span><span class="file__name">Lumio_Strategy_2026_Global_Vision.docx</span><span class="file__size">2.4 MB</span><svg class="file__more" width="18" height="18"><use href="#i-more"/></svg></div>
+        <div class="file"><span class="file__thumb"><i></i><i></i><i></i></span><span class="file__name">BrandBook_2026.pdf</span><span class="file__size">18 MB</span><svg class="file__more" width="18" height="18"><use href="#i-more"/></svg></div>
+        <div class="file"><span class="file__thumb"><i></i><i></i><i></i></span><span class="file__name">Sustainability_Progress_Report_2026.pdf</span><span class="file__size">6.1 MB</span><svg class="file__more" width="18" height="18"><use href="#i-more"/></svg></div>
+        <div class="file"><span class="file__thumb file__thumb--dark"><i></i><i></i><i></i></span><span class="file__name">Partnerships_Playbook_2026.pptx</span><span class="file__size">9.8 MB</span><svg class="file__more" width="18" height="18"><use href="#i-more"/></svg></div>
+        <div class="file"><span class="file__thumb"><i></i><i></i><i></i></span><span class="file__name">Tone_Of_Voice_Guidelines_Final.pdf</span><span class="file__size">1.2 MB</span><svg class="file__more" width="18" height="18"><use href="#i-more"/></svg></div>
+      </div>
+      <div class="upload">
+        <span class="upload__btn"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13V3M6 7l4-4 4 4M4 13v3h12v-3"/></svg></span>
+        Upload
+      </div>
+    </div>
+
+    <div class="abs tabs os__tabs reveal" role="tablist" aria-label="Lumio OS capabilities">
+      <div class="tab is-active" role="tab" tabindex="0" aria-selected="true">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Brand Foundation</h3>
+          <div class="tab__body"><div><p>Your lorem ipsum lives in PDFs, decks, and shared knowledge. Lumio extracts structure from chaos and turns it into intelligence every AI system can understand.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+      <div class="tab" role="tab" tabindex="0" aria-selected="false">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Brand Ontology</h3>
+          <div class="tab__body"><div><p>Map every product, audience, value, and proof point into a living graph of lorem ipsum that teams and agents can query.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+      <div class="tab" role="tab" tabindex="0" aria-selected="false">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Daily Signals</h3>
+          <div class="tab__body"><div><p>Track cultural, competitive, and category shifts every morning, filtered through what your brand actually stands for.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+      <div class="tab" role="tab" tabindex="0" aria-selected="false">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Connected Applications</h3>
+          <div class="tab__body"><div><p>Push structured brand context into the tools your teams already use, from design suites to lorem ipsum workspaces.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+      <div class="tab" role="tab" tabindex="0" aria-selected="false">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Search the way you speak</h3>
+          <div class="tab__body"><div><p>Ask questions in plain language and get answers grounded in your own guidelines, decks, and decisions.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · Lumio Studio -->
+<section class="section studio" id="studio">
+  <div class="canvas" style="height:100%">
+    <h2 class="abs studio__title reveal"><span class="ink">Lumio Studio</span><br>Where brand intelligence meets human craft</h2>
+    <a class="abs btn btn--dark btn--sm studio__btn reveal" href="#demo">Learn more</a>
+
+    <div class="abs tabs studio__tabs reveal" role="tablist" aria-label="Lumio Studio tools" data-panes="studio-panes">
+      <div class="tab is-active" role="tab" tabindex="0" aria-selected="true">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Assistant</h3>
+          <div class="tab__body"><div><p>Create lorem ipsum images, headlines, presentations, and releases. Choose your audience, then get on-brand assets based on your visual language and tone.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+      <div class="tab" role="tab" tabindex="0" aria-selected="false">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Canvas</h3>
+          <div class="tab__body"><div><p>Lay out lorem ipsum campaigns on an open canvas. Every frame inherits your typography, palette, and voice automatically.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+      <div class="tab" role="tab" tabindex="0" aria-selected="false">
+        <span class="tab__rail"></span>
+        <div><h3 class="tab__title">Projects</h3>
+          <div class="tab__body"><div><p>Keep briefs, drafts, and approvals in one place, with brand context attached to every decision along the way.</p><a class="link-u" href="#demo">Learn more</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mock studio__mock reveal" id="studio-panes" aria-hidden="true">
+      <div class="pane is-active">
+        <p class="ask__hello">What should we make today?</p>
+        <div class="ask">
+          <p class="ask__text">Analyze our lorem ipsum position and develop Q2 campaign</p>
+          <div class="ask__row">
+            <span class="ask__tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="1.5" width="8" height="9" rx="1.2"/><path d="M4 4.5h4M4 7h3"/></svg>LW26 Content Strategy</span>
+            <span class="ask__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M10.5 5.5 6 10a1.4 1.4 0 0 1-2-2l5-5a2.6 2.6 0 0 1 3.7 3.7l-5.2 5.2a3.8 3.8 0 0 1-5.4-5.4L6.5 2.1"/></svg></span>
+            <span class="ask__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.8 1.8 10.2 0 12M8 2c-1.8 1.8-1.8 10.2 0 12"/></svg></span>
+            <span class="ask__go"><svg width="14" height="14"><use href="#i-arrow"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <div class="pane">
+        <div class="canvas-frames">
+          <div class="frame" style="left:0; top:20px; width:170px; height:220px"><img src="assets/vessel.svg" alt=""></div>
+          <span class="frame__label" style="left:0; top:0">Hero · 4:5</span>
+          <div class="frame" style="left:190px; top:20px; width:190px; height:125px"><img src="assets/poster.svg" alt=""></div>
+          <span class="frame__label" style="left:190px; top:0">Deck cover</span>
+          <div class="frame" style="left:190px; top:165px; width:190px; height:125px"><img src="assets/leaves.svg" alt=""></div>
+          <div class="frame" style="left:400px; top:20px; width:140px; height:270px"><img src="assets/sky.svg" alt=""></div>
+          <span class="frame__label" style="left:400px; top:0">Story · 9:16</span>
+        </div>
+      </div>
+      <div class="pane">
+        <div class="projects">
+          <div class="project"><span class="project__dot"></span>LW26 Content Strategy<span class="project__meta">In review</span></div>
+          <div class="project"><span class="project__dot project__dot--mute"></span>Q2 Campaign Narrative<span class="project__meta">Draft</span></div>
+          <div class="project"><span class="project__dot project__dot--mute"></span>Partner Launch Kit<span class="project__meta">Draft</span></div>
+          <div class="project"><span class="project__dot"></span>Annual Report Visuals<span class="project__meta">Approved</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Teams -->
+<section class="section teams" id="teams">
+  <div class="canvas" style="height:100%">
+    <h2 class="abs teams__title reveal">One truth. Every team. Every time.</h2>
+    <div class="abs pills reveal" role="tablist" aria-label="Teams">
+      <button class="pill is-active" role="tab" aria-selected="true">Strategy</button>
+      <button class="pill" role="tab" aria-selected="false">Marketing</button>
+      <button class="pill" role="tab" aria-selected="false">Creative</button>
+      <button class="pill" role="tab" aria-selected="false">Communications</button>
+      <button class="pill" role="tab" aria-selected="false">Brand Governance</button>
+      <button class="pill" role="tab" aria-selected="false">Sales Enablement</button>
+    </div>
+
+    <div class="abs team-cards reveal" id="team-cards">
+      <article class="tcard">
+        <div class="tcard__img" aria-hidden="true">
+          <div class="ui-card fw">
+            <div class="fw__head">POSITIONING FRAMEWORK</div>
+            <div class="fw__row is-on"><span>01</span><span>Category tension</span><em></em></div>
+            <div class="fw__row is-on"><span>02</span><span>Audience truth</span><em></em></div>
+            <div class="fw__row"><span>03</span><span>Brand role</span><em></em></div>
+            <div class="fw__row"><span>04</span><span>Proof points</span><em></em></div>
+            <div class="fw__row"><span>05</span><span>Distinctive assets</span><em></em></div>
+          </div>
+          <div class="fw__foot"><svg width="12" height="12"><use href="#i-arrow"/></svg>Escaping category defaults</div>
+        </div>
+        <h3>Lorem positioning development</h3>
+        <p>Create distinctive lorem ipsum frameworks to escape category conventions and generic thinking.</p>
+      </article>
+      <article class="tcard">
+        <div class="tcard__img" aria-hidden="true">
+          <div class="ui-card doc">
+            <h4>Competitive landscape</h4>
+            <p>Across the category, most challengers lean on the same lorem ipsum claims: speed, simplicity, and scale. Messaging converges while audiences drift toward brands with a clear point of view.</p>
+            <p>The opportunity sits in the gap between <mark>what competitors promise and what customers remember</mark>. Few players own a distinctive tone.</p>
+            <p>Recent launches suggest a shift toward craft and provenance. Dolor sit amet signals remain early but consistent across three markets.</p>
+            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div class="doc__note">Gap: no competitor owns memory. Flagged for Q2 brief.</div>
+        </div>
+        <h3>Competitive intelligence analysis</h3>
+        <p>Get real insights on competitor moves, market gaps, and opportunities without generic templates.</p>
+      </article>
+      <article class="tcard">
+        <div class="tcard__img" aria-hidden="true">
+          <div class="ui-card deck">
+            <div class="deck__slide"><svg class="mark mark--light" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg><i></i><b>The next chapter<br>of our brand</b><small>BOARD · Q3 2026</small></div>
+            <div class="deck__cap">Board narrative</div>
+            <div class="deck__sub">12 slides · Generated from Lumio OS</div>
+            <div class="deck__thumbs"><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <h3>Executive brand presentations</h3>
+        <p>Create board-ready strategic narratives that show deep thinking, not performance metrics.</p>
+      </article>
+      <article class="tcard">
+        <div class="tcard__img" aria-hidden="true">
+          <img class="soft-bg" src="assets/warm-profile.svg" alt="">
+          <div class="ui-card summary">
+            <span class="summary__tag">Summary</span>
+            <h4>The return of slow culture</h4>
+            <p>Audiences are trading novelty for depth. Lorem ipsum brands that invest in ritual and craft are earning longer attention.</p>
+            <div class="summary__src"><i></i>3 sources · 4 min read</div>
+          </div>
+        </div>
+        <h3>Cultural trend integration</h3>
+        <p>Connect strategy to cultural moments and audience shifts with depth and specificity.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · Testimonial -->
+<section class="section quote" aria-label="Testimonials">
+  <div class="canvas" style="height:100%">
+    <div class="abs quote__stage" id="quotes">
+      <figure class="quote__item is-active">
+        <blockquote>“Lumio was built with the desire to liberate. It is created for inclusivity and understanding.”</blockquote>
+        <figcaption class="quote__by">
+          <span class="quote__avatar"><svg class="mark mark--light" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+          <span><span class="quote__name" style="display:block">Alex Morgan</span><span class="quote__role" style="display:block">Chief Strategy Officer, Placeholder Studio</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote__item">
+        <blockquote>“Every brief now starts from the same truth. Our teams stopped debating the brand and started building it.”</blockquote>
+        <figcaption class="quote__by">
+          <span class="quote__avatar"><svg class="mark mark--light" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+          <span><span class="quote__name" style="display:block">Jordan Ellis</span><span class="quote__role" style="display:block">VP Brand, Lorem Collective</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote__item">
+        <blockquote>“Our agents finally have a memory for who we are. The work sounds like us, everywhere.”</blockquote>
+        <figcaption class="quote__by">
+          <span class="quote__avatar"><svg class="mark mark--light" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+          <span><span class="quote__name" style="display:block">Sam Rivera</span><span class="quote__role" style="display:block">Head of Creative, Ipsum Works</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote__item">
+        <blockquote>“It feels less like software and more like a colleague who has read everything we have ever made.”</blockquote>
+        <figcaption class="quote__by">
+          <span class="quote__avatar"><svg class="mark mark--light" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+          <span><span class="quote__name" style="display:block">Taylor Brooks</span><span class="quote__role" style="display:block">Brand Director, Dolor &amp; Partners</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote__item">
+        <blockquote>“Governance used to slow us down. With Lumio, consistency is simply the default.”</blockquote>
+        <figcaption class="quote__by">
+          <span class="quote__avatar"><svg class="mark mark--light" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+          <span><span class="quote__name" style="display:block">Riley Chen</span><span class="quote__role" style="display:block">Global Communications Lead, Amet Group</span></span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="abs dots" role="tablist" aria-label="Choose testimonial">
+      <button class="dot is-active" aria-label="Testimonial 1"></button>
+      <button class="dot" aria-label="Testimonial 2"></button>
+      <button class="dot" aria-label="Testimonial 3"></button>
+      <button class="dot" aria-label="Testimonial 4"></button>
+      <button class="dot" aria-label="Testimonial 5"></button>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · Updates -->
+<section class="section updates" id="updates">
+  <div class="canvas" style="height:100%">
+    <h2 class="abs updates__title reveal">Updates and insights</h2>
+    <div class="abs updates__row">
+      <a class="post reveal" href="#updates">
+        <div class="post__img" aria-hidden="true">
+          <div class="ui-card del">
+            <div class="del__row"><i></i><span>Brand_Architecture_v3</span><span>•••</span></div>
+            <div class="del__row is-hover"><i></i><span>Pilot_Summary_Draft</span><span>•••</span></div>
+            <div class="del__row"><i></i><span>Agent_Prompts_Legacy</span><span>•••</span></div>
+            <div class="del__row"><i></i><span>Q1_Review_Notes</span><span>•••</span></div>
+          </div>
+          <div class="ui-card pop">
+            <div><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12h10M3 9.5 9.5 3l1.5 1.5L4.5 11H3z"/></svg>Rename</div>
+            <div><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M10 4V2.5A.5.5 0 0 0 9.5 2h-7a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5H4"/></svg>Duplicate</div>
+            <div class="is-on"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2.5 4h9M5.5 4V2.5h3V4M3.5 4l.6 7.5h5.8l.6-7.5"/></svg>Delete</div>
+          </div>
+          <svg class="cursor" width="22" height="26" viewBox="0 0 22 26"><path d="M3 2v18l5-4.5 3.4 7.5 3-1.4-3.4-7.3H18z" fill="#181818" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Why most lorem pilots never leave the lab</h3>
+        <p class="post__meta">Infrastructure · Apr 2026</p>
+      </a>
+      <a class="post reveal" href="#updates">
+        <div class="post__img"><img src="assets/network.svg" alt="Monochrome network map of connected brand knowledge"></div>
+        <h3>Lumio engineers: The role that did not exist until now</h3>
+        <p class="post__meta">Infrastructure · Mar 2026</p>
+      </a>
+      <a class="post reveal" href="#updates">
+        <div class="post__img">
+          <img src="assets/warm-profile.svg" alt="Warm portrait in profile">
+          <div class="post__overlay"><svg class="mark" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg><b>How teams<br>are using Lumio</b></div>
+        </div>
+        <h3>How teams are using Lumio</h3>
+        <p class="post__meta">Product · Mar 2026</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Demo CTA -->
+<section class="section demo" id="demo">
+  <div class="canvas" style="height:100%">
+    <div class="abs demo__icon reveal"><svg class="mark mark--light" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
+    <h2 class="abs reveal">Get a personalized demo<br>for your team</h2>
+    <p class="abs reveal">See how Lumio helps your team turn lorem ipsum into high-impact work.</p>
+    <a class="abs btn btn--dark reveal" href="#demo">Book a demo</a>
+  </div>
+</section>
+</main>
+
+<!-- 11 · Footer -->
+<footer class="footer" id="footer">
+  <div class="canvas">
+    <header class="nav nav--light" aria-hidden="true">
+      <a class="nav__logo" href="#top" tabindex="-1">
+        <span class="nav__badge"><svg class="mark" viewBox="0 0 100 100"><use href="#lumio-mark"/></svg></span>
+      </a>
+      <nav class="nav__links">
+        <a href="#product" tabindex="-1">Product</a>
+        <a href="#teams" tabindex="-1">Solutions</a>
+        <a href="#studio" tabindex="-1">Security</a>
+        <a href="#manifesto" tabindex="-1">Company</a>
+        <a href="#demo" tabindex="-1">Careers</a>
+        <a href="#updates" tabindex="-1">Blog</a>
+      </nav>
+      <a class="nav__login" href="#demo" tabindex="-1">Log in</a>
+      <a class="btn btn--light" href="#demo" tabindex="-1">Book a demo</a>
+    </header>
+
+    <div class="abs footer__mark"><svg class="mark mark--light" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
+    <p class="abs footer__slogan">Decode your lorem ipsum DNA</p>
+    <a class="abs btn btn--ghost footer__btn" href="#demo">Book a demo</a>
+
+    <div class="abs footer__cols">
+      <div><h4>Product</h4><a href="#product">Brand OS</a><a href="#studio">Brand Studio</a></div>
+      <div><h4>Enterprise</h4><a href="#teams">Teams</a></div>
+      <div><h4>Security</h4><a href="#footer">Trust Center</a></div>
+      <div><h4>Company</h4><a href="#updates">Blog</a><a href="#footer">Careers</a></div>
+      <div><h4>Book a demo</h4><a href="#footer">FAQ</a><a href="#footer">Privacy Policy</a><a href="#footer">Acceptable Use</a></div>
+      <div><h4>Social</h4><a href="#footer">Instagram</a><a href="#footer">LinkedIn</a></div>
+      <div><p class="footer__copy">© 2026 Lumio, Inc.</p><span class="status"><i></i>Operational</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const CANVAS = 1728;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Keep the wide desktop composition intact on narrower screens by scaling it. */
+  const fit = () => {
+    const z = Math.min(1, document.documentElement.clientWidth / CANVAS);
+    document.documentElement.style.zoom = z === 1 ? '' : z;
+  };
+  fit();
+  addEventListener('resize', fit);
+
+  /* Reveal on scroll */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  /* Manifesto: words ink in as you read */
+  const text = document.getElementById('manifesto-text');
+  text.innerHTML = text.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(' ');
+  const words = [...text.querySelectorAll('.w')];
+
+  /* Tabs (feature lists) */
+  document.querySelectorAll('.tabs').forEach((list) => {
+    const tabs = [...list.querySelectorAll('.tab')];
+    const panes = list.dataset.panes ? [...document.getElementById(list.dataset.panes).querySelectorAll('.pane')] : [];
+    const select = (i) => {
+      tabs.forEach((t, j) => { t.classList.toggle('is-active', i === j); t.setAttribute('aria-selected', i === j); });
+      panes.forEach((p, j) => p.classList.toggle('is-active', i === j));
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', (e) => { if (!e.target.closest('a')) select(i); });
+      t.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(i); } });
+    });
+  });
+
+  /* Team pills */
+  const pills = [...document.querySelectorAll('.pill')];
+  const cards = document.getElementById('team-cards');
+  pills.forEach((p) => p.addEventListener('click', () => {
+    if (p.classList.contains('is-active')) return;
+    pills.forEach((q) => { q.classList.toggle('is-active', q === p); q.setAttribute('aria-selected', q === p); });
+    cards.classList.add('is-swapping');
+    setTimeout(() => cards.classList.remove('is-swapping'), 320);
+  }));
+
+  /* Testimonials */
+  const quotes = [...document.querySelectorAll('.quote__item')];
+  const dots = [...document.querySelectorAll('.dot')];
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    quotes.forEach((q, j) => q.classList.toggle('is-active', i === j));
+    dots.forEach((x, j) => x.classList.toggle('is-active', i === j));
+  }));
+
+  /* Scroll-linked details: collage drift, manifesto ink, nav hand-off to the footer */
+  const nav = document.getElementById('nav');
+  const footer = document.getElementById('footer');
+  const drifters = [...document.querySelectorAll('[data-speed]')];
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const vh = innerHeight;
+
+    if (!reduce) {
+      drifters.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const offset = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.speed);
+        el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+      });
+
+      const r = text.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, (vh * 0.78 - r.top) / (r.height + vh * 0.28)));
+      const lit = Math.round(progress * words.length);
+      words.forEach((w, i) => w.classList.toggle('is-lit', i < lit));
+    }
+
+    /* Once the footer's own (inverted) nav is on screen, the floating nav steps aside. */
+    const navBottom = nav.getBoundingClientRect().bottom;
+    const footTop = footer.getBoundingClientRect().top;
+    nav.classList.toggle('is-hidden', footTop + navBottom < vh);
+  };
+
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
+</script>
+</body>
+</html>
