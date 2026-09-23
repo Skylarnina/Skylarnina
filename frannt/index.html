@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frannt Studio</title>
+<meta name="description" content="Frannt is a creative studio focused on Framer, Webflow, and modern web systems that merge design precision with scalable engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Inter+Tight:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F6F5F2;
+  --surface:#EEECE8;
+  --surface-2:#E3E1DC;
+  --text:#141414;
+  --muted:#7C7A73;
+  --line:#D6D3CD;
+  --white:#FFFFFF;
+  --black:#0F0F0F;
+
+  --wrap:1140px;
+  --gutter:24px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --display:"Inter Tight","Neue Haas Grotesk Display Pro","Söhne","Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:"Inter","Neue Haas Grotesk Text Pro","Söhne","Helvetica Now Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--body);font-size:16px;line-height:1.55;font-weight:450;
+  font-feature-settings:"cv11","ss01";
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,p,ul,dl,dd,figure,blockquote{margin:0}
+ul{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--text);outline-offset:3px;border-radius:4px}
+::selection{background:var(--text);color:var(--bg)}
+
+.wrap{width:100%;max-width:calc(var(--wrap) + var(--gutter)*2);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:clamp(96px,13vw,176px)}
+section[id]{scroll-margin-top:112px}
+
+/* ——— Type primitives ——— */
+.label{
+  font-family:var(--mono);font-size:12px;font-weight:500;line-height:1.4;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+}
+.h2{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(32px,4.4vw,52px);line-height:1;letter-spacing:-.04em;
+  text-wrap:balance;
+}
+.muted{color:var(--muted)}
+
+/* ——— Buttons & links ——— */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  height:52px;padding-inline:26px;border-radius:8px;
+  font:500 15px/1 var(--body);letter-spacing:-.005em;white-space:nowrap;
+  border:1px solid transparent;cursor:pointer;
+  transition:background-color .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
+}
+.btn svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-primary{background:var(--black);color:var(--bg)}
+.btn-primary:hover{background:#262626}
+.btn-ghost{border-color:rgba(20,20,20,.2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text)}
+
+.ulink{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding-bottom:5px;font-weight:500;font-size:15px;
+}
+.ulink::before,.ulink::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px}
+.ulink::before{background:var(--line)}
+.ulink::after{background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.ulink:hover::after{transform:scaleX(1);transform-origin:left}
+.ulink svg{width:12px;height:12px;transition:transform .35s var(--ease)}
+.ulink:hover svg{transform:translate(2px,-2px)}
+
+/* ——— Navigation ——— */
+.nav{
+  position:fixed;z-index:50;left:50%;transform:translateX(-50%);
+  top:calc(24px + env(safe-area-inset-top,0px));
+  width:min(1140px,calc(100% - 32px));height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding-inline:28px 14px;background:var(--black);color:var(--bg);border-radius:14px;
+}
+.nav :focus-visible{outline-color:var(--bg)}
+.logo{font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-.03em;color:var(--white);display:inline-flex;align-items:baseline;gap:2px}
+.logo sup{font-family:var(--body);font-size:9px;font-weight:500;letter-spacing:0;opacity:.5;transform:translateY(-8px)}
+.nav-links{display:flex;gap:40px;position:absolute;left:50%;transform:translateX(-50%)}
+.nav-links a{font-size:15px;color:var(--bg);opacity:.66;transition:opacity .2s}
+.nav-links a:hover{opacity:1}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:140px;height:44px;border-radius:8px;background:var(--bg);color:var(--black);
+  font-weight:500;font-size:15px;transition:background-color .25s var(--ease);
+}
+.nav-cta:hover{background:var(--white)}
+.nav-cta svg{width:12px;height:12px;transition:transform .35s var(--ease)}
+.nav-cta:hover svg{transform:translateX(2px)}
+.nav-toggle{
+  display:none;height:44px;padding-inline:16px;border-radius:8px;border:1px solid rgba(246,245,242,.18);
+  background:transparent;color:var(--bg);font:500 15px/1 var(--body);cursor:pointer;
+}
+.nav-panel{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;
+  background:var(--black);border-radius:14px;padding:12px 28px 20px;
+}
+.nav-panel a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(246,245,242,.1);font-size:17px;color:var(--bg)}
+.nav-panel a:last-child{border-bottom:0}
+.nav-panel a span{font-family:var(--mono);font-size:11px;opacity:.45;align-self:center}
+
+/* ——— 1. Hero ——— */
+.hero{
+  position:relative;min-height:100vh;min-height:100svh;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:clamp(168px,22vh,220px);padding-bottom:clamp(280px,46vh,500px);
+}
+.hero-inner{position:relative;z-index:2;max-width:1000px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:36px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--text)}
+.hero h1{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(44px,7.3vw,86px);line-height:.95;letter-spacing:-.05em;
+  text-wrap:balance;
+}
+.hero .lede{max-width:650px;margin-top:32px;font-size:clamp(17px,1.6vw,19px);line-height:1.55;color:var(--muted);text-wrap:pretty}
+.hero .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:44px}
+
+.hero-visual{
+  position:absolute;z-index:1;left:50%;bottom:0;
+  width:min(1320px,118vw);transform:translate(-50%,42%) perspective(2400px) rotateX(16deg);
+  transform-origin:50% 100%;container-type:inline-size;
+  opacity:.5;filter:grayscale(1) blur(.4px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 38%,#000 70%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0%,#000 38%,#000 70%,transparent 100%);
+  pointer-events:none;
+}
+/* Framer-style editor mockup */
+.editor{font-size:1cqw;aspect-ratio:16/9;background:var(--white);border:1px solid var(--line);border-radius:1.4em;overflow:hidden;display:flex;flex-direction:column;color:var(--text)}
+.ed-top{height:3.6em;flex:none;display:flex;align-items:center;gap:1.6em;padding-inline:1.6em;border-bottom:1px solid var(--line);font-size:1em}
+.dots{display:flex;gap:.5em}
+.dots i{width:.9em;height:.9em;border-radius:50%;background:var(--surface-2)}
+.ed-title{flex:1;text-align:center;color:var(--muted);font-size:1.05em}
+.ed-pill{background:var(--black);color:var(--bg);padding:.6em 1.3em;border-radius:.6em;font-size:1em;font-weight:500}
+.ed-body{flex:1;display:grid;grid-template-columns:17% 1fr 19%;min-height:0}
+.ed-layers,.ed-props{padding:1.6em;font-size:1em;background:var(--bg)}
+.ed-layers{border-right:1px solid var(--line)}
+.ed-props{border-left:1px solid var(--line)}
+.ed-h{font-weight:600;font-size:.95em;margin:0 0 1em;letter-spacing:-.01em}
+.ed-h + ul,.ed-props dl{margin-bottom:2em}
+.ed-layers li{padding:.55em .7em;border-radius:.4em;color:var(--muted);font-size:1.02em}
+.ed-layers li.in{padding-left:1.8em}
+.ed-layers li.in2{padding-left:3em}
+.ed-layers li.on{background:var(--text);color:var(--bg)}
+.ed-props dl{display:grid;grid-template-columns:auto 1fr;gap:.7em 1em;font-size:1em}
+.ed-props dt{color:var(--muted)}
+.ed-props dd{background:var(--surface);border-radius:.4em;padding:.25em .7em;text-align:right;font-family:var(--mono);font-size:.92em}
+.ed-canvas{position:relative;background:var(--surface);display:flex;justify-content:center;padding-top:4em}
+.ed-frame{width:74%;background:var(--bg);border:1px solid var(--line);outline:.15em solid var(--text);outline-offset:.4em;padding:2em 2.4em;display:flex;flex-direction:column;gap:3em;height:max-content}
+.ed-sel{position:absolute;top:1.6em;left:13%;font-family:var(--mono);font-size:.95em;background:var(--text);color:var(--bg);padding:.2em .6em;border-radius:.3em}
+.ef-nav{display:flex;align-items:center;gap:1.4em;background:var(--black);border-radius:.7em;padding:1em 1.4em}
+.ef-nav b{width:5em;height:.9em;background:var(--bg);border-radius:.2em;margin-right:auto}
+.ef-nav span{width:3em;height:.5em;background:#3a3a3a;border-radius:.2em}
+.ef-nav em{width:6em;height:2em;background:var(--bg);border-radius:.4em;margin-left:auto}
+.ef-hero{display:flex;flex-direction:column;align-items:center;gap:1em;padding-block:2em}
+.ef-h1{width:78%;height:3.4em;background:var(--text);border-radius:.3em}
+.ef-h1.short{width:56%}
+.ef-p{width:44%;height:.9em;background:var(--line);border-radius:.3em;margin-top:.8em}
+.ef-btns{display:flex;gap:.8em;margin-top:1em}
+.ef-btns i{width:8em;height:2.6em;border-radius:.4em;background:var(--text)}
+.ef-btns i + i{background:transparent;border:1px solid var(--muted)}
+.ef-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2em}
+.ef-grid div{aspect-ratio:4/3;background:var(--surface-2);border-radius:.6em;border:1px solid var(--line)}
+
+/* ——— 2. Logos ——— */
+.trust{padding-block:56px;border-block:1px solid var(--line)}
+.trust .label{text-align:center;margin-bottom:36px;text-transform:none;letter-spacing:.01em;font-family:var(--body);font-size:14px;font-weight:450}
+.logos{display:flex;justify-content:space-between;align-items:center;gap:32px 40px;opacity:.7}
+.lg{display:inline-flex;align-items:center;gap:8px;color:var(--text);white-space:nowrap;font-family:var(--display);font-size:20px;line-height:1}
+.lg svg{width:18px;height:18px}
+.lg-halden{font-weight:600;letter-spacing:-.035em}
+.lg-oriel{font-family:var(--body);font-weight:500;font-size:14px;letter-spacing:.32em}
+.lg-kestrel{font-weight:650;letter-spacing:-.04em;text-transform:lowercase;font-size:21px}
+.lg-stratum{font-weight:500;letter-spacing:-.02em}
+.lg-norde{font-weight:750;letter-spacing:-.06em;font-size:22px}
+.lg-axiom{font-family:var(--body);font-weight:600;font-size:15px;letter-spacing:.14em}
+.lg-lumen{font-weight:350;letter-spacing:-.02em;font-size:21px}
+.lg-lumen b{font-weight:600}
+
+/* ——— Section heads (Swiss grid) ——— */
+.sec-head{
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:end;
+  padding-top:20px;border-top:1px solid var(--line);margin-bottom:clamp(48px,6vw,80px);
+}
+.sec-head .label{grid-column:1/4;align-self:start}
+.sec-head .h2{grid-column:4/11}
+.sec-head .aside{grid-column:11/13;justify-self:end}
+
+/* ——— 3. Selected work ——— */
+.work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px;align-items:start}
+.work-grid > :nth-child(even){margin-top:112px}
+.work-card{
+  display:block;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg);
+  transition:transform .7s var(--ease);will-change:transform;
+}
+.work-card:hover{transform:scale(1.02)}
+.work-media{position:relative;aspect-ratio:5/4;overflow:hidden;background:var(--surface);border-bottom:1px solid var(--line);container-type:inline-size}
+.work-meta{padding:24px 24px 26px;display:grid;gap:10px}
+.work-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.work-row h3{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.03em;line-height:1.15}
+.work-meta p{color:var(--muted);font-size:15px;max-width:44ch}
+.tags{display:flex;gap:6px;flex-wrap:wrap;flex:none}
+.tag{font-family:var(--mono);font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;padding:5px 8px;border:1px solid var(--line);border-radius:5px;color:var(--text);line-height:1}
+.work-foot{display:flex;justify-content:space-between;margin-top:8px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+
+/* shared mock screen */
+.screen{
+  position:absolute;left:8%;right:8%;top:10%;bottom:-8%;
+  background:var(--white);border:1px solid var(--line);border-radius:1.4cqw 1.4cqw 0 0;overflow:hidden;
+  font-size:1.5cqw;line-height:1.3;color:var(--text);
+  box-shadow:0 30px 60px -44px rgba(20,20,20,.28);
+  transition:transform .8s var(--ease);
+}
+.work-card:hover .screen{transform:translateY(-1.5%)}
+.chrome{height:2.8em;display:flex;align-items:center;gap:1.4em;padding-inline:1.2em;border-bottom:1px solid var(--surface-2);background:var(--bg)}
+.chrome span{flex:1;text-align:center;margin-right:4em;font-family:var(--mono);font-size:.82em;color:var(--muted)}
+.chrome .dots i{width:.7em;height:.7em}
+
+/* A. dashboard */
+.dash{display:grid;grid-template-columns:22% 1fr;height:calc(100% - 2.8em)}
+.dash aside{background:var(--bg);border-right:1px solid var(--surface-2);padding:1.2em .9em;display:flex;flex-direction:column;gap:.25em}
+.dash aside b{display:flex;align-items:center;gap:.5em;font-weight:600;font-size:1em;margin-bottom:1.2em;padding-inline:.5em}
+.dash aside b::before{content:"";width:1.1em;height:1.1em;border-radius:.25em;background:var(--text)}
+.dash aside span{padding:.45em .6em;border-radius:.4em;color:var(--muted);font-size:.92em}
+.dash aside span.on{background:var(--surface-2);color:var(--text);font-weight:500}
+.dash main{padding:1.4em 1.6em;display:flex;flex-direction:column;gap:1.2em;min-width:0}
+.dash-head{display:flex;justify-content:space-between;align-items:center}
+.dash-head strong{font-size:1.35em;font-weight:600;letter-spacing:-.02em}
+.dash-head span{font-size:.85em;color:var(--muted);border:1px solid var(--surface-2);border-radius:.4em;padding:.3em .7em}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em}
+.kpis div{border:1px solid var(--surface-2);border-radius:.6em;padding:.8em .9em;display:grid;gap:.2em}
+.kpis span{font-size:.8em;color:var(--muted)}
+.kpis strong{font-size:1.3em;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpis em{font-style:normal;font-size:.78em;color:var(--muted);font-family:var(--mono)}
+.chart{border:1px solid var(--surface-2);border-radius:.6em;padding:.9em}
+.chart svg{width:100%;height:7.5em}
+.rows{display:grid;gap:.55em}
+.rows i{height:.7em;border-radius:.3em;background:var(--surface)}
+.rows i:nth-child(2){width:86%}.rows i:nth-child(3){width:92%}.rows i:nth-child(4){width:70%}
+
+/* B. real estate */
+.s-estate{background:#9c9a95}
+.est-photo{position:absolute;inset:0;background:linear-gradient(180deg,#d8d6d1 0%,#c4c2bd 46%,#a9a7a2 100%)}
+.est-tower{position:absolute;bottom:14%;
+  background:
+    repeating-linear-gradient(0deg,rgba(15,15,15,.35) 0 .18em,transparent .18em 1.9em),
+    repeating-linear-gradient(90deg,rgba(15,15,15,.28) 0 .14em,transparent .14em 2.6em),
+    linear-gradient(90deg,#55534f 0%,#7d7b76 38%,#6a6864 62%,#4b4a47 100%);
+}
+.est-tower.t1{left:38%;width:30%;height:78%}
+.est-tower.t2{left:66%;width:22%;height:56%;filter:brightness(.82)}
+.est-tower.t3{left:14%;width:18%;height:44%;filter:brightness(1.08) contrast(.8);opacity:.7}
+.est-ground{position:absolute;left:0;right:0;bottom:0;height:15%;background:linear-gradient(180deg,#3f3e3b,#262625)}
+.est-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.28) 0%,transparent 30%,transparent 55%,rgba(15,15,15,.55) 100%)}
+.est-nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:1.8em;padding:1.4em 1.8em;color:var(--white);font-size:.9em}
+.est-nav strong{letter-spacing:.3em;font-weight:500;margin-right:auto;font-size:1.05em}
+.est-nav em{font-style:normal;border:1px solid rgba(255,255,255,.6);padding:.45em 1em;border-radius:10em}
+.est-copy{position:absolute;left:1.8em;bottom:13%;color:var(--white)}
+.est-copy p{font-family:var(--mono);font-size:.78em;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:.8em}
+.est-copy h4{font-family:var(--display);font-weight:500;font-size:3.1em;line-height:.98;letter-spacing:-.04em}
+
+/* C. AI landing */
+.s-ai{background:var(--bg)}
+.ai-nav{display:flex;align-items:center;gap:1.6em;padding:1.1em 1.6em;font-size:.88em;color:var(--muted)}
+.ai-nav strong{color:var(--text);font-weight:600;margin-right:auto;display:flex;align-items:center;gap:.4em;font-size:1.1em}
+.ai-nav strong::before{content:"";width:1em;height:1em;border-radius:50%;background:linear-gradient(90deg,var(--text) 50%,transparent 50%);border:1px solid var(--text)}
+.ai-nav em{font-style:normal;color:var(--bg);background:var(--text);padding:.5em 1em;border-radius:.45em}
+.ai-hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:2.2em 2em 2em;gap:1.1em}
+.ai-pill{font-size:.8em;border:1px solid var(--line);border-radius:10em;padding:.35em .9em;color:var(--muted);background:var(--white)}
+.ai-hero h4{font-family:var(--display);font-weight:600;font-size:3.2em;line-height:.95;letter-spacing:-.05em}
+.ai-input{width:72%;display:flex;align-items:center;justify-content:space-between;background:var(--white);border:1px solid var(--line);border-radius:.8em;padding:.5em .5em .5em 1.1em;margin-top:.6em;font-size:.95em;color:var(--muted);box-shadow:0 1em 2em -1.5em rgba(20,20,20,.2)}
+.ai-input b{width:2.2em;height:2.2em;border-radius:.5em;background:var(--text);color:var(--bg);display:grid;place-items:center;font-weight:500}
+.ai-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em;padding:0 1.6em}
+.ai-tiles div{height:9em;border-radius:.7em;border:1px solid var(--line);background:var(--white);padding:.9em;display:flex;flex-direction:column;justify-content:space-between;font-size:.82em}
+.ai-tiles div::after{content:"";height:.6em;width:60%;border-radius:.3em;background:var(--surface-2)}
+.ai-tiles div:nth-child(2){background:var(--text);color:var(--bg);border-color:var(--text)}
+.ai-tiles div:nth-child(2)::after{background:#333}
+
+/* D. commerce */
+.s-shop{background:var(--white)}
+.shop-nav{display:grid;grid-template-columns:repeat(2,auto) 1fr repeat(2,auto);gap:1.6em;align-items:center;padding:1.2em 1.6em;font-size:.88em;color:var(--muted);border-bottom:1px solid var(--surface-2)}
+.shop-nav strong{text-align:center;color:var(--text);font-family:var(--display);font-weight:700;letter-spacing:-.06em;font-size:1.5em}
+.shop-filter{display:flex;gap:.6em;padding:1.1em 1.6em;font-size:.82em}
+.shop-filter span{border:1px solid var(--surface-2);padding:.35em .9em;border-radius:10em;color:var(--muted)}
+.shop-filter span.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4em .8em;padding:0 1.6em}
+.shop-grid figure{display:grid;gap:.6em}
+.obj-wrap{aspect-ratio:4/5;background:var(--surface);border-radius:.4em;display:grid;place-items:center;overflow:hidden}
+.shop-grid figcaption{display:flex;justify-content:space-between;font-size:.82em}
+.shop-grid figcaption span + span{color:var(--muted);font-variant-numeric:tabular-nums}
+.obj{width:52%;aspect-ratio:1}
+.o-sphere{border-radius:50%;background:radial-gradient(circle at 34% 30%,#fff 0%,#cfcdc8 38%,#8f8d88 100%)}
+.o-cyl{width:38%;aspect-ratio:1/1.5;border-radius:.5em .5em 1.4em 1.4em;background:linear-gradient(90deg,#8d8b86,#e6e4df 42%,#b7b5b0 70%,#7f7d78)}
+.o-cone{width:56%;clip-path:polygon(50% 4%,96% 96%,4% 96%);background:linear-gradient(90deg,#86847f,#e2e0db 45%,#a09e99)}
+.o-ring{border-radius:50%;background:radial-gradient(circle,transparent 34%,#9a9893 35%,#e0ded9 52%,#8a8883 70%,transparent 71%)}
+
+/* ——— 4. Services ——— */
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px}
+.svc{padding-top:28px;border-top:1px solid var(--text);display:flex;flex-direction:column}
+.svc-num{font-family:var(--display);font-weight:300;font-size:clamp(56px,6vw,80px);line-height:.9;letter-spacing:-.06em;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:56px}
+.svc h3{font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:-.03em;line-height:1.15;margin-bottom:12px}
+.svc p{color:var(--muted);max-width:34ch}
+.svc ul{margin:28px 0 36px;border-top:1px solid var(--line)}
+.svc li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.svc li span{font-family:var(--mono);font-size:11px;color:var(--muted);align-self:center}
+.svc .ulink{margin-top:auto;align-self:flex-start}
+
+/* ——— 5. Manifesto ——— */
+.manifesto{text-align:center;padding-block:clamp(128px,18vw,240px)}
+.manifesto .label{margin-bottom:48px}
+.manifesto blockquote{
+  max-width:900px;margin-inline:auto;
+  font-family:var(--display);font-weight:420;font-size:clamp(34px,5.2vw,62px);
+  line-height:1.06;letter-spacing:-.04em;text-wrap:balance;
+}
+.manifesto blockquote .muted{display:block}
+.manifesto .sig{margin-top:56px;display:inline-flex;align-items:center;gap:14px}
+.manifesto .sig::before{content:"";width:32px;height:1px;background:var(--muted)}
+
+/* ——— 6. Process ——— */
+.process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative}
+.process::before{content:"";position:absolute;top:6px;left:0;right:0;height:1px;background:var(--line)}
+.step{position:relative;padding:48px 32px 0 0;display:flex;flex-direction:column}
+.step::before{content:"";position:absolute;top:0;left:0;width:13px;height:13px;background:var(--bg);border:1px solid var(--text);transition:background-color .3s var(--ease)}
+.step:hover::before{background:var(--text)}
+.step .label{margin-bottom:20px}
+.step h3{font-family:var(--display);font-size:clamp(26px,2.6vw,32px);font-weight:600;letter-spacing:-.04em;line-height:1;margin-bottom:14px}
+.step p{color:var(--muted);font-size:15.5px;max-width:28ch}
+.step .dur{margin-top:28px;font-family:var(--mono);font-size:12px;color:var(--text);font-variant-numeric:tabular-nums}
+
+/* ——— 7. Featured ——— */
+.featured{background:var(--surface);border-block:1px solid var(--line);overflow:hidden}
+.feat{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,88px);align-items:center}
+.feat-text .label{margin-bottom:28px}
+.feat-text h2{margin-bottom:18px}
+.feat-text .intro{color:var(--muted);font-size:17px;max-width:40ch}
+.psr{margin:40px 0;border-top:1px solid var(--line)}
+.psr div{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.psr dt{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:3px}
+.psr dd{font-size:15.5px}
+.stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:40px;margin-bottom:44px}
+.stats strong{display:block;font-family:var(--display);font-size:34px;font-weight:600;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:13px;color:var(--muted)}
+
+.feat-visual{
+  position:relative;container-type:inline-size;margin-right:calc(min(0px, (1140px - 100vw) / 2) - 24px);
+  -webkit-mask-image:radial-gradient(ellipse 120% 110% at 30% 50%,#000 62%,transparent 100%);
+          mask-image:radial-gradient(ellipse 120% 110% at 30% 50%,#000 62%,transparent 100%);
+}
+.mer{
+  font-size:1.25cqw;aspect-ratio:16/11;background:#141414;color:#E3E1DC;border-radius:1.2em;border:1px solid #2a2a2a;
+  overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -48px rgba(15,15,15,.45);
+}
+.mer .chrome{background:#101010;border-color:#232323;height:3em}
+.mer .chrome .dots i{background:#2c2c2c}
+.mer .chrome span{color:#6f6d67}
+.mer-body{flex:1;display:grid;grid-template-columns:18% 1fr;min-height:0}
+.mer aside{border-right:1px solid #232323;padding:1.4em 1em;display:flex;flex-direction:column;gap:.3em;font-size:.95em}
+.mer aside b{display:flex;align-items:center;gap:.5em;font-weight:600;margin-bottom:1.4em;padding-inline:.5em;color:var(--white)}
+.mer aside b::before{content:"";width:1em;height:1em;border:1.5px solid #E3E1DC;transform:rotate(45deg)}
+.mer aside span{padding:.5em .6em;border-radius:.4em;color:#7C7A73}
+.mer aside span.on{background:#222;color:var(--white)}
+.mer main{padding:1.8em 2em;display:flex;flex-direction:column;gap:1.4em;min-width:0}
+.mer-head{display:flex;justify-content:space-between;align-items:flex-end}
+.mer-head span{display:block;font-size:.9em;color:#7C7A73;margin-bottom:.3em}
+.mer-head strong{font-family:var(--display);font-size:3.2em;font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
+.mer-head em{font-style:normal;font-family:var(--mono);font-size:.9em;border:1px solid #333;padding:.35em .7em;border-radius:.4em}
+.mer-chart{flex:1;min-height:0;border:1px solid #232323;border-radius:.8em;padding:1em 1em .6em;display:flex;flex-direction:column}
+.mer-chart svg{flex:1;width:100%;min-height:0}
+.mer-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.75em;color:#5c5a55;padding-top:.5em}
+.mer-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.9em}
+.mer-cards div{border:1px solid #232323;border-radius:.7em;padding:.9em 1em}
+.mer-cards span{display:block;font-size:.82em;color:#7C7A73;margin-bottom:.3em}
+.mer-cards strong{font-size:1.5em;font-weight:600;letter-spacing:-.03em;color:var(--white);font-variant-numeric:tabular-nums}
+
+/* ——— 8. Testimonial ——— */
+.testimonial{text-align:center}
+.testimonial .label{margin-bottom:48px}
+.testimonial blockquote{
+  max-width:1060px;margin-inline:auto;
+  font-family:var(--display);font-weight:450;font-size:clamp(32px,5vw,60px);
+  line-height:1.05;letter-spacing:-.04em;text-wrap:balance;
+}
+.person{display:inline-flex;align-items:center;gap:14px;margin-top:56px;text-align:left}
+.avatar{width:48px;height:48px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:-.02em}
+.person strong{display:block;font-weight:550;font-size:15px}
+.person span{font-size:14px;color:var(--muted)}
+
+/* ——— 9. Insights ——— */
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.post{display:flex;flex-direction:column;gap:20px}
+.post-img{aspect-ratio:4/3;border-radius:12px;border:1px solid var(--line);overflow:hidden;position:relative;background:var(--surface)}
+.post-img > div{position:absolute;inset:0;transition:transform .8s var(--ease)}
+.post:hover .post-img > div{transform:scale(1.03)}
+.post-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.post h3{font-family:var(--display);font-size:22px;font-weight:600;letter-spacing:-.03em;line-height:1.18;text-wrap:balance;max-width:24ch}
+.post h3 span{background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .5s var(--ease)}
+.post:hover h3 span{background-size:100% 1px}
+
+.img-stairs{background:
+  linear-gradient(180deg,rgba(246,245,242,0) 40%,rgba(20,20,20,.18) 100%),
+  repeating-linear-gradient(162deg,#d9d7d2 0 22px,#bdbbb6 22px 24px,#e6e4df 24px 46px);}
+.img-stairs::after{content:"";position:absolute;left:18%;top:0;bottom:0;width:34%;background:linear-gradient(90deg,rgba(20,20,20,.14),rgba(20,20,20,0))}
+.img-split{display:grid;grid-template-columns:1fr 1fr}
+.img-split i{position:relative;display:grid;place-items:center;font-style:normal}
+.img-split i:first-child{background:var(--surface-2)}
+.img-split i:last-child{background:#1a1a1a}
+.img-split i::before{content:"";width:46%;aspect-ratio:1;border:1px solid var(--text);border-radius:50%}
+.img-split i:last-child::before{border-radius:0;border-color:#bdbbb6;transform:rotate(0)}
+.img-split b{position:absolute;bottom:14px;left:16px;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.img-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:10px;padding:18px;background:var(--surface-2)}
+.img-grid i{border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.img-grid i.k{background:var(--text);border-color:var(--text)}
+.img-grid i.w{grid-column:span 2}
+.img-grid i.o{background:transparent;border-style:dashed;border-color:#b5b2ab}
+
+/* ——— 10. CTA ——— */
+.cta{position:relative;text-align:center;padding-block:clamp(128px,17vw,220px);overflow:hidden}
+.cta::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px calc(100% / 12));
+  background-size:min(1140px,100%) 100%;background-position:center;background-repeat:repeat-y;opacity:.55;
+  -webkit-mask-image:radial-gradient(ellipse 60% 70% at 50% 50%,#000,transparent 80%);
+          mask-image:radial-gradient(ellipse 60% 70% at 50% 50%,#000,transparent 80%);
+}
+.cta .wrap{position:relative}
+.cta .label{display:inline-flex;align-items:center;gap:10px;margin-bottom:36px}
+.cta h2{font-family:var(--display);font-weight:600;font-size:clamp(44px,7.4vw,92px);line-height:.95;letter-spacing:-.05em;max-width:980px;margin-inline:auto;text-wrap:balance}
+.cta .actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;margin-top:52px}
+
+.status-dot{position:relative;width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.status-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid currentColor;opacity:0;animation:ping 2.6s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(.5);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+
+/* ——— 11. Footer ——— */
+.footer{background:var(--black);color:var(--bg);padding-top:96px;padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+.footer :focus-visible{outline-color:var(--bg)}
+.foot-top{display:grid;grid-template-columns:minmax(0,4fr) repeat(4,minmax(0,2fr));gap:32px;padding-bottom:88px}
+.foot-intro p{font-family:var(--display);font-size:24px;font-weight:500;line-height:1.15;letter-spacing:-.03em;max-width:17ch;margin-bottom:24px}
+.foot-intro .mail{font-family:var(--mono);font-size:13px;color:#A8A59E;user-select:all}
+.foot-col h4{font-family:var(--mono);font-size:11.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:#7C7A73;margin-bottom:22px}
+.foot-col ul{display:grid;gap:12px}
+.foot-col a{font-size:15px;color:#D6D3CD;transition:color .2s}
+.foot-col a:hover{color:var(--white)}
+.foot-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding-top:28px;border-top:1px solid #262626;font-size:13px;color:#7C7A73}
+.foot-bottom .logo{font-size:26px;justify-self:center}
+.foot-status{justify-self:end;display:inline-flex;align-items:center;gap:10px;color:#A8A59E}
+.foot-status .status-dot{color:#E3E1DC}
+
+/* ——— Responsive ——— */
+@media (max-width:1100px){
+  .nav-links{gap:28px}
+}
+@media (max-width:960px){
+  .nav-links{display:none}
+  .nav-toggle{display:inline-flex;align-items:center}
+  .work-grid > :nth-child(even){margin-top:0}
+  .services{grid-template-columns:1fr;gap:64px}
+  .svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:32px}
+  .svc-num{margin-bottom:0;grid-row:span 4}
+  .svc .ulink{grid-column:2}
+  .process{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:56px}
+  .process::before{display:none}
+  .step{border-top:1px solid var(--line);padding-top:40px}
+  .step::before{top:-7px}
+  .feat{grid-template-columns:1fr}
+  .feat-visual{margin-right:0}
+  .posts{grid-template-columns:1fr 1fr}
+  .posts .post:last-child{display:none}
+  .foot-top{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:56px}
+  .foot-intro{grid-column:1/-1}
+  .sec-head .label{grid-column:1/-1}
+  .sec-head .h2{grid-column:1/10}
+  .sec-head .aside{grid-column:10/13}
+}
+@media (max-width:720px){
+  :root{--gutter:16px}
+  .nav{padding-inline:20px 10px}
+  .nav-cta{width:auto;padding-inline:16px}
+  .logos{flex-wrap:wrap;justify-content:center;gap:28px 36px}
+  .work-grid{grid-template-columns:1fr;gap:28px}
+  .sec-head .h2,.sec-head .aside{grid-column:1/-1;justify-self:start}
+  .svc{display:flex}
+  .svc-num{margin-bottom:32px}
+  .process{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .stats strong{font-size:28px}
+  .posts{grid-template-columns:1fr}
+  .posts .post:last-child{display:flex}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .foot-bottom{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .foot-bottom .logo{order:-1}
+  .foot-status{justify-self:center}
+}
+@media (max-width:420px){
+  .nav-toggle{padding-inline:12px}
+  .nav-cta svg{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="nav" id="top">
+  <a class="logo" href="#top" aria-label="Frannt — home">Frannt<sup>®</sup></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#insights">Insights</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel">Menu</button>
+    <a class="nav-cta" href="#contact">Let’s talk
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5"/></svg>
+    </a>
+  </div>
+  <nav class="nav-panel" id="nav-panel" aria-label="Mobile" hidden>
+    <a href="#work">Work <span>01</span></a>
+    <a href="#services">Services <span>02</span></a>
+    <a href="#about">About <span>03</span></a>
+    <a href="#insights">Insights <span>04</span></a>
+    <a href="#contact">Contact <span>05</span></a>
+  </nav>
+</header>
+
+<main>
+
+<!-- 1. Hero -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-inner">
+    <p class="label eyebrow"><span class="dot"></span>Framer &amp; Webflow studio — est. 2019</p>
+    <h1 id="hero-title">Designing digital systems that scale brands beyond templates.</h1>
+    <p class="lede">Frannt is a creative studio focused on Framer, Webflow, and modern web systems that merge design precision with scalable engineering.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#work">View Work
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 7h12M7.5 1.5 13 7l-5.5 5.5"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#contact">Book a call</a>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <div class="editor">
+      <div class="ed-top">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="ed-title">Meridian / Marketing site — Home</span>
+        <span class="ed-pill">Publish</span>
+      </div>
+      <div class="ed-body">
+        <aside class="ed-layers">
+          <p class="ed-h">Layers</p>
+          <ul>
+            <li>Desktop · 1440</li>
+            <li class="in">Navigation</li>
+            <li class="in on">Hero</li>
+            <li class="in2">Heading</li>
+            <li class="in2">Subtext</li>
+            <li class="in2">Actions</li>
+            <li class="in">Logos</li>
+            <li class="in">Work · CMS</li>
+            <li class="in">Footer</li>
+          </ul>
+          <p class="ed-h">Breakpoints</p>
+          <ul><li>Desktop 1440</li><li>Tablet 810</li><li>Phone 390</li></ul>
+        </aside>
+        <div class="ed-canvas">
+          <span class="ed-sel">Hero · Stack 1440 × 820</span>
+          <div class="ed-frame">
+            <div class="ef-nav"><b></b><span></span><span></span><span></span><em></em></div>
+            <div class="ef-hero"><div class="ef-h1"></div><div class="ef-h1 short"></div><div class="ef-p"></div><div class="ef-btns"><i></i><i></i></div></div>
+            <div class="ef-grid"><div></div><div></div></div>
+          </div>
+        </div>
+        <aside class="ed-props">
+          <p class="ed-h">Layout</p>
+          <dl>
+            <dt>Type</dt><dd>Stack</dd>
+            <dt>Direction</dt><dd>Vertical</dd>
+            <dt>Align</dt><dd>Center</dd>
+            <dt>Gap</dt><dd>24</dd>
+            <dt>Padding</dt><dd>160 / 24</dd>
+          </dl>
+          <p class="ed-h">Text</p>
+          <dl>
+            <dt>Font</dt><dd>Inter Tight</dd>
+            <dt>Size</dt><dd>84</dd>
+            <dt>Line</dt><dd>0.95</dd>
+            <dt>Letter</dt><dd>-5%</dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Trust -->
+<section class="trust" aria-label="Clients">
+  <div class="wrap">
+    <p class="label">Trusted by teams building modern products</p>
+    <div class="logos">
+      <span class="lg lg-halden"><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8" fill="currentColor"/></svg>Halden</span>
+      <span class="lg lg-oriel">ORIEL</span>
+      <span class="lg lg-kestrel"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1 17 17H1z" fill="currentColor"/></svg>kestrel</span>
+      <span class="lg lg-stratum"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M1 3h16v3H1zM3 8h12v3H3zM5 13h8v3H5z" fill="currentColor"/></svg>Stratum</span>
+      <span class="lg lg-norde">norde.</span>
+      <span class="lg lg-axiom"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1.5 16.5 9 9 16.5 1.5 9z" fill="none" stroke="currentColor" stroke-width="2"/></svg>AXIOM</span>
+      <span class="lg lg-lumen"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M1 12a8 8 0 0 1 16 0z" fill="currentColor"/><path d="M1 14h16v2H1z" fill="currentColor"/></svg><span>Lumen<b>&amp;Co</b></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Selected work -->
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Selected work (04)</p>
+      <h2 class="h2" id="work-title">Recent systems for SaaS teams and modern brands.</h2>
+      <a class="ulink aside" href="#featured">All projects
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 10 10 2M3.5 2H10v6.5"/></svg>
+      </a>
+    </div>
+
+    <div class="work-grid">
+      <!-- A -->
+      <a class="work-card" href="#featured">
+        <div class="work-media" aria-hidden="true">
+          <div class="screen">
+            <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span>app.ledgerline.com/revenue</span></div>
+            <div class="dash">
+              <aside><b>Ledgerline</b><span class="on">Overview</span><span>Revenue</span><span>Invoices</span><span>Customers</span><span>Reports</span><span>Settings</span></aside>
+              <main>
+                <div class="dash-head"><strong>Revenue</strong><span>Last 90 days</span></div>
+                <div class="kpis">
+                  <div><span>MRR</span><strong>$482,190</strong><em>+12.4%</em></div>
+                  <div><span>Net retention</span><strong>118%</strong><em>+3.1 pts</em></div>
+                  <div><span>Active accounts</span><strong>1,284</strong><em>+96</em></div>
+                </div>
+                <div class="chart">
+                  <svg viewBox="0 0 300 90" preserveAspectRatio="none">
+                    <path d="M0 22H300M0 45H300M0 68H300" stroke="#EEECE8" stroke-width="1" vector-effect="non-scaling-stroke" fill="none"/>
+                    <path d="M0 74 C30 70 40 62 60 64 S95 50 120 52 S160 36 180 40 S220 22 245 26 S280 12 300 10 V90 H0Z" fill="#141414" fill-opacity=".05"/>
+                    <path d="M0 74 C30 70 40 62 60 64 S95 50 120 52 S160 36 180 40 S220 22 245 26 S280 12 300 10" fill="none" stroke="#141414" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+                    <path d="M0 80 C40 78 70 72 110 73 S170 64 210 62 S270 54 300 50" fill="none" stroke="#7C7A73" stroke-width="1" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/>
+                  </svg>
+                </div>
+                <div class="rows"><i></i><i></i><i></i><i></i></div>
+              </main>
+            </div>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div class="work-row"><h3>SaaS Dashboard Redesign</h3><span class="tags"><span class="tag">SaaS</span><span class="tag">UX</span></span></div>
+          <p>A billing console rebuilt around the three questions finance teams ask every morning.</p>
+          <div class="work-foot"><span>Ledgerline</span><span>2026</span></div>
+        </div>
+      </a>
+
+      <!-- B -->
+      <a class="work-card" href="#featured">
+        <div class="work-media" aria-hidden="true">
+          <div class="screen s-estate">
+            <div class="est-photo"><div class="est-tower t3"></div><div class="est-tower t1"></div><div class="est-tower t2"></div><div class="est-ground"></div></div>
+            <div class="est-nav"><strong>HALDEN</strong><span>Residences</span><span>Amenities</span><span>Location</span><em>Enquire</em></div>
+            <div class="est-copy"><p>Residences 04 — 32</p><h4>Quiet living,<br>above the city.</h4></div>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div class="work-row"><h3>Luxury Real Estate Website</h3><span class="tags"><span class="tag">Webflow</span></span></div>
+          <p>A CMS-driven sales site for a 32-floor residential tower, with live unit availability.</p>
+          <div class="work-foot"><span>Halden Residences</span><span>2025</span></div>
+        </div>
+      </a>
+
+      <!-- C -->
+      <a class="work-card" href="#featured">
+        <div class="work-media" aria-hidden="true">
+          <div class="screen s-ai">
+            <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span>oriel.ai</span></div>
+            <div class="ai-nav"><strong>Oriel</strong><span>Product</span><span>Research</span><span>Pricing</span><em>Get access</em></div>
+            <div class="ai-hero">
+              <span class="ai-pill">Oriel 2.0 — now in private beta</span>
+              <h4>Research at the<br>speed of thought.</h4>
+              <div class="ai-input"><span>Ask across 12,000 sources…</span><b>↑</b></div>
+            </div>
+            <div class="ai-tiles"><div>Sources</div><div>Synthesis</div><div>Citations</div></div>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div class="work-row"><h3>AI Product Landing System</h3><span class="tags"><span class="tag">Framer</span><span class="tag">SaaS</span></span></div>
+          <p>A launch site and reusable page system for an AI research product, shipped in five weeks.</p>
+          <div class="work-foot"><span>Oriel</span><span>2026</span></div>
+        </div>
+      </a>
+
+      <!-- D -->
+      <a class="work-card" href="#featured">
+        <div class="work-media" aria-hidden="true">
+          <div class="screen s-shop">
+            <div class="shop-nav"><span>Shop</span><span>Journal</span><strong>norde.</strong><span>Search</span><span>Bag (2)</span></div>
+            <div class="shop-filter"><span class="on">All objects</span><span>Vessels</span><span>Lighting</span><span>Textiles</span></div>
+            <div class="shop-grid">
+              <figure><div class="obj-wrap"><div class="obj o-sphere"></div></div><figcaption><span>Orb 01</span><span>€84</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-cyl"></div></div><figcaption><span>Vessel 03</span><span>€120</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-cone"></div></div><figcaption><span>Form 07</span><span>€96</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-ring"></div></div><figcaption><span>Loop 02</span><span>€64</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-cyl"></div></div><figcaption><span>Vessel 05</span><span>€140</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-ring"></div></div><figcaption><span>Loop 04</span><span>€72</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-sphere"></div></div><figcaption><span>Orb 03</span><span>€92</span></figcaption></figure>
+              <figure><div class="obj-wrap"><div class="obj o-cone"></div></div><figcaption><span>Form 02</span><span>€88</span></figcaption></figure>
+            </div>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div class="work-row"><h3>E-commerce Framer Build</h3><span class="tags"><span class="tag">Framer</span></span></div>
+          <p>A storefront for a Copenhagen object studio, with Shopify checkout behind a Framer front end.</p>
+          <div class="work-foot"><span>Norde Objects</span><span>2025</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Services -->
+<section class="section" id="services" aria-labelledby="services-title" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Services (03)</p>
+      <h2 class="h2" id="services-title">Three disciplines, one system behind every page.</h2>
+    </div>
+    <div class="services">
+      <article class="svc">
+        <span class="svc-num">01</span>
+        <h3>Framer Development</h3>
+        <p>High-performance marketing sites with motion systems.</p>
+        <ul>
+          <li>Component libraries <span>Core</span></li>
+          <li>Interaction &amp; motion <span>Core</span></li>
+          <li>CMS &amp; localization <span>Add-on</span></li>
+        </ul>
+        <a class="ulink" href="#contact">Explore Framer builds <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 10 10 2M3.5 2H10v6.5"/></svg></a>
+      </article>
+      <article class="svc">
+        <span class="svc-num">02</span>
+        <h3>Webflow Development</h3>
+        <p>CMS-driven websites with scalable structure.</p>
+        <ul>
+          <li>Collection architecture <span>Core</span></li>
+          <li>Client-first class system <span>Core</span></li>
+          <li>Migrations &amp; integrations <span>Add-on</span></li>
+        </ul>
+        <a class="ulink" href="#contact">Explore Webflow builds <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 10 10 2M3.5 2H10v6.5"/></svg></a>
+      </article>
+      <article class="svc">
+        <span class="svc-num">03</span>
+        <h3>UX / Product Design</h3>
+        <p>User-first systems for SaaS and digital products.</p>
+        <ul>
+          <li>Research &amp; flows <span>Core</span></li>
+          <li>Design systems <span>Core</span></li>
+          <li>Prototyping &amp; testing <span>Add-on</span></li>
+        </ul>
+        <a class="ulink" href="#contact">Explore product design <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 10 10 2M3.5 2H10v6.5"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Manifesto -->
+<section class="manifesto" id="about" aria-label="Philosophy">
+  <div class="wrap">
+    <p class="label">Philosophy</p>
+    <blockquote>
+      <span class="muted">We don’t build websites.</span>
+      We design systems that communicate clarity, trust, and conversion.
+    </blockquote>
+    <p class="label sig">Frannt Studio</p>
+  </div>
+</section>
+
+<!-- 6. Process -->
+<section class="section" id="process" aria-labelledby="process-title" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Process</p>
+      <h2 class="h2" id="process-title">A fixed sequence, so nothing is left to chance.</h2>
+      <span class="label aside">6–10 weeks</span>
+    </div>
+    <ol class="process" style="list-style:none;margin:0;padding:0">
+      <li class="step">
+        <span class="label">Step 01</span>
+        <h3>Discover</h3>
+        <p>We audit your product, audience and funnel to define what the site has to prove.</p>
+        <span class="dur">Week 1–2</span>
+      </li>
+      <li class="step">
+        <span class="label">Step 02</span>
+        <h3>Design</h3>
+        <p>Typography, grid and components are set as a system before any page is composed.</p>
+        <span class="dur">Week 2–5</span>
+      </li>
+      <li class="step">
+        <span class="label">Step 03</span>
+        <h3>Build</h3>
+        <p>Every component is rebuilt natively in Framer or Webflow, responsive and CMS-ready.</p>
+        <span class="dur">Week 5–8</span>
+      </li>
+      <li class="step">
+        <span class="label">Step 04</span>
+        <h3>Launch</h3>
+        <p>We ship, measure and hand over a documented system your team can extend.</p>
+        <span class="dur">Week 8–10</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 7. Featured case study -->
+<section class="section featured" id="featured" aria-labelledby="featured-title">
+  <div class="wrap feat">
+    <div class="feat-text">
+      <p class="label">Featured case study — Meridian</p>
+      <h2 class="h2" id="featured-title">An analytics brand rebuilt for its Series B.</h2>
+      <p class="intro">Meridian had outgrown a template site that no longer matched the product enterprise buyers were seeing in demos.</p>
+      <dl class="psr">
+        <div><dt>Problem</dt><dd>Fourteen inconsistent landing pages, a 4.1s load time, and no way for marketing to ship without engineering.</dd></div>
+        <div><dt>Solution</dt><dd>A Framer system of 38 components, a new narrative, and a CMS the growth team runs on its own.</dd></div>
+        <div><dt>Result</dt><dd>Demo requests up in the first quarter, and pages now ship in hours instead of sprints.</dd></div>
+      </dl>
+      <div class="stats">
+        <div><strong>+38%</strong><span>Demo requests</span></div>
+        <div><strong>0.9s</strong><span>Largest paint</span></div>
+        <div><strong>6 wks</strong><span>To launch</span></div>
+      </div>
+      <a class="btn btn-primary" href="#contact">View full case study
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 7h12M7.5 1.5 13 7l-5.5 5.5"/></svg>
+      </a>
+    </div>
+
+    <div class="feat-visual" aria-hidden="true">
+      <div class="mer">
+        <div class="chrome"><span class="dots"><i></i><i></i><i></i></span><span>meridian.ai/platform</span></div>
+        <div class="mer-body">
+          <aside><b>Meridian</b><span class="on">Pipeline</span><span>Accounts</span><span>Signals</span><span>Forecast</span><span>Reports</span></aside>
+          <main>
+            <div class="mer-head">
+              <div><span>Pipeline influenced · Q3</span><strong>$12.8M</strong></div>
+              <em>+38% QoQ</em>
+            </div>
+            <div class="mer-chart">
+              <svg viewBox="0 0 400 140" preserveAspectRatio="none">
+                <defs><linearGradient id="merfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E3E1DC" stop-opacity=".22"/><stop offset="1" stop-color="#E3E1DC" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 35H400M0 70H400M0 105H400" stroke="#232323" stroke-width="1" vector-effect="non-scaling-stroke" fill="none"/>
+                <path d="M0 118 C40 112 60 100 90 104 S140 86 170 88 S220 64 250 70 S300 40 330 44 S375 20 400 16 V140 H0Z" fill="url(#merfill)"/>
+                <path d="M0 118 C40 112 60 100 90 104 S140 86 170 88 S220 64 250 70 S300 40 330 44 S375 20 400 16" fill="none" stroke="#F6F5F2" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+                <path d="M0 124 C60 122 100 114 150 114 S240 100 290 98 S360 88 400 84" fill="none" stroke="#5c5a55" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
+                <circle cx="400" cy="16" r="3" fill="#F6F5F2"/>
+              </svg>
+              <div class="mer-axis"><span>Jul</span><span>Aug</span><span>Sep</span></div>
+            </div>
+            <div class="mer-cards">
+              <div><span>Demo requests</span><strong>1,942</strong></div>
+              <div><span>Avg. session</span><strong>3m 12s</strong></div>
+              <div><span>Conversion</span><strong>4.6%</strong></div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Testimonial -->
+<section class="section testimonial" aria-label="Testimonial">
+  <div class="wrap">
+    <p class="label">Client note</p>
+    <blockquote>“Frannt transformed our entire digital presence into something that finally feels aligned with our product.”</blockquote>
+    <div class="person">
+      <span class="avatar" aria-hidden="true">CV</span>
+      <span><strong>Clara Voss</strong><span>VP Brand, Meridian</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Insights -->
+<section class="section" id="insights" aria-labelledby="insights-title" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Insights (03)</p>
+      <h2 class="h2" id="insights-title">Notes from production.</h2>
+      <a class="ulink aside" href="#insights">All articles
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 10 10 2M3.5 2H10v6.5"/></svg>
+      </a>
+    </div>
+    <div class="posts">
+      <a class="post" href="#insights">
+        <div class="post-img" aria-hidden="true"><div class="img-stairs"></div></div>
+        <div class="post-meta"><span>Conversion</span><span>Sep 12, 2026</span></div>
+        <h3><span>Why most agency websites fail conversion</span></h3>
+      </a>
+      <a class="post" href="#insights">
+        <div class="post-img" aria-hidden="true"><div class="img-split"><i><b>FRAMER</b></i><i><b>WEBFLOW</b></i></div></div>
+        <div class="post-meta"><span>Production</span><span>Aug 28, 2026</span></div>
+        <h3><span>Framer vs Webflow: real production breakdown</span></h3>
+      </a>
+      <a class="post" href="#insights">
+        <div class="post-img" aria-hidden="true"><div class="img-grid"><i class="k"></i><i class="w"></i><i></i><i></i><i class="o"></i><i class="k w"></i><i class="w"></i><i></i><i class="o"></i></div></div>
+        <div class="post-meta"><span>Systems</span><span>Aug 04, 2026</span></div>
+        <h3><span>Design systems for marketing websites</span></h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 10. CTA -->
+<section class="cta" id="contact" aria-labelledby="cta-title">
+  <div class="wrap">
+    <p class="label"><span class="status-dot" aria-hidden="true"></span>Booking projects for Q1 2027</p>
+    <h2 id="cta-title">Let’s build your next digital system</h2>
+    <div class="actions">
+      <a class="btn btn-primary" href="#contact">Start a project
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 7h12M7.5 1.5 13 7l-5.5 5.5"/></svg>
+      </a>
+      <a class="ulink" href="#contact">View pricing</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 11. Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-intro">
+        <p>Independent studio for Framer, Webflow and product systems.</p>
+        <span class="mail">hello@frannt.studio</span>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <ul><li><a href="#services">Framer Development</a></li><li><a href="#services">Webflow Development</a></li><li><a href="#services">UX / Product Design</a></li><li><a href="#services">Design Systems</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Work</h4>
+        <ul><li><a href="#featured">Meridian</a></li><li><a href="#work">Ledgerline</a></li><li><a href="#work">Halden</a></li><li><a href="#work">Oriel</a></li><li><a href="#work">Norde</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul><li><a href="#about">About</a></li><li><a href="#process">Process</a></li><li><a href="#insights">Insights</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Social</h4>
+        <ul><li><a href="#top">X / Twitter</a></li><li><a href="#top">LinkedIn</a></li><li><a href="#top">Dribbble</a></li><li><a href="#top">Read.cv</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Frannt Studio. All rights reserved.</span>
+      <a class="logo" href="#top" aria-label="Back to top">Frannt<sup>®</sup></a>
+      <span class="foot-status"><span class="status-dot" aria-hidden="true"></span>Studio open · replies within 24h</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle = document.getElementById('nav-toggle');
+  var panel = document.getElementById('nav-panel');
+  function setOpen(open){
+    panel.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Close' : 'Menu';
+  }
+  toggle.addEventListener('click', function(){ setOpen(panel.hidden); });
+  panel.addEventListener('click', function(e){ if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { setOpen(false); toggle.focus(); } });
+  window.addEventListener('resize', function(){ if (window.innerWidth > 960 && !panel.hidden) setOpen(false); });
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
