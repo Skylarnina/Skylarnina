@@ -243,6 +243,32 @@ The pricing spec says Kóda Weekend must sit "on equal visual footing" with a si
 **F22. Round 2: headline sizes above the brand book's range.** *Confirm.* (This extends F4.)
 The brand book caps desktop hero type at 76px. Round 2 sets the hero at 104px, the statement at 96px, section headlines at 72–88px, the story times at 140px and the closing line at up to 172px. Labels stay at 9.5–11px, as the brand book requires.
 
+## G. Round 3 (sky-design-taste and the Pinterest pins)
+
+**G1. Arch window in "Who a Kóda is".** *Needs Ana's approval.*
+The brand book says non-interactive elements are 0px radius. In enhanced mode, the window over the night photo is a tall arch (full radius at the top), and so is its 0.5px stone frame.
+**Applied:** brand mode is a sharp rectangle; the arch appears in enhanced mode only.
+
+**G2. The word BARCELONA sits on the photo without a navy block.** *Confirm.*
+The brand book asks for navy 60% wherever type sits on an image. The depth-type hero puts the big word straight onto the photo, behind the cut-out foreground. It is decorative and hidden from screen readers; the real headline sits in the navy 60% block.
+**Applied:** in both modes, because the word is the hero's main idea. If refused, the fallback is to keep the word in enhanced mode only.
+
+**G3. Depth carousel.** *Confirm (the motion is enhanced only).*
+The side tiles at 80% scale and 60% opacity are a static layout, so they appear in both modes. The 900ms `cubic-bezier(0.76,0,0.24,1)` slide runs in enhanced mode only; brand mode switches instantly with a 220ms opacity change.
+**Applied:** the round-3 brief asks for arrows, but the brand book bans arrow glyphs. The controls are text pills instead: PREVIOUS / 02 / 03 / NEXT. Swipe and the keyboard arrow keys also work.
+This also changes F21: Night is the active tile by default, but each option becomes the same large framed tile when selected, which brings Weekend back towards equal footing.
+
+**G4. Scroll depth and strip drift.** *Confirm (enhanced only).*
+- The hero foreground rises about 180px while the word rises 70px.
+- Each strip photo drifts ±7% inside its band.
+
+Both are forbidden by the brand book's motion rules (parallax), so they are off in brand mode and when reduced motion is on.
+
+**G5. The hero cycles through five scenes.** *Confirm.*
+In enhanced mode the hero crossfades to the next clip every 6.5 seconds (1200ms, same curve). In brand mode it stays on scene 01 until someone taps the 01–05 index.
+
+**G6. Story numerals at 160px, strips in spaced caps.** These extend F22, which covers headline sizes above the brand book's range. Labels stay at 9.5–11px.
+
 ---
 
 ## Housekeeping

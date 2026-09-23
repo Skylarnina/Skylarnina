@@ -1,43 +1,77 @@
-# Kóda: shot list (round 2)
+# Kóda: shot list (round 3)
 
-The page is built around **one coherent set of photos: warm Barcelona, dusk into night.** Every shot must include people, but always from behind, at a distance or in motion, never facing the camera. All shots share the same grade and have visible grain.
+**This is one shoot: warm Barcelona dusk into night.** Every frame has real texture and fine grain, and all share the same grade. People appear only from behind or at a distance, in motion.
 
-The page picks up each file automatically once it is placed in `koda/site/v2/media/` under the file name below. Until then, a labelled placeholder shows in its slot.
+Save each file in `koda/site/v2/media/` under the file name listed. The page swaps it in automatically, and until then a labelled placeholder shows in its slot.
 
 ## Rules for every frame
 
-- **Place and light first, people second.** Figures take up at most about a third of the frame. They walk away, cross or step through, with 1/30–1/60s motion blur where it helps.
-- **No faces to camera, no posed portraits, and nobody looking at the lens.** Nothing may suggest that a specific companion is available.
-- **Banned:** skylines, Hotel Arts or the Mapfre tower, the Gehry fish, empty furniture or table set-ups, Edison-bulb cafés, staged nightlife, and readable plates or shop signs.
+- **Place and light first.** Figures take up at most a third of the frame and are seen from behind or far away: walking, crossing, stepping through a door. Motion blur at 1/30–1/60s is welcome.
+- **Banned:**
+  - faces to camera, posed portraits, anyone looking at the lens;
+  - skylines, the Hotel Arts or Mapfre towers, the Gehry fish;
+  - empty furniture or table set-ups, Edison-bulb cafés, staged nightlife;
+  - readable plates or shop signs;
+  - anything that implies a specific companion is available.
 - **Grade them as one shoot:**
-  - warm highlights, cool shadows, low saturation (about −35), with most of the frame in shadow;
-  - fine grain (about 4%);
+  - warm highlights, cool shadows, saturation about −35, with most of the frame in shadow;
+  - fine grain of about 4%;
   - no vignette, glow or bloom.
-- **Light:** real available light only (golden hour, street lamps, doorway spill, car lights). No flash.
-- **Delivery:** JPG, sRGB, 2400px on the long edge, or MP4 for the hero film. File names exactly as listed.
+- **Light:** available light only (blue hour, street lamps, doorway spill, car lights). No flash.
+- **Delivery:**
+  - JPGs in sRGB, 2400px on the long edge;
+  - MP4 (H.264) at 1920px wide, 8–12 seconds, no audio;
+  - the cut-out as a PNG with a transparent background, 2880px wide.
 
-## The shots
+## Hero: depth-layered type
 
-| # | File | Where it's used | Aspect | Time | The shot |
-|---|---|---|---|---|---|
-| 01 | `hero.mp4` + `hero.jpg` (poster frame) | Hero (A: right 7 columns, full height; B: full-bleed) | 3:2 landscape; subject in the right third, left and lower-left kept quiet | 20:30 | Eixample chamfer corner, the last low sun on the façades. Three or four people crossing away from camera, mid-stride, long shadows. Locked-off, 8–12s loop, no cuts. |
-| 03 | `night.jpg` | Three ways: **Night**, the large tile | 4:5 vertical | 22:30 | El Born, a narrow lit street. A group of four leaving a restaurant door, seen from behind at 10–15m, one mid-step. Warm spill from the doorway on cool stone. |
-| 03b | `night-later.jpg` | Night, crossfade (hover/tap) | 4:5 | 00:30 | Same street, same tripod position: nearly empty, two figures far down it. |
-| 04 | `day.jpg` | Three ways: **Day** | 16:10 | 17:00 | A Gràcia plaça in low sun. Two or three people crossing away from camera, one pointing ahead. |
-| 04b | `day-later.jpg` | Day, crossfade | 16:10 | 19:30 | Same plaça, same position, the street lamps just on. |
-| 05 | `weekend.jpg` | Three ways: **Weekend** | 16:10 | 20:15 | Passeig Marítim sea wall. A small group walking along it from behind, the sea on one side, the sky still warm. **No towers in frame.** |
-| 05b | `weekend-later.jpg` | Weekend, crossfade | 16:10 | 22:00 | Same wall, dark sea, the promenade lights on. |
-| 06 | `story-2030.jpg` | Story · 20:30 (left half of the screen, full height) | 2:3 vertical | 20:30 | Hotel entrance from the pavement at dusk. A glass door, a warm lobby, a figure in a coat stepping in, seen from behind. |
-| 07 | `story-2215.jpg` | Story · 22:15 | 2:3 | 22:15 | A restaurant door held open from inside, two guests leaving into the street with their backs to camera, warm light spilling onto the pavement. |
-| 08 | `story-0040.jpg` | Story · 00:40 | 2:3 | 00:40 | A narrow Barri Gòtic lane with a wall lamp, three figures walking away, slight motion blur. |
-| 09 | `story-0210.jpg` | Story · 02:10 | 2:3 | 02:10 | A taxi at the kerb from the rear three-quarter, one person holding the door for another. Tail lights; no plates or readable signs. |
-| 10 | `story-0230.jpg` | Story · 02:30 | 2:3 | 02:30 | An Eixample portal with the heavy wooden door ajar and the hallway light on, one figure stepping in from behind. |
-| — | `founder.jpg` | *Not used yet.* The founder section is text-only until Ana supplies her own candid photo. | 4:5 | — | Ana's own photo, candid, not posed. Needs the brand-book sign-off (CONFLICTS F16). |
+| # | File | Aspect | The shot | Magnific search |
+|---|---|---|---|---|
+| 01 | `hero.mp4` + `hero.jpg` (still fallback) | 16:9, subject in the lower-middle | **A small group seen from behind, walking up a narrow lit street in the Gòtic at blue hour.** Wall lamps just on, the sky still deep blue, the upper third of the frame kept clear for BARCELONA. Locked-off, 8–12s loop, no cuts. | `barcelona gothic quarter narrow street blue hour people walking away`, `gothic quarter night street group back view video` |
+| 01b–01e | `hero-2.jpg` … `hero-5.jpg` (or `.mp4`) | 16:9 | Optional clips 2–5 for the 01–05 index. **01b** Plaça de Sant Felip Neri, two figures crossing. **01c** Passeig del Born as the lamps come on, a couple walking away. **01d** Carrer de Montcada, a group turning the corner. **01e** Plaça del Rei, stone steps, figures at a distance. | `placa sant felip neri night`, `passeig del born evening people`, `carrer montcada night`, `placa del rei barcelona blue hour` |
+| 02 | `hero-fg.png` | 16:9, transparent PNG, **aligned to shot 01** | **The cut-out foreground layer.** Cut from shot 01 itself, or shot from the same tripod position: the rooftop edge and a spire, or the group's silhouettes, with everything above them transparent. It must rise into the lower third of the word BARCELONA (upper 15–35% of the frame) so it overlaps the letters. | Cut it in Photoshop from shot 01. Or `barcelona cathedral spire silhouette`, `gothic quarter rooftops dusk` for a separate plate. |
 
-**Crop safety:** each story shot fills half the viewport at full height. On a 1440×900 screen that's about 720×830, so keep the subject in the middle 60% of the width. The Night tile is cropped to about 4:5 on desktop and 3:4 on mobile.
+## Strips: Dinner · The next place · The walk home · Home
 
-## Where to look (Magnific, formerly Freepik: Photos and Videos, with "exclude AI-generated" turned on)
+Full-width bands about 22% of the screen high, so every shot must work as a very wide crop (roughly 6:1) with the subject centred vertically.
 
-`barcelona eixample street golden hour people walking`, `el born street night people leaving restaurant back view`, `gracia square evening people walking`, `passeig maritim evening people walking`, `hotel entrance night person entering`, `barri gotic narrow street night people walking away`, `taxi door night city back view`, `barcelona doorway night light`.
+| # | File | The shot | Magnific search |
+|---|---|---|---|
+| 03 | `strip-dinner.jpg` | A restaurant window from the street at night: a table of four seen through the glass, from behind. Hands, glasses, warm light. | `restaurant window night people from behind`, `dinner through window street view night` |
+| 04 | `strip-next.jpg` | A group walking between bars on a lit street, backs to camera, slight motion blur. | `friends walking night street back view barcelona`, `people walking between bars night` |
+| 05 | `strip-walk.jpg` | Three figures walking away under the street lamps of a quiet Eixample pavement. | `eixample street night people walking away`, `street lamps pavement night figures` |
+| 06 | `strip-home.jpg` | A hand on a heavy portal door, the hallway light on inside. | `hand opening door night warm light`, `barcelona portal door night` |
 
-Commissioning a single evening's shoot, from 20:00 to 03:00 along this route, would give all twelve frames with one light and one grade. That consistency is what the page depends on.
+## Three ways: two shots each, same place, earlier and later (same tripod position)
+
+| # | File | Aspect | The shot | Magnific search |
+|---|---|---|---|---|
+| 12 | `day.jpg` | 4:5 | A Gràcia plaça at 17:00, low sun: two or three people crossing away from camera. | `gracia square barcelona afternoon people walking` |
+| 13 | `day-later.jpg` | 4:5 | The same plaça from the same spot at 19:30, the lamps just on. | `gracia square evening lamps` |
+| 14 | `night.jpg` | 4:5 | El Born at 22:30: four people leaving a restaurant door into a narrow lit street, seen from behind. | `el born street night people leaving restaurant back view` |
+| 15 | `night-later.jpg` | 4:5 | The same street at 00:30: nearly empty, two figures far down it. | `el born empty street night two people distance` |
+| 16 | `weekend.jpg` | 4:5 | Passeig Marítim sea wall at 20:15: a small group walking along it, seen from behind. **No towers in frame.** | `passeig maritim evening people walking sea wall` |
+| 17 | `weekend-later.jpg` | 4:5 | The same wall at 22:00: dark sea, the promenade lights on. | `barcelona promenade night lights sea` |
+
+## One evening, handled (the image fills the left half of the screen at full height)
+
+| # | File | Aspect | The shot | Magnific search |
+|---|---|---|---|---|
+| 07 | `story-2030.jpg` | 2:3 vertical | **The hotel lobby:** the glass entrance from the pavement at dusk, a figure in a coat stepping in, seen from behind. | `hotel lobby entrance night person entering back view` |
+| 08 | `story-2215.jpg` | 2:3 | **A restaurant at night:** the door held open from inside, two guests leaving, backs to camera, warm light spilling onto the pavement. | `restaurant door night people leaving warm light` |
+| 09 | `story-0040.jpg` | 2:3 | **A lit street:** a narrow Barri Gòtic lane, a wall lamp, three figures walking away. | `barri gotic lane night lamp people walking away` |
+| 10 | `story-0210.jpg` | 2:3 | **Taxi lights:** a taxi at the kerb from the rear three-quarter, one person holding the door for another. Tail lights; no plates. | `taxi night door open person getting in back view` |
+| 11 | `story-0230.jpg` | 2:3 | **A doorway:** an Eixample portal with the wooden door ajar, the hallway light on, one figure stepping in. | `apartment doorway night warm light person entering` |
+
+## Who a Kóda is: frame within a frame
+
+| # | File | Aspect | The shot | Magnific search |
+|---|---|---|---|---|
+| 18 | `who-night.jpg` | 16:9, full-bleed | The background: a wide Gòtic street at night, wall lamps, stone, nobody close to camera. The right third sits behind the window, so keep it calm. | `gothic quarter street night wide empty lamps` |
+| 19 | `who-doorway.jpg` | 2:3 vertical | Seen through the window (an arch in enhanced mode): **a figure seen from behind, standing in a lit doorway.** Keep the figure in the middle 50% of the width so the arch crop holds it. | `person standing in doorway back view night light` |
+
+## Not needed yet
+
+- `founder.jpg`: the founder section stays text-only until Ana supplies her own candid photo (CONFLICTS F16).
+
+**Tip:** a single commissioned evening along one route (Gòtic → El Born → Eixample, 20:00–03:00) gives every frame the same light and grade. That is what makes the page read as one shoot.

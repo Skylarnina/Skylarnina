@@ -147,3 +147,24 @@ Studied from the user's full-page captures: Wispr Flow (9-page PDF), Ooshot, Squ
 3. **One idea per section, with generous space.** Squarespace and Ooshot. The brand book agrees: "when a screen feels empty, that is the brand working."
 4. **Motion that explains rather than decorates.** Wispr's sticky story shows a sequence. Our evening story is the only place motion carries meaning; everywhere else it stays quiet.
 5. **Warmth comes from light and voice, not colour.** Otter is warm in its words and its photos, not in its palette. Kóda stays in its six colours and gets its warmth from the photography and the copy.
+
+---
+
+## Pinterest pins (`design-references/`, round 3)
+
+We studied all 12 pins before rebuilding, and took one concrete move from each. Nothing below overrides the brand book.
+
+| Pin (file) | Move taken | Where it lives | Not taken |
+|---|---|---|---|
+| ADVENTURE (`507072b5…`) | A huge word behind the landscape, with the ridge overlapping the letters | Hero: BARCELONA behind the rooftop/spire cut-out | Lime accent, "Reason for choosing us" icon row, rounded cards |
+| JAPAN (`64dd18ab…`) | Huge word behind the mountains, a figure from behind, an itinerary with photos along a thin line | Hero depth type; the story's single-journey structure | "What's included" icon boxes, the form panel |
+| NÔR (`92d6f77c…`) | Very widely tracked serif letters with the subject standing inside the word; tiny labels ("01 — FORM") | BARCELONA tracked 0.2em; the 01 / 02 section labels | — |
+| Visit Tokyo (`f5049d57…`) | A vertical 01–05 index on the right edge, active item marked by a short line | Hero scene index; story index | Heavy sans headline |
+| EAT / HIKE / CAMP / RELAX / REPEAT (`4e61e93e…`) | Full-width stacked photo bands, one spaced-caps word centred on each | The strips: DINNER · THE NEXT PLACE · THE WALK HOME · HOME | — |
+| Choose a Destination (`80a4eac6…`) | Depth carousel: large centre card, neighbours peeking at the sides | Three ways | Star ratings, bottom icon nav, glass |
+| Nexetrip (`ce9fa965…`) | Centre card with side peeks, arrows and dots, person from behind | Three ways: Previous/Next and 02 / 03 counter | Lime, rounded card chrome, arrow glyphs |
+| Fillory (`47642dd9…`) | The active card framed with a thin line | 0.5px stone frame around the active tile | Tilted 3D neighbours, crests |
+| Travel Hub (`10fd2117…`) | Arch windows over a full-bleed photo, figure seen from behind | "Who a Kóda is" arch window (enhanced) | "25% OFF" badge, bold sans, BOOK NOW |
+| Country Harmony (`a29587d3…`) | Thin outline shapes framing a photo on a dark ground; numbered list | The window's 0.5px stone frame, offset 14px | Circles |
+| Booked (`0cfc662a…`) | A second photo in a window over the same world | Frame within a frame | Glass, 3D spheres |
+| One Last Flight (`c0e1501b…`) | Stacked cinematic banners | Rhythm of the strips | Fantasy teal, mixed outline/solid display type |
