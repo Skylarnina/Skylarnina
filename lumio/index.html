@@ -5,23 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lumio — The operating system for modern brand work</title>
 <meta name="description" content="Lumio turns brand knowledge, strategy, and signals into structured intelligence that powers every team, tool, and agent.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='16' fill='%23F7F6F2' stroke='%23181818' stroke-width='1.5'/%3E%3Cpath d='M14.3 10.9V23.1H21.8' fill='none' stroke='%23181818' stroke-width='1.9'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='16' fill='%23FAF9F5' stroke='%23181818' stroke-width='1.5'/%3E%3Cpath d='M14.3 10.9V23.1H21.8' fill='none' stroke='%23181818' stroke-width='1.9'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --page-bg: #F5F3EF;
-    --panel-bg: #EFEEE9;
-    --soft-card: #E8E7E2;
-    --text: #191919;
-    --muted: #8B877F;
-    --muted-light: #BCB8AF;
-    --line: #D6D3CB;
-    --black: #171717;
-    --white-soft: #FAF9F6;
-    --rail: #C9C5BC;
-    --hairline: #ECEAE4;
+    --page-bg: #FAF9F5;
+    --panel-bg: #F0EFEB;
+    --soft-card: #E9E8E4;
+    --soft-card-2: #F4F3EF;
+    --black: #181818;
+    --deep-black: #151515;
+    --text: #1B1B1B;
+    --muted: #8C8880;
+    --muted-light: #BDBAB2;
+    --line: #D9D7D0;
+    --white-card: #FFFDF8;
+    --rail: var(--muted-light);
+    --hairline: #EFEDE7;
 
     --canvas: 1728px;
     --gutter: 118px;
@@ -54,17 +56,17 @@
   /* ------------------------------------------------------------ Buttons */
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
-    height: 36px; padding: 0 18px; border-radius: 6px; white-space: nowrap;
-    font-size: 14px; font-weight: 500; letter-spacing: -0.01em;
+    width: 148px; height: 48px; border-radius: 7px; white-space: nowrap;
+    font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
     transition: background-color .3s var(--ease), color .3s var(--ease), opacity .3s var(--ease), border-color .3s var(--ease);
   }
   .btn--dark { background: var(--black); color: var(--page-bg); }
-  .btn--dark:hover { background: #2A2926; }
+  .btn--dark:hover { background: #2C2B28; }
   .btn--light { background: var(--page-bg); color: var(--black); }
-  .btn--light:hover { background: #E6E3DC; }
+  .btn--light:hover { background: #ECEAE4; }
   .btn--ghost { background: transparent; color: var(--page-bg); border: 1px solid var(--page-bg); }
   .btn--ghost:hover { background: var(--page-bg); color: var(--black); }
-  .btn--sm { padding: 0 16px; }
+  .btn--sm { width: 136px; height: 50px; }
 
   .link-u {
     display: inline-block; font-size: 21px; color: var(--muted);
@@ -76,96 +78,89 @@
   /* ------------------------------------------------------------ Navigation */
   .nav {
     position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-    width: 1130px; height: 60px; z-index: 100;
+    width: 1130px; height: 72px; z-index: 100;
     display: flex; align-items: center;
-    padding: 0 13px 0 20px;
+    padding: 0 12px 0 24px;
     background: var(--black); color: var(--page-bg);
     border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .06);
     transition: background-color .35s var(--ease), color .35s var(--ease), opacity .25s var(--ease);
   }
   .nav__logo { display: flex; margin-right: 48px; }
   .nav__badge {
-    width: 34px; height: 34px; border-radius: 50%;
+    width: 38px; height: 38px; border-radius: 50%;
     background: var(--page-bg);
     display: grid; place-items: center;
     transition: background-color .35s var(--ease);
   }
-  .nav__badge .mark { width: 27px; height: 27px; }
+  .nav__badge .mark { width: 34px; height: 34px; }
   .nav__links { display: flex; gap: 42px; }
-  .nav__links a, .nav__login { font-size: 15px; font-weight: 400; opacity: 1; transition: opacity .2s; }
+  .nav__links a, .nav__login { font-size: 16px; font-weight: 400; opacity: 1; transition: opacity .2s; }
   .nav__links a:hover, .nav__login:hover { opacity: .62; }
   .nav__login { margin-left: auto; margin-right: 34px; }
 
   .nav--light { background: var(--page-bg); color: var(--black); }
   .nav--light .btn--light { background: var(--black); color: var(--page-bg); }
-  .nav--light .btn--light:hover { background: #2A2926; }
+  .nav--light .btn--light:hover { background: #2C2B28; }
   .nav.is-hidden { opacity: 0; pointer-events: none; }
-  .nav .btn { height: 34px; padding: 0 16px; }
 
   /* ------------------------------------------------------------ 1 · Hero */
-  .hero { height: 1320px; text-align: center; }
-  .hero__inner { width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+  .hero { height: 1080px; text-align: center; overflow: hidden; }
   .hero h1 {
-    margin-top: 250px; width: 950px;
+    position: absolute; left: 389px; top: 250px; width: 950px;
     font-size: 82px; line-height: .98; font-weight: 650; letter-spacing: -0.055em;
     color: var(--text);
   }
   .hero p {
-    margin-top: 34px; width: 670px;
+    position: absolute; left: 529px; top: 430px; width: 670px;
     font-size: 21px; line-height: 1.35; font-weight: 400; color: var(--muted); letter-spacing: -0.01em;
   }
-  .hero .btn { margin-top: 38px; }
+  .hero .btn { position: absolute; left: 790px; top: 520px; }
   .hero__card {
     position: absolute; left: 118px; top: 720px; width: 1492px; height: 520px;
-    border-radius: 82px 82px 22px 22px; overflow: hidden; background: var(--soft-card);
+    border-radius: 82px 82px 0 0; overflow: hidden; background: var(--soft-card);
   }
   .hero__card img { width: 100%; height: 100%; object-fit: cover; }
 
   /* ------------------------------------------------------------ 2 · Trust strip */
-  .trust { height: 330px; }
-  .trust__label { left: 118px; top: 0; font-size: 15px; letter-spacing: .04em; color: var(--muted); }
-  .marquee {
-    left: 0; right: 0; top: 68px; height: 42px; overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
-            mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
-  }
-  .marquee__track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
-  .marquee:hover .marquee__track { animation-play-state: paused; }
-  .marquee__group { display: flex; align-items: center; gap: 120px; padding-right: 120px; }
-  .trust__logo { height: 38px; display: flex; align-items: center; color: #6B675F; flex: none; }
+  .trust { height: 520px; }
+  .trust__label { left: 118px; top: 160px; font-size: 15px; letter-spacing: .04em; color: var(--muted); }
+  .trust__logo { top: 275px; height: 42px; display: flex; align-items: center; color: var(--muted-light); opacity: .72; }
   .trust__logo svg { height: 100%; width: auto; display: block; }
-  @keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
 
-  /* ------------------------------------------------------------ 3 · Collage */
-  .collage { height: 1200px; overflow: hidden; }
-  .tile { position: absolute; overflow: hidden; border-radius: 12px; background: var(--soft-card); will-change: transform; }
-  .tile img { width: 100%; height: 100%; object-fit: cover; }
-  .collage__mark { left: 749px; top: 295px; width: 230px; height: 230px; z-index: 3; }
-  .collage__mark .mark { width: 230px; height: 230px; --ring: 4px; --stem: 5.5px; }
+  /* ------------------------------------------------------------ 3 · Images / floating brand artifacts */
+  .images { height: 1200px; overflow: hidden; }
+  .artifact {
+    position: absolute; overflow: hidden; border-radius: 12px; background: var(--soft-card);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .04);
+  }
+  .artifact > img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.86) contrast(.97); }
+  .images__mark { left: 749px; top: 315px; width: 230px; height: 230px; z-index: 3; }
+  .images__mark .mark { width: 230px; height: 230px; --ring: 4px; --stem: 5.5px; }
 
-  .chip {
+  .tag {
     position: absolute; display: flex; align-items: center; gap: 10px;
-    background: var(--white-soft); color: var(--text);
+    background: var(--white-card); color: var(--text);
     font-size: 14px; letter-spacing: -0.005em; white-space: nowrap;
   }
-  .chip__dot { width: 8px; height: 8px; border-radius: 50%; background: #5C7A55; flex: none; }
-  .chip--guide { left: 16px; bottom: 16px; width: 170px; height: 38px; border-radius: 7px; padding: 0 14px; }
-  .chip--voice { left: 16px; top: 16px; height: 40px; border-radius: 8px; padding: 0 14px 0 8px; }
-  .chip__num {
-    width: 24px; height: 24px; border-radius: 50%; background: var(--black); color: var(--page-bg);
-    font-size: 12px; font-weight: 500; display: grid; place-items: center;
+  .tag__dot { width: 8px; height: 8px; border-radius: 50%; background: #6C8A68; flex: none; }
+  .tag--guide { left: 74px; top: 82px; width: 172px; height: 38px; border-radius: 7px; padding: 0 14px; }
+  .tag--voice { left: 18px; top: 18px; width: 190px; height: 52px; border-radius: 10px; padding: 0 16px 0 12px; font-size: 15px; }
+  .tag__num {
+    width: 26px; height: 26px; border-radius: 50%; background: var(--black); color: var(--page-bg);
+    font-size: 12px; font-weight: 500; display: grid; place-items: center; flex: none;
   }
 
   .comment {
     position: absolute; left: 585px; top: 800px; width: 305px; height: 62px; z-index: 2;
-    display: flex; align-items: center; gap: 12px; padding: 0 16px 0 12px;
-    background: var(--panel-bg); border-radius: 10px; font-size: 14px; will-change: transform;
+    display: flex; align-items: center; gap: 12px; padding: 0 16px 0 14px;
+    background: var(--panel-bg); border-radius: 10px; color: var(--text);
   }
-  .comment__avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; overflow: hidden; background: #CDBFAE; }
+  .comment__avatar { width: 34px; height: 34px; border-radius: 50%; flex: none; overflow: hidden; background: #CDBFAE; }
   .comment__avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .comment__user { font-weight: 500; color: var(--text); }
-  .comment__text { color: var(--muted); margin-left: 6px; }
-  .comment__time { margin-left: auto; font-size: 13px; color: var(--muted-light); }
+  .comment__user { font-size: 13px; font-weight: 500; }
+  .comment__text { font-size: 15px; margin-left: 6px; letter-spacing: -0.01em; }
+  .comment__time { margin-left: auto; font-size: 13px; color: var(--muted); }
 
   /* ------------------------------------------------------------ 4 · Manifesto */
   .manifesto { height: 780px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -216,42 +211,42 @@
   .os__btn { left: 118px; top: 208px; }
   .mock {
     position: absolute; overflow: hidden; border-radius: 9px;
-    background: linear-gradient(180deg, #EFEEE9 0%, #ECEBE6 60%, #E8E7E2 100%);
+    background: linear-gradient(180deg, #ECEBE7 0%, var(--soft-card) 100%);
   }
   .os__mock { left: 118px; top: 300px; width: 730px; height: 600px; }
   .os__meta {
-    position: absolute; left: 115px; top: 56px; width: 500px;
+    position: absolute; left: 115px; top: 112px; width: 500px;
     display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); letter-spacing: .02em;
   }
   .files {
-    position: absolute; left: 115px; top: 96px; width: 500px;
+    position: absolute; left: 115px; top: 150px; width: 500px;
     display: flex; flex-direction: column; gap: 8px;
     -webkit-mask-image: linear-gradient(180deg, #000 30%, rgba(0,0,0,.08) 100%);
             mask-image: linear-gradient(180deg, #000 30%, rgba(0,0,0,.08) 100%);
   }
   .file {
-    height: 54px; border-radius: 5px; background: var(--white-soft);
-    display: flex; align-items: center; gap: 14px; padding: 0 16px 0 12px;
+    height: 54px; border-radius: 5px; background: var(--white-card); overflow: hidden;
+    display: flex; align-items: center; gap: 16px; padding: 0 16px 0 0;
     font-size: 15px; color: var(--text); letter-spacing: -0.01em;
   }
   .file__thumb {
-    width: 30px; height: 30px; border-radius: 4px; background: var(--soft-card); flex: none;
-    display: grid; align-content: center; gap: 3px; padding: 0 7px;
+    width: 54px; height: 54px; background: var(--soft-card-2); flex: none;
+    display: grid; align-content: center; gap: 4px; padding: 0 15px;
   }
   .file__thumb i { display: block; height: 2px; border-radius: 1px; background: var(--muted-light); }
   .file__thumb i:nth-child(2) { width: 70%; }
-  .file__thumb--dark { background: var(--black); }
+  .file__thumb--dark { background: var(--deep-black); }
   .file__thumb--dark i { background: #55534F; }
   .file__name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .file__size { font-size: 13px; color: var(--muted-light); }
   .file__more { color: var(--muted-light); width: 18px; }
   .upload {
-    position: absolute; left: 50%; top: 452px; transform: translateX(-50%);
+    position: absolute; left: 50%; top: 486px; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 12px;
     font-size: 14px; color: var(--muted);
   }
   .upload__btn {
-    width: 56px; height: 56px; border-radius: 50%; background: var(--white-soft);
+    width: 56px; height: 56px; border-radius: 50%; background: var(--white-card);
     display: grid; place-items: center; color: var(--text);
     transition: transform .3s var(--ease);
   }
@@ -275,27 +270,28 @@
   .pane { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility 0s .45s; }
   .pane.is-active { opacity: 1; visibility: visible; transition: opacity .45s var(--ease), visibility 0s; }
 
-  .ask__hello { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 22px; letter-spacing: -0.03em; color: var(--muted); }
   .ask {
-    position: absolute; left: 100px; top: 206px; width: 520px;
-    background: var(--white-soft); border-radius: 8px; padding: 18px 16px 14px 20px;
+    position: absolute; left: 100px; top: 196px; width: 520px; height: 68px;
+    background: var(--white-card); border-radius: 8px; padding: 10px 12px 0 18px;
   }
-  .ask__text { font-size: 16px; color: var(--text); letter-spacing: -0.01em; }
-  .ask__row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .ask__text { font-size: 15px; line-height: 20px; color: var(--text); letter-spacing: -0.01em; }
+  .ask__row { display: flex; align-items: center; margin-top: 6px; }
   .ask__tag {
-    display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px;
-    border-radius: 6px; background: var(--panel-bg); font-size: 13px; color: var(--text);
+    display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px;
+    border-radius: 5px; background: var(--panel-bg); font-size: 12px; color: var(--text);
   }
-  .ask__icon { color: var(--muted); display: grid; place-items: center; }
   .ask__go {
-    margin-left: auto; width: 32px; height: 32px; border-radius: 50%;
+    position: absolute; right: 12px; bottom: 12px; width: 24px; height: 24px; border-radius: 50%;
     background: var(--black); color: var(--page-bg); display: grid; place-items: center;
   }
   .canvas-frames { position: absolute; left: 90px; top: 90px; width: 540px; height: 290px; }
-  .frame { position: absolute; border-radius: 6px; overflow: hidden; background: var(--white-soft); }
-  .frame img { width: 100%; height: 100%; object-fit: cover; }
+  .frame { position: absolute; border-radius: 6px; overflow: hidden; background: var(--white-card); padding: 14px; }
+  .frame b { display: block; font-size: 13px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; }
+  .frame i { display: block; height: 4px; border-radius: 2px; background: var(--soft-card); margin-top: 8px; }
+  .frame--dark { background: var(--deep-black); color: var(--page-bg); }
+  .frame--dark i { background: #34332F; }
   .frame__label { position: absolute; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
-  .projects { position: absolute; left: 150px; top: 110px; width: 420px; background: var(--white-soft); border-radius: 8px; padding: 8px 0; }
+  .projects { position: absolute; left: 150px; top: 110px; width: 420px; background: var(--white-card); border-radius: 8px; padding: 8px 0; }
   .project { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 18px; font-size: 15px; letter-spacing: -0.01em; }
   .project + .project { border-top: 1px solid var(--hairline); }
   .project__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--black); }
@@ -310,8 +306,8 @@
   }
   .pills { left: 0; right: 0; top: 230px; display: flex; justify-content: center; gap: 10px; }
   .pill {
-    height: 40px; padding: 0 22px; border-radius: 20px;
-    border: 1px solid var(--line); color: var(--text); font-size: 15px;
+    height: 46px; padding: 0 28px; border-radius: 23px;
+    border: 1px solid var(--line); color: var(--text); font-size: 16px;
     transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
   }
   .pill:hover { border-color: var(--muted-light); }
@@ -322,14 +318,14 @@
   .tcard h3 { margin-top: 28px; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
   .tcard p { margin-top: 18px; font-size: 19px; line-height: 1.38; color: var(--muted); letter-spacing: -0.015em; }
 
-  .ui-card { position: absolute; background: var(--white-soft); border-radius: 8px; }
+  .ui-card { position: absolute; background: var(--white-card); border-radius: 8px; }
   .fw { left: 40px; top: 70px; width: 255px; padding: 18px 18px 8px; }
   .fw__head { font-size: 12px; color: var(--muted); letter-spacing: .03em; margin-bottom: 10px; }
   .fw__row { display: flex; align-items: center; gap: 12px; height: 40px; font-size: 13px; color: var(--text); border-top: 1px solid var(--hairline); }
   .fw__row span:first-child { color: var(--muted-light); font-variant-numeric: tabular-nums; width: 18px; }
   .fw__row em { margin-left: auto; font-style: normal; width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
   .fw__row.is-on em { background: var(--black); }
-  .fw__foot { position: absolute; left: 40px; top: 346px; width: 255px; height: 38px; border-radius: 8px; background: var(--white-soft); display: flex; align-items: center; padding: 0 14px; gap: 8px; font-size: 12px; color: var(--muted); }
+  .fw__foot { position: absolute; left: 40px; top: 346px; width: 255px; height: 38px; border-radius: 8px; background: var(--white-card); display: flex; align-items: center; padding: 0 14px; gap: 8px; font-size: 12px; color: var(--muted); }
 
   .doc { left: 44px; top: 56px; width: 248px; height: 420px; padding: 24px 22px; border-radius: 6px; }
   .doc h4 { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; }
@@ -338,7 +334,7 @@
   .doc__note { position: absolute; left: 150px; top: 292px; width: 150px; background: var(--black); color: var(--page-bg); font-size: 11px; line-height: 1.4; padding: 9px 11px; border-radius: 6px; }
 
   .deck { left: 34px; top: 96px; width: 267px; padding: 12px 12px 16px; }
-  .deck__slide { height: 150px; border-radius: 5px; background: var(--black); position: relative; overflow: hidden; }
+  .deck__slide { height: 150px; border-radius: 5px; background: var(--deep-black); position: relative; overflow: hidden; }
   .deck__slide .mark { position: absolute; left: 14px; top: 14px; width: 18px; height: 18px; --ring: 1px; --stem: 1.2px; }
   .deck__slide b { position: absolute; left: 14px; bottom: 30px; font-size: 16px; font-weight: 500; letter-spacing: -0.03em; color: var(--page-bg); line-height: 1.1; }
   .deck__slide small { position: absolute; left: 14px; bottom: 14px; font-size: 8px; letter-spacing: .1em; color: #77746E; }
@@ -349,8 +345,7 @@
   .deck__thumbs span { flex: 1; height: 34px; border-radius: 3px; background: var(--soft-card); }
   .deck__thumbs span:first-child { background: var(--black); }
 
-  .soft-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; filter: blur(3px) saturate(.8); transform: scale(1.05); }
-  .summary { left: 36px; top: 150px; width: 263px; padding: 18px; }
+    .summary { left: 36px; top: 150px; width: 263px; padding: 18px; box-shadow: 0 16px 34px rgba(0, 0, 0, .05); }
   .summary__tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .summary h4 { margin-top: 10px; font-size: 16px; font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
   .summary p { margin-top: 10px; font-size: 12px; line-height: 1.5; color: var(--muted); }
@@ -392,13 +387,13 @@
   .del__row i { width: 26px; height: 26px; border-radius: 4px; background: var(--soft-card); flex: none; }
   .del__row.is-hover { background: var(--panel-bg); }
   .del__row span:last-child { margin-left: auto; color: var(--muted-light); }
-  .pop { left: 250px; top: 196px; width: 150px; padding: 6px; border-radius: 8px; background: var(--white-soft); box-shadow: 0 1px 0 rgba(24,24,24,.04), 0 10px 30px rgba(24,24,24,.06); }
+  .pop { left: 250px; top: 196px; width: 150px; padding: 6px; border-radius: 8px; background: var(--white-card); box-shadow: 0 1px 0 rgba(24,24,24,.04), 0 10px 30px rgba(24,24,24,.06); }
   .pop div { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border-radius: 5px; font-size: 13px; color: var(--text); }
   .pop div.is-on { background: var(--panel-bg); }
   .pop div svg { color: var(--muted); }
   .cursor { position: absolute; left: 330px; top: 300px; }
-  .post__overlay { position: absolute; left: 32px; bottom: 30px; color: #FBF8F3; }
-  .post__overlay .mark { width: 26px; height: 26px; color: #FBF8F3; --ring: 1.2px; --stem: 1.5px; margin-bottom: 16px; }
+  .post__overlay { position: absolute; left: 32px; bottom: 30px; color: var(--white-card); }
+  .post__overlay .mark { width: 26px; height: 26px; color: var(--white-card); --ring: 1.2px; --stem: 1.5px; margin-bottom: 16px; }
   .post__overlay b { display: block; font-size: 34px; line-height: 1.02; font-weight: 500; letter-spacing: -0.045em; }
 
   /* ------------------------------------------------------------ 10 · Demo CTA */
@@ -407,16 +402,16 @@
   .demo__icon .mark { width: 72px; height: 72px; --ring: 2px; --stem: 2.6px; }
   .demo h2 { left: 439px; top: 390px; width: 850px; font-size: 61px; line-height: 1.04; font-weight: 450; letter-spacing: -0.055em; }
   .demo p { left: 514px; top: 530px; width: 700px; font-size: 20px; line-height: 1.4; color: var(--muted); letter-spacing: -0.01em; }
-  .demo .btn { left: 0; right: 0; margin-inline: auto; width: fit-content; top: 610px; }
+  .demo .btn { left: 790px; top: 610px; }
 
   /* ------------------------------------------------------------ 11 · Footer */
   .footer { background: var(--black); color: var(--page-bg); }
-  .footer .canvas { height: 860px; }
-  .footer .nav { position: absolute; }
+  .footer .canvas { height: 820px; }
+  .footer .nav { position: absolute; box-shadow: none; }
   .footer__mark { left: 779px; top: 190px; width: 170px; height: 170px; }
   .footer__mark .mark { width: 170px; height: 170px; --ring: 3px; --stem: 4px; }
   .footer__slogan { left: 0; right: 0; top: 410px; text-align: center; font-size: 30px; font-weight: 400; letter-spacing: -0.035em; }
-  .footer__btn { left: 0; right: 0; margin-inline: auto; width: fit-content; top: 470px; }
+  .footer__btn { left: 790px; top: 470px; }
   .footer__cols { left: 118px; right: 118px; top: 620px; display: grid; grid-template-columns: repeat(6, 1fr) 1.25fr; gap: 24px; }
   .footer__cols h4 { font-size: 16px; font-weight: 500; color: var(--page-bg); line-height: 1.9; }
   .footer__cols a { display: block; font-size: 16px; line-height: 1.9; color: var(--page-bg); transition: opacity .2s; }
@@ -434,7 +429,6 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition-duration: 0s !important; }
-    .marquee__track { animation: none; }
   }
 </style>
 <script>document.documentElement.classList.add('js');</script>
@@ -471,11 +465,9 @@
 <!-- 1 · Hero -->
 <section class="section hero" id="top">
   <div class="canvas" style="height:100%">
-    <div class="hero__inner">
-      <h1>The operating system for<br>modern Lumio work</h1>
-      <p>Turn lorem ipsum, strategy, and signals into structured intelligence that powers every team, tool, and agent.</p>
-      <a class="btn btn--dark" href="#demo">Book a demo</a>
-    </div>
+    <h1>The operating system for<br>modern Lumio work</h1>
+    <p>Turn lorem ipsum, strategy, and signals into structured intelligence that powers every team, tool, and agent.</p>
+    <a class="btn btn--dark" href="#demo">Book a demo</a>
     <div class="hero__card">
       <img src="assets/hero-portrait.svg" alt="Editorial portrait in soft natural light">
     </div>
@@ -486,60 +478,43 @@
 <section class="section trust" aria-label="Customers">
   <div class="canvas" style="height:100%">
     <p class="abs trust__label">Built with lorem ipsum leaders from</p>
-    <div class="abs marquee">
-      <div class="marquee__track">
-        <div class="marquee__group">
-          <div class="trust__logo" role="img" aria-label="Lorem"><svg viewBox="0 0 150 42"><circle cx="21" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="21" cy="21" r="4.5" fill="currentColor"/><text x="46" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="-1" fill="currentColor">lorem</text></svg></div>
-          <div class="trust__logo" role="img" aria-label="Ipsum"><svg viewBox="0 0 150 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="7" fill="currentColor">IPSUM</text></svg></div>
-          <div class="trust__logo" role="img" aria-label="Dolor Studio"><svg viewBox="0 0 196 42"><rect x="2" y="9" width="18" height="18" fill="currentColor"/><rect x="12" y="15" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"/><text x="44" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="23" font-weight="500" letter-spacing="-0.6" fill="currentColor">Dolor Studio</text></svg></div>
-          <div class="trust__logo" role="img" aria-label="amet and co"><svg viewBox="0 0 136 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="-1.6" fill="currentColor">amet&amp;co.</text></svg></div>
-          <div class="trust__logo" role="img" aria-label="Consecta"><svg viewBox="0 0 186 42"><path d="M4 33 L17 9 L30 33 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><text x="42" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3.5" fill="currentColor">CONSECTA</text></svg></div>
-          <div class="trust__logo" role="img" aria-label="Tempor"><svg viewBox="0 0 150 42"><path d="M8 21a13 13 0 0 1 26 0z" fill="currentColor"/><path d="M8 25a13 13 0 0 0 26 0" fill="none" stroke="currentColor" stroke-width="2.6"/><text x="44" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="500" letter-spacing="-0.8" fill="currentColor">tempor</text></svg></div>
-          <div class="trust__logo" role="img" aria-label="Magna"><svg viewBox="0 0 150 42"><rect x="2" y="10" width="4" height="22" fill="currentColor"/><rect x="10" y="15" width="4" height="17" fill="currentColor"/><rect x="18" y="20" width="4" height="12" fill="currentColor"/><text x="34" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2" fill="currentColor">MAGNA</text></svg></div>
-        </div>
-        <div class="marquee__group" aria-hidden="true">
-          <div class="trust__logo"><svg viewBox="0 0 150 42"><circle cx="21" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="21" cy="21" r="4.5" fill="currentColor"/><text x="46" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="-1" fill="currentColor">lorem</text></svg></div>
-          <div class="trust__logo"><svg viewBox="0 0 150 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="7" fill="currentColor">IPSUM</text></svg></div>
-          <div class="trust__logo"><svg viewBox="0 0 196 42"><rect x="2" y="9" width="18" height="18" fill="currentColor"/><rect x="12" y="15" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"/><text x="44" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="23" font-weight="500" letter-spacing="-0.6" fill="currentColor">Dolor Studio</text></svg></div>
-          <div class="trust__logo"><svg viewBox="0 0 136 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="-1.6" fill="currentColor">amet&amp;co.</text></svg></div>
-          <div class="trust__logo"><svg viewBox="0 0 186 42"><path d="M4 33 L17 9 L30 33 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><text x="42" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3.5" fill="currentColor">CONSECTA</text></svg></div>
-          <div class="trust__logo"><svg viewBox="0 0 150 42"><path d="M8 21a13 13 0 0 1 26 0z" fill="currentColor"/><path d="M8 25a13 13 0 0 0 26 0" fill="none" stroke="currentColor" stroke-width="2.6"/><text x="44" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="500" letter-spacing="-0.8" fill="currentColor">tempor</text></svg></div>
-          <div class="trust__logo"><svg viewBox="0 0 150 42"><rect x="2" y="10" width="4" height="22" fill="currentColor"/><rect x="10" y="15" width="4" height="17" fill="currentColor"/><rect x="18" y="20" width="4" height="12" fill="currentColor"/><text x="34" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2" fill="currentColor">MAGNA</text></svg></div>
-        </div>
-      </div>
-    </div>
+    <div class="abs trust__logo" style="left:130px" role="img" aria-label="Lorem"><svg viewBox="0 0 150 42"><circle cx="21" cy="21" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="21" cy="21" r="4.5" fill="currentColor"/><text x="46" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="-1" fill="currentColor">lorem</text></svg></div>
+    <div class="abs trust__logo" style="left:380px" role="img" aria-label="Ipsum"><svg viewBox="0 0 150 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="7" fill="currentColor">IPSUM</text></svg></div>
+    <div class="abs trust__logo" style="left:680px" role="img" aria-label="Dolor Studio"><svg viewBox="0 0 196 42"><rect x="2" y="9" width="18" height="18" fill="currentColor"/><rect x="12" y="15" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"/><text x="44" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="23" font-weight="500" letter-spacing="-0.6" fill="currentColor">Dolor Studio</text></svg></div>
+    <div class="abs trust__logo" style="left:1040px" role="img" aria-label="amet and co"><svg viewBox="0 0 136 42"><text x="0" y="30" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="-1.6" fill="currentColor">amet&amp;co.</text></svg></div>
+    <div class="abs trust__logo" style="left:1380px" role="img" aria-label="Consecta"><svg viewBox="0 0 186 42"><path d="M4 33 L17 9 L30 33 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><text x="42" y="29" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3.5" fill="currentColor">CONSECTA</text></svg></div>
   </div>
 </section>
 
-<!-- 3 · Collage -->
-<section class="section collage" aria-label="Brand artifacts orbiting the Lumio identity">
+<!-- 3 · Images / floating brand artifacts -->
+<section class="section images" aria-label="Brand artifacts orbiting the Lumio identity">
   <div class="canvas" style="height:100%">
-    <div class="tile" data-speed="-0.05" style="left:130px; top:-20px; width:270px; height:210px"><img src="assets/vessel.svg" alt=""></div>
-    <div class="tile" data-speed="-0.07" style="left:1300px; top:-40px; width:290px; height:260px"><img src="assets/globe.svg" alt=""></div>
+    <figure class="artifact" style="left:130px; top:-20px; width:270px; height:210px"><img src="assets/vessel.svg" alt="Pale ceramic vessel in studio light"></figure>
+    <figure class="artifact" style="left:1300px; top:-42px; width:290px; height:260px"><img src="assets/globe.svg" alt="Grayscale stone globe"></figure>
 
-    <div class="tile" data-speed="0.04" style="left:135px; top:470px; width:330px; height:200px">
-      <img src="assets/leaves.svg" alt="">
-      <span class="chip chip--guide"><i class="chip__dot"></i>Content Guidelines</span>
-    </div>
+    <figure class="artifact" style="left:135px; top:470px; width:330px; height:200px">
+      <img src="assets/leaves.svg" alt="Dark green foliage">
+      <span class="tag tag--guide"><i class="tag__dot"></i>Content Guidelines</span>
+    </figure>
 
-    <div class="tile" data-speed="-0.04" style="left:1435px; top:250px; width:250px; height:330px; border-radius:10px"><img src="assets/audience.svg" alt=""></div>
+    <figure class="artifact" style="left:1435px; top:250px; width:250px; height:330px"><img src="assets/audience.svg" alt="Audience facing a campaign screen"></figure>
 
-    <div class="tile" data-speed="0.02" style="left:810px; top:560px; width:370px; height:250px; border-radius:10px"><img src="assets/poster.svg" alt=""></div>
+    <figure class="artifact" style="left:810px; top:560px; width:370px; height:250px"><img src="assets/poster.svg" alt="Black monochrome brand poster"></figure>
 
-    <div class="abs collage__mark"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
+    <div class="abs images__mark"><svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Lumio"><use href="#lumio-mark"/></svg></div>
 
-    <div class="comment" data-speed="0.06">
+    <div class="comment">
       <span class="comment__avatar"><img src="assets/warm-profile.svg" alt=""></span>
       <span><span class="comment__user">lorem_d</span><span class="comment__text">game changing!</span></span>
       <span class="comment__time">1h</span>
     </div>
 
-    <div class="tile" data-speed="0.08" style="left:40px; top:880px; width:340px; height:250px">
-      <img src="assets/event.svg" alt="">
-      <span class="chip chip--voice"><span class="chip__num">3</span>Brand Voice</span>
-    </div>
+    <figure class="artifact" style="left:40px; top:880px; width:340px; height:250px">
+      <img src="assets/event.svg" alt="Crowd at an evening culture event">
+      <span class="tag tag--voice"><span class="tag__num">7</span>Brand Voice</span>
+    </figure>
 
-    <div class="tile" data-speed="0.06" style="left:1250px; top:840px; width:410px; height:300px"><img src="assets/sky.svg" alt=""></div>
+    <figure class="artifact" style="left:1250px; top:840px; width:410px; height:300px"><img src="assets/sky.svg" alt="Figure leaping against a muted blue sky"></figure>
   </div>
 </section>
 
@@ -636,26 +611,23 @@
 
     <div class="mock studio__mock" id="studio-panes" aria-hidden="true">
       <div class="pane is-active">
-        <p class="ask__hello">What should we make today?</p>
         <div class="ask">
           <p class="ask__text">Analyze our lorem ipsum position and develop Q2 campaign</p>
           <div class="ask__row">
             <span class="ask__tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="1.5" width="8" height="9" rx="1.2"/><path d="M4 4.5h4M4 7h3"/></svg>LW26 Content Strategy</span>
-            <span class="ask__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M10.5 5.5 6 10a1.4 1.4 0 0 1-2-2l5-5a2.6 2.6 0 0 1 3.7 3.7l-5.2 5.2a3.8 3.8 0 0 1-5.4-5.4L6.5 2.1"/></svg></span>
-            <span class="ask__icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.8 1.8 10.2 0 12M8 2c-1.8 1.8-1.8 10.2 0 12"/></svg></span>
             <span class="ask__go"><svg width="14" height="14"><use href="#i-arrow"/></svg></span>
           </div>
         </div>
       </div>
       <div class="pane">
         <div class="canvas-frames">
-          <div class="frame" style="left:0; top:20px; width:170px; height:220px"><img src="assets/vessel.svg" alt=""></div>
           <span class="frame__label" style="left:0; top:0">Hero · 4:5</span>
-          <div class="frame" style="left:190px; top:20px; width:190px; height:125px"><img src="assets/poster.svg" alt=""></div>
+          <div class="frame" style="left:0; top:20px; width:170px; height:220px"><b>Quiet by design</b><i style="width:80%"></i><i style="width:60%"></i></div>
           <span class="frame__label" style="left:190px; top:0">Deck cover</span>
-          <div class="frame" style="left:190px; top:165px; width:190px; height:125px"><img src="assets/leaves.svg" alt=""></div>
-          <div class="frame" style="left:400px; top:20px; width:140px; height:270px"><img src="assets/sky.svg" alt=""></div>
+          <div class="frame frame--dark" style="left:190px; top:20px; width:190px; height:125px"><b>The next chapter</b><i style="width:50%"></i></div>
+          <div class="frame" style="left:190px; top:165px; width:190px; height:125px"><b>Tone of voice</b><i style="width:70%"></i><i style="width:45%"></i></div>
           <span class="frame__label" style="left:400px; top:0">Story · 9:16</span>
+          <div class="frame" style="left:400px; top:20px; width:140px; height:270px"><b>Made to last</b><i style="width:75%"></i><i style="width:55%"></i></div>
         </div>
       </div>
       <div class="pane">
@@ -727,7 +699,6 @@
       </article>
       <article class="tcard">
         <div class="tcard__img" aria-hidden="true">
-          <img class="soft-bg" src="assets/warm-profile.svg" alt="">
           <div class="ui-card summary">
             <span class="summary__tag">Summary</span>
             <h4>The return of slow culture</h4>
@@ -810,7 +781,7 @@
             <div><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M10 4V2.5A.5.5 0 0 0 9.5 2h-7a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5H4"/></svg>Duplicate</div>
             <div class="is-on"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2.5 4h9M5.5 4V2.5h3V4M3.5 4l.6 7.5h5.8l.6-7.5"/></svg>Delete</div>
           </div>
-          <svg class="cursor" width="22" height="26" viewBox="0 0 22 26"><path d="M3 2v18l5-4.5 3.4 7.5 3-1.4-3.4-7.3H18z" fill="#171717" stroke="#FAF9F6" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <svg class="cursor" width="22" height="26" viewBox="0 0 22 26"><path d="M3 2v18l5-4.5 3.4 7.5 3-1.4-3.4-7.3H18z" fill="#181818" stroke="#FFFDF8" stroke-width="1.4" stroke-linejoin="round"/></svg>
         </div>
         <h3>Why most lorem pilots never leave the lab</h3>
         <p class="post__meta">Infrastructure · Apr 2026</p>
@@ -928,10 +899,9 @@
     dots.forEach((x, j) => x.classList.toggle('is-active', i === j));
   }));
 
-  /* Scroll-linked details: collage drift, manifesto ink, nav hand-off to the footer */
+  /* Scroll-linked details: manifesto ink, nav hand-off to the footer */
   const nav = document.getElementById('nav');
   const footer = document.getElementById('footer');
-  const drifters = [...document.querySelectorAll('[data-speed]')];
   let ticking = false;
 
   const update = () => {
@@ -941,12 +911,6 @@
     const scrolls = document.documentElement.scrollHeight > vh + 200;
 
     if (!reduce && scrolls) {
-      drifters.forEach((el) => {
-        const r = el.getBoundingClientRect();
-        const offset = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.speed);
-        el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-      });
-
       const r = text.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, (vh * 0.78 - r.top) / (r.height + vh * 0.28)));
       const lit = Math.round(progress * words.length);
