@@ -236,6 +236,13 @@ Framer can't run GSAP or Locomotive.
 The Section 2 statement and the closing headline use nearly the same line.
 **Applied:** both are kept as written; the repetition works as a bookend. Tell me if you'd rather change one of them.
 
+**F21. Round 2: Night is larger than Day and Weekend.** *Confirm.*
+The pricing spec says Kóda Weekend must sit "on equal visual footing" with a single booking. The round-2 direction makes Night large (7 columns) with Day and Weekend stacked (5 columns).
+**Applied:** as directed. Weekend keeps the same label style, price note and pill as the others, but its tile is smaller. If the client holds to the spec, the fallback is to make Weekend the large tile, or to rotate which option is large.
+
+**F22. Round 2: headline sizes above the brand book's range.** *Confirm.* (This extends F4.)
+The brand book caps desktop hero type at 76px. Round 2 sets the hero at 104px, the statement at 96px, section headlines at 72–88px, the story times at 140px and the closing line at up to 172px. Labels stay at 9.5–11px, as the brand book requires.
+
 ---
 
 ## Housekeeping
