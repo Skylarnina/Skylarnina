@@ -3,35 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Private View</title>
-<meta name="description" content="Case studies are shared by invitation.">
+<title>Private View — Yasmin Bajwa</title>
+<meta name="description" content="Projects are shared by invitation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;display=swap">
-<link rel="stylesheet" href="assets/css/exhibition.css">
-<script src="assets/js/exhibition.js" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/css/r3.css">
 </head>
 <body>
-<main id="top">
-<!-- P8 (wide-tracked serif, spaced caps, short hairline) + P1 (a panel floating over a soft full-bleed scene) : PRIVATE VIEW -->
-<section class="pv" aria-labelledby="pv-title">
-  <div class="pv__bg"><img src="assets/img/r01-plan-16x9.jpg" alt=""></div>
-  <div class="pv__corner label"><a href="index.html">Yasmin Bajwa</a><a href="index.html#rooms">&larr; All rooms</a></div>
-  <div class="pv__card">
-    <p class="spaced">Private view</p>
-    <h1 class="pv__title" id="pv-title">Room 01 &mdash; The Jackson Home</h1>
-    <hr class="hairline">
-    <p>Case studies are shared by invitation. Enter the password to continue.</p>
-    <form action="#" novalidate>
-      <label for="pw" class="label">Password</label>
-      <input type="password" id="pw" name="pw" autocomplete="current-password" aria-describedby="pw-error">
-      <p class="error" id="pw-error" role="alert">That password didn&rsquo;t work. Try again.</p>
-      <button class="pill pill--solid" type="submit">Enter</button>
+<main class="lock" id="wrong">
+  <div class="lock__bg"><img src="assets/img/r01-plan-plain.jpg" alt=""></div>
+  <p class="lock__top" data-added="ui">Yasmin Bajwa</p>
+  <div class="lock__box" data-added="ui">
+    <h1>Projects are shared <em>by invitation.</em></h1>
+    <p>Enter the password to continue.</p>
+    <form action="private-view.html#wrong" method="get">
+      <label class="label" for="pw">Password</label>
+      <input type="password" id="pw" name="pw" autocomplete="current-password">
+      <button class="btn btn--solid" type="submit">Enter</button>
+      <p class="err" role="alert">Incorrect password.</p>
     </form>
-    <p class="pv__ask">No password? <a href="mailto:?subject=Portfolio%20access"><em>Ask Yasmin for access</em> &rarr;</a></p>
+    <p class="lock__ask">No password? <a class="u" href="mailto:?subject=Portfolio%20access">Email Yasmin →</a></p>
   </div>
-</section>
+  <p class="lock__foot" data-added="ui">© 2026 Yasmin Bajwa</p>
 </main>
-<div class="proto" aria-label="Prototype controls"><span>Prototype</span><button type="button" id="wf-toggle" aria-pressed="false">Wireframe</button></div>
 </body>
 </html>

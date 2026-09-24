@@ -52,20 +52,28 @@ Hi Yasmin, we've put your case-study text on the new site **exactly as you wrote
 
 | # | Where | As written | Suggested | Note |
 |---|---|---|---|---|
-| 22 | Header · Role · `R-002` | UX Designer\| UX Researcher \| UX Consultant | UX Designer \| UX Researcher \| UX Consultant | Space before the first bar. |
-| 23 | Chapter headings · `R-021`, `R-027` | The Approach/ Discovery & Stakeholder Alignment · UX Design/ Feature Prioritization | The Approach / Discovery & Stakeholder Alignment · UX Design / Feature Prioritization | Spacing around the slash. |
+| 22 | Title · `R-001` | Rhode Island State COVID Vaccine App/401 Health App | Rhode Island State COVID Vaccine App / 401 Health App | Spacing around the slash (optional). |
+| 23 | Header · Role · `R-002` | UX Designer\| UX Researcher \| UX Consultant | UX Designer \| UX Researcher \| UX Consultant | Space before the first bar. |
+| 24 | The Challenge · `R-010`, `R-017` | How might we... | How might we… | Three full stops here, but Littelfuse uses the single "…" character and capitals ("How Might We…"). Pick one style for all projects. |
+| 25 | Chapter headings · `R-021`, `R-027` | The Approach/ Discovery & Stakeholder Alignment · UX Design/ Feature Prioritization | The Approach / Discovery & Stakeholder Alignment · UX Design / Feature Prioritization | Spacing around the slash. |
+| 26 | The Approach · `R-022` · p26 | I conducted stakeholder interviews with employees across different areas of the program, typically in small groups of no more than two participants to enable focused discussions and gather perspectives from different areas of the program. | I conducted stakeholder interviews with employees across different areas of the program, typically in small groups of no more than two participants, to enable focused discussions and gather a range of perspectives. | "different areas of the program" appears twice in one sentence. |
+| 27 | The Approach · `R-022` · p26 | …helped guide the design process (Goals 20-23). | …helped guide the design process (Goals 20–23). | En dash for a range (optional). This paragraph is also very long (9 sentences). It could split after "(Goals 20–23)." for easier reading on the web. |
 
 ### Littelfuse
 
 | # | Where | As written | Suggested | Note |
 |---|---|---|---|---|
-| 24 | Header · Role · `L-002` | UX Consultant \| UX Designer \|UX Researcher | UX Consultant \| UX Designer \| UX Researcher | Missing space. |
-| 25 | Header · Methods · `L-003` | …Heuristic Evaluation \| Archetypes \|Competitive Analysis | …Heuristic Evaluation \| Archetypes \| Competitive Analysis | Missing space. |
-| 26 | The Approach · `L-022` · p32 | …the Little Fuse customers relied on… / …who the primary Little Fuse Customer is. | …Littelfuse customers relied on… / …who the primary Littelfuse customer is. | Company name is written "Littelfuse" everywhere else. |
-| 27 | The Approach · `L-024` · p32 | In combination with quantitative survey data with customer interviews, stakeholder research we identify recurring behaviors… | By combining quantitative survey data with customer interviews and stakeholder research, we identified recurring behaviors… | Sentence structure and tense. |
-| 28 | The Approach · `L-024` · p32 | …12% Sales and 5% Procurement.This insight helped us… | …12% Sales and 5% Procurement. This insight helped us… | Missing space after the full stop. |
-| 29 | The Approach · `L-024` · p32 | …rather than working of static archetypes. | …rather than working off static archetypes. | "of" → "off". |
-| 30 | The Approach · `L-040` · p35 | Below are the completed wire frames. | Below are the completed wireframes. | Written "wireframes" everywhere else. |
+| 28 | Header · Role · `L-002` | UX Consultant \| UX Designer \|UX Researcher | UX Consultant \| UX Designer \| UX Researcher | Missing space. |
+| 29 | Header · Methods · `L-003` | …Heuristic Evaluation \| Archetypes \|Competitive Analysis | …Heuristic Evaluation \| Archetypes \| Competitive Analysis | Missing space. The other three projects separate methods with "•"; Littelfuse uses "\|". Pick one. |
+| 30 | The Challenge · `L-014`–`L-017` · p31 | How Might We… / How might we help engineers… / How might we connect… / How might we streamline… | Keep the label "How might we…" and start the bullets at the verb: "Help engineers…", "Connect engineers…", "Streamline key tasks…" | "How might we" is said twice, once in the label and again in every bullet. Rhode Island already uses the shorter form. |
+| 31 | The Approach · `L-022` · p32 | In reviewing existing research I learned that the Little Fuse customers relied on… | In reviewing existing research, I learned that Littelfuse customers relied on… | Company name is "Littelfuse" everywhere else; comma. |
+| 32 | The Approach · `L-022` · p32 | Knowing that these were the common user flows and navigation paths I then began to understand who the primary Little Fuse Customer is. | Knowing that these were the common user flows and navigation paths, I then began to understand who the primary Littelfuse customer is. | Company name; lower-case "customer"; comma. |
+| 33 | The Approach · `L-024` · p32 | In combination with quantitative survey data with customer interviews, stakeholder research we identify recurring behaviors… | By combining quantitative survey data with customer interviews and stakeholder research, we identified recurring behaviors… | Sentence structure and tense. |
+| 34 | The Approach · `L-024` · p32 | …12% Sales and 5% Procurement.This insight helped us… | …12% Sales and 5% Procurement. This insight helped us… | Missing space after the full stop. |
+| 35 | The Approach · `L-024` · p32 | …rather than working of static archetypes. | …rather than working off static archetypes. | "of" → "off". |
+| 36 | The Approach · `L-024` · p32 | …recurring behaviors, pain points and decision drivers… | …recurring behaviors, pain points, and decision drivers… | Serial comma, to match the rest of your text (optional). |
+| 37 | The Approach · `L-040` · p35 | Below are the completed wire frames. | Below are the completed wireframes. | Written "wireframes" everywhere else. |
+| 38 | Figure after `L-024` (archetype board image) | "Engineer and Technical Archetype" (inside the image) | Engineering & Technical Archetype | Your text calls it "Engineering & Technical"; the image heading differs slightly. Only if you re-export the image. |
 
 ## Questions for Yasmin (facts we don't have yet)
 

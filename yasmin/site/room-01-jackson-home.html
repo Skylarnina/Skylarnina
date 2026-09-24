@@ -3,238 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Henry Ford Jackson Home Room</title>
-<meta name="description" content="A predictive model of how visitors would move through a historic house, built before anyone walked in.">
+<title>Jackson Home — Yasmin Bajwa</title>
+<meta name="description" content="The Henry Ford Jackson Home Visitor Flow Simulation">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;display=swap">
-<link rel="stylesheet" href="assets/css/exhibition.css">
-<script src="assets/js/exhibition.js" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/css/r3.css">
 </head>
-<body class="is-room">
+<body class="case">
+<header class="bar bar--over"><div class="wrap"><a class="bar__name" href="index.html" data-added="ui">Yasmin Bajwa</a><nav aria-label="Main" data-added="ui"><a href="projects.html" aria-current="page">Projects</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></nav></div></header>
 <main id="top">
-<header class="bar bar--dark">
-  <div class="wrap">
-    <a class="bar__name" href="index.html">Yasmin Bajwa</a>
-    <nav class="bar__nav" aria-label="Main">
-      <a href="index.html#rooms" aria-current="page">Work</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-      <a class="bar__cta" href="index.html#rooms">View Projects</a>
-      <a class="bar__menu" href="index.html#rooms">Menu</a>
-    </nav>
-  </div>
-</header>
-<nav class="rindex vindex" aria-label="Rooms"><a href="room-01-jackson-home.html" aria-current="page"><span class="vindex__name">Jackson Home</span>01</a><a href="room-02-power-energy.html"><span class="vindex__name">Power &amp; Energy</span>02</a><a href="room-03-rhode-island.html"><span class="vindex__name">Rhode Island</span>03</a><a href="room-04-littelfuse.html"><span class="vindex__name">Littelfuse</span>04</a></nav>
-
-<!-- P10 (stacked cinematic headline, one word in the accent, meta line with separators) + P12 (fixed 01-04 index) : ROOM HEADER -->
-<header class="rhead" aria-labelledby="room-title" style="--cover-op:0.45">
-  <div class="rhead__cover"><img src="assets/img/r01-cover-16x9.jpg" alt=""></div>
-  <div class="wrap grid rhead__grid">
-    <h1 class="rhead__title" id="room-title"><span>The Jackson Home</span><span>Visitor <span class="hot">Flow</span></span><span>Simulation</span></h1>
-    <div class="rhead__side">
-      <p>A predictive model of how visitors would move through a historic house, built before anyone walked in.</p>
-      <div class="rhead__ctas"><a class="pill pill--solid" href="#film">&#9654;&nbsp; Watch the simulation</a><a class="pill pill--ghost" href="#signature">The visitor&rsquo;s route</a></div>
-    </div>
-    <p class="rhead__meta metaline label"><span class="hl">Room 01</span><span>UX Researcher &middot; Experience Design</span><span>The Henry Ford</span><span>2026</span></p>
-  </div>
-</header>
-
-<!-- P6 (row of tall mini-cards with captions) : WALL LABEL -->
-<section class="walllabel" aria-label="Wall label" style="--card-shade:0.58">
-  <div class="wrap"><div class="minicards"><div class="minicard"><div class="m"><img src="assets/img/r01-sim-overview.jpg" alt="" loading="lazy"></div><p class="label">Role</p><p class="v">UX Researcher, Experience Design</p></div><div class="minicard"><div class="m"><img src="assets/img/r01-plan-plain.jpg" alt="" loading="lazy" style="object-position:50% 30%"></div><p class="label">Methods</p><p class="v">Observation, space syntax, simulation</p></div><div class="minicard"><div class="m"><img src="assets/img/r01-sim-music-room.jpg" alt="" loading="lazy"></div><p class="label">Setting</p><p class="v">Greenfield Village, The Henry Ford</p></div><div class="minicard"><div class="m"><img src="assets/img/r01-stop-front-rooms.jpg" alt="" loading="lazy"></div><p class="label">Year</p><p class="v big">2026</p></div><div class="minicard"><div class="m"><img src="assets/img/r01-sim-annex-crowd.jpg" alt="" loading="lazy"></div><p class="label">Key number</p><p class="v big">30<br><span style="font-size:15px;font-family:var(--sans)">visitors per 15-minute window</span></p></div></div></div>
-</section>
-
-<!-- Overview : two-column editorial (no pin; round-1 system) -->
-<section class="section">
-  <div class="wrap grid overview">
-    <p class="chapter-label label"><span class="no">Overview</span></p>
-    <p class="overview__pull reveal">The first building added to Greenfield Village in more than forty years, <em>with no visitor data</em> to plan from.</p>
-    <div class="overview__body"><p>The Dr. Sullivan and Mrs. Richie Jean Sherrod Jackson Home is a nationally significant house tied to the 1965 Selma to Montgomery marches. Civil rights leaders, including Dr. Martin Luther King Jr., met there to plan the strategies that led to the Voting Rights Act. Moved to Greenfield Village, it opened as a permanent exhibition in summer 2026.</p><p>With no historical visitor data, my role was to build a predictive visitor flow model: a forecast of how guests would move through the constrained historic space before opening day.</p><p>Using UX research methods and behavioural modelling, the simulation let stakeholders compare ticketing strategies, estimate capacity, find congestion points, and decide where presenters should stand.</p></div>
-  </div>
-</section>
-
-<!-- Challenge : numbered plaque list + full-width "How might we" lines (round-1 system) -->
-<section class="section section--wall">
-  <div class="wrap grid">
-    <p class="chapter-label label"><span class="no">The challenge</span></p>
-    <ol class="constraints"><li><span class="n">01</span><span>Narrow circulation paths</span></li><li><span class="n">02</span><span>Limited room capacity</span></li><li><span class="n">03</span><span>Sequential visitor movement</span></li><li><span class="n">04</span><span>Preservation rules: no structural changes</span></li></ol>
-    <div class="hmw"><p><span class="label">How might we</span>predict visitor behaviour and shape the museum experience before the exhibition opened to the public?</p></div>
-  </div>
-</section>
-
-
-<!-- Prose chapters (round-1 system: narrow text, hairline rows) -->
-<section class="section">
-  <div class="wrap grid chapter">
-    <p class="chapter-label label"><span class="no">Chapter 01</span><span>&mdash; Research questions</span></p>
-    <h2 class="chapter__title">Eight questions <em>before opening day.</em></h2>
-    <div class="chapter__body">
-      <p><strong>Visitor experience.</strong> How long will visitors spend inside the home? Where will they stop, or get stuck? What will waiting look like?</p>
-      <p><strong>Capacity planning.</strong> How many visitors can the Jackson Home and the Annex hold without overcrowding? Should tickets use 15- or 30-minute windows? Can walk-up visitors be added without hurting the experience?</p>
-      <p><strong>Operations.</strong> Where should docents and presenters stand? What should staff do at peak times?</p>
-    </div>
-  </div>
-</section>
-<section class="section" style="padding-top:0">
-  <div class="wrap grid chapter">
-    <p class="chapter-label label"><span class="no">Chapter 02</span><span>&mdash; Methodology</span></p>
-    <h2 class="chapter__title">No baseline data, <em>so I built one.</em></h2>
-    <div class="chapter__body">
-      <p><strong>Behavioural observation.</strong> I studied visitor movement in comparable historic homes and exhibits at The Henry Ford: arrivals, walking speed, dwell time, congestion, engagement, and decisions at the thresholds between rooms.</p>
-      <p><strong>Space syntax analysis.</strong> With the experience design team, I read the home&rsquo;s layout for visibility, connectivity and circulation, to find likely bottlenecks before testing any scenario.</p>
-      <p><strong>Behavioural path clustering.</strong> Visitors engage at different depths, so each simulated visitor was assigned a type, and viewing times were set to match.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- P6 (itinerary timeline with photos along a line) : SIGNATURE, THE VISITOR'S ROUTE -->
-<section class="section" id="signature" aria-labelledby="route-title">
-  <div class="wrap grid" style="row-gap:24px;margin-bottom:clamp(56px,6vw,96px);align-items:end">
-    <p class="chapter-label label"><span class="no">Signature</span><span>&mdash; The visitor&rsquo;s route</span></p>
-    <h2 class="title" id="route-title" style="grid-column:1/8">Seven stops, <em>one path.</em></h2>
-    <p style="grid-column:9/13;color:var(--ink-muted)">The route every simulated visitor followed. Stops marked in red are where congestion built up, with the numbers from the model.</p>
-  </div>
-  <div class="wrap"><ol class="route"><li class="stop stop--hot reveal">
-        <div class="stop__text"><p class="when">Arrival</p><h3>Entrance line</h3><p>Visitors arrive inside a 15- or 30-minute ticket window. The base plan was 24 tickets per 15 minutes; walk-ups join once ticketed visitors are in.</p><p class="hotnum">Up to 16.5 min wait in the busiest scenario tested</p><p class="label">Fig. 01</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-stop-entrance.jpg" alt="Entrance line on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-sim-annex-close.jpg" alt="Entrance line in the simulation" loading="lazy"></div></div>
-      </li><li class="stop stop--hot reveal">
-        <div class="stop__text"><p class="when">Docent-controlled</p><h3>Vestibule</h3><p>The first threshold. With docent control, about 8 people are let in at a time.</p><p class="hotnum">~8 visitors at a time</p><p class="label">Fig. 02</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-stop-vestibule.jpg" alt="Vestibule on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-sim-annex-crowd.jpg" alt="Vestibule in the simulation" loading="lazy"></div></div>
-      </li><li class="stop stop--hot reveal">
-        <div class="stop__text"><p class="when">Docent-controlled</p><h3>Pre-1965</h3><p>Part of the entrance area the docent manages, and one of the first exhibits.</p><p class="hotnum">Presenters at the first exhibits reduced skipped exhibits</p><p class="label">Fig. 03</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-sim-exhibit.jpg" alt="Pre-1965 on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-sim-case.jpg" alt="Pre-1965 in the simulation" loading="lazy"></div></div>
-      </li><li class="stop stop--hot reveal">
-        <div class="stop__text"><p class="when">Docent-controlled</p><h3>Video wall</h3><p>The last stop of the entrance area before visitors move on in sequence.</p><p class="hotnum">Still inside the ~8-person docent zone</p><p class="label">Fig. 04</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-sim-case.jpg" alt="Video wall on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-sim-overview.jpg" alt="Video wall in the simulation" loading="lazy"></div></div>
-      </li><li class="stop reveal">
-        <div class="stop__text"><p class="when">In sequence</p><h3>The rooms</h3><p>Front bedroom, living room, dining room, kitchen, music room. Each room has an occupancy limit; when one is full, visitors wait or move on.</p><p class="label">Fig. 05</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-stop-front-rooms.jpg" alt="The rooms on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-stop-kitchen.jpg" alt="The rooms in the simulation" loading="lazy"></div></div>
-      </li><li class="stop reveal">
-        <div class="stop__text"><p class="when">Digital interactives</p><h3>The Annex</h3><p>The complementary building with digital interactives. The model helped decide where the interactives went.</p><p class="label">Fig. 06</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-plan-annex.jpg" alt="The Annex on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-sim-overview.jpg" alt="The Annex in the simulation" loading="lazy"></div></div>
-      </li><li class="stop reveal">
-        <div class="stop__text"><p class="when">Leaving</p><h3>Exit</h3><p>Streakers leave after 8&ndash;20 minutes, Strollers after 30&ndash;45, Studiers after 50&ndash;65.</p><p class="label">Fig. 07</p></div>
-        <div class="stop__pics"><div class="m p1"><img src="assets/img/r01-stop-exit.jpg" alt="Exit on the plan" loading="lazy"></div><div class="m p2"><img src="assets/img/r01-sim-music-room.jpg" alt="Exit in the simulation" loading="lazy"></div></div>
-      </li></ol></div>
-</section>
-
-<!-- P9 (overlapping thin circles, sized by share) : VISITOR ARCHETYPES -->
-<section class="section section--wall" aria-labelledby="arch-title">
-  <div class="wrap grid archetypes">
-    <p class="chapter-label label"><span class="no">Chapter 03</span><span>&mdash; Visitor archetypes</span></p>
-    <div class="archetypes__circles reveal" role="img" aria-label="Circles sized by share: Strollers 60 percent, Streakers 30 percent, Studiers 10 percent">
-      <div class="arch arch--a"><span class="pct">60%</span><span class="nm">Strollers</span></div>
-      <div class="arch arch--b"><span class="pct">30%</span><span class="nm">Streakers</span></div>
-      <div class="arch arch--c"><span class="pct">10%</span><span class="nm">Studiers</span></div>
-    </div>
-    <div class="archetypes__list">
-      <h2 class="chapter__title" id="arch-title" style="margin-bottom:28px">Three ways <em>to visit.</em></h2>
-      <ul class="numbered">
-        <li><span class="n">60%</span><span><span class="t">Strollers</span><br><span style="color:var(--ink-muted);font-size:15px">Browse most exhibits with moderate viewing time. 30&ndash;45 min on site.</span></span></li>
-        <li><span class="n">30%</span><span><span class="t">Streakers</span><br><span style="color:var(--ink-muted);font-size:15px">Move quickly with minimal stopping. 8&ndash;20 min.</span></span></li>
-        <li><span class="n">10%</span><span><span class="t">Studiers</span><br><span style="color:var(--ink-muted);font-size:15px">Read the interpretation thoroughly and stay longest in each room. 50&ndash;65 min.</span></span></li>
-      </ul>
-      <p style="margin-top:20px;font-size:15px;color:var(--ink-muted)">Each simulated visitor was randomly assigned one of these profiles, based on museum research and checked against The Henry Ford&rsquo;s attendance patterns.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- Plates (Image System: plans as plates on the deeper wall, multiply) -->
-<section class="section">
-  <div class="wrap grid chapter">
-    <p class="chapter-label label"><span class="no">Chapter 04</span><span>&mdash; Building the simulation</span></p>
-    <h2 class="chapter__title">Every visitor made <em>their own decisions.</em></h2>
-    <div class="chapter__body">
-      <p>Using the behavioural research, I built a discrete event simulation of individual visitors. Each one navigated the home independently, following the expected paths through the house and reacting to the constraints below.</p>
-      <ul class="ticks"><li>Timed ticket arrivals</li><li>Room occupancy limits</li><li>Queue formation</li><li>Walking speed, about 2.0 mph</li><li>Exhibit dwell time by visitor type</li><li>Presenter intervention</li><li>Alternative routing when a space is full</li></ul>
-    </div>
-    <div style="grid-column:1/8;margin-top:56px"><figure class="plate plate--drawing"><a class="zoom" href="assets/img/r01-plan-paths.jpg" data-caption="Fig. 08 — The house with expected visitor paths, entering from the Annex"><div class="m"><img src="assets/img/r01-plan-paths.jpg" alt="The house with expected visitor paths, entering from the Annex" loading="lazy"></div></a><figcaption><span class="fig">Fig. 08</span><span>The house with expected visitor paths, entering from the Annex</span></figcaption></figure></div>
-    <div style="grid-column:8/13;margin-top:56px;display:grid;gap:40px;align-content:start">
-      <figure class="plate plate--drawing"><a class="zoom" href="assets/img/r01-plan-annex.jpg" data-caption="Fig. 09 — The Annex: site entrance, entrance line and vestibule"><div class="m"><img src="assets/img/r01-plan-annex.jpg" alt="The Annex: site entrance, entrance line and vestibule" loading="lazy"></div></a><figcaption><span class="fig">Fig. 09</span><span>The Annex: site entrance, entrance line and vestibule</span></figcaption></figure>
-      <figure class="plate plate--drawing"><a class="zoom" href="assets/img/r01-plan-plain.jpg" data-caption="Fig. 10 — The house before paths: space syntax view"><div class="m"><img src="assets/img/r01-plan-plain.jpg" alt="The house before paths: space syntax view" loading="lazy"></div></a><figcaption><span class="fig">Fig. 10</span><span>The house before paths: space syntax view</span></figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- Data wall (Image System: small charts + one numeral pulled out) : SCENARIO TESTING -->
-<section class="section section--wall">
-  <div class="wrap grid datawall">
-    <p class="chapter-label label"><span class="no">Chapter 05</span><span>&mdash; Scenario testing</span></p>
-    <div class="datawall__tiles">
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-arrivals-random.jpg" data-caption="Fig. 11 — Random arrivals: queues stay low"><div class="m"><img src="assets/img/r01-chart-arrivals-random.jpg" alt="Random arrivals: queues stay low" loading="lazy"></div></a><figcaption><span class="fig">Fig. 11</span><span>Random arrivals: queues stay low</span></figcaption></figure>
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-arrivals-ontime.jpg" data-caption="Fig. 12 — On-time arrivals: queues spike each window"><div class="m"><img src="assets/img/r01-chart-arrivals-ontime.jpg" alt="On-time arrivals: queues spike each window" loading="lazy"></div></a><figcaption><span class="fig">Fig. 12</span><span>On-time arrivals: queues spike each window</span></figcaption></figure>
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-docent.jpg" data-caption="Fig. 13 — Skipped exhibits, without and with docent control"><div class="m"><img src="assets/img/r01-chart-docent.jpg" alt="Skipped exhibits, without and with docent control" loading="lazy"></div></a><figcaption><span class="fig">Fig. 13</span><span>Skipped exhibits, without and with docent control</span></figcaption></figure>
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-dataset-full.jpg" data-caption="Fig. 14 — People in the house across a day"><div class="m"><img src="assets/img/r01-chart-congestion.jpg" alt="People in the house across a day" loading="lazy"></div></a><figcaption><span class="fig">Fig. 14</span><span>People in the house across a day</span></figcaption></figure>
-    </div>
-    <div class="datawall__num reveal">
-      <p class="numeral">15<small> min</small></p>
-      <p class="numeral-label">ticket windows beat 30-minute ones when most visitors arrive at the start of their slot.</p>
-      <p style="font-size:14px;color:var(--ink-muted)">Study factors: ticket window (15 or 30 min), arrival pattern, docent control, number of tickets (low, base, high) and walk-up visitors.</p>
-    </div>
-  </div>
-  <div class="wrap grid datawall" style="margin-top:clamp(72px,8vw,120px)">
-    <div class="datawall__num reveal" style="grid-column:1/5">
-      <p class="numeral">30</p>
-      <p class="numeral-label">visitors per 15-minute window felt comfortable. The house could take about 32.</p>
-    </div>
-    <div class="datawall__tiles" style="grid-column:5/13">
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-best-full.jpg" data-caption="Fig. 15 — Best scenario: people waiting at the entrance"><div class="m"><img src="assets/img/r01-chart-best-entrance.jpg" alt="Best scenario: people waiting at the entrance" loading="lazy"></div></a><figcaption><span class="fig">Fig. 15</span><span>Best scenario: people waiting at the entrance</span></figcaption></figure>
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-best-full.jpg" data-caption="Fig. 16 — Best scenario: people in the house"><div class="m"><img src="assets/img/r01-chart-best-house.jpg" alt="Best scenario: people in the house" loading="lazy"></div></a><figcaption><span class="fig">Fig. 16</span><span>Best scenario: people in the house</span></figcaption></figure>
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-dataset-full.jpg" data-caption="Fig. 17 — Queue sizes at the entrance"><div class="m"><img src="assets/img/r01-chart-queue.jpg" alt="Queue sizes at the entrance" loading="lazy"></div></a><figcaption><span class="fig">Fig. 17</span><span>Queue sizes at the entrance</span></figcaption></figure>
-      <figure class="plate "><a class="zoom" href="assets/img/r01-chart-dataset-full.jpg" data-caption="Fig. 18 — Wait times by line, in minutes"><div class="m"><img src="assets/img/r01-chart-delays.jpg" alt="Wait times by line, in minutes" loading="lazy"></div></a><figcaption><span class="fig">Fig. 18</span><span>Wait times by line, in minutes</span></figcaption></figure>
-    </div>
-  </div>
-</section>
-
-
-<!-- P12 (dark video section, round play marks) : BLACK-BOX GALLERY -->
-<section class="section blackbox" id="film" aria-labelledby="film-title">
-  <div class="wrap grid blackbox__grid">
-    <div class="blackbox__intro"><p class="label">Black-box gallery</p><h2 id="film-title">The model, running</h2><p>Each figure is one simulated visitor, deciding where to go based on space and behavioural rules.</p></div>
-    <div class="blackbox__main"><figure class="screen">
-        <div class="screen__box"><video src="assets/video/r01-simulation.mp4" poster="assets/img/poster-r01-simulation.jpg" muted playsinline loop preload="none"></video>
-          <button class="screen__play" type="button" aria-label="Play: Discrete event simulation of visitors moving through the Annex and the house"><span></span></button></div>
-        <figcaption><span><b class="accent" style="font-weight:500">Fig. 19</b> &nbsp;Discrete event simulation of visitors moving through the Annex and the house</span><span class="rt">0:48</span></figcaption>
-      </figure></div>
-    
-  </div>
-</section>
-
-
-<!-- Findings / impact : exhibit numerals + hairline rows (round-1 system) -->
-<section class="section">
-  <div class="wrap grid">
-    <p class="chapter-label label"><span class="no">Findings</span></p>
-    <div class="findings"><div class="finding reveal"><div><h3>Ticketing</h3><p class="numeral">15&#8209;min</p></div><p>15-minute ticket windows spread arrivals more evenly than 30-minute ones and cut congestion through the home.</p></div><div class="finding reveal"><div><h3>Capacity</h3><p class="numeral">30</p></div><p>visitors per entry window: noticeably more comfortable than the maximum of about 32, and still efficient.</p></div><div class="finding reveal"><div><h3>Presenters</h3><p class="numeral">3&ndash;4</p></div><p>presenters in key zones, starting near the first exhibits, to regulate entry and reduce skipped exhibits.</p></div><div class="finding reveal"><div><h3>Walk-ups</h3><p class="numeral">Mixed</p></div><p>A controlled mix of ticketed and walk-up visitors staggered arrivals and shortened waits.</p></div></div>
-    <div class="grid" style="grid-column:1/13;margin-top:clamp(72px,8vw,120px);row-gap:28px">
-      <h2 class="chapter__title" style="grid-column:1/6">Decisions made <em>on evidence.</em></h2>
-      <div style="grid-column:7/13;display:grid;gap:20px"><p style="color:var(--ink-muted)">The simulation gave stakeholders evidence-based recommendations before the Jackson Home opened. It helped teams:</p><ul class="ticks"><li>Set ticketing schedules for opening operations</li><li>Set comfortable capacity limits</li><li>Find high-congestion areas before opening</li><li>Place presenters throughout the home</li><li>Evaluate queue management strategies</li><li>Decide where to place the digital interactives</li><li>Improve flow while protecting the building&rsquo;s historic integrity</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<!-- Reflection : centred serif italic, the closing text panel -->
-<section class="section section--wall">
-  <div class="wrap closing">
-    <p class="label">Reflection</p>
-    <blockquote>This project took my understanding of user experience beyond digital products, into physical space. It also deepened my appreciation for how visitors take in complex, emotionally significant stories, especially those centred on difficult history.</blockquote>
-    <hr class="hairline">
-  </div>
-</section>
-
-
-<!-- P11 (cards floating over a full-bleed landscape, main card emphasised) : NEXT ROOM -->
-<section class="nextroom" aria-labelledby="next-title">
-  <div class="nextroom__bg"><img src="assets/img/r02-cover-16x9.jpg" alt="" loading="lazy"></div>
-  <div class="nextroom__head"><p class="label">Next room &rarr;</p><h2 class="title" id="next-title">Room 02, <em>Power &amp; Energy</em></h2></div>
-  <div class="nextroom__stage"><a class="nextroom__card nextroom__card--l" href="room-03-rhode-island.html"><div class="m"><img src="assets/img/r03-cover-4x5.jpg" alt="Cover of room 03" loading="lazy"></div><span class="cap"><span class="label">Room 03</span><span class="t">Rhode Island 401 Health App</span></span></a><a class="nextroom__card nextroom__card--r" href="room-04-littelfuse.html"><div class="m"><img src="assets/img/r04-cover-4x5.jpg" alt="Cover of room 04" loading="lazy"></div><span class="cap"><span class="label">Room 04</span><span class="t">Littelfuse Product Discovery</span></span></a><a class="nextroom__card nextroom__card--main" href="room-02-power-energy.html"><div class="m"><img src="assets/img/r02-cover-4x5.jpg" alt="Cover of room 02" loading="lazy"></div><span class="cap"><span class="label">Room 02</span><span class="t">Power &amp; Energy Interactive</span></span></a></div>
-  <div class="nextroom__foot label"><a class="textlink" href="index.html#rooms">&larr; Back to all rooms</a><span>Room 01 of 04</span></div>
-</section>
+<!-- A1 + A4: full-bleed cover with the title on it, meta panel bottom-right -->
+<section class="cover cover--dark"><div class="m"><img src="assets/img/r3-cover-r01-16x7.jpg" alt=""></div>
+  <h1 class="cover__title" data-id="J-001">The Henry Ford Jackson Home Visitor Flow Simulation</h1></section>
+<div class="meta"><div class="wrap g24"><dl class="meta__panel">
+  <div class="wide"><dt class="label" data-added="ui">Role</dt><dd data-id="J-002">UX Researcher | Experience Design</dd></div>
+  <div class="wide"><dt class="label" data-added="ui">Methods</dt><dd data-id="J-003">Behavioral Observation • Space Syntax Analysis • Behavioral Path Clustering • Visitor Segmentation • Discrete Event Simulation • Predictive Modeling</dd></div>
+  <div><dt class="label" data-added="ui">Setting</dt><dd data-added="supplied">The Henry Ford, Greenfield Village</dd></div>
+  <div><dt class="label" data-added="ui">Year</dt><dd class="" data-added="supplied">2026</dd></div>
+</dl></div></div>
+<!-- A1: numbered chapter index built from her own headings -->
+<nav class="wrap" aria-label="Chapters" data-added="ui"><div class="chindex"><ol><li><span>01</span><a href="#ch-1">Project Overview</a></li><li><span>02</span><a href="#ch-2">The Challenge</a></li><li><span>03</span><a href="#ch-3">Research Questions</a></li><li><span>04</span><a href="#ch-4">Research Methodology</a></li><li><span>05</span><a href="#ch-5">Building the Simulation</a></li><li><span>06</span><a href="#ch-6">Baseline Assumptions</a></li><li><span>07</span><a href="#ch-7">Scenario Testing</a></li><li><span>08</span><a href="#ch-8">Findings</a></li><li><span>09</span><a href="#ch-9">Impact</a></li><li><span>10</span><a href="#ch-10">Reflection</a></li></ol></div></nav>
+<!-- A2 + A3 chapters; A4 / A5 / A6 / A7 where her content calls for them -->
+<section class="chapter" id="ch-1"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">01</span><h2 data-id="J-004">Project Overview</h2></header><p class="b" data-id="J-005">The Dr. Sullivan and Mrs. Richie Jean Sherrod Jackson Home is a nationally significant historic residence associated with the 1965 Selma to Montgomery marches, where civil rights leaders, including Dr. Martin Luther King Jr., gathered to develop strategies that contributed to the passage of the Voting Rights Act. After being relocated to Greenfield Village at The Henry Ford museum, the home was prepared to open to the public as a permanent exhibition in Summer 2026.</p><p class="b" data-id="J-006">As the first building added to Greenfield Village in more than forty years, there was no historical visitor data to guide operational planning. My role was to develop a predictive visitor flow model that would forecast how guests would move through the constrained historic space before opening day.</p><p class="b" data-id="J-007">Using UX research methodologies and behavioral modeling, I created a visitor simulation that allowed stakeholders to evaluate different ticketing strategies, estimate visitor capacity, identify potential congestion points, and determine where presenters should be positioned to create a comfortable and engaging visitor experience.</p></div></section><section class="chapter" id="ch-2"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">02</span><h2 data-id="J-008">The Challenge</h2></header><p class="b" data-id="J-009">No behavioral data existed, planning visitor capacity relied on assumptions rather than evidence. The home&#x27;s preserved architectural layout introduced additional constraints:</p><ul class="b"><li><span data-id="J-010">Narrow circulation paths</span></li><li><span data-id="J-011">Limited room capacity</span></li><li><span data-id="J-012">Sequential visitor movement</span></li><li><span data-id="J-013">Preservation requirements that prevented structural modifications</span></li></ul><p class="b" data-id="J-014">The challenge became:</p><p class="b hmw" data-id="J-015">How might we predict visitor behavior and optimize the museum experience before the exhibition opened to the public?</p></div></section><section class="chapter" id="ch-3"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">03</span><h2 data-id="J-016">Research Questions</h2></header><p class="b" data-id="J-017">To support exhibition planning, I focused on answering several key research questions.</p><h3 class="b" data-id="J-018">Visitor Experience</h3><ul class="b"><li><span data-id="J-019">How long will visitors spend inside the home?</span></li><li><span data-id="J-020">Where are visitors most likely to stop or experience congestion?</span></li><li><span data-id="J-021">What will waiting times look like throughout the experience?</span></li></ul><h3 class="b" data-id="J-022">Capacity Planning</h3><ul class="b"><li><span data-id="J-023">How many visitors can comfortably occupy both the Jackson Home and Annex (complimentary building with digital interactives) without overcrowding?</span></li><li><span data-id="J-024">Should visitors enter through 15-minute or 30-minute ticketing windows?</span></li><li><span data-id="J-025">Can walk-up visitors be accommodated without negatively affecting the experience?</span></li></ul><h3 class="b" data-id="J-026">Operations</h3><ul class="b"><li><span data-id="J-027">Where should docents and presenters be positioned to support visitor flow?</span></li><li><span data-id="J-028">What traffic management strategies should staff use during peak attendance?</span></li></ul></div></section><section class="chapter" id="ch-4"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">04</span><h2 data-id="J-029">Research Methodology</h2></header><p class="b" data-id="J-030">Because no baseline visitor data existed for the Jackson Home, I combined several UX research methodologies to build a predictive behavioral model.</p><h3 class="b" data-id="J-031">Behavioral Observation</h3><p class="b" data-id="J-032">I analyzed visitor movement within comparable historical homes and nearby exhibitions at The Henry Ford to understand common behavioral patterns. These observations focused on:</p><ul class="b"><li><span data-id="J-033">visitor arrival behavior</span></li><li><span data-id="J-034">walking speed</span></li><li><span data-id="J-035">dwell time</span></li><li><span data-id="J-036">congestion points</span></li><li><span data-id="J-037">exhibit engagement</span></li><li><span data-id="J-038">decision-making at transitions between rooms</span></li></ul><p class="b" data-id="J-039">These findings established the behavioral assumptions used throughout the simulation.</p><h3 class="b" data-id="J-040">Space Syntax Analysis</h3><p class="b" data-id="J-041">In collaboration with our experience design team I evaluated the home&#x27;s architectural layout to understand how visibility, room connectivity, and circulation paths would naturally influence visitor movement. This helped identify areas likely to become bottlenecks before testing any operational scenarios.</p><h3 class="b" data-id="J-042">Behavioral Path Clustering</h3><p class="b" data-id="J-043">Behavioral observations revealed that visitors interact with museum environments differently depending on their engagement level. We simulate this behavior by randomly assigning a visitor type to each person and then reducing the average view time at each exhibit to give the correct %. This results in a very different time profile for each type of visitor to the Jackson Home: To reflect these differences, visitors were grouped into three behavioral archetypes based on existing museum research and validated using historical attendance patterns from The Henry Ford.</p><div class="stats" data-id="J-044" data-kind="table"><p class="heads label"><span>Distribution</span> <span>Visitor Type</span> <span>Characteristics</span></p><div><span class="num">60%</span><span class="name">Strollers</span><span class="char">Browse most exhibits with moderate viewing time</span></div><div><span class="num">10%</span><span class="name">Studiers</span><span class="char">Read interpretation thoroughly and spend longer in each room</span></div><div><span class="num">30%</span><span class="name">Streakers</span><span class="char">Move quickly through the exhibition with minimal stopping</span></div></div><p class="b" data-id="J-045">Each simulated visitor was randomly assigned one of these behavioral profiles, allowing the model to better represent realistic variation in visitor behavior.</p><div class="board b full mt"><figure class="fig fig--plate "><a href="assets/img/r01-chart-onsite-box.jpg" target="_blank" rel="noopener" aria-label="Open full image: Time spent on-site by visitor type"><div class="m"><img src="assets/img/r01-chart-onsite-box.jpg" alt="Time spent on-site by visitor type" loading="lazy"></div></a><figcaption data-added="caption">Fig. 01 — Time spent on-site by visitor type</figcaption></figure><figure class="fig fig--plate "><a href="assets/img/r01-chart-dataset-full.jpg" target="_blank" rel="noopener" aria-label="Open full image: Congestion, queue sizes, visit time and delays"><div class="m"><img src="assets/img/r01-chart-dataset-full.jpg" alt="Congestion, queue sizes, visit time and delays" loading="lazy"></div></a><figcaption data-added="caption">Fig. 02 — Congestion, queue sizes, visit time and delays</figcaption></figure></div></div></section><section class="chapter" id="ch-5"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">05</span><h2 data-id="J-048">Building the Simulation</h2></header><p class="b" data-id="J-049">Using behavioral research, I developed a discrete event simulation that modeled individual visitor movement throughout the exhibition. The simulation followed wayfinding based on the expected paths in the home, displayed below. Each visitor independently navigated the home while interacting with operational constraints including:</p><ul class="b"><li><span data-id="J-050">timed ticket arrivals</span></li><li><span data-id="J-051">room occupancy limits</span></li><li><span data-id="J-052">queue formation</span></li><li><span data-id="J-053">walking speed</span></li><li><span data-id="J-054">exhibit dwell time</span></li><li><span data-id="J-055">presenter intervention</span></li><li><span data-id="J-056">alternative routing when spaces reached capacity</span></li></ul><p class="b" data-id="J-057">Rather than moving visitors as a group, every individual made independent movement decisions based on available space and predefined behavioral rules. This allowed the simulation to realistically forecast congestion and visitor flow under multiple operational scenarios.</p><div class="board b full mt"><figure class="fig fig--plate "><a href="assets/img/r01-plan-plain.jpg" target="_blank" rel="noopener" aria-label="Open full image: Jackson Home floor plan"><div class="m"><img src="assets/img/r01-plan-plain.jpg" alt="Jackson Home floor plan" loading="lazy"></div></a><figcaption data-added="caption">Fig. 03 — Jackson Home floor plan</figcaption></figure><figure class="fig fig--plate "><a href="assets/img/r01-plan-annex.jpg" target="_blank" rel="noopener" aria-label="Open full image: The Annex floor plan, with site entrance, entrance line and vestibule"><div class="m"><img src="assets/img/r01-plan-annex.jpg" alt="The Annex floor plan, with site entrance, entrance line and vestibule" loading="lazy"></div></a><figcaption data-added="caption">Fig. 04 — The Annex floor plan, with site entrance, entrance line and vestibule</figcaption></figure></div><figure class="film b full mt"><video src="assets/video/r01-simulation.mp4" poster="assets/img/poster-r01-simulation.jpg" controls muted playsinline preload="none"></video><figcaption data-added="caption"><span>Fig. 05 — Discrete event simulation of visitor flow</span><span>0:48</span></figcaption></figure></div></section><section class="chapter" id="ch-6"><div class="wrap g24 spread"><figure class="fig fig--plate spread__plan"><a href="assets/img/r01-plan-paths.jpg" target="_blank" rel="noopener" aria-label="Open full image: Jackson Home floor plan with expected visitor paths"><div class="m"><img src="assets/img/r01-plan-paths.jpg" alt="Jackson Home floor plan with expected visitor paths" loading="lazy"></div></a><figcaption data-added="caption">Fig. 06 — Jackson Home floor plan with expected visitor paths</figcaption></figure><header class="ch-head"><span class="no" data-added="ui">06</span><h2 data-id="J-062">Baseline Assumptions</h2></header><p class="b" data-id="J-063">Since the exhibition had not yet opened, several assumptions were established using observations from comparable exhibitions. These assumptions provided a consistent foundation for comparing operational scenarios.</p><p class="b" data-id="J-064">These included:</p><ul class="b"><li><span data-id="J-065">Visitors arrive within their assigned ticket window.</span></li><li><span data-id="J-066">Ticket windows operate in either 15-minute or 30-minute intervals.</span></li><li><span data-id="J-067">Visitors travel independently while naturally clustering into small social groups.</span></li><li><span data-id="J-068">Average walking speed is approximately 2.0 mph, representing most museum visitors.</span></li><li><span data-id="J-069">Each exhibit has a maximum occupancy determined by available floor space.</span></li><li><span data-id="J-070">When capacity is reached, visitors either wait or continue to another available location.</span></li><li><span data-id="J-071">Individual viewing times vary according to visitor type and natural behavioral variation.</span></li></ul></div></section><section class="chapter" id="ch-7"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">07</span><h2 data-id="J-072">Scenario Testing</h2></header><h4 class="b" data-id="J-073">STUDY FACTORS</h4><ul class="b"><li><span data-id="J-074">Ticketing Window:</span><ul><li><span data-id="J-075">30-minute windows</span></li><li><span data-id="J-076">15-minute windows</span></li></ul></li><li><span data-id="J-077">Arrival Pattern:</span><ul><li><span data-id="J-078">Random times within ticketing window</span></li><li><span data-id="J-079">All arrive at start of ticketing window</span></li></ul></li><li><span data-id="J-080">Docent Control:</span><ul><li><span data-id="J-081">No constraint – visitors enter if there is space in the vestibule</span></li><li><span data-id="J-082">With constraint – docent allows ~8 people at a time into entrance area (Vestibule, Pre 1965 and Video Wall)</span></li></ul></li><li><span data-id="J-083">Number of tickets:</span><ul><li><span data-id="J-084">Base: 48 per 30-minutes or 24 per 15-minutes</span></li><li><span data-id="J-085">Low: 38 per 30-minutes or 20 per 15-minutes</span></li><li><span data-id="J-086">High: 58 per 30-minutes or 28 per 15-minutes</span></li></ul></li><li><span data-id="J-087">Walk-up Visitors:</span><ul><li><span data-id="J-088">A limited number of un-ticketed visitors may be allowed to join the queue if the ticketed visitors have entered the building</span></li></ul></li></ul><h4 class="b" data-id="J-089">Ticketing Window &amp; Arrival Patterns</h4><ul class="b"><li><span data-id="J-090">The effects of these factors are linked</span></li><li><span data-id="J-091">If visitor arrivals are spread randomly through the ticketing window</span><ul><li><span data-id="J-092">Congestion and queue sizes are low</span></li><li><span data-id="J-093">Visitors rarely have to skip exhibits</span></li><li><span data-id="J-094">Total time spent on-site matches expectations</span></li><li><span data-id="J-095">There is no significant difference between 30-minute or 15-minute ticketing windows</span></li></ul></li></ul><figure class="fig fig--plate b w mt"><a href="assets/img/r01-chart-arrivals-random.jpg" target="_blank" rel="noopener" aria-label="Open full image: Arrivals spread randomly through the ticketing window"><div class="m"><img src="assets/img/r01-chart-arrivals-random.jpg" alt="Arrivals spread randomly through the ticketing window" loading="lazy"></div></a><figcaption data-added="caption">Fig. 07 — Arrivals spread randomly through the ticketing window</figcaption></figure><h4 class="b" data-id="J-097">Ticketing Window &amp; Arrival Patterns</h4><ul class="b"><li><span data-id="J-098">If most visitors arrive close to the start of the ticketing window</span><ul><li><span data-id="J-099">Congestion and queue sizes are high</span></li><li><span data-id="J-100">With no docent control at the entrance, skipping behavior balloons</span><ul><li><span data-id="J-101">This could result in many unhappy visitors!</span></li></ul></li><li><span data-id="J-102">Average time spent on-site increases by just a few minutes, but the maximum time on-site almost doubles!</span></li><li><span data-id="J-103">In this case, all indicators are much better if 15-minute ticketing windows are used</span></li></ul></li></ul><div class="board b full mt"><figure class="fig fig--plate "><a href="assets/img/r01-chart-arrivals-ontime.jpg" target="_blank" rel="noopener" aria-label="Open full image: Arrivals at the start of the ticketing window"><div class="m"><img src="assets/img/r01-chart-arrivals-ontime.jpg" alt="Arrivals at the start of the ticketing window" loading="lazy"></div></a><figcaption data-added="caption">Fig. 08 — Arrivals at the start of the ticketing window</figcaption></figure><figure class="fig fig--plate "><a href="assets/img/r3-fig-visit-times.jpg" target="_blank" rel="noopener" aria-label="Open full image: Expected visit times by visitor type"><div class="m"><img src="assets/img/r3-fig-visit-times.jpg" alt="Expected visit times by visitor type" loading="lazy"></div></a><figcaption data-added="caption">Fig. 09 — Expected visit times by visitor type</figcaption></figure></div></div></section><section class="chapter" id="ch-8"><div class="wrap g24 a7"><div class="a7__left"><figure class="fig fig--plate "><a href="assets/img/r01-chart-docent.jpg" target="_blank" rel="noopener" aria-label="Open full image: Skipped exhibits, without and with docent control"><div class="m"><img src="assets/img/r01-chart-docent.jpg" alt="Skipped exhibits, without and with docent control" loading="lazy"></div></a><figcaption data-added="caption">Fig. 10 — Skipped exhibits, without and with docent control</figcaption></figure><figure class="fig fig--plate "><a href="assets/img/r01-chart-best-full.jpg" target="_blank" rel="noopener" aria-label="Open full image: Best scenario: 20 tickets, 8 walk-ups, with docent control"><div class="m"><img src="assets/img/r01-chart-best-full.jpg" alt="Best scenario: 20 tickets, 8 walk-ups, with docent control" loading="lazy"></div></a><figcaption data-added="caption">Fig. 11 — Best scenario: 20 tickets, 8 walk-ups, with docent control</figcaption></figure></div><header class="ch-head"><span class="no" data-added="ui">08</span><h2 data-id="J-106">Findings</h2></header><ol class="b nl"><li><h3 class="" data-id="J-107">Ticketing Strategy</h3><p class="" data-id="J-108">Visitors were expected to arrive near the beginning of their assigned ticket windows, particularly during the exhibition&#x27;s opening months.</p><p class="" data-id="J-109">A 15-minute ticketing schedule distributed arrivals more evenly than 30-minute windows, reducing congestion throughout the home.</p></li><li><h3 class="" data-id="J-110">Capacity</h3><p class="" data-id="J-111">While the home could accommodate a maximum of approximately 32 visitors every 15 minutes, a capacity of 30 visitors per entry window created a noticeably more comfortable visitor experience while maintaining operational efficiency.</p></li><li><h3 class="" data-id="J-112">Presenter Placement</h3><p class="" data-id="J-113">Simulation results demonstrated that placing presenters near the first exhibits significantly improved visitor flow.</p><p class="" data-id="J-114">Presenters helped regulate entry into high-demand spaces, reduced skipped exhibits, and minimized bottlenecks during periods of heavy attendance. The recommended staffing model included three to four presenters positioned throughout key zones of the home during opening operations.</p></li><li><h3 class="" data-id="J-115">Walk-Up Visitors</h3><p class="" data-id="J-116">Allowing a controlled mix of ticketed and walk-up visitors naturally staggered arrivals, reducing congestion and average waiting times while increasing access for guests unable to reserve tickets in advance.</p></li></ol></div></section><section class="chapter" id="ch-9"><div class="wrap g24"><header class="ch-head"><span class="no" data-added="ui">09</span><h2 data-id="J-119">Impact</h2></header><p class="b" data-id="J-120">The visitor flow simulation provided stakeholders with evidence-based recommendations before the Jackson Home opened to the public. The research directly informed operational planning by helping teams:</p><ol class="b nl"><li><span data-id="J-121">establish ticketing schedules for opening operations</span></li><li><span data-id="J-122">determine comfortable visitor capacity limits</span></li><li><span data-id="J-123">identify high-congestion areas before opening</span></li><li><span data-id="J-124">optimize presenter placement throughout the home</span></li><li><span data-id="J-125">evaluate queue management strategies</span></li><li><span data-id="J-126">deciding factor for where to place digital interactives in the exhibit</span></li><li><span data-id="J-127">improve visitor flow while preserving the historic integrity of the building</span></li></ol><p class="b" data-id="J-128">Rather than relying on assumptions alone, leadership was able to make operational decisions supported by predictive behavioral research and simulation.</p></div></section><section class="chapter section--alt reflection-sec" id="ch-10" style="padding-block:var(--section);margin-top:var(--section)"><div class="wrap reflection"><p class="label" data-added="ui">10</p><h2 class="kicker" data-id="J-129">Reflection</h2><p class="q" data-id="J-130">This project broadened my understanding of user experience beyond digital products, demonstrating how UX research methodologies can be applied to improve experiences within physical environments. It also deepened my appreciation for how visitors engage with and process complex, emotionally significant stories, particularly those centered on difficult history</p><p class="label" data-added="ui">—</p></div></section>
+<!-- A5: previous / all / next -->
+<nav class="pn" aria-label="More projects" data-added="ui"><div class="wrap g24">
+  <a class="prev" href="room-04-littelfuse.html"><span class="label">← Previous project</span><span class="t">Reimagining How Engineers Discover Littelfuse Products</span></a>
+  <a class="all" href="projects.html"><span class="label">All projects</span></a>
+  <a class="next" href="room-02-power-energy.html"><span class="label">Next project →</span><span class="t">Designing an Interactive Museum Experience for Power &amp; Energy</span></a>
+</div></nav>
 </main>
-<footer class="foot"><div class="wrap label"><span>Yasmin Bajwa &copy; 2026 &middot; Built with care</span><a href="#top">Back to top &uarr;</a></div></footer>
-<div class="proto" aria-label="Prototype controls"><span>Prototype</span><button type="button" id="wf-toggle" aria-pressed="false">Wireframe</button></div>
+<footer class="foot" data-added="ui"><div class="wrap"><span>Yasmin Bajwa © 2026</span><a class="u" href="#top">Back to top ↑</a></div></footer>
 </body>
 </html>

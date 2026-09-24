@@ -1,3 +1,4 @@
+"""Round 2 page generator, kept for reference only. Running it would overwrite the Round 3 pages; use tools/build_r3.py."""
 """Generate the six prototype pages from one set of templates.
 
 Run from the yasmin/ folder:  python3 tools/build_pages.py
