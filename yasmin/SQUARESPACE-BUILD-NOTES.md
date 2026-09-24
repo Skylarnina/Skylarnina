@@ -1,8 +1,10 @@
-# Squarespace build notes: Round 5
+# Squarespace build notes: Round 6
 
 How to build the prototype (`site/`) in **Squarespace 7.1 with Fluid Engine**, using only standard sections and blocks, Site Styles, and **19 lines of custom CSS** (§2; the budget is 30). There is **no custom JavaScript** and **no Code Block used for layout**. The prototype itself has no JavaScript either, so what you see is what the native build can do.
 
-**Round 5 changes:** the discipline panels always show their image under a 45% black overlay, and hover only lightens it to 30% (§2 lines 17–19; the opacity-0 CSS is gone). Rooms 03 and 04 get a white header with no image behind the title, and their cover moves to FIG. 01, a full plate under the chapter index (§4, 0a–0c). Headings are now Instrument Sans; body, captions and labels stay Inter Tight (§0). Greyscale HTML wireframes of every page are in `wireframes/` (§7).
+**Round 6 change:** headings are now **Instrument Serif** (one weight plus italic); body, captions, labels and numerals stay Inter Tight. Heading sizes went up a step because the serif is narrower and lighter (§0).
+
+**Round 5 changes:** the discipline panels always show their image under a 45% black overlay, and hover only lightens it to 30% (§2 lines 17–19; the opacity-0 CSS is gone). Rooms 03 and 04 get a white header with no image behind the title, and their cover moves to FIG. 01, a full plate under the chapter index (§4, 0a–0c). Headings were switched to Instrument Sans (replaced by Instrument Serif in round 6). Greyscale HTML wireframes of every page are in `wireframes/` (§7).
 
 **Round 4 changes:** no photo strip under the hero; discipline panels with images (revised in round 5); the About section as a bento (statement + four-image mosaic); finished 3:2 row covers with the subject whole; every case-study image in one of six bento modules (§4a, full list in `MODULE-MAP.md`). Drawing, screen and document tiles are exported with the light ground and 24px padding **inside the file**, so no CSS is needed to stop Squarespace cropping them.
 
@@ -15,7 +17,7 @@ Items marked **verify** are how I understand the current editor. Check each once
 | Item | Setting |
 |---|---|
 | Template | Any 7.1 template; everything below is set per section. |
-| Fonts (*Site Styles → Fonts*) | **Headings: Instrument Sans** (Google Fonts; listed in Squarespace's font picker, **verify** once under *Site Styles → Fonts → All font packs / Headings*). Use it for Heading 1–4, the site's big numerals (chapter and panel numbers, the 60% / 10% / 30% stats) through Heading styles. Weights **400 and 500 only**, plus italic 400 for "*Yasmin.*". Tracking **−0.01em on sizes above 48px**, 0 below. **Body, captions, labels, navigation and buttons: Inter Tight** (Google), 400/500. |
+| Fonts (*Site Styles → Fonts*) | **Headings: Instrument Serif** (Google Fonts; **verify** it is listed in her account's picker under *Site Styles → Fonts → Headings*; if it isn't, it can be added as a custom font). Use it for Heading 1–4: the hero name, page and cover titles, chapter titles, her sub-headings, the discipline names and the project titles (rows, Projects grid, previous/next). Instrument Serif comes in **one weight (400) plus italic**, so there is no bold heading: where a heading needs emphasis (her "How might we…" labels, the Littelfuse audit headings), use *italic*. Tracking **−0.01em on sizes above 48px**, 0 below. **Body, captions, labels, numerals, navigation and buttons: Inter Tight** (Google), 400/500. |
 | Colours (*Site Styles → Colours*) | Palette: `#FFFFFF`, `#F4F3F0`, `#111111`. Three themes: **White** (background `#FFFFFF`, text `#111111`), **Stone** (background `#F4F3F0`, text `#111111`) and **Ink** (background `#111111`, text `#FFFFFF`, used only by the discipline panels so their names are white without CSS). No accent colour; links `#111111`, underlined. |
 | Buttons | Primary: **outline**, **square corners**, 1px, 14px text. The lock screen's Enter button is solid (§5). |
 | Animations (*Site Styles → Animations*) | **Fade**, speed **Slow**. Nothing else: no scroll effects, no parallax. |
@@ -25,10 +27,10 @@ Items marked **verify** are how I understand the current editor. Check each once
 
 | Style | Desktop | Mobile | Used for |
 |---|---|---|---|
-| Heading 1 (Instrument Sans) | 140px / 0.92, tracking −0.01em | 64px | "Hi, I'm *Yasmin.*" |
-| Heading 2 (Instrument Sans) | 72px / 1.02, tracking −0.01em | 36–40px, tracking 0 | Page titles, cover titles, "Projects", contact line |
-| Heading 3 (Instrument Sans) | 40px / 1.08, tracking 0 | 30px | Chapter titles |
-| Heading 4 (Instrument Sans) | 20px / 1.3 | 20px | Her sub-headings ("Visitor Experience", "Ticketing Strategy"…) |
+| Heading 1 (Instrument Serif) | 140px / 0.92, tracking −0.01em | 64px | "Hi, I'm *Yasmin.*" |
+| Heading 2 (Instrument Serif) | 80px / 1.02, tracking −0.01em | 40px, tracking 0 | Page titles, cover titles, "Projects", contact line |
+| Heading 3 (Instrument Serif) | 46px / 1.08, tracking 0 | 34px | Chapter titles; discipline names at 34px (28px mobile); project-row titles at 32px |
+| Heading 4 (Instrument Serif) | 24px / 1.3 | 24px | Her sub-headings ("Visitor Experience", "Ticketing Strategy"…); italic for her "How might we…" labels |
 | Paragraph 1 (Inter Tight) | 40px / 1.2 | 28px | The About statement (left 12 columns) |
 | Paragraph 2 (Inter Tight) | 17px / 1.6 | 16px | All her body text, in a 12-column measure (~62ch) |
 | Paragraph 3 (Inter Tight) | 11px / 1.45, **uppercase, tracking 0.08em**, colour 62% ink | 11px | Labels, captions, "FIG. 03 — …", "PASSWORD PROTECTED" |

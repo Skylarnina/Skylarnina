@@ -31,8 +31,8 @@ def font_face(family, style, weight, file):
 FONTS = "\n".join([
     font_face("Inter Tight", "normal", "400 500", "inter-tight-latin.woff2"),
     font_face("Inter Tight", "italic", "400", "inter-tight-italic-latin.woff2"),
-    font_face("Instrument Sans", "normal", "400 500", "instrument-sans-latin.woff2"),
-    font_face("Instrument Sans", "italic", "400", "instrument-sans-italic-latin.woff2")])
+    font_face("Instrument Serif", "normal", "400", "instrument-serif-latin.woff2"),
+    font_face("Instrument Serif", "italic", "400", "instrument-serif-italic-latin.woff2")])
 
 WF_CSS = """
 /* ---- wireframe overrides: greyscale, grey boxes, labels ---- */
@@ -115,12 +115,13 @@ def convert(page, name):
     s = re.sub(r"<img [^>]*>", other, s)
     assert "assets/img/" not in re.sub(r'href="assets/img/[^"]*"', "", s), page
     # 3. no links to full-size images; no external files
+    css = open("site/assets/css/r3.css").read()          # inline the stylesheet first, before links are stripped
+    s = s.replace('<link rel="stylesheet" href="assets/css/r3.css">', f"<style>\n{FONTS}\n{css}\n{WF_CSS}</style>")
+    assert "<style>" in s and "@font-face" in s and "wf-label" in s, page
     s = re.sub(r'href="assets/[^"]*"', 'href="#"', s)
     s = s.replace(' target="_blank" rel="noopener"', "")
     s = re.sub(r'<link rel="preconnect"[^>]*>\n?', "", s)
     s = re.sub(r'<link rel="stylesheet" href="https://fonts[^>]*>\n?', "", s)
-    css = open("site/assets/css/r3.css").read()
-    s = s.replace('<link rel="stylesheet" href="assets/css/r3.css">', f"<style>\n{FONTS}\n{css}\n{WF_CSS}</style>")
     s = re.sub(r"<title>(.*?)</title>", r"<title>Wireframe — \1</title>", s, count=1)
     s = s.replace("</body>", f'<p class="wf-tag">Wireframe · {html.escape(name)} · <a href="index-wireframes.html">all pages</a></p>\n</body>')
     assert not re.search(r'(?:src|href)="(?:https?://|assets/)', s), page    # standalone: nothing external
@@ -144,13 +145,13 @@ index = f"""<!doctype html>
 body{{margin:0;background:#fff;color:#111;font:400 17px/1.6 'Inter Tight',Arial,sans-serif}}
 main{{max-width:1100px;margin:0 auto;padding:clamp(48px,7vw,112px) clamp(20px,3.4vw,48px)}}
 .label{{font:500 11px/1.45 'Inter Tight',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:rgba(17,17,17,.62)}}
-h1{{font:400 clamp(40px,5vw,72px)/1.02 'Instrument Sans',Arial,sans-serif;letter-spacing:-.01em;margin:12px 0 24px}}
+h1{{font:400 clamp(44px,5.4vw,80px)/1 'Instrument Serif',Georgia,serif;letter-spacing:-.01em;margin:12px 0 24px}}
 p{{max-width:62ch;margin:0 0 12px}}
 ol{{list-style:none;padding:0;margin:48px 0 0;border-top:1px solid #111}}
 li a{{display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(17,17,17,.14);color:inherit;text-decoration:none}}
 li a:hover .t{{text-decoration:underline;text-underline-offset:.22em}}
-.n{{font-family:'Instrument Sans',Arial,sans-serif;color:rgba(17,17,17,.62)}}
-.t{{font:400 24px/1.25 'Instrument Sans',Arial,sans-serif}}
+.n{{color:rgba(17,17,17,.62)}}
+.t{{font:400 28px/1.2 'Instrument Serif',Georgia,serif}}
 .f{{font-size:13px;color:rgba(17,17,17,.62)}}
 @media (max-width:600px){{li a{{grid-template-columns:40px 1fr}}.f{{display:none}}.t{{font-size:20px}}}}
 </style>
