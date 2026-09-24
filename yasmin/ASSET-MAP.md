@@ -155,3 +155,13 @@ All 24 images embedded in `source/CASE_STUDY-Yasmin_Bajwa.pdf`, numbered in docu
 | `r04-cover-4x5.jpg` | `r04_doc_journey-map.png` | Detail crop (Learn stage, steps 3–4) mounted like a plate on `#E9E4DB`, shared tone |
 
 **Shared tone** (all four covers): saturation 80%, contrast 97%, then `#F3F0EA` multiplied at 50%.
+
+## Round 2: derived web assets
+
+`tools/build_assets.py` regenerates every file in `site/assets/img/` and `site/assets/video/` from `media/` and `source/`. Its crop boxes are the record of what each web image shows. Main additions this round:
+- **Room 01:** 16:9 simulation still (header), itinerary crops (entrance, vestibule, front rooms, kitchen, exit), six simulation stills, and chart tiles cut from the data sheets.
+- **Room 02:** column frames from the final-setup and fabrication videos, the five side artworks, the shop drawings rendered from the vector PDF (+ a plan-view detail), the whiteboard split into two sketches, and ITC board and sides-diagram details.
+- **Room 03:** ten mobile and three desktop screens rendered from the RIDOH PDF, the goals 20–23 detail, and a 16:9 five-screen header.
+- **Room 04:** the Find / Learn / Get journey details and the three archetype panels.
+- **Homepage:** four 4:1 discipline strips.
+- **Videos:** 8 muted H.264 encodes (≤3.6 MB) with poster frames. The simulation has its burned-in player bar cropped off.

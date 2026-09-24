@@ -7,394 +7,165 @@
 <meta name="description" content="Yasmin Bajwa designs digital experiences for museums, and the research that shapes them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&display=swap">
-<style>
-/* =========================================================
-   The Exhibition: prototype for Squarespace 7.1 (Fluid Engine)
-   Every value here maps to Site Styles or the Custom CSS panel.
-   See ../SQUARESPACE-BUILD-NOTES.md (Phase 3).
-   ========================================================= */
-:root{
-  color-scheme: light;
-  /* colour */
-  --ground:#F3F0EA;          /* warm gallery white */
-  --wall:#E9E4DB;            /* deeper wall, alternate sections */
-  --ink:#16140F;
-  --ink-muted:rgba(22,20,15,.72);   /* brief: 64%. Raised to 72% for AA on --wall */
-  --ink-label:rgba(22,20,15,.66);   /* brief: 45%. 45% is 2.9:1 and fails WCAG AA; 66% passes on both grounds */
-  --hair:rgba(22,20,15,.15);
-  --accent:#8C2F1E;          /* archive red */
-  --blackbox:#141311;
-  /* type */
-  --serif:'Instrument Serif','Newsreader','Libre Caslon Display',Georgia,serif;
-  --sans:'Inter Tight','Neue Haas Grotesk Text Pro','Helvetica Neue',Arial,sans-serif;
-  --fs-body:17px;
-  --fs-label:11px;
-  --fs-hero:clamp(64px, 10.6vw, 152px);
-  --fs-room:clamp(44px, 5.6vw, 84px);
-  --fs-section:clamp(44px, 6vw, 88px);
-  /* grid */
-  --gutter:24px;
-  --margin:clamp(16px, 3.9vw, 56px);
-  --section:clamp(96px, 11.2vw, 168px);
-  --ease:cubic-bezier(.22,.61,.36,1);
-}
-*,*::before,*::after{box-sizing:border-box}
-html{background:var(--ground);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--ground);color:var(--ink);font:400 var(--fs-body)/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-img{display:block;max-width:100%;height:auto}
-a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-h1,h2,h3,p,dl,dd,figure,ol{margin:0;padding:0}
-ol{list-style:none}
-
-.wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--margin)}
-.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter)}
-.label{font:500 var(--fs-label)/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-label)}
-.serif{font-family:var(--serif);font-weight:400}
-
-/* ---------- 0. Top bar ---------- */
-.bar{border-bottom:1px solid var(--hair)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:24px}
-.bar__name{font:500 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase}
-.bar__nav{display:flex;align-items:center;gap:32px;font:400 14px/1 var(--sans)}
-.bar__nav a{position:relative;padding-block:8px}
-.bar__nav a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
-.bar__nav a:hover::after{transform:scaleX(1)}
-.bar__nav .bar__cta{color:var(--accent)}
-.bar__menu{display:none}
-
-/* ---------- 1. Hero: the exhibition title ---------- */
-.hero{padding-block:clamp(40px,5.6vw,80px) var(--section)}
-.hero .grid{position:relative;container-type:inline-size;grid-template-rows:auto auto auto 1fr;row-gap:0}
-.hero__eyebrow{grid-column:1/7;grid-row:1}
-.facts{grid-column:1/6;grid-row:4;align-self:end;margin-top:56px;border-bottom:1px solid var(--hair)}
-.facts div{display:grid;grid-template-columns:104px 1fr;gap:16px;padding:10px 0 9px;border-top:1px solid var(--hair)}
-.facts dt{padding-top:4px}
-.facts dd{font-size:15px;line-height:1.45}
-.pending{color:var(--ink-label);font-style:italic}
-
-.greet{grid-column:1/8;grid-row:2;font:400 var(--fs-hero)/.9 var(--serif);letter-spacing:-.02em;margin-block:clamp(64px,8vw,120px) 40px;position:relative;z-index:2}
-.greet em{font-style:italic}
-.greet .l1,.greet .l2{display:block}
-
-.lede{grid-column:1/6;grid-row:3;display:grid;gap:32px;align-content:start}
-.lede p{font:400 clamp(22px,2.1vw,28px)/1.3 var(--serif);max-width:24ch;text-wrap:balance}
-
-/* CTA option A: ink pill */
-.cta-pill{display:none;justify-self:start;align-items:center;gap:12px;padding:16px 28px;border-radius:999px;background:var(--ink);color:var(--ground);font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;transition:background-color .4s var(--ease)}
-.cta-pill:hover{background:var(--accent)}
-/* CTA option B: large underlined serif link (default) */
-.cta-link{justify-self:start;display:inline-flex;align-items:baseline;gap:.35em;font:400 clamp(30px,2.8vw,40px)/1.1 var(--serif);border-bottom:1px solid var(--accent);padding-bottom:6px;transition:color .4s var(--ease)}
-.cta-link span{transition:transform .5s var(--ease)}
-.cta-link:hover{color:var(--accent)}
-.cta-link:hover span{transform:translateX(6px)}
-
-.portrait{grid-column:8/13;grid-row:1/5;position:relative;z-index:1;align-self:start}
-.portrait__frame{aspect-ratio:4/5;background:#DCD5C9;overflow:hidden}
-.portrait__frame img{width:100%;height:100%;object-fit:cover}
-.placard{margin-top:16px;max-width:36ch;font:400 var(--fs-label)/1.55 var(--sans);letter-spacing:.02em;color:var(--ink-muted)}
-.placard b{display:block;font-weight:500;color:var(--ink);letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
-.cutout{display:none}
-
-/* Enhanced hero: the name passes behind her shoulder (desktop only) */
-@media (min-width:1100px){
-  body:has(#hero-depth:checked) .hero .grid > *{--pw:calc((100cqw - 11 * var(--gutter)) / 12 * 5 + 4 * var(--gutter));--hfs:calc(var(--pw) * .35);--htop:calc(var(--pw) * 1.25 * .425 - .46 * var(--hfs))}
-  body:has(#hero-depth:checked) .greet{position:absolute;grid-column:auto;grid-row:auto;left:var(--margin);top:var(--htop);margin:0;white-space:nowrap;font-size:var(--hfs)}
-  body:has(#hero-depth:checked) .greet .l1,
-  body:has(#hero-depth:checked) .greet .l2{display:inline}
-  body:has(#hero-depth:checked) .cutout{display:block;position:absolute;right:var(--margin);top:0;width:var(--pw);aspect-ratio:4/5;z-index:3;pointer-events:none}
-  body:has(#hero-depth:checked) .cutout img{width:100%;height:100%;object-fit:cover}
-  body:has(#hero-depth:checked) .lede{grid-row:2/4;margin-top:calc(var(--htop) + .9 * var(--hfs) + 28px - 16px)}
-}
-@media (min-width:1100px){
-  .lede{grid-column:1/8;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:32px}
-  .lede .cta-link,.lede .cta-pill{justify-self:end;margin-bottom:6px}
-  .facts{margin-top:24px}
-}
-body:has(#cta-pill:checked) .cta-pill{display:inline-flex}
-body:has(#cta-pill:checked) .cta-link{display:none}
-
-/* ---------- Phase marker (review only) ---------- */
-.next-phase{margin-block:0;border-block:1px dashed var(--hair)}
-.next-phase .wrap{display:flex;justify-content:space-between;gap:24px;padding-block:28px}
-
-/* ---------- 3. The rooms ---------- */
-.rooms{padding-block:var(--section)}
-.rooms__head{row-gap:32px;align-items:end;margin-bottom:clamp(80px,9vw,140px)}
-.rooms__title{grid-column:1/7;font:400 var(--fs-section)/.95 var(--serif);letter-spacing:-.015em}
-.rooms__title em{font-style:italic}
-.rooms__intro{grid-column:1/6;max-width:44ch;color:var(--ink-muted)}
-.rooms__eyebrow{grid-column:1/7}
-.plan{grid-column:8/13;grid-row:1/4;align-self:end}
-.plan svg{width:100%;height:auto;overflow:visible}
-.plan .rm rect{fill:transparent;stroke:var(--ink);stroke-opacity:.55;stroke-width:1;transition:fill .4s var(--ease)}
-.plan .rm:hover rect,.plan .rm:focus-visible rect{fill:var(--wall)}
-.plan .door{fill:var(--ground);stroke:none}
-.plan .no{font:italic 400 30px var(--serif);fill:var(--accent)}
-.plan .nm{font:500 8.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:var(--ink);fill-opacity:.72}
-.plan .path{fill:none;stroke:var(--accent);stroke-width:1.25;stroke-dasharray:3 4}
-.plan .you{fill:var(--accent)}
-.plan .you-t{font:500 8.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:var(--accent)}
-.plan figcaption{margin-top:14px;display:flex;justify-content:space-between;gap:16px}
-
-.room-list{display:grid;row-gap:var(--section)}
-.room__link{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);align-items:start}
-.room__cover{overflow:hidden;background:var(--wall)}
-.room__cover img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1.4s var(--ease)}
-.room__link:hover .room__cover img{transform:scale(1.025)}
-.wall-label{display:grid;gap:18px;align-content:start;position:relative;z-index:2}
-.wall-label .no{color:var(--accent)}
-.room__title{font:400 var(--fs-room)/.98 var(--serif);letter-spacing:-.015em;transition:color .4s var(--ease);text-wrap:balance}
-.room__title em{display:block;font-style:italic;font-size:.46em;line-height:1.2;margin-top:.35em;letter-spacing:0;color:var(--ink-muted)}
-.room__link:hover .room__title{color:var(--accent)}
-.meta{display:flex;flex-wrap:wrap;column-gap:10px;row-gap:2px;font:400 13px/1.5 var(--sans);color:var(--ink-muted);padding-block:12px;border-block:1px solid var(--hair)}
-.meta span:not(:last-child)::after{content:"\00B7";margin-left:10px;color:var(--ink-label)}
-.outcome{max-width:38ch}
-.room__foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:6px}
-.lock{display:inline-flex;align-items:center;gap:8px}
-.lock svg{width:10px;height:13px;flex:none}
-.enter{font:400 22px/1 var(--serif);border-bottom:1px solid var(--accent);padding-bottom:4px;white-space:nowrap}
-.enter span{display:inline-block;transition:transform .5s var(--ease)}
-.room__link:hover .enter span{transform:translateX(6px)}
-
-/* the four deliberately uneven rows */
-.room--1 .room__cover{grid-column:1/8}
-.room--1 .wall-label{grid-column:9/13;align-self:end}
-.room--2 .wall-label{grid-column:2/7;grid-row:1}
-.room--2 .room__title{white-space:nowrap;margin-right:-60vw}
-.room--2 .room__title em{white-space:normal;max-width:18em}
-.room--2 .room__cover{grid-column:7/13;grid-row:1;margin-top:clamp(120px,11vw,160px)}
-.room--3 .room__cover{grid-column:2/7}
-.room--3 .wall-label{grid-column:8/12;padding-top:clamp(40px,6vw,96px)}
-.room--4 .wall-label{grid-column:1/6;grid-row:1;align-self:end}
-.room--4 .room__cover{grid-column:7/12;grid-row:1}
-
-.foot{border-top:1px solid var(--hair)}
-.foot .wrap{display:flex;justify-content:space-between;gap:24px;padding-block:32px}
-
-/* ---------- motion: the gentlest fade, like Squarespace "Fade" ---------- */
-@supports (animation-timeline:view()){
-  @media (prefers-reduced-motion:no-preference){
-    .reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
-    @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-  }
-}
-
-/* ---------- review panel (prototype only, not built in Squarespace) ---------- */
-.review{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--ground);border:1px solid var(--hair);padding:14px 16px;display:grid;gap:10px;font:400 12px/1.2 var(--sans);max-width:calc(100vw - 32px)}
-.review fieldset{border:0;margin:0;padding:0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.review legend{float:left;width:52px;padding:0}
-.review input{position:absolute;opacity:0;pointer-events:none}
-.review label{padding:6px 10px;border:1px solid var(--hair);cursor:pointer;white-space:nowrap}
-.review input:checked+label{background:var(--ink);color:var(--ground);border-color:var(--ink)}
-.review input:focus-visible+label{outline:2px solid var(--accent);outline-offset:2px}
-
-/* ---------- tablet ---------- */
-@media (max-width:1099px){
-  .greet{grid-column:1/8}
-  .portrait{grid-column:8/13}
-  .room--2 .room__title{white-space:normal;margin-right:0}
-  .review .only-desktop{display:none}
-}
-/* ---------- mobile (390 design width) ---------- */
-@media (max-width:767px){
-  :root{--fs-body:16px;--gutter:16px}
-  .bar .wrap{min-height:60px}
-  .bar__nav a:not(.bar__menu){display:none}
-  .bar__menu{display:inline-flex}
-  .hero .grid{display:flex;flex-direction:column}
-  .portrait{order:1;margin-bottom:40px}
-  .hero__eyebrow{order:2}
-  .greet{order:3;margin-block:20px 24px;font-size:64px;line-height:.92}
-  .lede{order:4;gap:24px}
-  .lede p{font-size:24px}
-  .facts{order:5;margin-top:48px}
-  .facts div{grid-template-columns:96px 1fr}
-  .rooms__head{display:flex;flex-direction:column;align-items:stretch;margin-bottom:72px}
-  .plan{order:4;margin-top:16px;align-self:stretch}
-  .room__link{display:flex;flex-direction:column;gap:28px}
-  .room--2 .room__cover{margin-top:0;order:-1}
-  .room--4 .room__cover{order:-1}
-  .room--3 .wall-label{padding-top:0}
-  .room__title{font-size:44px}
-  .room-list{row-gap:96px}
-  .next-phase .wrap{flex-direction:column;gap:6px}
-  .foot .wrap{flex-direction:column;gap:8px}
-  .review{left:16px;right:16px}
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/css/exhibition.css">
+<script src="assets/js/exhibition.js" defer></script>
 </head>
 <body>
-
-<header class="bar">
+<main id="top">
+<header class="bar bar--dark">
   <div class="wrap">
-    <a class="bar__name" href="#top">Yasmin Bajwa</a>
+    <a class="bar__name" href="index.html">Yasmin Bajwa</a>
     <nav class="bar__nav" aria-label="Main">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a class="bar__cta" href="#work">View Projects</a>
-      <a class="bar__menu" href="#work">Menu</a>
+      <a href="index.html#rooms">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="bar__cta" href="index.html#rooms">View Projects</a>
+      <a class="bar__menu" href="index.html#rooms">Menu</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
+<!-- P5 (type behind subject, 01-04 index) + P8 (spaced caps, hairline) : EXHIBITION TITLE -->
+<section class="h-hero" aria-labelledby="hero-name">
+  <div class="m h-hero__photo"><img src="assets/img/portrait-4x5.jpg" alt="Yasmin Bajwa in a grey blazer"></div>
+  <h1 class="h-hero__word" id="hero-name"><span aria-hidden="true">YASMIN</span><span class="sr-only">Yasmin Bajwa</span></h1>
+  <div class="h-hero__cut" aria-hidden="true"><img src="assets/img/portrait-cutout.webp" alt=""></div>
+  <div class="h-hero__text">
+    <p class="spaced">Digital Exhibit Designer &mdash; The Henry Ford</p>
+    <hr class="hairline">
+    <p class="serif">Hi, I&rsquo;m <em>Yasmin.</em> I design digital experiences for museums, and the research that shapes them.</p>
+    <a class="pill pill--solid" href="#rooms">View Projects <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <nav class="h-hero__index vindex" aria-label="The four rooms"><a href="room-01-jackson-home.html" class="is-current"><span class="vindex__name">Jackson Home</span>01</a><a href="room-02-power-energy.html"><span class="vindex__name">Power &amp; Energy</span>02</a><a href="room-03-rhode-island.html"><span class="vindex__name">Rhode Island</span>03</a><a href="room-04-littelfuse.html"><span class="vindex__name">Littelfuse</span>04</a></nav>
+  <p class="h-hero__caption label">A portfolio in four rooms &mdash; 2026</p>
+</section>
 
-  <!-- 1. EXHIBITION TITLE -->
-  <section class="hero" aria-labelledby="greet">
-    <div class="wrap grid">
-      <p class="hero__eyebrow label reveal">A portfolio in four rooms &mdash; 2026</p>
+<!-- P4 (stacked full-width photo strips, one word each) : FOUR DISCIPLINES -->
+<section class="disciplines" aria-labelledby="disc-title">
+  <div class="wrap disciplines__head">
+    <h2 class="label" id="disc-title">Four disciplines</h2>
+    <p class="label">In the order I practise them</p>
+  </div>
+  <div class="strips">
+    <a class="strip" href="room-02-power-energy.html">
+      <div class="m"><img src="assets/img/strip-exhibit.jpg" alt="The installed Power and Energy column in the museum" loading="lazy"></div>
+      <span class="strip__no">01</span>
+      <span class="strip__word">Interactive Exhibit Design</span>
+      <span class="strip__note">A five-sided digital column at the entrance to Power &amp; Energy.</span>
+    </a>
+    <a class="strip" href="room-03-rhode-island.html">
+      <div class="m"><img src="assets/img/strip-ux-design.jpg" alt="A row of 401Health app wireframes" loading="lazy"></div>
+      <span class="strip__no">02</span>
+      <span class="strip__word">UX Design</span>
+      <span class="strip__note">Sign-up, records and scheduling for Rhode Island&rsquo;s 401 Health app.</span>
+    </a>
+    <a class="strip" href="room-01-jackson-home.html">
+      <div class="m"><img src="assets/img/strip-ux-research.jpg" alt="The Jackson Home floor plan with visitor paths" loading="lazy"></div>
+      <span class="strip__no">03</span>
+      <span class="strip__word">UX Research</span>
+      <span class="strip__note">Simulating how visitors would move through the Jackson Home before it opened.</span>
+    </a>
+    <a class="strip" href="room-02-power-energy.html">
+      <div class="m"><img src="assets/img/strip-marketing.jpg" alt="ITC employee research storyboard" loading="lazy"></div>
+      <span class="strip__no">04</span>
+      <span class="strip__word">Digital Marketing</span>
+      <span class="strip__note">Career stories for a sponsor, written to inform rather than advertise.</span>
+    </a>
+  </div>
+</section>
 
-
-      <h1 class="greet" id="greet"><span class="l1">Hi, I&rsquo;m</span> <em class="l2">Yasmin.</em></h1>
-
-      <div class="lede reveal">
-        <p>I design digital experiences for museums, and the research that shapes them.</p>
-        <a class="cta-link" href="#work">View Projects <span aria-hidden="true">&rarr;</span></a>
-        <a class="cta-pill" href="#work">View Projects <span aria-hidden="true">&rarr;</span></a>
-      </div>
-
-      <dl class="facts reveal" aria-label="Wall label">
-        <div><dt class="label">Role</dt><dd>Digital Exhibit Designer, The Henry Ford</dd></div>
-        <div><dt class="label">Based in</dt><dd class="pending">City to confirm</dd></div>
-        <div><dt class="label">Practice</dt><dd>UX design, UX research, exhibit development</dd></div>
-        <div><dt class="label">Currently</dt><dd>Museum and Greenfield Village, Dearborn</dd></div>
-      </dl>
-
-      <figure class="portrait">
-        <div class="portrait__frame">
-          <img src="assets/img/portrait-4x5.jpg" width="1200" height="1500" alt="Yasmin Bajwa, smiling, in a grey blazer against a warm studio backdrop.">
+<!-- P3 (dark perspective carousel, framed active card) + P10 (meta line) : THE ROOMS -->
+<section class="section section--bb" id="rooms" aria-labelledby="rooms-title">
+  <div class="wrap grid" style="row-gap:24px;align-items:end">
+    <p class="label" style="grid-column:1/7">Selected work</p>
+    <h2 class="title" id="rooms-title" style="grid-column:1/8;color:var(--on-bb)">Four rooms, <em>in order of visit.</em></h2>
+    <p style="grid-column:9/13;color:var(--on-bb-muted);font-size:15px">Each room is one project, told from brief to outcome. Swipe or use the numbers. The case studies are shared by invitation.</p>
+  </div>
+  <div class="depth">
+    <div class="depth__track" data-track data-group="rooms">
+      <article class="depth__slide" id="slide-01" data-start>
+        <a class="depth__frame" href="room-01-jackson-home.html" aria-label="Enter room 01: The Henry Ford Jackson Home"><div class="m"><img src="assets/img/r01-cover-4x5.jpg" alt="Cover of room 01, The Henry Ford Jackson Home" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 01</span><span>UX Research</span><span>The Henry Ford</span><span>2026</span></p>
+          <h3 class="title">The Henry Ford Jackson Home</h3>
+          <p class="label"><a class="textlink" href="room-01-jackson-home.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
         </div>
-        <figcaption class="placard"><b>Yasmin Bajwa</b>Digital Exhibit Designer, The Henry Ford. UX design, research, exhibit development.</figcaption>
-      </figure>
-      <div class="cutout" aria-hidden="true"><img src="assets/img/portrait-cutout.webp" width="1200" height="1500" alt=""></div>
+      </article>
+      <article class="depth__slide" id="slide-02">
+        <a class="depth__frame" href="room-02-power-energy.html" aria-label="Enter room 02: Power &amp; Energy Interactive"><div class="m"><img src="assets/img/r02-cover-4x5.jpg" alt="Cover of room 02, Power &amp; Energy Interactive" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 02</span><span>Exhibit + UX Design</span><span>The Henry Ford</span><span>2026</span></p>
+          <h3 class="title">Power &amp; Energy Interactive</h3>
+          <p class="label"><a class="textlink" href="room-02-power-energy.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
+      <article class="depth__slide" id="slide-03">
+        <a class="depth__frame" href="room-03-rhode-island.html" aria-label="Enter room 03: Rhode Island 401 Health App"><div class="m"><img src="assets/img/r03-cover-4x5.jpg" alt="Cover of room 03, Rhode Island 401 Health App" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 03</span><span>UX Design + Research</span><span>RI Dept. of Health</span><span>2021</span></p>
+          <h3 class="title">Rhode Island 401 Health App</h3>
+          <p class="label"><a class="textlink" href="room-03-rhode-island.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
+      <article class="depth__slide" id="slide-04">
+        <a class="depth__frame" href="room-04-littelfuse.html" aria-label="Enter room 04: Littelfuse Product Discovery"><div class="m"><img src="assets/img/r04-cover-4x5.jpg" alt="Cover of room 04, Littelfuse Product Discovery" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 04</span><span>UX Consulting</span><span>Littelfuse</span><span>Year TBC</span></p>
+          <h3 class="title">Littelfuse Product Discovery</h3>
+          <p class="label"><a class="textlink" href="room-04-littelfuse.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
     </div>
-  </section>
+    <nav class="depth__nav" aria-label="Choose a room">
+      <a class="arrow" href="#slide-04" data-slide data-group="x" data-prev="rooms" aria-label="Previous room">&larr;</a>
+      <a href="#slide-01" data-slide data-group="rooms">01</a><a href="#slide-02" data-slide data-group="rooms">02</a><a href="#slide-03" data-slide data-group="rooms">03</a><a href="#slide-04" data-slide data-group="rooms">04</a>
+      <a class="arrow" href="#slide-02" data-slide data-group="x" data-next="rooms" aria-label="Next room">&rarr;</a>
+    </nav>
+  </div>
+</section>
 
-  <!-- 2. FOUR DISCIPLINES: Phase 3 -->
-  <aside class="next-phase" aria-label="Coming in the next phase">
-    <div class="wrap label"><span>02 &mdash; Four disciplines</span><span>Designed in Phase 3</span></div>
-  </aside>
-
-  <!-- 3. THE ROOMS -->
-  <section class="rooms" id="work" aria-labelledby="rooms-title">
-    <div class="wrap grid rooms__head">
-      <p class="rooms__eyebrow label reveal">Selected work, four rooms</p>
-      <h2 class="rooms__title reveal" id="rooms-title">The <em>rooms.</em></h2>
-      <p class="rooms__intro reveal">Four projects, hung in the order I would walk you through them. Each room opens with its wall label. The full case studies are shared by invitation.</p>
-
-      <figure class="plan reveal" aria-label="Floor plan of the four rooms">
-        <svg viewBox="0 0 400 268" role="img" aria-labelledby="plan-t">
-          <title id="plan-t">Floor plan: Room 01 Jackson Home, Room 02 Power and Energy, Room 03 Rhode Island, Room 04 Littelfuse</title>
-          <a class="rm" href="#room-04"><rect x="10" y="10" width="210" height="90"/><text class="no" x="26" y="50">04</text><text class="nm" x="26" y="68">Littelfuse</text></a>
-          <a class="rm" href="#room-03"><rect x="220" y="10" width="170" height="110"/><text class="no" x="236" y="90">03</text><text class="nm" x="236" y="108">Rhode Island</text></a>
-          <a class="rm" href="#room-01"><rect x="10" y="100" width="210" height="130"/><text class="no" x="26" y="140">01</text><text class="nm" x="26" y="158">Jackson Home</text></a>
-          <a class="rm" href="#room-02"><rect x="220" y="120" width="170" height="110"/><text class="no" x="236" y="160">02</text><text class="nm" x="236" y="178">Power &amp; Energy</text></a>
-          <!-- doorways -->
-          <rect class="door" x="100" y="228" width="30" height="4"/>
-          <rect class="door" x="218" y="182" width="4" height="30"/>
-          <rect class="door" x="330" y="118" width="30" height="4"/>
-          <rect class="door" x="218" y="40" width="4" height="30"/>
-          <!-- visitor path, as in her simulation -->
-          <polyline class="path" points="115,258 115,205 170,197 345,197 345,128 372,100 372,55 150,55"/>
-          <circle class="you" cx="115" cy="258" r="4"/>
-          <text class="you-t" x="126" y="261">You are here</text>
-        </svg>
-        <figcaption><span class="label">Floor plan</span><span class="label">Entrance &rarr; Room 01</span></figcaption>
-      </figure>
+<!-- P9 (overlapping thin circles, photo in one, numbered 01-04 list) : BEYOND THE SCREEN -->
+<section class="section section--wall" id="about" aria-labelledby="about-title">
+  <div class="wrap grid about">
+    <div class="about__circles reveal">
+      <div class="circles">
+        <div class="circle" style="width:44%;aspect-ratio:1;left:0;top:22%"><span class="spaced">History</span></div>
+        <div class="circle circle--photo" style="width:46%;aspect-ratio:1;left:27%;top:6%">
+          <div class="placeholder"><span class="label">Personal photo pending<br>(fashion)</span></div>
+        </div>
+        <div class="circle" style="width:40%;aspect-ratio:1;left:58%;top:30%"><span class="spaced">Art</span></div>
+        <span class="spaced" style="position:absolute;left:43%;top:0;color:var(--ink-label)">Fashion</span>
+      </div>
     </div>
+    <div class="about__text">
+      <p class="label" id="about-title">Beyond the screen</p>
+      <blockquote>I&rsquo;m a Digital Exhibit Designer at The Henry Ford, with a background in UX design, user research and digital marketing. I bring stories to life through digital experiences, and I&rsquo;m inspired by history, fashion and art.</blockquote>
+      <p class="spaced about__loves">History &middot; Fashion &middot; Art</p>
+      <ol class="numbered">
+        <li><span class="n">01</span><span class="t">Stories brought to life</span></li>
+        <li><span class="n">02</span><span class="t">Research-led design</span></li>
+        <li><span class="n">03</span><span class="t">Exhibit development</span></li>
+        <li><span class="n">04</span><span class="t">A curious, experimental eye</span></li>
+      </ol>
+      <p><a class="textlink" href="#resume-pending">Download r&eacute;sum&eacute;</a> <span class="pending" style="font-size:13px">&nbsp;(PDF to come)</span></p>
+    </div>
+  </div>
+</section>
 
-    <ol class="room-list wrap">
-      <li class="room room--1" id="room-01">
-        <a class="room__link reveal" href="#room-01" aria-label="Room 01, The Henry Ford Jackson Home: visitor flow simulation. Password protected.">
-          <figure class="room__cover"><img src="assets/img/r01-cover-4x5.jpg" width="1600" height="2000" loading="lazy" alt="Top-down 3D plan of the Jackson Home with green visitor paths and three red callouts: A, entry from the Annex; B, the central hall where paths cross; C, the exit."></figure>
-          <div class="wall-label">
-            <p class="label no">Room 01</p>
-            <h3 class="room__title">The Henry Ford Jackson Home <em>Visitor flow simulation</em></h3>
-            <p class="meta"><span>UX Researcher</span><span>Discrete event simulation</span><span>Museum</span><span>2026</span></p>
-            <p class="outcome">A predictive model of how visitors would move through a historic house, used to set ticketing, capacity and presenter placement before opening day.</p>
-            <div class="room__foot">
-              <span class="lock label"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7" fill="none" stroke="#8C2F1E"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="#8C2F1E"/></svg>Password protected</span>
-              <span class="enter">Enter <span aria-hidden="true">&rarr;</span></span>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li class="room room--2" id="room-02">
-        <a class="room__link reveal" href="#room-02" aria-label="Room 02, Power and Energy Interactive: a five-sided digital column. Password protected.">
-          <div class="wall-label">
-            <p class="label no">Room 02</p>
-            <h3 class="room__title">Power &amp; Energy Interactive <em>A five-sided digital column</em></h3>
-            <p class="meta"><span>UX Designer, project lead</span><span>IA, user flows, content strategy</span><span>Museum</span><span>2026</span></p>
-            <p class="outcome">Turned the exhibit entrance into a storytelling column, built in the museum&rsquo;s own content system so staff can keep it current.</p>
-            <div class="room__foot">
-              <span class="lock label"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7" fill="none" stroke="#8C2F1E"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="#8C2F1E"/></svg>Password protected</span>
-              <span class="enter">Enter <span aria-hidden="true">&rarr;</span></span>
-            </div>
-          </div>
-          <figure class="room__cover"><img src="assets/img/r02-cover-4x5.jpg" width="1600" height="2000" loading="lazy" alt="The installed Power and Energy column in the museum gallery, its backlit side showing the exhibit title."></figure>
-        </a>
-      </li>
-
-      <li class="room room--3" id="room-03">
-        <a class="room__link reveal" href="#room-03" aria-label="Room 03, Rhode Island 401 Health App: digital vaccination records. Password protected.">
-          <figure class="room__cover"><img src="assets/img/r03-cover-4x5.jpg" width="1600" height="2000" loading="lazy" alt="Two 401Health app screens side by side: a vaccination record with a SMART Health Card, and the dose details."></figure>
-          <div class="wall-label">
-            <p class="label no">Room 03</p>
-            <h3 class="room__title">Rhode Island 401&nbsp;Health App <em>Digital vaccination records</em></h3>
-            <p class="meta"><span>UX Designer, Researcher</span><span>Review analysis, heuristic review, wireframes</span><span>Public health</span><span>2021</span></p>
-            <p class="outcome">Rebuilt sign-up and record access around trust, with a target of 23% more completed vaccination reports.</p>
-            <div class="room__foot">
-              <span class="lock label"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7" fill="none" stroke="#8C2F1E"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="#8C2F1E"/></svg>Password protected</span>
-              <span class="enter">Enter <span aria-hidden="true">&rarr;</span></span>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li class="room room--4" id="room-04">
-        <a class="room__link reveal" href="#room-04" aria-label="Room 04, Littelfuse Product Discovery. Password protected.">
-          <div class="wall-label">
-            <p class="label no">Room 04</p>
-            <h3 class="room__title">Littelfuse Product Discovery <em>Search for engineers without a part number</em></h3>
-            <p class="meta"><span>UX Consultant</span><span>Workshop, journey map, heuristic evaluation</span><span>B2B manufacturing</span><span class="pending">Year TBC</span></p>
-            <p class="outcome">Rebuilt product discovery around how engineers search. Mobile logins rose 6% after launch.</p>
-            <div class="room__foot">
-              <span class="lock label"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7" fill="none" stroke="#8C2F1E"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="#8C2F1E"/></svg>Password protected</span>
-              <span class="enter">Enter <span aria-hidden="true">&rarr;</span></span>
-            </div>
-          </div>
-          <figure class="room__cover"><img src="assets/img/r04-cover-4x5.jpg" width="1600" height="2000" loading="lazy" alt="Detail of the Littelfuse journey map: the Learn stage, with steps three, Learn, and four, Compare."></figure>
-        </a>
-      </li>
-    </ol>
-  </section>
-
-  <aside class="next-phase" id="about" aria-label="Coming in the next phase">
-    <div class="wrap label"><span>04 &mdash; Beyond the screen &nbsp;&middot;&nbsp; 05 &mdash; Contact</span><span id="contact">Designed in Phase 3</span></div>
-  </aside>
+<!-- P8 (wide-tracked serif centred over a dark photo, tiny caps, short hairline) : CONTACT -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="m"><img src="assets/img/r02-column-installed.jpg" alt="" loading="lazy"></div>
+  <div class="contact__inner">
+    <p class="spaced" style="color:var(--on-bb-label)">Contact</p>
+    <h2 id="contact-title">Let&rsquo;s make something <em>people remember.</em></h2>
+    <hr class="hairline">
+    <a class="contact__email" href="mailto:">email to confirm</a>
+    <p class="contact__links spaced"><a href="#linkedin-pending">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="#resume-pending">R&eacute;sum&eacute;</a><span aria-hidden="true">&middot;</span><span>Instagram (to confirm)</span></p>
+  </div>
+</section>
 </main>
-
-<footer class="foot">
-  <div class="wrap label"><span>Yasmin Bajwa &copy; 2026</span><a href="#top">Back to top &uarr;</a></div>
-</footer>
-
-<form class="review" aria-label="Prototype options" onsubmit="return false">
-  <fieldset class="only-desktop">
-    <legend class="label">Hero</legend>
-    <input type="radio" name="hero" id="hero-depth" checked><label for="hero-depth">Depth</label>
-    <input type="radio" name="hero" id="hero-flat"><label for="hero-flat">Flat</label>
-  </fieldset>
-  <fieldset>
-    <legend class="label">CTA</legend>
-    <input type="radio" name="cta" id="cta-link" checked><label for="cta-link">Serif link</label>
-    <input type="radio" name="cta" id="cta-pill"><label for="cta-pill">Ink pill</label>
-  </fieldset>
-</form>
-
+<footer class="foot"><div class="wrap label"><span>Yasmin Bajwa &copy; 2026 &middot; Built with care</span><a href="#top">Back to top &uarr;</a></div></footer>
+<div class="proto" aria-label="Prototype controls"><span>Prototype</span><button type="button" id="wf-toggle" aria-pressed="false">Wireframe</button></div>
 </body>
 </html>

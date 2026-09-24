@@ -67,3 +67,28 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 - **Video hosting in Squarespace.** Native video uploads are capped by plan storage. A muted autoplay loop can be a Video block or a section background video. Which one, and whether it is hosted natively or on Vimeo, will be checked against Squarespace's current options and set out in the build notes. The hosting plan is her decision.
 - **File weight.** The nine column-art JPGs are 3.6–6.3 MB each, and the composite PNG is 10.8 MB. Squarespace accepts images up to 20 MB, but every web image will be exported at ≤2500px long edge and ≤500 KB in Phase 3.
 - **Tall column art (2160×7680, 9:32).** This only reads at size as a row of strips ("the five sides, unfolded"), never as a single full-width image.
+
+---
+
+## Round 2 update (six-page prototype)
+
+**Now used from existing files (no longer gaps for the prototype):**
+- **Room 02 cover and "installed column" images:** frames from `r02_video_final-setup.mp4`. The original photos (C1) would still be sharper.
+- **Careers screens:** the installed column shows the **licensed** hard-hat photo (visible in the final-setup video, with no watermark). The watermarked source file `PandE_Column_CutUpArt_2602184.jpg` is still not used anywhere (C2 stands: ask for the licensed art file).
+- **Rhode Island screens:** rendered from the vector PDF (desktop and mobile), so no phone frames anywhere.
+
+**Labelled placeholders on the site right now** (dashed box + "pending" label; nothing invented):
+
+| Where | Placeholder | Needs |
+|---|---|---|
+| Home, Beyond the screen (P9 circle) | "Personal photo pending (fashion)" | B5: at least 1 personal photo (square-croppable, ≥1600px) |
+| Home, About | "Download résumé (PDF to come)" | D7: résumé PDF |
+| Home, Contact | "email to confirm", LinkedIn, "Instagram (to confirm)" | D7: email, LinkedIn URL, other socials |
+| Room 04, wireframes data wall | Six "Wireframe pending" plates (Home + mega menu, L0–L7 flow, Check stock, Request a sample, Where to buy, Mobile) | B1: exports from the Adobe XD links |
+| Room 04 year | "Year TBC" | D2 |
+| Private view, "Ask Yasmin for access" | `mailto:` with no address | D7 |
+
+**New, smaller asks:**
+- **R2-1:** a square or 4:5 photo for each of HISTORY and ART, if she'd like all three P9 circles to hold photos (optional; the design works with one).
+- **R2-2:** the **simulation video** has the player's control bar burned in; it's cropped off in `site/assets/video/r01-simulation.mp4`. A clean export would allow the full frame.
+- **R2-3:** confirm the **"~8 visitors at a time"** (docent control), **"16.5 min"** (maximum entrance wait in the busiest scenario) and **"≈32 max / 30 comfortable"** figures shown on the route. All come from her charts and doc, but she should sign off on how they are phrased.
