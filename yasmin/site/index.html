@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yasmin Bajwa Exhibition</title>
+<meta name="description" content="Yasmin Bajwa designs digital experiences for museums, and the research that shapes them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/css/exhibition.css">
+<script src="assets/js/exhibition.js" defer></script>
+</head>
+<body>
+<main id="top">
+<header class="bar bar--dark">
+  <div class="wrap">
+    <a class="bar__name" href="index.html">Yasmin Bajwa</a>
+    <nav class="bar__nav" aria-label="Main">
+      <a href="index.html#rooms">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="bar__cta" href="index.html#rooms">View Projects</a>
+      <a class="bar__menu" href="index.html#rooms">Menu</a>
+    </nav>
+  </div>
+</header>
+
+<!-- P5 (type behind subject, 01-04 index) + P8 (spaced caps, hairline) : EXHIBITION TITLE -->
+<section class="h-hero" aria-labelledby="hero-name">
+  <div class="m h-hero__photo"><img src="assets/img/portrait-4x5.jpg" alt="Yasmin Bajwa in a grey blazer"></div>
+  <h1 class="h-hero__word" id="hero-name"><span aria-hidden="true">YASMIN</span><span class="sr-only">Yasmin Bajwa</span></h1>
+  <div class="h-hero__cut" aria-hidden="true"><img src="assets/img/portrait-cutout.webp" alt=""></div>
+  <div class="h-hero__text">
+    <p class="spaced">Digital Exhibit Designer &mdash; The Henry Ford</p>
+    <hr class="hairline">
+    <p class="serif">Hi, I&rsquo;m <em>Yasmin.</em> I design digital experiences for museums, and the research that shapes them.</p>
+    <a class="pill pill--solid" href="#rooms">View Projects <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <nav class="h-hero__index vindex" aria-label="The four rooms"><a href="room-01-jackson-home.html" class="is-current"><span class="vindex__name">Jackson Home</span>01</a><a href="room-02-power-energy.html"><span class="vindex__name">Power &amp; Energy</span>02</a><a href="room-03-rhode-island.html"><span class="vindex__name">Rhode Island</span>03</a><a href="room-04-littelfuse.html"><span class="vindex__name">Littelfuse</span>04</a></nav>
+  <p class="h-hero__caption label">A portfolio in four rooms &mdash; 2026</p>
+</section>
+
+<!-- P4 (stacked full-width photo strips, one word each) : FOUR DISCIPLINES -->
+<section class="disciplines" aria-labelledby="disc-title">
+  <div class="wrap disciplines__head">
+    <h2 class="label" id="disc-title">Four disciplines</h2>
+    <p class="label">In the order I practise them</p>
+  </div>
+  <div class="strips">
+    <a class="strip" href="room-02-power-energy.html">
+      <div class="m"><img src="assets/img/strip-exhibit.jpg" alt="The installed Power and Energy column in the museum" loading="lazy"></div>
+      <span class="strip__no">01</span>
+      <span class="strip__word">Interactive Exhibit Design</span>
+      <span class="strip__note">A five-sided digital column at the entrance to Power &amp; Energy.</span>
+    </a>
+    <a class="strip" href="room-03-rhode-island.html">
+      <div class="m"><img src="assets/img/strip-ux-design.jpg" alt="A row of 401Health app wireframes" loading="lazy"></div>
+      <span class="strip__no">02</span>
+      <span class="strip__word">UX Design</span>
+      <span class="strip__note">Sign-up, records and scheduling for Rhode Island&rsquo;s 401 Health app.</span>
+    </a>
+    <a class="strip" href="room-01-jackson-home.html">
+      <div class="m"><img src="assets/img/strip-ux-research.jpg" alt="The Jackson Home floor plan with visitor paths" loading="lazy"></div>
+      <span class="strip__no">03</span>
+      <span class="strip__word">UX Research</span>
+      <span class="strip__note">Simulating how visitors would move through the Jackson Home before it opened.</span>
+    </a>
+    <a class="strip" href="room-02-power-energy.html">
+      <div class="m"><img src="assets/img/strip-marketing.jpg" alt="ITC employee research storyboard" loading="lazy"></div>
+      <span class="strip__no">04</span>
+      <span class="strip__word">Digital Marketing</span>
+      <span class="strip__note">Career stories for a sponsor, written to inform rather than advertise.</span>
+    </a>
+  </div>
+</section>
+
+<!-- P3 (dark perspective carousel, framed active card) + P10 (meta line) : THE ROOMS -->
+<section class="section section--bb" id="rooms" aria-labelledby="rooms-title">
+  <div class="wrap grid" style="row-gap:24px;align-items:end">
+    <p class="label" style="grid-column:1/7">Selected work</p>
+    <h2 class="title" id="rooms-title" style="grid-column:1/8;color:var(--on-bb)">Four rooms, <em>in order of visit.</em></h2>
+    <p style="grid-column:9/13;color:var(--on-bb-muted);font-size:15px">Each room is one project, told from brief to outcome. Swipe or use the numbers. The case studies are shared by invitation.</p>
+  </div>
+  <div class="depth">
+    <div class="depth__track" data-track data-group="rooms">
+      <article class="depth__slide" id="slide-01" data-start>
+        <a class="depth__frame" href="room-01-jackson-home.html" aria-label="Enter room 01: The Henry Ford Jackson Home"><div class="m"><img src="assets/img/r01-cover-4x5.jpg" alt="Cover of room 01, The Henry Ford Jackson Home" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 01</span><span>UX Research</span><span>The Henry Ford</span><span>2026</span></p>
+          <h3 class="title">The Henry Ford Jackson Home</h3>
+          <p class="label"><a class="textlink" href="room-01-jackson-home.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
+      <article class="depth__slide" id="slide-02">
+        <a class="depth__frame" href="room-02-power-energy.html" aria-label="Enter room 02: Power &amp; Energy Interactive"><div class="m"><img src="assets/img/r02-cover-4x5.jpg" alt="Cover of room 02, Power &amp; Energy Interactive" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 02</span><span>Exhibit + UX Design</span><span>The Henry Ford</span><span>2026</span></p>
+          <h3 class="title">Power &amp; Energy Interactive</h3>
+          <p class="label"><a class="textlink" href="room-02-power-energy.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
+      <article class="depth__slide" id="slide-03">
+        <a class="depth__frame" href="room-03-rhode-island.html" aria-label="Enter room 03: Rhode Island 401 Health App"><div class="m"><img src="assets/img/r03-cover-4x5.jpg" alt="Cover of room 03, Rhode Island 401 Health App" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 03</span><span>UX Design + Research</span><span>RI Dept. of Health</span><span>2021</span></p>
+          <h3 class="title">Rhode Island 401 Health App</h3>
+          <p class="label"><a class="textlink" href="room-03-rhode-island.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
+      <article class="depth__slide" id="slide-04">
+        <a class="depth__frame" href="room-04-littelfuse.html" aria-label="Enter room 04: Littelfuse Product Discovery"><div class="m"><img src="assets/img/r04-cover-4x5.jpg" alt="Cover of room 04, Littelfuse Product Discovery" loading="lazy"></div></a>
+        <div class="depth__meta">
+          <p class="metaline label"><span class="hl">Room 04</span><span>UX Consulting</span><span>Littelfuse</span><span>Year TBC</span></p>
+          <h3 class="title">Littelfuse Product Discovery</h3>
+          <p class="label"><a class="textlink" href="room-04-littelfuse.html">Enter room &rarr;</a> &nbsp; <span class="lock"><svg viewBox="0 0 10 13" aria-hidden="true"><rect x=".5" y="5.5" width="9" height="7"/><path d="M2.5 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/></svg>Password protected</span></p>
+        </div>
+      </article>
+    </div>
+    <nav class="depth__nav" aria-label="Choose a room">
+      <a class="arrow" href="#slide-04" data-slide data-group="x" data-prev="rooms" aria-label="Previous room">&larr;</a>
+      <a href="#slide-01" data-slide data-group="rooms">01</a><a href="#slide-02" data-slide data-group="rooms">02</a><a href="#slide-03" data-slide data-group="rooms">03</a><a href="#slide-04" data-slide data-group="rooms">04</a>
+      <a class="arrow" href="#slide-02" data-slide data-group="x" data-next="rooms" aria-label="Next room">&rarr;</a>
+    </nav>
+  </div>
+</section>
+
+<!-- P9 (overlapping thin circles, photo in one, numbered 01-04 list) : BEYOND THE SCREEN -->
+<section class="section section--wall" id="about" aria-labelledby="about-title">
+  <div class="wrap grid about">
+    <div class="about__circles reveal">
+      <div class="circles">
+        <div class="circle" style="width:44%;aspect-ratio:1;left:0;top:22%"><span class="spaced">History</span></div>
+        <div class="circle circle--photo" style="width:46%;aspect-ratio:1;left:27%;top:6%">
+          <div class="placeholder"><span class="label">Personal photo pending<br>(fashion)</span></div>
+        </div>
+        <div class="circle" style="width:40%;aspect-ratio:1;left:58%;top:30%"><span class="spaced">Art</span></div>
+        <span class="spaced" style="position:absolute;left:43%;top:0;color:var(--ink-label)">Fashion</span>
+      </div>
+    </div>
+    <div class="about__text">
+      <p class="label" id="about-title">Beyond the screen</p>
+      <blockquote>I&rsquo;m a Digital Exhibit Designer at The Henry Ford, with a background in UX design, user research and digital marketing. I bring stories to life through digital experiences, and I&rsquo;m inspired by history, fashion and art.</blockquote>
+      <p class="spaced about__loves">History &middot; Fashion &middot; Art</p>
+      <ol class="numbered">
+        <li><span class="n">01</span><span class="t">Stories brought to life</span></li>
+        <li><span class="n">02</span><span class="t">Research-led design</span></li>
+        <li><span class="n">03</span><span class="t">Exhibit development</span></li>
+        <li><span class="n">04</span><span class="t">A curious, experimental eye</span></li>
+      </ol>
+      <p><a class="textlink" href="#resume-pending">Download r&eacute;sum&eacute;</a> <span class="pending" style="font-size:13px">&nbsp;(PDF to come)</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- P8 (wide-tracked serif centred over a dark photo, tiny caps, short hairline) : CONTACT -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="m"><img src="assets/img/r02-column-installed.jpg" alt="" loading="lazy"></div>
+  <div class="contact__inner">
+    <p class="spaced" style="color:var(--on-bb-label)">Contact</p>
+    <h2 id="contact-title">Let&rsquo;s make something <em>people remember.</em></h2>
+    <hr class="hairline">
+    <a class="contact__email" href="mailto:">email to confirm</a>
+    <p class="contact__links spaced"><a href="#linkedin-pending">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="#resume-pending">R&eacute;sum&eacute;</a><span aria-hidden="true">&middot;</span><span>Instagram (to confirm)</span></p>
+  </div>
+</section>
+</main>
+<footer class="foot"><div class="wrap label"><span>Yasmin Bajwa &copy; 2026 &middot; Built with care</span><a href="#top">Back to top &uarr;</a></div></footer>
+<div class="proto" aria-label="Prototype controls"><span>Prototype</span><button type="button" id="wf-toggle" aria-pressed="false">Wireframe</button></div>
+</body>
+</html>
