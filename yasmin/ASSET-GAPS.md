@@ -12,7 +12,7 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 
 | # | Page | Note in the doc | Status | What we'll use / what's needed |
 |---|---|---|---|---|
-| A1 | 8 | "INSERT VIDEO HERE – DISCRETE EVENT SIMULATION" | ❌ **Missing, P2** | The Jackson Home simulation film for the Room 01 black-box gallery. Ask for an MP4 screen recording, 20–40 s, 1920×1080, no audio needed. Until then: a labelled black-box placeholder. |
+| A1 | 8 | "INSERT VIDEO HERE – DISCRETE EVENT SIMULATION" | ✅ **Received in Phase 2** | `r01_video_discrete-event-simulation.mp4` (1:10). The player's control bar is burned in, so it will be cropped in Phase 3. |
 | A2 | 20 | "INSERT VIDEO HERE: below is screen grab of what it looks like" | ✅ Covered | `r02_video_interface-user-flow.mp4` |
 | A3 | 20 | "INSERT POWER & ENERGY VIDEO HERE" (CMS channels) | ✅ Covered | `r02_video_appspace-cms-channels.mp4` |
 | A4 | 21 | "USE PDF VERSION HERE OF DRAWINGS" | ✅ Covered | `source/PandE_Shop-Drawing_Column-Surrounds_AV05.pdf` (vector). See the authorship question in D3. |
@@ -29,7 +29,7 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 | B1 | **Littelfuse wireframes PDF** | Still missing. `source/Littelfuse_Wireframes_XD-links.docx` only holds ~60 Adobe XD share links. It contains no images, and XD links can expire. | **P1** | Export a PDF or PNGs from XD. Minimum set: Home + mega menu, the L0 → L7 product flow, Check Stock, and one mobile screen. **Or** confirm the XD links still open and we'll screenshot them (needs her OK, since it's client work). |
 | B2 | Rhode Island wireframes | **Not missing.** Both a video (`r03_video_wireframes.mp4`) and a 98-page vector PDF (desktop + mobile) were uploaded. | Resolved | Only D4 needs confirming. |
 | B3 | Rhode Island app-review video | **Not missing.** `r03_video_app-store-reviews.mp4` (0:23). | Resolved | None. |
-| B4 | **Jackson Home simulation video** | Missing (= A1). | P2 | As A1. |
+| B4 | Jackson Home simulation video | **Received** (= A1). | Resolved | None. |
 | B5 | **Personal photos for "Beyond the screen"** | Missing. Only three studio headshots exist. | **P2** | **3 photos** for the About mosaic, ideally 1 portrait (4:5) + 2 landscape (3:2), ≥2000 px long edge. Themes: history · fashion · art. For example: her in a gallery or historic place, a fashion or textile detail she loves, her own sketchbook or a museum visit. Candid, not posed; natural light. Until then: three placeholders captioned HISTORY / FASHION / ART. |
 
 ## C. Other missing images
@@ -44,6 +44,8 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 | C6 | Littelfuse "people who drive component decisions" board (66 / 64 / 61 %) at full resolution | Only `doc-22` (975px). | P3 | Not needed if the numbers are set as live numerals (the plan). |
 | C7 | **Headshot cut-out** (transparent PNG) for the depth-layered "Yasmin" | Needed for the enhanced hero, where the name sits partly behind her shoulder. | P3 | We can cut out `headshot-a_blazer-warm.jpeg` (a plain backdrop, so a clean mask), **with her approval**. The flat fallback is always designed alongside it. |
 | C8 | Source video for the animated headshot | `headshot-a_animated.gif` is 480×600, too small for the hero. | P3 | The original clip (MP4). This would allow a subtle living portrait in the hero. |
+| C10 | **Journey map** at higher resolution (or vector) | The Room 04 cover is a detail crop of a 1787px image. It's sharp on standard screens and soft on retina. | P3 | The source file (Figma, Illustrator or PDF). |
+| C11 | **Jackson Home plan without the software tooltip** | The plan export includes a stray "Office Online Frame" tooltip. On the cover it's hidden under callout B; room plates in Phase 3 will show it. | P3 | Re-export the plan with the tooltip closed. |
 | C9 | A photograph of the **Jackson Home** itself (exterior or a furnished room) | Every Room 01 image is a diagram. One real photo would anchor the room emotionally, placed in the black-box gallery or beside the overview. | P3 | A museum or press image, with rights cleared by The Henry Ford. |
 
 ## D. Questions to confirm (facts, rights, content)
@@ -57,8 +59,8 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 | D5 | **The two files named "ChatGPT Image…"** (whiteboard sketches; content-themes board) | The whiteboard looks like a real photo, perhaps tidied up. The board looks composed. A museum audience and hiring managers value authenticity, so we need to know what's original and what was generated or retouched, and caption it honestly (e.g. "Concept board", not "photo"). |
 | D6 | **Permission to show ITC employees** (names and faces: Jeremy Durr Sr., Michael Ciuffoletti, Madison Ampunan) and the client names Littelfuse, ITC and RIDOH | The case studies sit behind a password, but the room titles and covers on the **public** homepage name the clients. |
 | D7 | **Contact details:** email, LinkedIn, any other socials; the **résumé PDF** for "Download résumé" | Placeholders until supplied. |
-| D8 | **Jackson Home congestion points** for the 2–3 red callouts on the cover plan | The doc names the entrance area (Vestibule, Pre-1965, Video Wall) as docent-controlled. We'll annotate those unless she names different hot spots. |
-| D9 | **Ayush reference screenshot.** `yasmin/references/ayushfolio.png` **is not in the repo.** The uploaded HTML is a Wall of Portfolios listing *about* Ayush (without its image folder), and ayushfolio.online is blocked from this environment. | The structure is taken from the brief's description (italic greeting, fact column, linked rows, "What else?", contact footer). Please add the PNG so Phase 5's side-by-side comparison can be done. |
+| D8 | **Jackson Home callouts** on the cover plan | The Phase 2 cover marks three points that are visible on the plan itself: A entry from the Annex, B the central hall where the green paths cross, C the exit. They are *not* labelled as congestion points, because the doc doesn't say where congestion peaked in the house. If Yasmin names the real pinch points, the labels change. |
+| D9 | ~~Ayush reference screenshot~~ | **Received in Phase 2**, saved as `references/ayushfolio.png`. |
 
 ## E. Production notes (not gaps, but flagged now)
 

@@ -30,6 +30,7 @@ Every image, video and source file in `yasmin/`, with its project, its **Image S
 | `r01_chart_arrivals-random.png` | `Arrivals Jackson Home Project 1_.png` | DATA | 1918×820 | Data wall, Scenario testing: "Random arrivals". Pairs with on-time. | ✅ |
 | `r01_chart_arrivals-on-time.png` | `Arrivals Jackson home Project 1.png` | DATA | 1815×866 | Data wall: "On-time arrivals". *Not a duplicate* of the file above, despite the similar name. | ✅ |
 | `r01_chart_docent-control.png` | `Docent Charts- Jackson Home.png` | DATA | 1554×1012 | Data wall: "Without docent / With docent" skipped-exhibit histograms. The strongest visual proof for the "3–4 presenters" finding. | ✅ |
+| `r01_video_discrete-event-simulation.mp4` | `DISCRETE EVENT SIMULATION- Jackson Home Project 1.mp4` (sent in Phase 2) | FILM | 1638×922, 1:10, 60 fps, 22 MB | **Room 01 black-box gallery.** A screen recording: the player's control bar (0:01/01:06, play, volume) is burned into the bottom ~50px. Crop it off, re-encode to 1600px / 30 fps / muted / ≤8 MB, and cut a 20–30 s loop for the background version. | ⚠️ |
 | `r01_chart_expected-visit-times.png` | `Expected Visit Times.png` | DATA | 1616×973 | Beside the archetype numerals: Streakers 8–20 min · Strollers 30–45 · Studiers 50–65. Crop out the slide title and bullets and keep only the three box plots. | ✅ |
 
 ## Room 02, Power & Energy Interactive: `media/room02-power-energy/`
@@ -135,8 +136,22 @@ All 24 images embedded in `source/CASE_STUDY-Yasmin_Bajwa.pdf`, numbered in docu
 
 | File | What it is | Note |
 |---|---|---|
-| `ayush-singh_wallofportfolios-listing.html` | A saved *Wall of Portfolios* listing page **about** Ayush, not his portfolio. Its `_files/` folder wasn't uploaded, so it renders without images. | `references/ayushfolio.png` **doesn't exist**, and ayushfolio.online is blocked by this environment's network policy. Structure is taken from the brief's description (see GAPS). An identical copy also sits at the repo root. |
+| `ayushfolio.png` | Screenshot of ayushfolio.online (sent in Phase 2) | The layout reference: a card with "Hi. I'm *Ayush.*" and a 4-column facts row, a halftone portrait, "Where I've worked" cards, project rows with an image on the right, testimonials, a "What else?" italic paragraph with a photo strip, and a contact footer. |
+| `ayush-singh_wallofportfolios-listing.html` | A saved *Wall of Portfolios* listing page **about** Ayush, not his portfolio. Its `_files/` folder wasn't uploaded, so it renders without images. | The reference screenshot was later supplied as `ayushfolio.png` (row above). An identical copy also sits at the repo root. |
 
 ## Not Yasmin's: repo root
 
 `day.jpg`, `night.jpg`, `hero.jpg`, `hero 1.jpg`, `hero-foreground.jpg`, `story-*.jpg`, `strip-*.jpg`, `weekend.jpg` are Barcelona night-street photography from a different client project. ⛔ **Not used.** The root copies of `PandE_Column_*.jpg` (5 files) and the case-study PDF are byte-identical to the files in `yasmin/`. They were left untouched.
+
+## Derived web assets: `site/assets/img/` (Phase 2)
+
+| File | Made from | Treatment |
+|---|---|---|
+| `portrait-4x5.jpg` | `headshot-a_blazer-warm.jpeg` | 1200×1500, untoned |
+| `portrait-cutout.png` / `.webp` | same | Transparent cut-out for the depth-layered hero. Mask = soft hair edge from one segmentation model + solid body from a second. The PNG is for Squarespace upload; the WebP is for the prototype. |
+| `r01-cover-4x5.jpg` | `r01_plan_house-visitor-paths.png` | 4:5 crop, shared tone, 3 red callouts built into the image (A entry from the Annex · B central hall · C exit). Callout B also covers a stray software tooltip ("Office Online Frame") in her export. |
+| `r02-cover-4x5.jpg` | frame 0:00 of `r02_video_final-setup.mp4` | 4:5 crop, shared tone. Interim until the original photo arrives (GAPS C1). |
+| `r03-cover-4x5.jpg` | `source/Rhode_Island_DOH_Wireframes.pdf` pp. 57 + 58 | Two frameless vector screens rendered at 3×, floating on `#E9E4DB` with a hairline, shared tone |
+| `r04-cover-4x5.jpg` | `r04_doc_journey-map.png` | Detail crop (Learn stage, steps 3–4) mounted like a plate on `#E9E4DB`, shared tone |
+
+**Shared tone** (all four covers): saturation 80%, contrast 97%, then `#F3F0EA` multiplied at 50%.
