@@ -21,7 +21,7 @@ The comparison is automatic (`tools/dom_text.js` then `tools/copy_check.py`). Re
 | A-04 | For the visual direction, I’d like the site to feel editorial, minimal… | Not printed (brief / instruction, confirmed Q1) | — | — |
 | A-05 | About Me | Hero, label above her first paragraph | ✔ | ✔ |
 | A-06 | Hi! I’m Yasmin, a Digital Exhibit Designer at The Henry Ford Museum wi… | Hero, under the greeting | ✔ | ✔ |
-| A-07 | By blending design, research, and exhibit development, I bring a fresh… | Statement (A9), centred | ✔ | ✔ |
+| A-07 | By blending design, research, and exhibit development, I bring a fresh… | About bento, statement in the left 12 columns | ✔ | ✔ |
 | A-08 | Highlight these 4 skills in this order:: | Not printed (brief / instruction, confirmed Q1) | — | — |
 | A-09 | Interactive Exhibit Design | Four disciplines, panel 01 | ✔ | ✔ |
 | A-10 | UX ( User Experience) Design | Four disciplines, panel 02 | ✔ | ✔ |
@@ -221,7 +221,7 @@ Order check: ✔ every item appears after the one before it.
 | P-048 | P | For the final installation, we partnered with Sleet Custom Cabinets, a… | Installation & Fabrication | ✔ | ✔ |
 | P-049 | P | I worked closely with the fabricator to provide precise dimensions, sp… | Installation & Fabrication | ✔ | ✔ |
 | P-050 | P | My role during this phase was to coordinate and manage the various tea… *(duplicate sentence removed, Q12)* | Installation & Fabrication | ✔ | ✔ |
-| P-051 | NOTE | USE PDF VERSION HERE OF DRAWINGS | Installation & Fabrication | ✔ → Shop drawing, column surround: plan, section and perspective | ✔ |
+| P-051 | NOTE | USE PDF VERSION HERE OF DRAWINGS | Installation & Fabrication | ✔ → Shop drawing, column surround: plan, section and perspective; Shop drawing: elevations and sections; Shop drawing: typical column surround and plan; Shop drawing, detail: column plan view | ✔ |
 | P-052 | FIG | doc-16: — | Installation & Fabrication | ✔ replaced by the vector PDF her note asks for | ✔ |
 | P-053 | FIG | doc-17: — | Installation & Fabrication | ✔ replaced by the vector PDF her note asks for | ✔ |
 | P-054 | FIG | doc-18: — | Installation & Fabrication | ✔ replaced by the vector PDF her note asks for | ✔ |
@@ -281,7 +281,7 @@ Removed duplicate: "Below are the CMS channels within App Space." appears **1×*
 | R-033 | LI | Household Management: The ability to add and manage household members … | UX Design/ Feature Prioritization | ✔ | ✔ |
 | R-034 | LI | Symptom Diary: An optional tool for anonymously reporting post-vaccina… | UX Design/ Feature Prioritization | ✔ | ✔ |
 | R-035 | LI | Testing Location Map: An interactive map helping users quickly locate … | UX Design/ Feature Prioritization | ✔ | ✔ |
-| R-036 | NOTE | INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE | UX Design/ Feature Prioritization | ✔ → Desktop wireframes (video) | ✔ |
+| R-036 | NOTE | INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE | UX Design/ Feature Prioritization | ✔ → Desktop wireframes (video); Mobile wireframes: vaccination record and dose details | ✔ |
 | R-037 | FIG | doc-21: Vaccine details: annotated mobile screens | UX Design/ Feature Prioritization | ✔ shown | ✔ |
 | R-038 | H2 | Results & Impact | Results & Impact | ✔ | ✔ |
 | R-039 | P | The redesigned experience streamlined how Rhode Island residents acces… | Results & Impact | ✔ | ✔ |
@@ -322,7 +322,7 @@ Order check: ✔ every item appears after the one before it.
 | L-023 | H4 | Defined the primary user: a design engineer | The Approach | ✔ | ✔ |
 | L-024 | P | Through stakeholder interviews, existing user research, and analysis o… | The Approach | ✔ | ✔ |
 | L-025 | FIG | doc-22: Survey: who drives component decisions | The Approach | ✔ shown | ✔ |
-| L-026 | FIG | doc-23: User archetypes: Engineering & Technical, Sales and Procurement | The Approach | ✔ shown | ✔ |
+| L-026 | FIG | doc-23: User archetype: Engineering & Technical; User archetype: Sales; User archetype: Procurement | The Approach | ✔ shown as 3 tiles | ✔ |
 | L-027 | H4 | Mapped the product-discovery journey | The Approach | ✔ | ✔ |
 | L-028 | P | The user journey was developed during a collaborative workshop at the … | The Approach | ✔ | ✔ |
 | L-029 | FIG | doc-24: Product-discovery journey map | The Approach | ✔ shown | ✔ |
@@ -351,11 +351,10 @@ These are **not her words**. They're short factual captions the brief asked for 
 
 | Page | Figure | Caption |
 |---|---|---|
-| index | Photo strip | Power & Energy column |
-| index | Photo strip | Jackson Home visitor paths |
-| index | Photo strip | 401 Health app |
-| index | Photo strip | Column shop drawing |
-| index | Photo strip | ITC employee research |
+| index | Fig. 01 | Power & Energy column, installed at The Henry Ford |
+| index | Fig. 02 | Installing the column in the Power & Energy gallery |
+| index | Fig. 03 | The gallery column before the build |
+| index | Fig. 04 | Column plan view, from the shop drawings |
 | room-01-jackson-home | Fig. 01 | Time spent on-site by visitor type |
 | room-01-jackson-home | Fig. 02 | Congestion, queue sizes, visit time and delays |
 | room-01-jackson-home | Fig. 03 | Jackson Home floor plan |
@@ -381,19 +380,21 @@ These are **not her words**. They're short factual captions the brief asked for 
 | room-02-power-energy | Fig. 12 | Shop drawing, column surround: plan, section and perspective |
 | room-02-power-energy | Fig. 13 | Shop drawing: elevations and sections |
 | room-02-power-energy | Fig. 14 | Shop drawing: typical column surround and plan |
-| room-02-power-energy | Fig. 15 | Column fabrication progression (video) |
-| room-02-power-energy | Fig. 16 | Final setup: the installed column (video) |
+| room-02-power-energy | Fig. 15 | Shop drawing, detail: column plan view |
+| room-02-power-energy | Fig. 16 | Column fabrication progression (video) |
+| room-02-power-energy | Fig. 17 | Final setup: the installed column (video) |
 | room-03-rhode-island | Fig. 01 | Rhode Island Department of Health population health goals |
 | room-03-rhode-island | Fig. 02 | App Store and Google Play reviews (video) |
 | room-03-rhode-island | Fig. 03 | Desktop wireframes (video) |
-| room-03-rhode-island | Fig. 04 | Mobile wireframe: vaccination record |
-| room-03-rhode-island | Fig. 05 | Mobile wireframe: dose details |
-| room-03-rhode-island | Fig. 06 | Vaccine details: annotated mobile screens |
+| room-03-rhode-island | Fig. 04 | Vaccine details: annotated mobile screens |
+| room-03-rhode-island | Fig. 05 | Mobile wireframes: vaccination record and dose details |
 | room-04-littelfuse | Fig. 01 | Survey: who drives component decisions |
-| room-04-littelfuse | Fig. 02 | User archetypes: Engineering & Technical, Sales and Procurement |
-| room-04-littelfuse | Fig. 03 | Engineering personas (video) |
-| room-04-littelfuse | Fig. 04 | Product-discovery journey map |
-| room-04-littelfuse | Fig. 05 | Littelfuse wireframes (placeholder) |
+| room-04-littelfuse | Fig. 02 | User archetype: Engineering & Technical |
+| room-04-littelfuse | Fig. 03 | User archetype: Sales |
+| room-04-littelfuse | Fig. 04 | User archetype: Procurement |
+| room-04-littelfuse | Fig. 05 | Engineering personas (video) |
+| room-04-littelfuse | Fig. 06 | Product-discovery journey map |
+| room-04-littelfuse | Fig. 07 | Littelfuse wireframes (placeholder) |
 
 ## Supplied, not her copy
 

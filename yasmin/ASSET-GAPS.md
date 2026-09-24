@@ -103,3 +103,16 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 | R3-2 | Project **years** for Power & Energy, Rhode Island, Littelfuse | Case-study header meta panel: "[YEAR — pending client]" | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
 | R3-3 | **Based in** (city) | Homepage facts column: "[pending client]" | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
 | R3-4 | "Studers" typo inside the p3 chart image (`doc-01`) | Jackson Home, Research Methodology | Needs a re-exported chart if she approves the fix (COPY-NOTES #12). |
+
+## Round 4 update
+
+| # | Gap | Where it shows | Status |
+|---|---|---|---|
+| **R4-1** | **Personal photo: history** (e.g. a museum visit, an archive, a historic place she loves) | Homepage About mosaic, **tall 4:5** slot | **Open.** Stand-in: her installed Power & Energy column (`r4-about-tall-4x5.jpg`, frame 0:19 of the final-setup video). |
+| **R4-2** | **Personal photo: fashion** | Homepage About mosaic, **wide 3:2** slot | **Open.** Stand-in: column installation in the gallery (`r4-about-wide-3x2.jpg`, fabrication video 0:12). |
+| **R4-3** | **Personal photo: art** | Homepage About mosaic, **square** slot A | **Open.** Stand-in: the gallery column before the build (`r4-about-sq-a.jpg`, fabrication video 0:00). |
+| **R4-4** | **Personal photo: any of the three** (or a detail shot) | Homepage About mosaic, **square** slot B | **Open.** Stand-in: column plan view from her shop drawing (`r4-about-sq-b.jpg`). |
+| R4-5 | Original **photographs** of the installed column | Row cover 02, panel 01, About mosaic | All column images are video frames (1080×1920). A few stills from her phone would be sharper. |
+| R4-6 | "Office Online Frame" tooltip inside the plan-with-paths image | Row cover 01, panel 03, Baseline Assumptions plate | Her export has a stray software tooltip in the kitchen hallway. Round 4 places the plan whole (no crop), so it now shows. Ask for a clean re-export. |
+
+**Photo specs for R4-1…R4-4:** at least 1600px on the long side; the tall slot is 4:5, the wide 3:2, the squares 1:1. Photos are cropped to those ratios, so keep the subject away from the edges. To swap one in Squarespace, click the image block → *Replace*.

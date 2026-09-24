@@ -14,23 +14,7 @@ ROOMS = [("room01", "J", "room-01-jackson-home", "The Henry Ford Jackson Home"),
          ("room02", "P", "room-02-power-energy", "Power & Energy"),
          ("room03", "R", "room-03-rhode-island", "Rhode Island 401 Health App"),
          ("room04", "L", "room-04-littelfuse", "Littelfuse")]
-NOTE_MEDIA = {
-    "INSERT VIDEO HERE - DISCRETE": "Discrete event simulation of visitor flow (video)",
-    "INSERT VIDEO HERE BELOW IS SCREEN GRAB": "Final interface and user flow (video)",
-    "INSERT POWER & ENERGY VIDEO HERE": "CMS channels in Appspace (video)",
-    "USE PDF VERSION HERE OF DRAWINGS": "Shop drawing, column surround: plan, section and perspective",
-    "ADD COLUMN FABRICATION VIDEO HERE": "Column fabrication progression (video)",
-    "ADD Final Results video here": "Final setup: the installed column (video)",
-    "INSERT VIDEO OF APP STORE REVIEWS HERE": "App Store and Google Play reviews (video)",
-    "INSERT PDF OR VIDEO OF DESKTOP": "Desktop wireframes (video)",
-    "INSERT WIREFRAMES FROM PDF HERE": "Littelfuse wireframes (placeholder)",
-}
-import importlib.util, sys
-spec = importlib.util.spec_from_file_location("b", "tools/build_r3.py")
-FIGCAP = {}
-src = open("tools/build_r3.py").read()
-for m in re.finditer(r"^\s+(\d+): \(\"[^\"]+\", \"([^\"]+)\"", src, re.M):
-    FIGCAP[int(m.group(1))] = m.group(2)
+FIGMAP = json.load(open("content/figmap.json"))      # written by tools/build_r3.py: item id -> captions shown for it
 REPLACED = {15: "replaced by the video her note asks for", 16: "replaced by the vector PDF her note asks for",
             17: "replaced by the vector PDF her note asks for", 18: "replaced by the vector PDF her note asks for",
             20: "replaced by the video her note asks for (her note: picture is only for reference)"}
@@ -92,7 +76,7 @@ w("## Homepage: About (`Instructions_About_Me.docx`)")
 w("")
 w("| ID | Text | Where | 1440 | 390 |")
 w("|---|---|---|---|---|")
-where = {"A-05": "Hero, label above her first paragraph", "A-06": "Hero, under the greeting", "A-07": "Statement (A9), centred",
+where = {"A-05": "Hero, label above her first paragraph", "A-06": "Hero, under the greeting", "A-07": "About bento, statement in the left 12 columns",
          "A-09": "Four disciplines, panel 01", "A-10": "Four disciplines, panel 02", "A-11": "Four disciplines, panel 03", "A-12": "Four disciplines, panel 04"}
 for k, a in enumerate(c["about"], 1):
     iid = f"A-{k:02d}"
@@ -143,16 +127,18 @@ for key, pre, page, name in ROOMS:
         typ = it["type"]
         if typ == "figure":
             d = it["doc"]
+            shown = FIGMAP.get(page, {}).get(iid, [])
             if d in REPLACED:
                 mark = f"✔ {REPLACED[d]}"
             else:
-                mark = "✔ shown" if FIGCAP.get(d) in pagecaps else "✘ missing"
+                mark = ("✔ shown" + (f" as {len(shown)} tiles" if len(shown) > 1 else "")
+                        if shown and all(x in pagecaps for x in shown) else "✘ missing")
             total += 1; passed += mark.startswith("✔")
-            w(f"| {iid} | FIG | doc-{d:02d}: {FIGCAP.get(d, '—')} | {chapter_of[iid]} | {mark} | {mark[:1]} |")
+            w(f"| {iid} | FIG | doc-{d:02d}: {'; '.join(shown) or '—'} | {chapter_of[iid]} | {mark} | {mark[:1]} |")
             continue
         if typ == "note":
-            want = next(v for k2, v in NOTE_MEDIA.items() if it["text"].startswith(k2))
-            mark = "✔ → " + want if want in pagecaps else "✘ media missing"
+            shown = FIGMAP.get(page, {}).get(iid, [])
+            mark = ("✔ → " + "; ".join(shown)) if shown and all(x in pagecaps for x in shown) else "✘ media missing"
             total += 1; passed += mark.startswith("✔")
             w(f"| {iid} | NOTE | {it['text'][:60]}{'…' if len(it['text']) > 60 else ''} | {chapter_of[iid]} | {mark} | {mark[:1]} |")
             continue

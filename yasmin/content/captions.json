@@ -1,28 +1,23 @@
 [
  [
   "index",
-  "Photo strip",
-  "Power & Energy column"
+  "Fig. 01",
+  "Power & Energy column, installed at The Henry Ford"
  ],
  [
   "index",
-  "Photo strip",
-  "Jackson Home visitor paths"
+  "Fig. 02",
+  "Installing the column in the Power & Energy gallery"
  ],
  [
   "index",
-  "Photo strip",
-  "401 Health app"
+  "Fig. 03",
+  "The gallery column before the build"
  ],
  [
   "index",
-  "Photo strip",
-  "Column shop drawing"
- ],
- [
-  "index",
-  "Photo strip",
-  "ITC employee research"
+  "Fig. 04",
+  "Column plan view, from the shop drawings"
  ],
  [
   "room-01-jackson-home",
@@ -152,11 +147,16 @@
  [
   "room-02-power-energy",
   "Fig. 15",
-  "Column fabrication progression (video)"
+  "Shop drawing, detail: column plan view"
  ],
  [
   "room-02-power-energy",
   "Fig. 16",
+  "Column fabrication progression (video)"
+ ],
+ [
+  "room-02-power-energy",
+  "Fig. 17",
   "Final setup: the installed column (video)"
  ],
  [
@@ -177,17 +177,12 @@
  [
   "room-03-rhode-island",
   "Fig. 04",
-  "Mobile wireframe: vaccination record"
+  "Vaccine details: annotated mobile screens"
  ],
  [
   "room-03-rhode-island",
   "Fig. 05",
-  "Mobile wireframe: dose details"
- ],
- [
-  "room-03-rhode-island",
-  "Fig. 06",
-  "Vaccine details: annotated mobile screens"
+  "Mobile wireframes: vaccination record and dose details"
  ],
  [
   "room-04-littelfuse",
@@ -197,21 +192,31 @@
  [
   "room-04-littelfuse",
   "Fig. 02",
-  "User archetypes: Engineering & Technical, Sales and Procurement"
+  "User archetype: Engineering & Technical"
  ],
  [
   "room-04-littelfuse",
   "Fig. 03",
-  "Engineering personas (video)"
+  "User archetype: Sales"
  ],
  [
   "room-04-littelfuse",
   "Fig. 04",
-  "Product-discovery journey map"
+  "User archetype: Procurement"
  ],
  [
   "room-04-littelfuse",
   "Fig. 05",
+  "Engineering personas (video)"
+ ],
+ [
+  "room-04-littelfuse",
+  "Fig. 06",
+  "Product-discovery journey map"
+ ],
+ [
+  "room-04-littelfuse",
+  "Fig. 07",
   "Littelfuse wireframes (placeholder)"
  ]
 ]

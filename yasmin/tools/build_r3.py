@@ -1,4 +1,7 @@
-"""Round 3: generate the six prototype pages from content/copy.json + content/site.json.
+"""Rounds 3-4: generate the six prototype pages from content/copy.json + content/site.json.
+Round 4: every image sits in one of six bento modules (pair, board, one3, strip, full,
+video); drawings/screens/documents are exported as finished tiles (whole, on #F4F3F0,
+24px padding in the file) into site/assets/img/tiles/. Writes MODULE-MAP.md.
 
 Run from yasmin/:  python3 tools/build_r3.py
 Every element that carries Yasmin's copy has data-id="<inventory id>", so
@@ -11,6 +14,7 @@ c = json.load(open("content/copy.json"))
 site = json.load(open("content/site.json"))
 E = lambda s: html.escape(s, quote=True)
 IMG = "assets/img/"
+IMG_DIR = "site/assets/img/"
 VID = "assets/video/"
 CAPTIONS = []          # (page, fig label, caption) for COPY-CHECK "Added captions"
 
@@ -25,98 +29,253 @@ for r in ROOMS:
     r["title"] = r["items"][0]
     r["role"] = next(it for it in r["items"] if it["type"] == "meta" and it["label"] == "Role")
     r["methods"] = next(it for it in r["items"] if it["type"] == "meta" and it["label"] == "Methods")
+DOCID = {(r["key"], it["doc"]): it["id"] for r in ROOMS for it in r["items"] if it["type"] == "figure"}
 
-# ---------------------------------------------------------------- figures and films
+# ---------------------------------------------------------------- figures (her doc images)
+# kind: "doc" = drawing, screen or document (placed whole on #F4F3F0, never cropped)
+#       "photo" = photograph (may be cropped to the module ratio)
 FIG = {
-    1: ("r01-chart-onsite-box.jpg", "Time spent on-site by visitor type", "plate"),
-    2: ("r01-chart-dataset-full.jpg", "Congestion, queue sizes, visit time and delays", "plate"),
-    3: ("r01-plan-plain.jpg", "Jackson Home floor plan", "plate"),
-    4: ("r01-plan-annex.jpg", "The Annex floor plan, with site entrance, entrance line and vestibule", "plate"),
-    5: ("r01-plan-paths.jpg", "Jackson Home floor plan with expected visitor paths", "plate"),
-    6: ("r01-chart-arrivals-random.jpg", "Arrivals spread randomly through the ticketing window", "plate"),
-    7: ("r01-chart-arrivals-ontime.jpg", "Arrivals at the start of the ticketing window", "plate"),
-    8: ("r3-fig-visit-times.jpg", "Expected visit times by visitor type", "plate"),
-    9: ("r01-chart-docent.jpg", "Skipped exhibits, without and with docent control", "plate"),
-    10: ("r01-chart-best-full.jpg", "Best scenario: 20 tickets, 8 walk-ups, with docent control", "plate"),
-    11: ("r02-concept-board.jpg", "Content themes and experience flow for the column", "plate"),
-    12: ("r3-fig-whiteboard.jpg", "Lo-fi sketches and wireframes for the column", "plain"),
-    13: ("r02-itc-full.jpg", "ITC employee research: three roles", "plate"),
-    14: ("r02-sides-full.jpg", "Content distribution across the sides of the column", "plate"),
-    19: ("r03-goals-full.jpg", "Rhode Island Department of Health population health goals", "plate"),
-    21: ("r03-annotated.jpg", "Vaccine details: annotated mobile screens", "plate"),
-    22: ("r3-fig-decision-board.jpg", "Survey: who drives component decisions", "plate"),
-    23: ("r04-archetypes-full.jpg", "User archetypes: Engineering & Technical, Sales and Procurement", "plate"),
-    24: ("r04-journey-full.jpg", "Product-discovery journey map", "plate"),
+    1: ("r01-chart-onsite-box.jpg", "Time spent on-site by visitor type", "doc"),
+    2: ("r01-chart-dataset-full.jpg", "Congestion, queue sizes, visit time and delays", "doc"),
+    3: ("r01-plan-plain.jpg", "Jackson Home floor plan", "doc"),
+    4: ("r01-plan-annex.jpg", "The Annex floor plan, with site entrance, entrance line and vestibule", "doc"),
+    5: ("r01-plan-paths.jpg", "Jackson Home floor plan with expected visitor paths", "doc"),
+    6: ("r01-chart-arrivals-random.jpg", "Arrivals spread randomly through the ticketing window", "doc"),
+    7: ("r01-chart-arrivals-ontime.jpg", "Arrivals at the start of the ticketing window", "doc"),
+    8: ("r3-fig-visit-times.jpg", "Expected visit times by visitor type", "doc"),
+    9: ("r01-chart-docent.jpg", "Skipped exhibits, without and with docent control", "doc"),
+    10: ("r01-chart-best-full.jpg", "Best scenario: 20 tickets, 8 walk-ups, with docent control", "doc"),
+    11: ("r02-concept-board.jpg", "Content themes and experience flow for the column", "doc"),
+    12: ("r4-whiteboard-stack.jpg", "Lo-fi sketches and wireframes for the column", "doc"),
+    13: ("r02-itc-full.jpg", "ITC employee research: three roles", "doc"),
+    14: ("r02-sides-full.jpg", "Content distribution across the sides of the column", "doc"),
+    19: ("r03-goals-full.jpg", "Rhode Island Department of Health population health goals", "doc"),
+    21: ("r03-annotated.jpg", "Vaccine details: annotated mobile screens", "doc"),
+    22: ("r3-fig-decision-board.jpg", "Survey: who drives component decisions", "doc"),
+    24: ("r04-journey-full.jpg", "Product-discovery journey map", "doc"),
 }
+# her archetype board (doc 23) is shown as its three archetype cards, whole, in a Board 2x2
+FIG23 = [("r04-archetype-engineering.jpg", "User archetype: Engineering & Technical", "doc"),
+         ("r04-archetype-sales.jpg", "User archetype: Sales", "doc"),
+         ("r04-archetype-procurement.jpg", "User archetype: Procurement", "doc")]
 REPLACED = {15, 16, 17, 18, 20}           # shown as the video / vector drawing her note asks for
-MOVED = {5}
-FULL = {19, 23, 24}                       # full plates (brief: goals table, archetype board, journey map)                               # rendered in the Baseline Assumptions spread (brief)
+MOVED = {5, 6, 9}                         # 5: Baseline spread; 6 and 9: the Scenario Testing data board
+TILE_DIR = "tiles/"
+FIGMAP = {}                               # page -> {inventory id: [captions shown for it]}
+MODLOG = []                               # every module, for MODULE-MAP.md and the order rule
 
 
 class Page:
     def __init__(self, name):
-        self.name, self.n = name, 0
+        self.name, self.n, self.ch, self.mods = name, 0, "", []
 
     def label(self):
         self.n += 1
         return f"Fig. {self.n:02d}"
 
 
-def fig(pg, src, cap, kind="plate", cls="b w mt", link=True, ratio=None):
+# Module widths at 1440px (the 24-column content width is 1344px, module gutters 24px).
+CONTENT = 1344
+MG = 24
+
+
+def export_tile(src, kind, ratio, disp_w):
+    """A finished tile for the module slot: drawings/screens/documents whole on the light
+    ground with 24px (display) padding inside the file; photographs cropped to the ratio.
+    ratio=None keeps the image's own ratio (plus padding). Returns the tile's file name."""
+    from PIL import Image
+    Image.MAX_IMAGE_PIXELS = None
+    im = Image.open(IMG_DIR + src).convert("RGB")
+    W = min(2400, round(disp_w * 2))
+    pad = round(MG * W / disp_w)
+    tag = "nat" if ratio is None else f"{ratio:.3f}".replace(".", "_")
+    name = f"{TILE_DIR}{src.rsplit('.', 1)[0]}--{tag}.jpg"
+    if kind == "photo":
+        r = ratio or im.width / im.height
+        w, h = im.size
+        if w / h > r:
+            nw = round(h * r); x = (w - nw) // 2; im = im.crop((x, 0, x + nw, h))
+        else:
+            nh = round(w / r); y = (h - nh) // 2; im = im.crop((0, y, w, y + nh))
+        out = im.resize((W, round(W / r)), Image.LANCZOS)
+    else:
+        if ratio is None:
+            s = (W - 2 * pad) / im.width
+            H = round(im.height * s) + 2 * pad
+        else:
+            H = round(W / ratio)
+            s = min((W - 2 * pad) / im.width, (H - 2 * pad) / im.height)
+        iw, ih = round(im.width * s), round(im.height * s)
+        out = Image.new("RGB", (W, H), (244, 243, 240))
+        out.paste(im.resize((iw, ih), Image.LANCZOS), ((W - iw) // 2, (H - ih) // 2))
+    out.save(IMG_DIR + name, quality=85, optimize=True, progressive=True)
+    return name
+
+
+def tile(pg, src, cap, kind, ratio, disp_w, src_id=None, cls=""):
+    """One captioned tile. The page shows the finished tile; a click opens her full image."""
     lab = pg.label()
     CAPTIONS.append((pg.name, lab, cap))
-    style = f' style="aspect-ratio:{ratio}"' if ratio else ""
-    img = f'<div class="m"{style}><img src="{IMG}{src}" alt="{E(cap)}" loading="lazy"></div>'
-    if link:
-        img = f'<a href="{IMG}{src}" target="_blank" rel="noopener" aria-label="Open full image: {E(cap)}">{img}</a>'
-    return f'<figure class="fig fig--{kind} {cls}">{img}<figcaption data-added="caption">{lab} — {E(cap)}</figcaption></figure>'
+    if src_id:
+        FIGMAP.setdefault(pg.name, {}).setdefault(src_id, []).append(cap)
+    t = export_tile(src, kind, ratio, disp_w)
+    pg.tiles.append(dict(label=lab, src=src, tile=t, cap=cap, kind=kind, src_id=src_id))
+    style = f' style="aspect-ratio:{ratio:.4f}"' if ratio else ""
+    return (f'<figure class="t{(" " + cls) if cls else ""}"><a class="m" href="{IMG}{src}"{style} target="_blank" rel="noopener" '
+            f'aria-label="Open full image: {E(cap)}"><img src="{IMG}{t}" alt="{E(cap)}" loading="lazy"></a>'
+            f'<figcaption data-added="caption">{lab} — {E(cap)}</figcaption></figure>')
 
 
-def film(pg, src, poster, cap, rt, cls="b full mt", vertical=False):
+def module(pg, typ, inner, note="", tag="div", extra="", style=""):
+    pg.mods.append(typ)
+    MODLOG.append(dict(page=pg.name, chapter=pg.ch, module=typ, tiles=pg.tiles, note=note))
+    pg.tiles = []
+    st = f' style="{style}"' if style else ""
+    return f'<{tag} class="mod mod--{typ}{extra} b full mt" data-module="{typ}"{st}>{inner}</{tag}>'
+
+
+def start(pg):
+    pg.tiles = []
+
+
+# ---- the six modules ------------------------------------------------------------------
+W_PAIR_WIDE, W_PAIR_TALL = (CONTENT - MG) * 2 / 3, (CONTENT - MG) / 3
+W_HALF = (CONTENT - MG) / 2
+
+
+def m_pair(pg, wide, tall, tall_first=False, note=""):
+    """Plate pair: one wide (16 cols, 3:2) + one tall (8 cols, 3:4): the same height."""
+    start(pg)
+    parts = [("w", wide), ("t", tall)]
+    if tall_first:
+        parts.reverse()
+    html_ = "".join(f(W_PAIR_WIDE if k == "w" else W_PAIR_TALL, 3 / 2 if k == "w" else 3 / 4, "t--wide" if k == "w" else "t--tall")
+                    for k, f in parts)
+    return module(pg, "pair", html_, note, extra=" mod--pair-r" if tall_first else "")
+
+
+def m_board(pg, fns, note=""):
+    """Board 2x2: four equal squares, a caption under each; each opens full size."""
+    start(pg)
+    return module(pg, "board", "".join(f(W_HALF, 1.0, "") for f in fns), note)
+
+
+def m_one3(pg, large, smalls, note=""):
+    """Board 1+3: one large (16 cols, the full height) + three small stacked (8 cols)."""
+    start(pg)
+    inner = large(W_PAIR_WIDE, None, "t--large") + "".join(f(W_PAIR_TALL, 3 / 2, "") for f in smalls)
+    return module(pg, "one3", inner, note)
+
+
+def m_strip(pg, fns, ratio, note=""):
+    """Strip: three to five equal tiles in one row, captions above (A8)."""
+    start(pg)
+    n = len(fns)
+    w = (CONTENT - MG * (n - 1)) / n
+    return module(pg, "strip", "".join(f(w, ratio, "") for f in fns), note, style=f"--n:{n}")
+
+
+def m_full(pg, fn, note=""):
+    """Full plate: one image across all 24 columns, on the light ground."""
+    start(pg)
+    return module(pg, "full", fn(CONTENT, "plate", ""), note)
+
+
+def m_video(pg, src, poster, cap, rt, vertical=False, src_id=None, note=""):
+    """Video panel: the video at 16 cols, its caption and running time in the other 8 (A5)."""
+    start(pg)
     lab = pg.label()
     CAPTIONS.append((pg.name, lab, cap + " (video)"))
-    return (f'<figure class="film{" film--v" if vertical else ""} {cls}">'
-            f'<video src="{VID}{src}" poster="{IMG}{poster}" controls muted playsinline preload="none"></video>'
-            f'<figcaption data-added="caption"><span>{lab} — {E(cap)}</span><span>{rt}</span></figcaption></figure>')
+    if src_id:
+        FIGMAP.setdefault(pg.name, {}).setdefault(src_id, []).append(cap + " (video)")
+    pg.tiles.append(dict(label=lab, src=src, tile=poster, cap=cap + " (video)", kind="video", src_id=src_id))
+    inner = (f'<div class="v{" v--tall" if vertical else ""}"><video src="{VID}{src}" poster="{IMG}{poster}" controls muted playsinline preload="metadata"></video></div>'
+             f'<figcaption data-added="caption"><span>{lab} — {E(cap)}</span><span class="rt">Running time {rt}</span></figcaption>')
+    return module(pg, "video", inner, note, tag="figure", extra=" mod--video-v" if vertical else "")
 
 
-def fig_doc(pg, doc, cls="b w mt"):
-    src, cap, kind = FIG[doc]
-    return fig(pg, src, cap, kind, cls)
+def T(src, cap, kind="doc", src_id=None):
+    """A tile factory for module functions: f(disp_w, ratio, cls)."""
+    def f(disp_w, ratio, cls):
+        if ratio == "plate":                      # full plate: at least 16:10, taller drawings sit whole inside
+            from PIL import Image
+            im = Image.open(IMG_DIR + src)
+            ratio_ = max((im.width + 96) / (im.height + 96), 1.6)
+            return tile(pg_now[0], src, cap, kind, ratio_, disp_w, src_id, cls)
+        return tile(pg_now[0], src, cap, kind, ratio, disp_w, src_id, cls)
+    return f
+
+
+def D(room, d):
+    src, cap, kind = FIG[d]
+    return T(src, cap, kind, DOCID[(room, d)])
+
+
+pg_now = [None]
 
 
 # ---------------------------------------------------------------- her production notes -> media
 def note_html(pg, it):
-    t = it["text"]
+    t, nid = it["text"], it["id"]
     if t.startswith("INSERT VIDEO HERE - DISCRETE EVENT SIMULATION"):
-        return film(pg, "r01-simulation.mp4", "poster-r01-simulation.jpg", "Discrete event simulation of visitor flow", "0:48")
+        return m_video(pg, "r01-simulation.mp4", "poster-r01-simulation.jpg", "Discrete event simulation of visitor flow", "0:48", src_id=nid)
     if t.startswith("INSERT VIDEO HERE BELOW IS SCREEN GRAB"):
-        return film(pg, "r02-interface.mp4", "poster-r02-interface.jpg", "Final interface and user flow", "0:22")
+        return m_video(pg, "r02-interface.mp4", "poster-r02-interface.jpg", "Final interface and user flow", "0:22", src_id=nid)
     if t.startswith("INSERT POWER & ENERGY VIDEO HERE"):
-        return film(pg, "r02-cms.mp4", "poster-r02-cms.jpg", "CMS channels in Appspace", "0:11", cls="b w mt")
+        return m_video(pg, "r02-cms.mp4", "poster-r02-cms.jpg", "CMS channels in Appspace", "0:11", src_id=nid)
     if t.startswith("USE PDF VERSION HERE OF DRAWINGS"):
-        return "".join(fig(pg, s, cap, "plate", "b full mt") for s, cap in [
-            ("r02-shop-1.jpg", "Shop drawing, column surround: plan, section and perspective"),
-            ("r02-shop-2.jpg", "Shop drawing: elevations and sections"),
-            ("r02-shop-3.jpg", "Shop drawing: typical column surround and plan")])
+        return m_one3(pg, T("r02-shop-1.jpg", "Shop drawing, column surround: plan, section and perspective", src_id=nid),
+                      [T("r02-shop-2.jpg", "Shop drawing: elevations and sections", src_id=nid),
+                       T("r02-shop-3.jpg", "Shop drawing: typical column surround and plan", src_id=nid),
+                       T("r02-shop-1-detail.jpg", "Shop drawing, detail: column plan view", src_id=nid)])
     if t.startswith("ADD COLUMN FABRICATION VIDEO HERE"):
-        return film(pg, "r02-fabrication.mp4", "poster-r02-fabrication.jpg", "Column fabrication progression", "0:14", cls="b w mt")
+        return m_video(pg, "r02-fabrication.mp4", "poster-r02-fabrication.jpg", "Column fabrication progression", "0:14", src_id=nid)
     if t.startswith("ADD Final Results video here"):
-        return film(pg, "r02-final-setup.mp4", "poster-r02-final-setup.jpg", "Final setup: the installed column", "0:21", cls="b mt", vertical=True)
+        return m_video(pg, "r02-final-setup.mp4", "poster-r02-final-setup.jpg", "Final setup: the installed column", "0:21", vertical=True, src_id=nid)
     if t.startswith("INSERT VIDEO OF APP STORE REVIEWS HERE"):
-        return film(pg, "r03-app-reviews.mp4", "poster-r03-app-reviews.jpg", "App Store and Google Play reviews", "0:23", cls="b mt", vertical=True)
+        return m_video(pg, "r03-app-reviews.mp4", "poster-r03-app-reviews.jpg", "App Store and Google Play reviews", "0:23", vertical=True, src_id=nid)
     if t.startswith("INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE"):
-        wide = film(pg, "r03-wireframes.mp4", "poster-r03-wireframes.jpg", "Desktop wireframes", "0:23", cls="")
-        tall = (fig(pg, "r03-screen-record.jpg", "Mobile wireframe: vaccination record", "plain", "", ratio="375/812")
-                + fig(pg, "r03-screen-doses.jpg", "Mobile wireframe: dose details", "plain", "", ratio="375/812"))
-        return f'<div class="pair b mt"><div class="pair__wide">{wide}</div><div class="pair__tall">{tall}</div></div>'
+        return m_video(pg, "r03-wireframes.mp4", "poster-r03-wireframes.jpg", "Desktop wireframes", "0:23", src_id=nid)
     if t.startswith("INSERT WIREFRAMES FROM PDF HERE"):
+        start(pg)
         lab = pg.label()
         CAPTIONS.append((pg.name, lab, "Littelfuse wireframes (placeholder)"))
-        return (f'<figure class="fig b w mt"><div class="placeholder"><span class="label" data-added="placeholder">'
-                f'Littelfuse wireframes — pending export from Adobe XD</span></div>'
-                f'<figcaption data-added="caption">{lab} — Littelfuse wireframes (placeholder)</figcaption></figure>')
+        FIGMAP.setdefault(pg.name, {}).setdefault(nid, []).append("Littelfuse wireframes (placeholder)")
+        pg.tiles.append(dict(label=lab, src="—", tile="—", cap="Littelfuse wireframes (placeholder)", kind="placeholder", src_id=nid))
+        return module(pg, "full", f'<figure class="t"><div class="m placeholder"><span class="label" data-added="placeholder">'
+                      f'Littelfuse wireframes — pending export from Adobe XD</span></div>'
+                      f'<figcaption data-added="caption">{lab} — Littelfuse wireframes (placeholder)</figcaption></figure>',
+                      "Placeholder until she exports the XD screens (ASSET-GAPS).")
     raise KeyError(t)
+
+
+def note_id(room, prefix):
+    return next(x["id"] for x in next(r for r in ROOMS if r["key"] == room)["items"] if x["type"] == "note" and x["text"].startswith(prefix))
+
+
+# ---- figure runs in her text -> modules (keyed by the docs in the run, after REPLACED/MOVED)
+RUNS = {
+    ("room01", (1, 2)): lambda pg: m_pair(pg, D("room01", 2), D("room01", 1), tall_first=True),
+    ("room01", (3, 4)): lambda pg: m_pair(pg, D("room01", 4), D("room01", 3), tall_first=True),
+    ("room01", ()): lambda pg: "",
+    ("room01", (7, 8)): lambda pg: m_board(pg, [D("room01", d) for d in (6, 7, 8, 9)],
+                                           "Figs 6 and 9 moved here so the four scenario charts read as one set."),
+    ("room02", (11, 12)): lambda pg: m_pair(pg, D("room02", 11), D("room02", 12)),
+    ("room02", (13,)): lambda pg: m_full(pg, D("room02", 13)),
+    ("room02", (14,)): lambda pg: m_full(pg, D("room02", 14)),
+    ("room02", ()): lambda pg: "",
+    ("room03", (19,)): lambda pg: m_full(pg, D("room03", 19)),
+    ("room03", ()): lambda pg: "",
+    ("room03", (21,)): lambda pg: m_pair(pg, D("room03", 21),
+                                         T("r4-ri-screens.jpg", "Mobile wireframes: vaccination record and dose details",
+                                           src_id=note_id("room03", "INSERT PDF OR VIDEO OF DESKTOP")),
+                                         note="Tall slot: the frameless mobile screens from her vector PDF (Q7)."),
+    ("room04", (22, 23)): lambda pg: m_board(pg, [D("room04", 22)] + [T(s, c_, k, DOCID[("room04", 23)]) for s, c_, k in FIG23],
+                                             "Her archetype board (doc 23) shown as its three cards, whole.")
+                                     + m_video(pg, "r04-personas.mp4", "poster-r04-personas.jpg", "Engineering personas", "0:20",
+                                               note="Added media (Q6): directly under the archetype board."),
+    ("room04", (24,)): lambda pg: m_full(pg, D("room04", 24)),
+}
 
 
 # ---------------------------------------------------------------- her text -> HTML
@@ -166,8 +325,8 @@ def stats_html(it):
             f'<p class="heads label">{" ".join(f"<span>{E(h)}</span>" for h in (heads[2], heads[0], heads[1]))}</p>{cells}</div>')
 
 
-def body(pg, items, room, ordered_lists=False, skip_docs=()):
-    """Default flow for a run of items: text in the 12-col measure, media wider."""
+def body(pg, items, room, ordered_lists=False):
+    """Default flow for a run of items: text in the 12-col measure, media in modules."""
     out, i = [], 0
     while i < len(items):
         it = items[i]
@@ -179,26 +338,17 @@ def body(pg, items, room, ordered_lists=False, skip_docs=()):
             run = items[i:j]
             out.append(list_html(run, "b nl" if ordered_lists else "b", ordered_lists))
             if room == "room02" and any(x["text"].startswith("Artifact interpretation:") for x in run):
-                out.append(sides_board(pg))
+                out.append(sides_strip(pg))
             i = j
             continue
         if typ == "figure":
             j, docs = i, []
             while j < len(items) and items[j]["type"] == "figure":
                 d = items[j]["doc"]
-                if d not in REPLACED and d not in MOVED and d not in skip_docs:
+                if d not in REPLACED and d not in MOVED:
                     docs.append(d)
                 j += 1
-            full = [d for d in docs if d in FULL]
-            rest = [d for d in docs if d not in FULL]
-            if len(rest) == 1:
-                out.append(fig_doc(pg, rest[0]))
-            elif rest:
-                out.append(f'<div class="board b full mt">{"".join(fig_doc(pg, d, "") for d in rest)}</div>')
-            for d in full:
-                out.append(fig_doc(pg, d, "b full mt"))
-            if 23 in docs:
-                out.append(film(pg, "r04-personas.mp4", "poster-r04-personas.jpg", "Engineering personas", "0:20", cls="b w mt"))
+            out.append(RUNS[(room, tuple(docs))](pg))
             i = j
             continue
         if typ == "note":
@@ -211,12 +361,12 @@ def body(pg, items, room, ordered_lists=False, skip_docs=()):
     return "".join(out)
 
 
-def sides_board(pg):
+def sides_strip(pg):
     sides = [("r02-side-wayfinding.jpg", "Exhibit wayfinding"), ("r02-side-stories.jpg", "Innovation stories"),
              ("r02-side-map.jpg", "Interactive exploration"), ("r02-side-careers.jpg", "Career discovery"),
              ("r02-side-artifacts.jpg", "Artifact interpretation")]
-    return ('<div class="board board--5 b full mt">'
-            + "".join(fig(pg, s, f"Column side: {c}", "plain", "") for s, c in sides) + "</div>")
+    return m_strip(pg, [T(s, f"Column side: {c_}") for s, c_ in sides], 9 / 32,
+                   "Added media (Q6). Five tiles, not three or four: the column has five sides and the set reads as one object.")
 
 
 # ---------------------------------------------------------------- chapter layouts
@@ -229,14 +379,19 @@ def ch_default(pg, no, h2, items, room, **kw):
 
 
 def ch_spread(pg, no, h2, items, room, plan_doc):
-    plan = fig_doc(pg, plan_doc, "spread__plan")
+    """A14 spread, kept from round 3: her plan beside the baseline list it illustrates."""
+    start(pg)
+    src, cap, kind = FIG[plan_doc]
+    plan = tile(pg, src, cap, kind, 2 / 3, (CONTENT - 13 * 16) * 11 / 24 + 10 * 16, DOCID[(room, plan_doc)], "spread__plan")
+    MODLOG.append(dict(page=pg.name, chapter=pg.ch, module="spread", tiles=pg.tiles,
+                       note="Not a run of images: one plan beside the list it illustrates (round-3 A14 spread, kept)."))
+    pg.tiles = []
     return f'<div class="wrap g24 spread">{plan}{head(no, h2)}{body(pg, items, room)}</div>'
 
 
-def ch_a7_numbered(pg, no, h2, items, room, left_docs):
-    """A7: plates left; her sub-headed findings as a numbered 01-0n list right."""
+def ch_findings(pg, no, h2, items, room):
+    """Jackson Home Findings: her sub-headed findings as a numbered 01-0n list, then the best-scenario plate."""
     text = [x for x in items if x["type"] != "figure"]
-    left = "".join(fig_doc(pg, d, "") for d in left_docs)
     groups, cur = [], None
     for x in text:
         if x["type"] == "h3":
@@ -244,16 +399,8 @@ def ch_a7_numbered(pg, no, h2, items, room, left_docs):
         else:
             cur.append(x)
     lis = "".join("<li>" + "".join(text_html(y, "") for y in g) + "</li>" for g in groups)
-    return (f'<div class="wrap g24 a7"><div class="a7__left">{left}</div>{head(no, h2)}'
-            f'<ol class="b nl">{lis}</ol></div>')
-
-
-def ch_a7_media_left(pg, no, h2, items, room):
-    """Power & Energy Results: the final-setup film left, her text right."""
-    note = next(x for x in items if x["type"] == "note")
-    rest = [x for x in items if x is not note]
-    return (f'<div class="wrap g24 a7"><div class="a7__left">{note_html(pg, note).replace("b mt", "")}</div>'
-            f'{head(no, h2)}{body(pg, rest, room)}</div>')
+    return (f'<div class="wrap g24">{head(no, h2)}<ol class="b nl">{lis}</ol>'
+            f'{m_full(pg, D(room, 10))}</div>')
 
 
 def ch_reflection(pg, no, h2, items, room):
@@ -279,9 +426,8 @@ def ch_littelfuse_approach(pg, no, h2, items, room):
 SPECIAL = {
     ("room01", "Building the Simulation"): lambda pg, n, h, it, r: ch_default(pg, n, h, it, r),
     ("room01", "Baseline Assumptions"): lambda pg, n, h, it, r: ch_spread(pg, n, h, it, r, 5),
-    ("room01", "Findings"): lambda pg, n, h, it, r: ch_a7_numbered(pg, n, h, it, r, [9, 10]),
+    ("room01", "Findings"): ch_findings,
     ("room01", "Impact"): lambda pg, n, h, it, r: ch_default(pg, n, h, it, r, ordered_lists=True),
-    ("room02", "Results & Impact"): ch_a7_media_left,
     ("room04", "The Approach"): ch_littelfuse_approach,
 }
 
@@ -327,28 +473,36 @@ def home():
     facts = "".join(
         f'<div><dt class="label" data-added="ui">{E(f["label"])}</dt><dd class="{"pending" if f.get("pending") else ""}" data-added="supplied">{E(f["value"])}</dd></div>'
         for f in site["home"]["facts"])
-    strip = [("r02-column-installed.jpg", "Power & Energy column"), ("r01-plan-16x9.jpg", "Jackson Home visitor paths"),
-             ("r3-cover-r03-3x2.jpg", "401 Health app"), ("r02-shop-1-detail.jpg", "Column shop drawing"),
-             ("r02-itc-full.jpg", "ITC employee research")]
-    strip_html = "".join(
-        f'<figure class="fade"><figcaption class="label" data-added="caption">{E(cap)}</figcaption>'
-        f'<div class="m"><img src="{IMG}{src}" alt="{E(cap)}" loading="lazy"></div></figure>' for src, cap in strip)
-    for _, cap in strip:
-        CAPTIONS.append(("index", "Photo strip", cap))
+    # A10 + round 4: four panels, each with an image. 01 shows it at rest; 02-04 reveal it on hover.
+    PANEL = [("r4-panel-01.jpg", "The installed Power & Energy column", "photo"),
+             ("r4-panel-02.jpg", "Rhode Island 401 Health app: two mobile screens", "doc"),
+             ("r4-panel-03.jpg", "Jackson Home floor plan with expected visitor paths", "doc"),
+             ("r4-panel-04.jpg", "ITC employee research storyboard", "doc")]
     skills = [A[f"A-{k:02d}"] for k in (9, 10, 11, 12)]
     panels = ""
-    for n, s in enumerate(skills, 1):
-        img = (f'<div class="m"><img src="{IMG}r02-column-installed.jpg" alt="The installed Power &amp; Energy column" loading="lazy"></div>'
-               if n == 1 else "")
-        panels += (f'<article class="panel{" panel--img" if n == 1 else ""}">{img}<span class="no" data-added="ui">{n:02d}</span>'
-                   f'<h3 data-id="A-{8 + n:02d}">{E(s["text"])}</h3></article>')
+    for n, (s_, (src, alt, kind)) in enumerate(zip(skills, PANEL), 1):
+        panels += (f'<article class="panel{" panel--rest" if n == 1 else ""}">'
+                   f'<div class="m m--{kind}"><img src="{IMG}{src}" alt="{E(alt)}" loading="lazy"></div>'
+                   f'<span class="no" data-added="ui">{n:02d}</span>'
+                   f'<h3 data-id="A-{8 + n:02d}">{E(s_["text"])}</h3></article>')
+    # A9 + A4: About bento. Work images stand in until she sends personal photos (ASSET-GAPS R4-1..4)
+    MOSAIC = [("tall", "r4-about-tall-4x5.jpg", "Power & Energy column, installed at The Henry Ford"),
+              ("wide", "r4-about-wide-3x2.jpg", "Installing the column in the Power & Energy gallery"),
+              ("sqa", "r4-about-sq-a.jpg", "The gallery column before the build"),
+              ("sqb", "r4-about-sq-b.jpg", "Column plan view, from the shop drawings")]
+    mosaic = ""
+    for slot, src, cap in MOSAIC:
+        lab = pg.label()
+        CAPTIONS.append(("index", lab, cap))
+        mosaic += (f'<figure class="t t--{slot}"><div class="m"><img src="{IMG}{src}" alt="{E(cap)}" loading="lazy"></div>'
+                   f'<figcaption data-added="caption">{lab} — {E(cap)}</figcaption></figure>')
     rows = ""
     for n, r in enumerate(ROOMS, 1):
         rows += (f'<a class="row fade" href="{r["slug"]}.html"><div class="row__t"><span class="label" data-added="ui">{n:02d}</span>'
                  f'<h3 data-ref="{r["title"]["id"]}">{E(r["title"]["text"])}</h3></div>'
                  f'<div class="row__role"><span data-ref="{r["role"]["id"]}">{E(r["role"]["text"])}</span>'
                  f'<span class="label" data-added="ui">Password protected</span></div>'
-                 f'<div class="row__img"><div class="m"><img src="{IMG}r3-cover-{r["key"].replace("room0", "r0")}-3x2.jpg" alt="" loading="lazy"></div></div></a>')
+                 f'<div class="row__img"><div class="m m--fit"><img src="{IMG}{ROW[r["key"]]}" alt="" loading="lazy"></div></div></a>')
     b = f"""{bar(here="home")}
 <main id="top">
 <!-- A9 + A8: greeting, her About sentence, headshot and facts -->
@@ -363,15 +517,18 @@ def home():
     <figcaption class="label" data-added="caption">Digital Exhibit Designer — The Henry Ford</figcaption></figure>
   <dl class="facts">{facts}</dl>
 </section>
-<!-- A9 photo strip at varying heights, A8 captions above -->
-<section class="wrap g24 strip" aria-label="Selected images">{strip_html}</section>
+<hr class="hairline">
 
-<!-- A9 statement: her second About paragraph -->
-<section class="section section--alt" id="about"><div class="wrap statement">
-  <p class="big fade" data-id="A-07">{E(A["A-07"]["text"])}</p>
+<!-- A9 auren + A4 Finnhütte: About bento on the light ground. Statement left 12, mosaic right 12 -->
+<section class="section section--alt" id="about"><div class="wrap g24 about">
+  <p class="about__statement" data-id="A-07">{E(A["A-07"]["text"])}</p>
+  <div class="about__right">
+    <div class="mosaic">{mosaic}</div>
+    <p class="about__tags" data-added="ui"><span>History</span><span aria-hidden="true">·</span><span>Fashion</span><span aria-hidden="true">·</span><span>Art</span></p>
+  </div>
 </div></section>
 
-<!-- A10: four equal vertical panels, her four skills in her order -->
+<!-- A10: four equal vertical panels, her four skills in her order; image revealed on hover -->
 <section class="panels" aria-label="Disciplines">{panels}</section>
 
 <!-- A3: project rows with hairlines -->
@@ -397,7 +554,7 @@ def home():
 def projects():
     cards = ""
     for n, r in enumerate(ROOMS, 1):
-        cards += (f'<a class="card fade" href="{r["slug"]}.html"><div class="m"><img src="{IMG}r3-cover-{r["key"].replace("room0", "r0")}-3x2.jpg" alt="" loading="lazy"></div>'
+        cards += (f'<a class="card fade" href="{r["slug"]}.html"><div class="m m--fit"><img src="{IMG}{ROW[r["key"]]}" alt="" loading="lazy"></div>'
                   f'<span class="label" data-added="ui">{n:02d} · Password protected</span>'
                   f'<h2 data-ref="{r["title"]["id"]}">{E(r["title"]["text"])}</h2>'
                   f'<p data-ref="{r["role"]["id"]}">{E(r["role"]["text"])}</p></a>')
@@ -412,8 +569,16 @@ def projects():
 
 
 # ---------------------------------------------------------------- case study template
+COVER = {"room01": "r3-cover-r01-16x7.jpg",      # simulation still (footage): cropped to 16:7
+         "room02": "r3-cover-r02-16x7.jpg",      # photograph: cropped to 16:7
+         "room03": "r4-cover-r03-16x7.jpg",      # five screens, whole, on the light ground
+         "room04": "r4-cover-r04-16x7.jpg"}      # the journey map, whole, on white
+ROW = {k: f"r4-row-{k.replace('room0', 'r0')}-3x2.jpg" for k in ("room01", "room02", "room03", "room04")}
+
+
 def case(r):
     pg = Page(r["slug"])
+    pg_now[0] = pg
     items = r["items"]
     sv = site["rooms"][r["key"]]
     # split into chapters at H2
@@ -428,6 +593,7 @@ def case(r):
     tone = r["tone"]
     parts = []
     for k, (h, its) in enumerate(chapters, 1):
+        pg.ch = f"{k:02d} {h['text']}"
         if h["text"] == "Reflection":
             inner = ch_reflection(pg, k, h, its, r["key"])
             parts.append(f'<section class="chapter section--alt reflection-sec" id="ch-{k}" style="padding-block:var(--section);margin-top:var(--section)">{inner}</section>')
@@ -440,7 +606,7 @@ def case(r):
     b = f"""{bar(over=tone, here="projects")}
 <main id="top">
 <!-- A1 + A4: full-bleed cover with the title on it, meta panel bottom-right -->
-<section class="cover cover--{tone}"><div class="m"><img src="{IMG}r3-cover-{r["key"].replace("room0", "r0")}-16x7.jpg" alt=""></div>
+<section class="cover cover--{tone}"><div class="m"><img src="{IMG}{COVER[r["key"]]}" alt=""></div>
   <h1 class="cover__title" data-id="{r["title"]["id"]}">{E(r["title"]["text"])}</h1></section>
 <div class="meta"><div class="wrap g24"><dl class="meta__panel">
   <div class="wide"><dt class="label" data-added="ui">Role</dt><dd data-id="{r["role"]["id"]}">{E(r["role"]["text"])}</dd></div>
@@ -484,11 +650,98 @@ def lock():
     return page("Private View — Yasmin Bajwa", "Projects are shared by invitation.", b)
 
 
+MODULE_NAMES = {"pair": "Plate pair", "board": "Board 2×2", "one3": "Board 1+3", "strip": "Strip",
+                "full": "Full plate", "video": "Video panel", "spread": "Spread (round-3 A14, kept)"}
+SQS = {"pair": "Fluid Engine row: image block 16 cols + image block 8 cols, same height",
+       "board": "Gallery section → Grid: Simple, 2 columns, 1:1, lightbox on",
+       "one3": "Fluid Engine row: one image block 16 cols × 3 rows tall + three image blocks 8 cols",
+       "strip": "Gallery section → Grid: Simple, n columns, captions above (or a Fluid Engine row)",
+       "full": "Fluid Engine row: one image block, 24 cols",
+       "video": "Fluid Engine row: video block 16 cols + text block 8 cols",
+       "spread": "Fluid Engine: image block 11 cols beside text blocks"}
+
+
+def rule_check():
+    """Never more than two modules of the same type in a row (per page, text between ignored)."""
+    bad = []
+    for r in ROOMS:
+        seq = [m["module"] for m in MODLOG if m["page"] == r["slug"] and m["module"] != "spread"]
+        for k in range(len(seq) - 2):
+            if seq[k] == seq[k + 1] == seq[k + 2]:
+                bad.append((r["slug"], k, seq[k]))
+    return bad
+
+
+def module_map():
+    L = ["# Module map (round 4)", "",
+         "Every image and video on the four case-study pages, the module it sits in, and why. "
+         "Generated by `tools/build_r3.py` (do not edit by hand; edit the `RUNS` table and re-run).", "",
+         "## The six modules", "",
+         "| Module | Layout (24-col grid, 24px gutters) | Use it for | Squarespace |", "|---|---|---|---|",
+         "| **Plate pair** | one wide 16 cols (3:2) + one tall 8 cols (3:4), same height; may be mirrored to keep her figure order | a plan beside a detail, a photo beside a drawing | " + SQS["pair"] + " |",
+         "| **Board 2×2** | four equal squares, caption under each, each opens full size | chart sets, data walls | " + SQS["board"] + " |",
+         "| **Board 1+3** | one large 16 cols (full height) + three small stacked 8 cols (3:2) | a key visual with supporting figures | " + SQS["one3"] + " |",
+         "| **Strip** | three or four equal tiles in one row, captions above (A8) | column art panels, persona cards, wireframe screens | " + SQS["strip"] + " |",
+         "| **Full plate** | one image across all 24 cols on the light ground, at least 16:10 | shop drawings, the journey map, the 23-goals table | " + SQS["full"] + " |",
+         "| **Video panel** | video 16 cols; caption and running time in the other 8 (A5) | every video | " + SQS["video"] + " |", "",
+         "**Rules applied to every tile:** drawings, screens and documents are placed whole (never cropped) on `#F4F3F0` "
+         "with 24px padding. The padding and ground are *inside the exported tile* (`site/assets/img/tiles/`), "
+         "so Squarespace needs no CSS for it. Photographs may be cropped to the module ratio. 24px gutters. "
+         "A FIG. caption on every tile. Never more than two modules of the same type in a row.", ""]
+    bad = rule_check()
+    L.append("**Order rule check:** " + ("✔ no page has three modules of the same type in a row." if not bad else "✘ " + str(bad)))
+    L.append("")
+    for r in ROOMS:
+        mods = [m for m in MODLOG if m["page"] == r["slug"]]
+        seq = " → ".join(MODULE_NAMES[m["module"]] for m in mods)
+        L += [f"## {r['short']} — `site/{r['slug']}.html`", "", f"Sequence: {seq}", "",
+              "| # | Chapter | Module | Fig. | Caption | Her item | Source file | Tile (as placed) | Fit | Note |",
+              "|---|---|---|---|---|---|---|---|---|---|"]
+        for k, m in enumerate(mods, 1):
+            for j, t in enumerate(m["tiles"]):
+                fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder"}[t["kind"]]
+                L.append(f"| {k if j == 0 else ''} | {m['chapter'] if j == 0 else ''} | {MODULE_NAMES[m['module']] if j == 0 else ''} | "
+                         f"{t['label']} | {t['cap']} | {t['src_id'] or '➕ added'} | `{t['src']}` | `{t['tile']}` | {fit} | {m['note'] if j == 0 else ''} |")
+        L.append("")
+    L += ["## Homepage (not modules, listed for completeness)", "",
+          "| Where | File | Fit |", "|---|---|---|",
+          "| Project rows + Projects grid | `r4-row-r01..r04-3x2.jpg` | finished 3:2, subject whole (plan, column ×3, two screens, journey map) |",
+          "| Discipline panels 01–04 | `r4-panel-01..04.jpg` | 2:3; 01 photograph (cropped), 02–04 whole on #F4F3F0 |",
+          "| About mosaic | `r4-about-tall-4x5.jpg`, `r4-about-wide-3x2.jpg`, `r4-about-sq-a.jpg`, `r4-about-sq-b.jpg` | stand-ins from her work until personal photos arrive (ASSET-GAPS R4-1..R4-4) |",
+          "| Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped), `r4-cover-r03/r04-16x7.jpg` (whole) | |", ""]
+    open("MODULE-MAP.md", "w").write("\n".join(L) + "\n")
+    return bad
+
+
+def asset_map_section():
+    """Rewrite the 'Round 4: module per image' section at the end of ASSET-MAP.md."""
+    head = "## Round 4: module per image"
+    L = [head, "", "Every image and video on the case-study pages, by source file, with the module it sits in "
+         "(generated by `tools/build_r3.py`; details and reasons in `MODULE-MAP.md`).", "",
+         "| Source file | Page | Fig. | Module | Tile placed | Fit |", "|---|---|---|---|---|---|"]
+    for m in MODLOG:
+        for t in m["tiles"]:
+            fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder"}[t["kind"]]
+            L.append(f"| `{t['src']}` | {m['page']} | {t['label']} | {MODULE_NAMES[m['module']]} | `{t['tile']}` | {fit} |")
+    L += ["", "Homepage (round 4): `r4-row-r01…r04-3x2.jpg` (rows + Projects grid), `r4-panel-01…04.jpg` (disciplines), "
+          "`r4-about-*.jpg` (About mosaic), `r4-cover-r03/r04-16x7.jpg` (covers). All made by `tools/build_r4_assets.py`.", ""]
+    s = open("ASSET-MAP.md").read()
+    if head in s:
+        s = s[:s.index(head)]
+    open("ASSET-MAP.md", "w").write(s.rstrip() + "\n\n" + "\n".join(L))
+
+
 if __name__ == "__main__":
+    import os
+    os.makedirs(IMG_DIR + TILE_DIR, exist_ok=True)
     open("site/index.html", "w").write(home())
     open("site/projects.html", "w").write(projects())
     for r in ROOMS:
         open(f"site/{r['slug']}.html", "w").write(case(r))
     open("site/private-view.html", "w").write(lock())
     json.dump(CAPTIONS, open("content/captions.json", "w"), indent=1, ensure_ascii=False)
-    print("pages written;", len(CAPTIONS), "captions")
+    json.dump(FIGMAP, open("content/figmap.json", "w"), indent=1, ensure_ascii=False)
+    bad = module_map()
+    json.dump(MODLOG, open("content/modules.json", "w"), indent=1, ensure_ascii=False)
+    asset_map_section()
+    print("pages written;", len(CAPTIONS), "captions;", len(MODLOG), "modules; order rule:", "ok" if not bad else bad)

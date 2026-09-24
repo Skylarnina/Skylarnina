@@ -1,0 +1,100 @@
+{
+ "room-01-jackson-home": {
+  "J-046": [
+   "Time spent on-site by visitor type"
+  ],
+  "J-047": [
+   "Congestion, queue sizes, visit time and delays"
+  ],
+  "J-058": [
+   "Jackson Home floor plan"
+  ],
+  "J-059": [
+   "The Annex floor plan, with site entrance, entrance line and vestibule"
+  ],
+  "J-061": [
+   "Discrete event simulation of visitor flow (video)"
+  ],
+  "J-060": [
+   "Jackson Home floor plan with expected visitor paths"
+  ],
+  "J-096": [
+   "Arrivals spread randomly through the ticketing window"
+  ],
+  "J-104": [
+   "Arrivals at the start of the ticketing window"
+  ],
+  "J-105": [
+   "Expected visit times by visitor type"
+  ],
+  "J-117": [
+   "Skipped exhibits, without and with docent control"
+  ],
+  "J-118": [
+   "Best scenario: 20 tickets, 8 walk-ups, with docent control"
+  ]
+ },
+ "room-02-power-energy": {
+  "P-024": [
+   "Content themes and experience flow for the column"
+  ],
+  "P-025": [
+   "Lo-fi sketches and wireframes for the column"
+  ],
+  "P-029": [
+   "ITC employee research: three roles"
+  ],
+  "P-040": [
+   "Content distribution across the sides of the column"
+  ],
+  "P-041": [
+   "Final interface and user flow (video)"
+  ],
+  "P-046": [
+   "CMS channels in Appspace (video)"
+  ],
+  "P-051": [
+   "Shop drawing, column surround: plan, section and perspective",
+   "Shop drawing: elevations and sections",
+   "Shop drawing: typical column surround and plan",
+   "Shop drawing, detail: column plan view"
+  ],
+  "P-055": [
+   "Column fabrication progression (video)"
+  ],
+  "P-060": [
+   "Final setup: the installed column (video)"
+  ]
+ },
+ "room-03-rhode-island": {
+  "R-024": [
+   "Rhode Island Department of Health population health goals"
+  ],
+  "R-025": [
+   "App Store and Google Play reviews (video)"
+  ],
+  "R-036": [
+   "Desktop wireframes (video)",
+   "Mobile wireframes: vaccination record and dose details"
+  ],
+  "R-037": [
+   "Vaccine details: annotated mobile screens"
+  ]
+ },
+ "room-04-littelfuse": {
+  "L-025": [
+   "Survey: who drives component decisions"
+  ],
+  "L-026": [
+   "User archetype: Engineering & Technical",
+   "User archetype: Sales",
+   "User archetype: Procurement"
+  ],
+  "L-029": [
+   "Product-discovery journey map"
+  ],
+  "L-041": [
+   "Littelfuse wireframes (placeholder)"
+  ]
+ }
+}

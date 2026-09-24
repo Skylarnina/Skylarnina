@@ -1,0 +1,506 @@
+[
+ {
+  "page": "room-01-jackson-home",
+  "chapter": "04 Research Methodology",
+  "module": "pair",
+  "tiles": [
+   {
+    "label": "Fig. 01",
+    "src": "r01-chart-onsite-box.jpg",
+    "tile": "tiles/r01-chart-onsite-box--0_750.jpg",
+    "cap": "Time spent on-site by visitor type",
+    "kind": "doc",
+    "src_id": "J-046"
+   },
+   {
+    "label": "Fig. 02",
+    "src": "r01-chart-dataset-full.jpg",
+    "tile": "tiles/r01-chart-dataset-full--1_500.jpg",
+    "cap": "Congestion, queue sizes, visit time and delays",
+    "kind": "doc",
+    "src_id": "J-047"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-01-jackson-home",
+  "chapter": "05 Building the Simulation",
+  "module": "pair",
+  "tiles": [
+   {
+    "label": "Fig. 03",
+    "src": "r01-plan-plain.jpg",
+    "tile": "tiles/r01-plan-plain--0_750.jpg",
+    "cap": "Jackson Home floor plan",
+    "kind": "doc",
+    "src_id": "J-058"
+   },
+   {
+    "label": "Fig. 04",
+    "src": "r01-plan-annex.jpg",
+    "tile": "tiles/r01-plan-annex--1_500.jpg",
+    "cap": "The Annex floor plan, with site entrance, entrance line and vestibule",
+    "kind": "doc",
+    "src_id": "J-059"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-01-jackson-home",
+  "chapter": "05 Building the Simulation",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 05",
+    "src": "r01-simulation.mp4",
+    "tile": "poster-r01-simulation.jpg",
+    "cap": "Discrete event simulation of visitor flow (video)",
+    "kind": "video",
+    "src_id": "J-061"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-01-jackson-home",
+  "chapter": "06 Baseline Assumptions",
+  "module": "spread",
+  "tiles": [
+   {
+    "label": "Fig. 06",
+    "src": "r01-plan-paths.jpg",
+    "tile": "tiles/r01-plan-paths--0_667.jpg",
+    "cap": "Jackson Home floor plan with expected visitor paths",
+    "kind": "doc",
+    "src_id": "J-060"
+   }
+  ],
+  "note": "Not a run of images: one plan beside the list it illustrates (round-3 A14 spread, kept)."
+ },
+ {
+  "page": "room-01-jackson-home",
+  "chapter": "07 Scenario Testing",
+  "module": "board",
+  "tiles": [
+   {
+    "label": "Fig. 07",
+    "src": "r01-chart-arrivals-random.jpg",
+    "tile": "tiles/r01-chart-arrivals-random--1_000.jpg",
+    "cap": "Arrivals spread randomly through the ticketing window",
+    "kind": "doc",
+    "src_id": "J-096"
+   },
+   {
+    "label": "Fig. 08",
+    "src": "r01-chart-arrivals-ontime.jpg",
+    "tile": "tiles/r01-chart-arrivals-ontime--1_000.jpg",
+    "cap": "Arrivals at the start of the ticketing window",
+    "kind": "doc",
+    "src_id": "J-104"
+   },
+   {
+    "label": "Fig. 09",
+    "src": "r3-fig-visit-times.jpg",
+    "tile": "tiles/r3-fig-visit-times--1_000.jpg",
+    "cap": "Expected visit times by visitor type",
+    "kind": "doc",
+    "src_id": "J-105"
+   },
+   {
+    "label": "Fig. 10",
+    "src": "r01-chart-docent.jpg",
+    "tile": "tiles/r01-chart-docent--1_000.jpg",
+    "cap": "Skipped exhibits, without and with docent control",
+    "kind": "doc",
+    "src_id": "J-117"
+   }
+  ],
+  "note": "Figs 6 and 9 moved here so the four scenario charts read as one set."
+ },
+ {
+  "page": "room-01-jackson-home",
+  "chapter": "08 Findings",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 11",
+    "src": "r01-chart-best-full.jpg",
+    "tile": "tiles/r01-chart-best-full--1_983.jpg",
+    "cap": "Best scenario: 20 tickets, 8 walk-ups, with docent control",
+    "kind": "doc",
+    "src_id": "J-118"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "03 The Approach/ UX Design",
+  "module": "strip",
+  "tiles": [
+   {
+    "label": "Fig. 01",
+    "src": "r02-side-wayfinding.jpg",
+    "tile": "tiles/r02-side-wayfinding--0_281.jpg",
+    "cap": "Column side: Exhibit wayfinding",
+    "kind": "doc",
+    "src_id": null
+   },
+   {
+    "label": "Fig. 02",
+    "src": "r02-side-stories.jpg",
+    "tile": "tiles/r02-side-stories--0_281.jpg",
+    "cap": "Column side: Innovation stories",
+    "kind": "doc",
+    "src_id": null
+   },
+   {
+    "label": "Fig. 03",
+    "src": "r02-side-map.jpg",
+    "tile": "tiles/r02-side-map--0_281.jpg",
+    "cap": "Column side: Interactive exploration",
+    "kind": "doc",
+    "src_id": null
+   },
+   {
+    "label": "Fig. 04",
+    "src": "r02-side-careers.jpg",
+    "tile": "tiles/r02-side-careers--0_281.jpg",
+    "cap": "Column side: Career discovery",
+    "kind": "doc",
+    "src_id": null
+   },
+   {
+    "label": "Fig. 05",
+    "src": "r02-side-artifacts.jpg",
+    "tile": "tiles/r02-side-artifacts--0_281.jpg",
+    "cap": "Column side: Artifact interpretation",
+    "kind": "doc",
+    "src_id": null
+   }
+  ],
+  "note": "Added media (Q6). Five tiles, not three or four: the column has five sides and the set reads as one object."
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "03 The Approach/ UX Design",
+  "module": "pair",
+  "tiles": [
+   {
+    "label": "Fig. 06",
+    "src": "r02-concept-board.jpg",
+    "tile": "tiles/r02-concept-board--1_500.jpg",
+    "cap": "Content themes and experience flow for the column",
+    "kind": "doc",
+    "src_id": "P-024"
+   },
+   {
+    "label": "Fig. 07",
+    "src": "r4-whiteboard-stack.jpg",
+    "tile": "tiles/r4-whiteboard-stack--0_750.jpg",
+    "cap": "Lo-fi sketches and wireframes for the column",
+    "kind": "doc",
+    "src_id": "P-025"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "04 Discovery & Stakeholder Alignment",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 08",
+    "src": "r02-itc-full.jpg",
+    "tile": "tiles/r02-itc-full--1_600.jpg",
+    "cap": "ITC employee research: three roles",
+    "kind": "doc",
+    "src_id": "P-029"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "05 Designing the Interactive Experience",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 09",
+    "src": "r02-sides-full.jpg",
+    "tile": "tiles/r02-sides-full--1_600.jpg",
+    "cap": "Content distribution across the sides of the column",
+    "kind": "doc",
+    "src_id": "P-040"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "05 Designing the Interactive Experience",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 10",
+    "src": "r02-interface.mp4",
+    "tile": "poster-r02-interface.jpg",
+    "cap": "Final interface and user flow (video)",
+    "kind": "video",
+    "src_id": "P-041"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "06 CMS Integration & Implementation",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 11",
+    "src": "r02-cms.mp4",
+    "tile": "poster-r02-cms.jpg",
+    "cap": "CMS channels in Appspace (video)",
+    "kind": "video",
+    "src_id": "P-046"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "07 Installation & Fabrication",
+  "module": "one3",
+  "tiles": [
+   {
+    "label": "Fig. 12",
+    "src": "r02-shop-1.jpg",
+    "tile": "tiles/r02-shop-1--nat.jpg",
+    "cap": "Shop drawing, column surround: plan, section and perspective",
+    "kind": "doc",
+    "src_id": "P-051"
+   },
+   {
+    "label": "Fig. 13",
+    "src": "r02-shop-2.jpg",
+    "tile": "tiles/r02-shop-2--1_500.jpg",
+    "cap": "Shop drawing: elevations and sections",
+    "kind": "doc",
+    "src_id": "P-051"
+   },
+   {
+    "label": "Fig. 14",
+    "src": "r02-shop-3.jpg",
+    "tile": "tiles/r02-shop-3--1_500.jpg",
+    "cap": "Shop drawing: typical column surround and plan",
+    "kind": "doc",
+    "src_id": "P-051"
+   },
+   {
+    "label": "Fig. 15",
+    "src": "r02-shop-1-detail.jpg",
+    "tile": "tiles/r02-shop-1-detail--1_500.jpg",
+    "cap": "Shop drawing, detail: column plan view",
+    "kind": "doc",
+    "src_id": "P-051"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "07 Installation & Fabrication",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 16",
+    "src": "r02-fabrication.mp4",
+    "tile": "poster-r02-fabrication.jpg",
+    "cap": "Column fabrication progression (video)",
+    "kind": "video",
+    "src_id": "P-055"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-02-power-energy",
+  "chapter": "08 Results & Impact",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 17",
+    "src": "r02-final-setup.mp4",
+    "tile": "poster-r02-final-setup.jpg",
+    "cap": "Final setup: the installed column (video)",
+    "kind": "video",
+    "src_id": "P-060"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-03-rhode-island",
+  "chapter": "03 The Approach/ Discovery & Stakeholder Alignment",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 01",
+    "src": "r03-goals-full.jpg",
+    "tile": "tiles/r03-goals-full--1_600.jpg",
+    "cap": "Rhode Island Department of Health population health goals",
+    "kind": "doc",
+    "src_id": "R-024"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-03-rhode-island",
+  "chapter": "03 The Approach/ Discovery & Stakeholder Alignment",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 02",
+    "src": "r03-app-reviews.mp4",
+    "tile": "poster-r03-app-reviews.jpg",
+    "cap": "App Store and Google Play reviews (video)",
+    "kind": "video",
+    "src_id": "R-025"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-03-rhode-island",
+  "chapter": "04 UX Design/ Feature Prioritization",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 03",
+    "src": "r03-wireframes.mp4",
+    "tile": "poster-r03-wireframes.jpg",
+    "cap": "Desktop wireframes (video)",
+    "kind": "video",
+    "src_id": "R-036"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-03-rhode-island",
+  "chapter": "04 UX Design/ Feature Prioritization",
+  "module": "pair",
+  "tiles": [
+   {
+    "label": "Fig. 04",
+    "src": "r03-annotated.jpg",
+    "tile": "tiles/r03-annotated--1_500.jpg",
+    "cap": "Vaccine details: annotated mobile screens",
+    "kind": "doc",
+    "src_id": "R-037"
+   },
+   {
+    "label": "Fig. 05",
+    "src": "r4-ri-screens.jpg",
+    "tile": "tiles/r4-ri-screens--0_750.jpg",
+    "cap": "Mobile wireframes: vaccination record and dose details",
+    "kind": "doc",
+    "src_id": "R-036"
+   }
+  ],
+  "note": "Tall slot: the frameless mobile screens from her vector PDF (Q7)."
+ },
+ {
+  "page": "room-04-littelfuse",
+  "chapter": "03 The Approach",
+  "module": "board",
+  "tiles": [
+   {
+    "label": "Fig. 01",
+    "src": "r3-fig-decision-board.jpg",
+    "tile": "tiles/r3-fig-decision-board--1_000.jpg",
+    "cap": "Survey: who drives component decisions",
+    "kind": "doc",
+    "src_id": "L-025"
+   },
+   {
+    "label": "Fig. 02",
+    "src": "r04-archetype-engineering.jpg",
+    "tile": "tiles/r04-archetype-engineering--1_000.jpg",
+    "cap": "User archetype: Engineering & Technical",
+    "kind": "doc",
+    "src_id": "L-026"
+   },
+   {
+    "label": "Fig. 03",
+    "src": "r04-archetype-sales.jpg",
+    "tile": "tiles/r04-archetype-sales--1_000.jpg",
+    "cap": "User archetype: Sales",
+    "kind": "doc",
+    "src_id": "L-026"
+   },
+   {
+    "label": "Fig. 04",
+    "src": "r04-archetype-procurement.jpg",
+    "tile": "tiles/r04-archetype-procurement--1_000.jpg",
+    "cap": "User archetype: Procurement",
+    "kind": "doc",
+    "src_id": "L-026"
+   }
+  ],
+  "note": "Her archetype board (doc 23) shown as its three cards, whole."
+ },
+ {
+  "page": "room-04-littelfuse",
+  "chapter": "03 The Approach",
+  "module": "video",
+  "tiles": [
+   {
+    "label": "Fig. 05",
+    "src": "r04-personas.mp4",
+    "tile": "poster-r04-personas.jpg",
+    "cap": "Engineering personas (video)",
+    "kind": "video",
+    "src_id": null
+   }
+  ],
+  "note": "Added media (Q6): directly under the archetype board."
+ },
+ {
+  "page": "room-04-littelfuse",
+  "chapter": "03 The Approach",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 06",
+    "src": "r04-journey-full.jpg",
+    "tile": "tiles/r04-journey-full--1_929.jpg",
+    "cap": "Product-discovery journey map",
+    "kind": "doc",
+    "src_id": "L-029"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "page": "room-04-littelfuse",
+  "chapter": "03 The Approach",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 07",
+    "src": "—",
+    "tile": "—",
+    "cap": "Littelfuse wireframes (placeholder)",
+    "kind": "placeholder",
+    "src_id": "L-041"
+   }
+  ],
+  "note": "Placeholder until she exports the XD screens (ASSET-GAPS)."
+ }
+]
