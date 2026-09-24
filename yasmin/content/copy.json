@@ -1,0 +1,1611 @@
+{
+ "about": [
+  {
+   "type": "brief_h",
+   "text": "Portfolio Website Direction"
+  },
+  {
+   "type": "brief",
+   "text": "I want my portfolio to position me at the intersection of UX Design, UX Research, and Museum/Digital Experience Design. The overall site should feel modern, polished, and design-forward while still reflecting my background creating digital experiences within the museum world. I don’t want it to read as a traditional museum portfolio or a generic product-design portfolio—the museum/exhibition experience should be the element that makes my UX background distinctive."
+  },
+  {
+   "type": "brief",
+   "text": "The landing page should feature a strong photo of me, a short introduction to who I am and what I do, and a clear CTA to View Projects. I’m open to incorporating the About Me content directly into the landing page or having a separate About page depending on what creates the cleanest experience. The developer can recommend the best structure."
+  },
+  {
+   "type": "brief",
+   "text": "For the visual direction, I’d like the site to feel editorial, minimal, sophisticated, and highly visual, with thoughtful motion and interaction where appropriate. Case studies should be easy to scan but immersive enough to showcase research, workshops, user journeys, wireframes, prototypes, fabrication, and final experiences. I have a mixture of static imagery, diagrams, GIFs/video, and project documentation that should feel integrated rather than simply placed on the page. Please also include password protection."
+  },
+  {
+   "type": "h2",
+   "text": "About Me"
+  },
+  {
+   "type": "p",
+   "text": "Hi! I’m Yasmin, a Digital Exhibit Designer at The Henry Ford Museum with a multidisciplinary background in UX design, user research, and digital marketing. I’m passionate about bringing stories to life through digital experiences—and deeply inspired by history, fashion, and art."
+  },
+  {
+   "type": "p",
+   "text": "By blending design, research, and exhibit development, I bring a fresh, curious perspective to every team. To me, every project is an opportunity to experiment, innovate, and create something people will remember."
+  },
+  {
+   "type": "instruction",
+   "text": "Highlight these 4 skills in this order::"
+  },
+  {
+   "type": "skill",
+   "text": "Interactive Exhibit Design"
+  },
+  {
+   "type": "skill",
+   "text": "UX ( User Experience) Design"
+  },
+  {
+   "type": "skill",
+   "text": "UX Research"
+  },
+  {
+   "type": "skill",
+   "text": "Digital Marketing"
+  }
+ ],
+ "room01": [
+  {
+   "type": "title",
+   "text": "The Henry Ford Jackson Home Visitor Flow Simulation",
+   "src": "p1"
+  },
+  {
+   "type": "meta",
+   "label": "Role",
+   "text": "UX Researcher | Experience Design",
+   "src": "p1"
+  },
+  {
+   "type": "meta",
+   "label": "Methods",
+   "text": "Behavioral Observation • Space Syntax Analysis • Behavioral Path Clustering • Visitor Segmentation • Discrete Event Simulation • Predictive Modeling",
+   "src": "p1"
+  },
+  {
+   "type": "h2",
+   "text": "Project Overview",
+   "src": "p1"
+  },
+  {
+   "type": "p",
+   "text": "The Dr. Sullivan and Mrs. Richie Jean Sherrod Jackson Home is a nationally significant historic residence associated with the 1965 Selma to Montgomery marches, where civil rights leaders, including Dr. Martin Luther King Jr., gathered to develop strategies that contributed to the passage of the Voting Rights Act. After being relocated to Greenfield Village at The Henry Ford museum, the home was prepared to open to the public as a permanent exhibition in Summer 2026.",
+   "src": "p1"
+  },
+  {
+   "type": "p",
+   "text": "As the first building added to Greenfield Village in more than forty years, there was no historical visitor data to guide operational planning. My role was to develop a predictive visitor flow model that would forecast how guests would move through the constrained historic space before opening day.",
+   "src": "p1"
+  },
+  {
+   "type": "p",
+   "text": "Using UX research methodologies and behavioral modeling, I created a visitor simulation that allowed stakeholders to evaluate different ticketing strategies, estimate visitor capacity, identify potential congestion points, and determine where presenters should be positioned to create a comfortable and engaging visitor experience.",
+   "src": "p1"
+  },
+  {
+   "type": "h2",
+   "text": "The Challenge",
+   "src": "p1"
+  },
+  {
+   "type": "p",
+   "text": "No behavioral data existed, planning visitor capacity relied on assumptions rather than evidence. The home's preserved architectural layout introduced additional constraints:",
+   "src": "p1"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Narrow circulation paths",
+   "src": "p1"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Limited room capacity",
+   "src": "p1"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Sequential visitor movement",
+   "src": "p1"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Preservation requirements that prevented structural modifications",
+   "src": "p1"
+  },
+  {
+   "type": "p",
+   "text": "The challenge became:",
+   "src": "p2"
+  },
+  {
+   "type": "hmw",
+   "text": "How might we predict visitor behavior and optimize the museum experience before the exhibition opened to the public?",
+   "src": "p2"
+  },
+  {
+   "type": "h2",
+   "text": "Research Questions",
+   "src": "p2"
+  },
+  {
+   "type": "p",
+   "text": "To support exhibition planning, I focused on answering several key research questions.",
+   "src": "p2"
+  },
+  {
+   "type": "h3",
+   "text": "Visitor Experience",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "How long will visitors spend inside the home?",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Where are visitors most likely to stop or experience congestion?",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "What will waiting times look like throughout the experience?",
+   "src": "p2"
+  },
+  {
+   "type": "h3",
+   "text": "Capacity Planning",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "How many visitors can comfortably occupy both the Jackson Home and Annex (complimentary building with digital interactives) without overcrowding?",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Should visitors enter through 15-minute or 30-minute ticketing windows?",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Can walk-up visitors be accommodated without negatively affecting the experience?",
+   "src": "p2"
+  },
+  {
+   "type": "h3",
+   "text": "Operations",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Where should docents and presenters be positioned to support visitor flow?",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "What traffic management strategies should staff use during peak attendance?",
+   "src": "p2"
+  },
+  {
+   "type": "h2",
+   "text": "Research Methodology",
+   "src": "p2"
+  },
+  {
+   "type": "p",
+   "text": "Because no baseline visitor data existed for the Jackson Home, I combined several UX research methodologies to build a predictive behavioral model.",
+   "src": "p2"
+  },
+  {
+   "type": "h3",
+   "text": "Behavioral Observation",
+   "src": "p2"
+  },
+  {
+   "type": "p",
+   "text": "I analyzed visitor movement within comparable historical homes and nearby exhibitions at The Henry Ford to understand common behavioral patterns. These observations focused on:",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "visitor arrival behavior",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "walking speed",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "dwell time",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "congestion points",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "exhibit engagement",
+   "src": "p2"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "decision-making at transitions between rooms",
+   "src": "p2"
+  },
+  {
+   "type": "p",
+   "text": "These findings established the behavioral assumptions used throughout the simulation.",
+   "src": "p2"
+  },
+  {
+   "type": "h3",
+   "text": "Space Syntax Analysis",
+   "src": "p3"
+  },
+  {
+   "type": "p",
+   "text": "In collaboration with our experience design team I evaluated the home's architectural layout to understand how visibility, room connectivity, and circulation paths would naturally influence visitor movement. This helped identify areas likely to become bottlenecks before testing any operational scenarios.",
+   "src": "p3"
+  },
+  {
+   "type": "h3",
+   "text": "Behavioral Path Clustering",
+   "src": "p3"
+  },
+  {
+   "type": "p",
+   "text": "Behavioral observations revealed that visitors interact with museum environments differently depending on their engagement level. We simulate this behavior by randomly assigning a visitor type to each person and then reducing the average view time at each exhibit to give the correct %. This results in a very different time profile for each type of visitor to the Jackson Home: To reflect these differences, visitors were grouped into three behavioral archetypes based on existing museum research and validated using historical attendance patterns from The Henry Ford.",
+   "src": "p3"
+  },
+  {
+   "type": "table",
+   "src": "p3",
+   "head": [
+    "Visitor Type",
+    "Characteristics",
+    "Distribution"
+   ],
+   "rows": [
+    [
+     "Strollers",
+     "Browse most exhibits with moderate viewing time",
+     "60%"
+    ],
+    [
+     "Studiers",
+     "Read interpretation thoroughly and spend longer in each room",
+     "10%"
+    ],
+    [
+     "Streakers",
+     "Move quickly through the exhibition with minimal stopping",
+     "30%"
+    ]
+   ]
+  },
+  {
+   "type": "p",
+   "text": "Each simulated visitor was randomly assigned one of these behavioral profiles, allowing the model to better represent realistic variation in visitor behavior.",
+   "src": "p3"
+  },
+  {
+   "type": "figure",
+   "doc": 1,
+   "src": "p3"
+  },
+  {
+   "type": "figure",
+   "doc": 2,
+   "src": "p4"
+  },
+  {
+   "type": "h2",
+   "text": "Building the Simulation",
+   "src": "p4"
+  },
+  {
+   "type": "p",
+   "text": "Using behavioral research, I developed a discrete event simulation that modeled individual visitor movement throughout the exhibition. The simulation followed wayfinding based on the expected paths in the home, displayed below. Each visitor independently navigated the home while interacting with operational constraints including:",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "timed ticket arrivals",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "room occupancy limits",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "queue formation",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "walking speed",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "exhibit dwell time",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "presenter intervention",
+   "src": "p4"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "alternative routing when spaces reached capacity",
+   "src": "p4"
+  },
+  {
+   "type": "p",
+   "text": "Rather than moving visitors as a group, every individual made independent movement decisions based on available space and predefined behavioral rules. This allowed the simulation to realistically forecast congestion and visitor flow under multiple operational scenarios.",
+   "src": "p4"
+  },
+  {
+   "type": "figure",
+   "doc": 3,
+   "src": "p5"
+  },
+  {
+   "type": "figure",
+   "doc": 4,
+   "src": "p6"
+  },
+  {
+   "type": "figure",
+   "doc": 5,
+   "src": "p7"
+  },
+  {
+   "type": "note",
+   "text": "INSERT VIDEO HERE - DISCRETE EVENT SIMULATION",
+   "src": "p8"
+  },
+  {
+   "type": "h2",
+   "text": "Baseline Assumptions",
+   "src": "p8"
+  },
+  {
+   "type": "p",
+   "text": "Since the exhibition had not yet opened, several assumptions were established using observations from comparable exhibitions. These assumptions provided a consistent foundation for comparing operational scenarios.",
+   "src": "p8"
+  },
+  {
+   "type": "p",
+   "text": "These included:",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Visitors arrive within their assigned ticket window.",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Ticket windows operate in either 15-minute or 30-minute intervals.",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Visitors travel independently while naturally clustering into small social groups.",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Average walking speed is approximately 2.0 mph, representing most museum visitors.",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Each exhibit has a maximum occupancy determined by available floor space.",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "When capacity is reached, visitors either wait or continue to another available location.",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Individual viewing times vary according to visitor type and natural behavioral variation.",
+   "src": "p8"
+  },
+  {
+   "type": "h2",
+   "text": "Scenario Testing",
+   "src": "p8"
+  },
+  {
+   "type": "h4",
+   "text": "STUDY FACTORS",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Ticketing Window:",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "30-minute windows",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "15-minute windows",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Arrival Pattern:",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Random times within ticketing window",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "All arrive at start of ticketing window",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Docent Control:",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "No constraint – visitors enter if there is space in the vestibule",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "With constraint – docent allows ~8 people at a time into entrance area (Vestibule, Pre 1965 and Video Wall)",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Number of tickets:",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Base: 48 per 30-minutes or 24 per 15-minutes",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Low: 38 per 30-minutes or 20 per 15-minutes",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "High: 58 per 30-minutes or 28 per 15-minutes",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Walk-up Visitors:",
+   "src": "p8"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "A limited number of un-ticketed visitors may be allowed to join the queue if the ticketed visitors have entered the building",
+   "src": "p8"
+  },
+  {
+   "type": "h4",
+   "text": "Ticketing Window & Arrival Patterns",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "The effects of these factors are linked",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "If visitor arrivals are spread randomly through the ticketing window",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Congestion and queue sizes are low",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Visitors rarely have to skip exhibits",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Total time spent on-site matches expectations",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "There is no significant difference between 30-minute or 15-minute ticketing windows",
+   "src": "p9"
+  },
+  {
+   "type": "figure",
+   "doc": 6,
+   "src": "p9"
+  },
+  {
+   "type": "h4",
+   "text": "Ticketing Window & Arrival Patterns",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "If most visitors arrive close to the start of the ticketing window",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Congestion and queue sizes are high",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "With no docent control at the entrance, skipping behavior balloons",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 3,
+   "text": "This could result in many unhappy visitors!",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "Average time spent on-site increases by just a few minutes, but the maximum time on-site almost doubles!",
+   "src": "p9"
+  },
+  {
+   "type": "li",
+   "level": 2,
+   "text": "In this case, all indicators are much better if 15-minute ticketing windows are used",
+   "src": "p9"
+  },
+  {
+   "type": "figure",
+   "doc": 7,
+   "src": "p10"
+  },
+  {
+   "type": "figure",
+   "doc": 8,
+   "src": "p10"
+  },
+  {
+   "type": "h2",
+   "text": "Findings",
+   "src": "p10"
+  },
+  {
+   "type": "h3",
+   "text": "Ticketing Strategy",
+   "src": "p10"
+  },
+  {
+   "type": "p",
+   "text": "Visitors were expected to arrive near the beginning of their assigned ticket windows, particularly during the exhibition's opening months.",
+   "src": "p10"
+  },
+  {
+   "type": "p",
+   "text": "A 15-minute ticketing schedule distributed arrivals more evenly than 30-minute windows, reducing congestion throughout the home.",
+   "src": "p11"
+  },
+  {
+   "type": "h3",
+   "text": "Capacity",
+   "src": "p11"
+  },
+  {
+   "type": "p",
+   "text": "While the home could accommodate a maximum of approximately 32 visitors every 15 minutes, a capacity of 30 visitors per entry window created a noticeably more comfortable visitor experience while maintaining operational efficiency.",
+   "src": "p11"
+  },
+  {
+   "type": "h3",
+   "text": "Presenter Placement",
+   "src": "p11"
+  },
+  {
+   "type": "p",
+   "text": "Simulation results demonstrated that placing presenters near the first exhibits significantly improved visitor flow.",
+   "src": "p11"
+  },
+  {
+   "type": "p",
+   "text": "Presenters helped regulate entry into high-demand spaces, reduced skipped exhibits, and minimized bottlenecks during periods of heavy attendance. The recommended staffing model included three to four presenters positioned throughout key zones of the home during opening operations.",
+   "src": "p11"
+  },
+  {
+   "type": "h3",
+   "text": "Walk-Up Visitors",
+   "src": "p11"
+  },
+  {
+   "type": "p",
+   "text": "Allowing a controlled mix of ticketed and walk-up visitors naturally staggered arrivals, reducing congestion and average waiting times while increasing access for guests unable to reserve tickets in advance.",
+   "src": "p11"
+  },
+  {
+   "type": "figure",
+   "doc": 9,
+   "src": "p12"
+  },
+  {
+   "type": "figure",
+   "doc": 10,
+   "src": "p12"
+  },
+  {
+   "type": "h2",
+   "text": "Impact",
+   "src": "p13"
+  },
+  {
+   "type": "p",
+   "text": "The visitor flow simulation provided stakeholders with evidence-based recommendations before the Jackson Home opened to the public. The research directly informed operational planning by helping teams:",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "establish ticketing schedules for opening operations",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "determine comfortable visitor capacity limits",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "identify high-congestion areas before opening",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "optimize presenter placement throughout the home",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "evaluate queue management strategies",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "deciding factor for where to place digital interactives in the exhibit",
+   "src": "p13"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "improve visitor flow while preserving the historic integrity of the building",
+   "src": "p13"
+  },
+  {
+   "type": "p",
+   "text": "Rather than relying on assumptions alone, leadership was able to make operational decisions supported by predictive behavioral research and simulation.",
+   "src": "p13"
+  },
+  {
+   "type": "h2",
+   "text": "Reflection",
+   "src": "p13"
+  },
+  {
+   "type": "p",
+   "text": "This project broadened my understanding of user experience beyond digital products, demonstrating how UX research methodologies can be applied to improve experiences within physical environments. It also deepened my appreciation for how visitors engage with and process complex, emotionally significant stories, particularly those centered on difficult history",
+   "src": "p13"
+  }
+ ],
+ "room02": [
+  {
+   "type": "title",
+   "text": "Designing an Interactive Museum Experience for Power & Energy",
+   "src": "p13"
+  },
+  {
+   "type": "meta",
+   "label": "Role",
+   "text": "UX Designer| Experience Design | Project Management",
+   "src": "p13"
+  },
+  {
+   "type": "meta",
+   "label": "Methods",
+   "text": "Information Architecture • User Flows • Wireframing • Content Strategy",
+   "src": "p13"
+  },
+  {
+   "type": "h2",
+   "text": "Project Overview",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "The goal of this project was to enhance The Henry Ford Museum’s Power & Energy exhibit through a multi-sided interactive digital column that serves as both a visual entrance marker and a centralized storytelling experience. Furthermore, the column was inspired by an existing column in a nearby exhibit.",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "The column was designed for student groups, families, and general museum visitors, the column combines video content, interactive content, wayfinding, and artifact highlights to communicate the exhibit’s central themes—including the interconnectedness and tradeoffs involved in energy production, distribution, and use.",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "The experience also incorporates content from project partner ITC( International Transmission Company) and was built in Appspace, the museum’s institutional content management system, allowing internal teams to maintain and update the experience over time.",
+   "src": "p14"
+  },
+  {
+   "type": "h2",
+   "text": "The Challenge",
+   "src": "p14"
+  },
+  {
+   "type": "h3",
+   "text": "Capturing Visitor Attention",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "In an exhibit filled with large-scale artifacts and live programming, the digital column needed to capture attention without competing with the physical environment.",
+   "src": "p14"
+  },
+  {
+   "type": "hmw",
+   "text": "How might we create an intuitive digital experience that encourages visitors of all ages to pause, explore, and learn?",
+   "src": "p14"
+  },
+  {
+   "type": "h3",
+   "text": "Balancing Museum and Sponsor Goals",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "The experience needed to support The Henry Ford’s educational mission while incorporating ITC’s industry, career, and employee stories without feeling overly promotional.",
+   "src": "p14"
+  },
+  {
+   "type": "hmw",
+   "text": "How might we introduce students to careers in power and energy while balancing visitor, museum, and sponsor needs?",
+   "src": "p14"
+  },
+  {
+   "type": "h2",
+   "text": "The Approach/ UX Design",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "To address visitor, educational, wayfinding, and sponsor needs, I developed a multi-sided experience that combined passive storytelling with touch-based exploration. Each side of the column served a distinct purpose while contributing to a cohesive visitor journey.",
+   "src": "p14"
+  },
+  {
+   "type": "p",
+   "text": "The experience included:",
+   "src": "p15"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Exhibit wayfinding: A backlit graphic identifying the Power & Energy exhibit and introducing its central themes.",
+   "src": "p15"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Innovation stories: Condensed Innovation Nation episodes highlighting innovation across power and energy. Innovation Nation is an educational television series produced by The Henry Ford that explores inventions, innovators, and technological advancements shaping the world.",
+   "src": "p15"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Interactive exploration: A touch-based map visualizing power transmission infrastructure across Michigan and the United States.",
+   "src": "p15"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Career discovery: ITC employee interviews introducing students to careers within the power and energy industry.",
+   "src": "p15"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Artifact interpretation: A backlit graphic highlighting key artifacts and providing additional historical context based on what was inside the exhibit.",
+   "src": "p15"
+  },
+  {
+   "type": "p",
+   "text": "I began to take the existing column we have in the Agriculture column and talk through how the Power & Energy column would look and feel. In addition I began to sketch and create lo- fi wireframes to share with key stakeholders for feedback( See below).",
+   "src": "p15"
+  },
+  {
+   "type": "figure",
+   "doc": 11,
+   "src": "p15"
+  },
+  {
+   "type": "figure",
+   "doc": 12,
+   "src": "p16"
+  },
+  {
+   "type": "h2",
+   "text": "Discovery & Stakeholder Alignment",
+   "src": "p16"
+  },
+  {
+   "type": "p",
+   "text": "Once the content strategy for each side of the column was established, I began developing the individual experiences and determining how each could support the broader goals of the Power & Energy exhibit. Visually, the backlit graphics were designed to maintain consistency with the existing exhibit while the interactive content introduced new opportunities for visitor engagement.",
+   "src": "p16"
+  },
+  {
+   "type": "p",
+   "text": "For the ITC career experience, the goal was to introduce visitors to the range of careers that support the power and energy industry. Working with ITC stakeholders, I identified three employee volunteers representing different areas of the organization: Safety & Security, Engineering, and Community Planning. I interviewed each employee about their role, responsibilities, career path, and connection to the energy industry. These conversations became the foundation for the career-focused content featured within the interactive. Employee interviews and responses informed the content shown below. Furthermore, below is a summary of highlighted content that was relevant and used in the final wireframes",
+   "src": "p16"
+  },
+  {
+   "type": "figure",
+   "doc": 13,
+   "src": "p17"
+  },
+  {
+   "type": "p",
+   "text": "In addition to the employee stories, I explored how the experience could connect careers in energy to objects, stories, and experiences visitors could encounter elsewhere in the museum. I developed short prompts for each career area using The Henry Ford’s Model i framework, an educational model that encourages learners to develop the habits and actions of innovators through curiosity, questioning, collaboration, and problem-solving. Because engaging younger visitors was an important project goal, these prompts were intentionally written to encourage exploration beyond the screen—connecting the digital experience back to the physical museum and inviting visitors to continue discovering how innovation, engineering, safety, and community planning shape the world around them.",
+   "src": "p17"
+  },
+  {
+   "type": "p",
+   "text": "Excerpts from the UX copy below:",
+   "src": "p17"
+  },
+  {
+   "type": "quote",
+   "text": "“Engineering Together: Thomas Edison employed dozens of engineers, inventors, and chemists at the Menlo Park Laboratory, where they collectively developed hundreds of technological innovations. Experience Menlo Park Laboratory for yourself in Greenfield Village.”",
+   "src": "p17"
+  },
+  {
+   "type": "quote",
+   "text": "“Safety & Security: As electric companies built new infrastructure around the country, they hired workers to construct and inspect the new poles and lines. To learn more, visit the Edison Illuminating Company’s Station A in Greenfield Village.”",
+   "src": "p18"
+  },
+  {
+   "type": "quote",
+   "text": "“Community Planning: Thomas Edison tested and gathered feedback on his experimental lighting system with the men and women who lived at the Sarah Jordan Boarding House. Step inside the Boarding House in Greenfield Village.”",
+   "src": "p18"
+  },
+  {
+   "type": "h2",
+   "text": "Designing the Interactive Experience",
+   "src": "p18"
+  },
+  {
+   "type": "p",
+   "text": "I then began finalizing the experience, focusing on the interaction touchpoints, content flow, and visual design. This was an iterative process informed by an existing interactive column within the museum’s Agriculture exhibit.",
+   "src": "p18"
+  },
+  {
+   "type": "p",
+   "text": "I began by evaluating the Agriculture column’s existing user flow, including its interaction rules, touchpoints, and the way content was distributed across the different sides of the column. I also reviewed findings from previous guest observations to understand how visitors actually approached, navigated, and engaged with the experience.",
+   "src": "p18"
+  },
+  {
+   "type": "p",
+   "text": "These behavioral insights became an important input into the final design. They helped determine how visitors would move through the Power & Energy experience, which types of content were best suited for each side of the column, and how the overall interaction flow should be structured.",
+   "src": "p18"
+  },
+  {
+   "type": "p",
+   "text": "The resulting flow and content distribution are illustrated in the diagram below. The final wireframes shown below.",
+   "src": "p18"
+  },
+  {
+   "type": "figure",
+   "doc": 14,
+   "src": "p19"
+  },
+  {
+   "type": "note",
+   "text": "INSERT VIDEO HERE BELOW IS SCREEN GRAB OF WHAT IT LOOKS LIKE",
+   "src": "p20"
+  },
+  {
+   "type": "figure",
+   "doc": 15,
+   "src": "p20"
+  },
+  {
+   "type": "h2",
+   "text": "CMS Integration & Implementation",
+   "src": "p20"
+  },
+  {
+   "type": "p",
+   "text": "The museum uses multiple content management systems to publish and maintain digital experiences. For this project, an institutional priority was to host and manage the content within Appspace, a cloud-based platform used to organize, publish, and update digital content across devices.",
+   "src": "p20"
+  },
+  {
+   "type": "p",
+   "text": "I collaborated closely with the Appspace team to ensure all final assets met the required dimensions, aspect ratios, and technical specifications. I led conversations with the Appspace partner manager, communicating the experience’s interaction points, user flow, and information architecture to guide the platform setup. Once configured, I built and managed the content channels, programmed the interactive interface, and implemented ongoing updates as the content and experience evolved. Below are the CMS channels within App Space.",
+   "src": "p20"
+  },
+  {
+   "type": "note",
+   "text": "INSERT POWER & ENERGY VIDEO HERE",
+   "src": "p20"
+  },
+  {
+   "type": "h2",
+   "text": "Installation & Fabrication",
+   "src": "p21"
+  },
+  {
+   "type": "p",
+   "text": "For the final installation, we partnered with Sleet Custom Cabinets, a fabricator familiar with the museum environment who had previously built the interactive columns and enclosures within the Agriculture exhibit. Building on this existing design helped maintain consistency across the museum while providing a proven framework for the new Power & Energy columns.",
+   "src": "p21"
+  },
+  {
+   "type": "p",
+   "text": "I worked closely with the fabricator to provide precise dimensions, specifications, and printing requirements for the backlit graphics. The new columns were designed to match the dimensions and construction of the existing Agriculture columns.",
+   "src": "p21"
+  },
+  {
+   "type": "p",
+   "text": "My role during this phase was to coordinate and manage the various teams involved in fabrication and installation, ensuring that the physical build, digital components, graphics, and technical requirements came together successfully and on schedule. Below are the CMS channels within App Space.",
+   "src": "p21"
+  },
+  {
+   "type": "note",
+   "text": "USE PDF VERSION HERE OF DRAWINGS",
+   "src": "p21"
+  },
+  {
+   "type": "figure",
+   "doc": 16,
+   "src": "p21"
+  },
+  {
+   "type": "figure",
+   "doc": 17,
+   "src": "p22"
+  },
+  {
+   "type": "figure",
+   "doc": 18,
+   "src": "p22"
+  },
+  {
+   "type": "note",
+   "text": "ADD COLUMN FABRICATION VIDEO HERE - https://drive.google.com/file/d/1cKmaAiyAW03hFPZ2O-OOlia55EY6v4pV/view?usp=drive_link",
+   "src": "p23"
+  },
+  {
+   "type": "h2",
+   "text": "Results & Impact",
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "The Power & Energy interactive column transformed the exhibit entrance into a more intentional visitor touchpoint, creating a clear visual anchor while introducing new opportunities for exploration and learning.",
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "The final experience supported multiple visitor needs through artifact discovery, career exploration, wayfinding, and interactive learning. It also advanced institutional technology goals by integrating the experience into the museum’s CMS ecosystem, creating a more flexible framework for managing and updating digital content.",
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "For project sponsor ITC, the experience provided a meaningful way to connect the Power & Energy story to the people behind the industry by highlighting employee perspectives and diverse career pathways.",
+   "src": "p23"
+  },
+  {
+   "type": "note",
+   "text": "ADD Final Results video here - https://drive.google.com/file/d/1OW2QVKf-GOFc-GanrBi_6sppCcU5P3JF/view?usp=share_link",
+   "src": "p23"
+  },
+  {
+   "type": "h2",
+   "text": "Ongoing Evaluation",
+   "promoted": true,
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "Because the experience was recently launched, long-term visitor impact has not yet been measured. The next phase of evaluation will focus on understanding how visitors engage with the column in the museum environment.",
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "Planned UX research includes museum volunteer focus groups, testing with The Henry Ford Academy students, and in-gallery visitor observation. Findings will be used to evaluate discoverability, usability, engagement, and opportunities for future content and interaction improvements.",
+   "src": "p23"
+  },
+  {
+   "type": "h2",
+   "text": "Reflection",
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "This project expanded my understanding of UX design beyond traditional mobile and desktop interfaces. Designing for a physical museum environment required me to consider not only the interface itself, but also spatial interaction, accessibility, visitor behavior, and the physical context surrounding the experience.",
+   "src": "p23"
+  },
+  {
+   "type": "p",
+   "text": "Working across touch displays, backlit graphics, static interpretation, and physical exhibit elements also challenged me to think about information architecture at an environmental scale—determining not only how visitors would navigate content, but where that content should live and how each touchpoint could contribute to a cohesive experience.",
+   "src": "p24"
+  },
+  {
+   "type": "p",
+   "text": "Most importantly, the project reinforced that UX does not stop at the screen. Creating an effective museum experience requires balancing digital interaction with physical space, technical constraints, accessibility, storytelling, and the different ways visitors choose to engage.",
+   "src": "p24"
+  }
+ ],
+ "room03": [
+  {
+   "type": "title",
+   "text": "Rhode Island State COVID Vaccine App/401 Health App",
+   "src": "p24"
+  },
+  {
+   "type": "meta",
+   "label": "Role",
+   "text": "UX Designer| UX Researcher | UX Consultant",
+   "src": "p24"
+  },
+  {
+   "type": "meta",
+   "label": "Methods",
+   "text": "Qualitative Research • Quantitative Analysis • Feedback Synthesis • Competitive/Heuristic Review • Content Strategy • Wireframing",
+   "src": "p24"
+  },
+  {
+   "type": "h2",
+   "text": "Project Overview",
+   "src": "p24"
+  },
+  {
+   "type": "p",
+   "text": "The goal of this project was to improve the State of Rhode Island’s vaccine website and health application, making it easier for residents to report vaccination information and access their vaccination records. The redesigned experience streamlined the reporting process while providing the state with reliable, timely data to support public health decision-making during the COVID-19 pandemic. It also made proof of vaccination easier for residents to access and present when entering large events and other venues requiring verification. Ultimately, the experience aimed to increase vaccination reporting completion rates by 23%, while creating a simpler, more accessible way for residents to manage and use their vaccination information.",
+   "src": "p24"
+  },
+  {
+   "type": "h2",
+   "text": "The Challenge",
+   "src": "p24"
+  },
+  {
+   "type": "h4",
+   "text": "Building Trust and Increasing Adoption of Digital Vaccination Records",
+   "src": "p24"
+  },
+  {
+   "type": "p",
+   "text": "Research and stakeholder feedback revealed a key barrier to adoption: residents were hesitant to share personal health information and unsure how a digital platform would securely manage their vaccination records. At the same time, residents saw value in having convenient digital access to their vaccination information.",
+   "src": "p25"
+  },
+  {
+   "type": "p",
+   "text": "The challenge was to create a sign-up and onboarding experience that reduced friction, established trust, and clearly communicated the value of maintaining a digital vaccination record.",
+   "src": "p25"
+  },
+  {
+   "type": "h4",
+   "text": "How might we...",
+   "src": "p25"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Create a seamless sign-up and onboarding experience that encourages residents to complete their vaccination record?",
+   "src": "p25"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Build trust by clearly communicating privacy, security, and how personal information is used?",
+   "src": "p25"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Demonstrate the value of digital vaccination records for events, travel, and other verification needs?",
+   "src": "p25"
+  },
+  {
+   "type": "h4",
+   "text": "Reducing Friction Through Health Record Integration",
+   "src": "p25"
+  },
+  {
+   "type": "p",
+   "text": "A second challenge was eliminating the need for residents to manually re-enter vaccination information already reported to the Rhode Island Child and Adult Immunization Registry (RICAIR). Because healthcare providers and pharmacies were already submitting immunization data to RICAIR, residents expected their existing records to be available within the application.",
+   "src": "p25"
+  },
+  {
+   "type": "p",
+   "text": "The challenge was to design a secure, intuitive way for users to authorize access to their existing records while clearly communicating where their information came from and how it would be used.",
+   "src": "p25"
+  },
+  {
+   "type": "h4",
+   "text": "How might we...",
+   "src": "p25"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Make it simple for residents to securely authorize access to their existing vaccination records?",
+   "src": "p25"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Clearly communicate where vaccination data comes from and how it is being used?",
+   "src": "p25"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Reduce unnecessary manual entry while maintaining confidence in the accuracy and privacy of health information?",
+   "src": "p25"
+  },
+  {
+   "type": "h2",
+   "text": "The Approach/ Discovery & Stakeholder Alignment",
+   "src": "p25"
+  },
+  {
+   "type": "p",
+   "text": "To better understand the existing application experience, Rhode Island state employees shared user feedback and analytics related to website and app usage with my team. I conducted stakeholder interviews with employees across different areas of the program, typically in small groups of no more than two participants to enable focused discussions and gather perspectives from different areas of the program. Through conversations with employees about the existing app and web experience, I began to identify the Rhode Island Department of Health’s broader program goals and priorities. Aligning the design direction with these strategic objectives was essential to gaining leadership support and moving the project forward. The following goals helped guide the design process (Goals 20-23). Several key themes emerged, including frustration with manually re-entering vaccination information and concerns about trusting the system with sensitive health data. I also analyzed Google Play and Apple App Store reviews to identify recurring user pain points, usability issues, and technical challenges within the existing experience. Common themes included difficulties with account setup, barriers to completing key tasks, and uncertainty around how vaccination information was managed. See below.",
+   "src": "p26"
+  },
+  {
+   "type": "p",
+   "text": "These insights helped us identify usability opportunities, prioritize design recommendations, and guide the development of a more intuitive, accessible, and trustworthy vaccination management experience.",
+   "src": "p26"
+  },
+  {
+   "type": "figure",
+   "doc": 19,
+   "src": "p27"
+  },
+  {
+   "type": "note",
+   "text": "INSERT VIDEO OF APP STORE REVIEWS HERE ( PICTURE IS ONLY FOR REFERENCE)",
+   "src": "p27"
+  },
+  {
+   "type": "figure",
+   "doc": 20,
+   "src": "p28"
+  },
+  {
+   "type": "h2",
+   "text": "UX Design/ Feature Prioritization",
+   "src": "p28"
+  },
+  {
+   "type": "p",
+   "text": "The solution focused on reducing user effort by creating a streamlined authorization flow that automatically populated vaccination records from an existing health data source. Once authenticated, users could review their vaccination history, add missing information when needed, and manage household members within a single account. This approach reduced duplicate data entry while creating a more intuitive and efficient experience.",
+   "src": "p28"
+  },
+  {
+   "type": "p",
+   "text": "Feature prioritization centered on improving usability, accessibility, and access to essential public health services. Key features included:",
+   "src": "p28"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Vaccination Status: A clear status card displaying COVID-19 vaccination history, including individual doses.",
+   "src": "p28"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Multilingual Support: Terms and Conditions available in multiple languages, including Portuguese, to support Rhode Island’s diverse communities.",
+   "src": "p29"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Appointment Scheduling: An integrated calendar that allowed users to find and schedule vaccination appointments.",
+   "src": "p29"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Household Management: The ability to add and manage household members and their vaccination records from a single account.",
+   "src": "p29"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Symptom Diary: An optional tool for anonymously reporting post-vaccination symptoms, providing the Rhode Island Department of Health with data to support public health monitoring.",
+   "src": "p29"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "Testing Location Map: An interactive map helping users quickly locate nearby COVID-19 testing services.",
+   "src": "p29"
+  },
+  {
+   "type": "note",
+   "text": "INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE",
+   "src": "p29"
+  },
+  {
+   "type": "figure",
+   "doc": 21,
+   "src": "p29"
+  },
+  {
+   "type": "h2",
+   "text": "Results & Impact",
+   "promoted": true,
+   "src": "p29"
+  },
+  {
+   "type": "p",
+   "text": "The redesigned experience streamlined how Rhode Island residents accessed and managed their vaccination information by providing a digital alternative to the paper vaccination cards used during the initial COVID-19 vaccine rollout. The multilingual experience also expanded accessibility, helping more residents navigate and manage their health information with confidence.",
+   "src": "p29"
+  },
+  {
+   "type": "h2",
+   "text": "Ongoing Evaluation",
+   "promoted": true,
+   "src": "p30"
+  },
+  {
+   "type": "p",
+   "text": "Long-term adoption and engagement metrics were outside the scope of my involvement. However, the design recommendations prioritized reducing friction, strengthening user trust, and simplifying access to critical vaccination information. The experience was also designed with flexibility in mind, allowing the platform to evolve alongside future vaccination programs and changing public health needs.",
+   "src": "p30"
+  },
+  {
+   "type": "h2",
+   "text": "Reflection",
+   "promoted": true,
+   "src": "p30"
+  },
+  {
+   "type": "p",
+   "text": "This project strengthened my understanding of designing digital experiences where privacy, security, accessibility, and trust are fundamental to the user experience. Working with sensitive health information reinforced the importance of reducing unnecessary friction while clearly communicating how personal data is accessed and used—principles I continue to apply in my work today.",
+   "src": "p30"
+  },
+  {
+   "type": "p",
+   "text": "The project was also particularly meaningful because of the context in which it was developed. Contributing to a digital health experience during the COVID-19 pandemic gave me a deeper appreciation for the role UX design can play in helping communities navigate essential services during periods of uncertainty.",
+   "src": "p30"
+  }
+ ],
+ "room04": [
+  {
+   "type": "title",
+   "text": "Reimagining How Engineers Discover Littelfuse Products",
+   "src": "p30"
+  },
+  {
+   "type": "meta",
+   "label": "Role",
+   "text": "UX Consultant | UX Designer |UX Researcher",
+   "src": "p30"
+  },
+  {
+   "type": "meta",
+   "label": "Methods",
+   "text": "Stakeholder Workshop | Data Analysis | Information Architecture | Wireframing | Heuristic Evaluation | Archetypes |Competitive Analysis",
+   "src": "p30"
+  },
+  {
+   "type": "h2",
+   "text": "Project Overview",
+   "src": "p30"
+  },
+  {
+   "type": "p",
+   "text": "Littelfuse is a global technology manufacturing company that develops electronic components and solutions used across automotive, industrial, electronics, and other industries.",
+   "src": "p30"
+  },
+  {
+   "type": "p",
+   "text": "I worked with Littelfuse to improve its existing digital portal experience, with a focus on creating a more intuitive way for engineers to discover, evaluate, and access products across its extensive portfolio. The project aimed to evolve the portal from an experience largely organized around individual business units into a more customer-centered platform that could better connect users with relevant products and solutions across the broader Littelfuse ecosystem.",
+   "src": "p31"
+  },
+  {
+   "type": "p",
+   "text": "From a business perspective, the redesigned experience also created opportunities to increase visibility across product categories and support cross-selling and upselling.",
+   "src": "p31"
+  },
+  {
+   "type": "h2",
+   "text": "The Challenge",
+   "src": "p31"
+  },
+  {
+   "type": "h3",
+   "text": "Simplifying Product Discovery Across a Complex Product Catalog",
+   "src": "p31"
+  },
+  {
+   "type": "p",
+   "text": "Littelfuse offers an extensive portfolio of highly technical products across a wide range of industries and applications. However, the existing experience placed a significant cognitive burden on users during product discovery. When engineers did not know the exact stock number for a product, they often had to rely on broader search terms and navigate multiple paths to find what they needed.",
+   "src": "p31"
+  },
+  {
+   "type": "p",
+   "text": "Preliminary research provided by Littelfuse showed that 73.2% of users searched using an exact stock number, while others relied on broader product categories such as heaters, panels, sensors, and switches. These broader searches often failed to surface relevant results, requiring users to refine their queries or navigate deeper into the product catalog.",
+   "src": "p31"
+  },
+  {
+   "type": "p",
+   "text": "When asked about the ease of search, 48% of survey respondents said that while finding products was generally easy, it still took too much time to reach relevant results. Another 12% reported that the search experience was difficult and that they were often unable to find relevant products.",
+   "src": "p31"
+  },
+  {
+   "type": "p",
+   "text": "These findings highlighted an opportunity to reduce users’ reliance on exact product knowledge and create a more intuitive discovery experience—one that could help engineers narrow their options, identify the right product, and complete key tasks with less effort.",
+   "src": "p31"
+  },
+  {
+   "type": "p",
+   "text": "How Might We…",
+   "src": "p31"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "How might we help engineers discover the right product without knowing an exact stock number?",
+   "src": "p31"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "How might we connect engineers with relevant and complementary products across Littelfuse’s broader portfolio?",
+   "src": "p31"
+  },
+  {
+   "type": "li",
+   "level": 1,
+   "text": "How might we streamline key tasks—from comparing products and accessing technical documentation to ordering, requesting samples, and getting support?",
+   "src": "p31"
+  },
+  {
+   "type": "h2",
+   "text": "The Approach",
+   "src": "p32"
+  },
+  {
+   "type": "p",
+   "text": "I began by reviewing existing customer research, business goals, and the end-to-end product-discovery experience. I translated those inputs into primary user needs, mapped the engineer’s pre-login journey, and audited the interface against the tasks users needed to complete—searching for a component, comparing options, checking stock, downloading technical information, and requesting samples.",
+   "src": "p32"
+  },
+  {
+   "type": "p",
+   "text": "The analysis exposed gaps in navigation, terminology, content pathways, and task continuity. These findings became the foundation for a simpler information architecture and more direct product-discovery flows.",
+   "src": "p32"
+  },
+  {
+   "type": "h4",
+   "text": "Synthesized existing research and business priorities",
+   "src": "p32"
+  },
+  {
+   "type": "p",
+   "text": "In reviewing existing research I learned that the Little Fuse customers relied on the platform to complete one of these tasks: find and compare products, access technical documentation, check availability, request samples, and get support. Knowing that these were the common user flows and navigation paths I then began to understand who the primary Little Fuse Customer is.",
+   "src": "p32"
+  },
+  {
+   "type": "h4",
+   "text": "Defined the primary user: a design engineer",
+   "src": "p32"
+  },
+  {
+   "type": "p",
+   "text": "Through stakeholder interviews, existing user research, and analysis of customer roles and behaviors, we grouped Littelfuse users into three primary archetypes: Engineering & Technical, Sales, and Procurement. These archetypes reflect the different ways users influence product selection—from engineers evaluating specifications and making design recommendations, to sales partners supporting customers, and procurement professionals managing purchasing and supply. In combination with quantitative survey data with customer interviews, stakeholder research we identify recurring behaviors, pain points and decision drivers that inform the experience strategy. The survey data found that 66% of respondents identified as being in an engineering role, compared with 12% Sales and 5% Procurement.This insight helped us prioritize the experience around engineers’ core tasks—finding the right product quickly, comparing options, accessing technical documentation, and confidently making component decisions—while still supporting the needs of Sales and Procurement users. The analysis of the survey data is what guided our work in completing detailed personas rather than working of static archetypes.",
+   "src": "p32"
+  },
+  {
+   "type": "figure",
+   "doc": 22,
+   "src": "p33"
+  },
+  {
+   "type": "figure",
+   "doc": 23,
+   "src": "p33"
+  },
+  {
+   "type": "h4",
+   "text": "Mapped the product-discovery journey",
+   "src": "p33"
+  },
+  {
+   "type": "p",
+   "text": "The user journey was developed during a collaborative workshop at the client’s headquarters, bringing together key stakeholders to map how engineers move from identifying a product need to researching, comparing, testing, and selecting a solution. By documenting both the high-level journey and detailed decision points, we identified key behaviors, information needs, and opportunities to streamline the digital product experience.",
+   "src": "p33"
+  },
+  {
+   "type": "figure",
+   "doc": 24,
+   "src": "p34"
+  },
+  {
+   "type": "h4",
+   "text": "Audited critical tasks and interface pathways",
+   "src": "p34"
+  },
+  {
+   "type": "p",
+   "text": "Following the journey-mapping workshop, I evaluated the existing Littelfuse website against the needs and behaviors identified in the user journey. The review focused on key paths engineers rely on to discover and evaluate products, revealing gaps in navigation, task flows, content structure, and interaction design.",
+   "src": "p34"
+  },
+  {
+   "type": "h4",
+   "text": "01 — Navigation & Findability",
+   "src": "p34"
+  },
+  {
+   "type": "p",
+   "text": "Critical product actions—including Cross Reference, Check Stock, Where to Buy, and Request Samples—were inconsistently represented across the experience. We also identified unclear labeling and opportunities to make global search and language selection more intuitive.",
+   "src": "p34"
+  },
+  {
+   "type": "h4",
+   "text": "02 — Incomplete Task Flows",
+   "src": "p34"
+  },
+  {
+   "type": "p",
+   "text": "Mapping core tasks exposed several points where the existing experience did not fully support the user's journey. The Check Stock flow, for example, contained missing screens and unclear paths for users who didn't already know a product or part number.",
+   "src": "p34"
+  },
+  {
+   "type": "h4",
+   "text": "03 — Interaction & Content Gaps",
+   "src": "p34"
+  },
+  {
+   "type": "p",
+   "text": "The audit uncovered smaller usability issues that compounded friction, including inconsistent labels, unclear interface states, missing landing-page templates, misaligned interface elements, and controls without clearly defined behaviors.",
+   "src": "p34"
+  },
+  {
+   "type": "h4",
+   "text": "Translated findings into design principles",
+   "src": "p35"
+  },
+  {
+   "type": "p",
+   "text": "Insights from the audit were translated into design principles focused on clarity, consistency, accessibility, and task completion. Existing wireframes were refined to create a more cohesive experience across desktop and mobile, including clearer navigation and labeling, improved menu hierarchy, accessible interaction states, standardized components, and more intuitive search and filtering patterns. These principles were applied consistently across the global header, mega menu, homepage, product pages, and supporting content modules.",
+   "src": "p35"
+  },
+  {
+   "type": "p",
+   "text": "The work also addressed gaps where the existing wireframes did not fully support critical user tasks. New and expanded flows were designed for global search, product discovery, Check Stock, Where to Buy, and privacy/GDPR interactions, while missing states, error handling, filters, links, and responsive behaviors were defined to make the experience development-ready. Below are the completed wire frames.",
+   "src": "p35"
+  },
+  {
+   "type": "note",
+   "text": "INSERT WIREFRAMES FROM PDF HERE",
+   "src": "p35"
+  },
+  {
+   "type": "h2",
+   "text": "Results & Impact",
+   "promoted": true,
+   "src": "p35"
+  },
+  {
+   "type": "p",
+   "text": "The redesigned experience streamlined product discovery and evaluation across desktop and mobile, creating clearer pathways through search, navigation, and key purchasing tasks. Following launch, mobile logins increased by 6%, indicating stronger engagement with the improved mobile experience.",
+   "src": "p35"
+  },
+  {
+   "type": "h2",
+   "text": "Reflection",
+   "promoted": true,
+   "src": "p35"
+  },
+  {
+   "type": "p",
+   "text": "This project introduced me to a highly specialized industry with a unique set of users and technical workflows. To design effectively, I invested additional time in secondary research—studying the competitive landscape, learning industry fundamentals, and understanding how products move from the warehouse into an online product database. That deeper investigation surfaced questions we hadn’t initially considered and ultimately led to additional discovery sessions with stakeholders. In hindsight, that extra effort became a strength of the project: stakeholders appreciated the attention to detail, and it reinforced for me that good UX sometimes means slowing down to fully understand a complex ecosystem before designing for it.",
+   "src": "p35"
+  }
+ ]
+}
