@@ -345,11 +345,27 @@
  },
  {
   "page": "room-03-rhode-island",
-  "chapter": "03 The Approach/ Discovery & Stakeholder Alignment",
+  "chapter": "Cover",
   "module": "full",
   "tiles": [
    {
     "label": "Fig. 01",
+    "src": "r5-ri-five-screens.jpg",
+    "tile": "tiles/r5-ri-five-screens--nat-p48.jpg",
+    "cap": "401 Health app: five mobile screens",
+    "kind": "doc",
+    "src_id": null
+   }
+  ],
+  "note": "Round 5: the document cover, shown whole under the chapter index (no image behind the title)."
+ },
+ {
+  "page": "room-03-rhode-island",
+  "chapter": "03 The Approach/ Discovery & Stakeholder Alignment",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 02",
     "src": "r03-goals-full.jpg",
     "tile": "tiles/r03-goals-full--1_600.jpg",
     "cap": "Rhode Island Department of Health population health goals",
@@ -365,7 +381,7 @@
   "module": "video",
   "tiles": [
    {
-    "label": "Fig. 02",
+    "label": "Fig. 03",
     "src": "r03-app-reviews.mp4",
     "tile": "poster-r03-app-reviews.jpg",
     "cap": "App Store and Google Play reviews (video)",
@@ -381,7 +397,7 @@
   "module": "video",
   "tiles": [
    {
-    "label": "Fig. 03",
+    "label": "Fig. 04",
     "src": "r03-wireframes.mp4",
     "tile": "poster-r03-wireframes.jpg",
     "cap": "Desktop wireframes (video)",
@@ -397,7 +413,7 @@
   "module": "pair",
   "tiles": [
    {
-    "label": "Fig. 04",
+    "label": "Fig. 05",
     "src": "r03-annotated.jpg",
     "tile": "tiles/r03-annotated--1_500.jpg",
     "cap": "Vaccine details: annotated mobile screens",
@@ -405,7 +421,7 @@
     "src_id": "R-037"
    },
    {
-    "label": "Fig. 05",
+    "label": "Fig. 06",
     "src": "r4-ri-screens.jpg",
     "tile": "tiles/r4-ri-screens--0_750.jpg",
     "cap": "Mobile wireframes: vaccination record and dose details",
@@ -417,11 +433,27 @@
  },
  {
   "page": "room-04-littelfuse",
+  "chapter": "Cover",
+  "module": "full",
+  "tiles": [
+   {
+    "label": "Fig. 01",
+    "src": "r04-journey-full.jpg",
+    "tile": "tiles/r04-journey-full--nat-p48.jpg",
+    "cap": "Product-discovery journey map: overview",
+    "kind": "doc",
+    "src_id": null
+   }
+  ],
+  "note": "Round 5: the document cover, shown whole under the chapter index (no image behind the title)."
+ },
+ {
+  "page": "room-04-littelfuse",
   "chapter": "03 The Approach",
   "module": "board",
   "tiles": [
    {
-    "label": "Fig. 01",
+    "label": "Fig. 02",
     "src": "r3-fig-decision-board.jpg",
     "tile": "tiles/r3-fig-decision-board--1_000.jpg",
     "cap": "Survey: who drives component decisions",
@@ -429,7 +461,7 @@
     "src_id": "L-025"
    },
    {
-    "label": "Fig. 02",
+    "label": "Fig. 03",
     "src": "r04-archetype-engineering.jpg",
     "tile": "tiles/r04-archetype-engineering--1_000.jpg",
     "cap": "User archetype: Engineering & Technical",
@@ -437,7 +469,7 @@
     "src_id": "L-026"
    },
    {
-    "label": "Fig. 03",
+    "label": "Fig. 04",
     "src": "r04-archetype-sales.jpg",
     "tile": "tiles/r04-archetype-sales--1_000.jpg",
     "cap": "User archetype: Sales",
@@ -445,7 +477,7 @@
     "src_id": "L-026"
    },
    {
-    "label": "Fig. 04",
+    "label": "Fig. 05",
     "src": "r04-archetype-procurement.jpg",
     "tile": "tiles/r04-archetype-procurement--1_000.jpg",
     "cap": "User archetype: Procurement",
@@ -461,7 +493,7 @@
   "module": "video",
   "tiles": [
    {
-    "label": "Fig. 05",
+    "label": "Fig. 06",
     "src": "r04-personas.mp4",
     "tile": "poster-r04-personas.jpg",
     "cap": "Engineering personas (video)",
@@ -477,7 +509,7 @@
   "module": "full",
   "tiles": [
    {
-    "label": "Fig. 06",
+    "label": "Fig. 07",
     "src": "r04-journey-full.jpg",
     "tile": "tiles/r04-journey-full--1_929.jpg",
     "cap": "Product-discovery journey map",
@@ -493,7 +525,7 @@
   "module": "full",
   "tiles": [
    {
-    "label": "Fig. 07",
+    "label": "Fig. 08",
     "src": "—",
     "tile": "—",
     "cap": "Littelfuse wireframes (placeholder)",

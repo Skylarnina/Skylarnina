@@ -383,18 +383,20 @@ These are **not her words**. They're short factual captions the brief asked for 
 | room-02-power-energy | Fig. 15 | Shop drawing, detail: column plan view |
 | room-02-power-energy | Fig. 16 | Column fabrication progression (video) |
 | room-02-power-energy | Fig. 17 | Final setup: the installed column (video) |
-| room-03-rhode-island | Fig. 01 | Rhode Island Department of Health population health goals |
-| room-03-rhode-island | Fig. 02 | App Store and Google Play reviews (video) |
-| room-03-rhode-island | Fig. 03 | Desktop wireframes (video) |
-| room-03-rhode-island | Fig. 04 | Vaccine details: annotated mobile screens |
-| room-03-rhode-island | Fig. 05 | Mobile wireframes: vaccination record and dose details |
-| room-04-littelfuse | Fig. 01 | Survey: who drives component decisions |
-| room-04-littelfuse | Fig. 02 | User archetype: Engineering & Technical |
-| room-04-littelfuse | Fig. 03 | User archetype: Sales |
-| room-04-littelfuse | Fig. 04 | User archetype: Procurement |
-| room-04-littelfuse | Fig. 05 | Engineering personas (video) |
-| room-04-littelfuse | Fig. 06 | Product-discovery journey map |
-| room-04-littelfuse | Fig. 07 | Littelfuse wireframes (placeholder) |
+| room-03-rhode-island | Fig. 01 | 401 Health app: five mobile screens |
+| room-03-rhode-island | Fig. 02 | Rhode Island Department of Health population health goals |
+| room-03-rhode-island | Fig. 03 | App Store and Google Play reviews (video) |
+| room-03-rhode-island | Fig. 04 | Desktop wireframes (video) |
+| room-03-rhode-island | Fig. 05 | Vaccine details: annotated mobile screens |
+| room-03-rhode-island | Fig. 06 | Mobile wireframes: vaccination record and dose details |
+| room-04-littelfuse | Fig. 01 | Product-discovery journey map: overview |
+| room-04-littelfuse | Fig. 02 | Survey: who drives component decisions |
+| room-04-littelfuse | Fig. 03 | User archetype: Engineering & Technical |
+| room-04-littelfuse | Fig. 04 | User archetype: Sales |
+| room-04-littelfuse | Fig. 05 | User archetype: Procurement |
+| room-04-littelfuse | Fig. 06 | Engineering personas (video) |
+| room-04-littelfuse | Fig. 07 | Product-discovery journey map |
+| room-04-littelfuse | Fig. 08 | Littelfuse wireframes (placeholder) |
 
 ## Supplied, not her copy
 

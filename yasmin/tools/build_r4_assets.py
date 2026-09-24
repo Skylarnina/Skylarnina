@@ -5,7 +5,7 @@ screens and documents sit WHOLE on the light ground (#F4F3F0) or white, never cr
 Only photographs may be cropped, and only to the frame's own ratio.
 
   r4-row-rNN-3x2.jpg     project rows + projects grid (3:2, subject whole)
-  r4-cover-rNN-16x7.jpg  case-study covers for the two light rooms (screens, journey map)
+  r5-ri-five-screens.jpg Rhode Island cover plate (FIG. 01): five screens in a row, whole
   r4-panel-0N.jpg        homepage discipline panels (2:3)
   r4-about-*.jpg         homepage About mosaic (4:5, 3:2, 1:1, 1:1)
   r4-ri-screens.jpg      the two frameless RI screens, side by side (Plate pair, tall slot)
@@ -73,10 +73,17 @@ save(place(col_whole, 1800, 1200, 120, 28), "r4-row-r02-3x2.jpg")               
 save(place(screens, 1800, 1200, 96, 56), "r4-row-r03-3x2.jpg")                     # both phone screens
 save(place([journey], 1800, 1200, 72, 0, WHITE), "r4-row-r04-3x2.jpg")             # the whole journey map
 
-# ---- case-study covers for the light rooms: 16:7, subject whole
-ri_row = [Image.open(f"{IMG}/r03-screen-{s}.jpg") for s in ("welcome", "home", "record", "doses", "household")]
-save(place(ri_row, 2000, 875, 80, 40), "r4-cover-r03-16x7.jpg")
-save(place([journey], 2000, 875, 60, 0, WHITE), "r4-cover-r04-16x7.jpg")
+# ---- round 5: Rhode Island's cover image, the five 401 Health screens in a row, whole and unpadded.
+# Shown as FIG. 01, a full plate under the chapter index (the builder adds the 48px padding).
+# Littelfuse's cover plate is her journey map, used as is.
+ri_row = [Image.open(f"{IMG}/r03-screen-{s}.jpg").convert("RGB") for s in ("welcome", "home", "record", "doses", "household")]
+H5, G5 = 1600, 64
+ws = [round(i.width * H5 / i.height) for i in ri_row]
+five = Image.new("RGB", (sum(ws) + G5 * 4, H5), GROUND)
+x = 0
+for im, w in zip(ri_row, ws):
+    five.paste(im.resize((w, H5), Image.LANCZOS), (x, 0)); x += w + G5
+save(five, "r5-ri-five-screens.jpg")
 
 # ---- homepage discipline panels, 2:3
 save(crop_to(Image.open(f"{IMG}/r02-column-installed.jpg"), 2 / 3, cy=.45), "r4-panel-01.jpg")   # photograph

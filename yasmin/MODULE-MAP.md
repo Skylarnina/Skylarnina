@@ -61,29 +61,31 @@ Sequence: Strip → Plate pair → Full plate → Full plate → Video panel →
 
 ## Rhode Island — `site/room-03-rhode-island.html`
 
-Sequence: Full plate → Video panel → Video panel → Plate pair
+Sequence: Full plate → Full plate → Video panel → Video panel → Plate pair
 
 | # | Chapter | Module | Fig. | Caption | Her item | Source file | Tile (as placed) | Fit | Note |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | 03 The Approach/ Discovery & Stakeholder Alignment | Full plate | Fig. 01 | Rhode Island Department of Health population health goals | R-024 | `r03-goals-full.jpg` | `tiles/r03-goals-full--1_600.jpg` | whole on #F4F3F0 |  |
-| 2 | 03 The Approach/ Discovery & Stakeholder Alignment | Video panel | Fig. 02 | App Store and Google Play reviews (video) | R-025 | `r03-app-reviews.mp4` | `poster-r03-app-reviews.jpg` | video |  |
-| 3 | 04 UX Design/ Feature Prioritization | Video panel | Fig. 03 | Desktop wireframes (video) | R-036 | `r03-wireframes.mp4` | `poster-r03-wireframes.jpg` | video |  |
-| 4 | 04 UX Design/ Feature Prioritization | Plate pair | Fig. 04 | Vaccine details: annotated mobile screens | R-037 | `r03-annotated.jpg` | `tiles/r03-annotated--1_500.jpg` | whole on #F4F3F0 | Tall slot: the frameless mobile screens from her vector PDF (Q7). |
-|  |  |  | Fig. 05 | Mobile wireframes: vaccination record and dose details | R-036 | `r4-ri-screens.jpg` | `tiles/r4-ri-screens--0_750.jpg` | whole on #F4F3F0 |  |
+| 1 | Cover | Full plate | Fig. 01 | 401 Health app: five mobile screens | ➕ added | `r5-ri-five-screens.jpg` | `tiles/r5-ri-five-screens--nat-p48.jpg` | whole on #F4F3F0 | Round 5: the document cover, shown whole under the chapter index (no image behind the title). |
+| 2 | 03 The Approach/ Discovery & Stakeholder Alignment | Full plate | Fig. 02 | Rhode Island Department of Health population health goals | R-024 | `r03-goals-full.jpg` | `tiles/r03-goals-full--1_600.jpg` | whole on #F4F3F0 |  |
+| 3 | 03 The Approach/ Discovery & Stakeholder Alignment | Video panel | Fig. 03 | App Store and Google Play reviews (video) | R-025 | `r03-app-reviews.mp4` | `poster-r03-app-reviews.jpg` | video |  |
+| 4 | 04 UX Design/ Feature Prioritization | Video panel | Fig. 04 | Desktop wireframes (video) | R-036 | `r03-wireframes.mp4` | `poster-r03-wireframes.jpg` | video |  |
+| 5 | 04 UX Design/ Feature Prioritization | Plate pair | Fig. 05 | Vaccine details: annotated mobile screens | R-037 | `r03-annotated.jpg` | `tiles/r03-annotated--1_500.jpg` | whole on #F4F3F0 | Tall slot: the frameless mobile screens from her vector PDF (Q7). |
+|  |  |  | Fig. 06 | Mobile wireframes: vaccination record and dose details | R-036 | `r4-ri-screens.jpg` | `tiles/r4-ri-screens--0_750.jpg` | whole on #F4F3F0 |  |
 
 ## Littelfuse — `site/room-04-littelfuse.html`
 
-Sequence: Board 2×2 → Video panel → Full plate → Full plate
+Sequence: Full plate → Board 2×2 → Video panel → Full plate → Full plate
 
 | # | Chapter | Module | Fig. | Caption | Her item | Source file | Tile (as placed) | Fit | Note |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | 03 The Approach | Board 2×2 | Fig. 01 | Survey: who drives component decisions | L-025 | `r3-fig-decision-board.jpg` | `tiles/r3-fig-decision-board--1_000.jpg` | whole on #F4F3F0 | Her archetype board (doc 23) shown as its three cards, whole. |
-|  |  |  | Fig. 02 | User archetype: Engineering & Technical | L-026 | `r04-archetype-engineering.jpg` | `tiles/r04-archetype-engineering--1_000.jpg` | whole on #F4F3F0 |  |
-|  |  |  | Fig. 03 | User archetype: Sales | L-026 | `r04-archetype-sales.jpg` | `tiles/r04-archetype-sales--1_000.jpg` | whole on #F4F3F0 |  |
-|  |  |  | Fig. 04 | User archetype: Procurement | L-026 | `r04-archetype-procurement.jpg` | `tiles/r04-archetype-procurement--1_000.jpg` | whole on #F4F3F0 |  |
-| 2 | 03 The Approach | Video panel | Fig. 05 | Engineering personas (video) | ➕ added | `r04-personas.mp4` | `poster-r04-personas.jpg` | video | Added media (Q6): directly under the archetype board. |
-| 3 | 03 The Approach | Full plate | Fig. 06 | Product-discovery journey map | L-029 | `r04-journey-full.jpg` | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |  |
-| 4 | 03 The Approach | Full plate | Fig. 07 | Littelfuse wireframes (placeholder) | L-041 | `—` | `—` | placeholder | Placeholder until she exports the XD screens (ASSET-GAPS). |
+| 1 | Cover | Full plate | Fig. 01 | Product-discovery journey map: overview | ➕ added | `r04-journey-full.jpg` | `tiles/r04-journey-full--nat-p48.jpg` | whole on #F4F3F0 | Round 5: the document cover, shown whole under the chapter index (no image behind the title). |
+| 2 | 03 The Approach | Board 2×2 | Fig. 02 | Survey: who drives component decisions | L-025 | `r3-fig-decision-board.jpg` | `tiles/r3-fig-decision-board--1_000.jpg` | whole on #F4F3F0 | Her archetype board (doc 23) shown as its three cards, whole. |
+|  |  |  | Fig. 03 | User archetype: Engineering & Technical | L-026 | `r04-archetype-engineering.jpg` | `tiles/r04-archetype-engineering--1_000.jpg` | whole on #F4F3F0 |  |
+|  |  |  | Fig. 04 | User archetype: Sales | L-026 | `r04-archetype-sales.jpg` | `tiles/r04-archetype-sales--1_000.jpg` | whole on #F4F3F0 |  |
+|  |  |  | Fig. 05 | User archetype: Procurement | L-026 | `r04-archetype-procurement.jpg` | `tiles/r04-archetype-procurement--1_000.jpg` | whole on #F4F3F0 |  |
+| 3 | 03 The Approach | Video panel | Fig. 06 | Engineering personas (video) | ➕ added | `r04-personas.mp4` | `poster-r04-personas.jpg` | video | Added media (Q6): directly under the archetype board. |
+| 4 | 03 The Approach | Full plate | Fig. 07 | Product-discovery journey map | L-029 | `r04-journey-full.jpg` | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |  |
+| 5 | 03 The Approach | Full plate | Fig. 08 | Littelfuse wireframes (placeholder) | L-041 | `—` | `—` | placeholder | Placeholder until she exports the XD screens (ASSET-GAPS). |
 
 ## Homepage (not modules, listed for completeness)
 
@@ -92,5 +94,5 @@ Sequence: Board 2×2 → Video panel → Full plate → Full plate
 | Project rows + Projects grid | `r4-row-r01..r04-3x2.jpg` | finished 3:2, subject whole (plan, column ×3, two screens, journey map) |
 | Discipline panels 01–04 | `r4-panel-01..04.jpg` | 2:3; 01 photograph (cropped), 02–04 whole on #F4F3F0 |
 | About mosaic | `r4-about-tall-4x5.jpg`, `r4-about-wide-3x2.jpg`, `r4-about-sq-a.jpg`, `r4-about-sq-b.jpg` | stand-ins from her work until personal photos arrive (ASSET-GAPS R4-1..R4-4) |
-| Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped), `r4-cover-r03/r04-16x7.jpg` (whole) | |
+| Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped to 16:7). Rooms 03/04 have no header image; their cover is FIG. 01 above | |
 

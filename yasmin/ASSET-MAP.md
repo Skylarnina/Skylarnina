@@ -200,17 +200,19 @@ Every image and video on the case-study pages, by source file, with the module i
 | `r02-shop-1-detail.jpg` | room-02-power-energy | Fig. 15 | Board 1+3 | `tiles/r02-shop-1-detail--1_500.jpg` | whole on #F4F3F0 |
 | `r02-fabrication.mp4` | room-02-power-energy | Fig. 16 | Video panel | `poster-r02-fabrication.jpg` | video |
 | `r02-final-setup.mp4` | room-02-power-energy | Fig. 17 | Video panel | `poster-r02-final-setup.jpg` | video |
-| `r03-goals-full.jpg` | room-03-rhode-island | Fig. 01 | Full plate | `tiles/r03-goals-full--1_600.jpg` | whole on #F4F3F0 |
-| `r03-app-reviews.mp4` | room-03-rhode-island | Fig. 02 | Video panel | `poster-r03-app-reviews.jpg` | video |
-| `r03-wireframes.mp4` | room-03-rhode-island | Fig. 03 | Video panel | `poster-r03-wireframes.jpg` | video |
-| `r03-annotated.jpg` | room-03-rhode-island | Fig. 04 | Plate pair | `tiles/r03-annotated--1_500.jpg` | whole on #F4F3F0 |
-| `r4-ri-screens.jpg` | room-03-rhode-island | Fig. 05 | Plate pair | `tiles/r4-ri-screens--0_750.jpg` | whole on #F4F3F0 |
-| `r3-fig-decision-board.jpg` | room-04-littelfuse | Fig. 01 | Board 2×2 | `tiles/r3-fig-decision-board--1_000.jpg` | whole on #F4F3F0 |
-| `r04-archetype-engineering.jpg` | room-04-littelfuse | Fig. 02 | Board 2×2 | `tiles/r04-archetype-engineering--1_000.jpg` | whole on #F4F3F0 |
-| `r04-archetype-sales.jpg` | room-04-littelfuse | Fig. 03 | Board 2×2 | `tiles/r04-archetype-sales--1_000.jpg` | whole on #F4F3F0 |
-| `r04-archetype-procurement.jpg` | room-04-littelfuse | Fig. 04 | Board 2×2 | `tiles/r04-archetype-procurement--1_000.jpg` | whole on #F4F3F0 |
-| `r04-personas.mp4` | room-04-littelfuse | Fig. 05 | Video panel | `poster-r04-personas.jpg` | video |
-| `r04-journey-full.jpg` | room-04-littelfuse | Fig. 06 | Full plate | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |
-| `—` | room-04-littelfuse | Fig. 07 | Full plate | `—` | placeholder |
+| `r5-ri-five-screens.jpg` | room-03-rhode-island | Fig. 01 | Full plate | `tiles/r5-ri-five-screens--nat-p48.jpg` | whole on #F4F3F0 |
+| `r03-goals-full.jpg` | room-03-rhode-island | Fig. 02 | Full plate | `tiles/r03-goals-full--1_600.jpg` | whole on #F4F3F0 |
+| `r03-app-reviews.mp4` | room-03-rhode-island | Fig. 03 | Video panel | `poster-r03-app-reviews.jpg` | video |
+| `r03-wireframes.mp4` | room-03-rhode-island | Fig. 04 | Video panel | `poster-r03-wireframes.jpg` | video |
+| `r03-annotated.jpg` | room-03-rhode-island | Fig. 05 | Plate pair | `tiles/r03-annotated--1_500.jpg` | whole on #F4F3F0 |
+| `r4-ri-screens.jpg` | room-03-rhode-island | Fig. 06 | Plate pair | `tiles/r4-ri-screens--0_750.jpg` | whole on #F4F3F0 |
+| `r04-journey-full.jpg` | room-04-littelfuse | Fig. 01 | Full plate | `tiles/r04-journey-full--nat-p48.jpg` | whole on #F4F3F0 |
+| `r3-fig-decision-board.jpg` | room-04-littelfuse | Fig. 02 | Board 2×2 | `tiles/r3-fig-decision-board--1_000.jpg` | whole on #F4F3F0 |
+| `r04-archetype-engineering.jpg` | room-04-littelfuse | Fig. 03 | Board 2×2 | `tiles/r04-archetype-engineering--1_000.jpg` | whole on #F4F3F0 |
+| `r04-archetype-sales.jpg` | room-04-littelfuse | Fig. 04 | Board 2×2 | `tiles/r04-archetype-sales--1_000.jpg` | whole on #F4F3F0 |
+| `r04-archetype-procurement.jpg` | room-04-littelfuse | Fig. 05 | Board 2×2 | `tiles/r04-archetype-procurement--1_000.jpg` | whole on #F4F3F0 |
+| `r04-personas.mp4` | room-04-littelfuse | Fig. 06 | Video panel | `poster-r04-personas.jpg` | video |
+| `r04-journey-full.jpg` | room-04-littelfuse | Fig. 07 | Full plate | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |
+| `—` | room-04-littelfuse | Fig. 08 | Full plate | `—` | placeholder |
 
-Homepage (round 4): `r4-row-r01…r04-3x2.jpg` (rows + Projects grid), `r4-panel-01…04.jpg` (disciplines), `r4-about-*.jpg` (About mosaic), `r4-cover-r03/r04-16x7.jpg` (covers). All made by `tools/build_r4_assets.py`.
+Homepage (round 4): `r4-row-r01…r04-3x2.jpg` (rows + Projects grid), `r4-panel-01…04.jpg` (disciplines), `r4-about-*.jpg` (About mosaic), `r5-ri-five-screens.jpg` (Rhode Island cover plate). All made by `tools/build_r4_assets.py`.

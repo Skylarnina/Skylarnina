@@ -79,7 +79,7 @@ CONTENT = 1344
 MG = 24
 
 
-def export_tile(src, kind, ratio, disp_w):
+def export_tile(src, kind, ratio, disp_w, pad_css=MG):
     """A finished tile for the module slot: drawings/screens/documents whole on the light
     ground with 24px (display) padding inside the file; photographs cropped to the ratio.
     ratio=None keeps the image's own ratio (plus padding). Returns the tile's file name."""
@@ -87,8 +87,8 @@ def export_tile(src, kind, ratio, disp_w):
     Image.MAX_IMAGE_PIXELS = None
     im = Image.open(IMG_DIR + src).convert("RGB")
     W = min(2400, round(disp_w * 2))
-    pad = round(MG * W / disp_w)
-    tag = "nat" if ratio is None else f"{ratio:.3f}".replace(".", "_")
+    pad = round(pad_css * W / disp_w)
+    tag = ("nat" if ratio is None else f"{ratio:.3f}".replace(".", "_")) + ("" if pad_css == MG else f"-p{pad_css}")
     name = f"{TILE_DIR}{src.rsplit('.', 1)[0]}--{tag}.jpg"
     if kind == "photo":
         r = ratio or im.width / im.height
@@ -112,13 +112,13 @@ def export_tile(src, kind, ratio, disp_w):
     return name
 
 
-def tile(pg, src, cap, kind, ratio, disp_w, src_id=None, cls=""):
+def tile(pg, src, cap, kind, ratio, disp_w, src_id=None, cls="", pad_css=MG):
     """One captioned tile. The page shows the finished tile; a click opens her full image."""
     lab = pg.label()
     CAPTIONS.append((pg.name, lab, cap))
     if src_id:
         FIGMAP.setdefault(pg.name, {}).setdefault(src_id, []).append(cap)
-    t = export_tile(src, kind, ratio, disp_w)
+    t = export_tile(src, kind, ratio, disp_w, pad_css)
     pg.tiles.append(dict(label=lab, src=src, tile=t, cap=cap, kind=kind, src_id=src_id))
     style = f' style="aspect-ratio:{ratio:.4f}"' if ratio else ""
     return (f'<figure class="t{(" " + cls) if cls else ""}"><a class="m" href="{IMG}{src}"{style} target="_blank" rel="noopener" '
@@ -443,7 +443,7 @@ def page(title, desc, body_html, cls=""):
 <meta name="description" content="{E(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;1,400&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;1,400&amp;family=Inter+Tight:ital,wght@0,400;0,500;1,400&amp;display=swap">
 <link rel="stylesheet" href="assets/css/r3.css">
 </head>
 <body{f' class="{cls}"' if cls else ''}>
@@ -473,7 +473,7 @@ def home():
     facts = "".join(
         f'<div><dt class="label" data-added="ui">{E(f["label"])}</dt><dd class="{"pending" if f.get("pending") else ""}" data-added="supplied">{E(f["value"])}</dd></div>'
         for f in site["home"]["facts"])
-    # A10 + round 4: four panels, each with an image. 01 shows it at rest; 02-04 reveal it on hover.
+    # A10 + round 5: four panels, each image always visible under a 45% black overlay; hover lightens it to 30%.
     PANEL = [("r4-panel-01.jpg", "The installed Power & Energy column", "photo"),
              ("r4-panel-02.jpg", "Rhode Island 401 Health app: two mobile screens", "doc"),
              ("r4-panel-03.jpg", "Jackson Home floor plan with expected visitor paths", "doc"),
@@ -481,7 +481,7 @@ def home():
     skills = [A[f"A-{k:02d}"] for k in (9, 10, 11, 12)]
     panels = ""
     for n, (s_, (src, alt, kind)) in enumerate(zip(skills, PANEL), 1):
-        panels += (f'<article class="panel{" panel--rest" if n == 1 else ""}">'
+        panels += (f'<article class="panel">'
                    f'<div class="m m--{kind}"><img src="{IMG}{src}" alt="{E(alt)}" loading="lazy"></div>'
                    f'<span class="no" data-added="ui">{n:02d}</span>'
                    f'<h3 data-id="A-{8 + n:02d}">{E(s_["text"])}</h3></article>')
@@ -571,8 +571,11 @@ def projects():
 # ---------------------------------------------------------------- case study template
 COVER = {"room01": "r3-cover-r01-16x7.jpg",      # simulation still (footage): cropped to 16:7
          "room02": "r3-cover-r02-16x7.jpg",      # photograph: cropped to 16:7
-         "room03": "r4-cover-r03-16x7.jpg",      # five screens, whole, on the light ground
-         "room04": "r4-cover-r04-16x7.jpg"}      # the journey map, whole, on white
+         }
+# Round 5: document rooms get a white header (no image behind the title) and their cover
+# shown whole as FIG. 01, a full plate with 48px padding directly under the chapter index.
+COVER_PLATE = {"room03": ("r5-ri-five-screens.jpg", "401 Health app: five mobile screens"),
+               "room04": ("r04-journey-full.jpg", "Product-discovery journey map: overview")}
 ROW = {k: f"r4-row-{k.replace('room0', 'r0')}-3x2.jpg" for k in ("room01", "room02", "room03", "room04")}
 
 
@@ -591,6 +594,30 @@ def case(r):
     index = "".join(f'<li><span>{k:02d}</span><a href="#ch-{k}">{E(h["text"])}</a></li>' for k, (h, _) in enumerate(chapters, 1))
     year_cls = "pending" if sv.get("year_pending") else ""
     tone = r["tone"]
+    doc = r["key"] in COVER_PLATE
+    meta = f"""<dl class="meta__panel">
+  <div class="wide"><dt class="label" data-added="ui">Role</dt><dd data-id="{r["role"]["id"]}">{E(r["role"]["text"])}</dd></div>
+  <div class="wide"><dt class="label" data-added="ui">Methods</dt><dd data-id="{r["methods"]["id"]}">{E(r["methods"]["text"])}</dd></div>
+  <div><dt class="label" data-added="ui">Setting</dt><dd data-added="supplied">{E(sv["setting"])}</dd></div>
+  <div><dt class="label" data-added="ui">Year</dt><dd class="{year_cls}" data-added="supplied">{E(sv["year"])}</dd></div>
+</dl>"""
+    title = f'<h1 class="{"dochead__title" if doc else "cover__title"}" data-id="{r["title"]["id"]}">{E(r["title"]["text"])}</h1>'
+    if doc:
+        header = (f'<!-- A1, document cover: white header, title left, meta table right, no image behind -->\n'
+                  f'<section class="wrap g24 dochead">{title}{meta}</section>')
+        src, cap = COVER_PLATE[r["key"]]
+        pg.ch = "Cover"
+        start(pg)
+        plate = ('<!-- the cover, whole: FIG. 01, full plate on the light ground, 48px padding -->\n'
+                 '<section class="wrap g24 coverplate">'
+                 + module(pg, "full", tile(pg, src, cap, "doc", None, CONTENT, None, "", 48),
+                          "Round 5: the document cover, shown whole under the chapter index (no image behind the title).")
+                 + '</section>')
+    else:
+        header = (f'<!-- A1 + A4: full-bleed photo cover with the title on it, meta panel bottom-right -->\n'
+                  f'<section class="cover cover--{tone}"><div class="m"><img src="{IMG}{COVER[r["key"]]}" alt=""></div>\n  {title}</section>\n'
+                  f'<div class="meta"><div class="wrap g24">{meta}</div></div>')
+        plate = ""
     parts = []
     for k, (h, its) in enumerate(chapters, 1):
         pg.ch = f"{k:02d} {h['text']}"
@@ -603,19 +630,12 @@ def case(r):
         parts.append(f'<section class="chapter" id="ch-{k}">{inner}</section>')
     i = ROOMS.index(r)
     prv, nxt = ROOMS[i - 1], ROOMS[(i + 1) % 4]
-    b = f"""{bar(over=tone, here="projects")}
+    b = f"""{bar(over=None if doc else tone, here="projects")}
 <main id="top">
-<!-- A1 + A4: full-bleed cover with the title on it, meta panel bottom-right -->
-<section class="cover cover--{tone}"><div class="m"><img src="{IMG}{COVER[r["key"]]}" alt=""></div>
-  <h1 class="cover__title" data-id="{r["title"]["id"]}">{E(r["title"]["text"])}</h1></section>
-<div class="meta"><div class="wrap g24"><dl class="meta__panel">
-  <div class="wide"><dt class="label" data-added="ui">Role</dt><dd data-id="{r["role"]["id"]}">{E(r["role"]["text"])}</dd></div>
-  <div class="wide"><dt class="label" data-added="ui">Methods</dt><dd data-id="{r["methods"]["id"]}">{E(r["methods"]["text"])}</dd></div>
-  <div><dt class="label" data-added="ui">Setting</dt><dd data-added="supplied">{E(sv["setting"])}</dd></div>
-  <div><dt class="label" data-added="ui">Year</dt><dd class="{year_cls}" data-added="supplied">{E(sv["year"])}</dd></div>
-</dl></div></div>
+{header}
 <!-- A1: numbered chapter index built from her own headings -->
 <nav class="wrap" aria-label="Chapters" data-added="ui"><div class="chindex"><ol>{index}</ol></div></nav>
+{plate}
 <!-- A2 + A3 chapters; A4 / A5 / A6 / A7 where her content calls for them -->
 {"".join(parts)}
 <!-- A5: previous / all / next -->
@@ -708,7 +728,7 @@ def module_map():
           "| Project rows + Projects grid | `r4-row-r01..r04-3x2.jpg` | finished 3:2, subject whole (plan, column ×3, two screens, journey map) |",
           "| Discipline panels 01–04 | `r4-panel-01..04.jpg` | 2:3; 01 photograph (cropped), 02–04 whole on #F4F3F0 |",
           "| About mosaic | `r4-about-tall-4x5.jpg`, `r4-about-wide-3x2.jpg`, `r4-about-sq-a.jpg`, `r4-about-sq-b.jpg` | stand-ins from her work until personal photos arrive (ASSET-GAPS R4-1..R4-4) |",
-          "| Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped), `r4-cover-r03/r04-16x7.jpg` (whole) | |", ""]
+          "| Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped to 16:7). Rooms 03/04 have no header image; their cover is FIG. 01 above | |", ""]
     open("MODULE-MAP.md", "w").write("\n".join(L) + "\n")
     return bad
 
@@ -724,7 +744,7 @@ def asset_map_section():
             fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder"}[t["kind"]]
             L.append(f"| `{t['src']}` | {m['page']} | {t['label']} | {MODULE_NAMES[m['module']]} | `{t['tile']}` | {fit} |")
     L += ["", "Homepage (round 4): `r4-row-r01…r04-3x2.jpg` (rows + Projects grid), `r4-panel-01…04.jpg` (disciplines), "
-          "`r4-about-*.jpg` (About mosaic), `r4-cover-r03/r04-16x7.jpg` (covers). All made by `tools/build_r4_assets.py`.", ""]
+          "`r4-about-*.jpg` (About mosaic), `r5-ri-five-screens.jpg` (Rhode Island cover plate). All made by `tools/build_r4_assets.py`.", ""]
     s = open("ASSET-MAP.md").read()
     if head in s:
         s = s[:s.index(head)]

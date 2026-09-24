@@ -2,6 +2,7 @@
 // Run from yasmin/:  node tools/dom_text.js > content/dom.json
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const path = require('path');
+const DIR = process.argv[2] || 'site';   // 'wireframes' to check the wireframe files
 const pages = ['index', 'projects', 'room-01-jackson-home', 'room-02-power-energy', 'room-03-rhode-island', 'room-04-littelfuse', 'private-view'];
 (async () => {
   const b = await chromium.launch();
@@ -9,7 +10,7 @@ const pages = ['index', 'projects', 'room-01-jackson-home', 'room-02-power-energ
   for (const w of [1440, 390]) {
     const p = await b.newPage({ viewport: { width: w, height: 900 } });
     for (const pg of pages) {
-      await p.goto('file://' + path.resolve('site/' + pg + '.html'), { waitUntil: 'domcontentloaded' });
+      await p.goto('file://' + path.resolve(DIR + '/' + pg + '.html'), { waitUntil: 'domcontentloaded' });
       out[`${pg}@${w}`] = await p.evaluate(() => [...document.querySelectorAll('[data-id],[data-ref],[data-added]')].map((el, i) => {
         const cs = getComputedStyle(el);
         const visible = el.getClientRects().length > 0 && cs.visibility !== 'hidden' && cs.display !== 'none';

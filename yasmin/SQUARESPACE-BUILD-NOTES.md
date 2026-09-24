@@ -1,8 +1,10 @@
-# Squarespace build notes: Round 4
+# Squarespace build notes: Round 5
 
-How to build the prototype (`site/`) in **Squarespace 7.1 with Fluid Engine**, using only standard sections and blocks, Site Styles, and **23 lines of custom CSS** (§2; the budget is 30). There is **no custom JavaScript** and **no Code Block used for layout**. The prototype itself has no JavaScript either, so what you see is what the native build can do.
+How to build the prototype (`site/`) in **Squarespace 7.1 with Fluid Engine**, using only standard sections and blocks, Site Styles, and **19 lines of custom CSS** (§2; the budget is 30). There is **no custom JavaScript** and **no Code Block used for layout**. The prototype itself has no JavaScript either, so what you see is what the native build can do.
 
-**Round 4 changes:** no photo strip under the hero; hover-reveal discipline panels (§2 lines 17–23); the About section as a bento (statement + four-image mosaic); finished 3:2 row covers with the subject whole; every case-study image in one of six bento modules (§4a, full list in `MODULE-MAP.md`). Drawing, screen and document tiles are exported with the light ground and 24px padding **inside the file**, so no CSS is needed to stop Squarespace cropping them.
+**Round 5 changes:** the discipline panels always show their image under a 45% black overlay, and hover only lightens it to 30% (§2 lines 17–19; the opacity-0 CSS is gone). Rooms 03 and 04 get a white header with no image behind the title, and their cover moves to FIG. 01, a full plate under the chapter index (§4, 0a–0c). Headings are now Instrument Sans; body, captions and labels stay Inter Tight (§0). Greyscale HTML wireframes of every page are in `wireframes/` (§7).
+
+**Round 4 changes:** no photo strip under the hero; discipline panels with images (revised in round 5); the About section as a bento (statement + four-image mosaic); finished 3:2 row covers with the subject whole; every case-study image in one of six bento modules (§4a, full list in `MODULE-MAP.md`). Drawing, screen and document tiles are exported with the light ground and 24px padding **inside the file**, so no CSS is needed to stop Squarespace cropping them.
 
 Items marked **verify** are how I understand the current editor. Check each once in her account before relying on it. Platform sources are at the end.
 
@@ -13,8 +15,8 @@ Items marked **verify** are how I understand the current editor. Check each once
 | Item | Setting |
 |---|---|
 | Template | Any 7.1 template; everything below is set per section. |
-| Fonts (*Site Styles → Fonts*) | **Neue Haas Grotesk Display** (Adobe Fonts, in the Squarespace picker) for headings, paragraphs, buttons and navigation. If it isn't listed in her account (**verify**), use **Inter Tight** (Google), which is what the prototype uses. Weights 400 and 500 only, plus italic 400 for "*Yasmin.*". |
-| Colours (*Site Styles → Colours*) | Palette: `#FFFFFF`, `#F4F3F0`, `#111111`. Two themes: **White** (background `#FFFFFF`, text `#111111`) and **Stone** (background `#F4F3F0`, text `#111111`). No accent colour; links `#111111`, underlined. |
+| Fonts (*Site Styles → Fonts*) | **Headings: Instrument Sans** (Google Fonts; listed in Squarespace's font picker, **verify** once under *Site Styles → Fonts → All font packs / Headings*). Use it for Heading 1–4, the site's big numerals (chapter and panel numbers, the 60% / 10% / 30% stats) through Heading styles. Weights **400 and 500 only**, plus italic 400 for "*Yasmin.*". Tracking **−0.01em on sizes above 48px**, 0 below. **Body, captions, labels, navigation and buttons: Inter Tight** (Google), 400/500. |
+| Colours (*Site Styles → Colours*) | Palette: `#FFFFFF`, `#F4F3F0`, `#111111`. Three themes: **White** (background `#FFFFFF`, text `#111111`), **Stone** (background `#F4F3F0`, text `#111111`) and **Ink** (background `#111111`, text `#FFFFFF`, used only by the discipline panels so their names are white without CSS). No accent colour; links `#111111`, underlined. |
 | Buttons | Primary: **outline**, **square corners**, 1px, 14px text. The lock screen's Enter button is solid (§5). |
 | Animations (*Site Styles → Animations*) | **Fade**, speed **Slow**. Nothing else: no scroll effects, no parallax. |
 | Images | Every image block: *Design → Clickthrough: Lightbox* (native lightbox), **Caption: below**, no border, no shadow, **corner radius 0**. |
@@ -23,13 +25,13 @@ Items marked **verify** are how I understand the current editor. Check each once
 
 | Style | Desktop | Mobile | Used for |
 |---|---|---|---|
-| Heading 1 | 140px / 0.92, tracking −0.035em | 64px | "Hi, I'm *Yasmin.*" |
-| Heading 2 | 72px / 1.02, tracking −0.03em | 40px | Page titles, cover titles, "Projects", contact line |
-| Heading 3 | 40px / 1.08, tracking −0.02em | 30px | Chapter titles |
-| Heading 4 | 20px / 1.3 | 20px | Her sub-headings ("Visitor Experience", "Ticketing Strategy"…) |
-| Paragraph 1 | 40px / 1.2 | 28px | The About statement (left 12 columns) |
-| Paragraph 2 | 17px / 1.6 | 16px | All her body text, in a 12-column measure (~62ch) |
-| Paragraph 3 | 11px / 1.45, **uppercase, tracking 0.08em**, colour 62% ink | 11px | Labels, captions, "FIG. 03 — …", "PASSWORD PROTECTED" |
+| Heading 1 (Instrument Sans) | 140px / 0.92, tracking −0.01em | 64px | "Hi, I'm *Yasmin.*" |
+| Heading 2 (Instrument Sans) | 72px / 1.02, tracking −0.01em | 36–40px, tracking 0 | Page titles, cover titles, "Projects", contact line |
+| Heading 3 (Instrument Sans) | 40px / 1.08, tracking 0 | 30px | Chapter titles |
+| Heading 4 (Instrument Sans) | 20px / 1.3 | 20px | Her sub-headings ("Visitor Experience", "Ticketing Strategy"…) |
+| Paragraph 1 (Inter Tight) | 40px / 1.2 | 28px | The About statement (left 12 columns) |
+| Paragraph 2 (Inter Tight) | 17px / 1.6 | 16px | All her body text, in a 12-column measure (~62ch) |
+| Paragraph 3 (Inter Tight) | 11px / 1.45, **uppercase, tracking 0.08em**, colour 62% ink | 11px | Labels, captions, "FIG. 03 — …", "PASSWORD PROTECTED" |
 
 Captions and labels use **62% ink, not 55%**. At 11px, 55% measures 4.4:1 on white, which fails WCAG AA; 62% passes at 5.2:1.
 
@@ -52,7 +54,7 @@ Header (*Edit Site Header*): layout **logo/site title left, navigation right**; 
 
 ## 2. Custom CSS (Website → Pages → Custom code → Custom CSS)
 
-The complete list: **23 lines** (16 from round 3, 7 for the hover panels).
+The complete list: **19 lines** (16 from round 3, 3 for the discipline panels).
 
 ```css
 /* 1  hairline under the header, if the template has no header border setting */
@@ -76,27 +78,15 @@ The complete list: **23 lines** (16 from round 3, 7 for the hover panels).
 .sqs-slide-container a{text-decoration:underline;text-underline-offset:.22em}
 .sqs-slide-container .sqs-slide-background-content{opacity:.08}
 .sqs-slide-container .sqs-slide-layer{background:#fff}
-/* 17-23  A10 discipline panels: image fades in behind the name (300ms), name turns white.
-   Fluid Engine blocks can't take custom classes, so these use each block's own class from the inspector:
-   I1-I4 = the four image blocks' wrappers (.fe-block-yui_3_17_2_1_…), T1-T4 = name text blocks, N1-N4 = "01"-"04" text blocks. */
-.I1,.I2,.I3,.I4{transition:opacity .3s ease;filter:brightness(.55)}
-.I2,.I3,.I4{opacity:0}
-.I2:hover,.I3:hover,.I4:hover{opacity:1}
-.T1,.T2,.T3,.T4,.N1,.N2,.N3,.N4{pointer-events:none}
-.T1 *,.N1 *,.fe-grid:has(.I2:hover) :is(.T2,.N2) *,.fe-grid:has(.I3:hover) :is(.T3,.N3) *,.fe-grid:has(.I4:hover) :is(.T4,.N4) *{color:#fff!important;transition:color .3s}
-@media (max-width:767px){.I2,.I3,.I4{opacity:1}.I1,.I2,.I3,.I4{filter:brightness(.6)}}
-@media (max-width:767px){.T1 *,.T2 *,.T3 *,.T4 *,.N1 *,.N2 *,.N3 *,.N4 *{color:#fff!important}}
-```
-
-**How lines 17–23 work.** In the section, each panel is: a **Shape** block (the hairline outline, sent to the back), an **Image** block filling the panel (the `r4-panel-0N.jpg` export, 2:3), and two **Text** blocks on top ("0N" at the top, her skill name at the bottom). Right-click → *Arrange → Bring forward* on the texts so they sit above the image. The texts ignore the pointer (line 20), so the mouse is always over the image; hovering it raises its opacity (line 19) and, through `:has()`, turns that panel's texts white (line 21). Panel 01 is visible at rest (line 18 leaves it out). On phones there is no hover, so all four images show at 60% brightness with white names (lines 22–23). To find a block's class: open the page, right-click the block → *Inspect*, and copy the `fe-block-…` class from the wrapper `div`. Replace `.I1` … `.N4` with those. Yasmin can still swap the images and edit the names normally; the CSS targets the blocks, not their content. **Verify** once in the browser: hover each panel.
-
-**Fallback, if the hover doesn't work in her account** (e.g. her template layers blocks differently): delete lines 17–23 and use these three lines instead. Every panel shows its image at 25%, going to 100% on hover; names stay ink.
-
-```css
-.I1,.I2,.I3,.I4{opacity:.25;transition:opacity .3s ease}
-.I1:hover,.I2:hover,.I3:hover,.I4:hover{opacity:1}
+/* 17-19  A10 discipline panels: every image always visible under a 45% black overlay; hover lightens it to 30% (300ms).
+   brightness(.55) is exactly a 45% black layer; .7 is 30%. Fluid Engine blocks can't take custom classes, so use each
+   block's own class from the inspector: I1-I4 = image blocks' wrappers (.fe-block-yui_3_17_2_1_…), T1-T4 / N1-N4 = name and "01"-"04" text blocks. */
+.I1 img,.I2 img,.I3 img,.I4 img{filter:brightness(.55);transition:filter .3s ease}
+.I1:hover img,.I2:hover img,.I3:hover img,.I4:hover img{filter:brightness(.7)}
 .T1,.T2,.T3,.T4,.N1,.N2,.N3,.N4{pointer-events:none}
 ```
+
+**How lines 17–19 work.** Each panel is a **Shape** block (the hairline outline, at the back), an **Image** block filling the panel (`r4-panel-0N.jpg`, 2:3) and two **Text** blocks on top ("0N" at the top, her skill name at the bottom). The section uses the **Ink** theme, so the names are white natively. Line 17 puts a 45% black overlay on every image, always, on desktop and phones. Line 18 lightens it to 30% while the pointer is over a panel. Line 19 lets the pointer pass through the text blocks to the image. Nothing appears or disappears: the image, number and name are always visible. To find a block's class, right-click it → *Inspect* and copy the `fe-block-…` class from the wrapper `div`. **Verify** once in the browser. If line 18 doesn't fire in her template, delete it: the panels still read correctly at rest.
 
 Everything else is Site Styles or block settings. **Not needed:** code blocks, JavaScript, plugins.
 
@@ -111,7 +101,7 @@ Everything else is Site Styles or block settings. **Not needed:** code blocks, J
 | 1 | **A9 + A8** hero | Blank section, theme White, padding M | **Text** "Hi, I'm *Yasmin.*" (H1) cols 1–14, rows 1–7. **Text** "About Me" (bold paragraph) + her paragraph (P2) cols 1–12, under it. **Button** "View Projects →" (outline) → `/projects`, cols 1–4. **Image** headshot 4:5, cols 15–19, caption "Digital Exhibit Designer — The Henry Ford". **Facts**: four **Text** blocks (label in P3 + value) separated by **Line** blocks, cols 21–24; "BASED IN: [pending client]" in italic until she answers. | Headshot first, then greeting, text, button, facts. |
 | 2 | Hairline | Section divider (or a full-width **Line** block at the top of section 3) | 1px, `#111` at 14%, full width. **The round-3 photo strip is removed.** | — |
 | 3 | **A9 auren + A4 Finnhütte** About bento | Blank section, theme **Stone**, padding L, anchor link `about` | **Text** block, P1 (40px), cols 1–12: her second About paragraph. Mosaic in cols 13–24, four **Image** blocks + a P3 caption **Text** under each: tall 4:5 (`r4-about-tall-4x5.jpg`) cols 13–18 across two rows; wide 3:2 (`r4-about-wide-3x2.jpg`) cols 19–24; two squares (`r4-about-sq-a.jpg`, `r4-about-sq-b.jpg`) cols 19–21 and 22–24 below it. Under the mosaic, a **Line** and a **Text** block: "HISTORY · FASHION · ART" (12px, 500, tracking 0.24em, uppercase). When Yasmin sends personal photos (history / fashion / art), she swaps the four images in place (ASSET-GAPS R4-1…R4-4). | Statement first (28px); mosaic: tall left, the two squares stacked right, the wide image full width below. |
-| 4 | **A10** four disciplines | Blank section, **content width Full**, no padding, section height ~60vh | Four equal columns (cols 1–6, 7–12, 13–18, 19–24). Each: **Shape** (outline, at the back), **Image** filling the panel (`r4-panel-01…04.jpg`: 01 installed column, 02 Rhode Island screens, 03 Jackson Home plan with paths, 04 ITC storyboard; subjects whole in the upper 70% so the name sits on plain ground), **Text** "01"–"04" at top (13px, muted) and her skill name at the bottom (28px), **in her order**. At rest 02–04 show white with number and name; on hover the image fades in (CSS §2 lines 17–23). | 2 × 2 panels at 42vh; all four images at 60% brightness, names white. |
+| 4 | **A10** four disciplines | Blank section, **content width Full**, no padding, section height ~60vh | Four equal columns (cols 1–6, 7–12, 13–18, 19–24). Each: **Shape** (outline, at the back), **Image** filling the panel (`r4-panel-01…04.jpg`: 01 installed column, 02 Rhode Island screens, 03 Jackson Home plan with paths, 04 ITC storyboard; subjects whole in the upper 70% so the name sits on plain ground), **Text** "01"–"04" at top (13px, muted) and her skill name at the bottom (28px), **in her order**. All four images always visible under a 45% black overlay; hover lightens it to 30% (CSS §2 lines 17–19). Section theme **Ink** (names white). | 2 × 2 panels at 42vh, same 45% overlay. |
 | 5 | **A3** projects | Blank section, White, anchor link `projects` | **Text** "Projects" (H2) cols 1–12, link "All projects →" cols 20–24. Then per project a row: **Line** (full width), **Text** number + title cols 1–10, **Text** her Role line + "PASSWORD PROTECTED" cols 12–17, **Image** `r4-row-rNN-3x2.jpg` cols 19–24, block sized exactly 3:2 so nothing is cropped (the export already holds the whole plan, the whole column, both phone screens, the whole journey map on the light ground or white). Title, image and link all go to the project's URL. (A whole row can't be one link in Fluid Engine; title and image are.) | Image, then title, then role. |
 | 6 | Contact | Blank section, theme Stone, anchor link `contact` | **Text** "CONTACT" (P3), **Text** "Let's create something people will remember." (H2) cols 1–14, **Text** links: Email · LinkedIn · Résumé (underlined; the résumé links to an uploaded PDF). | Stacked. |
 | — | Footer | Site footer | "Yasmin Bajwa © 2026" left, "Back to top ↑" right (link to `#`). | — |
@@ -133,8 +123,9 @@ Each project page in the Portfolio is built from ordinary sections.
 
 | # | Reference | Section | Blocks (desktop) | Notes |
 |---|---|---|---|---|
-| 0a | **A1** cover | Blank section, **content width Full**, height L (≈16:7), **background image** = `r3-cover-r01/r02-16x7.jpg` (footage / photograph) or `r4-cover-r03/r04-16x7.jpg` (screens / journey map, whole on the ground) | **Text** her title (H2, 72px) bottom-left, cols 1–12. | Jackson Home and Power & Energy: overlay **#111 at 38%**, title white. Rhode Island and Littelfuse (white documents): overlay **#FFF at 78%**, title ink. |
-| 0b | **A4** meta panel | Same section as 0a | **Shape** block (white rectangle, no stroke) cols 14–24, lower rows, overlapping the section's bottom edge; on it **Text** blocks: ROLE (her Role line), METHODS (her Methods line), SETTING, YEAR, with **Line** blocks between. | YEAR: "[YEAR — pending client]" in italic where pending. Mobile: panel below the cover. |
+| 0a | **A1** cover, **photo** (Jackson Home, Power & Energy) | Blank section, **content width Full**, height L (≈16:7), **background image** = `r3-cover-r01/r02-16x7.jpg`, overlay **#111 at 38%** | **Text** her title (H2, 72px, white) bottom-left, cols 1–12. | As built in round 3. Mobile: image, then the title below in ink. |
+| 0b | **A4** meta panel (photo covers) | Same section as 0a | **Shape** block (white rectangle, no stroke) cols 14–24, lower rows, overlapping the section's bottom edge; on it **Text** blocks: ROLE (her Role line), METHODS (her Methods line), SETTING, YEAR, with **Line** blocks between. | YEAR: "[YEAR — pending client]" in italic where pending. Mobile: panel below the cover. |
+| 0c | **A1** header, **document** (Rhode Island, Littelfuse) | Blank section, theme **White**, **no background image** | **Text** her title (H2, 72px, ink) cols 1–13, bottom-aligned; the meta table (ROLE, METHODS, SETTING, YEAR as **Text** + **Line** blocks) cols 15–24. After the chapter index (row 1), a **Full plate**: one **Image** block cols 1–24, captioned "FIG. 01 — …": Rhode Island `tiles/r5-ri-five-screens--nat-p48.jpg` (the five 401 Health screens), Littelfuse `tiles/r04-journey-full--nat-p48.jpg` (the journey map). The tiles already hold the `#F4F3F0` ground and the **48px** padding. | Title, meta, index, then the plate. |
 | 1 | **A1** chapter index | Blank section, White | One **Text** block, full width, between two **Line** blocks: "01 Project Overview · 02 The Challenge · …", each linked to `#ch-1`, `#ch-2`… | Each chapter section gets its **Anchor link** (`ch-1`…) in *Edit Section → Design*. |
 | 2 | **A2 + A3** chapter | One Blank section per chapter, White | **Text** "01" (P3) + chapter title (H3) cols 1–6. **Text** her copy cols 9–20: paragraphs, her sub-headings as Heading 4 with a **Line** block above, bullets as real (nested) lists. **Images** where her doc places them, cols 9–24 (or 1–24 for plates), caption "FIG. nn — …" below. | Mobile: title above text. |
 | 3 | **A4** stats strip | Inside Jackson Home "Research Methodology" | Three **Text** blocks cols 1–8 / 9–16 / 17–24 under a **Line**: "60%" (72–96px), "Strollers" (H4), her characteristic text; the column heads as P3 labels. | Stacked. |
@@ -199,7 +190,7 @@ The prototype's wrong-password state is `private-view.html#wrong` (pure CSS `:ta
 | Home | Hero, facts | Text, Image, Button, Line | — |
 | Home | Hairline | Section divider / Line | — |
 | Home | About bento | Text, 4 Image + 4 Text, Line | caption style (2–3) |
-| Home | Four disciplines (hover) | Shape, Image, Text | 17–23 (fallback: 3 lines) |
+| Home | Four disciplines | Shape, Image, Text (Ink theme) | 17–19 |
 | Home | Projects rows | Text, Line, Image | — |
 | Home | Contact / footer | Text, footer | — |
 | Projects | Grid | Image, Text | — |
@@ -229,3 +220,9 @@ The prototype's wrong-password state is `private-view.html#wrong` (pure CSS `:ta
 - [Save and reuse page sections – Squarespace Help Center](https://support.squarespace.com/hc/en-us/articles/46489432825613-Save-and-reuse-page-sections)
 - [Customizing a lock screen – Squarespace Help Center](https://support.squarespace.com/hc/en-us/articles/205815178-Customizing-a-lock-screen)
 - [Lock Screen 7.1 customisation (Squarespace Forum)](https://forum.squarespace.com/topic/205522-lock-screen-71-customisation/)
+
+---
+
+## 7. Wireframes for client approval (`wireframes/`)
+
+Greyscale HTML wireframes of all seven pages, generated from the same build (`tools/build_wireframes.py`), so structure and proportions match the design exactly. Every image and video is a grey box labelled "IMAGE — FIG. n" / "VIDEO — FIG. n" (or what it is, e.g. "IMAGE — PORTRAIT"). All her copy is in place and the hairlines are kept. There are no photos and no colour. Each file is **standalone**: CSS and the two web fonts are inline, with no external files, so the files can be downloaded and sent as they are. `wireframes/index-wireframes.html` links all seven.

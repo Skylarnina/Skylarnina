@@ -5,7 +5,9 @@ Every item must be on its page exactly once, word-for-word as rendered
 import json, re
 
 c = json.load(open("content/copy.json"))
-dom = json.load(open("content/dom.json"))
+import sys
+DOM = sys.argv[1] if len(sys.argv) > 1 else "content/dom.json"     # e.g. content/dom_wf.json to check the wireframes
+dom = json.load(open(DOM))
 caps = json.load(open("content/captions.json"))
 site = json.load(open("content/site.json"))
 N = lambda s: re.sub(r"\s+", " ", (s or "").replace(" ", " ")).strip()
@@ -184,5 +186,6 @@ import math
 pct = math.floor(1000 * passed / total) / 10
 out.insert(summary_at, f"**Result: {passed} / {total} items ✔ ({pct:g}%).**" + (" Every heading, paragraph, bullet, table row, quote, figure and production note is accounted for." if passed == total else " See ✘ rows."))
 out.insert(summary_at + 1, "")
-open("COPY-CHECK.md", "w").write("\n".join(out) + "\n")
+if DOM == "content/dom.json":
+    open("COPY-CHECK.md", "w").write("\n".join(out) + "\n")
 print(f"{passed}/{total}")

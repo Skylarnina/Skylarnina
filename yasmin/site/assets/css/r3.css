@@ -1,6 +1,7 @@
 /* =====================================================================
-   Yasmin Bajwa: prototype stylesheet (rounds 3-4).
-   White ground, near-black type, no accent colour, one type family.
+   Yasmin Bajwa: prototype stylesheet (rounds 3-5).
+   White ground, near-black type, no accent colour. Headings Instrument Sans,
+   body / captions / labels Inter Tight (round 5).
    Everything here stands in for Squarespace Site Styles (fonts, sizes,
    colours, buttons, spacing). The custom CSS the real site needs is only
    the short list in SQUARESPACE-BUILD-NOTES.md §2. No JavaScript.
@@ -12,7 +13,8 @@
   --ink:#111111;
   --muted:rgba(17,17,17,.62);   /* brief: 55%. 55% measures 4.4:1 on white; 62% passes AA (5.2:1) for 11-12px caps */
   --hair:rgba(17,17,17,.14);
-  --font:'Neue Haas Grotesk Display Pro','Neue Haas Grotesk Text Pro','Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --font:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --font-head:'Instrument Sans','Helvetica Neue',Arial,sans-serif;   /* weights 400/500; -0.01em above 48px, 0 below */
   --margin:clamp(20px,3.4vw,48px);
   --gutter:16px;
   --section:clamp(88px,9vw,144px);
@@ -31,6 +33,7 @@ a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 h1,h2,h3,h4,p,ul,ol,figure,blockquote,dl,dd{margin:0;padding:0}
 em{font-style:italic}
+h1,h2,h3,h4,.no,.num,.chindex li span,.row__t .label,ol.nl > li::before,.pn .t{font-family:var(--font-head)}
 strong,b{font-weight:500}
 
 .wrap{max-width:1600px;margin-inline:auto;padding-inline:var(--margin)}
@@ -103,8 +106,7 @@ strong,b{font-weight:500}
    HOMEPAGE
    ===================================================================== */
 .hero{padding-block:clamp(48px,6vw,96px) clamp(56px,6vw,96px);row-gap:40px;align-items:start}
-.hero__hi{grid-column:1/15;font-size:var(--fs-hero);line-height:.92;letter-spacing:-.035em;font-weight:400}
-.hero__hi em{letter-spacing:-.03em}
+.hero__hi{grid-column:1/15;font-size:var(--fs-hero);line-height:.92;letter-spacing:-.01em;font-weight:400}
 .hero__about{grid-column:1/13;display:grid;gap:28px;align-self:end}
 .hero__about p{font-size:19px;line-height:1.55;max-width:62ch}
 .hero__about .btn{justify-self:start}
@@ -134,42 +136,42 @@ strong,b{font-weight:500}
 .panel{position:relative;min-height:60vh;display:flex;flex-direction:column;justify-content:space-between;padding:20px var(--gutter) 24px;border-left:1px solid var(--hair);overflow:hidden;isolation:isolate}
 .panel:first-child{border-left:0}
 .panel .no{font-size:13px;color:var(--muted)}
-.panel h3{font-size:28px;line-height:1.1;letter-spacing:-.01em;font-weight:400;max-width:12ch}
-/* Round 4 hover reveal: the image layer fades in behind the name (300ms), the name turns white.
-   Panel 01 shows its image at rest. In Squarespace: 7 lines of custom CSS on block IDs (build notes §2). */
-.panel .m{position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s ease;filter:brightness(.55)}
+.panel h3{font-size:28px;line-height:1.1;font-weight:400;max-width:12ch}
+/* Round 5: every image always visible under a 45% black overlay (brightness .55 = a 45% black layer);
+   hover only lightens it to 30% over 300ms. Nothing appears or disappears. Squarespace: build notes §2. */
+.panel{color:#fff}
+.panel .m{position:absolute;inset:0;z-index:-1;background:var(--alt);filter:brightness(.55);transition:filter .3s ease}
 .panel .m img{width:100%;height:100%;object-fit:contain;object-position:50% 0}
 .panel .m--photo img{object-fit:cover;object-position:50% 50%}
-.panel h3,.panel .no{transition:color .3s ease}
-.panel:hover .m,.panel--rest .m{opacity:1}
-.panel:hover h3,.panel:hover .no,.panel--rest h3,.panel--rest .no{color:#fff}
+.panel .no{color:rgba(255,255,255,.85)}
+.panel:hover .m{filter:brightness(.7)}
 
 .projects-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px}
-.projects-head h2{font-size:var(--fs-title);line-height:1;letter-spacing:-.03em;font-weight:400}
+.projects-head h2{font-size:var(--fs-title);line-height:1;letter-spacing:-.01em;font-weight:400}
 .rows{border-top:1px solid var(--ink)}
 .row{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gutter);padding:22px 0;border-bottom:1px solid var(--hair);align-items:start;transition:background-color .3s}
 .row:hover{background:var(--alt)}
 .row__t{grid-column:1/11;display:grid;gap:10px}
-.row__t h3{font-size:clamp(22px,1.9vw,28px);line-height:1.15;font-weight:400;letter-spacing:-.01em}
+.row__t h3{font-size:clamp(22px,1.9vw,28px);line-height:1.15;font-weight:400}
 .row__role{grid-column:12/18;font-size:15px;line-height:1.45;display:grid;gap:6px;padding-top:6px}
 .row__img{grid-column:19/25}
 .row__img .m{aspect-ratio:3/2}
 .m--fit img{object-fit:contain}
 
 .contact{display:grid;gap:40px}
-.contact h2{font-size:var(--fs-title);line-height:1.02;letter-spacing:-.03em;font-weight:400;max-width:16ch;text-wrap:balance}
+.contact h2{font-size:var(--fs-title);line-height:1.02;letter-spacing:-.01em;font-weight:400;max-width:16ch;text-wrap:balance}
 .contact__links{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:19px}
 .foot .wrap{display:flex;justify-content:space-between;gap:16px;padding-block:28px;border-top:1px solid var(--hair);font-size:13px;color:var(--muted)}
 
 /* =====================================================================
    PROJECTS PAGE (A13)
    ===================================================================== */
-.p-title{font-size:var(--fs-title);line-height:1;letter-spacing:-.03em;font-weight:400;padding-block:clamp(48px,6vw,96px) 40px}
+.p-title{font-size:var(--fs-title);line-height:1;letter-spacing:-.01em;font-weight:400;padding-block:clamp(48px,6vw,96px) 40px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:56px var(--gutter)}
 .card{display:grid;gap:14px}
 .card .m{aspect-ratio:3/2}
 .card:hover h2{text-decoration:underline;text-underline-offset:.22em}
-.card h2{font-size:22px;line-height:1.2;font-weight:400;letter-spacing:-.005em;max-width:32ch}
+.card h2{font-size:22px;line-height:1.2;font-weight:400;max-width:32ch}
 .card p{font-size:15px}
 
 /* =====================================================================
@@ -178,11 +180,13 @@ strong,b{font-weight:500}
 .cover{position:relative;overflow:hidden}
 .cover .m{aspect-ratio:16/7;background:#222}
 .cover--dark .m::after{content:"";position:absolute;inset:0;background:rgba(17,17,17,.38)}
-.cover--light .m img{object-fit:contain}
-.cover--light .m::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.78)}
 .cover .m{position:relative}
-.cover__title{position:absolute;left:var(--margin);bottom:clamp(40px,5vw,72px);max-width:calc(50% - var(--margin));font-size:var(--fs-title);line-height:1.02;letter-spacing:-.03em;font-weight:400;color:#fff}
-.cover--light .cover__title{color:var(--ink)}
+.cover__title{position:absolute;left:var(--margin);bottom:clamp(40px,5vw,72px);max-width:calc(50% - var(--margin));font-size:var(--fs-title);line-height:1.02;letter-spacing:-.01em;font-weight:400;color:#fff}
+/* Round 5, document covers (Rhode Island, Littelfuse): white header, title left, meta right, no image behind */
+.dochead{padding-block:clamp(56px,7vw,112px) 0;align-items:end}
+.dochead__title{grid-column:1/14;font-size:var(--fs-title);line-height:1.02;letter-spacing:-.01em;font-weight:400;text-wrap:balance}
+.dochead .meta__panel{grid-column:15/25;padding:0;background:none}
+.coverplate .mod.mt{margin-top:clamp(40px,4vw,64px)}
 .meta{margin-top:calc(-1 * clamp(120px,12vw,190px));position:relative;z-index:2}
 .meta__panel{grid-column:14/25;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--gutter);background:#fff;padding:22px 24px 8px}
 .meta__panel div{padding:10px 0 14px;border-top:1px solid var(--hair);display:grid;gap:4px}
@@ -200,14 +204,14 @@ strong,b{font-weight:500}
 .chapter .g24{align-items:start}
 .ch-head{grid-column:1/7;grid-row:1/span 80;display:grid;gap:10px;align-self:start;padding-top:4px}
 .ch-head .no{font-size:14px;color:var(--muted)}
-.ch-head h2{font-size:var(--fs-chapter);line-height:1.08;letter-spacing:-.02em;font-weight:400;text-wrap:balance}
+.ch-head h2{font-size:var(--fs-chapter);line-height:1.08;font-weight:400;text-wrap:balance}
 .b{grid-column:9/21}
 .b + .b{margin-top:22px}
 .b.w{grid-column:9/25}
 .b.full{grid-column:1/25}
 .b.mt{margin-top:56px}
 p.b{max-width:62ch}
-h3.b,h4.b{font-size:var(--fs-sub);line-height:1.3;font-weight:400;letter-spacing:-.005em;margin-top:44px;padding-top:14px;border-top:1px solid var(--hair)}
+h3.b,h4.b{font-size:var(--fs-sub);line-height:1.3;font-weight:400;margin-top:44px;padding-top:14px;border-top:1px solid var(--hair)}
 h4.b.run{font-weight:500}
 .b.hmw{font-size:clamp(22px,2vw,28px);line-height:1.3;letter-spacing:-.01em;font-weight:400;margin-top:36px;max-width:36ch}
 .b.hmw-label{font-weight:500}
@@ -224,7 +228,7 @@ blockquote.b b{font-style:normal}
 .stats > div{padding:18px var(--gutter) 22px 0;border-right:1px solid var(--hair);display:grid;gap:10px;align-content:start}
 .stats > div + div{padding-left:var(--gutter)}
 .stats > div:last-child{border-right:0}
-.stats .num{font-size:clamp(56px,6vw,96px);line-height:.9;letter-spacing:-.04em}
+.stats .num{font-size:clamp(56px,6vw,96px);line-height:.9;letter-spacing:-.01em}
 .stats .name{font-size:var(--fs-sub)}
 .stats .char{font-size:15px;line-height:1.45;max-width:32ch}
 .stats .heads{grid-column:1/-1;display:flex;gap:24px;padding:0 0 12px}
@@ -276,7 +280,7 @@ ol.nl.plain > li > *{grid-column:1}
 .lock__bg img{width:100%;height:100%;object-fit:contain;filter:grayscale(1)}
 .lock__top{padding:24px var(--margin);font-size:15px}
 .lock__box{align-self:center;justify-self:center;width:min(100% - 2*var(--margin),560px);display:grid;gap:22px;text-align:center;justify-items:center}
-.lock__box h1{font-size:clamp(34px,3.4vw,48px);line-height:1.08;letter-spacing:-.025em;font-weight:400}
+.lock__box h1{font-size:clamp(34px,3.4vw,48px);line-height:1.08;font-weight:400}
 .lock__box p{font-size:15px}
 .lock form{width:100%;display:grid;grid-template-columns:1fr auto;gap:0 12px;align-items:end;margin-top:8px}
 .lock label{grid-column:1/-1;text-align:left;margin-bottom:6px}
@@ -321,13 +325,14 @@ ol.nl.plain > li > *{grid-column:1}
   .panel:nth-child(3){border-left:0}
   .panel:nth-child(n+3){border-top:1px solid var(--hair)}
   .panel h3{font-size:24px}
-  .panel .m{opacity:1;filter:brightness(.6)}
-  .panel h3,.panel .no{color:#fff}
   .row{row-gap:14px}
   .row__img{order:-1}
   .grid2{grid-template-columns:1fr;gap:40px}
   .cover .m::after{content:none}
-  .cover__title{position:static;max-width:none;font-size:36px;color:var(--ink);padding:28px var(--margin) 0}
+  .cover__title{position:static;max-width:none;font-size:36px;letter-spacing:0;color:var(--ink);padding:28px var(--margin) 0}
+  .dochead__title{font-size:36px;letter-spacing:0}
+  .dochead{row-gap:28px}
+  .p-title,.projects-head h2,.contact h2{letter-spacing:0}
   .bar--over{position:static;color:var(--ink)}
   .bar--over .wrap{border-color:var(--hair)}
   .meta{margin-top:0}
