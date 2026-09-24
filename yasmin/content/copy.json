@@ -49,6 +49,15 @@
    "text": "Digital Marketing"
   }
  ],
+ "edits": [
+  {
+   "room": "room02",
+   "id": "P-050",
+   "src": "p21",
+   "removed": "Below are the CMS channels within App Space.",
+   "reason": "Duplicate of the line ending the CMS chapter; no CMS image follows it here. Removed on instruction (Round 3, Q12)."
+  }
+ ],
  "room01": [
   {
    "type": "title",
@@ -1045,8 +1054,9 @@
   },
   {
    "type": "p",
-   "text": "My role during this phase was to coordinate and manage the various teams involved in fabrication and installation, ensuring that the physical build, digital components, graphics, and technical requirements came together successfully and on schedule. Below are the CMS channels within App Space.",
-   "src": "p21"
+   "text": "My role during this phase was to coordinate and manage the various teams involved in fabrication and installation, ensuring that the physical build, digital components, graphics, and technical requirements came together successfully and on schedule.",
+   "src": "p21",
+   "removed": "Below are the CMS channels within App Space."
   },
   {
    "type": "note",

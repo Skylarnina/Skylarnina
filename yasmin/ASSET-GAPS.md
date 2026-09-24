@@ -92,3 +92,14 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 - **R2-1:** a square or 4:5 photo for each of HISTORY and ART, if she'd like all three P9 circles to hold photos (optional; the design works with one).
 - **R2-2:** the **simulation video** has the player's control bar burned in; it's cropped off in `site/assets/video/r01-simulation.mp4`. A clean export would allow the full frame.
 - **R2-3:** confirm the **"~8 visitors at a time"** (docent control), **"16.5 min"** (maximum entrance wait in the busiest scenario) and **"≈32 max / 30 comfortable"** figures shown on the route. All come from her charts and doc, but she should sign off on how they are phrased.
+
+---
+
+## Round 3 update
+
+| # | Gap | Where it shows | Status |
+|---|---|---|---|
+| **R3-1** | **Littelfuse wireframes** (same as B1) | Littelfuse case study, "The Approach", exactly where her note says "INSERT WIREFRAMES FROM PDF HERE" (L-041). Labelled placeholder: *"Littelfuse wireframes — pending export from Adobe XD"*. | **Open.** Needs PNG or PDF exports from the ~60 XD links in `source/Littelfuse_Wireframes_XD-links.docx`. At minimum: Home + mega menu, the L0–L7 product flow, Check Stock, Where to Buy, one mobile screen. |
+| R3-2 | Project **years** for Power & Energy, Rhode Island, Littelfuse | Case-study header meta panel: "[YEAR — pending client]" | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
+| R3-3 | **Based in** (city) | Homepage facts column: "[pending client]" | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
+| R3-4 | "Studers" typo inside the p3 chart image (`doc-01`) | Jackson Home, Research Methodology | Needs a re-exported chart if she approves the fix (COPY-NOTES #12). |

@@ -11,7 +11,7 @@ The checklist for Round 3. Every heading, paragraph, bullet, table row, quote an
 - bullet glyphs (●), invisible zero-width spaces and trailing spaces are removed;
 - double spaces inside a line become one (e.g. "team I  evaluated"). A browser would collapse them anyway.
 
-Spelling, punctuation and capitalisation are exactly hers, including the likely slips listed under **Questions**. Nothing is corrected unless she says so.
+Spelling, punctuation and capitalisation are exactly hers, including the likely slips listed in `COPY-NOTES-FOR-CLIENT.md` for her approval. The one exception is the removed duplicate line (P-050), noted there and below.
 
 **Key to types:** `TITLE` project title · `META` Role / Methods line · `H2` chapter heading (these build the chapter index) · `H3` sub-heading · `H4` bold run-in label · `P` paragraph · `LI` bullet (`LI²`, `LI³` = nested levels) · `HMW` her bold "How might we" sentence · `QUOTE` UX-copy excerpt · `TABLE` table · `FIG` figure in her doc · `NOTE` her production note (not shown as text; it becomes the video, drawing or placeholder it asks for).
 
@@ -28,13 +28,13 @@ Spelling, punctuation and capitalisation are exactly hers, including the likely 
 ## About: `Instructions_About_Me.docx`
 
 - **A-01** `BRIEF_H`: Portfolio Website Direction  
-  → Brief to the designer, **not site copy** (Q1)
+  → Brief to us. **Not printed** (confirmed, Q1)
 - **A-02** `BRIEF`: I want my portfolio to position me at the intersection of UX Design, UX Research, and Museum/Digital Experience Design. The overall site should feel modern, polished, and design-forward while still reflecting my background creating digital experiences within the museum world. I don’t want it to read as a traditional museum portfolio or a generic product-design portfolio—the museum/exhibition experience should be the element that makes my UX background distinctive.  
-  → Brief to the designer, **not site copy** (Q1)
+  → Brief to us. **Not printed** (confirmed, Q1)
 - **A-03** `BRIEF`: The landing page should feature a strong photo of me, a short introduction to who I am and what I do, and a clear CTA to View Projects. I’m open to incorporating the About Me content directly into the landing page or having a separate About page depending on what creates the cleanest experience. The developer can recommend the best structure.  
-  → Brief to the designer, **not site copy** (Q1)
+  → Brief to us. **Not printed** (confirmed, Q1)
 - **A-04** `BRIEF`: For the visual direction, I’d like the site to feel editorial, minimal, sophisticated, and highly visual, with thoughtful motion and interaction where appropriate. Case studies should be easy to scan but immersive enough to showcase research, workshops, user journeys, wireframes, prototypes, fabrication, and final experiences. I have a mixture of static imagery, diagrams, GIFs/video, and project documentation that should feel integrated rather than simply placed on the page. Please also include password protection.  
-  → Brief to the designer, **not site copy** (Q1)
+  → Brief to us. **Not printed** (confirmed, Q1)
 - **A-05** `H2`: About Me  
   → Homepage: section label for the About / statement area
 - **A-06** `P`: Hi! I’m Yasmin, a Digital Exhibit Designer at The Henry Ford Museum with a multidisciplinary background in UX design, user research, and digital marketing. I’m passionate about bringing stories to life through digital experiences—and deeply inspired by history, fashion, and art.  
@@ -42,7 +42,7 @@ Spelling, punctuation and capitalisation are exactly hers, including the likely 
 - **A-07** `P`: By blending design, research, and exhibit development, I bring a fresh, curious perspective to every team. To me, every project is an opportunity to experiment, innovate, and create something people will remember.  
   → Homepage §2 **Statement** (A9), centred 40px
 - **A-08** `INSTRUCTION`: Highlight these 4 skills in this order::  
-  → Instruction to the designer, **not site copy**; followed exactly (skills shown in this order)
+  → Instruction to us. **Not printed** (confirmed, Q1); followed: skills shown in this order
 - **A-09** `SKILL`: Interactive Exhibit Design  
   → Homepage §3 **Four disciplines** (A10) panel label
 - **A-10** `SKILL`: UX ( User Experience) Design  
@@ -52,7 +52,7 @@ Spelling, punctuation and capitalisation are exactly hers, including the likely 
 - **A-12** `SKILL`: Digital Marketing  
   → Homepage §3 **Four disciplines** (A10) panel label
 
-Skill **A-10** reads `UX ( User Experience) Design` in her file, with a space after the bracket. See Q2.
+Skill **A-10** is printed exactly as `UX ( User Experience) Design`, space included (default D1). The suggested fix is in COPY-NOTES-FOR-CLIENT.md.
 
 ## Room 01 — The Henry Ford Jackson Home
 
@@ -67,6 +67,10 @@ Page: `site/room-01-jackson-home.html`
   → header meta panel (ROLE)
 - **J-003** `META` p1: **Methods**: Behavioral Observation • Space Syntax Analysis • Behavioral Path Clustering • Visitor Segmentation • Discrete Event Simulation • Predictive Modeling  
   → header meta panel (METHODS)
+- *(supplied, not her copy)* **Setting**: The Henry Ford, Greenfield Village  
+  → header meta panel (SETTING, Q9)
+- *(supplied, not her copy)* **Year**: 2026  
+  → header meta panel (YEAR, Q9) (Summer 2026 opening, from her Project Overview)
 
 ### Chapter 1: Project Overview
 *Layout: A2 chapter: number + title left (6 cols), text right (12 cols).*
@@ -106,7 +110,7 @@ Page: `site/room-01-jackson-home.html`
 - **J-028** `LI` p2: What traffic management strategies should staff use during peak attendance?
 
 ### Chapter 4: Research Methodology
-*Layout: A3 rows for the three methods. The visitor-type table becomes an **A4 stats strip** (60% · 10% · 30% with her characteristic text beneath each; see Q5).*
+*Layout: A3 rows for the three methods. The visitor-type table becomes an **A4 stats strip** (60% · 10% · 30% with her characteristic text beneath each; default D3).*
 
 - **J-029** `H2` p2: Research Methodology
 - **J-030** `P` p2: Because no baseline visitor data existed for the Jackson Home, I combined several UX research methodologies to build a predictive behavioral model.
@@ -252,6 +256,10 @@ Page: `site/room-02-power-energy.html`
   → header meta panel (ROLE)
 - **P-003** `META` p13: **Methods**: Information Architecture • User Flows • Wireframing • Content Strategy  
   → header meta panel (METHODS)
+- *(supplied, not her copy)* **Setting**: The Henry Ford Museum, Power & Energy exhibit  
+  → header meta panel (SETTING, Q9)
+- *(supplied, not her copy)* **Year**: [YEAR — pending client]  
+  → header meta panel (YEAR, Q9) — shown as a visible placeholder
 
 ### Chapter 1: Project Overview
 *Layout: A2 / A3 chapter: number + title left, her text right.*
@@ -273,7 +281,7 @@ Page: `site/room-02-power-energy.html`
 - **P-014** `HMW` p14: How might we introduce students to careers in power and energy while balancing visitor, museum, and sponsor needs?
 
 ### Chapter 3: The Approach/ UX Design
-*Layout: A2 chapter. The five 'experience included' bullets sit beside an **A6 board of the five column-art panels** (see Q6).*
+*Layout: A2 chapter. The five 'experience included' bullets sit beside an **A6 board of the five column-art panels** (Q6).*
 
 - **P-015** `H2` p14: The Approach/ UX Design
 - **P-016** `P` p14: To address visitor, educational, wayfinding, and sponsor needs, I developed a multi-sided experience that combined passive storytelling with touch-based exploration. Each side of the column served a distinct purpose while contributing to a cohesive visitor journey.
@@ -283,6 +291,7 @@ Page: `site/room-02-power-energy.html`
 - **P-020** `LI` p15: Interactive exploration: A touch-based map visualizing power transmission infrastructure across Michigan and the United States.
 - **P-021** `LI` p15: Career discovery: ITC employee interviews introducing students to careers within the power and energy industry.
 - **P-022** `LI` p15: Artifact interpretation: A backlit graphic highlighting key artifacts and providing additional historical context based on what was inside the exhibit.
+- ➕ **ADDED MEDIA** (Q6): board of the **column-art panels**, one per side of the column (wayfinding, Innovation Nation, interactive map, careers, artifact highlights), right after the list of the five sides. Her files `r02_art_PandE_Column_*.jpg`; the unlicensed Shutterstock careers comp stays out (ASSET-GAPS C2). No words added except captions.
 - **P-023** `P` p15: I began to take the existing column we have in the Agriculture column and talk through how the Power & Energy column would look and feel. In addition I began to sketch and create lo- fi wireframes to share with key stakeholders for feedback( See below).
 - **P-024** `FIG` `doc-11` (p15): content themes and experience-flow board. Full-res: `r02_board_content-themes-experience-flow.png`.
 - **P-025** `FIG` `doc-12` (p16): whiteboard lo-fi sketches. Full-res: `r02_sketch_whiteboard-lofi.png`.
@@ -328,7 +337,8 @@ Page: `site/room-02-power-energy.html`
 - **P-047** `H2` p21: Installation & Fabrication
 - **P-048** `P` p21: For the final installation, we partnered with Sleet Custom Cabinets, a fabricator familiar with the museum environment who had previously built the interactive columns and enclosures within the Agriculture exhibit. Building on this existing design helped maintain consistency across the museum while providing a proven framework for the new Power & Energy columns.
 - **P-049** `P` p21: I worked closely with the fabricator to provide precise dimensions, specifications, and printing requirements for the backlit graphics. The new columns were designed to match the dimensions and construction of the existing Agriculture columns.
-- **P-050** `P` p21: My role during this phase was to coordinate and manage the various teams involved in fabrication and installation, ensuring that the physical build, digital components, graphics, and technical requirements came together successfully and on schedule. Below are the CMS channels within App Space.
+- **P-050** `P` p21: My role during this phase was to coordinate and manage the various teams involved in fabrication and installation, ensuring that the physical build, digital components, graphics, and technical requirements came together successfully and on schedule.  
+  *(removed on instruction, Q12: the duplicated sentence "Below are the CMS channels within App Space." that ended this paragraph in her doc; logged in COPY-NOTES-FOR-CLIENT.md)*
 - **P-051** `NOTE` p21: "USE PDF VERSION HERE OF DRAWINGS"  
   → Three full-width plates rendered from `PandE_Shop-Drawing_Column-Surrounds_AV05.pdf`, replacing `doc-16/17/18`.
 - **P-052** `FIG` `doc-16` (p21): shop drawing sheet 1. **Replaced by the vector PDF** her note asks for: `PandE_Shop-Drawing_Column-Surrounds_AV05.pdf` p1, full-width plate.
@@ -350,7 +360,7 @@ Page: `site/room-02-power-energy.html`
 ### Chapter 9: Ongoing Evaluation
 *Layout: A2 / A3 chapter: number + title left, her text right.*
 
-- **P-061** `H2` p23: Ongoing Evaluation (her source sets this at 12–13pt; treated as a chapter like her other projects; Q4)
+- **P-061** `H2` p23: Ongoing Evaluation (her source sets this at 12–13pt; treated as a chapter like her other projects; default D2)
 - **P-062** `P` p23: Because the experience was recently launched, long-term visitor impact has not yet been measured. The next phase of evaluation will focus on understanding how visitors engage with the column in the museum environment.
 - **P-063** `P` p23: Planned UX research includes museum volunteer focus groups, testing with The Henry Ford Academy students, and in-gallery visitor observation. Findings will be used to evaluate discoverability, usability, engagement, and opportunities for future content and interaction improvements.
 
@@ -375,6 +385,10 @@ Page: `site/room-03-rhode-island.html`
   → header meta panel (ROLE)
 - **R-003** `META` p24: **Methods**: Qualitative Research • Quantitative Analysis • Feedback Synthesis • Competitive/Heuristic Review • Content Strategy • Wireframing  
   → header meta panel (METHODS)
+- *(supplied, not her copy)* **Setting**: State of Rhode Island Department of Health  
+  → header meta panel (SETTING, Q9)
+- *(supplied, not her copy)* **Year**: [YEAR — pending client]  
+  → header meta panel (YEAR, Q9) — shown as a visible placeholder
 
 ### Chapter 1: Project Overview
 *Layout: A2 / A3 chapter: number + title left, her text right.*
@@ -425,25 +439,25 @@ Page: `site/room-03-rhode-island.html`
 - **R-034** `LI` p29: Symptom Diary: An optional tool for anonymously reporting post-vaccination symptoms, providing the Rhode Island Department of Health with data to support public health monitoring.
 - **R-035** `LI` p29: Testing Location Map: An interactive map helping users quickly locate nearby COVID-19 testing services.
 - **R-036** `NOTE` p29: "INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE"  
-  → Video block → `r03_video_wireframes.mp4` (desktop). Mobile screens from `Rhode_Island_DOH_Wireframes.pdf` can sit beside it; see Q7.
-- **R-037** `FIG` `doc-21` (p29): annotated 'Vaccine Details' board (two phone screens with callouts). Full-res: `r03_ui_vaccine-details-annotated.png`. See question Q7 (device frames).
+  → Video block → `r03_video_wireframes.mp4` (desktop), with the **frameless mobile screens** from `Rhode_Island_DOH_Wireframes.pdf` beside it (Q7). Her own figure `doc-21` follows unchanged.
+- **R-037** `FIG` `doc-21` (p29): annotated 'Vaccine Details' board (two phone screens with callouts). Full-res: `r03_ui_vaccine-details-annotated.png`. **Kept exactly as she made it** (Q7).
 
 ### Chapter 5: Results & Impact
 *Layout: **A7** layout.*
 
-- **R-038** `H2` p29: Results & Impact (her source sets this at 12–13pt; treated as a chapter like her other projects; Q4)
+- **R-038** `H2` p29: Results & Impact (her source sets this at 12–13pt; treated as a chapter like her other projects; default D2)
 - **R-039** `P` p29: The redesigned experience streamlined how Rhode Island residents accessed and managed their vaccination information by providing a digital alternative to the paper vaccination cards used during the initial COVID-19 vaccine rollout. The multilingual experience also expanded accessibility, helping more residents navigate and manage their health information with confidence.
 
 ### Chapter 6: Ongoing Evaluation
 *Layout: A2 / A3 chapter: number + title left, her text right.*
 
-- **R-040** `H2` p30: Ongoing Evaluation (her source sets this at 12–13pt; treated as a chapter like her other projects; Q4)
+- **R-040** `H2` p30: Ongoing Evaluation (her source sets this at 12–13pt; treated as a chapter like her other projects; default D2)
 - **R-041** `P` p30: Long-term adoption and engagement metrics were outside the scope of my involvement. However, the design recommendations prioritized reducing friction, strengthening user trust, and simplifying access to critical vaccination information. The experience was also designed with flexibility in mind, allowing the platform to evolve alongside future vaccination programs and changing public health needs.
 
 ### Chapter 7: Reflection
 *Layout: Centred, 28px italic.*
 
-- **R-042** `H2` p30: Reflection (her source sets this at 12–13pt; treated as a chapter like her other projects; Q4)
+- **R-042** `H2` p30: Reflection (her source sets this at 12–13pt; treated as a chapter like her other projects; default D2)
 - **R-043** `P` p30: This project strengthened my understanding of designing digital experiences where privacy, security, accessibility, and trust are fundamental to the user experience. Working with sensitive health information reinforced the importance of reducing unnecessary friction while clearly communicating how personal data is accessed and used—principles I continue to apply in my work today.
 - **R-044** `P` p30: The project was also particularly meaningful because of the context in which it was developed. Contributing to a digital health experience during the COVID-19 pandemic gave me a deeper appreciation for the role UX design can play in helping communities navigate essential services during periods of uncertainty.
 
@@ -460,6 +474,10 @@ Page: `site/room-04-littelfuse.html`
   → header meta panel (ROLE)
 - **L-003** `META` p30: **Methods**: Stakeholder Workshop | Data Analysis | Information Architecture | Wireframing | Heuristic Evaluation | Archetypes |Competitive Analysis  
   → header meta panel (METHODS)
+- *(supplied, not her copy)* **Setting**: Littelfuse  
+  → header meta panel (SETTING, Q9)
+- *(supplied, not her copy)* **Year**: [YEAR — pending client]  
+  → header meta panel (YEAR, Q9) — shown as a visible placeholder
 
 ### Chapter 1: Project Overview
 *Layout: A2 / A3 chapter: number + title left, her text right.*
@@ -495,6 +513,7 @@ Page: `site/room-04-littelfuse.html`
 - **L-024** `P` p32: Through stakeholder interviews, existing user research, and analysis of customer roles and behaviors, we grouped Littelfuse users into three primary archetypes: Engineering & Technical, Sales, and Procurement. These archetypes reflect the different ways users influence product selection—from engineers evaluating specifications and making design recommendations, to sales partners supporting customers, and procurement professionals managing purchasing and supply. In combination with quantitative survey data with customer interviews, stakeholder research we identify recurring behaviors, pain points and decision drivers that inform the experience strategy. The survey data found that 66% of respondents identified as being in an engineering role, compared with 12% Sales and 5% Procurement.This insight helped us prioritize the experience around engineers’ core tasks—finding the right product quickly, comparing options, accessing technical documentation, and confidently making component decisions—while still supporting the needs of Sales and Procurement users. The analysis of the survey data is what guided our work in completing detailed personas rather than working of static archetypes.
 - **L-025** `FIG` `doc-22` (p33): 'Designing for the people who drive component decisions' stat board. Only copy (975px). Plate.
 - **L-026** `FIG` `doc-23` (p33): user archetypes board. Full-res: `r04_doc_user-archetypes.png`. Full plate.
+- ➕ **ADDED MEDIA** (Q6): **engineering personas video** `r04_video_engineering-personas.mp4`, directly under the archetype board, inside 'Defined the primary user: a design engineer'.
 - **L-027** `H4` p33: Mapped the product-discovery journey
 - **L-028** `P` p33: The user journey was developed during a collaborative workshop at the client’s headquarters, bringing together key stakeholders to map how engineers move from identifying a product need to researching, comparing, testing, and selecting a solution. By documenting both the high-level journey and detailed decision points, we identified key behaviors, information needs, and opportunities to streamline the digital product experience.
 - **L-029** `FIG` `doc-24` (p34): journey map. Full-res: `r04_doc_journey-map.png`. Full plate.
@@ -510,18 +529,18 @@ Page: `site/room-04-littelfuse.html`
 - **L-039** `P` p35: Insights from the audit were translated into design principles focused on clarity, consistency, accessibility, and task completion. Existing wireframes were refined to create a more cohesive experience across desktop and mobile, including clearer navigation and labeling, improved menu hierarchy, accessible interaction states, standardized components, and more intuitive search and filtering patterns. These principles were applied consistently across the global header, mega menu, homepage, product pages, and supporting content modules.
 - **L-040** `P` p35: The work also addressed gaps where the existing wireframes did not fully support critical user tasks. New and expanded flows were designed for global search, product discovery, Check Stock, Where to Buy, and privacy/GDPR interactions, while missing states, error handling, filters, links, and responsive behaviors were defined to make the experience development-ready. Below are the completed wire frames.
 - **L-041** `NOTE` p35: "INSERT WIREFRAMES FROM PDF HERE"  
-  → **Missing.** Only Adobe XD links exist (`Littelfuse_Wireframes_XD-links.docx`). A labelled placeholder until exports arrive (ASSET-GAPS B1). See Q8.
+  → **Labelled placeholder** (Q8): "Littelfuse wireframes — pending export from Adobe XD". Logged in ASSET-GAPS.md (B1, Round 3).
 
 ### Chapter 4: Results & Impact
 *Layout: **A7** layout.*
 
-- **L-042** `H2` p35: Results & Impact (her source sets this at 12–13pt; treated as a chapter like her other projects; Q4)
+- **L-042** `H2` p35: Results & Impact (her source sets this at 12–13pt; treated as a chapter like her other projects; default D2)
 - **L-043** `P` p35: The redesigned experience streamlined product discovery and evaluation across desktop and mobile, creating clearer pathways through search, navigation, and key purchasing tasks. Following launch, mobile logins increased by 6%, indicating stronger engagement with the improved mobile experience.
 
 ### Chapter 5: Reflection
 *Layout: Centred, 28px italic.*
 
-- **L-044** `H2` p35: Reflection (her source sets this at 12–13pt; treated as a chapter like her other projects; Q4)
+- **L-044** `H2` p35: Reflection (her source sets this at 12–13pt; treated as a chapter like her other projects; default D2)
 - **L-045** `P` p35: This project introduced me to a highly specialized industry with a unique set of users and technical workflows. To design effectively, I invested additional time in secondary research—studying the competitive landscape, learning industry fundamentals, and understanding how products move from the warehouse into an online product database. That deeper investigation surfaced questions we hadn’t initially considered and ultimately led to additional discovery sessions with stakeholders. In hindsight, that extra effort became a strength of the project: stakeholders appreciated the attention to detail, and it reinforced for me that good UX sometimes means slowing down to fully understand a complex ecosystem before designing for it.
 
 ## Words on the pages that are not in her documents
@@ -534,30 +553,34 @@ Rule 3 says no additions. These come from the Round 3 brief itself or are site n
 | Hero | Hi, I'm *Yasmin.* | Brief (her doc says "Hi! I'm Yasmin,"; this is the greeting the brief asks for) |
 | Hero | View Projects → | Brief |
 | Hero caption | DIGITAL EXHIBIT DESIGNER — THE HENRY FORD | Brief (her words, re-cased) |
-| Hero facts | ROLE / BASED IN / FOCUS / CURRENTLY + values | Brief. **Values not in her copy** (Q9) |
-| Photo strip | tiny caption above each photo | Brief (A8). Caption text needs approval (Q10) |
+| Hero facts | ROLE: Digital Exhibit Designer, The Henry Ford Museum · BASED IN: [pending client] · FOCUS: Interactive Exhibit Design · UX Design · UX Research · Digital Marketing · CURRENTLY: Bringing stories to life through digital experiences | Supplied by you (Q9). BASED IN stays a visible placeholder |
+| Photo strip | tiny caption above each photo | Written by us; listed under Added captions (Q10) |
 | Projects | Projects · Password protected · her project titles · her Role lines | Brief + her copy |
-| Contact | Let's make something *people remember.* | Brief. Her line is "create something people will remember" (Q3) |
+| Contact heading | Let’s create something people will remember. | Your wording from her sentence (Q3). Her statement paragraph A-07 stays whole |
 | Contact | email · LinkedIn · résumé | Pending her details |
-| Every case study | Chapter numbers, 'FIG. n — caption', ROLE / METHODS labels, '← Previous project · Next project → · All projects' | Brief. Captions need approval (Q10) |
-| Case study meta | SETTING / YEAR | Brief. **Not in her copy** (Q9) |
+| Every case study | Chapter numbers, ROLE / METHODS / SETTING / YEAR labels, '← Previous project · Next project → · All projects' | Brief |
+| Every figure | FIG. n — short factual caption | Written by us; listed under **Added captions** in COPY-CHECK.md for her approval (Q10) |
+| Case study meta | SETTING and YEAR values | Supplied by you (Q9); three YEARs are visible placeholders |
 | Lock screen | Projects are shared *by invitation.* · Enter the password to continue. · No password? Email Yasmin → | Brief |
 
 **Dropped as the brief instructs:** §5 "About by numbers". Her copy has no numbers about herself: '4 projects' and '3 institutions' are counts I'd be making up, and the brief says drop the section if fewer than three real numbers exist.
 
-## Questions before building
+## Decisions (Round 3 answers)
 
-- **Q1.** The four **'Portfolio Website Direction'** paragraphs (A-01…A-04) and **'Highlight these 4 skills in this order::'** (A-08) are instructions to the designer ("The developer can recommend the best structure", "Please also include password protection"). I plan to follow them, **not print them** on the site. Confirm.
-- **Q2.** **'UX ( User Experience) Design'**: verbatim has a space inside the bracket. Print exactly, or may it read **'UX (User Experience) Design'**?
-- **Q3.** **Contact headline:** the brief's "Let's make something people remember." isn't a sentence in her docs (hers: "…create something people will remember."). Use the brief's line, or her sentence verbatim?
-- **Q4.** **Heading levels:** in Rhode Island and Littelfuse she set Results & Impact / Ongoing Evaluation / Reflection at 12–13pt, and in Power & Energy 'Ongoing Evaluation' at 12pt, while the same headings are chapters elsewhere. I'm treating them all as chapters so the chapter index is consistent. Words unchanged.
-- **Q5.** **Jackson Home visitor-type table** (J-table): the A4 stats strip shows 60% · 10% · 30% with her characteristic text beneath. It keeps her row order (Strollers, Studiers, Streakers) and her column headings as small labels. OK?
-- **Q6.** **Additions of images** the brief asks for that her doc doesn't place: the **Power & Energy column-art panels** (A6 board beside 'The experience included:') and optionally the **Littelfuse personas video** (after 'Defined the primary user'). Both are her files; no words added. Confirm placement.
-- **Q7.** **Rhode Island screens:** her figure `doc-21` has phone frames drawn round the screens, and the brief says no device mockups. Keep her figure as is (it's her own board), and show the 'two mobile screens side by side' from the frameless vector PDF next to the wireframes video?
-- **Q8.** **Littelfuse 'INSERT WIREFRAMES FROM PDF HERE':** there is no Littelfuse wireframes PDF or video in the repo. The only video is the personas one. It stays a labelled placeholder until she exports screens from the XD links.
-- **Q9.** **Values I don't have:** homepage facts (BASED IN, FOCUS, CURRENTLY) and case-study SETTING / YEAR. I'll show only ROLE and METHODS in the case-study header (her words) and leave the others as marked placeholders, unless you supply them.
-- **Q10.** **Figure captions** are required by the brief but aren't her words. I'll write short, factual ones (e.g. "FIG. 05 — House plan with expected visitor paths") and list them in COPY-CHECK as captions, separate from her copy.
-- **Q11.** **Likely slips in her text, kept verbatim unless she approves a fix:** "Annex (complimentary building…)" (complementary?) · "ITC( International" · "lo- fi" · "feedback( See below)" · "Little Fuse" ×2 beside "Littelfuse" · "Procurement.This" (missing space) · "rather than working of static archetypes" · "In combination with … we identify" · "particularly those centered on difficult history" (no full stop) · "App Space" beside "Appspace" · "wire frames" beside "wireframes" · "The final wireframes shown below." · "Pre 1965" · "deciding factor for where to place digital interactives" (bullet grammar) · spacing in "UX Designer| Experience Design", "|UX Researcher", "The Approach/ UX Design".
-- **Q12.** **Duplicated line:** "Below are the CMS channels within App Space." ends both the CMS chapter (P-045) and an Installation & Fabrication paragraph (P-050), where no CMS image follows. Verbatim means it appears twice. Keep both, or drop the second?
-- **Q13.** **Duplicated heading:** "Ticketing Window & Arrival Patterns" appears twice in Scenario Testing (J-089, J-097), once for random arrivals and once for arrivals at the start of the window. Kept twice, as in her doc.
+- **Q1.** Brief paragraphs A-01…A-04 and the instruction A-08 are **not printed**. Verbatim applies to the two About Me paragraphs and all of the case-study document.
+- **Q3.** Contact heading: "Let’s create something people will remember.". The statement section keeps her paragraph A-07 whole.
+- **Q6.** Column-art board after the five-sides list in 'The Approach/ UX Design'; personas video directly under the archetype board (both marked ➕ above).
+- **Q7.** Her Rhode Island figure is kept as made; frameless mobile screens sit beside the wireframes video.
+- **Q8.** Littelfuse wireframes: labelled placeholder, logged in ASSET-GAPS.md.
+- **Q9.** SETTING and YEAR per project and the homepage facts come from `content/site.json`; pending values stay visible.
+- **Q10.** Short factual captions, listed under 'Added captions' in COPY-CHECK.md.
+- **Q11–13.** Everything verbatim; suspected slips go to COPY-NOTES-FOR-CLIENT.md. One exception: the second "Below are the CMS channels within App Space." is removed (P-050) and noted there.
+
+## Defaults applied (no answer needed)
+
+- **D1 (Q2):** "UX ( User Experience) Design" printed exactly as written, space included; fix suggested in COPY-NOTES-FOR-CLIENT.md.
+- **D2 (Q4):** Results & Impact, Ongoing Evaluation and Reflection are chapters in every project, although some are set at 12–13pt in her doc.
+- **D3 (Q5):** Jackson Home visitor-type table shown as an A4 stats strip: her row order (Strollers, Studiers, Streakers), her column headings as small labels, her characteristic text under each numeral.
+- **D4 (Q13):** "Ticketing Window & Arrival Patterns" appears twice in Scenario Testing, as in her doc.
+- **D5:** Figures that are replaced by what her notes ask for (screen grab → video, reference picture → video, JPEG drawings → vector PDF) are not shown twice.
 

@@ -174,6 +174,17 @@ out["room01"] = r1[:a] + [dict(type="table", src="p3", head=["Visitor Type", "Ch
     ["Studiers", "Read interpretation thoroughly and spend longer in each room", "10%"],
     ["Streakers", "Move quickly through the exhibition with minimal stopping", "30%"]])] + r1[b:]
 
+# ------------------------------------------------------------ 4b. approved edits (the only wording changes; see COPY-NOTES-FOR-CLIENT.md)
+EDITS = []
+r2 = out["room02"]
+i = next(i for i, it in enumerate(r2) if it.get("text", "").startswith("My role during this phase"))
+dup = " Below are the CMS channels within App Space."
+assert r2[i]["text"].endswith(dup)
+r2[i]["text"] = r2[i]["text"][: -len(dup)]
+r2[i]["removed"] = dup.strip()
+EDITS.append(dict(room="room02", id=f"P-{i + 1:03d}", src=r2[i]["src"], removed=dup.strip(),
+                  reason="Duplicate of the line ending the CMS chapter; no CMS image follows it here. Removed on instruction (Round 3, Q12)."))
+
 # ------------------------------------------------------------ 5. About (docx)
 about = []
 for p in docx.Document(DOCX).paragraphs:
@@ -193,5 +204,5 @@ for p in docx.Document(DOCX).paragraphs:
     else:
         about.append(dict(type="skill", text=t))
 
-json.dump(dict(about=about, **out), open("content/copy.json", "w"), indent=1, ensure_ascii=False)
+json.dump(dict(about=about, edits=EDITS, **out), open("content/copy.json", "w"), indent=1, ensure_ascii=False)
 print({k: len(v) for k, v in out.items()}, "about", len(about))

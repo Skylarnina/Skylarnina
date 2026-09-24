@@ -1,0 +1,23 @@
+{
+ "_about": "Values supplied by the project lead in Round 3 answers (Q3, Q6, Q9). Not from Yasmin's documents; listed in COPY-CHECK under 'Supplied, not her copy'. Pending values stay visible on the page.",
+ "home": {
+  "facts": [
+   {"label": "Role", "value": "Digital Exhibit Designer, The Henry Ford Museum"},
+   {"label": "Based in", "value": "[pending client]", "pending": true},
+   {"label": "Focus", "value": "Interactive Exhibit Design · UX Design · UX Research · Digital Marketing"},
+   {"label": "Currently", "value": "Bringing stories to life through digital experiences"}
+  ],
+  "contact_heading": "Let’s create something people will remember."
+ },
+ "rooms": {
+  "room01": {"setting": "The Henry Ford, Greenfield Village", "year": "2026"},
+  "room02": {"setting": "The Henry Ford Museum, Power & Energy exhibit", "year": "[YEAR — pending client]", "year_pending": true},
+  "room03": {"setting": "State of Rhode Island Department of Health", "year": "[YEAR — pending client]", "year_pending": true},
+  "room04": {"setting": "Littelfuse", "year": "[YEAR — pending client]", "year_pending": true}
+ },
+ "added_media": [
+  {"room": "room02", "after_text_starts": "Artifact interpretation:", "what": "Board of the column-art panels (the five sides)", "files": "media/room02-power-energy/r02_art_PandE_Column_*.jpg", "decision": "Q6"},
+  {"room": "room04", "after_figure_doc": 23, "what": "Engineering personas video, directly under the archetype board", "files": "media/room04-littelfuse/r04_video_engineering-personas.mp4", "decision": "Q6"},
+  {"room": "room03", "near_note_starts": "INSERT PDF OR VIDEO OF DESKTOP", "what": "Frameless mobile screens from the vector PDF, beside the wireframes video", "files": "source/Rhode_Island_DOH_Wireframes.pdf (mobile pages)", "decision": "Q7"}
+ ]
+}
