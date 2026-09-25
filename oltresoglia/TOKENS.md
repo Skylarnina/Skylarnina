@@ -95,3 +95,13 @@ Contact brief: soft fade on load, 220–300ms colour transitions. **≠** the te
 - Manrope static files: not in the repo (Google Fonts works meanwhile)
 - Logo pack / wordmark SVG: not in the repo
 - WhatsApp number, social URLs, email, city, hours: placeholders, as the brief expects
+
+## Decisions (client, after this audit)
+
+- The test's values win everywhere: Saffron `#EFC04D`, Porcelain `#EBF0F2`, the test's opacities, focus ring and field sizes.
+  The test itself is unchanged; the Contact page follows it.
+- No rule changes on either page: no red, no green, no gradients.
+  WhatsApp is the saffron pill with the WhatsApp glyph; errors use the test's pattern (saffron border, saffron "!" icon, Porcelain text).
+- Background: exactly the test's (line artwork + charcoal overlay, frosted panels). The "no glassmorphism" line and the glow are dropped.
+- Inputs keep 16px text (iOS zoom).
+- Footer: none until the homepage is designed (`<!-- footer: pending homepage -->`).
