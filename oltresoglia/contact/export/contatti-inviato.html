@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#050505" />
+<title>OLTRESOGLIA Contatti · inviato</title>
+<!--
+  Prototype of the Contact page for Framer. Every value comes from the approved test build
+  (oltresoglia-quiz/src/index.css + OltresogliaQuiz.tsx); see ../TOKENS.md and FRAMER-NOTES.md.
+  Fonts: Manrope from Google Fonts (as in the test). Bounded loads from ../fonts/ once the files are
+  added; until then Archivo Black (900) and Archivo (200) stand in for it.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Archivo+Black&family=Manrope:wght@200..800&display=swap" />
+<style>
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-extralight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-black.ttf') format('truetype'); font-weight: 900; font-display: swap; }
+
+  :root {
+    /* Brand palette — identical to the test build */
+    --oltre-blackout: #000000;
+    --oltre-dark-charcoal: #050505;
+    --oltre-porcelain: #EBF0F2;
+    --oltre-whiteout: #FFFFFF;
+    --oltre-saffron-mango: #EFC04D;
+
+    /* Porcelain / charcoal at the opacities the test uses */
+    --text: var(--oltre-porcelain);
+    --text-body: color-mix(in srgb, var(--oltre-porcelain) 75%, transparent);
+    --text-label: color-mix(in srgb, var(--oltre-porcelain) 70%, transparent);
+    --text-muted: color-mix(in srgb, var(--oltre-porcelain) 55%, transparent);
+    --text-placeholder: color-mix(in srgb, var(--oltre-porcelain) 35%, transparent);
+    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
+    --line-field: color-mix(in srgb, var(--oltre-porcelain) 20%, transparent);
+    --line-strong: color-mix(in srgb, var(--oltre-porcelain) 40%, transparent);
+    --fill-banner: color-mix(in srgb, var(--oltre-porcelain) 5%, transparent);
+    --fill-field: color-mix(in srgb, var(--oltre-porcelain) 4%, transparent);
+    --fill-soft: color-mix(in srgb, var(--oltre-porcelain) 8%, transparent);
+    --fill-disabled: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
+    --panel: color-mix(in srgb, var(--oltre-dark-charcoal) 60%, transparent);
+    --saffron-hover: color-mix(in srgb, var(--oltre-saffron-mango) 90%, var(--oltre-dark-charcoal));
+
+    --font-display: 'Bounded', 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
+    --font-display-light: 'Bounded', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+    --radius-field: 12px;
+    --radius-card: 16px;
+    --radius-banner: 24px;
+    --control-h: 56px;
+    --t: 200ms;
+
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { background: var(--oltre-dark-charcoal); color: var(--text); }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    isolation: isolate; /* keeps the fixed backdrop (z-index -1) above the body background */
+  }
+  ::selection { background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); }
+  a { color: inherit; }
+  [hidden] { display: none !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Background — exactly the test's: line artwork, grayscale, charcoal overlay (60%, as behind its forms) */
+  .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--oltre-dark-charcoal); pointer-events: none; }
+  .backdrop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
+  .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .6; }
+
+  .wrap { width: 100%; max-width: 1232px; margin-inline: auto; padding-inline: 16px; }
+  @media (min-width: 640px) { .wrap { padding-inline: 32px; } }
+
+  /* Focus — the test's saffron outline ring */
+  :where(a, button, input, textarea):focus-visible { outline: 2px solid var(--oltre-saffron-mango); outline-offset: 2px; }
+  .pill:focus-visible { outline-offset: 4px; }
+
+  /* ---------- Prototype-only state switch (not part of the page) ---------- */
+  .proto {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+    margin-top: 12px; padding: 8px 12px;
+    border: 1px dashed var(--line-field); border-radius: var(--radius-field);
+    font-size: 13px; color: var(--text-muted);
+  }
+  .proto__label { font-family: var(--font-display); font-weight: 400; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+  .proto__opts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .proto button {
+    min-height: 32px; padding: 0 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-field); background: transparent; color: var(--text-body);
+    font: 500 13px/1 var(--font-sans); transition: border-color var(--t), color var(--t), background-color var(--t);
+  }
+  .proto button[aria-pressed="true"] { border-color: var(--oltre-saffron-mango); color: var(--text); }
+
+  /* ---------- Header (test header + site nav) ---------- */
+  .site-header { position: relative; padding-top: 20px; }
+  @media (min-width: 640px) { .site-header { padding-top: 32px; } }
+  .site-header__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .wordmark {
+    font-family: var(--font-display); font-weight: 900; font-size: 14px; letter-spacing: .22em;
+    color: var(--oltre-whiteout); text-decoration: none; white-space: nowrap;
+  }
+  .nav { display: flex; align-items: center; gap: 12px; }
+  .nav__links { display: none; list-style: none; margin: 0; padding: 0; gap: 28px; }
+  .nav__links a {
+    font-size: 14px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    transition: color var(--t);
+  }
+  .nav__links a:hover { color: var(--text); }
+  .nav__menu {
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    border-radius: 999px; border: 1px solid var(--line-field); background: transparent; color: var(--text);
+    cursor: pointer; transition: border-color var(--t);
+  }
+  .nav__menu:hover { border-color: var(--line-strong); }
+  .nav__panel { margin-top: 16px; border-top: 1px solid var(--line-hair); }
+  .nav__panel ul { list-style: none; margin: 0; padding: 8px 0 0; }
+  .nav__panel a {
+    display: flex; align-items: center; min-height: 48px; font-size: 16px; font-weight: 500;
+    color: var(--text-body); text-decoration: none; border-bottom: 1px solid var(--line-hair);
+  }
+  @media (min-width: 960px) {
+    .nav { gap: 32px; }
+    .nav__links { display: flex; }
+    .nav__menu, .nav__panel { display: none !important; }
+  }
+
+  /* ---------- Buttons (the test's pill) ---------- */
+  .pill {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: var(--control-h); padding: 0 28px; border: 0; border-radius: 999px;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer;
+    background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal);
+    transition: background-color var(--t), color var(--t), transform var(--t);
+  }
+  .pill:hover { background: var(--saffron-hover); }
+  .pill:active { transform: scale(.98); }
+  .pill--sm { min-height: 44px; padding: 0 20px; font-size: 14px; }
+  .pill--caps { text-transform: uppercase; letter-spacing: .12em; }
+  .pill--submit { width: 100%; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .pill[aria-disabled="true"] { background: var(--fill-disabled); color: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); cursor: progress; transform: none; }
+  .pill svg { width: 20px; height: 20px; flex: none; }
+  .spinner {
+    width: 20px; height: 20px; border-radius: 999px; flex: none;
+    border: 2px solid color-mix(in srgb, var(--oltre-porcelain) 25%, transparent); border-top-color: var(--oltre-porcelain);
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Contact banner ---------- */
+  main { padding-block: 48px 64px; }
+  @media (min-width: 640px) { main { padding-block: 72px 96px; } }
+
+  .banner {
+    display: grid; gap: 40px;
+    padding: 24px; border-radius: 20px;
+    background: var(--fill-banner); border: 1px solid var(--line-hair);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  }
+  @media (min-width: 640px) { .banner { padding: 40px; border-radius: var(--radius-banner); } }
+  @media (min-width: 960px) { .banner { grid-template-columns: 5fr 7fr; gap: 64px; padding: 64px; } }
+
+  .banner__intro { display: flex; flex-direction: column; align-items: flex-start; }
+  .eyebrow {
+    margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 12px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--oltre-saffron-mango);
+  }
+  .headline {
+    margin: 16px 0 0; font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; text-wrap: balance;
+  }
+  .headline span { display: block; }
+  .headline__light { font-family: var(--font-display-light); font-weight: 200; }
+  .headline__strong { font-family: var(--font-display); font-weight: 900; }
+  .lede { margin: 20px 0 0; max-width: 34ch; font-size: 18px; line-height: 1.6; color: var(--text-body); }
+
+  .whatsapp { margin-top: 32px; min-width: 240px; }
+  @media (max-width: 959px) { .whatsapp { width: 100%; } }
+
+  .socials { margin-top: 40px; }
+  .socials__label { margin: 0; font-size: 14px; color: var(--text-body); }
+  .socials__list { display: flex; gap: 12px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .social {
+    display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px;
+    border-radius: 999px; background: var(--fill-soft); color: var(--oltre-porcelain);
+    transition: background-color var(--t), color var(--t);
+  }
+  .social svg { width: 20px; height: 20px; fill: currentColor; }
+  .social:hover { background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); }
+
+  /* ---------- Form card (the test's result panel) ---------- */
+  .form-card {
+    display: flex; flex-direction: column;
+    padding: 20px; border-radius: var(--radius-card);
+    background: var(--panel); border: 1px solid var(--line-hair);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  }
+  @media (min-width: 640px) { .form-card { padding: 32px; } }
+
+  .form { display: grid; gap: 20px; }
+  .form__row { display: grid; gap: 20px; }
+  @media (min-width: 560px) { .form__row--split { grid-template-columns: 1fr 1fr; } }
+
+  .field { display: flex; flex-direction: column; }
+  .field label { font-size: 14px; font-weight: 600; color: var(--text); }
+  .field label .req { color: var(--text-muted); font-weight: 500; }
+  .field input, .field textarea {
+    margin-top: 8px; width: 100%; min-height: var(--control-h); padding: 0 16px;
+    border-radius: var(--radius-field); border: 1px solid var(--line-field);
+    background: var(--fill-field); color: var(--text);
+    font: 400 16px/1.5 var(--font-sans);
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    transition: border-color var(--t);
+  }
+  .field textarea { padding: 14px 16px; resize: vertical; min-height: calc(5 * 1.5em + 28px); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-placeholder); }
+  .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--oltre-saffron-mango); outline-offset: 2px; }
+  .field [data-valid="true"] { border-color: var(--line-strong); }
+  .field [aria-invalid="true"] { border-color: var(--oltre-saffron-mango); }
+
+  /* The test's field message: saffron "!" icon + text in Porcelain */
+  .field__msg { display: flex; gap: 8px; align-items: flex-start; margin: 8px 0 0; font-size: 14px; color: var(--text); }
+  .field__msg svg { width: 16px; height: 16px; margin-top: 3px; flex: none; color: var(--oltre-saffron-mango); }
+
+  .form__submit { display: grid; gap: 12px; margin-top: 4px; }
+  .privacy { margin: 0; font-size: 12px; line-height: 1.5; color: var(--text-muted); }
+  .privacy a { color: var(--text-body); text-decoration: underline; text-underline-offset: 3px; transition: color var(--t); }
+  .privacy a:hover { color: var(--text); }
+
+  .success { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; padding-block: 24px; }
+  .success svg { width: 56px; height: 56px; color: var(--oltre-saffron-mango); }
+  .success p { margin: 0; max-width: 28ch; font-size: 20px; line-height: 1.4; color: var(--text); outline: none; }
+
+  /* ---------- Details row ---------- */
+  .details {
+    display: grid; gap: 16px; margin: 32px 0 0; padding: 24px 0 0; border-top: 1px solid var(--line-hair);
+  }
+  @media (min-width: 720px) { .details { grid-template-columns: repeat(3, 1fr); gap: 32px; padding-inline: 8px; } }
+  .details div { display: flex; gap: 12px; align-items: baseline; font-size: 14px; }
+  .details dt { color: var(--text-muted); }
+  .details dd { margin: 0; color: var(--text-body); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <!-- Same artwork as the test (oltresoglia-quiz/src/assets/backgrounds/soglia.svg). -->
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDE2MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48c3R5bGU+Knt2ZWN0b3ItZWZmZWN0Om5vbi1zY2FsaW5nLXN0cm9rZX08L3N0eWxlPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjE2MDAiIGZpbGw9IiMwNTA1MDUiLz48Y2lyY2xlIGN4PSIwLjEiIGN5PSIxNDczLjIiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIzMzYuOSIgY3k9IjExNjciIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI1MjYuOSIgY3k9IjEyMDMuMyIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI4NjguNiIgY3k9IjEwOTUuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzMDYuOCIgY3k9IjM4Ny4yIiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTEzMi42IiBjeT0iMTExNi45IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTA5NC4zIiBjeT0iNzQ4LjYiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxMjkxLjkiIGN5PSIxOTYuNSIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE0NzcuMSIgY3k9IjExMDEuNiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjU5NS42IiBjeT0iNTM2LjYiIHI9IjIuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI1MzEuNiIgY3k9IjI0NC4xIiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iNjg1LjYiIGN5PSI0NzEuOCIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9Ijg5MS44IiBjeT0iMTE2Ni44IiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iOTMuOCIgY3k9IjQzNy42IiByPSIxLjciIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODE0LjEiIGN5PSI2NzQuMyIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjE0NTQuNCIgY3k9Ijg3LjgiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI1NTAuNiIgY3k9IjEwNjMuMSIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjgyMy44IiBjeT0iMjY0LjkiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI0NTMuOCIgY3k9IjU4My4xIiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iNTMyLjEiIGN5PSI4NTAuNyIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzODAuOCIgY3k9IjEwMTYuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjgyNiIgY3k9IjgwNy45IiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTUwMy4zIiBjeT0iNjM0LjgiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI0MDEuOCIgY3k9IjkzOSIgcj0iMS40IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjUyOSIgY3k9IjYyNi4zIiByPSIyLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTQwNC4xIiBjeT0iMTc3LjciIHI9IjIuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMjQuNCIgY3k9IjY1MC45IiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEwMTEuOCIgY3k9IjIzMC44IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iOTQ4LjciIGN5PSIyMjAuNSIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjE0NTIuNCIgY3k9IjEyMTcuOCIgcj0iMS4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjE2LjgiIGN5PSIzOTcuMyIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjIuNSIgY3k9Ijk4Ni45IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTE4NS44IiBjeT0iNzgzIiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNzgyLjgiIGN5PSI0LjgiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNDQwLjEiIGN5PSIzMDEiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSI5MDQuNCIgY3k9IjEwODciIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIzNTYuNCIgY3k9IjMzNC4zIiByPSIxLjciIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODMuOCIgY3k9IjEyMzEuMSIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjExNDIuNSIgY3k9Ijc5Ny4xIiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTUyNi45IiBjeT0iMTIyMy44IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzk3LjEiIGN5PSIxMTY0LjMiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI2MzcuMyIgY3k9IjM3NS42IiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTQxOS4yIiBjeT0iODk0IiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iOTk0LjQiIGN5PSIxMTc1LjgiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTYwLjMiIGN5PSI2NzYuNCIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjMxOS4zIiBjeT0iMTAzMi4zIiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijc5NS45IiBjeT0iODkxLjgiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTUxMy4yIiBjeT0iNzcxLjMiIHI9IjEuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MTQuNyIgY3k9IjI2NS44IiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODM0LjgiIGN5PSI4OTguNCIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEyMTEuNCIgY3k9IjU3OS45IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjQxLjYiIGN5PSI0NzguMSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjMyNC40IiBjeT0iMTE1Ni43IiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzc3LjEiIGN5PSIxMDU1LjMiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMjAuNSIgY3k9IjEyMzYuNiIgcj0iMi4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE1MzQuMiIgY3k9IjQwLjMiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iOTYxLjciIGN5PSIxMTU4LjUiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSI1OS4yIiBjeT0iMjE3LjUiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxNzMuMiIgY3k9IjEzNS44IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMjEzLjgiIGN5PSIzMjMuNSIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjM4OS4yIiBjeT0iNzMwLjIiIHI9IjIuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSI2NzYuMiIgY3k9IjEwNzgiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNjM1IiBjeT0iNjY2LjMiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIzNjguMiIgY3k9IjEyOTIuMiIgcj0iMi40IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjE5NS41IiBjeT0iMzM2LjIiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIyNzIuOCIgY3k9IjEyNC45IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTAzNC41IiBjeT0iODg5LjgiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxNTkwLjEiIGN5PSIxMjAuNCIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjUwMy4xIiBjeT0iNi43IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNjYxLjUiIGN5PSIxNDYuMiIgcj0iMS4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjE0NzguNSIgY3k9IjEyNDMuOSIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMjgxLjUiIGN5PSIxMDU4LjkiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI1NTYuOSIgY3k9IjY1MS4yIiByPSIxLjYiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iNzkxLjciIGN5PSI5MDcuOSIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMDY0LjIiIGN5PSIxMDEyLjUiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTQxNS4yIiBjeT0iMTM1Mi4zIiByPSIyLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iNzAwLjkiIGN5PSI3NzkuMyIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjE1NjAuMSIgY3k9IjU3Mi40IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMzMxLjMiIGN5PSIzODEuMSIgcj0iMi4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEwMTYuMyIgY3k9IjExMzguMyIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzOTcuOSIgY3k9IjQzMi45IiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNjk0LjQiIGN5PSI2MzIuMSIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijk0Mi41IiBjeT0iMzcwLjMiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxMzE1LjMiIGN5PSI1NDAuOCIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE0MDMuOCIgY3k9IjE4NS41IiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTQ3My41IiBjeT0iMi4xIiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjYzNS42IiBjeT0iMzQuNSIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE0MzYuNiIgY3k9IjI3Ni44IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTUxNS43IiBjeT0iMTExOS43IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTg2LjkiIGN5PSIxMDAyLjUiIHI9IjAuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMjk5IiBjeT0iOTQ2LjUiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMjA0LjkiIGN5PSI1MzAiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNTI4LjEiIGN5PSI4NzYuNSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEyNDMuOSIgY3k9IjExMjQiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iOTU2LjEiIGN5PSIxNjAuNCIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijk4MS4yIiBjeT0iMzU5LjgiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI0MDEuNSIgY3k9IjM1Ni45IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMTQ0OC44IiBjeT0iODQuNCIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEyODcuNSIgY3k9IjE2Ny40IiByPSIyLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMTM4Ni4xIiBjeT0iMTI2NSIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNDUyLjUiIGN5PSIxMzczLjEiIHI9IjEuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMTUxLjUiIGN5PSIyNDcuMyIgcj0iMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMjMuMSIgY3k9IjQxOS4yIiByPSIyLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMzE3LjIiIGN5PSI0Ny42IiByPSIxLjYiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODk1LjEiIGN5PSIyMjYuNSIgcj0iMS4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijc2OS41IiBjeT0iMzYyLjgiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MSIgY3k9IjE0OS42IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODE3LjIiIGN5PSIxMTIwLjYiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNTM5LjIiIGN5PSIxMTM4LjQiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMjg0LjMiIGN5PSIyNzMuOSIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjExNjIuNSIgY3k9IjEwMzQuOCIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijg3MS43IiBjeT0iNjE5LjEiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxOTUuMSIgY3k9IjEwNi4yIiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNTY2LjciIGN5PSI1NTEuNCIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEwMjMuOSIgY3k9IjIwMC43IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMi42IiBjeT0iMTMzNy4yIiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNzEuMSIgY3k9IjEyMjkiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMDI4LjYiIGN5PSI2ODQuMSIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjI3Ni4zIiBjeT0iMTIwOC41IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjUwOC43IiBjeT0iNzM0LjgiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMDg1LjEiIGN5PSI3OTcuNiIgcj0iMi4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEzMTEuNiIgY3k9IjEzMDEiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTU1Mi42IiBjeT0iMTEwNi4xIiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTEzOS40IiBjeT0iNTE4LjkiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMzA1LjYiIGN5PSI3NDcuMSIgcj0iMi4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEzMjYuMSIgY3k9IjY4LjEiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIzMTIuOCIgY3k9IjM3LjQiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMjk5IiBjeT0iMTAwMy41IiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTM4NC43IiBjeT0iMTMwMS41IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iOTAwIiBjeT0iNzM1LjUiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI4NjEuMSIgY3k9IjEyMDEuNyIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjYxNC4xIiBjeT0iNzk5LjUiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTI1LjMiIGN5PSIxMjM0LjciIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI0MDcuMyIgY3k9Ijk4Mi40IiByPSIxLjciIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMTUwMS4xIiBjeT0iOTA5LjQiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI5NjAuNCIgY3k9IjkxNy44IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iOTEzLjciIGN5PSIyNTguNCIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjE4OS4zIiBjeT0iNTMzLjYiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMzk5LjQiIGN5PSIxMDMwLjYiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI1NTUuNyIgY3k9IjYzNy4xIiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjI0Ny43IiBjeT0iODUiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI2MDEuNCIgY3k9IjE0Ni4zIiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iNjQ1LjgiIGN5PSI3MzIiIHI9IjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTM0NC40IiBjeT0iNDM4LjciIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxOTQuNCIgY3k9IjMyNC43IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzE5LjQiIGN5PSI5NzIuMiIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEyMDYuMyIgY3k9IjEyNTUuNSIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzODcuMSIgY3k9IjEwOTUiIHI9IjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iOTk4LjMiIGN5PSIxMTc4LjEiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNTkxLjciIGN5PSI1OS45IiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjExNTcuNSIgY3k9Ijg3NC43IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTI5OSIgY3k9IjEwOTIuOSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE1MjEuNyIgY3k9IjQ5MC43IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTE3NS43IiBjeT0iODIzLjUiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMTA3LjMiIGN5PSIxMDkwLjgiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMDg3LjYiIGN5PSI5MDcuMyIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEwMDguMSIgY3k9IjkwNy45IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzYuMiIgY3k9IjEzODAuNSIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE1NjIuMSIgY3k9IjQ5Mi40IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE1MDEuMiIgY3k9IjkxMy42IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMzE2LjkiIGN5PSIzODcuMiIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjY5MS45IiBjeT0iNzUuNiIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjQ4OS43IiBjeT0iOTgzLjMiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI1MDcuOCIgY3k9IjQ2My45IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNTkxLjEiIGN5PSI2OTEuNCIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjgwNi41IiBjeT0iODY5LjgiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMDM3LjciIGN5PSI2NDcuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9Ijg0LjMiIGN5PSI0NTguNCIgcj0iMC44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEzNDUuMSIgY3k9IjE3OC42IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTA2Ni4yIiBjeT0iMzU0LjQiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIyMjUuOCIgY3k9IjEyMTYuNCIgcj0iMS4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijk5OS4zIiBjeT0iMTIwOS4xIiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTUyNS45IiBjeT0iMTE2LjIiIHI9IjEuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI0NDIuNCIgY3k9IjgzNy40IiByPSIyLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTEzMi42IiBjeT0iMTI2NS4yIiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTgzLjIiIGN5PSI5ODYuOCIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNDAuNiIgY3k9IjQ2MCIgcj0iMS40IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjEyMzIuMiIgY3k9IjEwODEuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9Ijk4OS40IiBjeT0iMTE1NC43IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTQyMi44IiBjeT0iMjU1LjQiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTE1LjEiIGN5PSI2NzMuOCIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE1NzYiIGN5PSI3MTYuNSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEwNTcuMyIgY3k9IjE2My40IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTU5My40IiBjeT0iODY2IiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijc2NS42IiBjeT0iODEyLjYiIHI9IjAuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIzMzguMyIgY3k9IjEwNyIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjY5Ny4yIiBjeT0iMjA3LjkiIHI9IjIuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNDIzLjkiIGN5PSIxMDcxIiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTM0NS44IiBjeT0iNDQwLjMiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI3NDUuNCIgY3k9IjEuNyIgcj0iMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxNDIuNyIgY3k9IjkzLjYiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxOTEuMyIgY3k9IjM1NC42IiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTA0Ny4xIiBjeT0iMzkxLjIiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTQ1LjYiIGN5PSIxMjAwLjQiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMzgwLjUiIGN5PSIyODguMyIgcj0iMS4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijg3NC44IiBjeT0iNjQ2LjciIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI2NTAuOCIgY3k9Ijg4MS40IiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTM2NC40IiBjeT0iNjUyLjciIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNTU3IiBjeT0iMTE4MyIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjExNDEuNSIgY3k9IjkwOC40IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMTQzMS4xIiBjeT0iMjkxLjciIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI3MDYuOCIgY3k9IjEyMzIuNyIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMTA3IiBjeT0iOTc5IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNDc0LjYiIGN5PSIxMjE1LjkiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI1My45IiBjeT0iODgyLjUiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNDY3LjciIGN5PSI4OC43IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjU4MS4yIiBjeT0iMTExOC41IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNjU5LjMiIGN5PSIxMjcuMSIgcj0iMS4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjU5MS4zIiBjeT0iNTA0LjUiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxOS42IiBjeT0iNjM1LjIiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMjgyLjEiIGN5PSIxMzEyLjciIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MDguNiIgY3k9IjkxNC44IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODAwIiBjeT0iMjY1MCIgcj0iMTQ4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRUJGMEYyIiBzdHJva2Utb3BhY2l0eT0iMC4xNiIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjI2NTAiIHI9IjE1OTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0VCRjBGMiIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjI2NTAiIHI9IjE3MzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0VCRjBGMiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDYiLz48Y2lyY2xlIGN4PSI4MDAiIGN5PSIyNjUwIiByPSIxOTAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNFQkYwRjIiIHN0cm9rZS1vcGFjaXR5PSIwLjAzNSIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjI2NTAiIHI9IjE0MDAiIGZpbGw9IiMwMDAwMDAiLz48Y2lyY2xlIGN4PSI4MDAiIGN5PSIyNjUwIiByPSIxNDAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNFQkYwRjIiIHN0cm9rZS1vcGFjaXR5PSIuNTUiIHN0cm9rZS13aWR0aD0iMS41Ii8+PGNpcmNsZSBjeD0iODAwIiBjeT0iMjY1MCIgcj0iMTM5NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRUJGMEYyIiBzdHJva2Utb3BhY2l0eT0iLjEyIiBzdHJva2Utd2lkdGg9IjEwIi8+PGZpbHRlciBpZD0iZyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9Ii44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxNjAwIiBmaWx0ZXI9InVybCgjZykiIG9wYWNpdHk9Ii4wNyIvPjwvc3ZnPg==" alt="" />
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <!-- PROTOTYPE ONLY: switches the form between its three states. Not part of the Framer page. -->
+      <div class="proto" role="group" aria-label="Prototipo: stato del modulo">
+        <span class="proto__label">Prototipo · stato del modulo</span>
+        <span class="proto__opts">
+          <button type="button" data-state="default" aria-pressed="true">Predefinito</button>
+          <button type="button" data-state="error" aria-pressed="false">Errore</button>
+          <button type="button" data-state="success" aria-pressed="false">Inviato</button>
+        </span>
+      </div>
+
+      <div class="site-header__row" style="margin-top: 20px">
+        <!-- Wordmark as in the test (retyped). Replace with the logotype SVG from the logo pack. -->
+        <a class="wordmark" href="#">OLTRESOGLIA</a>
+        <nav class="nav" aria-label="Principale">
+          <ul class="nav__links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Metodo</a></li>
+            <li><a href="#">Programma</a></li>
+            <li><a href="#">Guide</a></li>
+            <li><a href="#">Test</a></li>
+          </ul>
+          <a class="pill pill--sm" href="#">Fai il test</a>
+          <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-panel">
+            <span class="sr-only">Menu</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h14M3 13.5h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </button>
+        </nav>
+      </div>
+      <div class="nav__panel" id="nav-panel" hidden>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Metodo</a></li>
+          <li><a href="#">Programma</a></li>
+          <li><a href="#">Guide</a></li>
+          <li><a href="#">Test</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="banner" aria-labelledby="contact-title">
+        <div class="banner__intro">
+          <p class="eyebrow">Contatti</p>
+          <h1 class="headline" id="contact-title">
+            <span class="headline__light">Domande?</span>
+            <span class="headline__strong">Contattaci.</span>
+          </h1>
+          <p class="lede">Rispondiamo di persona, di solito entro un giorno lavorativo.</p>
+          <!-- Alternativa: "Scrivici qui o su WhatsApp. Ti risponde Pietro, di solito entro un giorno lavorativo." -->
+
+          <!-- Number pending from the client: replace NUMERO-DA-CONFERMARE (international format, digits only). -->
+          <a class="pill pill--caps whatsapp" href="https://wa.me/NUMERO-DA-CONFERMARE?text=Ciao%20Pietro%2C%20ti%20scrivo%20dal%20sito.%20Vorrei%20qualche%20informazione%20sul%20percorso." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+          </a>
+
+          <div class="socials">
+            <p class="socials__label">Seguici sui nostri social:</p>
+            <!-- Profile URLs pending from the client: [URL Instagram], [URL TikTok], [URL Facebook], [URL LinkedIn]. -->
+            <ul class="socials__list">
+              <li><a class="social" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a></li>
+              <li><a class="social" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a></li>
+              <li><a class="social" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a></li>
+              <li><a class="social" href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form class="form" id="contact-form" novalidate aria-label="Modulo di contatto">
+            <div class="form__row form__row--split">
+              <div class="field">
+                <label for="f-nome">Nome <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-nome" name="nome" type="text" autocomplete="given-name" required placeholder="Il tuo nome" />
+              </div>
+              <div class="field">
+                <label for="f-cognome">Cognome <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-cognome" name="cognome" type="text" autocomplete="family-name" required placeholder="Il tuo cognome" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" required placeholder="nome@dominio.it" />
+            </div>
+            <div class="field">
+              <label for="f-telefono">Numero di telefono <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+39 333 123 4567" />
+            </div>
+            <div class="field">
+              <label for="f-messaggio">Messaggio <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="f-messaggio" name="messaggio" rows="5" required placeholder="Scrivi qui la tua domanda"></textarea>
+            </div>
+            <div class="form__submit">
+              <button class="pill pill--submit" type="submit">Invia</button>
+              <p class="privacy">Inviando accetti l’<a href="#">informativa sulla privacy</a>.</p>
+            </div>
+          </form>
+
+          <div class="success" id="contact-success" hidden>
+            <svg viewBox="0 0 56 56" aria-hidden="true">
+              <circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M17 29l7.5 7.5L39 21" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p role="status" tabindex="-1">Messaggio inviato. Ti rispondiamo presto.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Details pending from the client: keep the placeholders visible until they arrive. -->
+      <dl class="details">
+        <div><dt>Email</dt><dd>[email da confermare]</dd></div>
+        <div><dt>Dove</dt><dd>[città da confermare]</dd></div>
+        <div><dt>Orari</dt><dd>[orari da confermare]</dd></div>
+      </dl>
+    </div>
+  </main>
+
+  <!-- footer: pending homepage -->
+
+  <template id="msg-icon">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M10 5.5v5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="10" cy="14.25" r="1.1" fill="currentColor"/></svg>
+  </template>
+
+  <script>
+  (() => {
+    const form = document.getElementById('contact-form')
+    const success = document.getElementById('contact-success')
+    const submit = form.querySelector('button[type="submit"]')
+    const icon = document.getElementById('msg-icon')
+    const EMAIL = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[^\s@.]{2,}$/
+    const REQUIRED = 'Campo obbligatorio.'
+
+    // Same messages and timing rules as the test: errors show on blur or submit,
+    // then follow the value live and clear the moment it is valid.
+    const rules = {
+      email: (v) => (EMAIL.test(v) ? null : "Controlla l'indirizzo: sembra incompleto (es. nome@dominio.it)."),
+      telefono: (v) => (v.replace(/\D/g, '').length >= 6 ? null : 'Controlla il numero: servono almeno 6 cifre.'),
+    }
+    const fields = [...form.querySelectorAll('input, textarea')]
+    const flagged = new Set()
+
+    function errorFor(el) {
+      const v = el.value.trim()
+      if (!v) return REQUIRED
+      return rules[el.name] ? rules[el.name](v) : null
+    }
+
+    function render(el) {
+      const msgId = el.id + '-msg'
+      let msg = document.getElementById(msgId)
+      const error = flagged.has(el) ? errorFor(el) : null
+      el.dataset.valid = String(!errorFor(el))
+      if (error) {
+        if (!msg) {
+          msg = document.createElement('p')
+          msg.className = 'field__msg'
+          msg.id = msgId
+          msg.append(icon.content.cloneNode(true), document.createElement('span'))
+          el.after(msg)
+        }
+        msg.lastChild.textContent = error
+        el.setAttribute('aria-invalid', 'true')
+        el.setAttribute('aria-describedby', msgId)
+      } else {
+        msg?.remove()
+        el.removeAttribute('aria-invalid')
+        el.removeAttribute('aria-describedby')
+      }
+    }
+
+    fields.forEach((el) => {
+      el.addEventListener('input', () => render(el))
+      el.addEventListener('blur', () => {
+        if (el.value.trim()) flagged.add(el)
+        render(el)
+      })
+    })
+
+    function setLoading(on) {
+      submit.setAttribute('aria-disabled', String(on))
+      submit.innerHTML = on ? '<span class="spinner" aria-hidden="true"></span>Invio in corso…' : 'Invia'
+      fields.forEach((el) => (el.readOnly = on))
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      if (submit.getAttribute('aria-disabled') === 'true') return
+      fields.forEach((el) => { flagged.add(el); render(el) })
+      const firstInvalid = fields.find((el) => errorFor(el))
+      if (firstInvalid) { firstInvalid.focus(); return }
+      // Prototype only: Framer's native Form handles the real submission.
+      setLoading(true)
+      setTimeout(() => { setLoading(false); showSuccess(true) }, 900)
+    })
+
+    function showSuccess(focus) {
+      form.hidden = true
+      success.hidden = false
+      if (focus) success.querySelector('p').focus()
+    }
+
+    function reset() {
+      form.reset()
+      flagged.clear()
+      fields.forEach(render)
+      fields.forEach((el) => delete el.dataset.valid)
+      setLoading(false)
+      form.hidden = false
+      success.hidden = true
+    }
+
+    // ----- Prototype state switch -----
+    const states = {
+      default: reset,
+      error() {
+        reset()
+        const sample = { nome: 'Giulia', cognome: '', email: 'giulia@', telefono: '', messaggio: '' }
+        fields.forEach((el) => { el.value = sample[el.name] ?? ''; flagged.add(el); render(el) })
+      },
+      success() { reset(); showSuccess(false) },
+    }
+    const buttons = [...document.querySelectorAll('.proto button')]
+    function setState(name) {
+      if (!states[name]) name = 'default'
+      states[name]()
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.state === name)))
+    }
+    buttons.forEach((b) => b.addEventListener('click', () => setState(b.dataset.state)))
+    const fromUrl = new URLSearchParams(location.search).get('stato') || location.hash.slice(1)
+    setState({ errore: 'error', error: 'error', inviato: 'success', success: 'success' }[fromUrl] || 'success')
+
+    // ----- Mobile menu -----
+    const menuBtn = document.querySelector('.nav__menu')
+    const panel = document.getElementById('nav-panel')
+    menuBtn.addEventListener('click', () => {
+      const open = menuBtn.getAttribute('aria-expanded') !== 'true'
+      menuBtn.setAttribute('aria-expanded', String(open))
+      panel.hidden = !open
+    })
+  })()
+  </script>
+</body>
+</html>
