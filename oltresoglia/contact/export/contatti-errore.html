@@ -27,21 +27,29 @@
     --oltre-whiteout: #FFFFFF;
     --oltre-saffron-mango: #EFC04D;
 
-    /* Porcelain / charcoal at the opacities the test uses */
+    /* Porcelain / charcoal opacities. Client feedback (round 1): more contrast, so these sit
+       one step brighter than the test (test values in comments). */
     --text: var(--oltre-porcelain);
-    --text-body: color-mix(in srgb, var(--oltre-porcelain) 75%, transparent);
-    --text-label: color-mix(in srgb, var(--oltre-porcelain) 70%, transparent);
-    --text-muted: color-mix(in srgb, var(--oltre-porcelain) 55%, transparent);
-    --text-placeholder: color-mix(in srgb, var(--oltre-porcelain) 35%, transparent);
-    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
-    --line-field: color-mix(in srgb, var(--oltre-porcelain) 20%, transparent);
-    --line-strong: color-mix(in srgb, var(--oltre-porcelain) 40%, transparent);
-    --fill-banner: color-mix(in srgb, var(--oltre-porcelain) 5%, transparent);
-    --fill-field: color-mix(in srgb, var(--oltre-porcelain) 4%, transparent);
-    --fill-soft: color-mix(in srgb, var(--oltre-porcelain) 8%, transparent);
+    --text-body: color-mix(in srgb, var(--oltre-porcelain) 85%, transparent);        /* test 75% */
+    --text-label: color-mix(in srgb, var(--oltre-porcelain) 75%, transparent);       /* test 70% */
+    --text-muted: color-mix(in srgb, var(--oltre-porcelain) 65%, transparent);       /* test 55% */
+    --text-placeholder: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); /* test 35% */
+    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);        /* test 10% */
+    --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);       /* test 20% */
+    --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent);      /* test 40% */
+    --fill-field: color-mix(in srgb, var(--oltre-porcelain) 6%, transparent);        /* test 4% */
+    --fill-soft: color-mix(in srgb, var(--oltre-porcelain) 12%, transparent);
     --fill-disabled: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
-    --panel: color-mix(in srgb, var(--oltre-dark-charcoal) 60%, transparent);
-    --saffron-hover: color-mix(in srgb, var(--oltre-saffron-mango) 90%, var(--oltre-dark-charcoal));
+
+    /* Banner surface: grey (client). Two readings of "grey", switchable in the prototype bar. */
+    --fill-banner: color-mix(in srgb, var(--oltre-porcelain) 13%, var(--oltre-dark-charcoal)); /* ≈ #232526 */
+    --panel: color-mix(in srgb, var(--oltre-dark-charcoal) 88%, transparent);
+
+    /* Outline buttons (client): black fill, saffron border and text, soft saffron glow */
+    --btn-fill: var(--oltre-blackout);
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout));
+    --btn-glow: 0 0 18px color-mix(in srgb, var(--oltre-saffron-mango) 35%, transparent);
+    --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
 
     --font-display: 'Bounded', 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
     --font-display-light: 'Bounded', 'Archivo', ui-sans-serif, system-ui, sans-serif;
@@ -72,10 +80,10 @@
   [hidden] { display: none !important; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  /* Background — exactly the test's: line artwork, grayscale, charcoal overlay (60%, as behind its forms) */
+  /* Background: the test's line artwork, grayscale, under a charcoal overlay (lighter than the test's 60%) */
   .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--oltre-dark-charcoal); pointer-events: none; }
   .backdrop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
-  .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .6; }
+  .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .45; } /* test .6 */
 
   .wrap { width: 100%; max-width: 1232px; margin-inline: auto; padding-inline: 16px; }
   @media (min-width: 640px) { .wrap { padding-inline: 32px; } }
@@ -136,17 +144,17 @@
   /* ---------- Buttons (the test's pill) ---------- */
   .pill {
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    min-height: var(--control-h); padding: 0 28px; border: 0; border-radius: 999px;
+    min-height: var(--control-h); padding: 0 28px; border: 2px solid var(--oltre-saffron-mango); border-radius: 999px;
     font-family: var(--font-sans); font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer;
-    background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal);
-    transition: background-color var(--t), color var(--t), transform var(--t);
+    background: var(--btn-fill); color: var(--oltre-saffron-mango); box-shadow: var(--btn-glow);
+    transition: background-color var(--t), color var(--t), box-shadow var(--t), transform var(--t);
   }
-  .pill:hover { background: var(--saffron-hover); }
+  .pill:hover { background: var(--btn-fill-hover); box-shadow: var(--btn-glow-hover); }
   .pill:active { transform: scale(.98); }
   .pill--sm { min-height: 44px; padding: 0 20px; font-size: 14px; }
   .pill--caps { text-transform: uppercase; letter-spacing: .12em; }
   .pill--submit { width: 100%; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-  .pill[aria-disabled="true"] { background: var(--fill-disabled); color: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); cursor: progress; transform: none; }
+  .pill[aria-disabled="true"] { background: var(--btn-fill); border-color: var(--line-field); box-shadow: none; color: var(--text-muted); cursor: progress; transform: none; }
   .pill svg { width: 20px; height: 20px; flex: none; }
   .spinner {
     width: 20px; height: 20px; border-radius: 999px; flex: none;
@@ -163,7 +171,33 @@
     display: grid; gap: 40px;
     padding: 24px; border-radius: 20px;
     background: var(--fill-banner); border: 1px solid var(--line-hair);
-    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  }
+  /* Option B: the brand's light Porcelain as the grey (the client's reference banner was light).
+     Only the left column's colours change; the form card stays dark. */
+  .banner[data-surface="porcellana"] {
+    --fill-banner: var(--oltre-porcelain);
+    --line-hair: transparent;
+    --text: var(--oltre-dark-charcoal);
+    --text-body: color-mix(in srgb, var(--oltre-dark-charcoal) 80%, transparent);
+    --fill-soft: color-mix(in srgb, var(--oltre-dark-charcoal) 8%, transparent);
+    --btn-glow: 0 0 0 transparent;
+    --btn-glow-hover: 0 0 0 transparent;
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 22%, var(--oltre-blackout));
+    color: var(--text);
+  }
+  .banner[data-surface="porcellana"] .eyebrow { color: color-mix(in srgb, var(--oltre-dark-charcoal) 70%, transparent); }
+  .banner[data-surface="porcellana"] .social { color: var(--oltre-dark-charcoal); }
+  .banner[data-surface="porcellana"] .banner__intro :focus-visible { outline-color: var(--oltre-dark-charcoal); }
+  .banner[data-surface="porcellana"] .form-card {
+    /* back to the dark tokens inside the card */
+    --text: var(--oltre-porcelain);
+    --text-body: color-mix(in srgb, var(--oltre-porcelain) 85%, transparent);
+    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
+    --btn-glow: 0 0 18px color-mix(in srgb, var(--oltre-saffron-mango) 35%, transparent);
+    --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout));
+    --panel: var(--oltre-dark-charcoal);
+    color: var(--text);
   }
   @media (min-width: 640px) { .banner { padding: 40px; border-radius: var(--radius-banner); } }
   @media (min-width: 960px) { .banner { grid-template-columns: 5fr 7fr; gap: 64px; padding: 64px; } }
@@ -174,14 +208,15 @@
     letter-spacing: .18em; text-transform: uppercase; color: var(--oltre-saffron-mango);
   }
   .headline {
-    margin: 16px 0 0; font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; text-wrap: balance;
+    margin: 16px 0 0; color: var(--text); font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; text-wrap: balance;
   }
   .headline span { display: block; }
   .headline__light { font-family: var(--font-display-light); font-weight: 200; }
   .headline__strong { font-family: var(--font-display); font-weight: 900; }
   .lede { margin: 20px 0 0; max-width: 34ch; font-size: 18px; line-height: 1.6; color: var(--text-body); }
+  .wa-lead { margin: 32px 0 0; max-width: 36ch; font-size: 16px; line-height: 1.5; color: var(--text-body); text-wrap: balance; }
 
-  .whatsapp { margin-top: 32px; min-width: 240px; }
+  .whatsapp { margin-top: 16px; min-width: 240px; }
   @media (max-width: 959px) { .whatsapp { width: 100%; } }
 
   .socials { margin-top: 40px; }
@@ -268,6 +303,11 @@
           <button type="button" data-state="error" aria-pressed="false">Errore</button>
           <button type="button" data-state="success" aria-pressed="false">Inviato</button>
         </span>
+        <span class="proto__label">Banner</span>
+        <span class="proto__opts">
+          <button type="button" data-surface="grigio" aria-pressed="true">Grigio scuro</button>
+          <button type="button" data-surface="porcellana" aria-pressed="false">Grigio chiaro</button>
+        </span>
       </div>
 
       <div class="site-header__row" style="margin-top: 20px">
@@ -302,15 +342,17 @@
 
   <main>
     <div class="wrap">
-      <section class="banner" aria-labelledby="contact-title">
+      <section class="banner" data-surface="grigio" aria-labelledby="contact-title">
         <div class="banner__intro">
           <p class="eyebrow">Contatti</p>
           <h1 class="headline" id="contact-title">
             <span class="headline__light">Domande?</span>
             <span class="headline__strong">Contattaci.</span>
           </h1>
-          <p class="lede">Rispondiamo di persona, di solito entro un giorno lavorativo.</p>
-          <!-- Alternativa: "Scrivici qui o su WhatsApp. Ti risponde Pietro, di solito entro un giorno lavorativo." -->
+          <p class="lede">Nessun bot, nessuna attesa. Ti rispondiamo noi, e in fretta.</p>
+          <!-- Replaced after client feedback (round 1). Previous line: "Rispondiamo di persona, di solito entro un giorno lavorativo." -->
+
+          <p class="wa-lead">Vuoi una risposta ancora più rapida? Scrivici su WhatsApp</p>
 
           <!-- Number pending from the client: replace NUMERO-DA-CONFERMARE (international format, digits only). -->
           <a class="pill pill--caps whatsapp" href="https://wa.me/NUMERO-DA-CONFERMARE?text=Ciao%20Pietro%2C%20ti%20scrivo%20dal%20sito.%20Vorrei%20qualche%20informazione%20sul%20percorso." target="_blank" rel="noopener">
@@ -483,7 +525,7 @@
       },
       success() { reset(); showSuccess(false) },
     }
-    const buttons = [...document.querySelectorAll('.proto button')]
+    const buttons = [...document.querySelectorAll('.proto button[data-state]')]
     function setState(name) {
       if (!states[name]) name = 'default'
       states[name]()
@@ -492,6 +534,17 @@
     buttons.forEach((b) => b.addEventListener('click', () => setState(b.dataset.state)))
     const fromUrl = new URLSearchParams(location.search).get('stato') || location.hash.slice(1)
     setState({ errore: 'error', error: 'error', inviato: 'success', success: 'success' }[fromUrl] || 'error')
+
+    // ----- Prototype banner switch -----
+    const banner = document.querySelector('.banner')
+    const surfaceButtons = [...document.querySelectorAll('.proto button[data-surface]')]
+    function setSurface(name) {
+      if (name !== 'porcellana') name = 'grigio'
+      banner.dataset.surface = name
+      surfaceButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.surface === name)))
+    }
+    surfaceButtons.forEach((b) => b.addEventListener('click', () => setSurface(b.dataset.surface)))
+    setSurface(new URLSearchParams(location.search).get('banner'))
 
     // ----- Mobile menu -----
     const menuBtn = document.querySelector('.nav__menu')

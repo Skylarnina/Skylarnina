@@ -1,5 +1,8 @@
 # Contact page: Framer handoff
 
+> **Round 1 client feedback applied** (more contrast, grey banner, outline buttons, new copy).
+> The banner colour is still open: the prototype bar switches between *Grigio scuro* and *Grigio chiaro*.
+
 Prototype: `oltresoglia/contact/index.html` (open it directly; use the dashed "Prototipo" bar or
 `?stato=errore` / `?stato=inviato` to see the three form states). Everything matches the approved
 test build. Token source: `oltresoglia-quiz/src/index.css`, audited in `../TOKENS.md`.
@@ -12,27 +15,30 @@ test build. Token source: `oltresoglia-quiz/src/index.css`, audited in `../TOKEN
 | --- | --- | --- |
 | Oltre/Dark Charcoal | `#050505` | page ground, text on saffron |
 | Oltre/Porcelain | `#EBF0F2` | headings, labels, input text, icons |
-| Oltre/Saffron Mango | `#EFC04D` | primary pills, eyebrow, focus ring, invalid border, check mark, social hover |
+| Oltre/Saffron Mango | `#EFC04D` | button border + text + glyph, eyebrow, focus ring, invalid border, check mark, social hover |
 | Oltre/Whiteout | `#FFFFFF` | wordmark only |
-| Oltre/Blackout | `#000000` | background artwork only |
+| Oltre/Blackout | `#000000` | button fill, background artwork |
+| Oltre/Banner Grey (option A) | `#232526` (Porcelain 13% mixed into Dark Charcoal) | banner fill, *Grigio scuro* |
+| Oltre/Porcelain as banner (option B) | `#EBF0F2` | banner fill, *Grigio chiaro*; left-column text becomes Dark Charcoal |
 
 Porcelain at fixed opacities (make these as separate styles, or set the opacity on the fill):
 
+Round 1 raised these one step above the test for more contrast (test value in brackets):
+
 | Opacity | Role |
 | --- | --- |
-| 75% | body text (supporting line, nav links, socials label, details values) |
-| 70% | small labels |
-| 55% | muted text: required `*`, privacy line, details labels |
-| 45% | disabled/loading button text |
-| 35% | placeholders |
-| 40% | border of a valid, filled field |
-| 20% | field border, menu button border |
-| 10% | banner border, form-card border, hairlines, disabled button fill |
-| 8% | social button fill |
-| 5% | banner fill |
-| 4% | field fill |
+| 85% (75%) | body text (supporting line, WhatsApp lead-in, nav links, socials label, details values) |
+| 75% (70%) | small labels |
+| 65% (55%) | muted text: required `*`, privacy line, details labels, loading button text |
+| 45% (35%) | placeholders |
+| 50% (40%) | border of a valid, filled field |
+| 28% (20%) | field border, menu button border, loading button border |
+| 14% (10%) | banner border, form-card border, hairlines |
+| 12% (8%) | social button fill |
+| 6% (4%) | field fill |
 
-Charcoal at 60% is the form-card fill; Saffron hover is Saffron mixed 90% with Charcoal.
+Form card fill: Dark Charcoal 88% (solid Dark Charcoal on the light banner). Background overlay: 45% (test 60%).
+Button glow: 0 0 18px Saffron 35% (hover 0 0 26px Saffron 50%, fill Saffron 14% over Blackout); no glow on the light banner.
 No other colours: no red, no green, no gradients.
 
 ### Text styles
@@ -47,8 +53,9 @@ No other colours: no red, no green, no gradients.
 | Field label | Manrope | 14 / 20 | 600 | none | Porcelain |
 | Input | Manrope | **16** / 24 | 400 | none | Porcelain; placeholder 35% |
 | Field message | Manrope | 14 / 20 | 400 | none | Porcelain, with a 16px saffron "!" icon |
-| Button | Manrope | 16 | 600 | none ("Fai il test") | Charcoal |
-| Button caps | Manrope | 16 | 600 (WhatsApp) / 700 (Invia) | UPPER, 0.12em / 0.14em | Charcoal |
+| Button | Manrope | 16 | 600 | none ("Fai il test") | Saffron |
+| Button caps | Manrope | 16 | 600 (WhatsApp) / 700 (Invia) | UPPER, 0.12em / 0.14em | Saffron |
+| WhatsApp lead-in | Manrope | 16 / 24 | 400 | none | Porcelain 85% |
 | Privacy | Manrope | 12 / 18 | 400 | none | Porcelain 55%, link 75% underlined |
 | Success | Manrope | 20 / 28 | 400 | none | Porcelain |
 | Wordmark (temporary) | Bounded | 14 | Black 900 | UPPER, 0.22em | Whiteout. Replace with the logotype SVG |
@@ -61,14 +68,14 @@ Manrope: Google Fonts, as in the test.
 
 | Token | Value |
 | --- | --- |
-| Pill buttons | radius 999, height 56 (nav pill 44) |
+| Buttons (all) | outline pill: fill Blackout, 2px Saffron border, Saffron text and glyph, glow as above; radius 999, height 56 (nav pill 44) |
 | Fields | radius 12, height 56, padding 0 × 16 (textarea: 5 rows, padding 14 × 16, vertical resize) |
 | Form card | radius 16, padding 32 (mobile 20) |
 | Banner | radius 24 (mobile 20), padding 64 (tablet 40, mobile 24), max width 1200 |
 | Social buttons | 48 × 48 circle, 20px glyph |
 | Background blur | banner 12px, form card 12px, fields 4px (same frosted panels as the test) |
 | Focus | 2px Saffron outline, 2px offset (4px on pills) |
-| Transitions | 200ms colour/border; pills scale to 0.98 on press. No load animation |
+| Transitions | 200ms colour/border/glow; pills scale to 0.98 on press. No load animation |
 
 ## Page structure
 
@@ -77,12 +84,14 @@ Manrope: Google Fonts, as in the test.
 2. **Header** (not sticky, transparent): wordmark left; right: links Home · Metodo · Programma ·
    Guide · Test, then the "Fai il test" saffron pill. Below 960px the links move into a menu button (44px circle)
    that opens a stacked list; the pill stays visible.
-3. **Banner**: a Frame, fill Porcelain 5% + 12px background blur, 1px border Porcelain 10%,
+3. **Banner**: a Frame, fill Banner Grey (option A) or Porcelain (option B), 1px border Porcelain 14% (none on B),
    radius 24, padding 64, max width 1200, centred. Inside, a horizontal Stack (gap 64)
    with two children sized 5fr / 7fr:
    - **Left** (vertical Stack, left aligned): Eyebrow "Contatti" → Headline "Domande?" (light) /
-     "Contattaci." (strong), gap 16 → Lede (gap 20) → WhatsApp button (gap 32) → socials block (gap 40).
-   - **Right**: form card, a Frame with fill Charcoal 60% + 12px blur, 1px border Porcelain 10%, radius 16, padding 32.
+     "Contattaci." (strong), gap 16 → Lede "Nessun bot, nessuna attesa. Ti rispondiamo noi, e in fretta." (gap 20)
+     → lead-in "Vuoi una risposta ancora più rapida? Scrivici su WhatsApp" (Manrope 16, gap 32)
+     → WhatsApp button (gap 16) → socials block (gap 40).
+   - **Right**: form card, a Frame with fill Dark Charcoal 88% + 12px blur, 1px border Porcelain 14%, radius 16, padding 32.
 4. **Details row**: 1px top border Porcelain 10%, 3 equal columns: Email / Dove / Orari with
    `[… da confermare]` placeholders until the client sends them.
 5. **Footer**: pending homepage, not designed yet.
@@ -90,7 +99,7 @@ Manrope: Google Fonts, as in the test.
 ## Components
 
 ### WhatsApp button: Link
-- Saffron pill, height 56, min width 240 (full width on mobile), WhatsApp glyph 20px left, label "WhatsApp" in Button caps.
+- Outline pill (see Buttons), height 56, min width 240 (full width on mobile), WhatsApp glyph 20px left, label "WhatsApp" in Button caps.
 - URL: `https://wa.me/<NUMBER>?text=Ciao%20Pietro%2C%20ti%20scrivo%20dal%20sito.%20Vorrei%20qualche%20informazione%20sul%20percorso.`
   Number pending: international format, digits only, no `+`. Open in new tab.
 
@@ -109,7 +118,7 @@ URLs pending from the client. Glyphs are in `index.html` as inline SVG (Simple I
 | 4 | Text area (5 rows) | `messaggio` | yes | Messaggio * | Scrivi qui la tua domanda |
 
 - Row 1 is a 2-column grid (gap 20); it stacks to one column below 560px. All other rows full width, gap 20.
-- Submit: full-width saffron pill, label "Invia" (Button caps, 700, 0.14em). Loading label: "Invio in corso…".
+- Submit: full-width outline pill, label "Invia" (Button caps, 700, 0.14em). Loading: spinner + "Invio in corso…", border Porcelain 28%, no glow.
 - Under the button: "Inviando accetti l'informativa sulla privacy." with the link underlined (URL pending).
 - Validation (same pattern as the test): invalid field gets a Saffron border and, beneath it, the
   saffron "!" icon + message in Porcelain:

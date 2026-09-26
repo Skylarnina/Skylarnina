@@ -105,3 +105,12 @@ Contact brief: soft fade on load, 220–300ms colour transitions. **≠** the te
 - Background: exactly the test's (line artwork + charcoal overlay, frosted panels). The "no glassmorphism" line and the glow are dropped.
 - Inputs keep 16px text (iOS zoom).
 - Footer: none until the homepage is designed (`<!-- footer: pending homepage -->`).
+
+## Client feedback, round 1 (Contact page only; the test is unchanged)
+
+- More contrast: text, border and fill opacities one step brighter than the test; background overlay 45% instead of 60%.
+- Banner "grey": two options in the prototype (dark grey `#232526` / light Porcelain `#EBF0F2`), pending the client's choice.
+- Buttons: black fill (Blackout), Saffron border and text, soft Saffron glow, per the client's reference image.
+  This reverses the earlier "no drop shadows" rule for buttons only.
+- Copy: supporting line replaced with "Nessun bot, nessuna attesa. Ti rispondiamo noi, e in fretta.";
+  "Vuoi una risposta ancora più rapida? Scrivici su WhatsApp" added directly above the WhatsApp button.
