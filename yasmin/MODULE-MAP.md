@@ -91,8 +91,8 @@ Sequence: Full plate → Board 2×2 → Video panel → Full plate → Full plat
 
 | Where | File | Fit |
 |---|---|---|
-| Project rows + Projects grid | `r4-row-r01..r04-3x2.jpg` | finished 3:2, subject whole (plan, column ×3, two screens, journey map) |
-| Discipline panels 01–04 | `r4-panel-01..04.jpg` | 2:3; 01 photograph (cropped), 02–04 whole on #F4F3F0 |
-| About mosaic | `r4-about-tall-4x5.jpg`, `r4-about-wide-3x2.jpg`, `r4-about-sq-a.jpg`, `r4-about-sq-b.jpg` | stand-ins from her work until personal photos arrive (ASSET-GAPS R4-1..R4-4) |
+| Project rows + Projects grid | `logos/*` (colour default; `*-ink` for option b) | logo tiles: 3:2 on #F4F3F0, 32px padding, optically sized (`logos/sizes.json`) |
+| Discipline panels 01–04 | `snippets/snippet-15, 13, 18, 06.jpg` | photographs, cropped to the panel (no case-study media before the password) |
+| Snippets About My Life | `snippets/snippet-01…21.jpg` | slideshow, 4:5; landscape photos letterboxed on #F4F3F0 in the file |
 | Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped to 16:7). Rooms 03/04 have no header image; their cover is FIG. 01 above | |
 

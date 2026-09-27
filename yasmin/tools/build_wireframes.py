@@ -58,6 +58,9 @@ def box(w, h):
 
 
 def size(src):
+    if src.endswith(".svg"):
+        vb = [float(x) for x in re.search(r'viewBox="([^"]+)"', open("site/" + src).read()).group(1).split()]
+        return round(vb[2]), round(vb[3])
     return Image.open("site/" + src).size
 
 
@@ -66,7 +69,9 @@ def ph_img(tag, label):
     w, h = size(src)
     alt = re.search(r'alt="([^"]*)"', tag)
     alt = alt.group(1) if alt else ""
-    return f'<img src="{box(w, h)}" alt="{alt}" width="{w}" height="{h}"><span class="wf-label">{html.escape(label)}</span>'
+    st = re.search(r'style="([^"]*)"', tag)                           # keep sizing set on the tag (logo widths)
+    st = f' style="{st.group(1)}"' if st else ""
+    return f'<img src="{box(w, h)}" alt="{alt}" width="{w}" height="{h}"{st}><span class="wf-label">{html.escape(label)}</span>'
 
 
 def ph_video(tag, label):
@@ -96,7 +101,13 @@ def convert(page, name):
         tag, before = m.group(0), s_[max(0, m.start() - 260):m.start()]
         if "data:image/svg" in tag:
             return tag
-        if "hero__photo" in before:
+        if "ss__slide" in before:
+            counters["ss"] = counters.get("ss", 0) + 1
+            lab = f"IMAGE — SNIPPETS SLIDESHOW · PHOTO {counters['ss']} OF 21"
+        elif "logo-tile" in before:
+            counters["proj"] = counters.get("proj", 0) + 1
+            lab = f"LOGO — PROJECT {counters['proj']:02d}"
+        elif "hero__photo" in before:
             lab = "IMAGE — PORTRAIT"
         elif 'class="cover' in before:
             lab = "IMAGE — COVER PHOTO"
@@ -118,6 +129,7 @@ def convert(page, name):
     css = open("site/assets/css/r3.css").read()          # inline the stylesheet first, before links are stripped
     s = s.replace('<link rel="stylesheet" href="assets/css/r3.css">', f"<style>\n{FONTS}\n{css}\n{WF_CSS}</style>")
     assert "<style>" in s and "@font-face" in s and "wf-label" in s, page
+    s = re.sub(r"<script>.*?</script>\n?", "", s, flags=re.S)      # static: the wireframe shows the slideshow's first frame
     s = re.sub(r'href="assets/[^"]*"', 'href="#"', s)
     s = s.replace(' target="_blank" rel="noopener"', "")
     s = re.sub(r'<link rel="preconnect"[^>]*>\n?', "", s)

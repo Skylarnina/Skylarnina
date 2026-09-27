@@ -77,7 +77,5 @@ Hi Yasmin, we've put your case-study text on the new site **exactly as you wrote
 
 ## Questions for Yasmin (facts we don't have yet)
 
-- **Where are you based?** It's shown as "[pending client]" on the homepage.
-- **Project years** for Power & Energy, Rhode Island and Littelfuse. They're shown as "[YEAR — pending client]".
 - **Littelfuse wireframes:** could you export the final screens from Adobe XD (PNG or PDF)? The case study has a marked placeholder where your note says "INSERT WIREFRAMES FROM PDF HERE".
 - **Figure captions:** we've added a short caption under each image (listed separately for you to approve or edit).

@@ -1,13 +1,11 @@
-"""Round 4 image exports (run from yasmin/, after build_assets.py and build_r3_assets.py).
+"""Round 4 image exports (Phase 2: the homepage row covers, panel images and About mosaic were retired;
+the homepage no longer shows case-study media) (run from yasmin/, after build_assets.py and build_r3_assets.py).
 
 Rule from the round 4 review: a cover is a finished image, placed as-is. Drawings,
 screens and documents sit WHOLE on the light ground (#F4F3F0) or white, never cropped.
 Only photographs may be cropped, and only to the frame's own ratio.
 
-  r4-row-rNN-3x2.jpg     project rows + projects grid (3:2, subject whole)
   r5-ri-five-screens.jpg Rhode Island cover plate (FIG. 01): five screens in a row, whole
-  r4-panel-0N.jpg        homepage discipline panels (2:3)
-  r4-about-*.jpg         homepage About mosaic (4:5, 3:2, 1:1, 1:1)
   r4-ri-screens.jpg      the two frameless RI screens, side by side (Plate pair, tall slot)
   r4-whiteboard-stack.jpg  her two whiteboard photos, one above the other (Plate pair, tall slot)
 Module tiles (drawings/screens/documents at their module ratio, on #F4F3F0 with the 24px
@@ -59,19 +57,11 @@ def place(items, W, H, pad, gap, ground=GROUND):
     return canvas
 
 
-col_src = f"{M}/room02-power-energy/r02_video_final-setup.mp4"
-fab_src = f"{M}/room02-power-energy/r02_video_fabrication-progression.mp4"
-col_whole = [frame(col_src, t) for t in (1, 5, 15)]          # frames where the whole column is in shot
 plan_paths = Image.open(f"{M}/room01-jackson-home/r01_plan_house-visitor-paths.png")
 screens = [Image.open(f"{IMG}/r03-screen-record.jpg"), Image.open(f"{IMG}/r03-screen-doses.jpg")]
 journey = Image.open(f"{M}/room04-littelfuse/r04_doc_journey-map.png")
 itc = Image.open(f"{M}/room02-power-energy/r02_board_itc-employee-research.png")
 
-# ---- project rows and projects grid: finished 3:2, subject whole
-save(place([plan_paths], 1800, 1200, 72, 0), "r4-row-r01-3x2.jpg")                 # the whole plan, with paths
-save(place(col_whole, 1800, 1200, 120, 28), "r4-row-r02-3x2.jpg")                  # the whole column, three states
-save(place(screens, 1800, 1200, 96, 56), "r4-row-r03-3x2.jpg")                     # both phone screens
-save(place([journey], 1800, 1200, 72, 0, WHITE), "r4-row-r04-3x2.jpg")             # the whole journey map
 
 # ---- round 5: Rhode Island's cover image, the five 401 Health screens in a row, whole and unpadded.
 # Shown as FIG. 01, a full plate under the chapter index (the builder adds the 48px padding).
@@ -85,25 +75,8 @@ for im, w in zip(ri_row, ws):
     five.paste(im.resize((w, H5), Image.LANCZOS), (x, 0)); x += w + G5
 save(five, "r5-ri-five-screens.jpg")
 
-# ---- homepage discipline panels, 2:3
-save(crop_to(Image.open(f"{IMG}/r02-column-installed.jpg"), 2 / 3, cy=.45), "r4-panel-01.jpg")   # photograph
-def upper(items, pad, gap):
-    """2:3 panel with the subject whole in the upper 70%, so the name below sits on plain ground."""
-    top = place(items, 1000, 1050, pad, gap)
-    canvas = Image.new("RGB", (1000, 1500), GROUND)
-    canvas.paste(top, (0, 30))
-    return canvas
 
 
-save(upper(screens, 90, 40), "r4-panel-02.jpg")
-save(upper([plan_paths], 70, 0), "r4-panel-03.jpg")
-save(upper([itc], 60, 0), "r4-panel-04.jpg")
-
-# ---- About mosaic: stand-ins from her work until she supplies personal photos (ASSET-GAPS R4-1..R4-4)
-save(crop_to(frame(col_src, 19), 4 / 5, cy=.35), "r4-about-tall-4x5.jpg")           # photograph
-save(crop_to(frame(fab_src, 12), 3 / 2, cy=.55), "r4-about-wide-3x2.jpg")           # photograph
-save(crop_to(frame(fab_src, 0), 1, cx=.5), "r4-about-sq-a.jpg")                      # photograph
-save(place([Image.open(f"{IMG}/r02-shop-1-detail.jpg")], 1000, 1000, 48, 0), "r4-about-sq-b.jpg")   # drawing, whole
 
 # ---- Plate pair (Power & Energy): her two whiteboard photos (fig 12) stacked, so they fill the tall slot
 wb = Image.open(f"{IMG}/r3-fig-whiteboard.jpg").convert("RGB")

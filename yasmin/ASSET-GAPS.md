@@ -100,7 +100,7 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 | # | Gap | Where it shows | Status |
 |---|---|---|---|
 | **R3-1** | **Littelfuse wireframes** (same as B1) | Littelfuse case study, "The Approach", exactly where her note says "INSERT WIREFRAMES FROM PDF HERE" (L-041). Labelled placeholder: *"Littelfuse wireframes — pending export from Adobe XD"*. | **Open.** Needs PNG or PDF exports from the ~60 XD links in `source/Littelfuse_Wireframes_XD-links.docx`. At minimum: Home + mega menu, the L0–L7 product flow, Check Stock, Where to Buy, one mobile screen. |
-| R3-2 | Project **years** for Power & Energy, Rhode Island, Littelfuse | Case-study header meta panel: "[YEAR — pending client]" | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
+| R3-2 | Project **years** for Power & Energy, Rhode Island, Littelfuse | Case-study header meta panel (the YEAR field was removed in Phase 2) | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
 | R3-3 | **Based in** (city) | Homepage facts column: "[pending client]" | Open (asked in COPY-NOTES-FOR-CLIENT.md). |
 | R3-4 | "Studers" typo inside the p3 chart image (`doc-01`) | Jackson Home, Research Methodology | Needs a re-exported chart if she approves the fix (COPY-NOTES #12). |
 
@@ -116,3 +116,15 @@ Every placeholder note in `source/CASE_STUDY-Yasmin_Bajwa.pdf`. Five of the nine
 | R4-6 | "Office Online Frame" tooltip inside the plan-with-paths image | Row cover 01, panel 03, Baseline Assumptions plate | Her export has a stray software tooltip in the kitchen hallway. Round 4 places the plan whole (no crop), so it now shows. Ask for a clean re-export. |
 
 **Photo specs for R4-1…R4-4:** at least 1600px on the long side; the tall slot is 4:5, the wide 3:2, the squares 1:1. Photos are cropped to those ratios, so keep the subject away from the edges. To swap one in Squarespace, click the image block → *Replace*.
+
+## Phase 2 update
+
+| # | Gap | Where it shows | Status |
+|---|---|---|---|
+| **P2-1** | **ITC logo: request SVG or transparent high-res from client** | Room 02 project tile (homepage row, Projects page) | **Open.** The supplied `itc.png` is 500×214. Its background is already transparent (no grey box was found in the file), so it was only upscaled ×3 for the prototype; the ink version was traced by threshold. Both are soft at large sizes. |
+| **P2-2** | **snippet-21**: can the handwritten note be published? | Snippets About My Life slideshow, last slide | **Open.** The note is legible in the photo. Remove the slide or blur the note if the client says no. |
+| P2-3 | Room 02 tile shows the **ITC** logo (the project's sponsor), not The Henry Ford | Homepage row 02, Projects card 02 | The client chose this; confirm on the call. |
+| P2-4 | LinkedIn profile URL | Contact section, LINKEDIN row | Open: "[URL — pending client]". |
+| P2-5 | Plan tooltip "Office Online Frame" (was R4-6) | Now only inside the Jackson Home case study (removed from the homepage) | Open, as before. |
+
+**Closed in Phase 2:** R4-1…R4-4 (personal photos: 21 snippets supplied); R3-2 / D2 (project years: removed from the site); R3-3 (Based in: United States); D7 in part (email and phone supplied; the résumé link was removed, so no PDF is needed).

@@ -21,7 +21,7 @@ The comparison is automatic (`tools/dom_text.js` then `tools/copy_check.py`). Re
 | A-04 | For the visual direction, I’d like the site to feel editorial, minimal… | Not printed (brief / instruction, confirmed Q1) | — | — |
 | A-05 | About Me | Hero, label above her first paragraph | ✔ | ✔ |
 | A-06 | Hi! I’m Yasmin, a Digital Exhibit Designer at The Henry Ford Museum wi… | Hero, under the greeting | ✔ | ✔ |
-| A-07 | By blending design, research, and exhibit development, I bring a fresh… | About bento, statement in the left 12 columns | ✔ | ✔ |
+| A-07 | By blending design, research, and exhibit development, I bring a fresh… | Snippets About My Life, statement in the left 10 columns | ✔ | ✔ |
 | A-08 | Highlight these 4 skills in this order:: | Not printed (brief / instruction, confirmed Q1) | — | — |
 | A-09 | Interactive Exhibit Design | Four disciplines, panel 01 | ✔ | ✔ |
 | A-10 | UX ( User Experience) Design | Four disciplines, panel 02 | ✔ | ✔ |
@@ -351,10 +351,6 @@ These are **not her words**. They're short factual captions the brief asked for 
 
 | Page | Figure | Caption |
 |---|---|---|
-| index | Fig. 01 | Power & Energy column, installed at The Henry Ford |
-| index | Fig. 02 | Installing the column in the Power & Energy gallery |
-| index | Fig. 03 | The gallery column before the build |
-| index | Fig. 04 | Column plan view, from the shop drawings |
 | room-01-jackson-home | Fig. 01 | Time spent on-site by visitor type |
 | room-01-jackson-home | Fig. 02 | Congestion, queue sizes, visit time and delays |
 | room-01-jackson-home | Fig. 03 | Jackson Home floor plan |
@@ -404,13 +400,17 @@ These are **not her words**. They're short factual captions the brief asked for 
 |---|---|---|
 | Homepage hero | Hi, I’m *Yasmin.* | Round 3 brief |
 | Homepage facts | Role: Digital Exhibit Designer, The Henry Ford Museum | Q9 |
-| Homepage facts | Based in: [pending client] | Q9 (visible placeholder) |
+| Homepage facts | Based in: United States | Phase 2 (client) |
 | Homepage facts | Focus: Interactive Exhibit Design · UX Design · UX Research · Digital Marketing | Q9 |
 | Homepage facts | Currently: Bringing stories to life through digital experiences | Q9 |
 | Homepage contact | Let’s create something people will remember. | Q3 |
-| room01 header | Setting: The Henry Ford, Greenfield Village · Year: 2026 | Q9 |
-| room02 header | Setting: The Henry Ford Museum, Power & Energy exhibit · Year: [YEAR — pending client] | Q9 |
-| room03 header | Setting: State of Rhode Island Department of Health · Year: [YEAR — pending client] | Q9 |
-| room04 header | Setting: Littelfuse · Year: [YEAR — pending client] | Q9 |
-| Every page | Navigation, chapter numbers, ROLE / METHODS / SETTING / YEAR labels, 'View Projects →', 'Projects', 'Password protected', 'All projects', '← Previous project', 'Next project →', footer, lock-screen text | Brief (interface text) |
+| Homepage contact row | Email: yasminbajwa248@gmail.com | Phase 2 (client) |
+| Homepage contact row | Phone: (313) 979-2205 | Phase 2 (client) |
+| Homepage contact row | LinkedIn: [URL — pending client] | Phase 2 (client) |
+| Homepage section title | Snippets About My Life | Phase 2 (client) |
+| room01 header | Setting: The Henry Ford, Greenfield Village | Q9 (project years removed in Phase 2) |
+| room02 header | Setting: The Henry Ford Museum, Power & Energy exhibit | Q9 (project years removed in Phase 2) |
+| room03 header | Setting: State of Rhode Island Department of Health | Q9 (project years removed in Phase 2) |
+| room04 header | Setting: Littelfuse | Q9 (project years removed in Phase 2) |
+| Every page | Navigation, chapter numbers, ROLE / METHODS / SETTING labels, 'View Projects →', 'Projects', 'Password protected', 'All projects', '← Previous project', 'Next project →', footer, lock-screen text | Brief (interface text) |
 

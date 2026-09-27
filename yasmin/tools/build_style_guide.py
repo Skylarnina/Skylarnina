@@ -150,7 +150,14 @@ META = re.search(r'<dl class="meta__panel">.*?</dl>', room, re.S).group(0)
 CHINDEX = re.search(r'<div class="chindex">.*?</div>', room, re.S).group(0)
 ROW = re.search(r'<a class="row fade".*?</a>', home, re.S).group(0).replace(" fade", "")
 ROW_IMG = re.search(r'<img src="assets/img/([^"]+)"', ROW).group(1)
-ROW = ROW.replace(f"assets/img/{ROW_IMG}", data_uri(f"site/assets/img/{ROW_IMG}", 360)).replace(' loading="lazy"', "")
+if ROW_IMG.endswith(".svg"):
+    ROW_URI = "data:image/svg+xml;base64," + base64.b64encode(open(f"site/assets/img/{ROW_IMG}", "rb").read()).decode()
+else:                                            # transparent PNG logo: keep the alpha
+    _im = Image.open(f"site/assets/img/{ROW_IMG}").convert("RGBA")
+    _im.thumbnail((360, 360))
+    _buf = io.BytesIO(); _im.save(_buf, "PNG", optimize=True)
+    ROW_URI = "data:image/png;base64," + base64.b64encode(_buf.getvalue()).decode()
+ROW = ROW.replace(f"assets/img/{ROW_IMG}", ROW_URI).replace(' loading="lazy"', "")
 FIG_CAP = re.search(r"Fig\. 04 — [^<]+", room).group(0)
 FIG_IMG = re.search(r'<img src="assets/img/(tiles/r01-plan-annex[^"]+)"', room).group(1)
 FIG = (f'<figure class="t"><div class="m" style="aspect-ratio:1.5"><img src="{data_uri("site/assets/img/" + FIG_IMG, 520)}" alt="The Annex floor plan"></div>'
@@ -163,8 +170,8 @@ SPEC_SELECTORS = [
     ".label", ".u", ".u:hover", ".btn", ".btn:hover", ".btn--solid", ".btn--solid:hover",
     ".bar nav", ".bar nav a[aria-current]", ".bar nav a:hover",
     ".m", ".m img,.m video", ".t", ".t .m", ".t .m img", ".t figcaption,.mod--video figcaption",
-    ".rows", ".row", ".row__t", ".row__t h3", ".row__role", ".row__img", ".row__img .m", ".m--fit img",
-    ".meta__panel", ".meta__panel div", ".meta__panel div:nth-child(-n+2)", ".meta__panel dd", ".meta__panel .wide",
+    ".rows", ".row", ".row__t", ".row__t h3", ".row__role", ".row__img", ".logo-tile", ".logo-tile img", ".row:hover .logo-tile,.card:hover .logo-tile",
+    ".meta__panel", ".meta__panel div", ".meta__panel dd",
     ".chindex", ".chindex ol", ".chindex li", ".chindex li span", ".chindex a:hover",
     ".lock form", ".lock label", ".lock input", ".lock input:focus", ".lock input:focus-visible", ".lock .err",
 ]
@@ -269,7 +276,7 @@ for a, name, note in ink_steps:
 ground_row = "".join([
     swatch(BG, "White", BG, "page ground", uses(BG)),
     swatch(ALT, "Ground", ALT, "plates, Stone sections", uses(ALT)),
-    swatch("#ECEAE5", "Ground deep", "#ECEAE5", "", uses("#ECEAE5")),
+    swatch("#ECEAE5", "Ground deep", "#ECEAE5", "logo tile hover" if uses("#ECEAE5") else "", uses("#ECEAE5")),
 ])
 usage = [
     (BG, "Page ground", BG, "html, body, .lock"),
@@ -328,9 +335,8 @@ WRAP = v(".wrap", "max-width")
 BAR_H = v(".bar .wrap", "min-height")
 FADE = decls(parse(MEDIA["@supports (animation-timeline:view())"][0][1]), ".fade")
 BTN_T = v(".btn", "transition")
-RATIOS = {"Cover (photo)": v(".cover .m", "aspect-ratio"), "Project rows + grid": v(".row__img .m", "aspect-ratio"),
-          "Headshot": v(".hero__photo .m", "aspect-ratio"), "Mosaic wide": v(".mosaic .t--wide .m", "aspect-ratio"),
-          "Mosaic squares": v(".mosaic .t--sqa .m,.mosaic .t--sqb .m", "aspect-ratio"), "Baseline plan": v(".spread__plan .m", "aspect-ratio"),
+RATIOS = {"Cover (photo)": v(".cover .m", "aspect-ratio"), "Project logo tiles": v(".logo-tile", "aspect-ratio"), "Snippets slideshow": v(".ss__frame", "aspect-ratio"),
+          "Headshot": v(".hero__photo .m", "aspect-ratio"), "Baseline plan": v(".spread__plan .m", "aspect-ratio"),
           "Placeholder": v(".placeholder", "aspect-ratio")}
 RADIUS = sorted(set(re.findall(r"border-radius:([^;}]+)", CSS)))
 SHADOW = "box-shadow" in CSS

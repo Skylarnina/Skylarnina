@@ -130,18 +130,24 @@ strong,b{font-weight:500}
 
 .hairline{border:0;border-top:1px solid var(--hair);margin:0}
 
-/* About bento (A9 auren + A4 Finnhütte): statement left 12 cols, mosaic right 12 */
+/* Phase 2: Snippets About My Life. Statement + tags left 10 cols, slideshow right 12 cols */
 .about{align-items:start;row-gap:40px}
-.about__statement{grid-column:1/13;font-size:40px;line-height:1.2;letter-spacing:-.015em;max-width:20ch;text-wrap:pretty}
-.about__right{grid-column:13/25;display:grid;gap:28px}
-.mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;align-items:start}
-.mosaic .t--tall{grid-row:1/3;align-self:stretch;grid-template-rows:1fr auto}
-.mosaic .t--tall .m{height:100%;min-height:0}
-.mosaic .t--tall img{position:absolute;inset:0;object-fit:cover}
-.mosaic .t--wide{grid-column:2/4}
-.mosaic .t--wide .m{aspect-ratio:3/2}
-.mosaic .t--sqa .m,.mosaic .t--sqb .m{aspect-ratio:1/1}
-.mosaic .m img{object-fit:contain}
+.about__left{grid-column:1/11;display:grid;gap:32px;align-content:start}
+.about__title{font-size:var(--fs-chapter);line-height:1.08;font-weight:400}
+.about__statement{font-size:40px;line-height:1.2;letter-spacing:-.015em;max-width:20ch;text-wrap:pretty}
+.about__right{grid-column:13/25}
+/* the slideshow as Squarespace's Gallery "Slideshow: Simple" draws it: 4:5 frame, fill,
+   arrows over the image, dots beneath, 400ms crossfade, no captions */
+.ss__frame{position:relative;aspect-ratio:4/5;background:var(--alt);overflow:hidden}
+.ss__slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .4s ease}
+.ss__slide.is-on{opacity:1}
+.ss__slide img{width:100%;height:100%;object-fit:cover}
+.ss__arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:0;background:rgba(255,255,255,.9);color:var(--ink);font:400 18px/1 var(--font);cursor:pointer;z-index:2}
+.ss__arrow--prev{left:12px}
+.ss__arrow--next{right:12px}
+.ss__dots{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding-top:16px}
+.ss__dot{width:7px;height:7px;padding:0;border:0;border-radius:0;background:var(--hair);cursor:pointer}
+.ss__dot.is-on{background:var(--ink)}
 .about__tags{display:flex;gap:14px;font:500 12px/1.4 var(--font);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);border-top:1px solid var(--ink);padding-top:14px}
 
 .panels{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--hair)}
@@ -162,17 +168,22 @@ strong,b{font-weight:500}
 .projects-head h2{font-size:var(--fs-title);line-height:1;letter-spacing:-.01em;font-weight:400}
 .rows{border-top:1px solid var(--ink)}
 .row{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gutter);padding:22px 0;border-bottom:1px solid var(--hair);align-items:start;transition:background-color .3s}
-.row:hover{background:var(--alt)}
 .row__t{grid-column:1/11;display:grid;gap:10px}
 .row__t h3{font-size:clamp(24px,2.1vw,32px);line-height:1.1;font-weight:400}
 .row__role{grid-column:12/18;font-size:15px;line-height:1.45;display:grid;gap:6px;padding-top:6px}
 .row__img{grid-column:19/25}
-.row__img .m{aspect-ratio:3/2}
 .m--fit img{object-fit:contain}
+/* Phase 2: logo tiles (rows + Projects grid). 3:2 on the light ground, 32px padding; hover darkens the ground only */
+.logo-tile{aspect-ratio:3/2;background:var(--alt);padding:32px;display:grid;place-items:center;transition:background-color .3s}
+.logo-tile img{height:auto;max-width:100%;max-height:100%}
+.row:hover .logo-tile,.card:hover .logo-tile{background:#ECEAE5}
 
 .contact{display:grid;gap:40px}
 .contact h2{font-size:var(--fs-title);line-height:1.02;letter-spacing:-.01em;font-weight:400;max-width:16ch;text-wrap:balance}
-.contact__links{display:flex;flex-wrap:wrap;gap:12px 32px;font-size:19px}
+/* Phase 2: Email · Phone · LinkedIn as hairline rows, the facts-column pattern (11px caps label, 17px value) */
+.contact__rows{max-width:560px;border-top:1px solid var(--ink)}
+.contact__rows div{padding:12px 0 14px;border-bottom:1px solid var(--hair);display:grid;gap:4px}
+.contact__rows dd{font-size:17px;line-height:1.4}
 .foot .wrap{display:flex;justify-content:space-between;gap:16px;padding-block:28px;border-top:1px solid var(--hair);font-size:13px;color:var(--muted)}
 
 /* =====================================================================
@@ -181,8 +192,6 @@ strong,b{font-weight:500}
 .p-title{font-size:var(--fs-title);line-height:1;letter-spacing:-.01em;font-weight:400;padding-block:clamp(48px,6vw,96px) 40px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:56px var(--gutter)}
 .card{display:grid;gap:14px}
-.card .m{aspect-ratio:3/2}
-.card:hover h2{text-decoration:underline;text-underline-offset:.22em}
 .card h2{font-size:26px;line-height:1.15;font-weight:400;max-width:32ch}
 .card p{font-size:15px}
 
@@ -200,11 +209,9 @@ strong,b{font-weight:500}
 .dochead .meta__panel{grid-column:15/25;padding:0;background:none}
 .coverplate .mod.mt{margin-top:clamp(40px,4vw,64px)}
 .meta{margin-top:calc(-1 * clamp(120px,12vw,190px));position:relative;z-index:2}
-.meta__panel{grid-column:14/25;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--gutter);background:#fff;padding:22px 24px 8px}
-.meta__panel div{padding:10px 0 14px;border-top:1px solid var(--hair);display:grid;gap:4px}
-.meta__panel div:nth-child(-n+2){border-top:1px solid var(--ink)}
+.meta__panel{grid-column:14/25;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) minmax(0,1fr);gap:0 var(--gutter);background:#fff;padding:22px 24px 8px}
+.meta__panel div{padding:10px 0 14px;border-top:1px solid var(--ink);display:grid;gap:4px;align-content:start}   /* Phase 2: three columns, ROLE / METHODS / SETTING (no YEAR) */
 .meta__panel dd{font-size:15px;line-height:1.45}
-.meta__panel .wide{grid-column:1/3}
 
 .chindex{margin-top:clamp(56px,6vw,88px);border-block:1px solid var(--ink)}
 .chindex ol{list-style:none;display:flex;flex-wrap:wrap;gap:10px 28px;padding-block:16px;font-size:14px}
@@ -288,8 +295,6 @@ ol.nl.plain > li > *{grid-column:1}
    LOCK SCREEN (Squarespace native lock screen, restyled)
    ===================================================================== */
 .lock{position:relative;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;background:#fff;isolation:isolate}
-.lock__bg{position:absolute;inset:0;z-index:-1;opacity:.08}
-.lock__bg img{width:100%;height:100%;object-fit:contain;filter:grayscale(1)}
 .lock__top{padding:24px var(--margin);font-size:15px}
 .lock__box{align-self:center;justify-self:center;width:min(100% - 2*var(--margin),560px);display:grid;gap:22px;text-align:center;justify-items:center}
 .lock__box h1{font-size:clamp(38px,3.8vw,56px);line-height:1.08;font-weight:400}
@@ -326,11 +331,9 @@ ol.nl.plain > li > *{grid-column:1}
   .facts{order:4}
   .hero__about p{font-size:17px}
   .about__statement{font-size:28px}
-  .mosaic{grid-template-columns:1.87fr 1fr;gap:12px}
-  .mosaic .t--tall{grid-column:1;grid-row:1/3}
-  .mosaic .t--sqa{grid-column:2;grid-row:1}
-  .mosaic .t--sqb{grid-column:2;grid-row:2}
-  .mosaic .t--wide{grid-column:1/3;grid-row:3}
+  .about__right{order:-1}
+  .about__title{font-size:34px}
+  .ss__arrow{width:38px;height:38px}
   .about__tags{gap:10px}
   .panels{grid-template-columns:1fr 1fr}
   .panel{min-height:42vh}
@@ -349,8 +352,7 @@ ol.nl.plain > li > *{grid-column:1}
   .bar--over .wrap{border-color:var(--hair)}
   .meta{margin-top:0}
   .meta__panel{grid-template-columns:1fr;padding:20px 0 0}
-  .meta__panel .wide{grid-column:auto}
-  .meta__panel div:nth-child(2){border-top:1px solid var(--hair)}
+  .meta__panel div + div{border-top:1px solid var(--hair)}
   .chindex ol{gap:8px 18px;font-size:13px}
   .ch-head{margin-bottom:18px}
   .ch-head h2{font-size:34px}
@@ -385,7 +387,6 @@ ol.nl.plain > li > *{grid-column:1}
 </head>
 <body>
 <main class="lock" id="wrong">
-  <div class="lock__bg"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221024%22%20height%3D%221536%22%20viewBox%3D%220%200%201024%201536%22%20preserveAspectRatio%3D%22none%22%3E%3Crect%20width%3D%221024%22%20height%3D%221536%22%20fill%3D%22%23D6D6D6%22/%3E%3Cpath%20d%3D%22M0%200L1024%201536M1024%200L0%201536%22%20stroke%3D%22%23B4B4B4%22%20stroke-width%3D%221.5%22%20vector-effect%3D%22non-scaling-stroke%22/%3E%3C/svg%3E" alt="" width="1024" height="1536"><span class="wf-label">IMAGE — BACKGROUND (8%)</span></div>
   <p class="lock__top" data-added="ui">Yasmin Bajwa</p>
   <div class="lock__box" data-added="ui">
     <h1>Projects are shared <em>by invitation.</em></h1>
@@ -398,8 +399,9 @@ ol.nl.plain > li > *{grid-column:1}
     </form>
     <p class="lock__ask">No password? <a class="u" href="mailto:?subject=Portfolio%20access">Email Yasmin →</a></p>
   </div>
-  <p class="lock__foot" data-added="ui">© 2026 Yasmin Bajwa</p>
+  <p class="lock__foot" data-added="ui">© Yasmin Bajwa</p>
 </main>
+
 <p class="wf-tag">Wireframe · Private view (password page) · <a href="index-wireframes.html">all pages</a></p>
 </body>
 </html>

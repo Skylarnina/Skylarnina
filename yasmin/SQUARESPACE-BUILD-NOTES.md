@@ -1,6 +1,8 @@
-# Squarespace build notes: Round 6
+# Squarespace build notes: Phase 2
 
-How to build the prototype (`site/`) in **Squarespace 7.1 with Fluid Engine**, using only standard sections and blocks, Site Styles, and **19 lines of custom CSS** (§2; the budget is 30). There is **no custom JavaScript** and **no Code Block used for layout**. The prototype itself has no JavaScript either, so what you see is what the native build can do.
+How to build the prototype (`site/`) in **Squarespace 7.1 with Fluid Engine**, using only standard sections and blocks, Site Styles, and **20 lines of custom CSS** (§2; the budget is 30). There is **no custom JavaScript** and **no Code Block used for layout**. The prototype has one small script, which only stands in for Squarespace's own Gallery slideshow (§3, section 3); everything else in it is HTML and CSS, so what you see is what the native build can do.
+
+**Phase 2 changes (client feedback):** no project years anywhere (the case-study meta table is ROLE / METHODS / SETTING); BASED IN is United States; the résumé link is gone; the contact section is three hairline rows, Email · Phone · LinkedIn; the About section is now **Snippets About My Life**, a Gallery slideshow of her 21 photos (§3); the project rows and Projects grid show **logo tiles** instead of covers (§3); and nothing from inside the case studies appears before the password (the discipline panels use her snippet photos, and the lock screen has no background image).
 
 **Round 6 change:** headings are now **Instrument Serif** (one weight plus italic); body, captions, labels and numerals stay Inter Tight. Heading sizes went up a step because the serif is narrower and lighter (§0).
 
@@ -47,7 +49,7 @@ Fluid Engine desktop grid is **24 columns**; every position below uses it (e.g. 
 |---|---|---|---|
 | Home | Regular page | (logo link) | No |
 | Projects | **Regular page** (public), see §3 | "Projects" | No |
-| About, Contact | Anchor links to sections on Home: `/#about`, `/#contact` | "About", "Contact" | — |
+| About, Contact | Anchor links to sections on Home: `/#snippets` (Snippets About My Life), `/#contact` | "About", "Contact" | — |
 | Case studies | **Portfolio page** "Case studies" (URL `/projects-private`), **Not linked**, four project pages inside | — | **Yes**, one password (§5) |
 
 Header (*Edit Site Header*): layout **logo/site title left, navigation right**; site title "Yasmin Bajwa" as text, 15px; nav 15px; style **Solid, White**; a hairline under the header (header border, if her template offers it; **verify**; otherwise CSS line 1).
@@ -56,7 +58,7 @@ Header (*Edit Site Header*): layout **logo/site title left, navigation right**; 
 
 ## 2. Custom CSS (Website → Pages → Custom code → Custom CSS)
 
-The complete list: **19 lines** (16 from round 3, 3 for the discipline panels).
+The complete list: **20 lines** (15 from round 3, 3 for the discipline panels, 2 for the logo tiles).
 
 ```css
 /* 1  hairline under the header, if the template has no header border setting */
@@ -70,7 +72,7 @@ The complete list: **19 lines** (16 from round 3, 3 for the discipline panels).
 .sqs-html-content ol > li{padding:14px 0;border-bottom:1px solid rgba(17,17,17,.14)}
 /* 7  square corners everywhere (buttons, images, video) */
 .sqs-block-button-element,.fluid-image-container,.video-player,.sqs-video-wrapper{border-radius:0!important}
-/* 8-16  lock screen (§5); class names from community examples, NOT verified here: check each in the browser inspector */
+/* 8-15  lock screen (§5); class names from community examples, NOT verified here: check each in the browser inspector */
 .sqs-slide-container input[type="password"]{border:0!important;border-bottom:1px solid #111!important;border-radius:0!important;background:transparent!important;letter-spacing:.12em}
 .sqs-slide-container input[type="password"]:focus{border-bottom-width:2px!important;box-shadow:none!important}
 .sqs-slide-container button,.sqs-slide-container input[type="submit"]{border-radius:0!important;background:#111!important;color:#fff!important;border:1px solid #111!important}
@@ -78,17 +80,22 @@ The complete list: **19 lines** (16 from round 3, 3 for the discipline panels).
 .sqs-slide-container .sqs-slide-layer-content{max-width:560px;margin:0 auto}
 .sqs-slide-container h1,.sqs-slide-container h2{font-weight:400!important;letter-spacing:-.025em}
 .sqs-slide-container a{text-decoration:underline;text-underline-offset:.22em}
-.sqs-slide-container .sqs-slide-background-content{opacity:.08}
 .sqs-slide-container .sqs-slide-layer{background:#fff}
-/* 17-19  A10 discipline panels: every image always visible under a 45% black overlay; hover lightens it to 30% (300ms).
+/* 16-18  A10 discipline panels: every image always visible under a 45% black overlay; hover lightens it to 30% (300ms).
    brightness(.55) is exactly a 45% black layer; .7 is 30%. Fluid Engine blocks can't take custom classes, so use each
    block's own class from the inspector: I1-I4 = image blocks' wrappers (.fe-block-yui_3_17_2_1_…), T1-T4 / N1-N4 = name and "01"-"04" text blocks. */
 .I1 img,.I2 img,.I3 img,.I4 img{filter:brightness(.55);transition:filter .3s ease}
 .I1:hover img,.I2:hover img,.I3:hover img,.I4:hover img{filter:brightness(.7)}
 .T1,.T2,.T3,.T4,.N1,.N2,.N3,.N4{pointer-events:none}
+/* 19-20  logo tiles (homepage project rows + Projects page): the light ground behind each transparent logo plate, darker on hover.
+   .L = the two sections, e.g. section[data-section-id="…"] (copy each section's ID from the inspector; list both, comma-separated). */
+.L .fluid-image-container{background:#F4F3F0;transition:background-color .3s}
+.L .fluid-image-container:hover{background:#ECEAE5}
 ```
 
-**How lines 17–19 work.** Each panel is a **Shape** block (the hairline outline, at the back), an **Image** block filling the panel (`r4-panel-0N.jpg`, 2:3) and two **Text** blocks on top ("0N" at the top, her skill name at the bottom). The section uses the **Ink** theme, so the names are white natively. Line 17 puts a 45% black overlay on every image, always, on desktop and phones. Line 18 lightens it to 30% while the pointer is over a panel. Line 19 lets the pointer pass through the text blocks to the image. Nothing appears or disappears: the image, number and name are always visible. To find a block's class, right-click it → *Inspect* and copy the `fe-block-…` class from the wrapper `div`. **Verify** once in the browser. If line 18 doesn't fire in her template, delete it: the panels still read correctly at rest.
+**How lines 16–18 work.** Each panel is a **Shape** block (the hairline outline, at the back), an **Image** block filling the panel (Phase 2: her snippet photos `snippet-15`, `-13`, `-18`, `-06`, set to Fill; no case-study images before the password) and two **Text** blocks on top ("0N" at the top, her skill name at the bottom). The section uses the **Ink** theme, so the names are white natively. Line 16 puts a 45% black overlay on every image, always, on desktop and phones. Line 17 lightens it to 30% while the pointer is over a panel. Line 18 lets the pointer pass through the text blocks to the image. Nothing appears or disappears: the image, number and name are always visible. To find a block's class, right-click it → *Inspect* and copy the `fe-block-…` class from the wrapper `div`. **Verify** once in the browser. If line 17 doesn't fire in her template, delete it: the panels still read correctly at rest.
+
+**Lines 19–20, logo tiles.** Each tile is an **Image** block showing a transparent logo plate (`site/assets/img/logos/plate-*.png`, 1200×800, 3:2). The logo is already sized for equal visual weight inside the plate, with a 121px transparent margin, which is 32px at the homepage tile size (316px wide). Line 19 paints the light ground behind it; line 20 darkens the ground to `#ECEAE5` on hover. Squarespace can't make a whole row one link, so the hover is on the tile itself. **Verify** once in the browser.
 
 Everything else is Site Styles or block settings. **Not needed:** code blocks, JavaScript, plugins.
 
@@ -100,19 +107,34 @@ Everything else is Site Styles or block settings. **Not needed:** code blocks, J
 
 | # | Reference | Section | Fluid Engine blocks (desktop, 24 cols) | Mobile (390px) |
 |---|---|---|---|---|
-| 1 | **A9 + A8** hero | Blank section, theme White, padding M | **Text** "Hi, I'm *Yasmin.*" (H1) cols 1–14, rows 1–7. **Text** "About Me" (bold paragraph) + her paragraph (P2) cols 1–12, under it. **Button** "View Projects →" (outline) → `/projects`, cols 1–4. **Image** headshot 4:5, cols 15–19, caption "Digital Exhibit Designer — The Henry Ford". **Facts**: four **Text** blocks (label in P3 + value) separated by **Line** blocks, cols 21–24; "BASED IN: [pending client]" in italic until she answers. | Headshot first, then greeting, text, button, facts. |
+| 1 | **A9 + A8** hero | Blank section, theme White, padding M | **Text** "Hi, I'm *Yasmin.*" (H1) cols 1–14, rows 1–7. **Text** "About Me" (bold paragraph) + her paragraph (P2) cols 1–12, under it. **Button** "View Projects →" (outline) → `/projects`, cols 1–4. **Image** headshot 4:5, cols 15–19, caption "Digital Exhibit Designer — The Henry Ford". **Facts**: four **Text** blocks (label in P3 + value) separated by **Line** blocks, cols 21–24; "BASED IN: United States". | Headshot first, then greeting, text, button, facts. |
 | 2 | Hairline | Section divider (or a full-width **Line** block at the top of section 3) | 1px, `#111` at 14%, full width. **The round-3 photo strip is removed.** | — |
-| 3 | **A9 auren + A4 Finnhütte** About bento | Blank section, theme **Stone**, padding L, anchor link `about` | **Text** block, P1 (40px), cols 1–12: her second About paragraph. Mosaic in cols 13–24, four **Image** blocks + a P3 caption **Text** under each: tall 4:5 (`r4-about-tall-4x5.jpg`) cols 13–18 across two rows; wide 3:2 (`r4-about-wide-3x2.jpg`) cols 19–24; two squares (`r4-about-sq-a.jpg`, `r4-about-sq-b.jpg`) cols 19–21 and 22–24 below it. Under the mosaic, a **Line** and a **Text** block: "HISTORY · FASHION · ART" (12px, 500, tracking 0.24em, uppercase). When Yasmin sends personal photos (history / fashion / art), she swaps the four images in place (ASSET-GAPS R4-1…R4-4). | Statement first (28px); mosaic: tall left, the two squares stacked right, the wide image full width below. |
-| 4 | **A10** four disciplines | Blank section, **content width Full**, no padding, section height ~60vh | Four equal columns (cols 1–6, 7–12, 13–18, 19–24). Each: **Shape** (outline, at the back), **Image** filling the panel (`r4-panel-01…04.jpg`: 01 installed column, 02 Rhode Island screens, 03 Jackson Home plan with paths, 04 ITC storyboard; subjects whole in the upper 70% so the name sits on plain ground), **Text** "01"–"04" at top (13px, muted) and her skill name at the bottom (28px), **in her order**. All four images always visible under a 45% black overlay; hover lightens it to 30% (CSS §2 lines 17–19). Section theme **Ink** (names white). | 2 × 2 panels at 42vh, same 45% overlay. |
-| 5 | **A3** projects | Blank section, White, anchor link `projects` | **Text** "Projects" (H2) cols 1–12, link "All projects →" cols 20–24. Then per project a row: **Line** (full width), **Text** number + title cols 1–10, **Text** her Role line + "PASSWORD PROTECTED" cols 12–17, **Image** `r4-row-rNN-3x2.jpg` cols 19–24, block sized exactly 3:2 so nothing is cropped (the export already holds the whole plan, the whole column, both phone screens, the whole journey map on the light ground or white). Title, image and link all go to the project's URL. (A whole row can't be one link in Fluid Engine; title and image are.) | Image, then title, then role. |
-| 6 | Contact | Blank section, theme Stone, anchor link `contact` | **Text** "CONTACT" (P3), **Text** "Let's create something people will remember." (H2) cols 1–14, **Text** links: Email · LinkedIn · Résumé (underlined; the résumé links to an uploaded PDF). | Stacked. |
-| — | Footer | Site footer | "Yasmin Bajwa © 2026" left, "Back to top ↑" right (link to `#`). | — |
+| 3 | **Snippets About My Life** | Blank section, theme **Stone**, padding L, anchor link `snippets` | Left, cols 1–10: **Text** "Snippets About My Life" (Heading 3), **Text** her second About paragraph (P1, 40px), **Line**, **Text** "HISTORY · FASHION · ART" (12px, 500, tracking 0.24em, uppercase). Right, cols 13–24: the slideshow, 4:5, autoplay 5 s (see *Snippets slideshow* below). | Slideshow first, full width, then the heading, text and tags. |
+| 4 | **A10** four disciplines | Blank section, **content width Full**, no padding, section height ~60vh | Four equal columns (cols 1–6, 7–12, 13–18, 19–24). Each: **Shape** (outline, at the back), **Image** filling the panel (Phase 2: `snippet-15` installation, `snippet-13` robotic head, `snippet-18` measuring tape, `snippet-06` mural; Fill; no case-study images before the password), **Text** "01"–"04" at top (13px, muted) and her skill name at the bottom (28px), **in her order**. All four images always visible under a 45% black overlay; hover lightens it to 30% (CSS §2 lines 17–19). Section theme **Ink** (names white). | 2 × 2 panels at 42vh, same 45% overlay. |
+| 5 | **A3** projects | Blank section, White, anchor link `projects` | **Text** "Projects" (H2) cols 1–12, link "All projects →" cols 20–24. Then per project a row: **Line** (full width), **Text** number + title cols 1–10, **Text** her Role line + "PASSWORD PROTECTED" cols 12–17, **Image** logo tile cols 19–24, block sized exactly 3:2: `logos/plate-the-henry-ford.png`, `plate-itc.png`, `plate-rhode-island-doh.png`, `plate-littelfuse.png` (colour, the default; the `plate-*-ink.png` files are option b). CSS lines 19–20 add the ground and hover. Title, image and link all go to the project's URL. (A whole row can't be one link in Fluid Engine; title and image are.) | Image, then title, then role. |
+| 6 | Contact | Blank section, theme Stone, anchor link `contact` | **Text** "CONTACT" (P3), **Text** "Let's create something people will remember." (H2) cols 1–14, then three hairline rows in the facts-column pattern (a **Line**, a P3 label, the value at 17px) cols 1–10: EMAIL `yasminbajwa248@gmail.com` → `mailto:yasminbajwa248@gmail.com`; PHONE `(313) 979-2205` → `tel:+13139792205`; LINKEDIN → her profile URL (pending). No icons. **No résumé link** (removed in Phase 2). | Stacked. |
+| — | Footer | Site footer | "© Yasmin Bajwa" left (no year), "Back to top ↑" right (link to `#`). | — |
+
+### Snippets slideshow (section 3)
+
+| Setting | Value |
+|---|---|
+| Section | **Add section → Gallery → Slideshow: Simple**; theme Stone to match the text above it. |
+| Aspect ratio | **4:5**. |
+| Autoplay | **On**, slide duration **5 seconds**. |
+| Navigation | Arrows on; dots/pagination on if her template offers them (**verify**: the options differ by template). Captions **off**. |
+| Transition | Squarespace's own fade. The prototype uses a 400ms crossfade; the native timing may differ slightly (**verify**). |
+| Images | Upload `site/assets/img/snippets/snippet-NN.jpg` in the order below. Slideshow: Simple **fills** the frame, so the 5 landscape photos (01, 02, 03, 04, 10) are supplied already letterboxed on `#F4F3F0` at 4:5, so they show whole. The 16 portrait photos are 3:4, and the 4:5 frame trims about 6% top and bottom. |
+| Order | 20 (column install) · 06 (mural) · 09 (pastries) · 11 (hat exhibit) · 01 (Violins of Hope) · 19 · 10 · 13 · 12 · 07 · 03 · 14 · 05 · 15 · 02 · 16 · 08 · 17 · 04 · 18 · **21 last** (the handwritten note: publish only once the client confirms). |
+| Editing | She adds, removes and reorders photos in the gallery panel by dragging. **For a new landscape photo**, either letterbox it to 4:5 first (like the five here) or accept the crop. |
+
+**Layout note.** A Gallery section is a whole section, so the text-left / slideshow-right arrangement is two sections: the text in a Blank section (cols 1–10), then the Gallery section. For a true side-by-side, use a **Gallery block** (Slideshow) inside the Blank section, cols 13–24, with the same settings (**verify** that her plan offers the Gallery block in Fluid Engine).
 
 ### Projects page (A13)
 
 Squarespace **can't** show the password-protected Portfolio's grid publicly: locking a Portfolio page locks its grid page too. So **Projects is a regular page**:
 - **Text** "Projects" (H2);
-- four **Image** blocks (the same `r4-row-rNN-3x2.jpg` covers, blocks at exactly 3:2) in a 2 × 2 grid (cols 1–12 / 13–24), each with a **Text** block beneath: "01 · PASSWORD PROTECTED", her title, her Role line;
+- four **Image** blocks, the same logo tiles as the homepage (`logos/plate-*.png`, blocks at exactly 3:2, CSS lines 19–20), in a 2 × 2 grid (cols 1–12 / 13–24), each with a **Text** block beneath: "01 · PASSWORD PROTECTED", her title, her Role line;
 - image and title link to the project page.
 
 **No filter pills.** Portfolio pages have no native filtering, and the brief made them optional.
@@ -126,8 +148,8 @@ Each project page in the Portfolio is built from ordinary sections.
 | # | Reference | Section | Blocks (desktop) | Notes |
 |---|---|---|---|---|
 | 0a | **A1** cover, **photo** (Jackson Home, Power & Energy) | Blank section, **content width Full**, height L (≈16:7), **background image** = `r3-cover-r01/r02-16x7.jpg`, overlay **#111 at 38%** | **Text** her title (H2, 72px, white) bottom-left, cols 1–12. | As built in round 3. Mobile: image, then the title below in ink. |
-| 0b | **A4** meta panel (photo covers) | Same section as 0a | **Shape** block (white rectangle, no stroke) cols 14–24, lower rows, overlapping the section's bottom edge; on it **Text** blocks: ROLE (her Role line), METHODS (her Methods line), SETTING, YEAR, with **Line** blocks between. | YEAR: "[YEAR — pending client]" in italic where pending. Mobile: panel below the cover. |
-| 0c | **A1** header, **document** (Rhode Island, Littelfuse) | Blank section, theme **White**, **no background image** | **Text** her title (H2, 72px, ink) cols 1–13, bottom-aligned; the meta table (ROLE, METHODS, SETTING, YEAR as **Text** + **Line** blocks) cols 15–24. After the chapter index (row 1), a **Full plate**: one **Image** block cols 1–24, captioned "FIG. 01 — …": Rhode Island `tiles/r5-ri-five-screens--nat-p48.jpg` (the five 401 Health screens), Littelfuse `tiles/r04-journey-full--nat-p48.jpg` (the journey map). The tiles already hold the `#F4F3F0` ground and the **48px** padding. | Title, meta, index, then the plate. |
+| 0b | **A4** meta panel (photo covers) | Same section as 0a | **Shape** block (white rectangle, no stroke) cols 14–24, lower rows, overlapping the section's bottom edge; on it **three columns** of **Text** blocks, each under a **Line**: ROLE (her Role line), METHODS (her Methods line), SETTING. **No YEAR** (removed in Phase 2). | Mobile: panel below the cover, the three stacked. |
+| 0c | **A1** header, **document** (Rhode Island, Littelfuse) | Blank section, theme **White**, **no background image** | **Text** her title (H2, 72px, ink) cols 1–13, bottom-aligned; the meta table in three columns (ROLE, METHODS, SETTING as **Text** + **Line** blocks; no YEAR) cols 15–24. After the chapter index (row 1), a **Full plate**: one **Image** block cols 1–24, captioned "FIG. 01 — …": Rhode Island `tiles/r5-ri-five-screens--nat-p48.jpg` (the five 401 Health screens), Littelfuse `tiles/r04-journey-full--nat-p48.jpg` (the journey map). The tiles already hold the `#F4F3F0` ground and the **48px** padding. | Title, meta, index, then the plate. |
 | 1 | **A1** chapter index | Blank section, White | One **Text** block, full width, between two **Line** blocks: "01 Project Overview · 02 The Challenge · …", each linked to `#ch-1`, `#ch-2`… | Each chapter section gets its **Anchor link** (`ch-1`…) in *Edit Section → Design*. |
 | 2 | **A2 + A3** chapter | One Blank section per chapter, White | **Text** "01" (P3) + chapter title (H3) cols 1–6. **Text** her copy cols 9–20: paragraphs, her sub-headings as Heading 4 with a **Line** block above, bullets as real (nested) lists. **Images** where her doc places them, cols 9–24 (or 1–24 for plates), caption "FIG. nn — …" below. | Mobile: title above text. |
 | 3 | **A4** stats strip | Inside Jackson Home "Research Methodology" | Three **Text** blocks cols 1–8 / 9–16 / 17–24 under a **Line**: "60%" (72–96px), "Strollers" (H4), her characteristic text; the column heads as P3 labels. | Stacked. |
@@ -171,7 +193,7 @@ One lock screen design serves the whole site (*Page settings of the protected pa
 | Setting | Value |
 |---|---|
 | Layout | Centred |
-| Media → Background image | `r01-plan-plain.jpg` (Jackson Home plan). Opacity 8% via CSS line 15, on a white ground (line 16). |
+| Media → Background image | **None** (Phase 2: no case-study image may show before the password). White ground (CSS line 15). |
 | Branding & text → Site title | "Yasmin Bajwa" (top) |
 | Headline | Projects are shared *by invitation.* (48px, Neue Haas Display 400) |
 | Body | Enter the password to continue. (15px) · then a link line: **No password? Email Yasmin →** (`mailto:` her address) |
@@ -191,11 +213,11 @@ The prototype's wrong-password state is `private-view.html#wrong` (pure CSS `:ta
 |---|---|---|---|
 | Home | Hero, facts | Text, Image, Button, Line | — |
 | Home | Hairline | Section divider / Line | — |
-| Home | About bento | Text, 4 Image + 4 Text, Line | caption style (2–3) |
-| Home | Four disciplines | Shape, Image, Text (Ink theme) | 17–19 |
-| Home | Projects rows | Text, Line, Image | — |
-| Home | Contact / footer | Text, footer | — |
-| Projects | Grid | Image, Text | — |
+| Home | Snippets About My Life | Text, Line, Gallery section (Slideshow: Simple) | — |
+| Home | Four disciplines | Shape, Image, Text (Ink theme) | 16–18 |
+| Home | Projects rows | Text, Line, Image (logo plates) | 19–20 |
+| Home | Contact / footer | Text, Line, footer | — |
+| Projects | Grid | Image (logo plates), Text | 19–20 |
 | Case study | Cover + meta | Section background + overlay, Text, Shape, Line | — |
 | Case study | Chapter index | Text + anchor links, Line | — |
 | Case study | Chapters | Text (lists), Line, Image, Video | list markers (4) |
@@ -203,7 +225,7 @@ The prototype's wrong-password state is `private-view.html#wrong` (pure CSS `:ta
 | Case study | Six bento modules | Image, Gallery section (Grid: Simple), Video, Text, Line | — (ground and padding are in the tile files) |
 | Case study | A7 lists | Text (ordered list), Image | 5–6 |
 | Case study | Reflection, prev/next | Text, Line | — |
-| Lock screen | — | Native lock screen | 8–16 |
+| Lock screen | — | Native lock screen | 8–15 |
 | All | Square corners | Block settings | 7 |
 
 **Simplified for Squarespace:**
@@ -227,4 +249,4 @@ The prototype's wrong-password state is `private-view.html#wrong` (pure CSS `:ta
 
 ## 7. Wireframes for client approval (`wireframes/`)
 
-Greyscale HTML wireframes of all seven pages, generated from the same build (`tools/build_wireframes.py`), so structure and proportions match the design exactly. Every image and video is a grey box labelled "IMAGE — FIG. n" / "VIDEO — FIG. n" (or what it is, e.g. "IMAGE — PORTRAIT"). All her copy is in place and the hairlines are kept. There are no photos and no colour. Each file is **standalone**: CSS and the two web fonts are inline, with no external files, so the files can be downloaded and sent as they are. `wireframes/index-wireframes.html` links all seven.
+Greyscale HTML wireframes of all seven pages (Phase 2: slideshow frame, logo tiles, three-column meta), generated from the same build (`tools/build_wireframes.py`), so structure and proportions match the design exactly. Every image and video is a grey box labelled "IMAGE — FIG. n" / "VIDEO — FIG. n" (or what it is, e.g. "IMAGE — PORTRAIT"). All her copy is in place and the hairlines are kept. There are no photos and no colour. Each file is **standalone**: CSS and the two web fonts are inline, with no external files, so the files can be downloaded and sent as they are. `wireframes/index-wireframes.html` links all seven.

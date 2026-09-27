@@ -433,7 +433,7 @@ SPECIAL = {
 
 
 # ---------------------------------------------------------------- page shell
-def page(title, desc, body_html, cls=""):
+def page(title, desc, body_html, cls="", script=""):
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -448,6 +448,7 @@ def page(title, desc, body_html, cls=""):
 </head>
 <body{f' class="{cls}"' if cls else ''}>
 {body_html}
+{f"<script>{script}</script>" if script else ""}
 </body>
 </html>
 """
@@ -458,11 +459,11 @@ def bar(over=None, here=""):
     cur = lambda k: ' aria-current="page"' if here == k else ""
     return (f'<header class="{cls}"><div class="wrap"><a class="bar__name" href="index.html" data-added="ui">Yasmin Bajwa</a>'
             f'<nav aria-label="Main" data-added="ui"><a href="projects.html"{cur("projects")}>Projects</a>'
-            f'<a href="index.html#about">About</a><a href="index.html#contact">Contact</a></nav></div></header>')
+            f'<a href="index.html#snippets">About</a><a href="index.html#contact">Contact</a></nav></div></header>')
 
 
 def foot():
-    return ('<footer class="foot" data-added="ui"><div class="wrap"><span>Yasmin Bajwa © 2026</span>'
+    return ('<footer class="foot" data-added="ui"><div class="wrap"><span>© Yasmin Bajwa</span>'
             '<a class="u" href="#top">Back to top ↑</a></div></footer>')
 
 
@@ -474,10 +475,12 @@ def home():
         f'<div><dt class="label" data-added="ui">{E(f["label"])}</dt><dd class="{"pending" if f.get("pending") else ""}" data-added="supplied">{E(f["value"])}</dd></div>'
         for f in site["home"]["facts"])
     # A10 + round 5: four panels, each image always visible under a 45% black overlay; hover lightens it to 30%.
-    PANEL = [("r4-panel-01.jpg", "The installed Power & Energy column", "photo"),
-             ("r4-panel-02.jpg", "Rhode Island 401 Health app: two mobile screens", "doc"),
-             ("r4-panel-03.jpg", "Jackson Home floor plan with expected visitor paths", "doc"),
-             ("r4-panel-04.jpg", "ITC employee research storyboard", "doc")]
+    # Phase 2 privacy rule: nothing from inside the case studies before the password, so the panels
+    # use four of her snippet photos instead of case-study images (a choice for the client to confirm).
+    PANEL = [("snippets/snippet-15.jpg", "Marble figures installation with digital counters", "photo"),
+             ("snippets/snippet-13.jpg", "Robotic head sculpture in a gallery", "photo"),
+             ("snippets/snippet-18.jpg", "Measuring tape against a gallery wall", "photo"),
+             ("snippets/snippet-06.jpg", "Street mural: portrait with a lightbulb hat", "photo")]
     skills = [A[f"A-{k:02d}"] for k in (9, 10, 11, 12)]
     panels = ""
     for n, (s_, (src, alt, kind)) in enumerate(zip(skills, PANEL), 1):
@@ -485,24 +488,24 @@ def home():
                    f'<div class="m m--{kind}"><img src="{IMG}{src}" alt="{E(alt)}" loading="lazy"></div>'
                    f'<span class="no" data-added="ui">{n:02d}</span>'
                    f'<h3 data-id="A-{8 + n:02d}">{E(s_["text"])}</h3></article>')
-    # A9 + A4: About bento. Work images stand in until she sends personal photos (ASSET-GAPS R4-1..4)
-    MOSAIC = [("tall", "r4-about-tall-4x5.jpg", "Power & Energy column, installed at The Henry Ford"),
-              ("wide", "r4-about-wide-3x2.jpg", "Installing the column in the Power & Energy gallery"),
-              ("sqa", "r4-about-sq-a.jpg", "The gallery column before the build"),
-              ("sqb", "r4-about-sq-b.jpg", "Column plan view, from the shop drawings")]
-    mosaic = ""
-    for slot, src, cap in MOSAIC:
-        lab = pg.label()
-        CAPTIONS.append(("index", lab, cap))
-        mosaic += (f'<figure class="t t--{slot}"><div class="m"><img src="{IMG}{src}" alt="{E(cap)}" loading="lazy"></div>'
-                   f'<figcaption data-added="caption">{lab} — {E(cap)}</figcaption></figure>')
+    # Phase 2: Snippets About My Life. Squarespace Gallery section, Slideshow: Simple, 4:5, autoplay.
+    slides = "".join(
+        f'<figure class="ss__slide{" is-on" if k == 0 else ""}" aria-hidden="{"false" if k == 0 else "true"}">'
+        f'<img src="{IMG}snippets/snippet-{n:02d}.jpg" alt="{E(SNIPPET_ALT[n])}"{LAZY if k else ""}></figure>'
+        for k, n in enumerate(SNIPPET_ORDER))
+    dots = "".join(f'<button type="button" class="ss__dot{" is-on" if k == 0 else ""}" aria-label="Show photo {k + 1} of {len(SNIPPET_ORDER)}"></button>'
+                   for k in range(len(SNIPPET_ORDER)))
+    contact_rows = "".join(
+        f'<div><dt class="label" data-added="ui">{E(c_["label"])}</dt><dd data-added="supplied">'
+        f'<a class="u{" pending" if c_.get("pending") else ""}" href="{E(c_["href"])}">{E(c_["value"])}</a></dd></div>'
+        for c_ in site["home"]["contact"])
     rows = ""
     for n, r in enumerate(ROOMS, 1):
         rows += (f'<a class="row fade" href="{r["slug"]}.html"><div class="row__t"><span class="label" data-added="ui">{n:02d}</span>'
                  f'<h3 data-ref="{r["title"]["id"]}">{E(r["title"]["text"])}</h3></div>'
                  f'<div class="row__role"><span data-ref="{r["role"]["id"]}">{E(r["role"]["text"])}</span>'
                  f'<span class="label" data-added="ui">Password protected</span></div>'
-                 f'<div class="row__img"><div class="m m--fit"><img src="{IMG}{ROW[r["key"]]}" alt="" loading="lazy"></div></div></a>')
+                 f'<div class="row__img">{logo_tile(r["key"])}</div></a>')
     b = f"""{bar(here="home")}
 <main id="top">
 <!-- A9 + A8: greeting, her About sentence, headshot and facts -->
@@ -519,16 +522,25 @@ def home():
 </section>
 <hr class="hairline">
 
-<!-- A9 auren + A4 Finnhütte: About bento on the light ground. Statement left 12, mosaic right 12 -->
-<section class="section section--alt" id="about"><div class="wrap g24 about">
-  <p class="about__statement" data-id="A-07">{E(A["A-07"]["text"])}</p>
-  <div class="about__right">
-    <div class="mosaic">{mosaic}</div>
+<!-- Phase 2: Snippets About My Life. Statement and tags left 10 cols; slideshow right 12 cols -->
+<section class="section section--alt" id="snippets"><div class="wrap g24 about">
+  <div class="about__left">
+    <h2 class="about__title" data-added="supplied">Snippets About My Life</h2>
+    <p class="about__statement" data-id="A-07">{E(A["A-07"]["text"])}</p>
     <p class="about__tags" data-added="ui"><span>History</span><span aria-hidden="true">·</span><span>Fashion</span><span aria-hidden="true">·</span><span>Art</span></p>
+  </div>
+  <div class="about__right">
+    <div class="ss" role="region" aria-roledescription="carousel" aria-label="Snippets About My Life">
+      <div class="ss__frame">{slides}
+        <button type="button" class="ss__arrow ss__arrow--prev" aria-label="Previous photo">←</button>
+        <button type="button" class="ss__arrow ss__arrow--next" aria-label="Next photo">→</button>
+      </div>
+      <div class="ss__dots">{dots}</div>
+    </div>
   </div>
 </div></section>
 
-<!-- A10: four equal vertical panels, her four skills in her order; image revealed on hover -->
+<!-- A10: four equal vertical panels, her four skills in her order; image always visible, 45% overlay -->
 <section class="panels" aria-label="Disciplines">{panels}</section>
 
 <!-- A3: project rows with hairlines -->
@@ -541,20 +553,18 @@ def home():
 <section class="section section--alt" id="contact"><div class="wrap contact">
   <p class="label" data-added="ui">Contact</p>
   <h2 data-added="supplied">{E(site["home"]["contact_heading"])}</h2>
-  <p class="contact__links" data-added="ui"><a class="u" href="mailto:">Email</a> <span class="pending">[email — pending client]</span>
-    <a class="u" href="#linkedin">LinkedIn</a> <span class="pending">[URL — pending client]</span>
-    <a class="u" href="#resume">Résumé</a> <span class="pending">[PDF — pending client]</span></p>
+  <dl class="contact__rows">{contact_rows}</dl>
 </div></section>
 </main>
 {foot()}"""
-    return page("Yasmin Bajwa", A["A-06"]["text"][:150], b)
+    return page("Yasmin Bajwa", A["A-06"]["text"][:150], b, script=SLIDESHOW_JS)
 
 
 # ---------------------------------------------------------------- projects page (A13)
 def projects():
     cards = ""
     for n, r in enumerate(ROOMS, 1):
-        cards += (f'<a class="card fade" href="{r["slug"]}.html"><div class="m m--fit"><img src="{IMG}{ROW[r["key"]]}" alt="" loading="lazy"></div>'
+        cards += (f'<a class="card fade" href="{r["slug"]}.html">{logo_tile(r["key"])}'
                   f'<span class="label" data-added="ui">{n:02d} · Password protected</span>'
                   f'<h2 data-ref="{r["title"]["id"]}">{E(r["title"]["text"])}</h2>'
                   f'<p data-ref="{r["role"]["id"]}">{E(r["role"]["text"])}</p></a>')
@@ -568,6 +578,54 @@ def projects():
     return page("Projects — Yasmin Bajwa", "Four case studies.", b)
 
 
+# ---------------------------------------------------------------- Phase 2: snippets and logos
+LAZY = ' loading="lazy"'
+# Default order (she can reorder in Squarespace): install, art, food/travel, museum interior, install,
+# then varied; snippet-21 (the handwritten note) last until the client confirms it can be published.
+SNIPPET_ORDER = [20, 6, 9, 11, 1, 19, 10, 13, 12, 7, 3, 14, 5, 15, 2, 16, 8, 17, 4, 18, 21]
+SNIPPET_ALT = {1: "Violins of Hope exhibit", 2: "A gallery mid-install", 3: "A gallery mid-install under a skylight",
+               4: "An exhibit gallery with panels and cases", 5: "Painting supplies, a painted pumpkin and a charcuterie board",
+               6: "Street mural: a portrait with a lightbulb hat", 7: "An ornate painted ceiling", 8: "A crown and sceptre on red",
+               9: "A pastry case of custard tarts", 10: "Yasmin looking at a framed painting", 11: "A hat exhibit",
+               12: "A blazer hanging outside a vintage shop", 13: "A robotic head sculpture", 14: "Orangutans playing chess, a diorama",
+               15: "Marble figures installation with digital counters", 16: "A carved standing figure", 17: "Bookshop shelves",
+               18: "Measuring tape against a gallery wall", 19: "Anatomical fashion pieces on mannequins",
+               20: "The Power & Energy column being installed", 21: "A The Henry Ford cap on a notebook with a handwritten note"}
+LOGO = {"room01": ("the-henry-ford", "png", "The Henry Ford"), "room02": ("itc", "png", "ITC"),
+        "room03": ("rhode-island-doh", "svg", "Rhode Island Department of Health"), "room04": ("littelfuse", "svg", "Littelfuse")}
+LOGO_SIZES = json.load(open("site/assets/img/logos/sizes.json"))
+
+
+def logo_tile(key, variant=None):
+    """3:2 tile on #F4F3F0, 32px padding, logo optically sized (sizes.json). Default: colour (a)."""
+    variant = variant or site.get("logo_variant", "colour")
+    stem, ext, name = LOGO[key]
+    f = f"{stem}{'-ink' if variant == 'ink' else ''}.{ext}"
+    sz = LOGO_SIZES[f]
+    return (f'<div class="logo-tile"><img src="{IMG}logos/{f}" alt="{E(name)} logo" '
+            f'style="width:{sz["w_pct"]}%" loading="lazy"></div>')
+
+
+SLIDESHOW_JS = """
+/* Prototype stand-in for Squarespace's built-in Gallery "Slideshow: Simple" (autoplay on, 5 s,
+   arrows, dots, crossfade). The real site uses the native gallery section, not this script. */
+document.querySelectorAll('.ss').forEach(function (ss) {
+  var slides = ss.querySelectorAll('.ss__slide'), dots = ss.querySelectorAll('.ss__dot'), i = 0, timer;
+  function show(n) {
+    slides[i].classList.remove('is-on'); slides[i].setAttribute('aria-hidden', 'true'); dots[i].classList.remove('is-on');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('is-on'); slides[i].setAttribute('aria-hidden', 'false'); dots[i].classList.add('is-on');
+    var img = slides[i].querySelector('img'); if (img) img.loading = 'eager';
+  }
+  function restart() { clearInterval(timer); timer = setInterval(function () { show(i + 1); }, 5000); }
+  ss.querySelector('.ss__arrow--prev').addEventListener('click', function () { show(i - 1); restart(); });
+  ss.querySelector('.ss__arrow--next').addEventListener('click', function () { show(i + 1); restart(); });
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k); restart(); }); });
+  restart();
+});
+"""
+
+
 # ---------------------------------------------------------------- case study template
 COVER = {"room01": "r3-cover-r01-16x7.jpg",      # simulation still (footage): cropped to 16:7
          "room02": "r3-cover-r02-16x7.jpg",      # photograph: cropped to 16:7
@@ -576,7 +634,6 @@ COVER = {"room01": "r3-cover-r01-16x7.jpg",      # simulation still (footage): c
 # shown whole as FIG. 01, a full plate with 48px padding directly under the chapter index.
 COVER_PLATE = {"room03": ("r5-ri-five-screens.jpg", "401 Health app: five mobile screens"),
                "room04": ("r04-journey-full.jpg", "Product-discovery journey map: overview")}
-ROW = {k: f"r4-row-{k.replace('room0', 'r0')}-3x2.jpg" for k in ("room01", "room02", "room03", "room04")}
 
 
 def case(r):
@@ -592,14 +649,12 @@ def case(r):
         else:
             cur[1].append(it)
     index = "".join(f'<li><span>{k:02d}</span><a href="#ch-{k}">{E(h["text"])}</a></li>' for k, (h, _) in enumerate(chapters, 1))
-    year_cls = "pending" if sv.get("year_pending") else ""
     tone = r["tone"]
     doc = r["key"] in COVER_PLATE
     meta = f"""<dl class="meta__panel">
-  <div class="wide"><dt class="label" data-added="ui">Role</dt><dd data-id="{r["role"]["id"]}">{E(r["role"]["text"])}</dd></div>
-  <div class="wide"><dt class="label" data-added="ui">Methods</dt><dd data-id="{r["methods"]["id"]}">{E(r["methods"]["text"])}</dd></div>
+  <div><dt class="label" data-added="ui">Role</dt><dd data-id="{r["role"]["id"]}">{E(r["role"]["text"])}</dd></div>
+  <div><dt class="label" data-added="ui">Methods</dt><dd data-id="{r["methods"]["id"]}">{E(r["methods"]["text"])}</dd></div>
   <div><dt class="label" data-added="ui">Setting</dt><dd data-added="supplied">{E(sv["setting"])}</dd></div>
-  <div><dt class="label" data-added="ui">Year</dt><dd class="{year_cls}" data-added="supplied">{E(sv["year"])}</dd></div>
 </dl>"""
     title = f'<h1 class="{"dochead__title" if doc else "cover__title"}" data-id="{r["title"]["id"]}">{E(r["title"]["text"])}</h1>'
     if doc:
@@ -649,10 +704,37 @@ def case(r):
     return page(f"{r['short']} — Yasmin Bajwa", r["title"]["text"], b, "case")
 
 
+# ---------------------------------------------------------------- logo comparison (for the client; not linked)
+def logo_compare():
+    def row(variant, title, note):
+        tiles = "".join(f'<figure class="lc__t">{logo_tile(r["key"], variant)}<figcaption class="label">{n:02d} · {E(LOGO[r["key"]][2])}</figcaption></figure>'
+                        for n, r in enumerate(ROOMS, 1))
+        return (f'<section class="lc__row"><div class="lc__head"><h2>{title}</h2><p class="label">{note}</p></div>'
+                f'<div class="lc__tiles">{tiles}</div></section>')
+    b = f"""<main class="wrap lc" id="top">
+  <p class="label">Yasmin Bajwa · project tiles · for the client to choose</p>
+  <h1 class="p-title" style="padding-top:48px">Logo tiles: (a) colour or (b) ink</h1>
+  {row("colour", "(a) Colour", "Brand colours as supplied · default in the build")}
+  {row("ink", "(b) Ink", "All four in #111111 on the light ground")}
+  <p class="lc__note">Each tile: 3:2 on #F4F3F0, 32px padding, square corners. Logos are sized by eye for equal visual weight, not equal bounding boxes. Hover darkens the ground to #ECEAE5. Shown at the homepage row size (316px wide at 1440).</p>
+</main>
+<style>
+.lc{{padding-bottom:64px}}
+.lc__row{{display:grid;gap:20px;padding:28px 0 36px;border-top:1px solid var(--ink)}}
+.lc__head{{display:flex;align-items:baseline;gap:24px}}
+.lc__head h2{{font-size:34px;line-height:1.1;font-weight:400}}
+.lc__tiles{{display:grid;grid-template-columns:repeat(4,316px);gap:16px}}
+.lc__t{{display:grid;gap:10px}}
+.lc__t:hover .logo-tile{{background:#ECEAE5}}
+.lc__note{{max-width:70ch;font-size:15px;padding-top:24px;border-top:1px solid var(--hair)}}
+@media (max-width:767px){{.lc__row{{grid-template-columns:1fr}}.lc__tiles{{grid-template-columns:1fr 1fr}}}}
+</style>"""
+    return page("Logo tiles — Yasmin Bajwa", "Logo tile options for the client.", b)
+
+
 # ---------------------------------------------------------------- lock screen
 def lock():
     b = f"""<main class="lock" id="wrong">
-  <div class="lock__bg"><img src="{IMG}r01-plan-plain.jpg" alt=""></div>
   <p class="lock__top" data-added="ui">Yasmin Bajwa</p>
   <div class="lock__box" data-added="ui">
     <h1>Projects are shared <em>by invitation.</em></h1>
@@ -665,7 +747,7 @@ def lock():
     </form>
     <p class="lock__ask">No password? <a class="u" href="mailto:?subject=Portfolio%20access">Email Yasmin →</a></p>
   </div>
-  <p class="lock__foot" data-added="ui">© 2026 Yasmin Bajwa</p>
+  <p class="lock__foot" data-added="ui">© Yasmin Bajwa</p>
 </main>"""
     return page("Private View — Yasmin Bajwa", "Projects are shared by invitation.", b)
 
@@ -725,9 +807,9 @@ def module_map():
         L.append("")
     L += ["## Homepage (not modules, listed for completeness)", "",
           "| Where | File | Fit |", "|---|---|---|",
-          "| Project rows + Projects grid | `r4-row-r01..r04-3x2.jpg` | finished 3:2, subject whole (plan, column ×3, two screens, journey map) |",
-          "| Discipline panels 01–04 | `r4-panel-01..04.jpg` | 2:3; 01 photograph (cropped), 02–04 whole on #F4F3F0 |",
-          "| About mosaic | `r4-about-tall-4x5.jpg`, `r4-about-wide-3x2.jpg`, `r4-about-sq-a.jpg`, `r4-about-sq-b.jpg` | stand-ins from her work until personal photos arrive (ASSET-GAPS R4-1..R4-4) |",
+          "| Project rows + Projects grid | `logos/*` (colour default; `*-ink` for option b) | logo tiles: 3:2 on #F4F3F0, 32px padding, optically sized (`logos/sizes.json`) |",
+          "| Discipline panels 01–04 | `snippets/snippet-15, 13, 18, 06.jpg` | photographs, cropped to the panel (no case-study media before the password) |",
+          "| Snippets About My Life | `snippets/snippet-01…21.jpg` | slideshow, 4:5; landscape photos letterboxed on #F4F3F0 in the file |",
           "| Case-study covers | `r3-cover-r01/r02-16x7.jpg` (footage/photo, cropped to 16:7). Rooms 03/04 have no header image; their cover is FIG. 01 above | |", ""]
     open("MODULE-MAP.md", "w").write("\n".join(L) + "\n")
     return bad
@@ -743,8 +825,8 @@ def asset_map_section():
         for t in m["tiles"]:
             fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder"}[t["kind"]]
             L.append(f"| `{t['src']}` | {m['page']} | {t['label']} | {MODULE_NAMES[m['module']]} | `{t['tile']}` | {fit} |")
-    L += ["", "Homepage (round 4): `r4-row-r01…r04-3x2.jpg` (rows + Projects grid), `r4-panel-01…04.jpg` (disciplines), "
-          "`r4-about-*.jpg` (About mosaic), `r5-ri-five-screens.jpg` (Rhode Island cover plate). All made by `tools/build_r4_assets.py`.", ""]
+    L += ["", "Homepage (Phase 2): logo tiles from `site/assets/img/logos/` (rows + Projects grid), snippet photos for the disciplines and "
+          "the Snippets About My Life slideshow (`tools/build_phase2_assets.py`); `r5-ri-five-screens.jpg` is the Rhode Island cover plate.", ""]
     s = open("ASSET-MAP.md").read()
     if head in s:
         s = s[:s.index(head)]
@@ -759,6 +841,7 @@ if __name__ == "__main__":
     for r in ROOMS:
         open(f"site/{r['slug']}.html", "w").write(case(r))
     open("site/private-view.html", "w").write(lock())
+    open("site/logo-compare.html", "w").write(logo_compare())
     json.dump(CAPTIONS, open("content/captions.json", "w"), indent=1, ensure_ascii=False)
     json.dump(FIGMAP, open("content/figmap.json", "w"), indent=1, ensure_ascii=False)
     bad = module_map()

@@ -78,7 +78,7 @@ w("## Homepage: About (`Instructions_About_Me.docx`)")
 w("")
 w("| ID | Text | Where | 1440 | 390 |")
 w("|---|---|---|---|---|")
-where = {"A-05": "Hero, label above her first paragraph", "A-06": "Hero, under the greeting", "A-07": "About bento, statement in the left 12 columns",
+where = {"A-05": "Hero, label above her first paragraph", "A-06": "Hero, under the greeting", "A-07": "Snippets About My Life, statement in the left 10 columns",
          "A-09": "Four disciplines, panel 01", "A-10": "Four disciplines, panel 02", "A-11": "Four disciplines, panel 03", "A-12": "Four disciplines, panel 04"}
 for k, a in enumerate(c["about"], 1):
     iid = f"A-{k:02d}"
@@ -175,11 +175,14 @@ w("| Where | Text | Source |")
 w("|---|---|---|")
 w("| Homepage hero | Hi, I’m *Yasmin.* | Round 3 brief |")
 for f in site["home"]["facts"]:
-    w(f"| Homepage facts | {f['label']}: {f['value']} | Q9{' (visible placeholder)' if f.get('pending') else ''} |")
+    w(f"| Homepage facts | {f['label']}: {f['value']} | {'Phase 2 (client)' if f['label'] == 'Based in' else 'Q9'}{' (visible placeholder)' if f.get('pending') else ''} |")
 w(f"| Homepage contact | {site['home']['contact_heading']} | Q3 |")
+for c_ in site["home"].get("contact", []):
+    w(f"| Homepage contact row | {c_['label']}: {c_['value']} | Phase 2 (client) |")
+w("| Homepage section title | Snippets About My Life | Phase 2 (client) |")
 for k, v in site["rooms"].items():
-    w(f"| {k} header | Setting: {v['setting']} · Year: {v['year']} | Q9 |")
-w("| Every page | Navigation, chapter numbers, ROLE / METHODS / SETTING / YEAR labels, 'View Projects →', 'Projects', 'Password protected', 'All projects', '← Previous project', 'Next project →', footer, lock-screen text | Brief (interface text) |")
+    w(f"| {k} header | Setting: {v['setting']} | Q9 (project years removed in Phase 2) |")
+w("| Every page | Navigation, chapter numbers, ROLE / METHODS / SETTING labels, 'View Projects →', 'Projects', 'Password protected', 'All projects', '← Previous project', 'Next project →', footer, lock-screen text | Brief (interface text) |")
 w("")
 
 import math

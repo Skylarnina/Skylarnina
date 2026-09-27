@@ -252,4 +252,4 @@ Every image and video on the case-study pages, by source file, with the module i
 | `r04-journey-full.jpg` | room-04-littelfuse | Fig. 07 | Full plate | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |
 | `—` | room-04-littelfuse | Fig. 08 | Full plate | `—` | placeholder |
 
-Homepage (round 4): `r4-row-r01…r04-3x2.jpg` (rows + Projects grid), `r4-panel-01…04.jpg` (disciplines), `r4-about-*.jpg` (About mosaic), `r5-ri-five-screens.jpg` (Rhode Island cover plate). All made by `tools/build_r4_assets.py`.
+Homepage (Phase 2): logo tiles from `site/assets/img/logos/` (rows + Projects grid), snippet photos for the disciplines and the Snippets About My Life slideshow (`tools/build_phase2_assets.py`); `r5-ri-five-screens.jpg` is the Rhode Island cover plate.

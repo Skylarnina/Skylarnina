@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logo tiles — Yasmin Bajwa</title>
+<meta name="description" content="Logo tile options for the client.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:ital,wght@0,400;0,500;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/css/r3.css">
+</head>
+<body>
+<main class="wrap lc" id="top">
+  <p class="label">Yasmin Bajwa · project tiles · for the client to choose</p>
+  <h1 class="p-title" style="padding-top:48px">Logo tiles: (a) colour or (b) ink</h1>
+  <section class="lc__row"><div class="lc__head"><h2>(a) Colour</h2><p class="label">Brand colours as supplied · default in the build</p></div><div class="lc__tiles"><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/the-henry-ford.png" alt="The Henry Ford logo" style="width:44.7%" loading="lazy"></div><figcaption class="label">01 · The Henry Ford</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/itc.png" alt="ITC logo" style="width:71.5%" loading="lazy"></div><figcaption class="label">02 · ITC</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/rhode-island-doh.svg" alt="Rhode Island Department of Health logo" style="width:49.5%" loading="lazy"></div><figcaption class="label">03 · Rhode Island Department of Health</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/littelfuse.svg" alt="Littelfuse logo" style="width:93.7%" loading="lazy"></div><figcaption class="label">04 · Littelfuse</figcaption></figure></div></section>
+  <section class="lc__row"><div class="lc__head"><h2>(b) Ink</h2><p class="label">All four in #111111 on the light ground</p></div><div class="lc__tiles"><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/the-henry-ford-ink.png" alt="The Henry Ford logo" style="width:52.9%" loading="lazy"></div><figcaption class="label">01 · The Henry Ford</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/itc-ink.png" alt="ITC logo" style="width:71.9%" loading="lazy"></div><figcaption class="label">02 · ITC</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/rhode-island-doh-ink.svg" alt="Rhode Island Department of Health logo" style="width:49.5%" loading="lazy"></div><figcaption class="label">03 · Rhode Island Department of Health</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/littelfuse-ink.svg" alt="Littelfuse logo" style="width:93.7%" loading="lazy"></div><figcaption class="label">04 · Littelfuse</figcaption></figure></div></section>
+  <p class="lc__note">Each tile: 3:2 on #F4F3F0, 32px padding, square corners. Logos are sized by eye for equal visual weight, not equal bounding boxes. Hover darkens the ground to #ECEAE5. Shown at the homepage row size (316px wide at 1440).</p>
+</main>
+<style>
+.lc{padding-bottom:64px}
+.lc__row{display:grid;gap:20px;padding:28px 0 36px;border-top:1px solid var(--ink)}
+.lc__head{display:flex;align-items:baseline;gap:24px}
+.lc__head h2{font-size:34px;line-height:1.1;font-weight:400}
+.lc__tiles{display:grid;grid-template-columns:repeat(4,316px);gap:16px}
+.lc__t{display:grid;gap:10px}
+.lc__t:hover .logo-tile{background:#ECEAE5}
+.lc__note{max-width:70ch;font-size:15px;padding-top:24px;border-top:1px solid var(--hair)}
+@media (max-width:767px){.lc__row{grid-template-columns:1fr}.lc__tiles{grid-template-columns:1fr 1fr}}
+</style>
+
+</body>
+</html>
