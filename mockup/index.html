@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BDA One – homepage mockup</title>
+<style>
+/* Mockup of a Thinkific "Vogue" homepage. Each <section> = one Site Builder section.
+   Delete the .tag rule to hide the section-type labels. */
+:root{--navy:#0B1F3A;--teal:#2CB6D3;--teal-dark:#1a8ea8;--grey:#F2F6F9;--white:#fff;--ink:#0B1F3A;--muted:#4a5b70;--line:#d9e2ea}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--white)}
+h1,h2,h3{text-wrap:balance;font-family:Montserrat,"Helvetica Neue",Arial,sans-serif;line-height:1.15;margin:0 0 16px;letter-spacing:-.01em}
+h1{font-size:clamp(32px,6vw,56px);font-weight:800}
+h2{font-size:clamp(26px,4vw,38px);font-weight:700;text-align:center}
+h3{font-size:19px;font-weight:700}
+p{margin:0 0 14px}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px;margin:0 auto}
+section{position:relative;padding:88px 0}
+.dark{background:var(--navy);color:#fff}
+.light{background:var(--grey)}
+.sub{font-size:19px;color:var(--muted);text-align:center;max-width:720px;margin:0 auto 40px}
+.dark .sub{color:#c9d6e6}
+.centre{text-align:center}
+
+/* section-type labels (mockup only) */
+.tag{position:absolute;top:10px;left:12px;font:600 11px/1 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;background:rgba(44,182,211,.15);color:var(--teal-dark);padding:5px 8px;border-radius:4px}
+.dark .tag{background:rgba(255,255,255,.12);color:#9fdff0}
+
+/* buttons */
+.btn{display:inline-block;font:700 16px/1.2 Montserrat,Arial,sans-serif;text-decoration:none;padding:16px 30px;border-radius:999px;border:2px solid var(--teal);background:var(--teal);color:var(--navy);text-align:center}
+.btn:hover{background:#fff;border-color:#fff}
+.btn.secondary{background:transparent;color:var(--navy);border-color:var(--navy)}
+.btn.secondary:hover{background:var(--navy);color:#fff}
+.dark .btn.secondary{color:#fff;border-color:#fff}
+.dark .btn.secondary:hover{background:#fff;color:var(--navy)}
+.btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+
+/* header */
+header{background:#fff;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{font:800 24px Montserrat,Arial,sans-serif;color:var(--navy);text-decoration:none}
+.logo span{color:var(--teal)}
+nav{display:flex;gap:28px;align-items:center;font:600 15px Montserrat,Arial,sans-serif}
+nav a{text-decoration:none}
+nav a.start{background:var(--teal);color:var(--navy);padding:10px 20px;border-radius:999px}
+.burger{display:none;width:26px;height:18px;border-top:3px solid var(--navy);border-bottom:3px solid var(--navy);position:relative}
+.burger:after{content:"";position:absolute;left:0;right:0;top:5px;border-top:3px solid var(--navy)}
+
+/* placeholders */
+.ph{background:repeating-linear-gradient(45deg,#e3ebf1,#e3ebf1 12px,#edf3f7 12px,#edf3f7 24px);border:2px dashed #9fb3c4;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);font:600 14px/1.4 Arial,sans-serif;min-height:320px}
+.light .ph{background:repeating-linear-gradient(45deg,#fff,#fff 12px,#f7fafc 12px,#f7fafc 24px)}
+
+/* text and media */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.split h2{text-align:left}
+.split .big p{font-size:21px;font-weight:600;line-height:1.4;padding-left:18px;border-left:4px solid var(--teal);margin-bottom:18px}
+
+/* checklist */
+.check{list-style:none;padding:0;margin:0 auto;max-width:760px}
+.check li{position:relative;padding:14px 0 14px 44px;border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:0}
+.check li:before{content:"";position:absolute;left:0;top:17px;width:26px;height:26px;border-radius:50%;background:var(--teal)}
+.check li:after{content:"";position:absolute;left:9px;top:22px;width:7px;height:12px;border:solid var(--navy);border-width:0 3px 3px 0;transform:rotate(45deg)}
+.check b{display:block;font-family:Montserrat,Arial,sans-serif}
+
+/* cta */
+.cta{text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{font-size:19px;max-width:640px;margin:0 auto}
+.cta .btn{margin-top:26px}
+
+/* testimonials */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column}
+.card blockquote{margin:0 0 24px;font-size:17px;flex:1}
+.card blockquote:before{content:"\201C";display:block;font:800 52px/0.8 Montserrat,Arial,sans-serif;color:var(--teal)}
+.who{display:flex;gap:14px;align-items:center}
+.avatar{width:48px;height:48px;border-radius:50%;background:#e3ebf1;border:2px dashed #9fb3c4;flex:none;font:600 9px/1.1 Arial;color:var(--muted);display:flex;align-items:center;justify-content:center;text-align:center}
+.who b{display:block;font-family:Montserrat,Arial,sans-serif}
+.who small{color:var(--muted);font-size:14px;line-height:1.35;display:block}
+
+/* pricing */
+.pricing{padding:56px 0}
+.price-card{max-width:460px;margin:0 auto;background:#fff;border:2px solid var(--line);border-radius:20px;padding:36px 32px;text-align:center}
+.price-card.best{border-color:var(--teal)}
+.price-card h2{font-size:24px;margin-bottom:8px}
+.price{font:800 48px/1 Montserrat,Arial,sans-serif;margin:14px 0 6px}
+.price small{font-size:18px;font-weight:600;color:var(--muted)}
+.price-card p{color:var(--muted);font-size:15px}
+.price-card .btn{display:block}
+
+/* faq */
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;font:700 18px/1.35 Montserrat,Arial,sans-serif;padding:20px 40px 20px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:4px;top:16px;font-size:28px;color:var(--teal-dark);font-weight:400}
+details[open] summary:after{content:"\2212"}
+details p{padding:0 8px 20px 0;color:var(--muted)}
+
+footer{background:var(--navy);color:#9fb3c9;text-align:center;padding:32px 24px;font-size:14px;border-top:1px solid #1d3557}
+
+@media (max-width:820px){
+  section{padding:56px 0}
+  .pricing{padding:36px 0}
+  .split{grid-template-columns:1fr;gap:32px}
+  .split .ph{order:2;min-height:220px}
+  .split.media-left .ph{order:2}
+  .split h2{text-align:center}
+  .cards{grid-template-columns:1fr}
+  nav a:not(.start){display:none}
+  .burger{display:block;margin-left:16px}
+  nav{gap:0}
+}
+@media (max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .sub{font-size:17px;margin-bottom:28px}
+  .btns{flex-direction:column}
+  .btn{width:100%;padding:16px 20px}
+  .split .big p{font-size:18px}
+  .price{font-size:40px}
+  summary{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">BDA <span>One</span></a>
+    <nav>
+      <a href="#">Membership</a>
+      <a href="#">Programmes</a>
+      <a href="#" class="start">Start free</a>
+      <a href="#">Sign In</a>
+      <span class="burger" aria-hidden="true"></span>
+    </nav>
+  </div>
+</header>
+
+<!-- 1 HERO: Banner -->
+<section class="dark" style="padding:112px 0 104px">
+  <span class="tag">1 · Banner (hero)</span>
+  <div class="wrap centre">
+    <div class="narrow">
+      <h1>Be noticed, trusted and promoted.</h1>
+      <p class="sub" style="margin-bottom:0">Practical business development training in 15 minutes a day, for lawyers and accountants from trainee to five years qualified.</p>
+      <div class="btns">
+        <a class="btn" href="https://www.bda-one.com/courses/The-5-Day-BD-Advantage">Start the free 5-day programme</a>
+        <a class="btn secondary" href="https://www.bda-one.com/pages/membership">See membership</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 THE PROBLEM: Text and media (image right) -->
+<section>
+  <span class="tag">2 · Text and media (image right)</span>
+  <div class="wrap">
+    <div class="split">
+      <div class="big">
+        <h2>Doing good work is no longer enough.</h2>
+        <p>You can be technically excellent and still be invisible.</p>
+        <p>Do partners even know your name yet?</p>
+        <p>Does a pitch make you feel nauseous?</p>
+        <p>Business development is a skill. You can learn it, 15 minutes at a time.</p>
+      </div>
+      <div class="ph">PHOTO: a young lawyer or accountant in a smart-casual office, standing slightly apart from a group of senior colleagues (landscape, 4:3)</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 WHAT'S INSIDE: Checklist -->
+<section class="light">
+  <span class="tag">3 · Checklist / key points</span>
+  <div class="wrap">
+    <h2>What’s inside BDA One</h2>
+    <p class="sub">10 learning paths across 5 focus areas. 15 minutes a day, tracked towards your CPD.</p>
+    <ul class="check">
+      <li><b>Build your profile</b>Mastering Networking · BD Essentials</li>
+      <li><b>Win new work</b>Targeting New Business · Mastering BD Discussions &amp; Meetings · Pitching to Win</li>
+      <li><b>Grow your clients</b>Nurturing and Protecting the Client Relationship · Growing the Client Account</li>
+      <li><b>Perform at your best</b>Maximising Personal Performance</li>
+      <li><b>Keep learning</b>Webinar of the Month · Webinar Library</li>
+      <li><b>15 minutes a day. Every day.</b>Short enough to fit around long days.</li>
+      <li><b>Progress tracked, counted towards CPD</b>See what you’ve completed at a glance.</li>
+      <li><b>Branded iPhone and Android app</b>Learn on the train, the tube or between meetings.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 FREE PROGRAMME: Call to action -->
+<section class="dark cta">
+  <span class="tag">4 · Call to action</span>
+  <div class="wrap">
+    <h2>Get Noticed: The 5-Day BD Advantage</h2>
+    <p>A free 5-day programme. One 15-minute action a day, a certificate at the end, and 15% off annual membership when you finish.</p>
+    <a class="btn" href="https://www.bda-one.com/courses/The-5-Day-BD-Advantage">Start the free 5-day programme</a>
+  </div>
+</section>
+
+<!-- 5 WHY 15 MINUTES: Text and media (image left) -->
+<section>
+  <span class="tag">5 · Text and media (image left)</span>
+  <div class="wrap">
+    <div class="split media-left" style="grid-template-columns:1fr 1fr">
+      <div class="ph">PHOTO: someone on a commute, phone in hand, doing a quick lesson on the BDA One app (landscape, 4:3)</div>
+      <div>
+        <h2>Why 15 minutes a day works</h2>
+        <p>Spaced learning means returning to an idea little and often, which helps it stick. BDA One is built around it: one 15-minute step a day, every day. Small, regular effort compounds into real results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 WHO IT'S FOR: Checklist -->
+<section class="light">
+  <span class="tag">6 · Checklist / key points</span>
+  <div class="wrap">
+    <h2>Who BDA One is for</h2>
+    <p class="sub">Built first for early-career lawyers and accountants. Not for passengers.</p>
+    <ul class="check">
+      <li>Trainees and newly qualified solicitors</li>
+      <li>Junior accountants and associates, up to around five years qualified</li>
+      <li>Technically strong professionals who want to be commercially visible</li>
+      <li>BD and marketing teams who want a consistent programme for their people</li>
+      <li>Pre-partners and partners who want to sharpen their own business development</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 7 TESTIMONIALS -->
+<section>
+  <span class="tag">7 · Testimonials (3 per row)</span>
+  <div class="wrap">
+    <h2 style="margin-bottom:40px">What members say</h2>
+    <div class="cards">
+      <div class="card">
+        <blockquote>I came out of my training contract technically strong… but commercially lost… 15 minutes a day felt manageable, but the impact grew quickly. I’m more confident speaking to clients, and partners have noticed.</blockquote>
+        <div class="who"><div class="avatar">photo (optional)</div><div><b>Suzi</b><small>Newly Qualified Solicitor, Magic Circle firm</small></div></div>
+      </div>
+      <div class="card">
+        <blockquote>I was winging it and hoping for the best… BDA One broke it down into something practical and actually usable. It’s now part of my daily tube ride.</blockquote>
+        <div class="who"><div class="avatar">photo (optional)</div><div><b>Abdul</b><small>Trainee Solicitor, Magic Circle firm</small></div></div>
+      </div>
+      <div class="card">
+        <blockquote>I used to feel completely out of my depth with clients… The 15-minute format fits around the long days, and I’ve already started contributing more confidently in meetings.</blockquote>
+        <div class="who"><div class="avatar">photo (optional)</div><div><b>Laura</b><small>Junior Accountant, international accountancy practice</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8a PRICING INTRO: Banner (light) -->
+<section class="light" style="padding-bottom:24px">
+  <span class="tag">8a · Banner (light, no buttons)</span>
+  <div class="wrap">
+    <h2>Choose how you join</h2>
+    <p class="sub" style="margin-bottom:0">Every learning path, the app and CPD tracking. Prices include VAT. Want just one path? Single paths are £99 a year.</p>
+  </div>
+</section>
+<!-- 8b PRICING: Annual -->
+<section class="light pricing" style="padding-bottom:20px">
+  <span class="tag">8b · Pricing options (annual)</span>
+  <div class="wrap">
+    <div class="price-card best">
+      <h2>Best value: two months free</h2>
+      <div class="price">£199<small> / year</small></div>
+      <p>BDA One Membership, annual. Includes VAT.</p>
+      <a class="btn" href="https://www.bda-one.com/enroll/3541557">Join for £199 a year</a>
+    </div>
+  </div>
+</section>
+<!-- 8c PRICING: Monthly -->
+<section class="light pricing">
+  <span class="tag">8c · Pricing options (monthly)</span>
+  <div class="wrap">
+    <div class="price-card">
+      <h2>Monthly, cancel anytime</h2>
+      <div class="price">£19.99<small> / month</small></div>
+      <p>BDA One Membership, monthly. Includes VAT.</p>
+      <a class="btn secondary" href="https://www.bda-one.com/bundles/bda-one-membership-monthly">Join for £19.99 a month</a>
+    </div>
+  </div>
+</section>
+
+<!-- 9 FAQ -->
+<section>
+  <span class="tag">9 · FAQ</span>
+  <div class="wrap">
+    <h2 style="margin-bottom:32px">Questions, answered</h2>
+    <div class="narrow">
+      <details><summary>Can I cancel?</summary><p>Yes. Monthly membership (£19.99) can be cancelled at any time. Annual membership is £199 for the year and works out at two months free.</p></details>
+      <details><summary>How does CPD tracking work?</summary><p>BDA One tracks your progress as you complete each learning path, and that learning counts towards your CPD. Check your own regulator’s and firm’s requirements for how to record it.</p></details>
+      <details><summary>Can my firm pay, or buy for a team?</summary><p>Yes. BDA One is used by BD teams as well as individuals. Get in touch with The Results Consultancy and we’ll talk you through team access.</p></details>
+      <details><summary>What’s in the free programme?</summary><p>Get Noticed: The 5-Day BD Advantage is five days, with one 15-minute action each day. You get a certificate at the end, plus 15% off annual membership.</p></details>
+      <details><summary>Is there an app?</summary><p>Yes. BDA One has a branded app for iPhone and Android, so you can do your 15 minutes wherever you are.</p></details>
+      <details><summary>What happens after the 5 days?</summary><p>You receive your certificate and 15% off annual membership. Join when you’re ready and carry on with all 10 learning paths, 15 minutes a day.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10 FINAL CTA -->
+<section class="dark cta">
+  <span class="tag">10 · Call to action</span>
+  <div class="wrap">
+    <h2>Not for average professionals.</h2>
+    <p>15 minutes a day. Every day. Compounding results.</p>
+    <a class="btn" href="https://www.bda-one.com/courses/The-5-Day-BD-Advantage">Start the free 5-day programme</a>
+  </div>
+</section>
+
+<footer>© The Results Consultancy · BDA One (footer is set separately in Thinkific)</footer>
+</body>
+</html>

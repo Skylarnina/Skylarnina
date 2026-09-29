@@ -1,0 +1,45 @@
+/* BDA One – optional custom CSS (Theme Settings > Code / Custom CSS).
+   NOTE: selectors are best guesses for Vogue. Inspect a button/section in the
+   live preview (right-click > Inspect) and adjust class names if a rule has no effect.
+   Simplest alternative for rule 1: set Theme Settings > Colours > Primary to #2CB6D3. */
+
+/* 1. Primary buttons: teal with navy text (white on teal fails contrast) */
+.btn-primary, .button-primary, a.btn--primary {
+  background-color: #2CB6D3 !important;
+  border-color: #2CB6D3 !important;
+  color: #0B1F3A !important;
+  border-radius: 999px !important;   /* pill shape */
+  font-weight: 700;
+}
+.btn-primary:hover, .button-primary:hover, a.btn--primary:hover {
+  background-color: #0B1F3A !important;
+  border-color: #0B1F3A !important;
+  color: #fff !important;
+}
+
+/* 2. Secondary buttons: outlined pill, navy text */
+.btn-secondary, .button-secondary, a.btn--secondary {
+  background: transparent !important;
+  border: 2px solid #0B1F3A !important;
+  color: #0B1F3A !important;
+  border-radius: 999px !important;
+}
+
+/* 3. Headings: tighter, balanced wrapping so short lines don't orphan a word */
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* 4. Mobile: tighter section padding and full-width stacked buttons */
+@media (max-width: 767px) {
+  .section, section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .btn, .button {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+}
