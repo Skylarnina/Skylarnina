@@ -1,0 +1,694 @@
+<title>The Kóda Note</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;500&display=swap">
+<style>
+:root{
+  --navy:#0D1F2D; --bone:#F0EBE3; --paper:#FAFAF8; --stone:#C8BCA8;
+  --blue-rich:#1B3A5C;
+  --blue-mid:#2D5F8A;
+  --stone-hover:#B8AC98; --navy-hover:#163043;
+  --n62:rgba(13,31,45,.62); --n64:rgba(13,31,45,.64); --n38:rgba(13,31,45,.38);
+  --b62:rgba(240,235,227,.62); --b38:rgba(240,235,227,.38); --b22:rgba(240,235,227,.22);
+  --stone50:rgba(200,188,168,.5); --stone45:rgba(200,188,168,.45);
+  --serif:'Cormorant Garamond','Cormorant',Garamond,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --pad-x:28px;
+  color-scheme:light;
+}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--navy);font-family:var(--sans);font-weight:300;font-variant-numeric:lining-nums;font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box}
+h1,h2,h3,p,ol,ul,dl,dd,figure{margin:0;padding:0}
+ol,ul{list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+
+/* ---------- surfaces ---------- */
+.s-paper,html[data-hero="day"] .hs{
+  background:var(--paper);color:var(--navy);
+  --fg:var(--navy);--muted:var(--n62);--eye:var(--n62);--idx:var(--n38);
+  --rule:var(--stone);--rule-soft:var(--stone50);--focus:var(--blue-mid);--link:var(--blue-mid);
+  --btn-bg:var(--navy);--btn-fg:var(--bone);--btn-hover:var(--navy-hover);--btn-h:52px;
+  --btn2-line:var(--navy);--btn2-fg:var(--navy);--btn2-h:48px;
+}
+.s-bone{
+  background:var(--bone);color:var(--navy);
+  --fg:var(--navy);--muted:var(--n64);--eye:var(--n64);--idx:var(--n38);
+  --rule:var(--stone);--rule-soft:var(--stone50);--focus:var(--blue-mid);--link:var(--blue-mid);
+  --btn-bg:var(--navy);--btn-fg:var(--bone);--btn-hover:var(--navy-hover);--btn-h:52px;
+}
+.s-navy,.hs{
+  background:var(--navy);color:var(--bone);
+  --fg:var(--bone);--muted:var(--b62);--eye:var(--stone);--idx:var(--b38);
+  --rule:var(--b22);--rule-soft:var(--b22);--focus:var(--bone);--link:var(--bone);
+  --btn-bg:var(--stone);--btn-fg:var(--navy);--btn-hover:var(--stone-hover);--btn-h:54px;
+  --btn2-line:var(--stone);--btn2-fg:var(--bone);--btn2-h:54px;
+}
+:focus-visible{outline:1px solid var(--focus,var(--blue-mid));outline-offset:3px}
+
+/* ---------- grid (12 cols, 1200 max, 32 gutters; outer tracks reach the viewport edge) ---------- */
+.g{padding:0 var(--pad-x)}
+.g .bleed-m{margin-left:calc(var(--pad-x) * -1);margin-right:calc(var(--pad-x) * -1)}
+
+/* ---------- type primitives ---------- */
+.idx{font:500 9.5px/1 var(--sans);letter-spacing:.18em;color:var(--idx);font-variant-numeric:lining-nums tabular-nums;margin-bottom:28px}
+.eyebrow{font:500 9.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--eye)}
+.h2{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1.12;letter-spacing:-.005em;text-wrap:balance;margin-top:14px}
+.body{font:300 13.5px/1.75 var(--sans);color:var(--muted);text-wrap:pretty;max-width:60ch}
+.small{font:300 12px/1.6 var(--sans);color:var(--muted);text-wrap:pretty}
+.lnk{color:var(--link);text-decoration:underline;text-decoration-thickness:.5px;text-underline-offset:4px}
+.price-note{font:500 9.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;text-decoration:none;padding:0 calc(32px - .14em) 0 32px;border:.5px solid transparent;
+  transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease,opacity 220ms ease}
+.btn:active{opacity:.85}
+.btn-p{height:var(--btn-h);min-height:44px;background:var(--btn-bg);color:var(--btn-fg)}
+.btn-p:hover{background:var(--btn-hover)}
+.btn-s{height:var(--btn2-h);min-height:44px;background:transparent;border-color:var(--btn2-line);color:var(--btn2-fg)}
+.btn-s:hover{border-color:var(--stone-hover)}
+
+/* ---------- wordmark ---------- */
+.mark{display:inline-flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--fg)}
+.mark-k{font:300 21px/1 var(--serif);letter-spacing:.42em;margin-right:-.42em;text-transform:uppercase}
+.mark-b{font:500 9.5px/1 var(--sans);letter-spacing:.18em;margin-right:-.18em;margin-top:8px}
+
+/* ---------- photo slots ---------- */
+.slot{position:relative;margin:0;background:var(--slot-bg);--slot-bg:var(--blue-rich);--slot-fg:var(--b62)}
+.slot-day{--slot-bg:var(--bone);--slot-fg:var(--n64)}
+.slot figcaption{position:absolute;left:20px;right:20px;bottom:20px;color:var(--slot-fg)}
+.slot .sk{display:block;font:500 9.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase}
+.slot .sq{display:block;font:300 11px/1.5 var(--sans);margin-top:4px}
+.cap{font:300 11px/1.4 var(--sans);color:var(--muted)}
+html[data-hero="day"] .night-only,html:not([data-hero="day"]) .day-only{display:none}
+
+/* ---------- header ---------- */
+.hdr-in{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+.hdr-link{display:inline-flex;align-items:center;min-height:44px;font:300 13px/1 var(--sans);color:var(--fg);text-decoration:underline;text-decoration-thickness:.5px;text-underline-offset:4px}
+
+/* ---------- 01 hero ---------- */
+.hero-g{display:grid;grid-template-columns:1fr auto;align-items:baseline;column-gap:16px}
+.hero-photo{grid-column:1/-1;grid-row:1;height:clamp(236px,calc(100svh - 548px),58svh)}
+.hero-photo .slot{height:100%}
+.hero-idx{grid-column:1;grid-row:2;margin:14px 0 0}
+.hero-cap{grid-column:2;grid-row:2;margin-top:14px;text-align:right}
+.hero-txt{grid-column:1/-1;grid-row:3;padding:18px 0 56px}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:46px;line-height:1.06;letter-spacing:-.005em;text-wrap:balance;margin-top:12px;color:var(--fg)}
+.rule-short{display:block;width:72px;border-top:.5px solid var(--stone);margin:18px 0 14px}
+.lede{font:300 13.5px/1.75 var(--sans);color:var(--muted);text-wrap:pretty;max-width:46ch}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 24px;margin-top:22px}
+.cta .lnk{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+.hero .note{margin-top:6px;font:300 11px/1.5 var(--sans);color:var(--muted)}
+
+/* ---------- sections ---------- */
+.sec{padding-top:var(--pt);padding-bottom:var(--pb)}
+.sec-ways{--pt:72px;--pb:88px}
+.sec-eve{--pt:112px;--pb:112px}
+.sec-how{--pt:88px;--pb:88px}
+.sec-who{--pt:96px;--pb:96px}
+.sec-note{--pt:104px;--pb:104px}
+.sec-faq{--pt:72px;--pb:72px}
+.sec-cancel{--pt:64px;--pb:96px}
+.sec-close{--pt:96px;--pb:88px}
+
+/* 02 three ways */
+.ways{display:grid;gap:64px;margin-top:40px}
+.way{display:flex;flex-direction:column}
+.way .slot{aspect-ratio:4/3}
+.way-rule{border-top:.5px solid var(--rule);margin-top:24px}
+.way h3{font:300 36px/1.05 var(--serif);margin-top:20px}
+.way .body{margin-top:12px}
+.way .eyebrow{margin-top:14px}
+.windows{margin-top:18px}
+.windows li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:.5px solid var(--rule-soft);padding:10px 0}
+.windows li:last-child{border-bottom:.5px solid var(--rule-soft)}
+.windows .d{font:300 13.5px/1.4 var(--sans);color:var(--muted)}
+.windows .t{font:400 21px/1.2 var(--serif);font-variant-numeric:lining-nums tabular-nums}
+.way-end{margin-top:auto;padding-top:22px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.ways-foot{margin-top:48px}
+
+/* 03 one evening */
+.eve-head{margin-bottom:48px}
+.tl-row{border-top:.5px solid var(--rule);padding-top:20px;padding-bottom:24px}
+.tl-row:last-child{border-bottom:.5px solid var(--rule)}
+.tl-t{display:block;font:300 56px/1 var(--serif);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.01em;color:var(--fg)}
+.tl-s{font:300 20px/1.35 var(--serif);color:var(--fg);text-wrap:pretty;margin-top:10px;max-width:30ch}
+
+/* 04 how it works */
+.steps{margin-top:40px}
+.step{display:grid;grid-template-columns:48px 1fr;column-gap:16px;border-top:.5px solid var(--rule);padding:20px 0 28px}
+.step:last-child{border-bottom:.5px solid var(--rule-soft)}
+.step-n{font:300 40px/1 var(--serif);font-variant-numeric:lining-nums;grid-row:1/span 2}
+.step h3{font:400 21px/1.25 var(--serif);text-wrap:balance}
+.step .body{margin-top:8px}
+
+/* 05 who */
+.who-rows{margin-top:48px}
+.who-row{border-top:.5px solid var(--rule-soft);padding:16px 0 18px}
+.who-row:first-child{border-top-color:var(--rule)}
+.who-row:last-child{border-bottom:.5px solid var(--rule-soft)}
+.who-row .lab{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.status{font:500 9.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--blue-mid);white-space:nowrap}
+.who-row dd{font:400 21px/1.3 var(--serif);margin-top:6px}
+.who .body{margin-top:20px}
+
+/* 06 founder's note */
+.letter p.l{font:italic 400 22px/1.45 var(--serif);color:var(--navy);text-wrap:pretty;margin-top:24px}
+.letter .rep{margin-top:24px}
+.sign{margin-top:36px}
+.sign-n{display:block;font:300 44px/1 var(--serif)}
+.sign-r{display:block;font:300 12px/1.6 var(--sans);color:var(--muted);margin-top:10px}
+
+/* 07 answers */
+.qa{margin-top:40px}
+.qa-row{border-top:.5px solid var(--rule-soft);padding:20px 0 24px}
+.qa-row:first-child{border-top-color:var(--rule)}
+.qa-row:last-child{border-bottom:.5px solid var(--rule-soft)}
+.qa-row dt{font:400 21px/1.3 var(--serif);text-wrap:balance}
+.qa-row dd{margin-top:10px}
+
+/* 08 cancellation */
+.cancel-box{padding:36px 24px 32px}
+.cx{margin-top:24px}
+.cx-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:.5px solid var(--rule-soft);padding:14px 0}
+.cx-row:first-child{border-top-color:var(--rule)}
+.cx-row:last-child{border-bottom:.5px solid var(--rule-soft)}
+.cx-row dt{font:300 13.5px/1.5 var(--sans);color:var(--muted)}
+.cx-row dd{font:400 21px/1.2 var(--serif);white-space:nowrap}
+.cancel-box .small{margin-top:18px}
+
+.cx-row dd,.step h3,.step-n,.who-row dd,.qa-row dt,.letter p.l,.h2,.close-h,.hero h1{font-variant-numeric:lining-nums}
+
+/* 09 closing + footer */
+.close-h{font:300 40px/1.06 var(--serif);letter-spacing:-.005em;text-wrap:balance;color:var(--fg)}
+.close-cta{margin-top:32px}
+.ftr{border-top:.5px solid var(--rule);padding-top:56px;padding-bottom:40px}
+.ftr .mark{justify-self:start;align-self:start}
+.ftr-cols{display:grid;gap:36px}
+.ftr-list li{font:300 13px/1.6 var(--sans);color:var(--muted);padding:3px 0}
+.ftr-links li a{display:inline-flex;align-items:center;min-height:44px;font:300 13px/1 var(--sans);color:var(--bone);text-decoration:underline;text-decoration-thickness:.5px;text-underline-offset:4px}
+.ftr-base{border-top:.5px solid var(--rule);margin-top:48px;padding-top:24px;display:grid;gap:12px}
+.ftr-base p{font:300 11px/1.6 var(--sans);color:var(--muted)}
+.ftr-base a{color:var(--bone);text-decoration:underline;text-decoration-thickness:.5px;text-underline-offset:4px}
+
+/* ---------- sticky bar (mobile) ---------- */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--bone);border-top:.5px solid var(--stone);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px)) 28px;
+  --btn-bg:var(--navy);--btn-fg:var(--bone);--btn-hover:var(--navy-hover);--focus:var(--blue-mid);
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity 240ms ease,visibility 0s linear 240ms}
+.sticky.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity 240ms ease,visibility 0s}
+.sticky p{font:300 12px/1.4 var(--sans);color:var(--n64)}
+.sticky .btn-p{height:44px;padding:0 calc(22px - .14em) 0 22px}
+
+/* ---------- booking overlay ---------- */
+.ov{position:fixed;inset:0;z-index:60;opacity:0;transition:opacity 220ms ease}
+.ov.open{opacity:1}
+.ov-scrim{position:absolute;inset:0;background:rgba(13,31,45,.6)}
+.ov-panel{position:absolute;inset:0;background:#FAFAF8;color:var(--navy);display:flex;flex-direction:column;overflow-y:auto;padding:8px 28px calc(24px + env(safe-area-inset-bottom,0px));--focus:var(--blue-mid);--eye:var(--n62)}
+.ov-top{display:flex;justify-content:space-between;align-items:center;min-height:52px}
+.ov-top button,.ov-top span{font:500 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--n62)}
+.ov-top button{min-height:44px;padding:0 12px 0 0}
+.ov-track{position:relative;border-top:.5px solid var(--stone45);margin:4px calc(var(--ov-x,28px) * -1) 0}
+.ov-fill{position:absolute;left:0;top:-.5px;border-top:.5px solid var(--navy);width:14.2857%}
+.ov-body{padding-top:48px}
+.ov-body .eyebrow{margin-bottom:16px}
+.ov-q{font:300 38px/1.1 var(--serif);letter-spacing:-.005em;text-wrap:balance}
+.ov-hint{font:300 13px/1.7 var(--sans);color:var(--n62);max-width:290px;margin-top:14px;min-height:44px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.chip{height:38px;padding:0 16px;border-radius:999px;border:.5px solid var(--stone);background:transparent;color:var(--navy);font:300 13px/1 var(--sans);
+  transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease,opacity 220ms ease}
+.chip:hover{border-color:var(--stone-hover)}
+.chip:active{opacity:.85}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--bone)}
+.ov-foot{margin-top:auto;padding-top:48px;font:300 11px/1.6 var(--sans);color:var(--n38);word-break:break-word}
+
+/* ---------- scroll fades ---------- */
+[data-fade]{transition:opacity 300ms ease}
+.will-fade{opacity:0}
+@media (prefers-reduced-motion:reduce){[data-fade]{transition:none}.will-fade{opacity:1}.ov,.sticky{transition:none}}
+
+/* ======================= desktop ======================= */
+@media (min-width:900px){
+  .g{display:grid;padding:0;column-gap:32px;
+     grid-template-columns:minmax(0,calc(50% - 632px)) repeat(12,minmax(0,1fr)) minmax(0,calc(50% - 632px))}
+  .g>*{grid-column:2/14}
+  .g .bleed-m{margin-left:0;margin-right:0}
+  .idx{grid-column:2/3;margin-bottom:48px}
+  .c1-4{grid-column:2/6}.c1-5{grid-column:2/7}.c1-6{grid-column:2/8}.c1-8{grid-column:2/10}
+  .c2-6{grid-column:3/8}.c2-8{grid-column:3/10}.c5-10{grid-column:6/12}.c5-12{grid-column:6/14}
+  .c7-11{grid-column:8/13}.c8-12{grid-column:9/14}.c1-12{grid-column:2/14}
+  .h2{font-size:48px;line-height:1.08;margin-top:18px}
+  .body{font-size:15px}
+  .mark-k{font-size:24px}
+
+  .hdr-in{padding-top:26px;padding-bottom:26px;align-items:center}
+  .hdr-in .mark{grid-column:2/6;justify-self:start}
+  .hdr-in .hdr-link{grid-column:10/14;justify-self:end}
+
+  .hero-g{grid-template-rows:820px auto;align-items:stretch;column-gap:32px}
+  .hero-photo{grid-column:9/-1;grid-row:1;height:auto}
+  .hero-idx{grid-column:2/8;grid-row:1;align-self:start;margin:40px 0 0}
+  .hero-cap{grid-column:9/-1;grid-row:2;text-align:left;margin-top:14px}
+  .hero-txt{grid-column:2/8;grid-row:1;align-self:end;padding:0 0 72px}
+  .hero h1{font-size:72px;line-height:1.04;margin-top:22px}
+  .rule-short{width:96px;margin:32px 0 26px}
+  .lede{font-size:15px}
+  .cta{margin-top:40px;gap:8px 32px}
+  .hero .note{margin-top:4px}
+
+  .sec-ways{--pt:96px;--pb:112px}
+  .sec-eve{--pt:160px;--pb:160px}
+  .sec-how{--pt:112px;--pb:112px}
+  .sec-who{--pt:128px;--pb:128px}
+  .sec-note{--pt:144px;--pb:144px}
+  .sec-faq{--pt:96px;--pb:96px}
+  .sec-cancel{--pt:64px;--pb:128px}
+  .sec-close{--pt:128px;--pb:112px}
+
+  .ways{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px;row-gap:0;margin-top:64px;align-items:stretch}
+  .way .slot{aspect-ratio:4/5}
+  .way-rule{margin-top:28px}
+  .way h3{margin-top:24px}
+  .ways-foot{margin-top:56px}
+
+  .eve-head{margin-bottom:72px}
+  .tl-row{align-items:baseline;padding-top:28px;padding-bottom:36px}
+  .tl-t{grid-column:2/7;font-size:104px;line-height:.9}
+  .tl-s{grid-column:8/13;font-size:24px;line-height:1.35;margin-top:0;max-width:none}
+
+  .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:32px;margin-top:72px}
+  .step{display:block;padding:24px 0 0}
+  .step:last-child{border-bottom:0}
+  .step-n{display:block;font-size:56px}
+  .step h3{margin-top:28px}
+  .step .body{margin-top:12px}
+
+  .who-head{grid-column:3/8;align-self:start}
+  .who-rows{grid-column:9/14;margin-top:0;align-self:start}
+  .who .h2{margin-top:18px}
+
+  .letter{grid-column:6/12}
+  .letter p.l{font-size:28px;line-height:1.42;margin-top:28px}
+  .sign-n{font-size:52px}
+  .sign{margin-top:48px}
+
+  .faq-head{grid-column:2/6;align-self:start}
+  .qa{grid-column:6/14;margin-top:0}
+  .qa-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:32px;padding:24px 0 28px}
+  .qa-row dt{grid-column:1/5}
+  .qa-row dd{grid-column:5/9;margin-top:4px}
+
+  .cancel-box{grid-column:3/10;padding:48px 56px 44px}
+  .cancel-idx{grid-column:2/3;align-self:start;margin:0}
+
+  .close-h{grid-column:2/10;font-size:64px;line-height:1.04}
+  .close-cta{grid-column:2/10;margin-top:48px}
+  .ftr{padding-top:72px;padding-bottom:48px}
+  .ftr-cols{grid-column:2/14;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px}
+  .ftr-cols .mark{grid-column:1/4}
+  .ftr-cols .ftr-list{grid-column:5/9}
+  .ftr-cols .ftr-links{grid-column:10/13}
+  .ftr-base{grid-column:2/14;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;margin-top:64px}
+  .ftr-base p:first-child{grid-column:1/8}
+  .ftr-base p:last-child{grid-column:9/13}
+
+  .sticky{display:none}
+
+  .ov-panel{left:50%;right:auto;width:min(720px,100%);margin-left:calc(min(720px,100%) / -2);padding:16px 64px 40px;--ov-x:64px}
+  .ov-body{padding-top:96px}
+  .ov-q{font-size:38px}
+}
+</style>
+
+<header class="hdr hs" id="top">
+  <div class="g hdr-in">
+    <a class="mark" href="#top" aria-label="Kóda, Barcelona"><span class="mark-k">Kóda</span><span class="mark-b">BARCELONA</span></a>
+    <a class="hdr-link" href="#contact" id="hdr-message">Message us</a>
+  </div>
+</header>
+
+<main>
+<section class="hero hs" aria-labelledby="hero-h">
+  <div class="g hero-g">
+    <div class="hero-photo bleed-m">
+      <figure class="slot slot-night night-only" aria-label="Photograph to come: the Gothic Quarter at night">
+        <figcaption><span class="sk">Photo — Hero, night</span><span class="sq">barcelona gothic quarter night street warm light</span></figcaption>
+      </figure>
+      <figure class="slot slot-day day-only" aria-label="Photograph to come: Eixample in the afternoon">
+        <figcaption><span class="sk">Photo — Hero, day</span><span class="sq">eixample golden hour street candid, people walking back view</span></figcaption>
+      </figure>
+    </div>
+    <p class="idx hero-idx" aria-hidden="true">01</p>
+    <p class="cap hero-cap"><span class="night-only">Barri Gòtic, 21:40</span><span class="day-only">Eixample, 16:20</span></p>
+    <div class="hero-txt">
+      <p class="eyebrow">Barcelona · <span data-bcn-time>21:40</span></p>
+      <h1 id="hero-h">Someone who knows the city, with your group, start to finish.</h1>
+      <span class="rule-short" aria-hidden="true"></span>
+      <p class="lede">A composed local stays with you for the evening, the day or the whole weekend — so nobody has to think about how the night gets home.</p>
+      <div class="cta">
+        <button class="btn btn-p" type="button" id="hero-book" data-book>Plan your evening</button>
+        <a class="lnk" href="#contact" id="hero-message">or message us first</a>
+      </div>
+      <p class="note">Arranged at least 48 hours ahead.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-ways s-paper" id="three-ways" aria-labelledby="ways-h">
+  <div class="g">
+    <p class="idx" aria-hidden="true">02</p>
+    <div class="c1-6" data-fade>
+      <p class="eyebrow">Three ways</p>
+      <h2 class="h2" id="ways-h">An evening, a day, or the weekend.</h2>
+    </div>
+    <div class="ways c1-12">
+      <article class="way" data-fade aria-labelledby="way-day-h">
+        <figure class="slot slot-day bleed-m" aria-label="Photograph to come: Santa Caterina market">
+          <figcaption><span class="sk">Photo — Day</span><span class="sq">barcelona market daylight candid</span></figcaption>
+        </figure>
+        <p class="cap" style="margin-top:10px">Santa Caterina, 11:30</p>
+        <div class="way-rule"></div>
+        <h3 id="way-day-h">Kóda Day</h3>
+        <p class="body">From a late breakfast to the last gallery, someone who knows which street is quicker and which café is worth the wait.</p>
+        <p class="eyebrow">Daytime · Barcelona</p>
+        <div class="way-end">
+          <span class="price-note" data-price-note>[PRICE — pending client]</span>
+          <button class="btn btn-s" type="button" id="book-day" data-book data-kind="day">Plan your day</button>
+        </div>
+      </article>
+      <article class="way" data-fade aria-labelledby="way-night-h">
+        <figure class="slot slot-night bleed-m" aria-label="Photograph to come: El Born at night">
+          <figcaption><span class="sk">Photo — Night</span><span class="sq">leaving restaurant night street</span></figcaption>
+        </figure>
+        <p class="cap" style="margin-top:10px">El Born, 23:10</p>
+        <div class="way-rule"></div>
+        <h3 id="way-night-h">Kóda Night</h3>
+        <p class="body">Dinner, the place after, and the walk home. They stay until everyone is in.</p>
+        <p class="eyebrow">Evening into night</p>
+        <div class="way-end">
+          <span class="price-note" data-price-note>[PRICE — pending client]</span>
+          <button class="btn btn-s" type="button" id="book-night" data-book data-kind="night">Plan your night</button>
+        </div>
+      </article>
+      <article class="way" data-fade aria-labelledby="way-weekend-h">
+        <figure class="slot slot-day bleed-m" aria-label="Photograph to come: Barceloneta seafront in the morning">
+          <figcaption><span class="sk">Photo — Weekend</span><span class="sq">seafront promenade barcelona morning people distance</span></figcaption>
+        </figure>
+        <p class="cap" style="margin-top:10px">Barceloneta, 10:15</p>
+        <div class="way-rule"></div>
+        <h3 id="way-weekend-h">Kóda Weekend</h3>
+        <p class="body">One Kóda, three windows, arranged once.</p>
+        <ul class="windows" aria-label="The three weekend windows">
+          <li><span class="d">Friday</span><span class="t">20:00–01:00</span></li>
+          <li><span class="d">Saturday</span><span class="t">12:00–16:00</span></li>
+          <li><span class="d">Saturday</span><span class="t">21:00–02:00</span></li>
+        </ul>
+        <div class="way-end">
+          <span class="price-note" data-price-note>[PRICE — pending client]</span>
+          <button class="btn btn-s" type="button" id="book-weekend" data-book data-kind="weekend">Plan your weekend</button>
+        </div>
+      </article>
+    </div>
+    <p class="small ways-foot c1-6" data-fade>One Kóda for up to six people. Seven to twelve, two. Within Barcelona municipality.</p>
+  </div>
+</section>
+
+<section class="sec sec-eve s-navy" aria-labelledby="eve-h">
+  <div class="g eve-head">
+    <p class="idx" aria-hidden="true">03</p>
+    <h2 class="eyebrow c1-6" id="eve-h">One evening, handled</h2>
+  </div>
+  <ol class="tl">
+    <li class="g tl-row" data-fade><span class="tl-t">20:30</span><p class="tl-s">Your Kóda meets you in the hotel lobby. The table is under your name.</p></li>
+    <li class="g tl-row" data-fade><span class="tl-t">22:15</span><p class="tl-s">Dinner runs long. They’ve already spoken to the next place.</p></li>
+    <li class="g tl-row" data-fade><span class="tl-t">00:40</span><p class="tl-s">The street is unfamiliar; it doesn’t feel that way.</p></li>
+    <li class="g tl-row" data-fade><span class="tl-t">02:10</span><p class="tl-s">A taxi, an address confirmed, everyone counted in.</p></li>
+    <li class="g tl-row" data-fade><span class="tl-t">02:30</span><p class="tl-s">Everyone home. The evening simply ended well.</p></li>
+  </ol>
+</section>
+
+<section class="sec sec-how s-paper" aria-labelledby="how-h">
+  <div class="g">
+    <p class="idx" aria-hidden="true">04</p>
+    <div class="c1-5" data-fade>
+      <p class="eyebrow">How it works</p>
+      <h2 class="h2" id="how-h">Four steps, most of them ours.</h2>
+    </div>
+    <ol class="steps c1-12">
+      <li class="step" data-fade><span class="step-n">1</span><h3>Tell us about the evening</h3><p class="body">Where, when, how many of you, and anything we should know. No account, no sign-in.</p></li>
+      <li class="step" data-fade><span class="step-n">2</span><h3>48 hours’ notice</h3><p class="body">Two days lets us choose the right person for your group. Sooner than that, message us first.</p></li>
+      <li class="step" data-fade><span class="step-n">3</span><h3>We assign your Kóda</h3><p class="body">Chosen for your plans, your group and your language. Confirmation arrives by email.</p></li>
+      <li class="step" data-fade><span class="step-n">4</span><h3>They stay until the end</h3><p class="body">From the first meeting point to everyone home.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec sec-who who s-paper" aria-labelledby="who-h">
+  <div class="g">
+    <p class="idx" aria-hidden="true">05</p>
+    <div class="who-head" data-fade>
+      <p class="eyebrow">Who a Kóda is</p>
+      <h2 class="h2" id="who-h">Chosen for judgement, not for looks.</h2>
+      <p class="body">Most come from hospitality — hotel front desks, restaurant floors, guest services. People who notice the table running late before you do, and who know the city after midnight as well as by day.</p>
+    </div>
+    <dl class="who-rows" data-fade>
+      <div class="who-row"><dt class="lab"><span class="eyebrow">Vetting</span><span class="status">Pending verification</span></dt><dd>[Vetting steps — pending client]</dd></div>
+      <div class="who-row"><dt class="lab"><span class="eyebrow">Languages</span><span class="status">Confirmed</span></dt><dd>English · Spanish</dd></div>
+      <div class="who-row"><dt class="lab"><span class="eyebrow">Background</span><span class="status">Pending verification</span></dt><dd>Hospitality and guest services</dd></div>
+      <div class="who-row"><dt class="lab"><span class="eyebrow">Training</span><span class="status">Pending verification</span></dt><dd>[Training programme — pending client]</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec sec-note s-bone" aria-labelledby="note-h">
+  <div class="g">
+    <p class="idx" aria-hidden="true">06</p>
+    <div class="letter" data-fade>
+      <h2 class="eyebrow" id="note-h">A note from the founder</h2>
+      <p class="l">I started Kóda after too many evenings where one person in the group spent the whole night quietly counting heads — the route back, the last metro, the friend who wandered off. That person deserves the dinner too. So we arrange someone whose only job is the evening going well, and we let everyone else simply be there.</p>
+      <p class="eyebrow rep">[Replace with founder’s own words]</p>
+      <p class="sign"><span class="sign-n">Ana</span><span class="sign-r">[Surname] · Founder, Kóda</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-faq s-paper" aria-labelledby="faq-h">
+  <div class="g">
+    <p class="idx" aria-hidden="true">07</p>
+    <div class="faq-head" data-fade>
+      <p class="eyebrow">Answers</p>
+      <h2 class="h2" id="faq-h">Before you ask.</h2>
+    </div>
+    <dl class="qa">
+      <div class="qa-row" data-fade><dt>Is a Kóda a guide, or something more?</dt><dd class="body">More than a guide. A Kóda knows the city and stays with your group for the whole booking: reading the evening, handling the small things, making sure everyone gets home. They won’t recite the history of every façade unless you ask.</dd></div>
+      <div class="qa-row" data-fade><dt>How much notice do you need?</dt><dd class="body">At least 48 hours. If your plans are sooner, message us first and we’ll tell you honestly what’s possible.</dd></div>
+      <div class="qa-row" data-fade><dt>How many people can one Kóda look after?</dt><dd class="body">Up to six. For seven to twelve people we arrange two. For larger groups, message us.</dd></div>
+      <div class="qa-row" data-fade><dt>What if the evening runs long?</dt><dd class="body">Your Kóda can arrange more time on the night.</dd></div>
+      <div class="qa-row" data-fade><dt>Where do you operate?</dt><dd class="body">Within the municipality of Barcelona. If your plans take you further, message us before booking.</dd></div>
+      <div class="qa-row" data-fade><dt>Which languages do Kódas speak?</dt><dd class="body">English and Spanish.</dd></div>
+      <div class="qa-row" data-fade><dt>Can we choose our Kóda?</dt><dd class="body">We choose for you, based on your group and your plans. It’s the part we take most seriously.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec sec-cancel s-paper" aria-labelledby="cx-h">
+  <div class="g">
+    <p class="idx cancel-idx" aria-hidden="true">08</p>
+    <div class="cancel-box s-bone" data-fade>
+      <h2 class="eyebrow" id="cx-h">Cancellation</h2>
+      <dl class="cx">
+        <div class="cx-row"><dt>More than 72 hours before</dt><dd>Full refund</dd></div>
+        <div class="cx-row"><dt>72 to 24 hours before</dt><dd>50% refund</dd></div>
+        <div class="cx-row"><dt>Less than 24 hours before</dt><dd>No refund</dd></div>
+      </dl>
+      <p class="small">Full terms in Cancellations below.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-close s-navy" id="closing" aria-labelledby="close-h">
+  <div class="g">
+    <p class="idx" aria-hidden="true">09</p>
+    <h2 class="close-h" id="close-h" data-fade>Tell us when. We arrange who.</h2>
+    <div class="cta close-cta">
+      <button class="btn btn-p" type="button" id="close-book" data-book>Plan your evening</button>
+      <a class="lnk" href="#contact" id="close-message">or message us first</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="s-navy ftr" id="contact">
+  <div class="g">
+    <div class="ftr-cols">
+      <a class="mark" href="#top" aria-label="Kóda, Barcelona"><span class="mark-k">Kóda</span><span class="mark-b">BARCELONA</span></a>
+      <ul class="ftr-list">
+        <li>[Legal entity name]</li>
+        <li>[Registered address], Barcelona</li>
+        <li>WhatsApp [+34 number — pending]</li>
+        <li>Email [address — pending]</li>
+      </ul>
+      <ul class="ftr-links">
+        <li><a href="#" id="ftr-corporate">Corporate &amp; congress</a></li>
+        <li><a href="#" id="ftr-terms">Terms</a></li>
+        <li><a href="#" id="ftr-privacy">Privacy</a></li>
+        <li><a href="#" id="ftr-cancellations">Cancellations</a></li>
+      </ul>
+    </div>
+    <div class="ftr-base">
+      <p>[Legal disclaimer line — from Ana’s homepage]</p>
+      <p>Prototype · Hero as <a href="#day" id="proto-day">Day</a> / <a href="#night" id="proto-night">Night</a> / <a href="#live" id="proto-live">Live</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true" inert>
+  <p>48 hours’ notice · Barcelona</p>
+  <button class="btn btn-p" type="button" id="sticky-book" data-book>Check a date</button>
+</div>
+
+<div class="ov" id="booking" hidden>
+  <div class="ov-scrim" id="booking-scrim"></div>
+  <div class="ov-panel" role="dialog" aria-modal="true" aria-labelledby="bk-q">
+    <div class="ov-top">
+      <button type="button" id="bk-close">Close</button>
+      <span id="bk-step">1 / 7</span>
+    </div>
+    <div class="ov-track" aria-hidden="true"><span class="ov-fill" id="bk-fill"></span></div>
+    <div class="ov-body">
+      <p class="eyebrow" id="bk-kind" hidden></p>
+      <h2 class="ov-q" id="bk-q">What do you need a Kóda for?</h2>
+      <p class="ov-hint" id="bk-hint" aria-live="polite">So we can choose the right person for your group.</p>
+      <div class="chips" role="group" aria-labelledby="bk-q">
+        <button type="button" class="chip" id="chip-dinner" aria-pressed="false">Dinner</button>
+        <button type="button" class="chip" id="chip-night-out" aria-pressed="false">A night out</button>
+        <button type="button" class="chip" id="chip-walk-home" aria-pressed="false">The walk home</button>
+        <button type="button" class="chip" id="chip-family" aria-pressed="false">A family visit</button>
+        <button type="button" class="chip" id="chip-getting-around" aria-pressed="false">Getting around the city</button>
+        <button type="button" class="chip" id="chip-other" aria-pressed="false">Something else</button>
+      </div>
+    </div>
+    <p class="ov-foot" id="bk-foot">Prototype stub · live embed: forms.fillout.com/t/[FORM_ID]</p>
+  </div>
+</div>
+
+<script>
+const SHOW_PRICE_NOTE = true;
+(function () {
+  var root = document.documentElement;
+
+  /* PriceNote */
+  if (!SHOW_PRICE_NOTE) document.querySelectorAll('[data-price-note]').forEach(function (el) { el.hidden = true; });
+
+  /* Barcelona time + hero state */
+  var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hour12: false });
+  var live = 'night', override = null;
+  function apply() { root.dataset.hero = override || live; }
+  function tick() {
+    var s = fmt.format(new Date()).replace(/^24/, '00');
+    document.querySelectorAll('[data-bcn-time]').forEach(function (el) { el.textContent = s; });
+    var h = parseInt(s.slice(0, 2), 10);
+    live = (h >= 6 && h < 18) ? 'day' : 'night';
+    apply();
+  }
+  function readHash() {
+    var h = location.hash.slice(1);
+    if (h === 'day' || h === 'night') override = h;
+    else if (h === 'live') override = null;
+    apply();
+  }
+  readHash(); tick();
+  window.addEventListener('hashchange', readHash);
+  setTimeout(function () { tick(); setInterval(tick, 60000); }, 60000 - (Date.now() % 60000) + 20);
+
+  /* Booking overlay */
+  var ov = document.getElementById('booking');
+  var panel = ov.querySelector('.ov-panel');
+  var closeBtn = document.getElementById('bk-close');
+  var hint = document.getElementById('bk-hint');
+  var HINT = 'So we can choose the right person for your group.';
+  var chips = Array.prototype.slice.call(ov.querySelectorAll('.chip'));
+  var names = { day: 'Kóda Day', night: 'Kóda Night', weekend: 'Kóda Weekend' };
+  var trigger = null, hintTimer = null, closeTimer = null;
+
+  function openBooking(kind, from) {
+    trigger = from;
+    clearTimeout(closeTimer); clearTimeout(hintTimer);
+    var total = kind ? 7 : 8;
+    document.getElementById('bk-step').textContent = '1 / ' + total;
+    document.getElementById('bk-fill').style.width = (100 / total) + '%';
+    var k = document.getElementById('bk-kind');
+    if (kind && names[kind]) { k.textContent = names[kind] + ' · Pre-set'; k.hidden = false; } else { k.hidden = true; }
+    document.getElementById('bk-foot').textContent = 'Prototype stub · live embed: forms.fillout.com/t/[FORM_ID]' + (kind ? '?kind=' + kind : '');
+    hint.textContent = HINT;
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
+    ov.hidden = false;
+    root.style.overflow = 'hidden';
+    void ov.offsetWidth;
+    ov.classList.add('open');
+    closeBtn.focus();
+  }
+  function closeBooking() {
+    if (ov.hidden) return;
+    ov.classList.remove('open');
+    root.style.overflow = '';
+    closeTimer = setTimeout(function () { ov.hidden = true; }, 220);
+    if (trigger && trigger.focus) trigger.focus();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-book]');
+    if (t) { e.preventDefault(); openBooking(t.getAttribute('data-kind') || '', t); }
+  });
+  closeBtn.addEventListener('click', closeBooking);
+  document.getElementById('booking-scrim').addEventListener('click', closeBooking);
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
+      clearTimeout(hintTimer);
+      hintTimer = setTimeout(function () { hint.textContent = 'In the live site, Fillout continues to the next question.'; }, 190);
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (ov.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeBooking(); return; }
+    if (e.key === 'Tab') {
+      var f = Array.prototype.slice.call(panel.querySelectorAll('button:not([disabled]),a[href]'));
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* Sticky bar (mobile) */
+  var bar = document.getElementById('sticky');
+  var ways = document.getElementById('three-ways');
+  var closing = document.getElementById('closing');
+  var barOn = false;
+  function barCheck() {
+    var on = window.innerWidth < 900 &&
+      ways.getBoundingClientRect().top < 0 &&
+      closing.getBoundingClientRect().top > window.innerHeight;
+    if (on === barOn) return;
+    barOn = on;
+    bar.classList.toggle('on', on);
+    bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+    if (on) bar.removeAttribute('inert'); else bar.setAttribute('inert', '');
+  }
+  window.addEventListener('scroll', barCheck, { passive: true });
+  window.addEventListener('resize', barCheck);
+  barCheck();
+
+  /* Scroll fades: only for elements that start below the first screen */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.remove('will-fade'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    var vh = window.innerHeight;
+    document.querySelectorAll('[data-fade]').forEach(function (el) {
+      if (el.getBoundingClientRect().top > vh) { el.classList.add('will-fade'); io.observe(el); }
+    });
+  }
+})();
+</script>
