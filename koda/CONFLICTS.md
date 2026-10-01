@@ -294,6 +294,10 @@ Logo strips, stat counters, icon rows, star ratings and pill badges are banned, 
 The brand book asks for cool, low-saturation imagery with a navy 60% overlay under text and no gradients. The prototype now has a Look switch: **Graded** (the brand book's treatment) and **Colour** (saturated, no grain, with black or white linear gradients under text instead of navy washes). The gradients and the saturated set are outside the brand book in both motion modes.
 **Applied:** Colour is the prototype default so the photos can be judged; Graded is one click away.
 
+**H7. Blur behind the booking overlay.** *Confirm.*
+The brand book bans blur. The desktop booking overlay now blurs the page (6px) behind the navy 60% scrim, with the Paper side panel and the phone mock-up on top.
+**Applied:** in both modes, as requested; it drops to a flat scrim if the client refuses.
+
 ---
 
 ## Housekeeping

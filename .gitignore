@@ -1,3 +1,5 @@
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
 koda/references/
+koda/exports/*.zip
+koda/exports/koda-prototype-*.png

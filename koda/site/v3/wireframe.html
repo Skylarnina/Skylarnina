@@ -1,4 +1,4 @@
-<title>Kóda Evening</title>
+<title>Kóda Wireframe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;500&display=swap">
@@ -731,6 +731,39 @@ html[data-look="colour"] .float{ z-index:3; }
   </div>
 </div>
 
+
+<style id="wire">
+/* ===== low-fidelity wireframe overrides ===== */
+*{ font-family:Helvetica, Arial, sans-serif !important; color:#2b2b2b !important; letter-spacing:0 !important; font-style:normal !important; transition:none !important; animation:none !important; }
+body, .bar, .statement, .who, .built, .story, .answers, .ways{ background:#fff !important; }
+.how, .founder, .plansec, .night, .hero, .strip, .plan.is-main, .float, .pc-txt, .scard .wash, .hero-wash, .night .wash{ background:#ececec !important; }
+.hero-wash, .night .wash, .scard .wash, .pc-txt{ background:transparent !important; }
+.theme-dark, .theme-dark *, .plan.is-main *{ color:#2b2b2b !important; }
+.display, h1, h2, h3, .mk-q, .bk-q, .scard .t, .tier .v, .plan .name, .step .n{ font-weight:700 !important; }
+.ph, .photo-card .ph, .hero > .ph, .night > .ph, .strip-img, .who-photo .ph{ background:#d9d9d9 !important; background-image:repeating-linear-gradient(45deg, transparent 0 14px, rgba(0,0,0,.06) 14px 15px) !important; border:1px solid #9a9a9a !important; }
+.ph::after{ content:"IMAGE"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font:700 11px/1 Helvetica, Arial, sans-serif; letter-spacing:.2em !important; color:#777 !important; }
+.ph-note{ display:none !important; }
+.hero video{ display:none !important; }
+.btn, .chip, .car-btn{ background:#fff !important; border:1px solid #2b2b2b !important; color:#2b2b2b !important; border-radius:4px !important; }
+.btn-navy, .btn-stone, .chip.on, .chip[aria-pressed="true"]{ background:#2b2b2b !important; color:#fff !important; }
+.plan, .float, .iphone .screen, .mock{ border:1px solid #9a9a9a !important; border-radius:4px !important; background:#fff !important; }
+.plan.is-main{ background:#ececec !important; }
+.iphone{ background:#555 !important; border-radius:28px !important; }
+.iphone .island, .iphone .home, .iphone .status i, .iphone .status .bat::before{ background:#999 !important; }
+.facts, .acc, .acc-item, .faq, .qa, .plan dd, .step, .feat, .tier, .float dl, .float .fr, .who-row, .sig, .mk-prog, .bk-progress{ border-color:#9a9a9a !important; }
+.proto, .sticky, .strip-track span.dot{ display:none !important; }
+.strip-track{ animation:none !important; }
+.hero-cap, .pc-cap, .cap, .price-note, .eyebrow, .facts span{ color:#666 !important; }
+.hero-in .eyebrow .sep{ border-color:#666 !important; }
+.hero-in, .hero-in *, .close, .close *, .pc-txt *, .scard .t, .scard .s{ color:#2b2b2b !important; }
+.pc-txt{ background:rgba(255,255,255,.85) !important; }
+.scard .t, .scard .s{ background:rgba(255,255,255,.85); padding:4px 8px; }
+.hero-in{ background:rgba(255,255,255,.85); padding:32px !important; }
+.close{ background:rgba(255,255,255,.85); margin-block:48px; }
+.booking{ display:none !important; }
+.wire-note{ position:fixed; left:12px; bottom:12px; z-index:99; font:700 10px/1 Helvetica,Arial,sans-serif; letter-spacing:.2em !important; color:#777 !important; background:#fff; border:1px solid #9a9a9a; padding:8px 10px; }
+</style>
+<div class="wire-note">KÓDA · LOW-FIDELITY WIREFRAME</div>
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
