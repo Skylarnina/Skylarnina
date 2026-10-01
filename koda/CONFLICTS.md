@@ -290,6 +290,10 @@ Continuous motion is outside the brand book's motion rules.
 **H5. Replaced reference blocks.** Resolved.
 Logo strips, stat counters, icon rows, star ratings and pill badges are banned, so: the logo strips became a facts strip; the stats row carries the refund tiers; the icon features became Cormorant lines; the pill badges became tracked eyebrows.
 
+**H6. The "colour" look.** *Confirm.*
+The brand book asks for cool, low-saturation imagery with a navy 60% overlay under text and no gradients. The prototype now has a Look switch: **Graded** (the brand book's treatment) and **Colour** (saturated, no grain, with black or white linear gradients under text instead of navy washes). The gradients and the saturated set are outside the brand book in both motion modes.
+**Applied:** Colour is the prototype default so the photos can be judged; Graded is one click away.
+
 ---
 
 ## Housekeeping

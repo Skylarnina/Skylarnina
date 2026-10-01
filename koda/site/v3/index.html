@@ -315,6 +315,20 @@ footer{ position:relative; z-index:2; padding-block:56px 48px; }
 .foot-legal{ grid-column:1 / -1; margin-top:16px; padding-top:20px; border-top:.5px solid rgba(240,235,227,.14); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font:300 11px/1.6 var(--sans); color:rgba(240,235,227,.62); }
 @media (max-width:899px){ .close{ padding-block:112px 72px; } .close .facts{ margin-top:24px; } footer{ padding-block:40px 140px; } .foot-r{ align-items:flex-start; text-align:left; } .foot-r .link{ align-self:flex-start; } .foot-c{ align-items:flex-start; text-align:left; } }
 
+/* ======================================================
+   LOOK — graded (cool, low saturation, grain) · colour (saturated, no grain; black/white gradients instead of navy washes)
+   ====================================================== */
+html[data-look="colour"] .hero-wash{ background:linear-gradient(to bottom, rgba(0,0,0,.10) 0%, rgba(0,0,0,.36) 50%, rgba(0,0,0,.74) 100%); }
+html[data-look="colour"] .hero-cap{ color:rgba(255,255,255,.75); }
+html[data-look="colour"] .pc-txt.bottom{ background:linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,0) 100%); padding-top:88px; }
+html[data-look="colour"] .pc-txt.top{ background:linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,0) 100%); padding-bottom:88px; }
+html[data-look="colour"] .scard .wash{ background:linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 38%, rgba(0,0,0,0) 52%, rgba(0,0,0,.82) 100%); }
+html[data-look="colour"] .night .wash{ background:linear-gradient(to bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,.88) 100%); }
+html[data-look="colour"] .built-photo::after, html[data-look="colour"] .who-photo::after{ content:""; position:absolute; inset:0 0 auto 0; height:34%; z-index:2; pointer-events:none; background:linear-gradient(to bottom, rgba(250,250,248,.85) 0%, rgba(250,250,248,0) 100%); }
+html[data-look="colour"] .built-photo::before{ content:""; position:absolute; inset:auto 0 0 0; height:34%; z-index:2; pointer-events:none; background:linear-gradient(to top, rgba(250,250,248,.85) 0%, rgba(250,250,248,0) 100%); }
+html[data-look="colour"] .float{ z-index:3; }
+.proto .sep{ width:0; height:20px; border-left:.5px solid var(--stone); margin:0 4px; }
+
 /* ---------- mobile sticky bar ---------- */
 .sticky{ position:fixed; left:0; right:0; bottom:0; z-index:55; background:var(--bone); border-top:.5px solid var(--stone); padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 240ms ease,visibility 0s linear 240ms; }
 .sticky.is-on{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity 240ms ease,visibility 0s; }
@@ -324,7 +338,7 @@ footer{ position:relative; z-index:2; padding-block:56px 48px; }
 /* ---------- prototype switch ---------- */
 .proto{ position:fixed; right:16px; top:calc(var(--bar) + env(safe-area-inset-top,0px) + 12px); z-index:58; display:flex; align-items:center; gap:2px; padding:3px; border-radius:999px; background:var(--paper); border:.5px solid var(--stone); color:var(--navy); transition:opacity 240ms ease,visibility 0s; }
 .proto .lbl{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); margin:0 6px 0 11px; }
-.proto button{ position:relative; height:44px; padding:0 13px; border-radius:999px; font:500 9.5px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--navy); transition:background-color 220ms ease,color 220ms ease; }
+.proto button{ position:relative; height:44px; padding:0 12px; border-radius:999px; font:500 9.5px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--navy); transition:background-color 220ms ease,color 220ms ease; }
 .proto button[aria-pressed="true"]{ background:var(--navy); color:var(--bone); }
 .proto button:hover:not([aria-pressed="true"]){ background:var(--bone); }
 @media (max-width:899px){ .proto{ right:12px; top:calc(var(--bar) + env(safe-area-inset-top,0px) + 10px); } .proto .lbl{ display:none; } .proto button{ height:36px; padding:0 10px; } .proto button::after{ content:""; position:absolute; inset:-4px 0; } html.sticky-on .proto{ opacity:0; visibility:hidden; pointer-events:none; transition:opacity 240ms ease,visibility 0s linear 240ms; } }
@@ -649,7 +663,7 @@ footer{ position:relative; z-index:2; padding-block:56px 48px; }
 
 <div class="sticky" id="sticky" aria-hidden="true"><p>48 hours' notice · Barcelona</p><button class="btn btn-navy btn-sm" id="sticky-book" data-book tabindex="-1">Check a date</button></div>
 
-<div class="proto" role="group" aria-label="Prototype motion level"><span class="lbl">Motion</span><button id="m-brand" data-mode="brand" aria-pressed="false">Brand</button><button id="m-enh" data-mode="enhanced" aria-pressed="true">Enhanced</button></div>
+<div class="proto" role="group" aria-label="Prototype controls"><span class="lbl">Motion</span><button id="m-brand" data-mode="brand" aria-pressed="false">Brand</button><button id="m-enh" data-mode="enhanced" aria-pressed="true">Enh.</button><span class="sep" aria-hidden="true"></span><span class="lbl">Look</span><button id="l-graded" data-look="graded" aria-pressed="false">Graded</button><button id="l-colour" data-look="colour" aria-pressed="true">Colour</button></div>
 
 <div class="booking" id="booking" hidden>
   <div class="booking-scrim" data-close></div>
@@ -686,7 +700,23 @@ footer{ position:relative; z-index:2; padding-block:56px 48px; }
   const tick = () => { const t = fmt.format(new Date()); $$('[data-bcn-time]').forEach(el => { el.textContent = t; }); };
   tick(); setTimeout(() => { tick(); setInterval(tick, 60000); }, (60 - new Date().getSeconds()) * 1000 + 50);
 
-  $$('.ph[data-src]').forEach(ph => { const img = new Image(); img.onload = () => { ph.style.backgroundImage = 'url("' + ph.dataset.src + '")'; if (ph.dataset.pos) ph.style.backgroundPosition = ph.dataset.pos; ph.classList.add('has-media'); }; img.src = ph.dataset.src; });
+  /* look: 'graded' loads media/<name>, 'colour' loads media/colour/<name> */
+  const DEFAULT_LOOK = 'colour';
+  function loadMedia(look){
+    $$('.ph[data-src]').forEach(ph => {
+      const src = look === 'colour' ? ph.dataset.src.replace('media/', 'media/colour/') : ph.dataset.src;
+      const img = new Image();
+      img.onload = () => { ph.style.backgroundImage = 'url("' + src + '")'; if (ph.dataset.pos) ph.style.backgroundPosition = ph.dataset.pos; ph.classList.add('has-media'); };
+      img.src = src;
+    });
+  }
+  function applyLook(look){
+    root.dataset.look = look;
+    $$('.proto [data-look]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.look === look)));
+    loadMedia(look);
+  }
+  $$('.proto [data-look]').forEach(b => b.addEventListener('click', () => { store.set('koda-look', b.dataset.look); applyLook(b.dataset.look); }));
+  applyLook(['graded','colour'].includes(store.get('koda-look')) ? store.get('koda-look') : DEFAULT_LOOK);
   const video = $('.hero video');
   if (video) { video.addEventListener('playing', () => video.classList.add('is-playing')); video.addEventListener('error', () => video.remove(), true); const pr = video.play && video.play(); if (pr && pr.catch) pr.catch(() => {}); }
 
