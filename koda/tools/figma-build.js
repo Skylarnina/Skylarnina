@@ -64,6 +64,7 @@ PY`,{stdio:'inherit'}); }
            .replace(/@media\s*\(prefers-reduced-motion:\s*reduce\)/g,'@media not all')
            .replace(/position:\s*fixed/g,'position:absolute')
            .replace(/env\(safe-area-inset-[a-z]+,\s*0px\)/g,'0px');
+    if(v.wire) css=css.replace(/Helvetica,\s*Arial,\s*sans-serif/g,'Inter, Helvetica, Arial, sans-serif'); // Figma's library has Inter, not Helvetica
     return '<style'+attrs+'>'+css+'</style>';
   });
   const head='<meta charset="utf-8"><meta name="viewport" content="width='+W+'"><title>Kóda · '+v.name+'</title><style>'+fontCss+'\nhtml,body{width:'+W+'px;min-width:'+W+'px;max-width:'+W+'px;margin:0;overflow-x:hidden}*,*::before,*::after{transition:none!important;animation:none!important}.will-fade{opacity:1!important}</style>';
