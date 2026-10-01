@@ -269,6 +269,27 @@ In enhanced mode the hero crossfades to the next clip every 6.5 seconds (1200ms,
 
 **G6. Story numerals at 160px, strips in spaced caps.** These extend F22, which covers headline sizes above the brand book's range. Labels stay at 9.5–11px.
 
+## H. Round 4 (the Camospace and amp* layouts)
+
+**H1. Centred hero and centred section heads.** *Confirm.*
+The brand book's hero unit is left-set, and the first brief banned "everything centred". The amp* and Camospace layouts centre the hero, most section heads, the founder quote, the refund tiers and the close.
+**Applied:** as the references do. The "Who" and "Answers" sections keep a left headline with the CTA on the right, so the page still alternates.
+
+**H2. Rounded photo cards and panels.** *Confirm (enhanced only).*
+amp* rounds every photo card, panel and pricing column. The brand book says non-interactive elements are 0px.
+**Applied:** 0px in brand mode; 20px (`--r`) in enhanced mode on photo cards, the floating summary, the booking mock-up and the three-ways columns.
+
+**H3. Bordered columns and a floating panel.** *Confirm.*
+The brand book says "cards: there are none". The pricing table and the floating booking summary are boxed surfaces by nature.
+**Applied:** the three-ways columns use a 0.5px stone border and no fill, except Night, which is a navy fill. The floating summary is flat Bone with a 0.5px stone border and hairline rows, like the brand book's estimate bar.
+
+**H4. The running strip.** *Confirm (enhanced only).*
+Continuous motion is outside the brand book's motion rules.
+**Applied:** the strip is static in brand mode and moves (60s, linear) in enhanced mode, and stops when reduced motion is on.
+
+**H5. Replaced reference blocks.** Resolved.
+Logo strips, stat counters, icon rows, star ratings and pill badges are banned, so: the logo strips became a facts strip; the stats row carries the refund tiers; the icon features became Cormorant lines; the pill badges became tracked eyebrows.
+
 ---
 
 ## Housekeeping

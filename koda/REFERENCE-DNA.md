@@ -168,3 +168,26 @@ We studied all 12 pins before rebuilding, and took one concrete move from each. 
 | Country Harmony (`a29587d3…`) | Thin outline shapes framing a photo on a dark ground; numbered list | The window's 0.5px stone frame, offset 14px | Circles |
 | Booked (`0cfc662a…`) | A second photo in a window over the same world | Frame within a frame | Glass, 3D spheres |
 | One Last Flight (`c0e1501b…`) | Stacked cinematic banners | Rhythm of the strips | Fantasy teal, mixed outline/solid display type |
+
+---
+
+## Camospace and amp* (`koda/references/camospace.webp`, `amp-home.webp`, `amp-pricing.webp`, round 4)
+
+The round-4 page follows these three layouts block for block. What each block became, and what was left out:
+
+| Reference block | Kóda section | Left out |
+|---|---|---|
+| Nav: logo left, links centre, pill right | Wordmark left, section links, *Plan your evening* pill, live time | — |
+| Full-bleed photo hero, centred eyebrow pill, headline, pill CTA | Hero with the live time as eyebrow; flat navy 60% wash instead of a gradient | The pill badge, the three phone mock-ups |
+| Camospace running "• DISCOVER THE APP •" strip | "Tell us when · We arrange who · Everyone gets home" (moves in enhanced only) | — |
+| amp* "Built around your money": two rounded photo cards, text overlaid, flag chips | Two cards: "Someone who knows the city" / "Everyone gets home", language chips | Flags |
+| "Brex · POWERED BY · ramp" logo strip | Facts strip: 48 hours' notice · one Kóda for up to six · Barcelona municipality | Logos (banned) |
+| "Modern money stack": headline + CTA, accordion left, photo right | Who a Kóda is: Background / Languages / Vetting / Training, photo swaps per row | Icons on the rows |
+| "One account": big photo, floating UI card, four icon features | Built around your evening: city photo, floating booking summary (Bone, hairline rows), four Cormorant lines | Icons |
+| "Banking without compromise": scrolling photo cards with big stats | One evening, handled: five cards with the times 20:30 → 02:30 | Stat counters (banned) |
+| Camospace "In real time": tablet mock-up + text | How it works: the booking screen as the mock-up, four serif-numeral steps | The leaf wreath |
+| amp* pricing table, middle card highlighted | Three ways: Day / Night (navy) / Weekend with `PriceNote` and hairline rows | Checkmarks and crosses |
+| Camospace testimonial quote | Founder's note | Headshot |
+| amp* "Our Impact" dark three-stat row | If plans change: Full refund / 50% / No refund | Stat icons, the pill badge |
+| FAQ: headline left + CTA right, rows | Answers | — |
+| Dark photo footer, centred CTA, PLATFORM / LEGAL columns, "TWITTER · CONTRA · FRAMER" | Everyone home, facts strip, Kóda / Legal columns, WhatsApp · Email centre line | Social icons, template badges |
