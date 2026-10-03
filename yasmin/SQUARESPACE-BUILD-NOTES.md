@@ -20,7 +20,7 @@ Items marked **verify** are how I understand the current editor. Check each once
 |---|---|
 | Template | Any 7.1 template; everything below is set per section. |
 | Fonts (*Site Styles → Fonts*) | **Headings: Instrument Serif** (Google Fonts; **verify** it is listed in her account's picker under *Site Styles → Fonts → Headings*; if it isn't, it can be added as a custom font). Use it for Heading 1–4: the hero name, page and cover titles, chapter titles, her sub-headings, the discipline names and the project titles (rows, Projects grid, previous/next). Instrument Serif comes in **one weight (400) plus italic**, so there is no bold heading: where a heading needs emphasis (her "How might we…" labels, the Littelfuse audit headings), use *italic*. Tracking **−0.01em on sizes above 48px**, 0 below. **Body, captions, labels, numerals, navigation and buttons: Inter Tight** (Google), 400/500. |
-| Colours (*Site Styles → Colours*) | Palette: `#FFFFFF`, `#F4F3F0`, `#111111`. Three themes: **White** (background `#FFFFFF`, text `#111111`), **Stone** (background `#F4F3F0`, text `#111111`) and **Ink** (background `#111111`, text `#FFFFFF`, used only by the discipline panels so their names are white without CSS). No accent colour; links `#111111`, underlined. |
+| Colours (*Site Styles → Colours*) | Palette: `#FFFFFF`, `#F4F3F0`, `#111111`. Three themes: **White** (background `#FFFFFF`, text `#111111`), **Stone** (background `#F4F3F0`, text `#111111`) and **Ink** (background `#111111`, text `#FFFFFF`, used only by the discipline panels so their names are white without CSS). No accent colour; links `#111111`, underlined. These are the **mono** values; for cream or venues see *Site Styles per theme* below. |
 | Buttons | Primary: **outline**, **square corners**, 1px, 14px text. The lock screen's Enter button is solid (§5). |
 | Animations (*Site Styles → Animations*) | **Fade**, speed **Slow**. Nothing else: no scroll effects, no parallax. |
 | Images | Every image block: *Design → Clickthrough: Lightbox* (native lightbox), **Caption: below**, no border, no shadow, **corner radius 0**. |
@@ -38,6 +38,29 @@ Items marked **verify** are how I understand the current editor. Check each once
 | Paragraph 3 (Inter Tight) | 11px / 1.45, **uppercase, tracking 0.08em**, colour 62% ink | 11px | Labels, captions, "FIG. 03 — …", "PASSWORD PROTECTED" |
 
 Captions and labels use **62% ink, not 55%**. At 11px, 55% measures 4.4:1 on white, which fails WCAG AA; 62% passes at 5.2:1.
+
+### Site Styles per theme (theme comparison: the client picks one)
+
+The prototype can show three palettes (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all three; only the values below change. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
+
+| Setting | Mono (built) | Cream | Venues |
+|---|---|---|---|
+| Palette (*Site Styles → Colours*, five slots; **verify** slot names in her account) | `#FFFFFF` · `#F4F3F0` · `#111111` | `#F3F0EA` · `#E9E4DB` · `#16140F` · `#8C2F1E` · `#FFFFFF` | `#FAFAF8` · `#F1F1EC` · `#1E3F63` · `#4F7084` · `#9B5C15` |
+| Section theme **White** (most sections) | background `#FFFFFF`, text `#111111` | background `#F3F0EA`, text `#16140F` | background `#FAFAF8`, text `#1E3F63` |
+| Section theme **Stone** (Snippets, Contact, Reflection) | background `#F4F3F0`, text `#111111` | background `#E9E4DB`, text `#16140F` | background `#F1F1EC`, text `#1E3F63` |
+| Section theme **Ink** (discipline panels; the photos cover it) | background `#111111`, text `#FFFFFF` | background `#16140F`, text `#FFFFFF` | background `#1E3F63`, text `#FFFFFF` |
+| Paragraph 3 colour (labels, captions) | `#6B6B6B` (62% ink) | `#66635E` (64% ink) | `#556E88` (75% navy) |
+| Links | `#111111`, underlined | text `#16140F`; underline `#8C2F1E` (CSS +1 line, below) | `#4F7084`, underlined |
+| Primary button (outline) | `#111111` | `#16140F` | `#1E3F63` |
+| Section index numbers (project 01–04, chapter numbers) and PASSWORD PROTECTED | 62% ink | `#8C2F1E` | `#9B5C15` on Home/Projects; room colour on case pages (below) |
+| Lock screen Enter button (CSS line 10) | `#111` fill, `#fff` text | `#8C2F1E` fill, `#fff` text | `#4F7084` fill, `#fff` text |
+| Logo tile ground / hover (CSS lines 19–20) | `#F4F3F0` / `#ECEAE5` | `#E9E4DB` / `#E1DCD3` | `#F1F1EC` / per room: 01 `#DADBC9`, 02 `#EFE0CC`, 03 `#D4DDDE`, 04 `#E3CCC7` |
+| Signature stripe | none | none | **Image block**, full width, `site/assets/img/stripe-venues.png` (2400×8, shown at 4px): under the hero, and above the footer. Replaces the hairline at both places. No CSS. |
+| Per-room colour (case pages) | none | none | Chapter numbers, chapter-index numbers, FIG. numbers, active chapter: 01 `#6D6F41`, 02 `#9B5C15`, 03 `#4F7084`, 04 `#A8443F`. Set as the text colour of those text blocks on each project page (**verify** the text colour picker takes a custom hex; if not, +4 CSS lines scoped by each page's `#collection-…` ID). Captions' FIG. numbers need the CSS route. |
+
+**Custom CSS per theme.** The §2 lines stay; only their hex values change: `rgba(17,17,17,.14)` → the theme hairline (cream `rgba(22,20,15,.15)`, venues `rgba(30,63,99,.15)`); `rgba(17,17,17,.62)` → the Paragraph 3 colour above; `#111` → the theme ink, except line 10, which takes the Enter fill; `#fff` on line 15 → the White background; lines 19–20 → the logo tile values. Line counts: **mono 20**; **cream 21** (+ `.sqs-html-content a{text-decoration-color:#8C2F1E}`); **venues 23** (line 20 split into four, one per room's tile section; up to 27 if per-room numbers need CSS). All three stay under the 30-line budget.
+
+**Not carried to Squarespace:** the theme switcher, the `?theme=` links and the `data-theme` attribute are prototype tools only.
 
 Fluid Engine desktop grid is **24 columns**; every position below uses it (e.g. "cols 9–20" = 12 columns). After desktop, switch to the **mobile view** and arrange blocks for 390px as described under each section. Fluid Engine keeps a separate mobile layout.
 

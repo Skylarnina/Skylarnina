@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="mono">
 <head>
 <meta charset="utf-8">
+<script>(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}if(['mono','cream','venues'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Private View — Yasmin Bajwa</title>
 <meta name="description" content="Projects are shared by invitation.">
@@ -27,5 +28,34 @@
   <p class="lock__foot" data-added="ui">© Yasmin Bajwa</p>
 </main>
 
+<div class="theme-sw" role="group" aria-label="Colour theme (prototype only)" data-added="ui"><button type="button" data-t="mono" aria-pressed="false">Mono</button><button type="button" data-t="cream" aria-pressed="false">Cream</button><button type="button" data-t="venues" aria-pressed="false">Venues</button></div>
+<script>
+/* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
+   the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
+(function () {
+  var d = document.documentElement, bs = document.querySelectorAll('.theme-sw button');
+  function links(t) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href'), m = h.match(/^([\w-]+\.html|\.\/)(?:\?[^#]*)?(#.*)?$/);
+      if (m) a.setAttribute('href', m[1] + '?theme=' + t + (m[2] || ''));
+    });
+  }
+  function set(t) {
+    d.setAttribute('data-theme', t);
+    bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === t ? 'true' : 'false'); });
+    try { localStorage.setItem('yb-theme', t); } catch (e) {}
+    links(t);
+  }
+  bs.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.t); }); });
+  set(d.getAttribute('data-theme') || 'mono');
+  /* the active chapter in the index = the chapter jumped to */
+  function chapter() {
+    document.querySelectorAll('.chindex a').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('href') === location.hash);
+    });
+  }
+  window.addEventListener('hashchange', chapter); chapter();
+})();
+</script>
 </body>
 </html>

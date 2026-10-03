@@ -111,6 +111,7 @@ def hexrgb(h):
 
 
 def alpha_of(token):
+    token = re.sub(r"var\((--[\w-]+)\)", lambda m: ROOT[m.group(1)], token)   # theme variables (r3.css :root)
     return float(re.search(r"rgba\(17,17,17,([\d.]+)\)", token).group(1))
 
 
@@ -128,11 +129,13 @@ def data_uri(path, width):
 
 
 # ------------------------------------------------------------------ brand values
-BG, ALT, INK = TOK("--bg"), TOK("--alt"), TOK("--ink")
-MUTED, HAIR = TOK("--muted"), TOK("--hair")
+BG, ALT, INK = TOK("--ground"), TOK("--ground-2"), TOK("--ink")
+MUTED, HAIR = TOK("--ink-muted"), TOK("--hairline")
+# the built palette's colour variables (mono), so the component specimens resolve them as on the site
+THEME_VARS = ";".join(f"{k}:{val}" for k, val in ROOT.items() if not k.startswith(("--font", "--fs", "--margin", "--gutter", "--section"))) + ";"
 A_MUTED, A_HAIR = alpha_of(MUTED), alpha_of(HAIR)
 A_COVER = alpha_of(v(".cover--dark .m::after", "background"))
-A_PLACE = alpha_of(re.search(r"rgba\([^)]*\)", v(".placeholder", "border")).group(0))
+A_PLACE = alpha_of(v(".placeholder", "border"))
 PANEL_REST = float(re.search(r"brightness\(([\d.]+)\)", v(".panel .m", "filter")).group(1))
 PANEL_HOVER = float(re.search(r"brightness\(([\d.]+)\)", v(".panel:hover .m", "filter")).group(1))
 PANEL_T = v(".panel .m", "transition")
@@ -158,7 +161,7 @@ else:                                            # transparent PNG logo: keep th
     _buf = io.BytesIO(); _im.save(_buf, "PNG", optimize=True)
     ROW_URI = "data:image/png;base64," + base64.b64encode(_buf.getvalue()).decode()
 ROW = ROW.replace(f"assets/img/{ROW_IMG}", ROW_URI).replace(' loading="lazy"', "")
-FIG_CAP = re.search(r"Fig\. 04 — [^<]+", room).group(0)
+FIG_CAP = re.sub(r"<[^>]+>", "", re.search(r"(?:<span class=\"fig-no\">)?Fig\. 04(?:</span>)? — [^<]+", room).group(0))
 FIG_IMG = re.search(r'<img src="assets/img/(tiles/r01-plan-annex[^"]+)"', room).group(1)
 FIG = (f'<figure class="t"><div class="m" style="aspect-ratio:1.5"><img src="{data_uri("site/assets/img/" + FIG_IMG, 520)}" alt="The Annex floor plan"></div>'
        f'<figcaption>{E(FIG_CAP)}</figcaption></figure>')
@@ -392,6 +395,7 @@ for name, sel, cells in buttons:
 
 guide_css = f"""
 :root{{--canvas:#8C8C8C;--bg:{BG};--alt:{ALT};--ink:{INK};--muted:{MUTED};--hair:{HAIR};
+  {THEME_VARS}
   --font:{TOK('--font')};--font-head:{TOK('--font-head')};--gutter:{GUTTER};--margin:{MARGIN};--section:{SECTION};
   --fs-label:{TOK('--fs-label')};--fs-body:{BODY_SIZE};--fs-sub:{TOK('--fs-sub')};
   --head:{TOK('--font-head')};--body:{TOK('--font')};--mono:{TOK('--font')}}}

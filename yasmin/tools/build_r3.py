@@ -112,6 +112,10 @@ def export_tile(src, kind, ratio, disp_w, pad_css=MG):
     return name
 
 
+def fig_no(lab):
+    return f'<span class="fig-no">{lab}</span>'
+
+
 def tile(pg, src, cap, kind, ratio, disp_w, src_id=None, cls="", pad_css=MG):
     """One captioned tile. The page shows the finished tile; a click opens her full image."""
     lab = pg.label()
@@ -123,7 +127,7 @@ def tile(pg, src, cap, kind, ratio, disp_w, src_id=None, cls="", pad_css=MG):
     style = f' style="aspect-ratio:{ratio:.4f}"' if ratio else ""
     return (f'<figure class="t{(" " + cls) if cls else ""}"><a class="m" href="{IMG}{src}"{style} target="_blank" rel="noopener" '
             f'aria-label="Open full image: {E(cap)}"><img src="{IMG}{t}" alt="{E(cap)}" loading="lazy"></a>'
-            f'<figcaption data-added="caption">{lab} — {E(cap)}</figcaption></figure>')
+            f'<figcaption data-added="caption">{fig_no(lab)} — {E(cap)}</figcaption></figure>')
 
 
 def module(pg, typ, inner, note="", tag="div", extra="", style=""):
@@ -190,7 +194,7 @@ def m_video(pg, src, poster, cap, rt, vertical=False, src_id=None, note=""):
         FIGMAP.setdefault(pg.name, {}).setdefault(src_id, []).append(cap + " (video)")
     pg.tiles.append(dict(label=lab, src=src, tile=poster, cap=cap + " (video)", kind="video", src_id=src_id))
     inner = (f'<div class="v{" v--tall" if vertical else ""}"><video src="{VID}{src}" poster="{IMG}{poster}" controls muted playsinline preload="metadata"></video></div>'
-             f'<figcaption data-added="caption"><span>{lab} — {E(cap)}</span><span class="rt">Running time {rt}</span></figcaption>')
+             f'<figcaption data-added="caption"><span>{fig_no(lab)} — {E(cap)}</span><span class="rt">Running time {rt}</span></figcaption>')
     return module(pg, "video", inner, note, tag="figure", extra=" mod--video-v" if vertical else "")
 
 
@@ -244,7 +248,7 @@ def note_html(pg, it):
         pg.tiles.append(dict(label=lab, src="—", tile="—", cap="Littelfuse wireframes (placeholder)", kind="placeholder", src_id=nid))
         return module(pg, "full", f'<figure class="t"><div class="m placeholder"><span class="label" data-added="placeholder">'
                       f'Littelfuse wireframes — pending export from Adobe XD</span></div>'
-                      f'<figcaption data-added="caption">{lab} — Littelfuse wireframes (placeholder)</figcaption></figure>',
+                      f'<figcaption data-added="caption">{fig_no(lab)} — Littelfuse wireframes (placeholder)</figcaption></figure>',
                       "Placeholder until she exports the XD screens (ASSET-GAPS).")
     raise KeyError(t)
 
@@ -433,11 +437,55 @@ SPECIAL = {
 
 
 # ---------------------------------------------------------------- page shell
+# Theme comparison (prototype only; Squarespace gets one palette). THEMES.md has the values.
+THEMES = ["mono", "cream", "venues"]
+THEME_HEAD_JS = ("(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}"
+                 "if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}"
+                 "if(['mono','cream','venues'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
+THEME_JS = r"""
+/* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
+   the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
+(function () {
+  var d = document.documentElement, bs = document.querySelectorAll('.theme-sw button');
+  function links(t) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href'), m = h.match(/^([\w-]+\.html|\.\/)(?:\?[^#]*)?(#.*)?$/);
+      if (m) a.setAttribute('href', m[1] + '?theme=' + t + (m[2] || ''));
+    });
+  }
+  function set(t) {
+    d.setAttribute('data-theme', t);
+    bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === t ? 'true' : 'false'); });
+    try { localStorage.setItem('yb-theme', t); } catch (e) {}
+    links(t);
+  }
+  bs.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.t); }); });
+  set(d.getAttribute('data-theme') || 'mono');
+  /* the active chapter in the index = the chapter jumped to */
+  function chapter() {
+    document.querySelectorAll('.chindex a').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('href') === location.hash);
+    });
+  }
+  window.addEventListener('hashchange', chapter); chapter();
+})();
+"""
+THEME_SWITCHER = ('<div class="theme-sw" role="group" aria-label="Colour theme (prototype only)" data-added="ui">'
+                  + "".join(f'<button type="button" data-t="{t}" aria-pressed="false">{t.capitalize()}</button>' for t in THEMES)
+                  + f'</div>\n<script>{THEME_JS}</script>')
+
+
+def stripe(cls=""):
+    """Venues theme only: the 4px five-colour rule (display:none in the other themes; takes no space)."""
+    return f'<div class="stripe{(" " + cls) if cls else ""}" aria-hidden="true"></div>'
+
+
 def page(title, desc, body_html, cls="", script=""):
     return f"""<!doctype html>
-<html lang="en">
+<html lang="en" data-theme="mono">
 <head>
 <meta charset="utf-8">
+<script>{THEME_HEAD_JS}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
@@ -449,6 +497,7 @@ def page(title, desc, body_html, cls="", script=""):
 <body{f' class="{cls}"' if cls else ''}>
 {body_html}
 {f"<script>{script}</script>" if script else ""}
+{THEME_SWITCHER}
 </body>
 </html>
 """
@@ -463,7 +512,7 @@ def bar(over=None, here=""):
 
 
 def foot():
-    return ('<footer class="foot" data-added="ui"><div class="wrap"><span>© Yasmin Bajwa</span>'
+    return ('<footer class="foot" data-added="ui"><div class="stripe-wrap">' + stripe() + '</div><div class="wrap"><span>© Yasmin Bajwa</span>'
             '<a class="u" href="#top">Back to top ↑</a></div></footer>')
 
 
@@ -504,7 +553,7 @@ def home():
         rows += (f'<a class="row fade" href="{r["slug"]}.html"><div class="row__t"><span class="label" data-added="ui">{n:02d}</span>'
                  f'<h3 data-ref="{r["title"]["id"]}">{E(r["title"]["text"])}</h3></div>'
                  f'<div class="row__role"><span data-ref="{r["role"]["id"]}">{E(r["role"]["text"])}</span>'
-                 f'<span class="label" data-added="ui">Password protected</span></div>'
+                 f'<span class="label lock-mark" data-added="ui">Password protected</span></div>'
                  f'<div class="row__img">{logo_tile(r["key"])}</div></a>')
     b = f"""{bar(here="home")}
 <main id="top">
@@ -521,6 +570,7 @@ def home():
   <dl class="facts">{facts}</dl>
 </section>
 <hr class="hairline">
+{stripe('stripe--hero')}
 
 <!-- Phase 2: Snippets About My Life. Statement and tags left 10 cols; slideshow right 12 cols -->
 <section class="section section--alt" id="snippets"><div class="wrap g24 about">
@@ -565,7 +615,7 @@ def projects():
     cards = ""
     for n, r in enumerate(ROOMS, 1):
         cards += (f'<a class="card fade" href="{r["slug"]}.html">{logo_tile(r["key"])}'
-                  f'<span class="label" data-added="ui">{n:02d} · Password protected</span>'
+                  f'<span class="label" data-added="ui"><span class="no">{n:02d}</span> · <span class="lock-mark">Password protected</span></span>'
                   f'<h2 data-ref="{r["title"]["id"]}">{E(r["title"]["text"])}</h2>'
                   f'<p data-ref="{r["role"]["id"]}">{E(r["role"]["text"])}</p></a>')
     b = f"""{bar(here="projects")}
@@ -602,7 +652,7 @@ def logo_tile(key, variant=None):
     stem, ext, name = LOGO[key]
     f = f"{stem}{'-ink' if variant == 'ink' else ''}.{ext}"
     sz = LOGO_SIZES[f]
-    return (f'<div class="logo-tile"><img src="{IMG}logos/{f}" alt="{E(name)} logo" '
+    return (f'<div class="logo-tile {key}"><img src="{IMG}logos/{f}" alt="{E(name)} logo" '
             f'style="width:{sz["w_pct"]}%" loading="lazy"></div>')
 
 
@@ -701,7 +751,7 @@ def case(r):
 </div></nav>
 </main>
 {foot()}"""
-    return page(f"{r['short']} — Yasmin Bajwa", r["title"]["text"], b, "case")
+    return page(f"{r['short']} — Yasmin Bajwa", r["title"]["text"], b, f"case {r['key']}")
 
 
 # ---------------------------------------------------------------- logo comparison (for the client; not linked)

@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="mono">
 <head>
 <meta charset="utf-8">
+<script>(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}if(['mono','cream','venues'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Logo tiles — Yasmin Bajwa</title>
 <meta name="description" content="Logo tile options for the client.">
@@ -14,8 +15,8 @@
 <main class="wrap lc" id="top">
   <p class="label">Yasmin Bajwa · project tiles · for the client to choose</p>
   <h1 class="p-title" style="padding-top:48px">Logo tiles: (a) colour or (b) ink</h1>
-  <section class="lc__row"><div class="lc__head"><h2>(a) Colour</h2><p class="label">Brand colours as supplied · default in the build</p></div><div class="lc__tiles"><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/the-henry-ford.png" alt="The Henry Ford logo" style="width:44.7%" loading="lazy"></div><figcaption class="label">01 · The Henry Ford</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/itc.png" alt="ITC logo" style="width:71.5%" loading="lazy"></div><figcaption class="label">02 · ITC</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/rhode-island-doh.svg" alt="Rhode Island Department of Health logo" style="width:49.5%" loading="lazy"></div><figcaption class="label">03 · Rhode Island Department of Health</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/littelfuse.svg" alt="Littelfuse logo" style="width:93.7%" loading="lazy"></div><figcaption class="label">04 · Littelfuse</figcaption></figure></div></section>
-  <section class="lc__row"><div class="lc__head"><h2>(b) Ink</h2><p class="label">All four in #111111 on the light ground</p></div><div class="lc__tiles"><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/the-henry-ford-ink.png" alt="The Henry Ford logo" style="width:52.9%" loading="lazy"></div><figcaption class="label">01 · The Henry Ford</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/itc-ink.png" alt="ITC logo" style="width:71.9%" loading="lazy"></div><figcaption class="label">02 · ITC</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/rhode-island-doh-ink.svg" alt="Rhode Island Department of Health logo" style="width:49.5%" loading="lazy"></div><figcaption class="label">03 · Rhode Island Department of Health</figcaption></figure><figure class="lc__t"><div class="logo-tile"><img src="assets/img/logos/littelfuse-ink.svg" alt="Littelfuse logo" style="width:93.7%" loading="lazy"></div><figcaption class="label">04 · Littelfuse</figcaption></figure></div></section>
+  <section class="lc__row"><div class="lc__head"><h2>(a) Colour</h2><p class="label">Brand colours as supplied · default in the build</p></div><div class="lc__tiles"><figure class="lc__t"><div class="logo-tile room01"><img src="assets/img/logos/the-henry-ford.png" alt="The Henry Ford logo" style="width:44.7%" loading="lazy"></div><figcaption class="label">01 · The Henry Ford</figcaption></figure><figure class="lc__t"><div class="logo-tile room02"><img src="assets/img/logos/itc.png" alt="ITC logo" style="width:71.5%" loading="lazy"></div><figcaption class="label">02 · ITC</figcaption></figure><figure class="lc__t"><div class="logo-tile room03"><img src="assets/img/logos/rhode-island-doh.svg" alt="Rhode Island Department of Health logo" style="width:49.5%" loading="lazy"></div><figcaption class="label">03 · Rhode Island Department of Health</figcaption></figure><figure class="lc__t"><div class="logo-tile room04"><img src="assets/img/logos/littelfuse.svg" alt="Littelfuse logo" style="width:93.7%" loading="lazy"></div><figcaption class="label">04 · Littelfuse</figcaption></figure></div></section>
+  <section class="lc__row"><div class="lc__head"><h2>(b) Ink</h2><p class="label">All four in #111111 on the light ground</p></div><div class="lc__tiles"><figure class="lc__t"><div class="logo-tile room01"><img src="assets/img/logos/the-henry-ford-ink.png" alt="The Henry Ford logo" style="width:52.9%" loading="lazy"></div><figcaption class="label">01 · The Henry Ford</figcaption></figure><figure class="lc__t"><div class="logo-tile room02"><img src="assets/img/logos/itc-ink.png" alt="ITC logo" style="width:71.9%" loading="lazy"></div><figcaption class="label">02 · ITC</figcaption></figure><figure class="lc__t"><div class="logo-tile room03"><img src="assets/img/logos/rhode-island-doh-ink.svg" alt="Rhode Island Department of Health logo" style="width:49.5%" loading="lazy"></div><figcaption class="label">03 · Rhode Island Department of Health</figcaption></figure><figure class="lc__t"><div class="logo-tile room04"><img src="assets/img/logos/littelfuse-ink.svg" alt="Littelfuse logo" style="width:93.7%" loading="lazy"></div><figcaption class="label">04 · Littelfuse</figcaption></figure></div></section>
   <p class="lc__note">Each tile: 3:2 on #F4F3F0, 32px padding, square corners. Logos are sized by eye for equal visual weight, not equal bounding boxes. Hover darkens the ground to #ECEAE5. Shown at the homepage row size (316px wide at 1440).</p>
 </main>
 <style>
@@ -30,5 +31,34 @@
 @media (max-width:767px){.lc__row{grid-template-columns:1fr}.lc__tiles{grid-template-columns:1fr 1fr}}
 </style>
 
+<div class="theme-sw" role="group" aria-label="Colour theme (prototype only)" data-added="ui"><button type="button" data-t="mono" aria-pressed="false">Mono</button><button type="button" data-t="cream" aria-pressed="false">Cream</button><button type="button" data-t="venues" aria-pressed="false">Venues</button></div>
+<script>
+/* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
+   the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
+(function () {
+  var d = document.documentElement, bs = document.querySelectorAll('.theme-sw button');
+  function links(t) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href'), m = h.match(/^([\w-]+\.html|\.\/)(?:\?[^#]*)?(#.*)?$/);
+      if (m) a.setAttribute('href', m[1] + '?theme=' + t + (m[2] || ''));
+    });
+  }
+  function set(t) {
+    d.setAttribute('data-theme', t);
+    bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === t ? 'true' : 'false'); });
+    try { localStorage.setItem('yb-theme', t); } catch (e) {}
+    links(t);
+  }
+  bs.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.t); }); });
+  set(d.getAttribute('data-theme') || 'mono');
+  /* the active chapter in the index = the chapter jumped to */
+  function chapter() {
+    document.querySelectorAll('.chindex a').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('href') === location.hash);
+    });
+  }
+  window.addEventListener('hashchange', chapter); chapter();
+})();
+</script>
 </body>
 </html>
