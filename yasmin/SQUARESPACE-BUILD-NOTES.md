@@ -41,7 +41,7 @@ Captions and labels use **62% ink, not 55%**. At 11px, 55% measures 4.4:1 on whi
 
 ### Site Styles per theme (theme comparison: the client picks one)
 
-The prototype can show three palettes (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all three; only the values below change. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
+The prototype can show five palettes (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all five; only colours change. The first table covers the three calm palettes; the bold two follow. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
 
 | Setting | Mono (built) | Cream | Venues |
 |---|---|---|---|
@@ -59,6 +59,25 @@ The prototype can show three palettes (switcher, top-right; values and contrast 
 | Per-room colour (case pages) | none | none | Chapter numbers, chapter-index numbers, FIG. numbers, active chapter: 01 `#6D6F41`, 02 `#9B5C15`, 03 `#4F7084`, 04 `#A8443F`. Set as the text colour of those text blocks on each project page (**verify** the text colour picker takes a custom hex; if not, +4 CSS lines scoped by each page's `#collection-…` ID). Captions' FIG. numbers need the CSS route. |
 
 **Custom CSS per theme.** The §2 lines stay; only their hex values change: `rgba(17,17,17,.14)` → the theme hairline (cream `rgba(22,20,15,.15)`, venues `rgba(30,63,99,.15)`); `rgba(17,17,17,.62)` → the Paragraph 3 colour above; `#111` → the theme ink, except line 10, which takes the Enter fill; `#fff` on line 15 → the White background; lines 19–20 → the logo tile values. Line counts: **mono 20**; **cream 21** (+ `.sqs-html-content a{text-decoration-color:#8C2F1E}`); **venues 23** (line 20 split into four, one per room's tile section; up to 27 if per-room numbers need CSS). All three stay under the 30-line budget.
+
+**Bold palettes: colour as sections.** Same Site Styles as their calm parent (Cream bold = Cream's palette and type colours; Venues bold = Venues' with a white page ground), plus **section colour themes**. In 7.1 each section picks one of the palette's colour themes (background + text); **verify** in her account whether a theme's background can take a colour outside the five palette slots. Where it can't, the line marked *CSS* is the fallback.
+
+| Where | Cream bold | Venues bold |
+|---|---|---|
+| Palette (five slots) | `#F3F0EA` · `#E9E4DB` · `#16140F` · `#8C2F1E` · `#FFFFFF` | `#FFFFFF` · `#F1F1EC` · `#1E3F63` · `#E9A35B` · `#9DB9CB` |
+| Hero | cream `#F3F0EA`, text `#16140F` | white, text `#1E3F63`; stripe Image block under it |
+| Snippets About My Life (statement + slideshow) | theme **Wine**: background `#8C2F1E`, text `#F3F0EA`; the slideshow on a 12px cream frame (*CSS* +1, on the gallery's slideshow wrapper) | theme **Light**: `#F1F1EC`, text navy |
+| Four disciplines (panels) | Ink theme as built; image overlay **60%** (CSS lines 16–17: `brightness(.4)`, hover `.5`) | each panel's image under its colour at 55% on top of the built darkening: orange · olive · red · light blue, white text (*CSS* +4, one `::after` per panel block, +1 hover) |
+| Projects (homepage) | cream; rows 02 and 04 on a full-width **Shape** block `#E9E4DB` behind the row (**verify** a Shape block can span the full-width section) | theme **Navy**: `#1E3F63`, text white; logo plates on white (lines 19–20 values `#FFFFFF`, room tints on hover) |
+| Contact | theme **Ink**: `#16140F`, text `#F3F0EA`; wine link underline (cream's +1 line covers it) | theme **Orange**: `#E9A35B`, text navy; white link underline (*CSS* +1) |
+| Footer | cream | Navy (footer colour theme); stripe Image block above it |
+| Case header, photo covers (01, 02) | section background overlay **wine at 82%** instead of `#111` at 38%; title cream | overlay **room colour**: 01 olive `#72743F` at 92%, 02 orange `#E9A35B` at 96% (strong enough that the title passes 4.5:1 over the photo); title white (01) / navy (02). Room 02's header text navy on that page (*CSS* +1, scoped to the page) |
+| Case header, document headers (03, 04) | section theme **Wine**; the meta table on a **Shape** block of `#F3F0EA` | section ground 03 light blue `#9DB9CB` (navy title), 04 red `#B04A44` (white title; *CSS* +1 if red can't be a theme background); meta on a white Shape block |
+| Chapters / Reflection | cream / `#E9E4DB` (Stone theme) | white / the room colour at 12% (`#EEEEE8`, `#FCF4EB`, `#F3F7F9`, `#F6E9E9`: *CSS* +4, or use the Light theme `#F1F1EC` and skip them) |
+| Lock screen | background `#8C2F1E` (*CSS* +1), name and footer cream; the form on line 15's layer in `#F3F0EA`; Enter wine | background navy (*CSS* +1), name and footer white; layer white; Enter `#4F7084` |
+| Olive panel / band colour | — | `#72743F`, outside the palette: *CSS* for the Room 01 cover overlay if the overlay picker only offers palette colours |
+
+**CSS cost.** Cream bold: the calm Cream set (21 lines) + slideshow frame + lock background = **about 23 lines**, inside the 30 budget. Venues bold: the calm Venues set (23) + panel colours (5) + contact underline (1) + Room 02 header (1) + lock background (1) + red band (1) = **about 32 lines, plus 4 for the reflection tints**, so **over the 30-line budget**. To bring it under: drop the reflection tints (use the Light theme) and the panels' hover change, and merge the four room tile hovers into one rule per line pair; that lands at about 30. This is the real cost of choosing Venues bold.
 
 **Not carried to Squarespace:** the theme switcher, the `?theme=` links and the `data-theme` attribute are prototype tools only.
 

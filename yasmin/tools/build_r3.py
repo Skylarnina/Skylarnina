@@ -438,10 +438,10 @@ SPECIAL = {
 
 # ---------------------------------------------------------------- page shell
 # Theme comparison (prototype only; Squarespace gets one palette). THEMES.md has the values.
-THEMES = ["mono", "cream", "venues"]
+THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold"]
 THEME_HEAD_JS = ("(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}"
                  "if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}"
-                 "if(['mono','cream','venues'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
+                 "if(['mono','cream','cream-bold','venues','venues-bold'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
 THEME_JS = r"""
 /* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
    the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
@@ -471,13 +471,13 @@ THEME_JS = r"""
 })();
 """
 THEME_SWITCHER = ('<div class="theme-sw" role="group" aria-label="Colour theme (prototype only)" data-added="ui">'
-                  + "".join(f'<button type="button" data-t="{t}" aria-pressed="false">{t.capitalize()}</button>' for t in THEMES)
+                  + "".join(f'<button type="button" data-t="{t}" aria-pressed="false">{t.replace("-", " ").capitalize()}</button>' for t in THEMES)
                   + f'</div>\n<script>{THEME_JS}</script>')
 
 
 def stripe(cls=""):
     """Venues theme only: the 4px five-colour rule (display:none in the other themes; takes no space)."""
-    return f'<div class="stripe{(" " + cls) if cls else ""}" aria-hidden="true"></div>'
+    return f'<div class="stripe{(" " + cls) if cls else ""}" aria-hidden="true"><span>{"<i></i>" * 5}</span></div>'
 
 
 def page(title, desc, body_html, cls="", script=""):

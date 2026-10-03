@@ -131,7 +131,7 @@ def convert(page, name):
     assert "<style>" in s and "@font-face" in s and "wf-label" in s, page
     s = re.sub(r"<script>.*?</script>\n?", "", s, flags=re.S)      # static: the wireframe shows the slideshow's first frame
     s = re.sub(r'<div class="theme-sw".*?</div>\n?', "", s, flags=re.S)  # the prototype's theme switcher is not part of the layout
-    s = re.sub(r'<div class="stripe-wrap"><div class="stripe[^"]*" aria-hidden="true"></div></div>|<div class="stripe[^"]*" aria-hidden="true"></div>\n?', "", s)
+    s = re.sub(r'<div class="stripe-wrap"><div class="stripe[^"]*" aria-hidden="true"><span>(?:<i></i>)*</span></div></div>|<div class="stripe[^"]*" aria-hidden="true"><span>(?:<i></i>)*</span></div>\n?', "", s)
     s = re.sub(r'href="assets/[^"]*"', 'href="#"', s)
     s = s.replace(' target="_blank" rel="noopener"', "")
     s = re.sub(r'<link rel="preconnect"[^>]*>\n?', "", s)

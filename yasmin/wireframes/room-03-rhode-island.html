@@ -45,6 +45,7 @@
   --on-photo-2:rgba(255,255,255,.85);
   --on-photo-line:rgba(255,255,255,.35);
   --photo-ui:rgba(255,255,255,.9);
+  --photo-ui-ink:var(--ink);        /* slideshow arrows: resolved here, so a coloured section's text colour never reaches the white chip */
   --photo-scrim:rgba(17,17,17,.38);
   --cover-ground:#222222;
   --video-ground:#000000;
@@ -85,7 +86,7 @@ strong,b{font-weight:500}
 .m img,.m video{width:100%;height:100%;object-fit:cover}
 
 /* ---------- themes (prototype only: colour changes, nothing moves) ----------
-   data-theme on <html>: mono (built palette, above) | cream | venues. THEMES.md has every value
+   data-theme on <html>: mono (built palette, above) | cream | cream-bold | venues | venues-bold. THEMES.md has every value
    with its contrast check. Squarespace gets one palette at the end, via Site Styles. */
 .row__t .label,.card .no{color:var(--index-no)}
 .lock-mark{color:var(--accent-2)}
@@ -93,13 +94,13 @@ strong,b{font-weight:500}
 /* the active chapter in the index (the chapter you jumped to); mono keeps no active state */
 html:not([data-theme="mono"]) .chindex a.is-active{color:var(--index-active);text-decoration:underline;text-decoration-color:currentColor;text-underline-offset:.22em}
 
-[data-theme="cream"]{
+:is([data-theme="cream"],[data-theme="cream-bold"]){
   --ground:#F3F0EA; --ground-2:#E9E4DB; --ink:#16140F;
   --ink-muted:rgba(22,20,15,.64); --ink-low:rgba(22,20,15,.45); --hairline:rgba(22,20,15,.15);
-  --accent:#8C2F1E; --accent-2:#8C2F1E; --link:#8C2F1E;      /* wine: small marks only, never a large fill */
+  --accent:#8C2F1E; --accent-2:#8C2F1E; --link:#8C2F1E;      /* cream: wine on small marks only, never a large fill */
   --tile:#E9E4DB; --tile-hover:#E1DCD3;
 }
-[data-theme="venues"]{
+:is([data-theme="venues"],[data-theme="venues-bold"]){
   /* The Henry Ford's five venue colours. Fills (stripe, tile hovers) are the card values;
      text uses darker "text-safe" versions so every pair passes 4.5:1. */
   --v-orange:#E9A35B; --v-olive:#8A8D4F; --v-red:#B04A44; --v-blue:#6E94AB; --v-navy:#1E3F63;
@@ -111,27 +112,101 @@ html:not([data-theme="mono"]) .chindex a.is-active{color:var(--index-active);tex
   --tile:#F1F1EC; --tile-hover:#E6E6E0;
 }
 /* per-room colour (venues): Room 01 olive, 02 orange, 03 light blue, 04 red. Small marks only. */
-[data-theme="venues"] .room01{--room:var(--t-olive);--room-tint:#DADBC9}
-[data-theme="venues"] .room02{--room:var(--t-orange);--room-tint:#EFE0CC}
-[data-theme="venues"] .room03{--room:var(--t-blue);--room-tint:#D4DDDE}
-[data-theme="venues"] .room04{--room:var(--t-red);--room-tint:#E3CCC7}
-[data-theme="venues"] body.case{--index-no:var(--room);--fig-no:var(--room);--index-active:var(--room)}
-[data-theme="venues"] .row:hover .logo-tile[class*="room"],[data-theme="venues"] .card:hover .logo-tile[class*="room"]{background:var(--room-tint)}
-/* signature stripe (venues): one 4px five-colour rule, under the hero and above the footer.
+:is([data-theme="venues"],[data-theme="venues-bold"]) .room01{--room:var(--t-olive);--room-tint:#DADBC9}
+:is([data-theme="venues"],[data-theme="venues-bold"]) .room02{--room:var(--t-orange);--room-tint:#EFE0CC}
+:is([data-theme="venues"],[data-theme="venues-bold"]) .room03{--room:var(--t-blue);--room-tint:#D4DDDE}
+:is([data-theme="venues"],[data-theme="venues-bold"]) .room04{--room:var(--t-red);--room-tint:#E3CCC7}
+:is([data-theme="venues"],[data-theme="venues-bold"]) body.case{--index-no:var(--room);--fig-no:var(--room);--index-active:var(--room)}
+:is([data-theme="venues"],[data-theme="venues-bold"]) :is(.row,.card):hover .logo-tile[class*="room"]{background:var(--room-tint)}
+/* signature stripe (venues): one 4px rule of five equal flat segments, under the hero and above the footer.
    It overlays the hairline it replaces, so it takes no space. */
 .stripe{display:none}
-[data-theme="venues"] .stripe{display:block;position:relative;height:0}
-[data-theme="venues"] .stripe::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;
-  background:linear-gradient(90deg,var(--v-orange) 0 20%,var(--v-olive) 20% 40%,var(--v-red) 40% 60%,var(--v-blue) 60% 80%,var(--v-navy) 80% 100%)}
+:is([data-theme="venues"],[data-theme="venues-bold"]) .stripe{display:block;position:relative;height:0}
+.stripe span{position:absolute;left:0;right:0;top:0;height:4px;display:flex}
+.stripe i{flex:1}
+.stripe i:nth-child(1){background:var(--v-orange)} .stripe i:nth-child(2){background:var(--v-olive)} .stripe i:nth-child(3){background:var(--v-red)}
+.stripe i:nth-child(4){background:var(--v-blue)} .stripe i:nth-child(5){background:var(--v-navy)}
 .stripe-wrap{max-width:1600px;margin-inline:auto;padding-inline:var(--margin)}   /* the footer rule's width (= .wrap) */
-[data-theme="venues"] .stripe--hero::before{top:-1px}   /* over the 1px hairline it replaces */
-[data-theme="venues"] .hairline,[data-theme="venues"] .foot .wrap{border-top-color:transparent}
+:is([data-theme="venues"],[data-theme="venues-bold"]) .stripe--hero span{top:-1px}   /* over the 1px hairline it replaces */
+:is([data-theme="venues"],[data-theme="venues-bold"]) :is(.hairline,.foot .wrap){border-top-color:transparent}
+
+/* ---------- bold themes: colour as sections. Every coloured surface sets its own text, rule and link
+   colours (white or ink, whichever passes 4.5:1 on that ground; cream bold uses cream or ink). ---------- */
+/* surfaces: --s = ground, --s-ink = text, --s-rule = rules, --s-link = link underline (applied by the :is() rule below) */
+[data-theme="cream-bold"]{--wine:#8C2F1E;--cream:#F3F0EA;--c-ink:#16140F}
+[data-theme="cream-bold"] :is(#snippets,.lock){--s:var(--wine);--s-ink:var(--cream);--s-rule:rgba(243,240,234,.3)}
+[data-theme="cream-bold"] #contact{--s:var(--c-ink);--s-ink:var(--cream);--s-rule:rgba(243,240,234,.25);--s-link:var(--wine)}
+[data-theme="venues-bold"]{--ground:#FFFFFF;--b-orange:#E9A35B;--b-olive:#72743F;--b-red:#B04A44;--b-blue:#9DB9CB;--b-navy:#1E3F63;--white:#FFFFFF}
+[data-theme="venues-bold"] :is(#projects,.foot,.lock){--s:var(--b-navy);--s-ink:var(--white);--s-rule:rgba(255,255,255,.3)}
+[data-theme="venues-bold"] #contact{--s:var(--b-orange);--s-ink:var(--b-navy);--s-rule:rgba(30,63,99,.3);--s-link:var(--white)}
+:is([data-theme="cream-bold"] :is(#snippets,#contact,.lock),[data-theme="venues-bold"] :is(#projects,#contact,.foot,.lock)){--ink:var(--s-ink);--ink-muted:var(--s-ink);--ink-low:var(--s-rule);--hairline:var(--s-rule);--link:var(--s-link,var(--s-ink));--link-ink:var(--s-ink);--active:var(--s-ink);--index-no:var(--s-ink);--accent-2:var(--s-ink);--fig-no:var(--s-ink);--index-active:var(--s-ink);background:var(--s);color:var(--s-ink)}
+/* cream bold: the slideshow sits on a cream frame inside the wine section */
+[data-theme="cream-bold"] #snippets{--ground-2:var(--cream)}
+[data-theme="cream-bold"] #snippets .ss__frame{border:12px solid var(--cream)}
+/* cream bold: project rows alternate cream / #E9E4DB, full-bleed; the logo tile takes the other ground */
+[data-theme="cream-bold"] #projects .row:nth-child(even){background:#E9E4DB;box-shadow:0 0 0 100vmax #E9E4DB;clip-path:inset(0 -100vmax);--tile:#F3F0EA;--tile-hover:#ECE7DF}
+/* venues bold: logo tiles on white inside the navy Projects section */
+[data-theme="venues-bold"] #projects{--tile:#FFFFFF;--tile-hover:#F1F1EC}
+/* panels: a flat colour layer over each photo (replaces the 45% black). Hover: cream bold lightens, venues bold 10% darker. */
+[data-theme="cream-bold"] .panel .m{filter:none}
+[data-theme="venues-bold"] .panel .m{filter:brightness(.55)}   /* the photo keeps mono's darkening under the tint, so white text holds */
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .panel .m::after{content:"";position:absolute;inset:0;background:var(--tint);transition:opacity .3s ease,filter .3s ease}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .panel{color:var(--p-ink);--on-photo-2:var(--p-ink);--hairline:var(--p-rule)}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .panels{--hairline:var(--p-rule)}
+[data-theme="cream-bold"] .panels{--tint:rgba(22,20,15,.6);--p-ink:var(--cream);--p-rule:rgba(243,240,234,.25)}
+[data-theme="cream-bold"] .panel:hover .m::after{opacity:.8}
+[data-theme="venues-bold"] .panels{--p-rule:rgba(255,255,255,.35)}
+[data-theme="venues-bold"] .panel:nth-child(1){--tint:rgba(233,163,91,.55);--p-ink:var(--white)}
+[data-theme="venues-bold"] .panel:nth-child(2){--tint:rgba(114,116,63,.55);--p-ink:var(--white)}
+[data-theme="venues-bold"] .panel:nth-child(3){--tint:rgba(176,74,68,.55);--p-ink:var(--white)}
+[data-theme="venues-bold"] .panel:nth-child(4){--tint:rgba(157,185,203,.55);--p-ink:var(--white)}
+[data-theme="venues-bold"] .panel:hover .m::after{filter:brightness(.9)}
+/* case-study headers: a full-width band behind the title. Photo covers (Rooms 01, 02) take the band as their
+   overlay; document headers (Rooms 03, 04) take it as their ground. The meta table stays on the page ground. */
+[data-theme="cream-bold"] body.case{--band:var(--wine);--band-a:rgba(140,47,30,.82);--band-ink:var(--cream)}
+[data-theme="venues-bold"] body.room01{--band:var(--b-olive);--band-a:rgba(114,116,63,.92);--band-ink:var(--white);--refl:#EEEEE8}
+[data-theme="venues-bold"] body.room02{--band:var(--b-orange);--band-a:rgba(233,163,91,.96);--band-ink:var(--b-navy);--refl:#FCF4EB}
+[data-theme="venues-bold"] body.room03{--band:var(--b-blue);--band-a:rgba(157,185,203,.82);--band-ink:var(--b-navy);--refl:#F3F7F9}
+[data-theme="venues-bold"] body.room04{--band:var(--b-red);--band-a:rgba(176,74,68,.82);--band-ink:var(--white);--refl:#F6E9E9}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) body.case{--photo-scrim:var(--band-a);--on-photo:var(--band-ink);--on-photo-line:var(--band-ink)}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .dochead{background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax -48px)}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .dochead__title{color:var(--band-ink)}
+/* the meta table's card is drawn behind it, so nothing moves */
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .dochead .meta__panel{position:relative}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .dochead .meta__panel::before{content:"";position:absolute;inset:-22px -24px -8px;background:var(--ground);z-index:-1}
+[data-theme="venues-bold"] .reflection-sec{background:var(--refl)}
+   /* navy nav over the orange cover: on the flat band, not the photo (4.5:1) */
+/* venues bold footer stripe: on the section above the navy footer, so all five segments show
+   (the homepage's section above is orange, so there it stays on the footer's top edge) */
+[data-theme="venues-bold"] .foot .stripe span{top:-4px}
+[data-theme="venues-bold"] body:has(#contact) .foot .stripe span{top:0}
+/* password page: coloured ground, the form on a card of the page ground */
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .lock__box::before{content:"";position:absolute;inset:-48px -40px;background:var(--ground);z-index:-1}
+:is([data-theme="cream-bold"],[data-theme="venues-bold"]) .lock__box{position:relative;color:var(--c-ink,var(--b-navy));
+  --ink:var(--c-ink,var(--b-navy));--ink-muted:var(--c-ink,var(--b-navy));--hairline:rgba(0,0,0,.15);--link:var(--accent);--link-ink:var(--ink)}
+[data-theme="cream-bold"] .lock__box{--link:var(--wine)}
+[data-theme="venues-bold"] .lock__box{--link:var(--t-blue);--link-ink:var(--t-blue)}
 /* theme switcher (prototype only, not part of the Squarespace build) */
-.theme-sw{position:fixed;top:80px;right:var(--margin);z-index:60;display:flex;gap:2px;padding:4px;background:var(--ground);border:1px solid var(--hairline)}
+.theme-sw{position:fixed;top:80px;right:var(--margin);z-index:60;display:flex;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 2 * var(--margin));gap:2px;padding:4px;background:var(--ground);border:1px solid var(--hairline)}
 .theme-sw button{font:500 11px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;padding:7px 8px;border:0;border-radius:0;background:none;color:var(--ink-muted);cursor:pointer}
 .theme-sw button:hover{color:var(--ink)}
 .theme-sw button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--link);text-underline-offset:.3em}
 body:has(.lock) .theme-sw{top:16px}
+@media (max-width:600px){
+  .theme-sw{gap:0;padding:2px}
+  .theme-sw button{padding:7px 4px;letter-spacing:.03em}
+  body:has(.lock) .theme-sw{top:60px}
+}
+/* bold themes on phones: the cover title sits below the photo, so the band goes behind the title there;
+   document headers keep the band behind the title only, with the meta table on the page ground below */
+@media (max-width:767px){
+  :is([data-theme="cream-bold"],[data-theme="venues-bold"]) .cover__title{color:var(--band-ink);background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax -20px)}
+  :is([data-theme="cream-bold"],[data-theme="venues-bold"]) .cover + .meta .meta__panel{background:transparent}
+  :is([data-theme="cream-bold"],[data-theme="venues-bold"]) .cover{overflow:clip visible}   /* lets the band's 20px tail show above the first rule */
+  :is([data-theme="cream-bold"],[data-theme="venues-bold"]) .dochead{clip-path:inset(0 -100vmax)}
+  :is([data-theme="cream-bold"],[data-theme="venues-bold"]) .dochead .meta__panel::before{inset:0 -100vmax}
+  :is([data-theme="cream-bold"],[data-theme="venues-bold"]) .lock__box::before{inset:-32px -12px}
+}
 
 /* ---------- top bar ---------- */
 .bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:68px;border-bottom:1px solid var(--hairline)}
@@ -215,7 +290,7 @@ body:has(.lock) .theme-sw{top:16px}
 .ss__slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .4s ease}
 .ss__slide.is-on{opacity:1}
 .ss__slide img{width:100%;height:100%;object-fit:cover}
-.ss__arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:0;background:var(--photo-ui);color:var(--ink);font:400 18px/1 var(--font);cursor:pointer;z-index:2}
+.ss__arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:0;background:var(--photo-ui);color:var(--photo-ui-ink);font:400 18px/1 var(--font);cursor:pointer;z-index:2}
 .ss__arrow--prev{left:12px}
 .ss__arrow--next{right:12px}
 .ss__dots{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding-top:16px}
