@@ -1,0 +1,1024 @@
+<title>Kóda Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;500&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --navy:#0D1F2D; --bone:#F0EBE3; --paper:#FAFAF8; --stone:#C8BCA8;
+  --blue-rich:#1B3A5C; --blue-mid:#2D5F8A;
+  --stone-hover:#B8AC98; --navy-hover:#163043;
+  --stone-50:rgba(200,188,168,.5);
+  --serif:'Cormorant Garamond','Cormorant',Garamond,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --bar:64px; --gut:24px;
+  --r:0px; --r-lg:0px;                     /* 0 in brand · 20px / 32px in enhanced */
+  --fg:var(--navy); --muted:rgba(13,31,45,.62); --low:rgba(13,31,45,.38);
+  --line:var(--stone); --line-soft:var(--stone-50); --label:rgba(13,31,45,.62); --link:var(--blue-mid);
+}
+@media (min-width:900px){ :root{ --bar:72px; --gut:32px; } }
+html[data-motion="enhanced"]{ --r:20px; --r-lg:32px; }
+.theme-dark{
+  --fg:var(--bone); --muted:rgba(240,235,227,.62); --low:rgba(240,235,227,.38);
+  --line:rgba(240,235,227,.22); --line-soft:rgba(240,235,227,.14); --label:var(--stone); --link:var(--bone);
+  color:var(--fg);
+}
+.theme-bone{ --muted:rgba(13,31,45,.64); --label:rgba(13,31,45,.64); }
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{ margin:0; background:var(--paper); color:var(--fg); font:300 15px/1.7 var(--sans); font-synthesis:none; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:clip; }
+@media (min-width:900px){ body{ font-size:16px; } }
+img,video,canvas,svg{ display:block; max-width:100%; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+a{ color:inherit; }
+h1,h2,h3,p,ol,ul,dl,dd,figure,blockquote{ margin:0; }
+ol,ul{ padding:0; list-style:none; }
+:focus-visible{ outline:1px solid var(--blue-mid); outline-offset:3px; }
+.theme-dark :focus-visible{ outline-color:var(--bone); }
+
+.wrap{ width:100%; max-width:1264px; margin-inline:auto; padding-inline:var(--gut); position:relative; z-index:2; }
+.grid{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; }
+@media (max-width:899px){ .grid{ grid-template-columns:minmax(0,1fr); } .grid > *{ grid-column:1 / -1 !important; } }
+
+.eyebrow{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--label); }
+.eyebrow .ix{ color:var(--low); margin-right:.9em; }
+.display{ font-family:var(--serif); font-weight:300; letter-spacing:-.01em; line-height:1; text-wrap:balance; color:var(--fg); }
+.display em, .serif-em{ font-style:italic; font-weight:400; }
+.h-sec{ font-size:clamp(40px,5.2vw,72px); }
+.h-mid{ font-size:clamp(34px,3.6vw,52px); line-height:1.04; }
+.body{ font:300 15px/1.7 var(--sans); color:var(--muted); text-wrap:pretty; max-width:58ch; }
+@media (min-width:900px){ .body{ font-size:16px; } br.m{ display:none; } }
+@media (max-width:899px){ br.d{ display:none; } }
+.link{ position:relative; font:300 15px/1 var(--sans); color:var(--link); text-decoration:underline; text-decoration-thickness:.5px; text-underline-offset:5px; transition:color 220ms ease,opacity 220ms ease; }
+.link::after{ content:""; position:absolute; inset:-15px -6px; }
+.link:hover{ opacity:.8; }
+.cap{ font:300 11px/1.4 var(--sans); color:var(--muted); letter-spacing:.01em; }
+.centred{ text-align:center; }
+.centred .body{ margin-inline:auto; }
+.sec-head{ display:flex; flex-direction:column; align-items:center; gap:20px; }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 32px; border-radius:999px; white-space:nowrap; font:500 12px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; text-decoration:none; transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease,opacity 220ms ease; }
+.btn:active{ opacity:.85; }
+.btn-navy{ background:var(--navy); color:var(--bone); }
+.btn-navy:hover{ background:var(--navy-hover); }
+.btn-stone{ background:var(--stone); color:var(--navy); height:54px; }
+.btn-stone:hover{ background:var(--stone-hover); }
+.btn-ghost{ background:transparent; border:.5px solid var(--navy); color:var(--navy); height:48px; }
+.btn-ghost:hover{ background:var(--navy); color:var(--bone); }
+.theme-dark .btn-ghost{ border-color:var(--stone); color:var(--bone); height:54px; }
+.theme-dark .btn-ghost:hover{ background:var(--stone); color:var(--navy); }
+.btn-sm{ height:44px; padding:0 20px; }
+.price-note{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+
+/* thin outline circle with a serif numeral or a tiny word: replaces the references' icon badges */
+.ring{ display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; border:.5px solid var(--line); font:300 18px/1 var(--serif); color:var(--fg); flex:none; }
+.ring.word{ font:500 9.5px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+.ring.lg{ width:56px; height:56px; font-size:22px; }
+
+.ph{ position:relative; overflow:hidden; background:var(--blue-rich); background-size:cover; background-position:center; }
+.ph-note{ position:absolute; left:20px; top:20px; right:20px; max-width:34ch; font:300 11px/1.5 var(--sans); color:rgba(240,235,227,.62); }
+.ph-note b{ display:block; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; margin-bottom:2px; }
+.ph.has-media .ph-note{ display:none; }
+.photo-card{ position:relative; overflow:hidden; border-radius:var(--r); }
+.photo-card .ph{ position:absolute; inset:0; }
+.will-fade{ opacity:0; } .fade{ transition:opacity 320ms ease; }
+
+/* ---------- route line (OldRiga's drawn path) ---------- */
+.route{ position:absolute; inset:0; z-index:2; pointer-events:none; overflow:visible; }
+.route path{ fill:none; stroke:var(--bone); stroke-opacity:.72; stroke-width:1; vector-effect:non-scaling-stroke; }
+.route .pin{ fill:none; stroke:var(--bone); stroke-width:1; vector-effect:non-scaling-stroke; }
+.route .pin-dot{ fill:var(--bone); }
+html[data-motion="enhanced"] .route path.draw{ stroke-dasharray:1; stroke-dashoffset:1; animation:draw 1800ms cubic-bezier(.76,0,.24,1) 300ms forwards; }
+@keyframes draw{ to{ stroke-dashoffset:0; } }
+.pin-lbl{ position:absolute; z-index:3; display:flex; flex-direction:column; gap:3px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--bone); }
+.pin-lbl b{ font:300 22px/1 var(--serif); font-variant-numeric:lining-nums tabular-nums; letter-spacing:0; text-transform:none; }
+.pin-lbl.dark{ color:var(--navy); }
+
+/* ======================================================
+   0 · TOP BAR
+   ====================================================== */
+.bar{ position:fixed; inset:0 0 auto 0; z-index:60; background:var(--paper); border-bottom:.5px solid var(--stone); padding-top:env(safe-area-inset-top,0px); }
+.bar-in{ height:var(--bar); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }
+.lockup{ display:inline-flex; flex-direction:column; align-items:center; gap:5px; text-decoration:none; color:var(--navy); padding:10px 12px 10px 0; justify-self:start; }
+.wm{ font:300 20px/1 var(--serif); letter-spacing:.42em; margin-right:-.42em; text-transform:uppercase; }
+.wm-city{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); margin-right:-.18em; }
+.bar-nav{ display:flex; gap:32px; }
+.bar-nav a{ position:relative; font:300 14px/1 var(--sans); color:rgba(13,31,45,.62); text-decoration:none; padding:12px 0; transition:color 220ms ease; }
+.bar-nav a:hover{ color:var(--navy); }
+.bar-act{ justify-self:end; display:flex; align-items:center; gap:24px; }
+.bar-time{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); font-variant-numeric:tabular-nums; }
+.bar-act .short{ display:none; }
+@media (max-width:899px){ .bar-nav, .bar-time, .bar-act .full{ display:none; } .bar-act .short{ display:inline; } .bar-in{ grid-template-columns:1fr auto; } }
+main{ padding-top:calc(var(--bar) + env(safe-area-inset-top,0px)); }
+
+/* ======================================================
+   1 · HERO — SecureHome's left-set headline and floating status panel · OldRiga's route drawn over the photo · Travellah's search bar
+   ====================================================== */
+.hero{ position:relative; min-height:max(680px, calc(100svh - var(--bar))); display:grid; align-items:end; overflow:hidden; background:var(--navy); border-radius:0 0 var(--r-lg) var(--r-lg); }
+.hero > .ph{ position:absolute; inset:0; }
+.hero video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 400ms ease; }
+.hero video.is-playing{ opacity:1; }
+.hero-wash{ position:absolute; inset:0; background:rgba(13,31,45,.6); }
+.hero-in{ position:relative; z-index:3; padding-block:72px 48px; display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:24px; align-items:end; }
+.hero-txt{ display:flex; flex-direction:column; align-items:flex-start; gap:24px; max-width:720px; }
+.hero-txt .eyebrow{ color:var(--stone); display:inline-flex; align-items:center; gap:14px; }
+.hero-txt .eyebrow .sep{ width:24px; border-top:.5px solid var(--stone); }
+.hero h1{ font-size:clamp(46px,6.6vw,96px); line-height:.98; color:var(--bone); }
+.hero-sub{ font:300 16px/1.65 var(--sans); color:var(--bone); max-width:46ch; }
+.hero-cta{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-top:4px; }
+.hero-cta .link{ color:var(--bone); }
+/* check-a-date bar (Travellah's search bar) */
+.check{ grid-column:1 / -1; margin-top:48px; display:grid; grid-template-columns:1fr 1fr 1.4fr auto; align-items:center; background:rgba(13,31,45,.6); border:.5px solid rgba(240,235,227,.22); border-radius:var(--r); padding:8px 8px 8px 0; }
+.check .f{ display:flex; flex-direction:column; gap:4px; padding:12px 28px; border-right:.5px solid rgba(240,235,227,.22); text-align:left; color:var(--bone); min-height:68px; justify-content:center; }
+.check .f span{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--stone); }
+.check .f b{ font:300 20px/1.1 var(--serif); font-variant-numeric:lining-nums; }
+.check .f:hover b{ color:var(--stone); transition:color 220ms ease; }
+.check .btn{ margin-left:16px; }
+/* floating status panel (SecureHome's "System status") */
+.status-panel{ justify-self:end; width:min(380px,100%); background:var(--bone); border:.5px solid var(--stone); border-radius:var(--r); padding:22px 24px 20px; color:var(--navy); }
+.status-panel .eyebrow{ color:rgba(13,31,45,.64); display:flex; justify-content:space-between; }
+.status-panel .big{ font:300 34px/1.05 var(--serif); margin:10px 0 14px; font-variant-numeric:lining-nums tabular-nums; }
+.status-panel dl{ border-top:.5px solid var(--stone); }
+.status-panel .fr{ display:flex; justify-content:space-between; gap:16px; padding-block:10px; border-bottom:.5px solid var(--stone-50); font:300 12.5px/1.5 var(--sans); color:rgba(13,31,45,.64); }
+.status-panel .fr dd{ color:var(--navy); text-align:right; font-family:var(--serif); font-size:16px; font-weight:400; }
+.status-panel .st{ margin-top:12px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--blue-mid); display:flex; align-items:center; gap:10px; }
+.status-panel .st i{ width:6px; height:6px; border-radius:50%; background:var(--blue-mid); }
+.hero-cap{ position:absolute; z-index:3; left:var(--gut); bottom:18px; font:300 11px/1.4 var(--sans); color:rgba(240,235,227,.62); }
+.hero .route.m{ display:none; }
+@media (max-width:899px){
+  .hero{ min-height:0; border-radius:0; }
+  .hero-in{ grid-template-columns:1fr; padding-block:56px 40px; gap:32px; }
+  .hero-txt{ gap:18px; } .hero h1{ font-size:48px; } .hero-sub{ font-size:15px; }
+  .check{ margin-top:8px; grid-template-columns:1fr; padding:0; }
+  .check .f{ border-right:0; border-bottom:.5px solid rgba(240,235,227,.22); padding:14px 20px; min-height:0; }
+  .check .btn{ margin:12px; }
+  .status-panel{ width:100%; }
+  .hero-cap{ display:none; }
+  .hero .route.d{ display:none; } .hero .route.m{ display:block; }
+  .hero .pin-lbl{ display:none; }
+}
+
+/* ======================================================
+   2 · INDEX + THREE-COLUMN EDITORIAL — SecureHome's "01 — 02 03 04" · OldRiga's "Emotions" row · Travellah's inline numbers
+   ====================================================== */
+.intro{ padding-block:112px 96px; }
+.ix-row{ display:flex; align-items:center; gap:18px; font:300 13px/1 var(--sans); color:var(--navy); font-variant-numeric:tabular-nums; }
+.ix-row .ln{ width:120px; border-top:.5px solid var(--navy); }
+.ix-row .rest{ color:var(--low); display:flex; gap:14px; }
+.tri{ margin-top:48px; align-items:start; }
+.tri .l{ grid-column:1 / 3; }
+.tri .c{ grid-column:3 / 9; }
+.tri .r{ grid-column:9 / 13; display:flex; flex-direction:column; gap:32px; }
+.nums{ display:flex; border-top:.5px solid var(--stone); }
+.nums div{ flex:1; padding:18px 0 0; border-right:.5px solid var(--stone-50); padding-right:16px; }
+.nums div + div{ padding-left:20px; }
+.nums div:last-child{ border-right:0; }
+.nums b{ display:block; font:300 44px/1 var(--serif); color:var(--navy); font-variant-numeric:lining-nums; }
+.nums span{ display:block; margin-top:8px; font:300 12.5px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+@media (max-width:899px){ .intro{ padding-block:80px 64px; } .tri{ margin-top:32px; row-gap:28px; } .nums b{ font-size:34px; } }
+
+/* ======================================================
+   3 · BENTO ROW — OldRiga's dark map tile, photo tile, time tile, photo-with-text tile
+   ====================================================== */
+.bento{ padding-block:0 112px; }
+.bento-row{ display:grid; grid-template-columns:3fr 2.6fr 2.6fr 3fr; gap:24px; align-items:end; }
+.tile{ position:relative; overflow:hidden; border-radius:var(--r); display:flex; flex-direction:column; justify-content:space-between; padding:28px; min-height:380px; }
+.tile.dark{ background:var(--navy); color:var(--bone); }
+.tile.dark h3{ font:300 34px/1.05 var(--serif); text-wrap:balance; max-width:9em; }
+.tile.dark .route{ inset:0; }
+.tile.photo{ min-height:420px; padding:0; }
+.tile.photo .ph{ position:absolute; inset:0; }
+.tile.photo .route{ inset:0; }
+.tile.photo .txt{ position:absolute; inset:auto 0 0 0; padding:28px; z-index:3; background:rgba(13,31,45,.6); }
+.tile.photo .txt h3{ font:300 30px/1.05 var(--serif); color:var(--bone); text-wrap:balance; }
+.tile.photo .txt p{ margin-top:8px; font:300 13px/1.55 var(--sans); color:rgba(240,235,227,.62); }
+.tile.time{ background:var(--bone); border:.5px solid var(--stone); min-height:300px; }
+.tile.time h3{ font:300 26px/1.1 var(--serif); color:var(--navy); text-wrap:balance; }
+.tile.time .big{ display:flex; align-items:baseline; gap:12px; font:300 72px/1 var(--serif); color:var(--navy); font-variant-numeric:lining-nums tabular-nums; letter-spacing:-.02em; }
+.tile.time .big small{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.tile.time p{ font:300 13px/1.55 var(--sans); color:rgba(13,31,45,.64); }
+.tile.photo .pin-lbl{ left:28px; top:28px; }
+@media (max-width:899px){ .bento{ padding-bottom:80px; } .bento-row{ grid-template-columns:1fr 1fr; gap:14px; } .tile{ min-height:280px; padding:20px; } .tile.photo{ min-height:300px; } .tile.dark h3{ font-size:26px; } .tile.time .big{ font-size:52px; } .tile.photo .txt{ padding:20px; } .tile.photo .txt h3{ font-size:22px; } }
+
+/* ======================================================
+   4 · WHO — SecureHome's "About us" column with two photo cards, captions below, ring badges
+   ====================================================== */
+.who{ padding-block:96px 128px; }
+.who .l{ grid-column:1 / 5; display:flex; flex-direction:column; gap:24px; align-items:flex-start; }
+.who .cards{ grid-column:6 / 13; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.pcard{ display:flex; flex-direction:column; gap:0; }
+.pcard .photo-card{ aspect-ratio:4 / 4.6; }
+.pcard .ring{ position:absolute; left:20px; bottom:20px; z-index:3; background:var(--paper); border-color:var(--paper); color:var(--navy); }
+.pcard h3{ margin-top:22px; font:300 30px/1.08 var(--serif); color:var(--navy); }
+.pcard p{ margin-top:10px; font:300 14px/1.6 var(--sans); color:rgba(13,31,45,.62); }
+.pcard .more{ margin-top:18px; display:flex; justify-content:space-between; align-items:center; border-top:.5px solid var(--stone-50); padding-top:14px; }
+.pcard .more .ring{ position:static; width:36px; height:36px; font-size:14px; border-color:var(--stone); background:transparent; }
+.who-ix{ display:flex; align-items:center; gap:16px; margin-top:8px; }
+.who-ix .ix-dot{ width:6px; height:6px; border-radius:50%; background:var(--navy); }
+.who-ix .ix-dot.off{ background:var(--stone); }
+@media (max-width:899px){ .who{ padding-block:72px 88px; } .who .cards{ grid-template-columns:1fr; margin-top:40px; gap:40px; } }
+
+/* ======================================================
+   5 · PROMISE — SecureHome's "Our promise": film card left, three rows right
+   ====================================================== */
+.promise{ background:var(--bone); padding-block:120px; border-radius:var(--r-lg); margin-inline:12px; }
+.promise .t{ grid-column:1 / 5; display:flex; flex-direction:column; gap:20px; }
+.promise .film{ grid-column:5 / 9; aspect-ratio:4 / 5; }
+.film .wash{ position:absolute; inset:0; background:rgba(13,31,45,.45); z-index:1; }
+.film .play{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2; width:72px; height:72px; border:.5px solid var(--bone); color:var(--bone); background:transparent; }
+.film .play:hover{ background:var(--bone); color:var(--navy); }
+.film .txt{ position:absolute; left:28px; right:28px; bottom:28px; z-index:2; display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+.film .txt h3{ font:300 26px/1.1 var(--serif); color:var(--bone); max-width:12em; }
+.film .txt .link{ color:var(--bone); font-size:13px; }
+.promise .rows{ grid-column:9 / 13; align-self:center; border-top:.5px solid var(--stone); }
+.prow{ display:grid; grid-template-columns:44px 1fr; gap:20px; padding-block:24px; border-bottom:.5px solid var(--stone-50); }
+.prow h3{ font:400 20px/1.3 var(--serif); color:var(--navy); }
+.prow p{ margin-top:4px; font:300 13.5px/1.6 var(--sans); color:rgba(13,31,45,.64); }
+@media (max-width:899px){ .promise{ padding-block:80px; margin-inline:0; border-radius:0; } .promise .film{ margin-top:36px; aspect-ratio:4 / 4.4; } .promise .rows{ margin-top:36px; } }
+
+/* ======================================================
+   6 · IF PLANS CHANGE — SecureHome's bordered stat rows
+   ====================================================== */
+.tiers{ padding-block:112px; }
+.tier-rows{ margin-top:48px; display:flex; flex-direction:column; gap:12px; }
+.trow{ display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:24px; border:.5px solid var(--stone); border-radius:var(--r); padding:22px 32px 22px 24px; background:var(--paper); }
+.trow .k{ font:300 15px/1.5 var(--sans); color:var(--navy); }
+.trow .k small{ display:block; font:300 12.5px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+.trow .v{ text-align:right; font:300 clamp(36px,3.8vw,52px)/1 var(--serif); color:var(--navy); font-variant-numeric:lining-nums; }
+.trow .v small{ display:block; margin-top:6px; font:300 11px/1.4 var(--sans); color:rgba(13,31,45,.62); }
+.trow .ring{ background:var(--navy); border-color:var(--navy); color:var(--bone); }
+@media (max-width:899px){ .tiers{ padding-block:80px; } .trow{ grid-template-columns:44px 1fr; padding:18px; } .trow .v{ grid-column:2; text-align:left; margin-top:6px; } }
+
+/* ======================================================
+   7 · ON YOUR PHONE — OldRiga's "The quest takes place online": two phones, a dotted route between
+   ====================================================== */
+.phones{ position:relative; background:var(--bone); border-radius:var(--r-lg); margin-inline:12px; padding-block:120px 0; overflow:hidden; }
+.phones .head{ grid-column:1 / 8; display:flex; flex-direction:column; gap:20px; }
+.phones .head .eyebrow{ grid-column:1 / 3; }
+.phones .two{ margin-top:64px; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:end; }
+.phones .pf{ display:flex; flex-direction:column; gap:28px; }
+.phones .pf .iphone{ margin-inline:0; }
+.phones .pf.second{ align-items:flex-end; text-align:right; }
+.phones .pf.second .pf-txt{ align-items:flex-end; }
+.pf-txt{ display:flex; flex-direction:column; gap:10px; max-width:360px; }
+.pf-txt h3{ font:300 28px/1.1 var(--serif); color:var(--navy); }
+.pf-txt p{ font:300 14px/1.6 var(--sans); color:rgba(13,31,45,.64); }
+.phones .route{ inset:0; z-index:1; }
+.phones .route path{ stroke:var(--navy); stroke-opacity:.5; stroke-dasharray:2 6; }
+.phones .iphone{ position:relative; z-index:2; margin-bottom:-120px; }
+.phones .pf.second .iphone{ margin-bottom:-60px; }
+.phones .wrap{ z-index:2; }
+@media (max-width:899px){ .phones{ padding-block:80px 0; margin-inline:0; border-radius:0; } .phones .two{ grid-template-columns:1fr; gap:48px; margin-top:40px; } .phones .pf.second{ align-items:flex-start; text-align:left; } .phones .pf.second .pf-txt{ align-items:flex-start; } .phones .iphone{ margin-bottom:0; width:min(320px,100%); } .phones .pf.second .iphone{ margin-bottom:-80px; } .phones .route{ display:none; } }
+
+/* ======================================================
+   IPHONE FRAME
+   ====================================================== */
+.iphone{ position:relative; width:360px; max-width:100%; aspect-ratio:380 / 790; background:var(--navy); border-radius:58px; padding:12px; margin-inline:auto; }
+.iphone::before{ content:""; position:absolute; inset:3px; border-radius:55px; border:1px solid rgba(240,235,227,.16); pointer-events:none; }
+.iphone .screen{ position:absolute; inset:12px; border-radius:46px; background:var(--paper); color:var(--navy); overflow:hidden; display:flex; flex-direction:column; padding:14px 22px 0; }
+.iphone .island{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:118px; height:34px; border-radius:999px; background:var(--navy); z-index:3; }
+.iphone .status{ height:54px; display:flex; justify-content:space-between; align-items:center; padding:0 6px 0 10px; font:500 15px/1 var(--sans); color:var(--navy); font-variant-numeric:tabular-nums; }
+.iphone .status .bars{ display:flex; align-items:flex-end; gap:2px; }
+.iphone .status .bars i{ display:block; width:3px; background:var(--navy); border-radius:1px; }
+.iphone .status .bars i:nth-child(1){ height:4px; } .iphone .status .bars i:nth-child(2){ height:6px; } .iphone .status .bars i:nth-child(3){ height:8px; } .iphone .status .bars i:nth-child(4){ height:10px; }
+.iphone .status .bat{ position:relative; width:26px; height:12px; border:1px solid rgba(13,31,45,.5); border-radius:4px; margin-left:8px; }
+.iphone .status .bat::before{ content:""; position:absolute; inset:2px 7px 2px 2px; background:var(--navy); border-radius:2px; }
+.iphone .status .bat::after{ content:""; position:absolute; right:-4px; top:3px; width:2px; height:5px; background:rgba(13,31,45,.5); border-radius:1px; }
+.iphone .status .right{ display:flex; align-items:center; }
+.iphone .home{ position:absolute; left:50%; bottom:9px; transform:translateX(-50%); width:134px; height:5px; border-radius:999px; background:var(--navy); }
+.iphone .app{ flex:1; display:flex; flex-direction:column; min-height:0; padding-bottom:30px; }
+.iphone .mk-top{ display:flex; justify-content:space-between; font:500 10px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.iphone .mk-prog{ border-top:.5px solid rgba(200,188,168,.45); position:relative; margin-top:12px; }
+.iphone .mk-prog span{ position:absolute; left:0; top:-.5px; width:12.5%; border-top:1px solid var(--navy); }
+.iphone .mk-prog span.full{ width:100%; }
+.iphone .mk-body{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; padding-block:24px; }
+.iphone .mk-q{ font:300 28px/1.1 var(--serif); color:var(--navy); }
+.iphone .mk-hint{ font:300 12.5px/1.55 var(--sans); color:rgba(13,31,45,.62); max-width:260px; }
+.iphone .chips{ margin-top:10px; gap:7px; }
+.iphone .chip{ height:34px; padding:0 13px; font-size:12.5px; }
+.iphone .mk-foot{ font:300 10.5px/1.5 var(--sans); color:rgba(13,31,45,.62); word-break:break-word; }
+.iphone .mk-sum{ border-top:.5px solid var(--stone); margin-top:6px; }
+.iphone .mk-sum div{ display:flex; justify-content:space-between; gap:12px; padding-block:9px; border-bottom:.5px solid var(--stone-50); font:300 12px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+.iphone .mk-sum dd{ font:400 15px/1.4 var(--serif); color:var(--navy); text-align:right; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ position:relative; height:38px; padding:0 16px; border-radius:999px; border:.5px solid var(--stone); font:300 13px/1 var(--sans); color:var(--navy); display:inline-flex; align-items:center; transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease; }
+.chip::after{ content:""; position:absolute; inset:-3px 0; }
+.chip[aria-pressed="true"], .chip.on{ background:var(--navy); border-color:var(--navy); color:var(--bone); }
+
+/* ======================================================
+   8 · THE NIGHT — OldRiga's dark section with photo bubbles along the bottom
+   ====================================================== */
+.night-sec{ position:relative; background:var(--navy); padding-block:200px 0; overflow:hidden; }
+.night-sec .sec-head{ max-width:760px; margin-inline:auto; }
+.night-sec .cta-row{ display:flex; align-items:center; gap:14px; margin-top:8px; }
+.night-sec .cta-row .ring{ width:auto; height:54px; padding:0 20px; border-radius:999px; border-color:var(--stone); color:var(--bone); display:inline-flex; flex-direction:column; gap:2px; line-height:1; }
+.night-sec .cta-row .ring small{ font:500 9px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--stone); }
+.night-sec .cta-row .ring b{ font:300 20px/1 var(--serif); font-weight:300; }
+.cluster{ margin-top:72px; display:grid; grid-template-columns:repeat(12,1fr); gap:24px; align-items:end; }
+.bubble{ position:relative; overflow:hidden; border-radius:var(--r) var(--r) 0 0; }
+.bubble .ph{ position:absolute; inset:0; }
+.bubble .wash{ position:absolute; inset:0; background:rgba(13,31,45,.3); z-index:1; }
+.bubble .pin-lbl{ z-index:2; }
+.bubble .pin-lbl{ left:20px; bottom:20px; }
+.b1{ grid-column:1 / 3; height:220px; }
+.b2{ grid-column:3 / 6; height:360px; }
+.b3{ grid-column:6 / 8; height:280px; }
+.b4{ grid-column:8 / 11; height:420px; }
+.b5{ grid-column:11 / 13; height:200px; }
+html[data-motion="enhanced"] .b2, html[data-motion="enhanced"] .b4{ border-radius:999px 999px 0 0; }
+html[data-motion="enhanced"] .b1, html[data-motion="enhanced"] .b3, html[data-motion="enhanced"] .b5{ border-radius:var(--r-lg) var(--r-lg) 0 0; }
+@media (max-width:899px){ .night-sec{ padding-top:96px; } .cluster{ margin-top:48px; grid-template-columns:repeat(6,1fr); gap:10px; } .b1{ grid-column:1 / 3; height:140px; } .b2{ grid-column:3 / 5; height:220px; } .b3{ grid-column:5 / 7; height:170px; } .b4{ grid-column:1 / 4; height:240px; } .b5{ grid-column:4 / 7; height:160px; } .bubble .pin-lbl{ left:12px; bottom:12px; } .bubble .pin-lbl b{ font-size:18px; } }
+
+/* ======================================================
+   9 · THREE WAYS — Altai's trip cards and Travellah's packages: photo on top, price note, facts, pill
+   ====================================================== */
+.ways{ padding-block:128px 112px; }
+.trips{ margin-top:64px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:end; }
+.trip{ border:.5px solid var(--stone); border-radius:var(--r); overflow:hidden; display:flex; flex-direction:column; background:transparent; color:var(--navy); }
+.trip .photo-card{ aspect-ratio:4 / 3.2; border-radius:0; }
+.trip.is-main .photo-card{ aspect-ratio:4 / 4.2; }
+.trip .tag-top{ position:absolute; left:20px; top:20px; z-index:3; background:var(--bone); color:var(--navy); padding:8px 12px; font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
+.trip .in{ padding:28px 28px 28px; display:flex; flex-direction:column; flex:1; }
+.trip .name{ font:300 44px/1 var(--serif); display:flex; align-items:baseline; gap:14px; }
+.trip .name small{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.trip .lead{ margin-top:12px; font:300 14px/1.55 var(--sans); color:rgba(13,31,45,.62); }
+.trip dl{ margin-top:22px; border-top:.5px solid var(--stone-50); }
+.trip dd{ padding-block:9px; border-bottom:.5px solid var(--stone-50); font:400 16px/1.4 var(--serif); }
+.trip .btn{ margin-top:28px; align-self:stretch; }
+.trip.is-main{ background:var(--navy); border-color:var(--navy); color:var(--bone); }
+.trip.is-main .name small, .trip.is-main .lead{ color:rgba(240,235,227,.62); }
+.trip.is-main dl, .trip.is-main dd{ border-color:rgba(240,235,227,.16); }
+.trip.is-main .tag-top{ background:var(--stone); }
+@media (max-width:899px){ .ways{ padding-block:88px 80px; } .trips{ grid-template-columns:1fr; margin-top:40px; } .trip.is-main{ order:-1; } }
+
+/* ======================================================
+   10 · FOUNDER — OldRiga's "A little about our project" three columns
+   ====================================================== */
+.founder{ background:var(--bone); padding-block:120px; border-radius:var(--r-lg); margin-inline:12px; }
+.founder .l{ grid-column:1 / 3; }
+.founder .c{ grid-column:3 / 8; display:flex; flex-direction:column; gap:28px; align-items:flex-start; }
+.founder .r{ grid-column:8 / 13; }
+.founder blockquote{ font:italic 400 clamp(20px,1.6vw,22px)/1.6 var(--serif); color:var(--navy); text-wrap:pretty; }
+.founder .todo{ margin-top:20px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.64); }
+.sig{ margin-top:28px; display:inline-flex; flex-direction:column; gap:6px; padding-top:18px; border-top:.5px solid var(--stone); min-width:200px; }
+.sig .n{ font:300 40px/1 var(--serif); color:var(--navy); }
+.sig .r{ font:300 13px/1.5 var(--sans); color:rgba(13,31,45,.64); }
+@media (max-width:899px){ .founder{ padding-block:80px; margin-inline:0; border-radius:0; } .founder .grid{ row-gap:28px; } }
+
+/* ======================================================
+   11 · DOES / DOESN'T — Altai's "price includes / does not include"
+   ====================================================== */
+.does{ padding-block:112px; }
+.does .col{ grid-column:span 6; }
+.does h3{ font:300 30px/1.1 var(--serif); color:var(--navy); padding-bottom:18px; border-bottom:.5px solid var(--stone); }
+.does li{ display:grid; grid-template-columns:36px 1fr; gap:16px; padding-block:14px; border-bottom:.5px solid var(--stone-50); font:300 15px/1.6 var(--sans); color:rgba(13,31,45,.72); align-items:start; }
+.does li i{ font:300 15px/1.6 var(--serif); color:var(--navy); font-style:normal; font-variant-numeric:lining-nums tabular-nums; }
+@media (max-width:899px){ .does{ padding-block:80px; } .does .col + .col{ margin-top:48px; } }
+
+/* ======================================================
+   12 · ANSWERS — Travellah's two-column FAQ
+   ====================================================== */
+.answers{ padding-block:0 128px; }
+.answers .t{ grid-column:1 / 5; display:flex; flex-direction:column; gap:20px; align-items:flex-start; }
+.answers .faq{ grid-column:6 / 13; }
+.faq{ border-top:.5px solid var(--stone); }
+.qa{ border-bottom:.5px solid var(--stone-50); }
+.q{ width:100%; min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px; text-align:left; padding-block:20px; font:400 22px/1.25 var(--serif); color:var(--navy); }
+.q .pm{ font:300 22px/1 var(--sans); color:rgba(13,31,45,.62); width:20px; text-align:center; flex:none; }
+.a{ display:grid; grid-template-rows:0fr; opacity:0; transition:opacity 220ms ease; }
+.a > div{ overflow:hidden; }
+.a p{ padding:0 48px 26px 0; }
+.qa.is-open .a{ grid-template-rows:1fr; opacity:1; }
+html[data-motion="enhanced"] .a{ transition:grid-template-rows 300ms ease,opacity 300ms ease; }
+@media (max-width:899px){ .answers{ padding-bottom:88px; } .answers .faq{ margin-top:40px; } .q{ font-size:20px; } .a p{ padding-right:0; } }
+
+/* ======================================================
+   13 · CLOSE — SecureHome's CTA band with the house photo · Travellah's input + pill · dark footer
+   ====================================================== */
+.close-band{ position:relative; margin-inline:12px; border-radius:var(--r-lg); overflow:hidden; background:var(--navy); min-height:520px; display:grid; grid-template-columns:1fr 1fr; }
+.close-band .ph{ position:absolute; inset:0 0 0 45%; }
+.close-band .wash{ position:absolute; inset:0; background:linear-gradient(to right, var(--navy) 45%, rgba(13,31,45,.6) 100%); }
+html:not([data-look="colour"]) .close-band .wash{ background:none; }
+html:not([data-look="colour"]) .close-band::after{ content:""; position:absolute; inset:0 0 0 45%; background:rgba(13,31,45,.6); }
+.close-band .in{ position:relative; z-index:2; padding:88px 64px; display:flex; flex-direction:column; align-items:flex-start; gap:28px; }
+.close-band h2{ font-size:clamp(48px,6vw,88px); line-height:.96; color:var(--bone); }
+.close-band .body{ color:rgba(240,235,227,.62); }
+.date-form{ display:flex; align-items:center; gap:0; border:.5px solid rgba(240,235,227,.3); border-radius:999px; padding:6px 6px 6px 24px; width:min(460px,100%); }
+.date-form input{ flex:1; min-width:0; background:none; border:0; outline:0; font:300 15px/1 var(--sans); color:var(--bone); }
+.date-form input::placeholder{ color:rgba(240,235,227,.5); }
+.date-form .btn{ height:44px; padding:0 22px; }
+.close-band .pin-lbl{ right:48px; top:64px; }
+footer{ background:var(--navy); color:var(--bone); margin-top:12px; padding-block:72px 40px; }
+.foot-grid{ row-gap:40px; align-items:start; }
+.foot-brand{ grid-column:1 / 5; display:flex; flex-direction:column; gap:18px; }
+.foot-brand .lockup{ color:var(--bone); padding:0; }
+.foot-brand .wm-city{ color:var(--stone); }
+.foot-brand p{ font:300 13.5px/1.6 var(--sans); color:rgba(240,235,227,.62); max-width:30ch; }
+.foot-col{ display:flex; flex-direction:column; gap:12px; }
+.foot-col .eyebrow{ color:var(--stone); margin-bottom:8px; }
+.foot-col .link{ align-self:flex-start; padding-block:4px; font-size:14px; text-decoration:none; color:rgba(240,235,227,.62); }
+.foot-col .link:hover{ color:var(--bone); }
+.fc1{ grid-column:6 / 8; } .fc2{ grid-column:8 / 10; } .fc3{ grid-column:10 / 13; }
+.foot-legal{ grid-column:1 / -1; margin-top:24px; padding-top:20px; border-top:.5px solid rgba(240,235,227,.14); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font:300 11px/1.6 var(--sans); color:rgba(240,235,227,.62); }
+@media (max-width:899px){ .close-band{ margin-inline:0; border-radius:0; grid-template-columns:1fr; min-height:0; } .close-band .ph{ position:relative; inset:auto; aspect-ratio:4 / 3; order:-1; } html:not([data-look="colour"]) .close-band::after{ display:none; } .close-band .wash{ display:none; } .close-band .in{ padding:56px var(--gut) 64px; } .close-band .pin-lbl{ display:none; } footer{ margin-top:0; padding-block:56px 120px; } }
+
+/* ======================================================
+   LOOK — graded (navy washes) · colour (black/white gradients)
+   ====================================================== */
+html[data-look="colour"] .hero-wash{ background:linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.30) 45%, rgba(0,0,0,.78) 100%); }
+html[data-look="colour"] .tile.photo .txt{ background:linear-gradient(to top, rgba(0,0,0,.84) 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,0) 100%); padding-top:72px; }
+html[data-look="colour"] .film .wash{ background:linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.72) 100%); }
+html[data-look="colour"] .bubble .wash{ background:linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 50%); }
+html[data-look="colour"] .check{ background:rgba(0,0,0,.42); }
+
+/* ---------- mobile sticky bar ---------- */
+.sticky{ position:fixed; left:0; right:0; bottom:0; z-index:55; background:var(--bone); border-top:.5px solid var(--stone); padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 240ms ease,visibility 0s linear 240ms; }
+.sticky.is-on{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity 240ms ease,visibility 0s; }
+.sticky p{ font:300 13px/1.4 var(--sans); color:rgba(13,31,45,.64); }
+@media (min-width:900px){ .sticky{ display:none; } }
+
+/* ---------- prototype switch ---------- */
+.proto{ position:fixed; right:16px; top:calc(var(--bar) + env(safe-area-inset-top,0px) + 12px); z-index:58; display:flex; align-items:center; gap:2px; padding:3px; border-radius:999px; background:var(--paper); border:.5px solid var(--stone); color:var(--navy); transition:opacity 240ms ease,visibility 0s; }
+.proto .lbl{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); margin:0 6px 0 11px; }
+.proto button{ position:relative; height:44px; padding:0 12px; border-radius:999px; font:500 9.5px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--navy); transition:background-color 220ms ease,color 220ms ease; }
+.proto button[aria-pressed="true"]{ background:var(--navy); color:var(--bone); }
+.proto button:hover:not([aria-pressed="true"]){ background:var(--bone); }
+.proto .sep{ width:0; height:20px; border-left:.5px solid var(--stone); margin:0 4px; }
+@media (max-width:899px){ .proto{ right:12px; top:calc(var(--bar) + env(safe-area-inset-top,0px) + 10px); } .proto .lbl{ display:none; } .proto button{ height:36px; padding:0 10px; } .proto button::after{ content:""; position:absolute; inset:-4px 0; } html.sticky-on .proto{ opacity:0; visibility:hidden; pointer-events:none; transition:opacity 240ms ease,visibility 0s linear 240ms; } }
+
+/* ======================================================
+   BOOKING OVERLAY — Voyger's split card: form left, photo with pinned labels right, blurred scene behind
+   ====================================================== */
+.booking{ position:fixed; inset:0; z-index:80; opacity:0; transition:opacity 220ms ease; display:grid; place-items:center; padding:24px; }
+.booking.is-open{ opacity:1; }
+.booking-scrim{ position:absolute; inset:0; background:rgba(13,31,45,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.bk-card{ position:relative; z-index:2; width:min(1080px,100%); height:min(720px, calc(100svh - 48px)); background:var(--paper); border-radius:var(--r-lg); overflow:hidden; display:grid; grid-template-columns:5fr 7fr; }
+.bk-form{ display:flex; flex-direction:column; padding:36px 44px 32px; min-height:0; overflow-y:auto; }
+.bk-top{ display:flex; justify-content:space-between; align-items:center; min-height:44px; }
+.bk-top button, .bk-top span{ font:500 10px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.bk-top button{ min-height:44px; padding-right:12px; }
+.bk-progress{ border-top:.5px solid rgba(200,188,168,.45); position:relative; margin-top:8px; }
+.bk-progress span{ position:absolute; left:0; top:-.5px; border-top:1px solid var(--navy); width:12.5%; }
+.bk-body{ flex:1; display:flex; flex-direction:column; justify-content:center; padding-block:28px; min-height:0; }
+.bk-body .lockup{ margin-bottom:28px; padding:0; }
+.bk-kind{ margin-bottom:18px; }
+.bk-q{ font:300 34px/1.1 var(--serif); letter-spacing:-.005em; color:var(--navy); }
+.bk-hint{ margin-top:16px; font:300 13px/1.6 var(--sans); color:rgba(13,31,45,.62); max-width:300px; }
+.bk-body .chips{ margin-top:24px; }
+.bk-after{ margin-top:24px; min-height:1.6em; font:300 13px/1.6 var(--sans); color:rgba(13,31,45,.62); }
+.bk-next{ margin-top:28px; align-self:stretch; }
+.bk-foot{ font:300 11px/1.5 var(--sans); color:rgba(13,31,45,.62); word-break:break-word; }
+.bk-photo{ position:relative; margin:12px 12px 12px 0; border-radius:var(--r); overflow:hidden; background:var(--blue-rich); }
+.bk-photo .ph{ position:absolute; inset:0; }
+.bk-photo .route{ inset:0; }
+.bk-tag{ position:absolute; z-index:3; background:rgba(13,31,45,.6); color:var(--bone); padding:12px 16px; border-radius:var(--r); display:flex; flex-direction:column; gap:3px; font:300 12.5px/1.4 var(--sans); max-width:210px; }
+.bk-tag b{ font:400 15px/1.3 var(--serif); }
+.bk-tag small{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--stone); }
+html[data-look="colour"] .bk-tag{ background:rgba(0,0,0,.55); }
+@media (max-width:899px){
+  .booking{ padding:0; }
+  .booking-scrim{ display:none; }
+  .bk-card{ width:100%; height:100%; border-radius:0; grid-template-columns:1fr; }
+  .bk-photo{ display:none; }
+  .bk-form{ padding:calc(20px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px)); }
+}
+
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{ transition-duration:0ms !important; animation:none !important; } .will-fade{ opacity:1 !important; } html[data-motion="enhanced"] .route path.draw{ stroke-dashoffset:0; } }
+</style>
+
+<!-- ============================ TOP BAR ============================ -->
+<header class="bar" id="bar">
+  <div class="wrap bar-in">
+    <a class="lockup" href="#top" aria-label="Kóda Barcelona, back to top"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></a>
+    <nav class="bar-nav" aria-label="Sections">
+      <a href="#ways">Three ways</a><a href="#evening">The night</a><a href="#who">Who a Kóda is</a><a href="#answers">Answers</a>
+    </nav>
+    <div class="bar-act">
+      <p class="bar-time" aria-label="Local time in Barcelona">Barcelona · <span data-bcn-time>21:40</span></p>
+      <button class="btn btn-navy btn-sm" id="bar-book" data-book><span class="full">Plan your evening</span><span class="short">Plan</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============================ 1 · HERO ============================ -->
+<section class="hero theme-dark" id="top" aria-label="Kóda, Barcelona">
+  <div class="ph" data-src="media/hero-street.jpg" data-pos="50% 55%"><p class="ph-note"><b>Hero film / still</b>A small group from behind, walking up a lit street at blue hour.</p></div>
+  <video muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"><source src="media/hero.mp4" type="video/mp4"></video>
+  <div class="hero-wash"></div>
+  <!-- the evening's route, drawn over the photo: lobby → dinner → the walk → home -->
+  <svg class="route d" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <path class="draw" pathLength="1" d="M -40 150 C 200 60, 380 300, 600 170 S 860 30, 980 140 S 1140 360, 1250 220 S 1400 90, 1500 160"/>
+  </svg>
+  <svg class="route d" viewBox="0 0 1440 900" aria-hidden="true">
+    <circle class="pin" cx="600" cy="170" r="9"/><circle class="pin-dot" cx="600" cy="170" r="2.5"/>
+    <circle class="pin" cx="980" cy="140" r="9"/><circle class="pin-dot" cx="980" cy="140" r="2.5"/>
+    <circle class="pin" cx="1250" cy="220" r="9"/><circle class="pin-dot" cx="1250" cy="220" r="2.5"/>
+  </svg>
+  <svg class="route m" viewBox="0 0 390 600" preserveAspectRatio="none" aria-hidden="true"><path class="draw" pathLength="1" d="M -20 80 C 80 30, 160 120, 240 70 S 360 10, 420 70"/></svg>
+  <span class="pin-lbl" style="left:43%;top:17%"><b>20:30</b>Hotel lobby</span>
+  <span class="pin-lbl" style="left:69.4%;top:13.8%"><b>22:15</b>Dinner, El Born</span>
+  <span class="pin-lbl" style="left:88.2%;top:22.7%"><b>02:30</b>Everyone home</span>
+  <div class="wrap hero-in">
+    <div class="hero-txt">
+      <p class="eyebrow"><span class="sep"></span>Barcelona · <span data-bcn-time>21:40</span></p>
+      <h1 class="display">Someone who knows the city, <br class="d"><em>start to finish.</em></h1>
+      <p class="hero-sub">A composed local stays with your group for the evening, the day or the whole weekend, so nobody has to think about how the night gets home.</p>
+      <div class="hero-cta">
+        <button class="btn btn-stone" id="hero-book" data-book>Plan your evening</button>
+        <a class="link" href="#contact">or message us first</a>
+      </div>
+    </div>
+    <aside class="status-panel" aria-label="Tonight in Barcelona">
+      <p class="eyebrow"><span>Tonight</span><span>Barcelona</span></p>
+      <p class="big"><span data-bcn-time>21:40</span> local</p>
+      <dl>
+        <div class="fr"><dt>Taking bookings</dt><dd>From Thursday</dd></div>
+        <div class="fr"><dt>Notice</dt><dd>48 hours</dd></div>
+        <div class="fr"><dt>Group</dt><dd>Up to six per Kóda</dd></div>
+      </dl>
+      <p class="st"><i aria-hidden="true"></i>Kódas assigned by hand</p>
+    </aside>
+    <div class="check" role="group" aria-label="Check a date">
+      <button class="f" data-book><span>Date</span><b>Saturday 14</b></button>
+      <button class="f" data-book><span>People</span><b>Four</b></button>
+      <button class="f" data-book data-kind="night"><span>Kind</span><b>Kóda Night · dinner to door</b></button>
+      <button class="btn btn-stone" data-book>Check</button>
+    </div>
+  </div>
+  <span class="hero-cap">Eixample · 21:20</span>
+</section>
+
+<!-- ============================ 2 · INDEX + EDITORIAL ============================ -->
+<section class="intro" id="statement" aria-labelledby="intro-h">
+  <div class="wrap">
+    <div class="ix-row fade-in"><span>01</span><span class="ln"></span><span class="rest"><span>02</span><span>03</span><span>04</span></span></div>
+    <div class="grid tri">
+      <div class="l fade-in"><p class="eyebrow">What a Kóda is</p><p class="cap" style="margin-top:12px;max-width:22ch">A composed local, for the evening, the day or the weekend.</p></div>
+      <div class="c fade-in"><h2 class="display h-sec" id="intro-h">Tell us when. <br class="d">We arrange <em>who.</em></h2></div>
+      <div class="r fade-in">
+        <p class="body">A Kóda comes from Barcelona's front-of-house world: hotel desks, restaurant floors, guiding, events. They know the rooms, the staff, and the way home.</p>
+        <div class="nums" aria-label="The numbers">
+          <div><b>48 h</b><span>notice, so we choose well</span></div>
+          <div><b>6</b><span>people per Kóda</span></div>
+          <div><b>2</b><span>Kódas for seven to twelve</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 3 · BENTO ROW ============================ -->
+<section class="bento" aria-label="The route">
+  <div class="wrap">
+    <div class="bento-row fade-in">
+      <div class="tile dark theme-dark">
+        <h3>One route. <em class="serif-em">One person.</em></h3>
+        <svg class="route" viewBox="0 0 360 380" preserveAspectRatio="none" aria-hidden="true"><path d="M -10 230 C 60 150, 120 290, 180 200 S 290 90, 380 160"/><circle class="pin" cx="180" cy="200" r="7"/><circle class="pin-dot" cx="180" cy="200" r="2"/></svg>
+        <p class="cap" style="color:rgba(240,235,227,.62);position:relative;z-index:3;max-width:24ch">Gòtic, El Born, Eixample. Your Kóda walks it with you, so the city feels known.</p>
+      </div>
+      <div class="tile photo">
+        <div class="ph" data-src="media/lane-vertical.jpg" data-pos="50% 40%"></div>
+        <svg class="route" viewBox="0 0 300 420" preserveAspectRatio="none" aria-hidden="true"><path d="M -10 300 C 80 220, 150 360, 220 260 S 320 120, 330 160"/></svg>
+        <span class="pin-lbl"><b>00:40</b>Carrer del Bisbe</span>
+      </div>
+      <div class="tile time">
+        <h3>How long is a Kóda Night?</h3>
+        <p class="big">4–8 <small>hours</small></p>
+        <p>Dinner to door. If the evening runs long, your Kóda can arrange more time on the night.</p>
+      </div>
+      <div class="tile photo">
+        <div class="ph" data-src="media/strip-walk.jpg" data-pos="50% 50%"></div>
+        <div class="txt"><h3>Barcelona, through someone <em class="serif-em">who lives here.</em></h3><p>Which street is quicker, which table is worth the wait, who to call when dinner runs long.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4 · WHO ============================ -->
+<section class="who" id="who" aria-labelledby="who-h">
+  <div class="wrap grid">
+    <div class="l fade-in">
+      <div class="ix-row"><span>02</span><span class="ln"></span><span class="rest"><span>03</span><span>04</span></span></div>
+      <p class="eyebrow" style="margin-top:32px">Who a Kóda is</p>
+      <h2 class="display h-mid" id="who-h">Chosen for judgement, <em>not for looks.</em></h2>
+      <p class="body">Most come from hospitality. People who notice the table running late before you do, and who know the city after midnight as well as by day.</p>
+      <button class="btn btn-navy" id="who-book" data-book>Plan your evening</button>
+      <div class="who-ix" aria-hidden="true"><span class="ix-dot"></span><span class="ix-dot off"></span><span class="ix-dot off"></span></div>
+    </div>
+    <div class="cards fade-in">
+      <article class="pcard">
+        <div class="photo-card"><div class="ph" data-src="media/lobby.jpg" data-pos="40% 50%"></div><span class="ring">01</span></div>
+        <h3>Someone who knows the city</h3>
+        <p>Hotel front desks, restaurant floors, guest services. Which street is quicker, which table is worth the wait.</p>
+        <div class="more"><a class="link" href="#evening">See the evening</a><span class="ring">→</span></div>
+      </article>
+      <article class="pcard">
+        <div class="photo-card"><div class="ph" data-src="media/strip-home.jpg" data-pos="45% 50%"></div><span class="ring">02</span></div>
+        <h3>Everyone gets home</h3>
+        <p>From the first meeting point to the last door. English and Spanish. Your Kóda stays until everyone is in.</p>
+        <div class="more"><a class="link" href="#answers">What a Kóda does</a><span class="ring">→</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 5 · PROMISE ============================ -->
+<section class="promise theme-bone" id="built" aria-labelledby="built-h">
+  <div class="wrap grid">
+    <div class="t fade-in">
+      <p class="eyebrow"><span class="ix">03</span>Built around your evening</p>
+      <h2 class="display h-mid" id="built-h">One evening. <em>Arranged once.</em></h2>
+      <p class="body">Tell us the plans, the people and the language. We choose the person, and the night takes care of itself.</p>
+    </div>
+    <div class="photo-card film fade-in">
+      <div class="ph" data-src="media/strip-dinner.jpg" data-pos="60% 50%"></div>
+      <div class="wash"></div>
+      <button class="ring word play" aria-label="Play the film">Play</button>
+      <div class="txt"><h3>See how a Kóda keeps the evening</h3><a class="link" href="#evening">Watch the night, 40 s</a></div>
+    </div>
+    <ul class="rows fade-in">
+      <li class="prow"><span class="ring">1</span><div><h3>Groups of one to twelve</h3><p>One Kóda for up to six, two for up to twelve.</p></div></li>
+      <li class="prow"><span class="ring">2</span><div><h3>English and Spanish</h3><p>Matched to your group's language.</p></div></li>
+      <li class="prow"><span class="ring">3</span><div><h3>Arranged 48 hours ahead</h3><p>Sooner? <a class="link" href="#contact">Message us directly.</a></p></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ 6 · IF PLANS CHANGE ============================ -->
+<section class="tiers" id="cancellations" aria-labelledby="tiers-h">
+  <div class="wrap">
+    <div class="row-head fade-in" style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:20px;max-width:560px"><p class="eyebrow"><span class="ix">04</span>Cancellation</p><h2 class="display h-mid" id="tiers-h">If plans <em>change.</em></h2></div>
+      <p class="body" style="max-width:34ch">Refunds follow how far ahead you let us know. Full terms in Cancellations below.</p>
+    </div>
+    <div class="tier-rows fade-in">
+      <div class="trow"><span class="ring">1</span><p class="k">More than 72 hours before<small>Let us know and the whole amount comes back.</small></p><p class="v">Full refund</p></div>
+      <div class="trow"><span class="ring">2</span><p class="k">72 to 24 hours before<small>Half is returned. The Kóda has already been assigned.</small></p><p class="v">50%<small>returned</small></p></div>
+      <div class="trow"><span class="ring">3</span><p class="k">Less than 24 hours before<small>The evening has been held for you.</small></p><p class="v">No refund</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 7 · ON YOUR PHONE ============================ -->
+<section class="phones theme-bone" id="how" aria-labelledby="how-h">
+  <svg class="route" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true"><path d="M 420 760 C 560 560, 700 700, 820 520 S 1000 300, 1100 420"/></svg>
+  <div class="wrap">
+    <div class="grid">
+      <div class="head fade-in">
+        <p class="eyebrow"><span class="ix">05</span>How it works</p>
+        <h2 class="display h-sec" id="how-h">The booking happens <em>on your phone.</em></h2>
+        <p class="body">Eight questions, one per page. No account, no sign-in. Your Kóda is chosen by hand and confirmed by email.</p>
+      </div>
+    </div>
+    <div class="two">
+      <div class="pf fade-in">
+        <div class="pf-txt"><h3>Easy to answer</h3><p>Where, when, how many of you, and anything we should know. Two days' notice lets us choose the right person.</p></div>
+        <div class="iphone" role="img" aria-label="The first question of the booking flow, shown on a phone">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="status"><span data-bcn-time>21:40</span><span class="right"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+            <div class="app">
+              <div class="mk-top"><span>Back</span><span>1 / 8</span></div>
+              <div class="mk-prog"><span></span></div>
+              <div class="mk-body">
+                <p class="eyebrow" style="color:rgba(13,31,45,.62)">Kóda Night · pre-set</p>
+                <p class="mk-q">What do you need a Kóda for?</p>
+                <p class="mk-hint">So we can choose the right person for your group.</p>
+                <div class="chips"><span class="chip">Dinner</span><span class="chip on">A night out</span><span class="chip">The walk home</span><span class="chip">A family visit</span><span class="chip">Getting around</span></div>
+              </div>
+              <p class="mk-foot">Eight questions, one per page.</p>
+            </div>
+            <div class="home"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf second fade-in">
+        <div class="pf-txt"><h3>Confirmed, then quiet</h3><p>Your Kóda is assigned and the confirmation arrives by email. From then on, the only thing left to do is turn up.</p></div>
+        <div class="iphone" role="img" aria-label="The confirmation screen, shown on a phone">
+          <div class="island"></div>
+          <div class="screen">
+            <div class="status"><span data-bcn-time>21:40</span><span class="right"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+            <div class="app">
+              <div class="mk-top"><span>Kóda</span><span>8 / 8</span></div>
+              <div class="mk-prog"><span class="full"></span></div>
+              <div class="mk-body">
+                <p class="eyebrow" style="color:var(--blue-mid)">Assigned · confirmed by email</p>
+                <p class="mk-q">Saturday, 20:30. <br>Your Kóda meets you in the lobby.</p>
+                <dl class="mk-sum">
+                  <div><dt>Kind</dt><dd>Kóda Night</dd></div>
+                  <div><dt>Group</dt><dd>Four people</dd></div>
+                  <div><dt>Language</dt><dd>English</dd></div>
+                  <div><dt>Meeting point</dt><dd>Hotel lobby</dd></div>
+                </dl>
+              </div>
+              <p class="mk-foot">Questions before then? WhatsApp [+34 — pending].</p>
+            </div>
+            <div class="home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 8 · THE NIGHT ============================ -->
+<section class="night-sec theme-dark" id="evening" aria-labelledby="story-h">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow" style="color:var(--stone)"><span class="ix">06</span>One evening, handled</p>
+      <h2 class="display h-sec" id="story-h">The night, through the eyes of <em>someone who lives here.</em></h2>
+      <p class="body">Five moments from one Saturday. This is what a Kóda does without ever having to say so.</p>
+      <div class="cta-row"><button class="btn btn-stone" id="story-book" data-book data-kind="night">Plan your night</button><span class="ring" aria-label="Price"><small>From</small><b class="price-note" data-price-note style="color:var(--bone);letter-spacing:.08em;font-size:11px">[PRICE — pending]</b></span></div>
+    </div>
+    <div class="cluster fade-in" aria-label="Five moments of one evening">
+      <figure class="bubble b1"><div class="ph" data-src="media/lobby.jpg"></div><div class="wash"></div><figcaption class="pin-lbl"><b>20:30</b>The lobby</figcaption></figure>
+      <figure class="bubble b2"><div class="ph" data-src="media/strip-dinner.jpg" data-pos="70% 50%"></div><div class="wash"></div><figcaption class="pin-lbl"><b>22:15</b>Dinner runs long</figcaption></figure>
+      <figure class="bubble b3"><div class="ph" data-src="media/lane-vertical.jpg"></div><div class="wash"></div><figcaption class="pin-lbl"><b>00:40</b>The street</figcaption></figure>
+      <figure class="bubble b4"><div class="ph" data-src="media/taxi-night.jpg" data-pos="72% 50%"></div><div class="wash"></div><figcaption class="pin-lbl"><b>02:10</b>A taxi, counted in</figcaption></figure>
+      <figure class="bubble b5"><div class="ph" data-src="media/strip-home.jpg" data-pos="42% 50%"></div><div class="wash"></div><figcaption class="pin-lbl"><b>02:30</b>Home</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 9 · THREE WAYS ============================ -->
+<section class="ways" id="ways" aria-labelledby="ways-h">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow"><span class="ix">07</span>Three ways</p>
+      <h2 class="display h-sec" id="ways-h">An evening, a day, <br class="d"><em>or the whole weekend.</em></h2>
+      <p class="body">Every booking has the same person, the same care and the same notice. Choose how much of your time in Barcelona you'd like handled.</p>
+    </div>
+    <div class="trips fade-in">
+      <article class="trip" aria-labelledby="p-day">
+        <div class="photo-card"><div class="ph" data-src="media/eixample-day.jpg" data-pos="50% 60%"></div><span class="tag-top">Daytime</span></div>
+        <div class="in">
+          <h3 class="name" id="p-day">Day <small>Kóda</small></h3>
+          <p class="lead">From a late breakfast to the last gallery.</p>
+          <dl><dd>Someone who knows which street is quicker</dd><dd>Which café is worth the wait</dd><dd>Up to six people</dd></dl>
+          <p class="price-note" data-price-note style="margin-top:18px">[PRICE — pending client]</p>
+          <button class="btn btn-ghost" id="book-day" data-book data-kind="day">Plan your day</button>
+        </div>
+      </article>
+      <article class="trip is-main theme-dark" aria-labelledby="p-night">
+        <div class="photo-card"><div class="ph" data-src="media/neon-street.jpg" data-pos="50% 50%"></div><span class="tag-top">Evening into night</span></div>
+        <div class="in">
+          <h3 class="name" id="p-night">Night <small>Kóda</small></h3>
+          <p class="lead">Dinner, the place after, and the walk home.</p>
+          <dl><dd>The table under your name</dd><dd>The next place, already spoken to</dd><dd>They stay until everyone is in</dd></dl>
+          <p class="price-note" data-price-note style="margin-top:18px;color:rgba(240,235,227,.62)">[PRICE — pending client]</p>
+          <button class="btn btn-stone" id="book-night" data-book data-kind="night">Plan your night</button>
+        </div>
+      </article>
+      <article class="trip" aria-labelledby="p-weekend">
+        <div class="photo-card"><div class="ph" data-src="media/coast.jpg" data-pos="50% 55%"></div><span class="tag-top">Friday to Saturday</span></div>
+        <div class="in">
+          <h3 class="name" id="p-weekend">Weekend <small>Kóda</small></h3>
+          <p class="lead">One Kóda, three windows, arranged once.</p>
+          <dl><dd>Friday 20:00–01:00</dd><dd>Saturday 12:00–16:00</dd><dd>Saturday 21:00–02:00</dd></dl>
+          <p class="price-note" data-price-note style="margin-top:18px">[PRICE — pending client]</p>
+          <button class="btn btn-ghost" id="book-weekend" data-book data-kind="weekend">Plan your weekend</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 10 · FOUNDER ============================ -->
+<section class="founder theme-bone" id="founder" aria-labelledby="founder-h">
+  <div class="wrap grid">
+    <div class="l fade-in"><p class="eyebrow" id="founder-h"><span class="ix">08</span>A note from the founder</p></div>
+    <div class="c fade-in">
+      <h2 class="display h-mid">Why I started <em>Kóda.</em></h2>
+      <button class="btn btn-navy" id="founder-book" data-book>Plan your evening</button>
+    </div>
+    <div class="r fade-in">
+      <blockquote>I started Kóda after too many evenings where one person in the group spent the whole night quietly counting heads: the route back, the last metro, the friend who wandered off. That person deserves the dinner too.</blockquote>
+      <p class="todo">[Replace with founder's own words]</p>
+      <div class="sig"><span class="n">Ana</span><span class="r">[Surname] · Founder, Kóda</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 11 · DOES / DOESN'T ============================ -->
+<section class="does" aria-label="What a Kóda does and doesn't do">
+  <div class="wrap grid">
+    <div class="col fade-in">
+      <h3>What a Kóda does</h3>
+      <ul>
+        <li><i>01</i>Meets you where you are: the lobby, the station, the door.</li>
+        <li><i>02</i>Knows which street is quicker and which table is worth the wait.</li>
+        <li><i>03</i>Speaks to the next place before you get there.</li>
+        <li><i>04</i>Counts everyone into the taxi and stays until everyone is in.</li>
+        <li><i>05</i>Speaks English and Spanish.</li>
+      </ul>
+    </div>
+    <div class="col fade-in">
+      <h3>What a Kóda doesn't do</h3>
+      <ul>
+        <li><i>01</i>Recite the history of every façade, unless you ask.</li>
+        <li><i>02</i>Drive. Taxis are arranged, addresses confirmed.</li>
+        <li><i>03</i>Work outside the municipality of Barcelona without a message first.</li>
+        <li><i>04</i>Take a booking with less than 48 hours' notice without a conversation.</li>
+        <li><i>05</i>Let you choose them. We choose for you, based on your group and your plans.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 12 · ANSWERS ============================ -->
+<section class="answers" id="answers" aria-labelledby="answers-h">
+  <div class="wrap grid">
+    <div class="t fade-in">
+      <p class="eyebrow"><span class="ix">09</span>Answers</p>
+      <h2 class="display h-mid" id="answers-h">Before <em>you ask.</em></h2>
+      <p class="body">If your question isn't here, message us. We answer like people.</p>
+      <button class="btn btn-navy" id="faq-book" data-book>Plan your evening</button>
+    </div>
+    <div class="faq fade-in" id="faq">
+      <div class="qa"><button class="q" id="q1" aria-expanded="false" aria-controls="a1">Is a Kóda a guide, or something more?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a1" role="region" aria-labelledby="q1"><div><p class="body">More than a guide. A Kóda knows the city and stays with your group for the whole booking: reading the evening, handling the small things, making sure everyone gets home.</p></div></div></div>
+      <div class="qa"><button class="q" id="q2" aria-expanded="false" aria-controls="a2">How much notice do you need?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a2" role="region" aria-labelledby="q2"><div><p class="body">At least 48 hours. If your plans are sooner, message us first and we'll tell you honestly what's possible.</p></div></div></div>
+      <div class="qa"><button class="q" id="q3" aria-expanded="false" aria-controls="a3">How many people can one Kóda look after?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a3" role="region" aria-labelledby="q3"><div><p class="body">Up to six. For seven to twelve people we arrange two. For larger groups, message us.</p></div></div></div>
+      <div class="qa"><button class="q" id="q4" aria-expanded="false" aria-controls="a4">What if the evening runs long?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a4" role="region" aria-labelledby="q4"><div><p class="body">Your Kóda can arrange more time on the night.</p></div></div></div>
+      <div class="qa"><button class="q" id="q5" aria-expanded="false" aria-controls="a5">Where do you operate?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a5" role="region" aria-labelledby="q5"><div><p class="body">Within the municipality of Barcelona. If your plans take you further, message us before booking.</p></div></div></div>
+      <div class="qa"><button class="q" id="q6" aria-expanded="false" aria-controls="a6">Can we choose our Kóda?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a6" role="region" aria-labelledby="q6"><div><p class="body">We choose for you, based on your group and your plans. It's the part we take most seriously.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 13 · CLOSE + FOOTER ============================ -->
+<section class="close-band theme-dark" id="night" aria-labelledby="night-h">
+  <div class="ph" data-src="media/hero-rooftops.jpg" data-pos="50% 40%"></div>
+  <div class="wash"></div>
+  <span class="pin-lbl"><b>02:30</b>Everyone home</span>
+  <div class="in">
+    <p class="eyebrow" style="color:var(--stone)"><span class="ix">10</span>Ready for Thursday?</p>
+    <h2 class="display" id="night-h">Everyone <em>home.</em></h2>
+    <p class="body">Tell us the evening. We'll arrange the rest.</p>
+    <form class="date-form" onsubmit="return false"><input type="text" placeholder="Your date, e.g. Saturday 14" aria-label="Your date"><button class="btn btn-stone" data-book type="button">Check</button></form>
+    <a class="link" href="#contact" style="color:var(--bone)">or message us first</a>
+  </div>
+</section>
+<footer id="contact">
+  <div class="wrap grid foot-grid">
+    <div class="foot-brand">
+      <a class="lockup" href="#top" aria-label="Kóda Barcelona, back to top"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></a>
+      <p>A composed local for the evening, the day or the weekend. Someone who knows the city, start to finish.</p>
+      <p style="font:500 9.5px/1.6 var(--sans);letter-spacing:.18em;text-transform:uppercase">WhatsApp [+34 — pending] · Email [pending]</p>
+    </div>
+    <div class="foot-col fc1"><p class="eyebrow">Kóda</p><a class="link" href="#ways">Three ways</a><a class="link" href="#evening">The night</a><a class="link" href="#who">Who a Kóda is</a><a class="link" href="#how">How it works</a></div>
+    <div class="foot-col fc2"><p class="eyebrow">Company</p><a class="link" href="#founder">The founder</a><a class="link" href="#">Corporate &amp; congress</a><a class="link" href="#contact">Contact</a></div>
+    <div class="foot-col fc3"><p class="eyebrow">Legal</p><a class="link" href="#">Terms</a><a class="link" href="#">Privacy</a><a class="link" href="#cancellations">Cancellations</a><a class="link" href="#answers">Answers</a></div>
+    <div class="foot-legal"><span>[Legal entity name] · [Registered address], Barcelona · [Legal disclaimer line — from Ana's homepage]</span><span>Prototype · copy marked [ ] is pending</span></div>
+  </div>
+</footer>
+</main>
+
+<div class="sticky" id="sticky" aria-hidden="true"><p>48 hours' notice · Barcelona</p><button class="btn btn-navy btn-sm" id="sticky-book" data-book tabindex="-1">Check a date</button></div>
+
+<div class="proto" role="group" aria-label="Prototype controls"><span class="lbl">Motion</span><button id="m-brand" data-mode="brand" aria-pressed="false">Brand</button><button id="m-enh" data-mode="enhanced" aria-pressed="true">Enh.</button><span class="sep" aria-hidden="true"></span><span class="lbl">Look</span><button id="l-graded" data-look="graded" aria-pressed="false">Graded</button><button id="l-colour" data-look="colour" aria-pressed="true">Colour</button></div>
+
+<div class="booking" id="booking" hidden>
+  <div class="booking-scrim" data-close></div>
+  <div class="bk-card" role="dialog" aria-modal="true" aria-labelledby="bk-q">
+    <div class="bk-form">
+      <div class="bk-top"><button id="bk-back" data-close>Back</button><span id="bk-count">1 / 8</span></div>
+      <div class="bk-progress"><span></span></div>
+      <div class="bk-body">
+        <span class="lockup" aria-hidden="true"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></span>
+        <p class="eyebrow bk-kind" id="bk-kind" hidden></p>
+        <h2 class="bk-q" id="bk-q">What do you need a Kóda for?</h2>
+        <p class="bk-hint">So we can choose the right person for your group.</p>
+        <div class="chips" id="chips">
+          <button class="chip" id="c1" aria-pressed="false">Dinner</button><button class="chip" id="c2" aria-pressed="false">A night out</button><button class="chip" id="c3" aria-pressed="false">The walk home</button><button class="chip" id="c4" aria-pressed="false">A family visit</button><button class="chip" id="c5" aria-pressed="false">Getting around the city</button><button class="chip" id="c6" aria-pressed="false">Something else</button>
+        </div>
+        <p class="bk-after" id="bk-after" aria-live="polite"></p>
+        <button class="btn btn-navy bk-next" type="button">Next</button>
+      </div>
+      <p class="bk-foot" id="bk-foot">Prototype stub · live embed: forms.fillout.com/t/[FORM_ID]</p>
+    </div>
+    <div class="bk-photo" aria-hidden="true">
+      <div class="ph" data-src="media/hero-cathedral.jpg" data-pos="50% 62%"></div>
+      <svg class="route" viewBox="0 0 620 700" preserveAspectRatio="none"><path d="M 120 120 C 200 240, 140 380, 300 420 S 520 480, 480 620"/><circle class="pin" cx="120" cy="120" r="7"/><circle class="pin-dot" cx="120" cy="120" r="2"/><circle class="pin" cx="300" cy="420" r="7"/><circle class="pin-dot" cx="300" cy="420" r="2"/><circle class="pin" cx="480" cy="620" r="7"/><circle class="pin-dot" cx="480" cy="620" r="2"/></svg>
+      <div class="bk-tag" style="left:24%;top:9%"><small>20:30</small><b>Hotel lobby</b>The table is under your name.</div>
+      <div class="bk-tag" style="left:54%;top:52%"><small>1.2 km</small><b>left to the door</b>The street is unfamiliar. It doesn't feel that way.</div>
+      <div class="bk-tag" style="left:40%;top:84%"><small>02:30</small><b>Everyone home</b></div>
+    </div>
+  </div>
+</div>
+
+<style id="wire">
+/* ===== low-fidelity wireframe overrides (v4) ===== */
+*{ font-family:Helvetica, Arial, sans-serif !important; color:#2b2b2b !important; letter-spacing:0 !important; font-style:normal !important; transition:none !important; animation:none !important; }
+body, .bar, .intro, .bento, .who, .tiers, .ways, .does, .answers{ background:#fff !important; }
+.hero, .promise, .phones, .night-sec, .founder, .close-band, footer, .tile.dark, .tile.time, .trip.is-main, .trow .ring{ background:#ececec !important; }
+.hero-wash, .film .wash, .bubble .wash, .close-band .wash, .close-band::after{ background:none !important; display:none !important; }
+.theme-dark, .theme-dark *, .trip.is-main *, footer *{ color:#2b2b2b !important; }
+.display, h1, h2, h3, .mk-q, .bk-q, .trow .v, .trip .name, .nums b, .tile.time .big, .pin-lbl b, .status-panel .big{ font-weight:700 !important; }
+.ph{ background:#d9d9d9 !important; background-image:repeating-linear-gradient(45deg, transparent 0 14px, rgba(0,0,0,.06) 14px 15px) !important; border:1px solid #9a9a9a !important; }
+.ph::after{ content:"IMAGE"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font:700 11px/1 Helvetica, Arial, sans-serif; letter-spacing:.2em !important; color:#777 !important; }
+.ph-note{ display:none !important; }
+.hero video{ display:none !important; }
+.route path, .route .pin{ stroke:#777 !important; stroke-opacity:1 !important; stroke-dasharray:4 4 !important; }
+.route .pin-dot{ fill:#777 !important; }
+.btn, .chip, .ring, .check .f, .date-form{ background:#fff !important; border:1px solid #2b2b2b !important; color:#2b2b2b !important; border-radius:4px !important; }
+.btn-navy, .btn-stone, .chip.on, .chip[aria-pressed="true"], .trow .ring{ background:#2b2b2b !important; color:#fff !important; }
+.ring{ border-radius:50% !important; }
+.btn *{ color:inherit !important; }
+.status-panel, .check, .tile, .trip, .trow, .pcard .photo-card, .film, .bubble, .iphone .screen, .bk-card, .close-band{ border:1px solid #9a9a9a !important; border-radius:4px !important; }
+.status-panel, .check, .tile.photo .txt, .pin-lbl{ background:#fff !important; }
+.pin-lbl{ padding:4px 6px; border:1px solid #9a9a9a; }
+.tile.photo .txt{ background:rgba(255,255,255,.9) !important; }
+.iphone{ background:#555 !important; border-radius:28px !important; }
+.iphone .island, .iphone .home, .iphone .status i, .iphone .status .bat::before{ background:#999 !important; }
+.nums, .nums div, .faq, .qa, .trip dl, .trip dd, .prow, .promise .rows, .does h3, .does li, .status-panel dl, .status-panel .fr, .sig, .mk-prog, .bk-progress, .foot-legal, .ix-row .ln, .iphone .mk-sum, .iphone .mk-sum div{ border-color:#9a9a9a !important; }
+.proto, .sticky{ display:none !important; }
+.hero-cap, .cap, .price-note, .eyebrow, .trow .k small, .pf-txt p, .prow p, .pcard p{ color:#666 !important; }
+.hero-txt{ background:rgba(255,255,255,.85); padding:32px !important; }
+.close-band .in{ background:rgba(255,255,255,.85); margin:48px; }
+.close-band .ph{ inset:0 0 0 50% !important; }
+.booking{ display:none !important; }
+.wire-note{ position:fixed; left:12px; bottom:12px; z-index:99; font:700 10px/1 Helvetica,Arial,sans-serif; letter-spacing:.2em !important; color:#777 !important; background:#fff; border:1px solid #9a9a9a; padding:8px 10px; }
+</style>
+
+<div class="wire-note">KÓDA · LOW-FIDELITY WIREFRAME</div>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  const SHOW_PRICE_NOTE = true, DEFAULT_MOTION = 'enhanced', DEFAULT_LOOK = 'colour';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const root = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+  const store = { get(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch (e) {} } };
+  if (!SHOW_PRICE_NOTE) $$('[data-price-note]').forEach(el => { el.hidden = true; });
+
+  const fmt = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/Madrid', hour:'2-digit', minute:'2-digit', hour12:false });
+  const tick = () => { const t = fmt.format(new Date()); $$('[data-bcn-time]').forEach(el => { el.textContent = t; }); };
+  tick(); setTimeout(() => { tick(); setInterval(tick, 60000); }, (60 - new Date().getSeconds()) * 1000 + 50);
+
+  function loadMedia(look){
+    $$('.ph[data-src]').forEach(ph => {
+      const src = look === 'colour' ? ph.dataset.src.replace('media/', 'media/colour/') : ph.dataset.src;
+      const img = new Image();
+      img.onload = () => { ph.style.backgroundImage = 'url("' + src + '")'; if (ph.dataset.pos) ph.style.backgroundPosition = ph.dataset.pos; ph.classList.add('has-media'); };
+      img.src = src;
+    });
+  }
+  function applyLook(look){ root.dataset.look = look; $$('.proto [data-look]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.look === look))); loadMedia(look); }
+  $$('.proto [data-look]').forEach(b => b.addEventListener('click', () => { store.set('koda-look', b.dataset.look); applyLook(b.dataset.look); }));
+  applyLook(['graded','colour'].includes(store.get('koda-look')) ? store.get('koda-look') : DEFAULT_LOOK);
+  const video = $('.hero video');
+  if (video) { video.addEventListener('playing', () => video.classList.add('is-playing')); video.addEventListener('error', () => video.remove(), true); const pr = video.play && video.play(); if (pr && pr.catch) pr.catch(() => {}); }
+
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('will-fade'); io.unobserve(e.target); } }), { rootMargin:'0px 0px -8% 0px' });
+    $$('.fade-in').forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('fade', 'will-fade'); io.observe(el); } });
+  }
+
+  /* FAQ */
+  $$('.qa').forEach(qa => { const b = $('.q', qa), pm = $('.pm', qa); b.addEventListener('click', () => { const open = !qa.classList.contains('is-open'); qa.classList.toggle('is-open', open); b.setAttribute('aria-expanded', String(open)); pm.textContent = open ? '−' : '+'; }); });
+
+  /* booking overlay */
+  const booking = $('#booking'); let bookingOpen = false, lastTrigger = null, lenis = null;
+  const KIND = { day:'Kóda Day', night:'Kóda Night', weekend:'Kóda Weekend' };
+  function openBooking(kind, trigger){
+    lastTrigger = trigger; bookingOpen = true; const k = $('#bk-kind');
+    if (kind && KIND[kind]) { k.textContent = KIND[kind] + ' · pre-set'; k.hidden = false; } else k.hidden = true;
+    $('#bk-foot').textContent = 'Prototype stub · live embed: forms.fillout.com/t/[FORM_ID]' + (kind ? '?kind=' + kind : '');
+    $$('#chips .chip').forEach(c => c.setAttribute('aria-pressed','false')); $('#bk-after').textContent = '';
+    booking.hidden = false; document.body.style.overflow = 'hidden'; lenis && lenis.stop();
+    requestAnimationFrame(() => { booking.classList.add('is-open'); $('#bk-back').focus(); }); checkSticky();
+  }
+  function closeBooking(){ booking.classList.remove('is-open'); bookingOpen = false; setTimeout(() => { booking.hidden = true; }, 220); document.body.style.overflow = ''; lenis && lenis.start(); if (lastTrigger) lastTrigger.focus({ preventScroll:true }); checkSticky(); }
+  $$('[data-book]').forEach(b => b.addEventListener('click', () => openBooking(b.dataset.kind, b)));
+  $$('[data-close]', booking).forEach(b => b.addEventListener('click', closeBooking));
+  document.addEventListener('keydown', e => { if (!bookingOpen) return; if (e.key === 'Escape') closeBooking();
+    if (e.key === 'Tab') { const f = $$('button, a[href], input', $('.bk-form')).filter(x => !x.hidden && x.offsetParent !== null);
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); } } });
+  $$('#chips .chip').forEach(c => c.addEventListener('click', () => { $$('#chips .chip').forEach(x => x.setAttribute('aria-pressed', String(x === c))); setTimeout(() => { $('#bk-after').textContent = 'In the live site, Fillout continues to the next question.'; }, 190); }));
+  $('.bk-next').addEventListener('click', () => { $('#bk-after').textContent = 'In the live site, Fillout continues to the next question.'; });
+
+  /* sticky bar (mobile) */
+  const sticky = $('#sticky'), ways = $('#statement'), night = $('#night'); let stickyOn = null;
+  function checkSticky(){ const on = ways.getBoundingClientRect().top < 0 && night.getBoundingClientRect().top > innerHeight * .55 && !bookingOpen; if (on === stickyOn) return; stickyOn = on;
+    sticky.classList.toggle('is-on', on); root.classList.toggle('sticky-on', on && innerWidth < 900); sticky.setAttribute('aria-hidden', String(!on)); $('#sticky-book').tabIndex = on ? 0 : -1; }
+  let raf = 0; addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; checkSticky(); }); }, { passive:true });
+
+  /* motion levels */
+  let lenisRaf = null;
+  function readMode(){ if (reduce) return 'brand'; const h = location.hash.slice(1); if (h === 'brand' || h === 'enhanced') return h; const s = store.get('koda-motion'); return (s === 'brand' || s === 'enhanced') ? s : DEFAULT_MOTION; }
+  function applyMotion(mode){
+    if (lenis) { gsap.ticker.remove(lenisRaf); lenis.destroy(); lenis = null; }
+    root.dataset.motion = mode;
+    $$('.proto [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    if (mode === 'enhanced' && hasGsap && !reduce) { gsap.registerPlugin(ScrollTrigger); lenis = new Lenis({ lerp:.1, smoothWheel:true }); lenis.on('scroll', ScrollTrigger.update); lenisRaf = t => lenis.raf(t * 1000); gsap.ticker.add(lenisRaf); gsap.ticker.lagSmoothing(0); }
+  }
+  $$('.proto [data-mode]').forEach(b => b.addEventListener('click', () => { store.set('koda-motion', b.dataset.mode); const y = scrollY; applyMotion(b.dataset.mode); requestAnimationFrame(() => { scrollTo(0, y); stickyOn = null; checkSticky(); }); }));
+  if (reduce) { const e = $('#m-enh'); e.disabled = true; e.title = 'Reduced motion is on: brand level only'; }
+  applyMotion(readMode()); checkSticky();
+})();
+</script>
