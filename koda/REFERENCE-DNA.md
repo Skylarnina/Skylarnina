@@ -191,3 +191,32 @@ The round-4 page follows these three layouts block for block. What each block be
 | amp* "Our Impact" dark three-stat row | If plans change: Full refund / 50% / No refund | Stat icons, the pill badge |
 | FAQ: headline left + CTA right, rows | Answers | — |
 | Dark photo footer, centred CTA, PLATFORM / LEGAL columns, "TWITTER · CONTRA · FRAMER" | Everyone home, facts strip, Kóda / Legal columns, WhatsApp · Email centre line | Social icons, template badges |
+
+---
+
+## SecureHome, OldRiga, Voyger, Altai and Travellah (`koda/references/securehome.webp`, `oldriga.webp`, `voyger.webp`, `altai.webp`, `travellah.webp`, round 5)
+
+The round-5 page (`koda/site/v4/`) takes its structure from these five. One concept runs through it: **the evening is a route**, drawn as a thin line with times at the pins, from OldRiga.
+
+| Reference block | Kóda section | Left out |
+|---|---|---|
+| SecureHome hero: eyebrow, left headline, two CTAs, product photo right, floating "System status" panel, social icons | Hero: Barcelona time eyebrow, "Someone who knows the city", Plan / message, Bone status panel with live time and the three facts | Avatars, "+12k", social icons, the dark glass |
+| OldRiga hero: white looping route with pins across the photo | The evening's route over the hero photo with 20:30 / 22:15 / 02:30 pins | Round pin icons |
+| Travellah hero search bar (destination / date / trip type / Explore) | Check-a-date bar: Date / People / Kind / Check | Dropdown arrows |
+| SecureHome "01 ——— 02 03 04" index | Section indexes in the intro and Who | — |
+| OldRiga "Emotions that you'll want to share" three columns (label / headline / body) | "Tell us when. We arrange who." | — |
+| Travellah inline stats 200+ / 65+ / 250+ | 48 h · 6 · 2, in Cormorant with hairline dividers | Plus signs |
+| OldRiga bento row: dark map tile, photo, "How long is the quest? 2–3" with a watch, photo with text | One route / 00:40 lane / "How long is a Kóda Night? 4–8 hours" / "Barcelona, through someone who lives here" | Watch illustration, rounded pills |
+| SecureHome "About us" column with two photo cards, circular icon badges, "Explore" with arrow circles | Who a Kóda is: two cards, outline circles with 01 / 02, "See the evening" with a → ring | Icons, carousel dots as controls |
+| SecureHome "Our promise": video card with play, three icon features | Built around your evening: film card with a PLAY ring, three numbered rows | Icons |
+| SecureHome bordered stat rows (12+ years, 50K+, 250K+) | If plans change: Full refund / 50% / No refund as three hairline rows | Counters (banned) |
+| OldRiga "The quest takes place online": two phones, dotted route, two features | The booking happens on your phone: the first question and the confirmation screen, dotted route between | Telegram UI |
+| OldRiga dark section with circular photo bubbles and a price pill | The night, through the eyes of someone who lives here: five frames at different heights (arches in enhanced), Plan your night + From [PRICE] ring | Circles, faces to camera |
+| Altai trip cards (price tag, photo, name, dates, pill) · Travellah package cards | Three ways: photo on top, caps tag, Day / Night / Weekend, facts, PriceNote, pill | "From 420$" badges |
+| OldRiga "A little about our project" three columns | A note from the founder: label / headline + CTA / quote | Illustration |
+| Altai "The price includes / does not include" | What a Kóda does / doesn't do, 01–05 numerals | Tick and cross icons |
+| Travellah two-column FAQ | Answers: headline + CTA left, rows right | — |
+| SecureHome "Ready to secure…" CTA band with house photo · Travellah full-bleed close with input | Everyone home: navy band, rooftops photo right, date input + Check pill | Newsletter copy, the phone mock-up |
+| SecureHome / Travellah dark footer, four columns | Footer: lockup + line, Kóda / Company / Legal columns | Social icons |
+| Voyger split card: form left, photo with pinned labels right, blurred scene behind | Booking overlay: Fillout stub left, cathedral photo with route and three pinned labels right, blurred page behind | Apple / Google / Facebook sign-in, password field |
+| Altai dark teal canvas and device mock-ups | Nothing: the palette is off-brand and the mock-ups are a presentation device, not a page section | — |

@@ -305,3 +305,41 @@ The brand book bans blur. The desktop booking overlay now blurs the page (6px) b
 - The brand book PDF was **not committed** because this repository is public. Put the source files in `koda/source/` only if the repo becomes private, or keep them outside git.
 - The reference captures (Wispr, Ooshot, Squarespace, Otter, Adomate) are kept locally in `koda/references/`, which is git-ignored because they are other companies' pages and this repository is public.
 - The banned-word check will be run on `koda/` only. The repo's installed skills legitimately contain some of those words, and changing them is out of scope.
+
+## I. Round 5 (the SecureHome, OldRiga, Voyger, Altai and Travellah layouts)
+
+The round-5 page (`koda/site/v4/`) follows five new reference layouts. These are the points where the layouts and the brand book disagree, and what was done about each.
+
+**I1. A route drawn over the photos.** *Confirm.*
+OldRiga draws a looping white line with pins across its hero and sections. Kóda's version draws the evening's route (lobby → dinner → home) in a 1px Bone line at 72% with three time labels in the hero, inside two bento tiles, between the two phones and over the booking photo. The brand book's lines are 0.5px; on a photo at 1440 a 0.5px line vanishes, so the route is 1px.
+**Applied:** in both modes. In enhanced mode the hero line draws itself over 1.8s on load (`cubic-bezier(.76,0,.24,1)`), which is outside the 220ms/400ms motion rules; brand mode shows it static.
+
+**I2. Outline circles with numerals replace icon badges.** Resolved.
+SecureHome's circular icon badges on the photo cards, feature rows and stat rows, and the play button, are banned (icons). They became 0.5px outline circles with a Cormorant numeral or the word PLAY in 9.5px caps. The circles are non-interactive except the play button.
+
+**I3. Flat Bone status panel in the hero.** *Confirm.*
+SecureHome's floating "System status" panel is a dark glass card with avatars. Kóda's is the estimate-bar treatment from the brand book: flat Bone, 0.5px stone border, hairline rows, no avatars (no faces anywhere). It reports the live Barcelona time and the three facts (bookings from Thursday, 48 hours, up to six).
+
+**I4. A check-a-date bar on the hero.** *Confirm.*
+Travellah's search bar (destination / date / trip type / Explore) became Date / People / Kind / Check on a navy 60% panel with hairline dividers. It is a stub: every field opens the booking flow. In the colour look the panel is black 42%.
+
+**I5. Bordered rows and bordered trip cards.** *Confirm.*
+The brand book says "cards: there are none". The refund tiers are three full-width hairline-bordered rows (SecureHome's stat rows) and the three ways are bordered columns with the photo on top (Altai's trip cards), Night filled navy. All 0.5px stone, no fill, no shadow.
+
+**I6. Arch-topped photo cluster.** *Confirm (enhanced only).*
+OldRiga closes its dark section with round photo bubbles. Circles crop the subjects badly and the brand book keeps non-interactive shapes square, so the five story frames are rectangles of different heights in brand mode and arch-topped (second and fourth) or rounded (first, third, fifth) in enhanced mode. Times are labels at the bottom-left of each frame.
+
+**I7. Rounded section slabs.** *Confirm (enhanced only).*
+Several references round the whole section (Promise, Phones, Founder, Close band) at about 32px and inset it 12px from the viewport edge. Brand mode keeps 0px and full bleed.
+
+**I8. The Voyger split card replaces the phone-on-panel overlay.** *Needs Sky's decision.*
+Round 4 put the booking stub inside an iPhone on the Paper side panel. Voyger's layout is a centred floating card: form on the left, photo with pinned labels on the right, over the blurred page. The round-5 overlay follows Voyger. The phone-on-panel version remains in `koda/site/v3/` if that is preferred.
+
+**I9. Does / doesn't lists without checkmarks.** Resolved.
+Altai's "price includes / does not include" uses tick and cross icons. Kóda's two lists use 01–05 Cormorant numerals and hairline rows.
+
+**I10. The date input in the close band.** *Confirm.*
+Travellah closes with a newsletter input. Kóda does not run a newsletter, so the input asks for a date and the pill says Check; it opens the booking flow. The brand book has no input style, so it uses the chip style: 0.5px Bone 30% outline, pill, Bone placeholder at 50%.
+
+**I11. Left-set hero.** Resolved.
+After the centred round-4 hero, this round returns to the brand book's left-set hero unit, as SecureHome and Travellah both do.
