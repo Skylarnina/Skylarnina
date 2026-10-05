@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#050505" />
+<title>OLTRESOGLIA Chi siamo</title>
+<!--
+  Prototype of the "Chi siamo" page for Framer. Same tokens, header, background and contrast settings as the
+  Contact page (../contact/index.html, client feedback round 1); see ../TOKENS.md and FRAMER-NOTES.md.
+  Layout follows the client's reference: two-column grid of coach cards, round portrait, name plate, bio.
+  Bios are verbatim from chi_siamo.pdf. Portraits are placeholders until the photos arrive.
+  Fonts: Manrope from Google Fonts. Bounded loads from ../fonts/ once added; Archivo stands in until then.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Archivo+Black&family=Manrope:wght@200..800&display=swap" />
+<style>
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-extralight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-black.ttf') format('truetype'); font-weight: 900; font-display: swap; }
+
+  :root {
+    /* Brand palette — identical to the test build */
+    --oltre-blackout: #000000;
+    --oltre-dark-charcoal: #050505;
+    --oltre-porcelain: #EBF0F2;
+    --oltre-whiteout: #FFFFFF;
+    --oltre-saffron-mango: #EFC04D;
+
+    /* Porcelain / charcoal opacities. Client feedback (round 1): more contrast, so these sit
+       one step brighter than the test (test values in comments). */
+    --text: var(--oltre-porcelain);
+    --text-body: color-mix(in srgb, var(--oltre-porcelain) 85%, transparent);        /* test 75% */
+    --text-label: color-mix(in srgb, var(--oltre-porcelain) 75%, transparent);       /* test 70% */
+    --text-muted: color-mix(in srgb, var(--oltre-porcelain) 65%, transparent);       /* test 55% */
+    --text-placeholder: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); /* test 35% */
+    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);        /* test 10% */
+    --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);       /* test 20% */
+    --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent);      /* test 40% */
+    --fill-field: color-mix(in srgb, var(--oltre-porcelain) 6%, transparent);        /* test 4% */
+    --fill-soft: color-mix(in srgb, var(--oltre-porcelain) 12%, transparent);
+    --fill-disabled: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
+
+    /* Card surface: the dark grey from the Contact page (client feedback round 1). */
+    --fill-banner: color-mix(in srgb, var(--oltre-porcelain) 13%, var(--oltre-dark-charcoal)); /* ≈ #232526 */
+    --panel: color-mix(in srgb, var(--oltre-dark-charcoal) 88%, transparent);
+
+    /* Outline buttons (client): black fill, saffron border and text, soft saffron glow */
+    --btn-fill: var(--oltre-blackout);
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout));
+    --btn-glow: 0 0 18px color-mix(in srgb, var(--oltre-saffron-mango) 35%, transparent);
+    --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
+
+    --font-display: 'Bounded', 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
+    --font-display-light: 'Bounded', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+    --radius-field: 12px;
+    --radius-card: 16px;
+    --radius-banner: 24px;
+    --control-h: 56px;
+    --t: 200ms;
+
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { background: var(--oltre-dark-charcoal); color: var(--text); }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    isolation: isolate; /* keeps the fixed backdrop (z-index -1) above the body background */
+  }
+  ::selection { background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); }
+  a { color: inherit; }
+  [hidden] { display: none !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Background: the test's line artwork, grayscale, under a charcoal overlay (lighter than the test's 60%) */
+  .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--oltre-dark-charcoal); pointer-events: none; }
+  .backdrop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
+  .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .45; } /* test .6 */
+
+  .wrap { width: 100%; max-width: 1232px; margin-inline: auto; padding-inline: 16px; }
+  @media (min-width: 640px) { .wrap { padding-inline: 32px; } }
+
+  /* Focus — the test's saffron outline ring */
+  :where(a, button, input, textarea):focus-visible { outline: 2px solid var(--oltre-saffron-mango); outline-offset: 2px; }
+  .pill:focus-visible { outline-offset: 4px; }
+
+  /* ---------- Header (test header + site nav) ---------- */
+  .site-header { position: relative; padding-top: 20px; }
+  @media (min-width: 640px) { .site-header { padding-top: 32px; } }
+  .site-header__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .wordmark {
+    font-family: var(--font-display); font-weight: 900; font-size: 14px; letter-spacing: .22em;
+    color: var(--oltre-whiteout); text-decoration: none; white-space: nowrap;
+  }
+  .nav { display: flex; align-items: center; gap: 12px; }
+  .nav__links { display: none; list-style: none; margin: 0; padding: 0; gap: 28px; }
+  .nav__links a {
+    font-size: 14px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    transition: color var(--t);
+  }
+  .nav__links a:hover { color: var(--text); }
+  .nav__menu {
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    border-radius: 999px; border: 1px solid var(--line-field); background: transparent; color: var(--text);
+    cursor: pointer; transition: border-color var(--t);
+  }
+  .nav__menu:hover { border-color: var(--line-strong); }
+  .nav__panel { margin-top: 16px; border-top: 1px solid var(--line-hair); }
+  .nav__panel ul { list-style: none; margin: 0; padding: 8px 0 0; }
+  .nav__panel a {
+    display: flex; align-items: center; min-height: 48px; font-size: 16px; font-weight: 500;
+    color: var(--text-body); text-decoration: none; border-bottom: 1px solid var(--line-hair);
+  }
+  @media (min-width: 960px) {
+    .nav { gap: 32px; }
+    .nav__links { display: flex; }
+    .nav__menu, .nav__panel { display: none !important; }
+  }
+
+  /* ---------- Buttons (the test's pill) ---------- */
+  .pill {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: var(--control-h); padding: 0 28px; border: 2px solid var(--oltre-saffron-mango); border-radius: 999px;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer;
+    background: var(--btn-fill); color: var(--oltre-saffron-mango); box-shadow: var(--btn-glow);
+    transition: background-color var(--t), color var(--t), box-shadow var(--t), transform var(--t);
+  }
+  .pill:hover { background: var(--btn-fill-hover); box-shadow: var(--btn-glow-hover); }
+  .pill:active { transform: scale(.98); }
+  .pill--sm { min-height: 44px; padding: 0 20px; font-size: 14px; }
+  .pill--caps { text-transform: uppercase; letter-spacing: .12em; }
+  .pill--submit { width: 100%; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .pill[aria-disabled="true"] { background: var(--btn-fill); border-color: var(--line-field); box-shadow: none; color: var(--text-muted); cursor: progress; transform: none; }
+  .pill svg { width: 20px; height: 20px; flex: none; }
+  .spinner {
+    width: 20px; height: 20px; border-radius: 999px; flex: none;
+    border: 2px solid color-mix(in srgb, var(--oltre-porcelain) 25%, transparent); border-top-color: var(--oltre-porcelain);
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+
+  /* ---------- Current page in the nav ---------- */
+  .nav__links a[aria-current="page"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--oltre-saffron-mango); padding-bottom: 4px; }
+  .nav__panel a[aria-current="page"] { color: var(--text); }
+
+  main { padding-block: 48px 64px; }
+  @media (min-width: 640px) { main { padding-block: 72px 96px; } }
+
+  /* ---------- Intro (same type as the Contact headline) ---------- */
+  .intro { max-width: 760px; }
+  .eyebrow {
+    margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 12px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--oltre-saffron-mango);
+  }
+  .headline { margin: 16px 0 0; color: var(--text); font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; text-wrap: balance; }
+  .headline span { display: block; }
+  .headline__light { font-family: var(--font-display-light); font-weight: 200; }
+  .headline__strong { font-family: var(--font-display); font-weight: 900; }
+  .lede { margin: 20px 0 0; max-width: 46ch; font-size: 18px; line-height: 1.6; color: var(--text-body); }
+  .placeholder { color: var(--text-muted); }
+
+  /* ---------- Team grid: two columns, like the reference ---------- */
+  .team { list-style: none; margin: 48px 0 0; padding: 0; display: grid; gap: 24px; }
+  @media (min-width: 840px) {
+    /* cards in a row share a height (reference); "Leggi tutta la storia" sits on the same line */
+    .team { grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 64px; }
+    .team > li { display: flex; }
+    /* odd number of coaches: centre the last card */
+    .team > li:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 16px); }
+  }
+
+  .coach {
+    display: flex; flex-direction: column; width: 100%;
+    padding: 32px 24px 24px; border-radius: var(--radius-card);
+    background: var(--fill-banner); border: 1px solid var(--line-hair);
+  }
+  @media (min-width: 640px) { .coach { padding: 40px 40px 32px; } }
+
+  /* Round portrait; the name plate overlaps its lower edge (reference layout) */
+  .coach__photo {
+    position: relative; width: min(240px, 72%); aspect-ratio: 1; margin-inline: auto; border-radius: 999px; overflow: hidden;
+    display: grid; place-items: center; align-content: center; gap: 4px;
+    background: color-mix(in srgb, var(--oltre-porcelain) 10%, var(--oltre-dark-charcoal));
+  }
+  .coach__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .coach__initials { font-family: var(--font-display-light); font-weight: 200; font-size: 56px; line-height: 1; color: var(--text-body); margin-top: -18%; }
+  .coach__photo-note { font-size: 12px; color: var(--text-muted); }
+  .coach__name {
+    position: relative; margin: -28px auto 0; width: min(100%, 340px); padding: 14px 20px;
+    border-radius: var(--radius-field); background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal);
+    text-align: center; font-family: var(--font-display); font-weight: 900; font-size: clamp(17px, 1.7vw, 21px);
+    letter-spacing: .06em; line-height: 1.2; text-transform: uppercase;
+  }
+
+  .coach__bio { flex: 1; display: flex; flex-direction: column; margin-top: 28px; font-size: 16px; line-height: 1.65; color: var(--text-body); }
+  .coach__bio p { margin: 0 0 14px; }
+  .coach__more > p:last-child { margin-bottom: 0; }
+  .coach__toggle {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: auto; padding: 4px 0 0; align-self: flex-start;
+    border: 0; background: none; cursor: pointer;
+    font: 600 15px/1 var(--font-sans); color: var(--oltre-saffron-mango);
+    text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+  }
+  .coach__toggle svg { width: 16px; height: 16px; transition: transform var(--t); }
+  .coach__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .coach__toggle:hover { text-decoration-thickness: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <!-- Same artwork as the test and the Contact page. -->
+    <img src="assets/soglia.svg" alt="" />
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="site-header__row">
+        <!-- Wordmark as in the test (retyped). Replace with the logotype SVG from the logo pack. -->
+        <a class="wordmark" href="#">OLTRESOGLIA</a>
+        <nav class="nav" aria-label="Principale">
+          <ul class="nav__links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Metodo</a></li>
+            <li><a href="#">Programma</a></li>
+            <li><a href="#" aria-current="page">Chi siamo</a></li>
+            <li><a href="#">Guide</a></li>
+            <li><a href="#">Test</a></li>
+          </ul>
+          <a class="pill pill--sm" href="#">Fai il test</a>
+          <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-panel">
+            <span class="sr-only">Menu</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h14M3 13.5h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </button>
+        </nav>
+      </div>
+      <div class="nav__panel" id="nav-panel" hidden>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Metodo</a></li>
+          <li><a href="#">Programma</a></li>
+          <li><a href="#" aria-current="page">Chi siamo</a></li>
+          <li><a href="#">Guide</a></li>
+          <li><a href="#">Test</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Chi siamo</p>
+        <!-- Draft headline, to confirm with Pietro. -->
+        <h1 class="headline" id="page-title">
+          <span class="headline__light">Le persone</span>
+          <span class="headline__strong">dietro OLTRESOGLIA.</span>
+        </h1>
+        <p class="lede placeholder">[Introduzione al team: testo in arrivo da Pietro]</p>
+      </section>
+
+      <ul class="team" aria-label="Il team">
+        <li>
+          <article class="coach" aria-labelledby="coach-marco">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Marco Saponaro" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Marco Saponaro in arrivo">
+              <span class="coach__initials" aria-hidden="true">MS</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-marco">Marco Saponaro</h2>
+            <div class="coach__bio">
+              <p>Ho provato vari sport, tra cui calcio e basket, e non ero per nulla portato.<br />Così, a 16 anni, mi iscrivo per la prima volta in palestra, quasi come se fossi “costretto” a trovare uno sport da fare.</p>
+              <p>Con il tempo, quella scelta si trasforma in una vera passione. All’inizio era il desiderio di migliorare la mia condizione fisica, anche a causa della mia introversione e di alcune insicurezze legate al corpo. Poi è diventata voglia di superarmi sempre di più, sia fisicamente che mentalmente.</p>
+              <div class="coach__more" id="bio-marco-more">
+                <p>Negli ultimi anni mi sono appassionato anche alla corsa. E ogni volta penso al me di 13 anni, che faceva fatica persino a correre un chilometro senza fermarsi. Se potessi parlargli oggi, gli direi di avere fiducia in sé stesso e di non sottovalutare mai ciò che si può costruire con costanza e impegno.</p>
+                <p>Parallelamente, durante il mio percorso all’istituto tecnico economico, mi sono reso conto che i lavori troppo statici e da ufficio non facevano per me. Così, trovo la strada della nutrizione.</p>
+                <p>Il mio essere molto schematico mi portano ad estrema organizzazione, precisione e ordine. Difficilmente esco fuori dai miei schemi, ma ho anche grande facilità di adattamento.</p>
+                <p>Amo viaggiare e mi affascinano gli sport estremi, ma credo anche che una semplice passeggiata all’aria aperta, magari in riva al mare, possa farsi sentire vivi.</p>
+                <p>Cosa mi ha spinto a diventare coach? La voglia di aiutare le persone a rendersi conto di cosa significhi superare i propri limiti.</p>
+                <p>In questo campo siamo tutti sullo stesso piano, senza filtri, senza scorciatoie. Alla fine, è l’impegno autentico a fare davvero la differenza.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="false" aria-controls="bio-marco-more" hidden><span>Leggi tutta la storia</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-devid">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Devid Cresta" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Devid Cresta in arrivo">
+              <span class="coach__initials" aria-hidden="true">DC</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-devid">Devid Cresta</h2>
+            <div class="coach__bio">
+              <p>Lo sport fa parte della mia vita da sempre. Da bambino ho fatto nuoto e jiu-jitsu, e già lì avevo capito che stare fermo non faceva per me.</p>
+              <p>Poi, a nove anni, è arrivato il calcio. Ho iniziato a giocare nella squadra del mio paese e non ho più smesso, ci gioco ancora oggi. Quella squadra mi ha dato più di uno sport, mi ha dato le persone che ancora adesso sono i miei amici.</p>
+              <div class="coach__more" id="bio-devid-more">
+                <p>Il 2019 è l'anno che ha cambiato la direzione. Mi allenavo a casa senza un piano preciso, senza sapere davvero cosa stessi facendo, però vedevo il mio corpo cambiare e quella cosa mi ha preso. Ho capito che quella curiosità meritava un metodo, e che quel metodo poteva diventare il mio lavoro.</p>
+                <p>Poi mi sono trovato davanti a un bivio: allenamento o nutrizione. Non sono riuscito a scegliere, così ho deciso di non scegliere e di portare avanti entrambe le strade, mi permette di guardare la persona per intero.</p>
+                <p>Sono organizzato e metodico. Ma lo schema serve a me, ogni percorso deve entrare nella vita reale di una persona, con il suo lavoro, i suoi orari, le sue cene fuori. Non credo negli estremismi, credo in un piano sostenibile da portare avanti per mesi.</p>
+                <p>Fuori dal lavoro amo viaggiare, vedere posti nuovi, stare con gli amici o semplicemente guardare una partita in compagnia.</p>
+                <p>Quello che mi tiene attaccato a questo lavoro è semplice: mi piace aiutare le persone. Non c'è soddisfazione più grande che vedere qualcuno arrivare dove era convinto di non poter arrivare.</p>
+                <p>Perché il cambiamento vero non riguarda solo il corpo. Riguarda la fiducia che una persona ha in sé stessa.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="false" aria-controls="bio-devid-more" hidden><span>Leggi tutta la storia</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-yuri">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Yuri" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Yuri in arrivo">
+              <span class="coach__initials" aria-hidden="true">Y</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-yuri">Yuri</h2>
+            <div class="coach__bio">
+              <p>Ho praticato calcio, rugby, pugilato e altri sport per gran parte della mia vita.</p>
+              <p>Allenatori e preparatori mi hanno sempre detto che avevo qualità atletiche importanti. Ero forte, performante, spesso tra quelli che fisicamente reggevano meglio il lavoro. Nel mio percorso mi sono dedicato anche al powerlifting, arrivando a conquistare due podi in gara.</p>
+              <div class="coach__more" id="bio-yuri-more">
+                <p>Eppure c’era una contraddizione.<br />Per quanto fossi allenato, non mi sentivo davvero a mio agio nel mio corpo.</p>
+                <p>Ricordo che situazioni normalissime come andare al mare, stare in piscina o togliermi la maglietta davanti agli altri mi mettevano a disagio più di quanto volessi ammettere. Non era un problema enorme, ma era una sensazione costante. Quella vocina che ti fa scegliere una maglietta larga invece di una aderente, o che ti fa sentire osservato quando probabilmente nessuno ti sta guardando</p>
+                <p>Per anni ho pensato che bastasse essere forte. Poi ho capito che non è così. La sicurezza non nasce solo da quello che il tuo corpo sa fare. Nasce anche dal rapporto che hai con lui</p>
+                <p>È stato questo a farmi interessare davvero all’allenamento, non per passione accademica, ma per trovare risposte pratiche.</p>
+                <p>Volevo semplicemente capire come costruire un fisico che mi facesse sentire bene, forte, atletico, ma anche esteticamente in linea con l’immagine che avevo di me stesso.</p>
+                <p>Ho iniziato a studiare e sperimentare per trovare una risposta a una domanda molto personale. Con il tempo quella ricerca è diventata una passione e, alla fine, anche il mio lavoro</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="false" aria-controls="bio-yuri-more" hidden><span>Leggi tutta la storia</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-anna">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Anna" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Anna in arrivo">
+              <span class="coach__initials" aria-hidden="true">A</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-anna">Anna</h2>
+            <div class="coach__bio">
+              <p>Lo sport ha sempre fatto parte della mia vita. Ho praticato diverse discipline, ma ho spesso avuto la sensazione che il grande impegno non fosse ripagato dai risultati.</p>
+              <p>Durante l'adolescenza ho deciso di lasciare gli sport di squadra e iniziare un percorso individuale in palestra. Cercavo qualcosa di sfidante, in cui il risultato dipendesse soprattutto da me, dal mio impegno e dalla mia costanza.</p>
+              <div class="coach__more" id="bio-anna-more">
+                <p>In poco tempo la palestra è diventata una vera passione e l'allenamento il momento felice della mia giornata.</p>
+                <p>Per anni mi sono dedicata principalmente al bodybuilding. Oggi alterno i pesi al lavoro aerobico. Mi piace sentirmi forte e avere un corpo efficiente, prestante e pronto ad affrontare sfide diverse.</p>
+                <p>Nel mio percorso ho attraversato momenti che mi hanno fatto capire quanto sia importante conoscere il proprio corpo, rispettarlo e prendersene cura. Da questa consapevolezza nasce la scelta di studiare Scienze Motorie e Scienze della Nutrizione e trasformare la mia passione nella mia professione.</p>
+                <p>Sono metodica, determinata e razionale. Mi piace avere una direzione, capire il perché di quello che faccio e curare i dettagli. Allo stesso tempo ho imparato che non tutto può andare sempre secondo i piani. Sapersi adattare, concedersi un'eccezione e tornare focalizzati subito dopo fa parte del percorso.</p>
+                <p>Ed è lo stesso approccio che porto nel mio lavoro. Non esistono percorsi perfettamente lineari. Ci sono salite, discese, curve e momenti in cui è necessario rallentare. Quello che conta è continuare ad andare nella direzione giusta.</p>
+                <p>Per questo credo nella personalizzazione e nella costruzione di un rapporto di fiducia. Voglio conoscere davvero la persona che ho davanti e costruire un percorso che funzioni nella sua quotidianità, non soltanto sulla carta.</p>
+                <p>Mi appassionano quasi tutti gli sport, soprattutto quelli outdoor. Amo vivere la natura in ogni stagione e mettermi alla prova, anche se la sala pesi rimane il posto in cui mi sento più a casa.</p>
+                <p>Diventare coach è stata una delle scelte più importanti che abbia fatto. Mi rende felice essere la guida di persone che decidono di mettersi in gioco, accompagnarle verso obiettivi che sembravano lontani e portarle oltre i limiti che si erano poste.</p>
+                <p>Non credo nelle scorciatoie e nemmeno negli estremismi. Credo nel fare le cose con criterio, adattarle quando serve e continuare a ripeterle nel tempo.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="false" aria-controls="bio-anna-more" hidden><span>Leggi tutta la storia</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-giulio">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Giulio" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Giulio in arrivo">
+              <span class="coach__initials" aria-hidden="true">G</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-giulio">Giulio</h2>
+            <div class="coach__bio">
+              <p>Fin da piccolo ho sempre avuto una forte passione per lo sport, in particolare per il calcio; nonostante fossi in sovrappeso, dentro di me c’era già una forte voglia di migliorare. Lo sport è stato il primo mezzo che mi ha insegnato a mettermi in gioco e a lavorare su me stesso.</p>
+              <p>Non ero il più pronto, né il più avvantaggiato, ma avevo qualcosa che nel tempo sarebbe diventato uno dei miei punti fermi: la capacità di impegnarmi, cadere, rialzarmi e continuare a lavorare.<br />Due importanti infortuni alle ginocchia hanno messo alla prova la mentalità che stavo costruendo, costringendomi più volte a rientrare, a riprendere, a ritrovare le stesse sensazioni di prima.<br />Nonostante questo, con il tempo, iniziavo a capire che la passione stava cambiando ed accettarlo non è stato semplice.</p>
+              <div class="coach__more" id="bio-giulio-more">
+                <p>Lo sport e la disciplina, però, non mi hanno mai abbandonato, anzi sono diventati la base su cui ho costruito le successive scelte della mia vita: questa mentalità mi ha portato a entrare nell’esercito, superando il concorso e affrontando due anni di formazione intensa.<br />Un duro percorso rivelatosi fondamentale: ho imparato lì che la forza non è solo resistere, ma anche sapersi guidare quando tutto intorno ti mette alla prova.<br />Dopo quell’esperienza ho deciso di provare il concorso in Polizia di Stato, vivendo così cinque anni di volante.<br />Periodo che mi ha formato profondamente dal punto di vista umano e psicologico, mettendomi davanti a situazioni difficili, persone diverse, tensioni e responsabilità quotidiane.</p>
+                <p>Eppure, nonostante tutto quello che avevo costruito, sentivo che mancava qualcosa. Dentro di me c’era la percezione chiara che la mia strada non fosse ancora completa. Avevo disciplina, esperienza, struttura mentale, voglia di aiutare gli altri, ma non ancora il modo più autentico per farlo.</p>
+                <p>Attraverso la lettura, la crescita personale e un percorso interiore più profondo, ho iniziato a guardarmi con più consapevolezza. Così ho capito una cosa importante: per anni avevo cercato lontano una direzione che, in realtà, avevo sempre avuto davanti agli occhi.</p>
+                <p>Per me essere coach oggi significa unire tutto ciò che ho vissuto: sport, disciplina, ostacoli, ricostruzione, gestione della fatica, crescita mentale.<br />Non vedo l’allenamento solo come un mezzo per cambiare il corpo, ma come strumento per costruire identità, forza interiore e capacità di affrontare la vita con una mentalità diversa.</p>
+                <p>Credo che ogni persona abbia dentro di sé molto più di quello che pensa: il mio compito è aiutarla a tirarlo fuori.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="false" aria-controls="bio-giulio-more" hidden><span>Leggi tutta la storia</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- footer: pending homepage -->
+
+  <script>
+  (() => {
+    // Bios open on the first 2 paragraphs; the rest expands in place.
+    const expandAll = new URLSearchParams(location.search).get('bio') === 'aperte'
+    document.querySelectorAll('.coach__toggle').forEach((btn) => {
+      const more = document.getElementById(btn.getAttribute('aria-controls'))
+      const label = btn.querySelector('span')
+      const card = btn.closest('.coach')
+      function set(open) {
+        more.hidden = !open
+        btn.setAttribute('aria-expanded', String(open))
+        label.textContent = open ? 'Riduci' : 'Leggi tutta la storia'
+      }
+      btn.hidden = false
+      set(expandAll)
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') !== 'true'
+        set(open)
+        if (!open && card.getBoundingClientRect().top < 0) card.scrollIntoView({ block: 'start' })
+      })
+    })
+
+    // ----- Mobile menu -----
+    const menuBtn = document.querySelector('.nav__menu')
+    const panel = document.getElementById('nav-panel')
+    menuBtn.addEventListener('click', () => {
+      const open = menuBtn.getAttribute('aria-expanded') !== 'true'
+      menuBtn.setAttribute('aria-expanded', String(open))
+      panel.hidden = !open
+    })
+  })()
+  </script>
+</body>
+</html>
