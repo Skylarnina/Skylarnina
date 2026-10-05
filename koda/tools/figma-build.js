@@ -4,7 +4,7 @@ const fs=require('fs'),path=require('path');const {chromium}=require('playwright
    Output: koda/exports/figma/koda-*.html, one <div id="frame"> per file (desktop 1440, mobile 390, booking overlay states, wireframes).
    Fonts: five TTFs in FONTDIR (f1 Cormorant Garamond Italic, f2 Light, f3 Regular, f4 Inter Light, f5 Inter Medium) are inlined as @font-face. */
 const FONTDIR=process.env.KODA_FONTS||process.env.HOME+'/.local/share/fonts/koda';
-const SITE=path.resolve(__dirname,'../site/v3'), OUT=path.resolve(__dirname,'../exports/figma'), IMG=path.join(OUT,'img'); fs.mkdirSync(IMG,{recursive:true});
+const VER=process.env.KODA_SITE||'v4'; const SITE=path.resolve(__dirname,'../site/'+VER), OUT=path.resolve(__dirname,'../exports/figma/'+VER), IMG=path.resolve(__dirname,'../exports/figma/img'); fs.mkdirSync(IMG,{recursive:true}); fs.mkdirSync(OUT,{recursive:true});
 const FONTS=[['f1','Cormorant Garamond','italic',400],['f2','Cormorant Garamond','normal',300],['f3','Cormorant Garamond','normal',400],['f4','Inter','normal',300],['f5','Inter','normal',500]];
 const fontCss=FONTS.map(([f,fam,sty,w])=>`@font-face{font-family:'${fam}';font-style:${sty};font-weight:${w};src:url(data:font/ttf;base64,${fs.readFileSync(path.join(FONTDIR,f+'.ttf')).toString('base64')}) format('truetype');}`).join('\n');
 const dataUri=n=>'data:image/jpeg;base64,'+fs.readFileSync(path.join(IMG,n)).toString('base64');
@@ -13,9 +13,10 @@ const VARIANTS=[
  {name:'mobile',    src:'index.html',     W:390, H:844, mobile:true},
  {name:'booking-desktop',src:'index.html',W:1440,H:900, mobile:false, booking:'night'},
  {name:'booking-mobile', src:'index.html',W:390, H:844, mobile:true,  booking:'night'},
+].concat(fs.existsSync(path.join(SITE,'wireframe.html'))?[
  {name:'wireframe-desktop',src:'wireframe.html',W:1440,H:900,mobile:false, wire:true},
  {name:'wireframe-mobile', src:'wireframe.html',W:390, H:844,mobile:true,  wire:true},
-];
+]:[]);
 (async()=>{
  if(!fs.readdirSync(IMG).length){ require('child_process').execSync(`python3 - <<'PY'
 from PIL import Image, ImageOps
@@ -39,7 +40,7 @@ PY`,{stdio:'inherit'}); }
   // image map
   const imgs={}; for(const n of fs.readdirSync(IMG)) imgs[n]=dataUri(n);
   const html=await p.evaluate(({imgs,v})=>{
-    const $$=s=>Array.from(document.querySelectorAll(s));
+    const $$=s=>Array.from(document.querySelectorAll(s)); $$('.will-fade,.fade').forEach(e=>e.classList.remove('will-fade','fade')); $$('.route path.draw').forEach(e=>e.classList.remove('draw'));
     $$('script,link,video,.proto,#sticky').forEach(e=>e.remove());
     $$('.will-fade,.fade').forEach(e=>{e.classList.remove('will-fade','fade');});
     $$('.ph[data-src]').forEach(ph=>{ const n=ph.dataset.src.split('/').pop(); if(v.wire){ ph.style.backgroundImage=''; return; } if(imgs[n]){ ph.style.backgroundImage='url("'+imgs[n]+'")'; if(ph.dataset.pos) ph.style.backgroundPosition=ph.dataset.pos; ph.classList.add('has-media'); } });
