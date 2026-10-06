@@ -343,3 +343,23 @@ Travellah closes with a newsletter input. Kóda does not run a newsletter, so th
 
 **I11. Left-set hero.** Resolved.
 After the centred round-4 hero, this round returns to the brand book's left-set hero unit, as SecureHome and Travellah both do.
+
+## J. Ana's decisions of 28 September, and the booking flow
+
+Source: the Upwork thread and *KÓDA 1.0 Pricing architecture & build specification*. Applied to `koda/site/v4/` and the new flow board `koda/site/v4/flow.html` (see `koda/FLOW.md`).
+
+**J1. Group size 1–12.** Applied. One Kóda for one to six, two Kódas for seven to twelve, thirteen or more to the enquiry route. "Kóda / Kódas" throughout; "companion" appears nowhere.
+
+**J2. Flow order from the spec, no language or occasion questions.** Applied. The page's phone mock-ups and the overlay stub now open on "Day, night, or the whole weekend?" and read "1 / 9". The optional note is the seventh question. This supersedes E2 and F-era "1 / 8" counts, and the brand book's eight-question Brief.
+
+**J3. One exact total, no prices in page copy.** Applied. `SHOW_PRICE_NOTE` is now false, so the `[PRICE — pending client]` spans and the "From" ring are hidden. In the flow, the price is one Cormorant figure and one muted summary line from the People question onward; the figures used are from the spec's tables and are illustrative.
+
+**J4. 48 hours or the enquiry route.** Applied. Every "or message us first" link now reads "or send an enquiry"; the flow's date screen routes dates inside 48 hours to the enquiry screen, which also serves groups over twelve and places outside the municipality.
+
+**J5. No saved shortcuts.** Applied. The brand book's express lane and "Save as shortcut" action are not designed.
+
+**J6. Language.** The site is English-only and there is no language question. The page no longer lists "English and Spanish" as a feature; the "Vetted before their first evening" line takes its place, with the vetting steps still pending from Ana.
+
+**J7. Tone.** Ana's private brief describes the service as peace of mind delivered through a vetted, present person, with the public words kept soft ("trusted human presence", never the banned terms). The copy already leans this way (everyone home, stays until everyone is in, chosen by hand). No banned word appears; the grep is clean.
+
+**J8. Not done here: the UX designer's notes in Figma.** Ana's friend left notes on the Figma file. They cannot be read from this environment (the Figma connector has no comments tool and the Starter plan's monthly call allowance is spent). Paste the notes into the chat and they will be worked through.

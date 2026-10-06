@@ -1,0 +1,476 @@
+<title>Kóda Booking Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;500&display=swap">
+<style>
+:root{ color-scheme:light; --navy:#0D1F2D; --bone:#F0EBE3; --paper:#FAFAF8; --stone:#C8BCA8; --blue-rich:#1B3A5C; --blue-mid:#2D5F8A; --stone-hover:#B8AC98; --navy-hover:#163043; --stone-50:rgba(200,188,168,.5); --stone-45:rgba(200,188,168,.45);
+  --serif:'Cormorant Garamond','Cormorant',Garamond,'Times New Roman',serif; --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif; --r:0px; }
+html[data-motion="enhanced"]{ --r:20px; }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bone); color:var(--navy); font:300 15px/1.6 var(--sans); font-synthesis:none; -webkit-font-smoothing:antialiased; }
+h1,h2,h3,p,dl,dd,dt,ol,ul{ margin:0; } ol,ul{ padding:0; list-style:none; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+.eyebrow{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.btn{ display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 32px; border-radius:999px; white-space:nowrap; font:500 12px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease,opacity 220ms ease; }
+.btn-navy{ background:var(--navy); color:var(--bone); } .btn-navy:hover{ background:var(--navy-hover); }
+.btn-stone{ background:var(--stone); color:var(--navy); height:54px; } .btn-stone:hover{ background:var(--stone-hover); }
+.btn-ghost{ background:transparent; border:.5px solid var(--navy); color:var(--navy); height:48px; }
+.btn-ghost.dark{ border-color:var(--stone); color:var(--bone); height:54px; }
+.btn.wide{ width:100%; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ height:38px; padding:0 16px; border-radius:999px; border:.5px solid var(--stone); font:300 13px/1 var(--sans); color:var(--navy); display:inline-flex; align-items:center; transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease; }
+.chip.on{ background:var(--navy); border-color:var(--navy); color:var(--bone); }
+
+/* ---------- board ---------- */
+.board{ padding:64px 48px 96px; display:flex; flex-direction:column; gap:56px; }
+.board-head{ display:flex; flex-direction:column; gap:14px; max-width:720px; }
+.board-head h1{ font:300 44px/1.05 var(--serif); letter-spacing:-.005em; }
+.board-head p{ font:300 14px/1.7 var(--sans); color:rgba(13,31,45,.64); max-width:60ch; }
+.row{ display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start; }
+.cell{ display:flex; flex-direction:column; gap:14px; }
+.cell .lbl{ display:flex; justify-content:space-between; width:390px; }
+.cell .lbl span:last-child{ color:rgba(13,31,45,.38); }
+
+/* ---------- the screen template (brand book 05 · the question page) ---------- */
+.scr{ position:relative; width:390px; height:844px; background:var(--paper); color:var(--navy); display:flex; flex-direction:column; padding:14px 28px 0; overflow:hidden; border:.5px solid var(--stone); }
+.sb{ height:48px; display:flex; justify-content:space-between; align-items:center; font:500 15px/1 var(--sans); font-variant-numeric:tabular-nums; padding:0 4px; }
+.sb .r{ display:flex; align-items:center; gap:6px; }
+.sb .bars{ display:flex; align-items:flex-end; gap:2px; } .sb .bars i{ display:block; width:3px; background:currentColor; border-radius:1px; }
+.sb .bars i:nth-child(1){height:4px}.sb .bars i:nth-child(2){height:6px}.sb .bars i:nth-child(3){height:8px}.sb .bars i:nth-child(4){height:10px}
+.sb .bat{ position:relative; width:24px; height:11px; border:1px solid currentColor; border-radius:3px; opacity:.6; } .sb .bat::before{ content:""; position:absolute; inset:2px 6px 2px 2px; background:currentColor; border-radius:1px; }
+.top{ display:flex; justify-content:space-between; align-items:center; min-height:44px; font:500 10px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.prog{ border-top:.5px solid var(--stone-45); position:relative; margin-top:6px; }
+.prog i{ position:absolute; left:0; top:-.5px; border-top:1px solid var(--navy); }
+.qb{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; padding-block:24px; min-height:0; }
+.pre{ margin-bottom:4px; }
+.q{ font:300 36px/1.1 var(--serif); letter-spacing:-.005em; text-wrap:balance; }
+.hint{ font:300 13px/1.6 var(--sans); color:rgba(13,31,45,.62); max-width:290px; }
+.ctl{ margin-top:18px; }
+.note{ font:300 11px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+/* option rows (kind) */
+.opts{ border-top:.5px solid var(--stone); }
+.opt{ width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; text-align:left; padding-block:18px; border-bottom:.5px solid var(--stone-50); min-height:72px; transition:color 220ms ease; }
+.opt b{ display:block; font:400 21px/1.2 var(--serif); }
+.opt span{ display:block; margin-top:3px; font:300 12.5px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+.opt em{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); font-style:normal; flex:none; }
+.opt.on{ color:var(--navy); } .opt.on em{ color:var(--blue-mid); }
+/* boxed pickers (date & time) */
+.pick{ display:inline-flex; align-items:center; height:44px; padding:0 20px; border-radius:999px; border:.5px solid var(--stone); font:300 13px/1 var(--sans); color:var(--navy); }
+.pick.on{ border-color:var(--navy); }
+.pickrow{ display:flex; gap:10px; flex-wrap:wrap; }
+/* calendar strip */
+.cal{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px 0; margin-top:8px; }
+.cal span{ text-align:center; font:500 9.5px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:rgba(13,31,45,.38); padding-block:10px; }
+.cal b{ display:flex; align-items:center; justify-content:center; height:40px; width:40px; margin-inline:auto; border-radius:999px; font:400 17px/1 var(--serif); color:var(--navy); }
+.cal b.low{ color:rgba(13,31,45,.38); } .cal b.on{ background:var(--navy); color:var(--bone); } .cal b.pk{ border:.5px solid var(--stone); }
+/* stepper */
+.step{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.step .n{ font:300 96px/1 var(--serif); font-variant-numeric:lining-nums tabular-nums; letter-spacing:-.02em; }
+.step .pm{ width:52px; height:52px; border-radius:50%; border:.5px solid var(--navy); font:300 24px/1 var(--sans); display:inline-flex; align-items:center; justify-content:center; }
+.step .pm.off{ border-color:var(--stone); color:rgba(13,31,45,.38); }
+.stepnote{ margin-top:14px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--blue-mid); }
+/* serif underline fields */
+.fld{ display:flex; flex-direction:column; gap:10px; padding-top:18px; }
+.fld label{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.fld .v{ font:300 18px/1.3 var(--serif); color:var(--navy); height:34px; border-bottom:.5px solid var(--stone); }
+.fld .v.ph{ font-style:italic; font-weight:400; color:rgba(13,31,45,.38); border-bottom-color:var(--stone-45); }
+.fld .v.req{ border-bottom-color:var(--navy); }
+/* estimate bar (docked) */
+.est{ margin:0 -28px; background:var(--bone); border-top:.5px solid var(--stone); padding:16px 28px calc(20px + 24px); display:flex; flex-direction:column; gap:14px; }
+.est .pr{ display:flex; align-items:baseline; gap:14px; }
+.est .pr b{ font:400 24px/1 var(--serif); font-variant-numeric:lining-nums; }
+.est .pr span{ font:300 12.5px/1.45 var(--sans); color:rgba(13,31,45,.64); }
+.act{ margin:0 -28px; padding:12px 28px calc(20px + 24px); }
+.act.two{ display:flex; gap:10px; } .act.two .btn{ flex:1; }
+.home{ position:absolute; left:50%; bottom:9px; transform:translateX(-50%); width:134px; height:5px; border-radius:999px; background:var(--navy); opacity:.9; }
+/* summary rows */
+.sum{ border-top:.5px solid var(--stone); }
+.sum div{ display:flex; justify-content:space-between; gap:16px; padding-block:11px; border-bottom:.5px solid var(--stone-50); font:300 12.5px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+.sum dd{ font:400 16px/1.4 var(--serif); color:var(--navy); text-align:right; }
+.terms{ margin-top:18px; font:300 12.5px/1.6 var(--sans); color:rgba(13,31,45,.64); }
+.agree{ margin-top:14px; }
+/* pay */
+.wallet{ display:flex; gap:10px; } .wallet .btn{ flex:1; height:48px; padding:0; }
+.or{ display:flex; align-items:center; gap:12px; font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.38); margin-block:18px 4px; }
+.or::before,.or::after{ content:""; flex:1; border-top:.5px solid var(--stone-50); }
+/* navy screens */
+.scr.navy{ background:var(--navy); color:var(--bone); }
+.scr.navy .top, .scr.navy .hint, .scr.navy .note, .scr.navy .eyebrow, .scr.navy .sum div{ color:rgba(240,235,227,.62); }
+.scr.navy .eyebrow.st{ color:var(--stone); }
+.scr.navy .sum{ border-color:rgba(240,235,227,.22); } .scr.navy .sum div{ border-color:rgba(240,235,227,.14); } .scr.navy .sum dd{ color:var(--bone); }
+.scr.navy .home{ background:var(--bone); }
+.lockup{ display:inline-flex; flex-direction:column; align-items:center; gap:5px; }
+.wm{ font:300 22px/1 var(--serif); letter-spacing:.42em; margin-right:-.42em; text-transform:uppercase; }
+.wm-city{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; margin-right:-.18em; color:rgba(13,31,45,.62); }
+.scr.navy .wm-city{ color:var(--stone); }
+.big{ font:300 44px/1.04 var(--serif); letter-spacing:-.005em; text-wrap:balance; }
+.ref{ font:400 24px/1 var(--serif); font-variant-numeric:lining-nums; }
+
+/* ---------- desktop context: the Voyger split card ---------- */
+.desk{ position:relative; width:1440px; height:900px; background:var(--navy); display:grid; place-items:center; overflow:hidden; }
+.desk .page{ position:absolute; inset:0; opacity:.35; background:var(--blue-rich); }
+.desk .page i{ position:absolute; display:block; background:rgba(240,235,227,.12); }
+.card{ position:relative; width:1080px; height:720px; background:var(--paper); border-radius:calc(var(--r) * 1.6); overflow:hidden; display:grid; grid-template-columns:5fr 7fr; }
+.card .scr{ width:auto; height:auto; border:0; padding:36px 44px 32px; }
+.card .scr .sb, .card .scr .home{ display:none; }
+.card .scr .est, .card .scr .act{ margin:0; padding:16px 0 0; }
+.card .photo{ position:relative; margin:12px 12px 12px 0; border-radius:var(--r); background:var(--blue-rich); overflow:hidden; }
+.card .photo svg{ position:absolute; inset:0; width:100%; height:100%; }
+.card .photo path, .card .photo circle{ fill:none; stroke:var(--bone); stroke-opacity:.72; stroke-width:1; vector-effect:non-scaling-stroke; }
+.card .photo .dot{ fill:var(--bone); stroke:none; }
+.tag{ position:absolute; z-index:3; background:rgba(13,31,45,.6); color:var(--bone); padding:12px 16px; border-radius:var(--r); display:flex; flex-direction:column; gap:3px; font:300 12.5px/1.4 var(--sans); max-width:210px; }
+.tag b{ font:400 15px/1.3 var(--serif); } .tag small{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--stone); }
+.photo-note{ position:absolute; left:20px; bottom:20px; font:300 11px/1.5 var(--sans); color:rgba(240,235,227,.62); }
+.photo-note b{ display:block; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
+@media (max-width:899px){ .board{ padding:40px 20px 80px; } .desk{ display:none; } }
+</style>
+
+<div class="board" id="frame">
+  <div class="board-head">
+    <p class="eyebrow">Kóda · Fillout booking flow · 1.0</p>
+    <h1>Nine questions, one payment, one confirmation.</h1>
+    <p>Step order follows the pricing specification (section 9.1) and Ana's decisions of 28 September: Day / Night / Kóda Weekend first, no language question, no occasion step, an optional note at the end, one exact total from the People question onward, 48 hours' notice or the enquiry route. Every screen uses the brand book's question template. Single-choice questions advance on tap; Continue appears only where a tap cannot mean "done". Prices shown are from the spec's tables (Night, Band C, five hours, standard date) and live in the calculation layer, never in copy.</p>
+  </div>
+
+  <!-- ============ ROW 1 · questions 1–4 ============ -->
+  <div class="row">
+
+    <div class="cell"><p class="lbl eyebrow"><span>01 · Kind</span><span>Advances on tap</span></p>
+    <section class="scr" aria-label="Question 1, kind">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Close</span><span>1 / 9</span></div>
+      <div class="prog"><i style="width:11.1%"></i></div>
+      <div class="qb">
+        <p class="q">Day, night, or the whole weekend?</p>
+        <p class="hint">Every booking is the same person, the same care. Choose how much of your time you'd like handled.</p>
+        <div class="ctl opts">
+          <button class="opt"><span style="margin:0"><b>Kóda Day</b><span>08:00 to 19:59 · four to eight hours</span></span><em>Daytime</em></button>
+          <button class="opt on"><span style="margin:0"><b>Kóda Night</b><span>Dinner, the place after, the walk home</span></span><em>Evening</em></button>
+          <button class="opt"><span style="margin:0"><b>Kóda Weekend</b><span>Friday night, Saturday afternoon, Saturday night</span></span><em>14 hours</em></button>
+        </div>
+      </div>
+      <div class="act"><p class="note">One Kóda for up to six people. Seven to twelve, two Kódas. Within Barcelona.</p></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>02 · Date</span><span>Continue</span></p>
+    <section class="scr" aria-label="Question 2, date">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>2 / 9</span></div>
+      <div class="prog"><i style="width:22.2%"></i></div>
+      <div class="qb">
+        <p class="eyebrow pre">Kóda Night</p>
+        <p class="q">Which date?</p>
+        <p class="hint">We arrange at least 48 hours ahead. Anything sooner, message us directly.</p>
+        <div class="ctl">
+          <div class="pickrow"><span class="pick on">Thursday 12 March 2026</span></div>
+          <div class="cal" aria-hidden="true">
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+            <b class="low">2</b><b class="low">3</b><b class="low">4</b><b class="low">5</b><b class="low">6</b><b class="pk low">7</b><b class="pk low">8</b>
+            <b>9</b><b>10</b><b>11</b><b class="on">12</b><b class="pk">13</b><b class="pk">14</b><b class="pk">15</b>
+            <b>16</b><b>17</b><b>18</b><b>19</b><b class="pk">20</b><b class="pk">21</b><b class="pk">22</b>
+          </div>
+          <p class="note" style="margin-top:10px">Outlined dates are busier in the city. Dates before 7 March are inside 48 hours.</p>
+        </div>
+      </div>
+      <div class="act"><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>03 · Start time</span><span>Continue</span></p>
+    <section class="scr" aria-label="Question 3, start time">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>3 / 9</span></div>
+      <div class="prog"><i style="width:33.3%"></i></div>
+      <div class="qb">
+        <p class="eyebrow pre">Thursday 12 March</p>
+        <p class="q">When should your Kóda arrive?</p>
+        <p class="hint">Half-hour steps. An evening that starts from 20:00, or runs past it, is a Kóda Night.</p>
+        <div class="ctl">
+          <div class="pickrow"><span class="pick on">21:00</span></div>
+          <div class="chips" style="margin-top:18px"><span class="chip">19:30</span><span class="chip">20:00</span><span class="chip">20:30</span><span class="chip on">21:00</span><span class="chip">21:30</span><span class="chip">22:00</span><span class="chip">22:30</span><span class="chip">23:00</span></div>
+        </div>
+      </div>
+      <div class="act"><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>04 · People</span><span>Continue · price appears</span></p>
+    <section class="scr" aria-label="Question 4, people">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>4 / 9</span></div>
+      <div class="prog"><i style="width:44.4%"></i></div>
+      <div class="qb">
+        <p class="q">How many of you?</p>
+        <p class="hint">One Kóda looks after up to six. From seven, two Kódas come.</p>
+        <div class="ctl">
+          <div class="step"><button class="pm" aria-label="Fewer">–</button><span class="n">6</span><button class="pm" aria-label="More">+</button></div>
+          <p class="stepnote">One Kóda · up to six</p>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 6 guests</span></div><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+  </div>
+
+  <!-- ============ ROW 2 · questions 5–8 ============ -->
+  <div class="row">
+
+    <div class="cell"><p class="lbl eyebrow"><span>05 · How long</span><span>Advances on tap · 5 h pre-selected</span></p>
+    <section class="scr" aria-label="Question 5, duration">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>5 / 9</span></div>
+      <div class="prog"><i style="width:55.5%"></i></div>
+      <div class="qb">
+        <p class="q">How long?</p>
+        <p class="hint">Four hours at least. If the evening runs long, your Kóda can arrange more time on the night.</p>
+        <div class="ctl chips"><span class="chip">4 hours</span><span class="chip on">5 hours</span><span class="chip">6 hours</span><span class="chip">7 hours</span><span class="chip">8 hours</span></div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 6 guests</span></div></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>06 · Where</span><span>Continue</span></p>
+    <section class="scr" aria-label="Question 6, where">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>6 / 9</span></div>
+      <div class="prog"><i style="width:66.6%"></i></div>
+      <div class="qb">
+        <p class="q">Where will you be?</p>
+        <p class="hint">A hotel, a neighbourhood or a venue. It tells us where to meet you; it doesn't change the price.</p>
+        <div class="ctl">
+          <div class="fld"><label>Meeting point</label><div class="v">Hotel Arts, Barcelona</div></div>
+          <div class="chips" style="margin-top:22px"><span class="chip">Hotel lobby</span><span class="chip">Restaurant</span><span class="chip">Apartment</span><span class="chip">Somewhere else</span></div>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 6 guests</span></div><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>07 · Anything we should know</span><span>Skip, or Continue</span></p>
+    <section class="scr" aria-label="Question 7, note">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>7 / 9</span></div>
+      <div class="prog"><i style="width:77.7%"></i></div>
+      <div class="qb">
+        <p class="q">Anything we should know?</p>
+        <p class="hint">Optional. A birthday, a late flight, someone who'd rather walk slowly.</p>
+        <div class="ctl">
+          <div class="fld"><label>Note</label><div class="v ph">Anything else — optional</div></div>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 6 guests</span></div><button class="btn btn-ghost wide">Skip</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>08 · Your details</span><span>Continue</span></p>
+    <section class="scr" aria-label="Question 8, your details">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>8 / 9</span></div>
+      <div class="prog"><i style="width:88.8%"></i></div>
+      <div class="qb">
+        <p class="q">Who should we confirm to?</p>
+        <p class="hint">No account, no sign-in. Confirmation arrives by email; your Kóda reaches you on WhatsApp.</p>
+        <div class="ctl">
+          <div class="fld"><label>Name</label><div class="v">Marta Vidal</div></div>
+          <div class="fld"><label>Email</label><div class="v">marta@example.com</div></div>
+          <div class="fld"><label>Phone · WhatsApp</label><div class="v ph req">+34 …</div></div>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 6 guests</span></div><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+  </div>
+
+  <!-- ============ ROW 3 · review, payment, confirmation, routes ============ -->
+  <div class="row">
+
+    <div class="cell"><p class="lbl eyebrow"><span>09 · Review</span><span>Terms, then pay</span></p>
+    <section class="scr" aria-label="Review">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>9 / 9</span></div>
+      <div class="prog"><i style="width:100%"></i></div>
+      <div class="qb" style="justify-content:flex-start;padding-top:28px">
+        <p class="q">Your evening, read back.</p>
+        <dl class="sum ctl" style="margin-top:8px">
+          <div><dt>Kind</dt><dd>Kóda Night</dd></div>
+          <div><dt>Date</dt><dd>Thursday 12 March</dd></div>
+          <div><dt>From</dt><dd>21:00 · five hours</dd></div>
+          <div><dt>People</dt><dd>Six · one Kóda</dd></div>
+          <div><dt>Meeting point</dt><dd>Hotel Arts, Barcelona</dd></div>
+          <div><dt>Note</dt><dd>—</dd></div>
+          <div><dt>Confirm to</dt><dd>marta@example.com</dd></div>
+        </dl>
+        <p class="terms">Full refund more than 72 hours before. Half between 72 and 24 hours. None under 24 hours. Cancel by email or WhatsApp.</p>
+        <div class="agree chips"><span class="chip on">I agree to the terms and cancellation policy</span></div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 6 guests</span></div><button class="btn btn-navy wide">Pay €460 and request</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>10 · Pay in full</span><span>Stripe · cards, Apple Pay, Google Pay</span></p>
+    <section class="scr" aria-label="Payment">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>Payment</span></div>
+      <div class="prog"><i style="width:100%"></i></div>
+      <div class="qb" style="justify-content:flex-start;padding-top:28px">
+        <p class="q">Pay in full, once.</p>
+        <p class="hint">Your Kóda is assigned after payment. Nothing is confirmed until it goes through.</p>
+        <div class="ctl">
+          <div class="wallet"><span class="btn btn-navy">Apple Pay</span><span class="btn btn-ghost">Google Pay</span></div>
+          <p class="or">or card</p>
+          <div class="fld"><label>Card number</label><div class="v ph">0000 0000 0000 0000</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px"><div class="fld"><label>Expiry</label><div class="v ph">MM / YY</div></div><div class="fld"><label>CVC</label><div class="v ph">···</div></div></div>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€460</b><span>Charged now · EUR · receipt by email</span></div><button class="btn btn-navy wide">Pay and request</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>11 · Confirmed</span><span>Navy · closes the journey</span></p>
+    <section class="scr navy" aria-label="Confirmed">
+      <div class="sb"><span>21:41</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span class="lockup" style="color:var(--bone)"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></span><span>Confirmed</span></div>
+      <div class="qb" style="gap:20px">
+        <p class="eyebrow st">Request KD-2603-114</p>
+        <p class="big">Your Kóda is being assigned. The evening is held.</p>
+        <p class="hint" style="color:rgba(240,235,227,.62)">A confirmation with everything below is on its way by email. Your Kóda's name follows once assigned, usually within two hours.</p>
+        <dl class="sum">
+          <div><dt>When</dt><dd>Thursday 12 March · 21:00–02:00</dd></div>
+          <div><dt>Where</dt><dd>Hotel Arts, Barcelona</dd></div>
+          <div><dt>People</dt><dd>Six · one Kóda</dd></div>
+          <div><dt>Charged</dt><dd>€460</dd></div>
+        </dl>
+      </div>
+      <div class="act"><button class="btn btn-ghost dark wide">Message us on WhatsApp</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>Route · Enquiry</span><span>Within 48 h, 13+ people, outside Barcelona</span></p>
+    <section class="scr" aria-label="Enquiry route">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>Enquiry</span></div>
+      <div class="prog"><i style="width:0"></i></div>
+      <div class="qb">
+        <p class="eyebrow pre">Thursday 5 March · within 48 hours</p>
+        <p class="q">Sooner than two days? Message us directly.</p>
+        <p class="hint">Two days lets us choose the right person. For anything closer, we'll tell you honestly what's possible, usually within the hour.</p>
+        <div class="ctl">
+          <div class="fld"><label>Your plans, in a line</label><div class="v ph">Thursday, dinner for six in El Born…</div></div>
+          <div class="fld"><label>Phone · WhatsApp</label><div class="v ph">+34 …</div></div>
+        </div>
+      </div>
+      <div class="act two"><button class="btn btn-navy">WhatsApp</button><button class="btn btn-ghost">Send enquiry</button></div>
+      <div class="home"></div>
+    </section></div>
+  </div>
+
+  <!-- ============ ROW 4 · Kóda Weekend variants ============ -->
+  <div class="row">
+    <div class="cell"><p class="lbl eyebrow"><span>02w · Weekend date</span><span>Replaces 02 and 03 for Kóda Weekend</span></p>
+    <section class="scr" aria-label="Weekend, which weekend">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>2 / 7</span></div>
+      <div class="prog"><i style="width:28.5%"></i></div>
+      <div class="qb">
+        <p class="eyebrow pre">Kóda Weekend</p>
+        <p class="q">Which weekend?</p>
+        <p class="hint">One Kóda for all three windows, arranged once. Start times can move by up to two hours.</p>
+        <div class="ctl">
+          <div class="pickrow"><span class="pick on">Friday 13 – Saturday 14 March</span></div>
+          <dl class="sum" style="margin-top:22px">
+            <div><dt>Friday</dt><dd>20:00–01:00</dd></div>
+            <div><dt>Saturday</dt><dd>12:00–16:00</dd></div>
+            <div><dt>Saturday</dt><dd>21:00–02:00</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="act"><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>03w · Weekend people</span><span>Price appears · duration is fixed at 14 h</span></p>
+    <section class="scr" aria-label="Weekend, people">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>3 / 7</span></div>
+      <div class="prog"><i style="width:42.8%"></i></div>
+      <div class="qb">
+        <p class="q">How many of you?</p>
+        <p class="hint">One Kóda looks after up to six. From seven, two Kódas come.</p>
+        <div class="ctl">
+          <div class="step"><button class="pm" aria-label="Fewer">–</button><span class="n">5</span><button class="pm" aria-label="More">+</button></div>
+          <p class="stepnote">One Kóda · up to six</p>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€1,140</b><span>Kóda Weekend · Friday 13 to Saturday 14 March · three windows · up to 6 guests</span></div><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>04 · People, seven or more</span><span>Two Kódas</span></p>
+    <section class="scr" aria-label="People, seven or more">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>4 / 9</span></div>
+      <div class="prog"><i style="width:44.4%"></i></div>
+      <div class="qb">
+        <p class="q">How many of you?</p>
+        <p class="hint">One Kóda looks after up to six. From seven, two Kódas come.</p>
+        <div class="ctl">
+          <div class="step"><button class="pm" aria-label="Fewer">–</button><span class="n">8</span><button class="pm" aria-label="More">+</button></div>
+          <p class="stepnote">Two Kódas · seven to twelve</p>
+        </div>
+      </div>
+      <div class="est"><div class="pr"><b>€830</b><span>Night presence · Thursday 12 March · 21:00–02:00 · up to 12 guests · two Kódas</span></div><button class="btn btn-navy wide">Continue</button></div>
+      <div class="home"></div>
+    </section></div>
+
+    <div class="cell"><p class="lbl eyebrow"><span>04 · Thirteen or more</span><span>Routes to enquiry</span></p>
+    <section class="scr" aria-label="People, thirteen or more">
+      <div class="sb"><span>21:40</span><span class="r"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="top"><span>Back</span><span>4 / 9</span></div>
+      <div class="prog"><i style="width:44.4%"></i></div>
+      <div class="qb">
+        <p class="q">How many of you?</p>
+        <p class="hint">One Kóda looks after up to six. From seven, two Kódas come.</p>
+        <div class="ctl">
+          <div class="step"><button class="pm" aria-label="Fewer">–</button><span class="n">13</span><button class="pm off" aria-label="More">+</button></div>
+          <p class="stepnote">More than twelve · we'll arrange this by hand</p>
+        </div>
+      </div>
+      <div class="act"><button class="btn btn-navy wide">Message us about a larger group</button></div>
+      <div class="home"></div>
+    </section></div>
+  </div>
+
+  <!-- ============ ROW 5 · desktop context ============ -->
+  <div class="cell"><p class="lbl eyebrow" style="width:auto"><span>Desktop · the same screen inside the split card, over the blurred page</span></p></div>
+  <div class="desk" aria-label="Desktop context, question 1">
+    <div class="page" aria-hidden="true"><i style="left:120px;top:60px;width:300px;height:14px"></i><i style="left:120px;top:120px;width:620px;height:70px"></i><i style="left:120px;top:210px;width:620px;height:70px"></i><i style="left:120px;top:330px;width:420px;height:12px"></i><i style="left:880px;top:420px;width:400px;height:180px"></i></div>
+    <div class="card">
+      <section class="scr" aria-label="Question 1 on desktop">
+        <div class="top"><span>Close</span><span>1 / 9</span></div>
+        <div class="prog"><i style="width:11.1%"></i></div>
+        <div class="qb">
+          <span class="lockup" style="margin-bottom:20px"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></span>
+          <p class="q">Day, night, or the whole weekend?</p>
+          <p class="hint">Every booking is the same person, the same care. Choose how much of your time you'd like handled.</p>
+          <div class="ctl opts">
+            <button class="opt"><span style="margin:0"><b>Kóda Day</b><span>08:00 to 19:59 · four to eight hours</span></span><em>Daytime</em></button>
+            <button class="opt on"><span style="margin:0"><b>Kóda Night</b><span>Dinner, the place after, the walk home</span></span><em>Evening</em></button>
+            <button class="opt"><span style="margin:0"><b>Kóda Weekend</b><span>Friday night, Saturday afternoon, Saturday night</span></span><em>14 hours</em></button>
+          </div>
+        </div>
+        <div class="act"><p class="note">One Kóda for up to six people. Seven to twelve, two Kódas. Within Barcelona.</p></div>
+      </section>
+      <div class="photo" aria-hidden="true">
+        <svg viewBox="0 0 620 700" preserveAspectRatio="none"><path d="M 120 120 C 200 240, 140 380, 300 420 S 520 480, 480 620"/><circle cx="120" cy="120" r="7"/><circle class="dot" cx="120" cy="120" r="2"/><circle cx="300" cy="420" r="7"/><circle class="dot" cx="300" cy="420" r="2"/><circle cx="480" cy="620" r="7"/><circle class="dot" cx="480" cy="620" r="2"/></svg>
+        <div class="tag" style="left:24%;top:9%"><small>20:30</small><b>Hotel lobby</b>The table is under your name.</div>
+        <div class="tag" style="left:54%;top:52%"><small>1.2 km</small><b>left to the door</b>The street is unfamiliar. It doesn't feel that way.</div>
+        <div class="tag" style="left:40%;top:84%"><small>02:30</small><b>Everyone home</b></div>
+        <p class="photo-note"><b>Photo</b>hero-cathedral.jpg, colour look</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){ const s = localStorage.getItem('koda-motion'); document.documentElement.dataset.motion = (s === 'brand' || s === 'enhanced') ? s : 'enhanced'; })();
+</script>
