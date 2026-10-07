@@ -121,7 +121,7 @@ html:not([data-theme="mono"]) .chindex a.is-active{color:var(--index-active);tex
 /* signature stripe (venues): one 4px rule of five equal flat segments, under the hero and above the footer.
    It overlays the hairline it replaces, so it takes no space. */
 .stripe{display:none}
-:is([data-theme="venues"],[data-theme="venues-bold"]) .stripe{display:block;position:relative;height:0}
+:is([data-theme="venues"],[data-theme="venues-bold"]) .stripe:not(.stripe--rows){display:block;position:relative;height:0}
 .stripe span{position:absolute;left:0;right:0;top:0;height:4px;display:flex}
 .stripe i{flex:1}
 .stripe i:nth-child(1){background:var(--v-orange)} .stripe i:nth-child(2){background:var(--v-olive)} .stripe i:nth-child(3){background:var(--v-red)}
@@ -186,6 +186,50 @@ html:not([data-theme="mono"]) .chindex a.is-active{color:var(--index-active);tex
   --ink:var(--c-ink,var(--b-navy));--ink-muted:var(--c-ink,var(--b-navy));--hairline:rgba(0,0,0,.15);--link:var(--accent);--link-ink:var(--ink)}
 [data-theme="cream-bold"] .lock__box{--link:var(--wine)}
 [data-theme="venues-bold"] .lock__box{--link:var(--t-blue);--link-ink:var(--t-blue)}
+/* ---------- heritage themes: cream paper + Yasmin's wine + The Henry Ford's venue colours as wayfinding ----------
+   Roles (60 / 30 / 10): paper (cream) carries the page; navy ink carries the type and one navy band (Contact);
+   wine is Yasmin's own accent (her name, links, active states, the Enter button); the five card colours are
+   wayfinding only: one colour per project (row bar, numbers, case-study marks) and one five-colour rule over the
+   project list. Heritage rich adds a single olive band (Snippets). No gradients, no textures, no shapes. */
+:is([data-theme="heritage"],[data-theme="heritage-rich"]){
+  --ground:#F3F0EA; --ground-2:#E9E4DB; --ink:#1C2635;
+  --ink-muted:rgba(28,38,53,.68); --ink-low:rgba(28,38,53,.45); --hairline:rgba(28,38,53,.15);
+  --accent:#8C2F1E; --accent-2:#8C2F1E; --link:#8C2F1E; --active:var(--ink);
+  --tile:#E9E4DB; --tile-hover:#E1DCD3;
+  --v-orange:#E9A35B; --v-olive:#8A8D4F; --v-red:#B04A44; --v-blue:#6E94AB; --v-navy:#1E3F63;
+  --h-olive:#63653A; --h-orange:#8E5412; --h-blue:#48677A; --h-red:#A8443F;      /* text-safe on both creams */
+  --photo-scrim:rgba(28,38,53,.6); --on-photo-2:#FFFFFF;
+}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .room01{--room:var(--h-olive);--room-fill:var(--v-olive);--room-tint:#E2E0D0}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .room02{--room:var(--h-orange);--room-fill:var(--v-orange);--room-tint:#EEDFCB}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .room03{--room:var(--h-blue);--room-fill:var(--v-blue);--room-tint:#DDE1DF}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .room04{--room:var(--h-red);--room-fill:var(--v-red);--room-tint:#E8D3CC}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) body.case{--index-no:var(--room);--fig-no:var(--room);--index-active:var(--room)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .hero__hi em{color:var(--accent)}
+/* project rows: each takes its venue colour as a 3px bar in the margin, and its number in that colour */
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .row{position:relative}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .row::before{content:"";position:absolute;left:-14px;top:22px;bottom:22px;width:3px;background:var(--row-fill,transparent)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .row:has(.room01){--row-fill:var(--v-olive);--index-no:var(--h-olive)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .row:has(.room02){--row-fill:var(--v-orange);--index-no:var(--h-orange)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .row:has(.room03){--row-fill:var(--v-blue);--index-no:var(--h-blue)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .row:has(.room04){--row-fill:var(--v-red);--index-no:var(--h-red)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) :is(.row,.card):hover .logo-tile[class*="room"]{background:var(--room-tint)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .card:has(.room01) .no{color:var(--h-olive)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .card:has(.room02) .no{color:var(--h-orange)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .card:has(.room03) .no{color:var(--h-blue)}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .card:has(.room04) .no{color:var(--h-red)}
+/* the one five-colour rule: over the project list, the legend for the row colours */
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .rows{border-top-color:transparent}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .stripe--rows{display:block;position:relative;height:0}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .stripe--rows span{top:-1px;height:3px}
+/* discipline panels: the built darkening, in navy ink instead of black */
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .panel .m{filter:none}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .panel .m::after{content:"";position:absolute;inset:0;background:rgba(28,38,53,.6);transition:opacity .3s ease}
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) .panel:hover .m::after{opacity:.8}
+/* one navy band: Contact (cream text; links underlined in the card orange, decoration only) */
+:is([data-theme="heritage"],[data-theme="heritage-rich"]) #contact{--ink:#F3F0EA;--ink-muted:#F3F0EA;--hairline:rgba(243,240,234,.25);--link:#E9A35B;--link-ink:#F3F0EA;background:#1E3F63;color:#F3F0EA}
+/* heritage rich: one olive band, Snippets (cream text; the slideshow arrows stay ink on white) */
+[data-theme="heritage-rich"] #snippets{--ink:#F3F0EA;--ink-muted:#F3F0EA;--hairline:rgba(243,240,234,.3);--active:#F3F0EA;background:#5E6337;color:#F3F0EA}
 /* theme switcher (prototype only, not part of the Squarespace build) */
 .theme-sw{position:fixed;top:80px;right:var(--margin);z-index:60;display:flex;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 2 * var(--margin));gap:2px;padding:4px;background:var(--ground);border:1px solid var(--hairline)}
 .theme-sw button{font:500 11px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;padding:7px 8px;border:0;border-radius:0;background:none;color:var(--ink-muted);cursor:pointer}

@@ -41,7 +41,7 @@ Captions and labels use **62% ink, not 55%**. At 11px, 55% measures 4.4:1 on whi
 
 ### Site Styles per theme (theme comparison: the client picks one)
 
-The prototype can show five palettes (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all five; only colours change. The first table covers the three calm palettes; the bold two follow. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
+The prototype can show seven palettes (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all five; only colours change. The first table covers the three calm palettes; the bold two follow. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
 
 | Setting | Mono (built) | Cream | Venues |
 |---|---|---|---|
@@ -78,6 +78,21 @@ The prototype can show five palettes (switcher, top-right; values and contrast i
 | Olive panel / band colour | — | `#72743F`, outside the palette: *CSS* for the Room 01 cover overlay if the overlay picker only offers palette colours |
 
 **CSS cost.** Cream bold: the calm Cream set (21 lines) + slideshow frame + lock background = **about 23 lines**, inside the 30 budget. Venues bold: the calm Venues set (23) + panel colours (5) + contact underline (1) + Room 02 header (1) + lock background (1) + red band (1) = **about 32 lines, plus 4 for the reflection tints**, so **over the 30-line budget**. To bring it under: drop the reflection tints (use the Light theme) and the panels' hover change, and merge the four room tile hovers into one rule per line pair; that lands at about 30. This is the real cost of choosing Venues bold.
+
+**Heritage palettes (the refined colour direction; reasoning in COLOUR-DIRECTION.md).** Cream paper, navy-ink type, wine as Yasmin's accent, the card colours as per-project wayfinding.
+
+| Where | Heritage | Heritage rich |
+|---|---|---|
+| Palette (five slots) | `#F3F0EA` · `#E9E4DB` · `#1C2635` · `#8C2F1E` · `#1E3F63` | `#F3F0EA` · `#1C2635` · `#8C2F1E` · `#1E3F63` · `#5E6337` (`#E9E4DB` only through CSS) |
+| Section themes | **Paper** (bg `#F3F0EA`, text `#1C2635`) for most sections; **Paper 2** (`#E9E4DB`) for Snippets and Reflection; **Navy** (bg `#1E3F63`, text `#F3F0EA`) for Contact | Same, but Snippets uses **Olive** (bg `#5E6337`, text `#F3F0EA`) and the Reflection uses Paper |
+| Paragraph 3 colour | `#61676F` (68% ink) | same |
+| "Yasmin." in the hero | text colour **wine** `#8C2F1E` on the italic word (text colour picker; **verify**) | same |
+| Links | text ink, underline wine (*CSS* +1); in Contact, cream text with an orange `#E9A35B` underline (*CSS* +1) | same |
+| Primary button / Enter | outline ink / solid wine (CSS rule 9's value) | same |
+| Project list | a five-colour rule over the list: **Image block** `stripe-venues.png` (native); a 3px venue-colour bar beside each row and the number in the venue's text colour (Shape block per row, or *CSS* +4) | same |
+| Discipline panels | the 45% layer in navy-ink instead of black, 60% (*CSS*: rules 15–16 values) | same |
+| Case studies | cover overlay navy-ink `#1C2635` at 60%; per-project chapter, FIG. and index numbers in the venue text colour (as Venues: text colour or *CSS* +4) | same |
+| CSS cost | about **28–30 lines** (the limit): drop the coloured tile hovers first if needed | same |
 
 **Not carried to Squarespace:** the theme switcher, the `?theme=` links and the `data-theme` attribute are prototype tools only.
 

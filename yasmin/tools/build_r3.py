@@ -438,10 +438,10 @@ SPECIAL = {
 
 # ---------------------------------------------------------------- page shell
 # Theme comparison (prototype only; Squarespace gets one palette). THEMES.md has the values.
-THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold"]
+THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold", "heritage", "heritage-rich"]
 THEME_HEAD_JS = ("(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}"
                  "if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}"
-                 "if(['mono','cream','cream-bold','venues','venues-bold'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
+                 "if(['mono','cream','cream-bold','venues','venues-bold','heritage','heritage-rich'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
 THEME_JS = r"""
 /* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
    the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
@@ -596,7 +596,7 @@ def home():
 <!-- A3: project rows with hairlines -->
 <section class="section" id="projects"><div class="wrap">
   <div class="projects-head"><h2 data-added="ui">Projects</h2><a class="u" href="projects.html" data-added="ui">All projects →</a></div>
-  <div class="rows">{rows}</div>
+  <div class="rows">{stripe('stripe--rows')}{rows}</div>
 </div></section>
 
 <!-- Contact -->
