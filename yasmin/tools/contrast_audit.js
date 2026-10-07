@@ -50,7 +50,7 @@ const ratio = (a, b) => { const [x, y] = a > b ? [a, b] : [b, a]; return (x + 0.
         }
         return res;
       });
-      await p.addStyleTag({ content: '*,*::before,*::after{color:transparent!important;text-decoration-color:transparent!important;text-shadow:none!important}' });
+      await p.addStyleTag({ content: '*,*::before,*::after{transition:none!important;color:transparent!important;text-decoration-color:transparent!important;text-shadow:none!important}' });   // no transition: hidden text must be gone, not fading
       await p.waitForTimeout(150);
       const H = await p.evaluate(() => document.documentElement.scrollHeight);
       const buf = await p.screenshot({ fullPage: true, clip: { x: 0, y: 0, width: WIDTH, height: H } });

@@ -438,10 +438,12 @@ SPECIAL = {
 
 # ---------------------------------------------------------------- page shell
 # Theme comparison (prototype only; Squarespace gets one palette). THEMES.md has the values.
-THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold", "heritage", "heritage-rich"]
+THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold", "heritage", "heritage-rich", "salon", "campus"]
+DIRECTIONS = [("heritage", "Archive"), ("salon", "Salon"), ("campus", "Campus"), ("mono", "Mono")]          # the three colour directions + the build
+EARLIER = [("cream", "Cream"), ("cream-bold", "Cream bold"), ("venues", "Venues"), ("venues-bold", "Venues bold"), ("heritage-rich", "Heritage rich")]
 THEME_HEAD_JS = ("(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}"
                  "if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}"
-                 "if(['mono','cream','cream-bold','venues','venues-bold','heritage','heritage-rich'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
+                 "if(['mono','cream','cream-bold','venues','venues-bold','heritage','heritage-rich','salon','campus'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
 THEME_JS = r"""
 /* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
    the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
@@ -471,8 +473,10 @@ THEME_JS = r"""
 })();
 """
 THEME_SWITCHER = ('<div class="theme-sw" role="group" aria-label="Colour theme (prototype only)" data-added="ui">'
-                  + "".join(f'<button type="button" data-t="{t}" aria-pressed="false">{t.replace("-", " ").capitalize()}</button>' for t in THEMES)
-                  + f'</div>\n<script>{THEME_JS}</script>')
+                  + "".join(f'<button type="button" data-t="{t}" aria-pressed="false">{n}</button>' for t, n in DIRECTIONS)
+                  + '<span class="sep" aria-hidden="true"></span><details><summary>Earlier</summary>'
+                  + "".join(f'<button type="button" data-t="{t}" aria-pressed="false">{n}</button>' for t, n in EARLIER)
+                  + f'</details></div>\n<script>{THEME_JS}</script>')
 
 
 def stripe(cls=""):

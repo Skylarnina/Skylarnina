@@ -343,7 +343,8 @@ RATIOS = {"Cover (photo)": v(".cover .m", "aspect-ratio"), "Project logo tiles":
           "Placeholder": v(".placeholder", "aspect-ratio")}
 RADIUS = sorted(set(re.findall(r"border-radius:([^;}]+)", CSS)))
 # a real shadow has a blur; "0 0 0 100vmax colour" is the bold themes' full-bleed band fill (prototype-only), not a shadow
-SHADOW = any(not re.match(r"0 0 0 100vmax ", v.strip()) for v in re.findall(r"box-shadow:([^;}]+)", CSS))
+SHADOW = any(not re.match(r"(inset )?0 \S+ 0 ", v.strip()) and v.strip() != "none!important" and v.strip() != "none"
+             for v in re.findall(r"box-shadow:([^;}]+)", CSS))   # zero-blur fills and rules (inset 0 2px 0 …) are not shadows
 
 # ------------------------------------------------------------------ page
 def run(title, no):
