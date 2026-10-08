@@ -14,8 +14,8 @@ export interface QuizSubmission {
   totals: ProfileTotals
   result: ProfileId
   email: string
-  /** ISO timestamp of when the GDPR consent box was ticked and submitted. */
-  consentedAt: string
+  /** ISO timestamp of the submission (the privacy notice is shown next to the button). */
+  submittedAt: string
 }
 
 export type OnQuizComplete = (submission: QuizSubmission) => Promise<void>

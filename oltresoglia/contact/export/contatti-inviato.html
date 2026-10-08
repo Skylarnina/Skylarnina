@@ -41,7 +41,7 @@
     --fill-soft: color-mix(in srgb, var(--oltre-porcelain) 12%, transparent);
     --fill-disabled: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
 
-    /* Banner surface: grey (client). Two readings of "grey", switchable in the prototype bar. */
+    /* Banner surface: dark grey (used by the Chi siamo cards); the Contact banner uses Porcelain below. */
     --fill-banner: color-mix(in srgb, var(--oltre-porcelain) 13%, var(--oltre-dark-charcoal)); /* ≈ #232526 */
     --panel: color-mix(in srgb, var(--oltre-dark-charcoal) 88%, transparent);
 
@@ -172,7 +172,7 @@
     padding: 24px; border-radius: 20px;
     background: var(--fill-banner); border: 1px solid var(--line-hair);
   }
-  /* Option B: the brand's light Porcelain as the grey (the client's reference banner was light).
+  /* Contact banner: light Porcelain (client's choice, the "white version").
      Only the left column's colours change; the form card stays dark. */
   .banner[data-surface="porcellana"] {
     --fill-banner: var(--oltre-porcelain);
@@ -271,16 +271,10 @@
 
   .success { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; padding-block: 24px; }
   .success svg { width: 56px; height: 56px; color: var(--oltre-saffron-mango); }
-  .success p { margin: 0; max-width: 28ch; font-size: 20px; line-height: 1.4; color: var(--text); outline: none; }
+  .success__text { outline: none; }
+  .success__text p { margin: 0; max-width: 34ch; font-size: 16px; line-height: 1.6; color: var(--text-body); }
+  .success__text .success__title { margin-bottom: 8px; font-size: 22px; line-height: 1.3; font-weight: 600; color: var(--text); }
 
-  /* ---------- Details row ---------- */
-  .details {
-    display: grid; gap: 16px; margin: 32px 0 0; padding: 24px 0 0; border-top: 1px solid var(--line-hair);
-  }
-  @media (min-width: 720px) { .details { grid-template-columns: repeat(3, 1fr); gap: 32px; padding-inline: 8px; } }
-  .details div { display: flex; gap: 12px; align-items: baseline; font-size: 14px; }
-  .details dt { color: var(--text-muted); }
-  .details dd { margin: 0; color: var(--text-body); }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
@@ -302,11 +296,6 @@
           <button type="button" data-state="default" aria-pressed="true">Predefinito</button>
           <button type="button" data-state="error" aria-pressed="false">Errore</button>
           <button type="button" data-state="success" aria-pressed="false">Inviato</button>
-        </span>
-        <span class="proto__label">Banner</span>
-        <span class="proto__opts">
-          <button type="button" data-surface="grigio" aria-pressed="true">Grigio scuro</button>
-          <button type="button" data-surface="porcellana" aria-pressed="false">Grigio chiaro</button>
         </span>
       </div>
 
@@ -342,7 +331,7 @@
 
   <main>
     <div class="wrap">
-      <section class="banner" data-surface="grigio" aria-labelledby="contact-title">
+      <section class="banner" data-surface="porcellana" aria-labelledby="contact-title">
         <div class="banner__intro">
           <p class="eyebrow">Contatti</p>
           <h1 class="headline" id="contact-title">
@@ -352,7 +341,7 @@
           <p class="lede">Nessun bot, nessuna attesa. Ti rispondiamo noi, e in fretta.</p>
           <!-- Replaced after client feedback (round 1). Previous line: "Rispondiamo di persona, di solito entro un giorno lavorativo." -->
 
-          <p class="wa-lead">Vuoi una risposta ancora più rapida? Scrivici su WhatsApp</p>
+          <p class="wa-lead">Vuoi una risposta ancora più rapida? Scrivici su WhatsApp, clicca qui sotto.</p>
 
           <!-- Number pending from the client: replace NUMERO-DA-CONFERMARE (international format, digits only). -->
           <a class="pill pill--caps whatsapp" href="https://wa.me/NUMERO-DA-CONFERMARE?text=Ciao%20Pietro%2C%20ti%20scrivo%20dal%20sito.%20Vorrei%20qualche%20informazione%20sul%20percorso." target="_blank" rel="noopener">
@@ -407,17 +396,15 @@
               <circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="2"/>
               <path d="M17 29l7.5 7.5L39 21" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <p role="status" tabindex="-1">Messaggio inviato. Ti rispondiamo presto.</p>
+            <div role="status" tabindex="-1" class="success__text">
+              <p class="success__title">Messaggio inviato.</p>
+              <p>Abbiamo ricevuto la tua richiesta.<br />Ti contatteremo al più presto.</p>
+            </div>
+            <button class="pill pill--sm" type="button" id="contact-again">Invia un altro messaggio</button>
           </div>
         </div>
       </section>
 
-      <!-- Details pending from the client: keep the placeholders visible until they arrive. -->
-      <dl class="details">
-        <div><dt>Email</dt><dd>[email da confermare]</dd></div>
-        <div><dt>Dove</dt><dd>[città da confermare]</dd></div>
-        <div><dt>Orari</dt><dd>[orari da confermare]</dd></div>
-      </dl>
     </div>
   </main>
 
@@ -502,7 +489,7 @@
     function showSuccess(focus) {
       form.hidden = true
       success.hidden = false
-      if (focus) success.querySelector('p').focus()
+      if (focus) success.querySelector('.success__text').focus()
     }
 
     function reset() {
@@ -514,6 +501,11 @@
       form.hidden = false
       success.hidden = true
     }
+
+    document.getElementById('contact-again').addEventListener('click', () => {
+      reset()
+      fields[0].focus()
+    })
 
     // ----- Prototype state switch -----
     const states = {
@@ -535,16 +527,6 @@
     const fromUrl = new URLSearchParams(location.search).get('stato') || location.hash.slice(1)
     setState({ errore: 'error', error: 'error', inviato: 'success', success: 'success' }[fromUrl] || 'success')
 
-    // ----- Prototype banner switch -----
-    const banner = document.querySelector('.banner')
-    const surfaceButtons = [...document.querySelectorAll('.proto button[data-surface]')]
-    function setSurface(name) {
-      if (name !== 'porcellana') name = 'grigio'
-      banner.dataset.surface = name
-      surfaceButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.surface === name)))
-    }
-    surfaceButtons.forEach((b) => b.addEventListener('click', () => setSurface(b.dataset.surface)))
-    setSurface(new URLSearchParams(location.search).get('banner'))
 
     // ----- Mobile menu -----
     const menuBtn = document.querySelector('.nav__menu')

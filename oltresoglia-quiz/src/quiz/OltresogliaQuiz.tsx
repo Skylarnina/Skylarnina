@@ -15,6 +15,7 @@ import eclissiBg from '../assets/backgrounds/eclissi.svg'
 import orbitaBg from '../assets/backgrounds/orbita.svg'
 import sogliaBg from '../assets/backgrounds/soglia.svg'
 import zenitBg from '../assets/backgrounds/zenit.svg'
+import { suggestEmail } from './emailSuggestion'
 import { onQuizComplete as placeholderOnQuizComplete, type OnQuizComplete } from './onQuizComplete'
 import {
   PROFILE_NAMES,
@@ -34,25 +35,47 @@ import {
 /* Copy that is not in the brief — to be confirmed by Pietro.         */
 /* ------------------------------------------------------------------ */
 
-const INTRO_VALUE_PROP = 'Otto domande sulle tue giornate reali. Un profilo che le descrive davvero.'
-const INTRO_META = '8 domande · circa 2 minuti'
+// Intro copy from Pietro (test feedback, Oct 2026). Pairs of lines render as one paragraph.
+const INTRO_PARAGRAPHS = [
+  'Il problema non è la tua disciplina.\nÈ che hai sempre cercato di seguire programmi costruiti per una vita che non è la tua.',
+  '8 domande per capire come sono davvero fatte le tue giornate.\nAl termine riceverai via email un piano personalizzato: come strutturare alimentazione, allenamento e abitudini intorno ai tuoi impegni reali.',
+  'Per perdere grasso, costruire forza e fiato, e avere le energie per performare ovunque.\nNel lavoro, sul fisico e nella vita.',
+  'Non è il solito test che ti dice chi sei.\nÈ il primo passo per costruire un sistema che funzioni anche quando la tua settimana non va come previsto.',
+]
+const INTRO_META = '8 domande · 60–90 secondi'
 
-interface ResultCopy {
-  definingLine: string | null
-  narratedDay: string | null
-  whatChanges: string | null
-  whatsappLabel: string
-  /** Placeholder until the real WhatsApp link is supplied. */
-  whatsappHref: string
+// Steps shown on the analysis screen between question 8 and the email step.
+const ANALYSIS_STEPS = ['Incrocio orari, turni e trasferte', 'Calcolo quanto pesa davvero la tua giornata', 'Individuo il tuo profilo']
+const ANALYSIS_STEP_MS = 900
+
+// Result description per profile, from Pietro. `null` keeps a visible placeholder until the text arrives.
+const PROFILE_DESCRIPTIONS: Record<ProfileId, string[] | null> = {
+  ORBITA: [
+    'La sveglia cambia, i pasti si spostano, il sonno segue il turno.\nReggi notti e cambi che manderebbero in tilt chiunque, e a volte hai persino più ore libere degli altri. Solo che non stanno mai nello stesso posto.',
+    'Quello che ti manca non è il tempo, è un riferimento stabile.\nUn piano scritto per chi ha il lunedì salta alla prima rotazione.',
+    'Ti abbiamo inviato per email la guida che fa per te.\nPerché un sistema che regge solo quando tutto va come previsto non è un sistema.',
+  ],
+  ZENIT: [
+    "La tua giornata ha un inizio preciso e una fine che decide il lavoro: il rientro delle 19 diventa 21, poi una telefonata, una mail, un cliente che si trattiene. La chiudi quando l'hai vinta, non quando segna l'orologio. A quel punto la forza per allenarti ce l'hai ancora, ma le decisioni le hai finite molto prima.",
+    "Quello che ti manca è una fine affidabile della giornata. La prima cosa che si rompe è la sera: l'allenamento rimandato, la cena che diventa il pasto più grande.",
+    'Ti abbiamo inviato per email la guida che fa per te.\nPerché la sera non può continuare a essere il momento in cui molli tutto.',
+  ],
+  // Only partly visible in the screenshot we received: full text pending from Pietro.
+  AFELIO: null,
+  ECLISSI: null,
 }
 
-// [PIETRO TO PROVIDE — final result copy per profile not yet written]
-// Fill a slot and its placeholder disappears; leave it null to keep the marked placeholder.
-const RESULT_COPY: Record<ProfileId, ResultCopy> = {
-  ORBITA: { definingLine: null, narratedDay: null, whatChanges: null, whatsappLabel: 'Scrivici su WhatsApp', whatsappHref: '#' },
-  ZENIT: { definingLine: null, narratedDay: null, whatChanges: null, whatsappLabel: 'Scrivici su WhatsApp', whatsappHref: '#' },
-  AFELIO: { definingLine: null, narratedDay: null, whatChanges: null, whatsappLabel: 'Scrivici su WhatsApp', whatsappHref: '#' },
-  ECLISSI: { definingLine: null, narratedDay: null, whatChanges: null, whatsappLabel: 'Scrivici su WhatsApp', whatsappHref: '#' },
+/** Where "Vedi il tuo risultato" leads (per-profile page or video). Placeholder until confirmed. */
+const RESULT_CTA_HREF: Record<ProfileId, string> = { ORBITA: '#', ZENIT: '#', AFELIO: '#', ECLISSI: '#' }
+
+/** Renders "line one\nline two" as one paragraph with a line break. */
+function Lines({ text }: { text: string }) {
+  return text.split('\n').map((line, i) => (
+    <span key={i}>
+      {i > 0 && <br />}
+      {line}
+    </span>
+  ))
 }
 
 /* ------------------------------------------------------------------ */
@@ -70,7 +93,7 @@ const BACKGROUND_RESULT: Record<ProfileId, string> = {
 }
 
 // Overlay strength per screen: light where there is little text, heavier behind the questions.
-const OVERLAY_OPACITY: Record<Step['kind'], number> = { intro: 0.2, question: 0.6, email: 0.6, result: 0.3 }
+const OVERLAY_OPACITY: Record<Step['kind'], number> = { intro: 0.2, question: 0.6, analysis: 0.6, email: 0.6, result: 0.3 }
 
 /* ------------------------------------------------------------------ */
 /* Persistence — answers only, never totals or the result.            */
@@ -112,6 +135,7 @@ function clearSavedAnswers() {
 type Step =
   | { kind: 'intro' }
   | { kind: 'question'; index: number }
+  | { kind: 'analysis' }
   | { kind: 'email' }
   | { kind: 'result'; profile: ProfileId }
 
@@ -120,6 +144,7 @@ type SubmitStatus = 'idle' | 'submitting' | 'error'
 const SUBMIT_TIMEOUT_MS = 20_000
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[^\s@.]{2,}$/
 const EMAIL_ERROR_DELAY_MS = 700
+const EMAIL_FORMAT_ERROR = 'Questa email non sembra completa. Controlla, ad esempio: nome@email.it'
 
 function stepKey(step: Step) {
   return step.kind === 'question' ? `question-${step.index}` : step.kind
@@ -159,22 +184,16 @@ export interface OltresogliaQuizProps {
 }
 
 export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComplete }: OltresogliaQuizProps) {
-  const [initial] = useState(() => {
-    const saved = loadSavedAnswers()
-    return saved
-      ? { answers: saved, step: resumeStep(saved), resumed: true }
-      : { answers: emptyAnswers(), step: { kind: 'intro' } as Step, resumed: false }
-  })
+  // A returning visitor lands on the intro, which offers "Riprendi dalla domanda N".
+  const [initialAnswers] = useState(() => loadSavedAnswers() ?? emptyAnswers())
 
-  const [answers, setAnswers] = useState<AnswerIndices>(initial.answers)
-  const [step, setStep] = useState<Step>(initial.step)
+  const [answers, setAnswers] = useState<AnswerIndices>(initialAnswers)
+  const [step, setStep] = useState<Step>({ kind: 'intro' })
   const [direction, setDirection] = useState(1)
-  const [showResumeNotice, setShowResumeNotice] = useState(initial.resumed)
   // Headings only take focus after the visitor has navigated — never on first page load.
   const [hasNavigated, setHasNavigated] = useState(false)
 
   const [email, setEmail] = useState('')
-  const [consent, setConsent] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle')
   const submittingRef = useRef(false)
 
@@ -187,7 +206,6 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
   const go = useCallback((next: Step, dir: 1 | -1) => {
     setDirection(dir)
     setHasNavigated(true)
-    setShowResumeNotice(false)
     setStep(next)
   }, [])
 
@@ -219,7 +237,7 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
       totals,
       result,
       email: email.trim(),
-      consentedAt: new Date().toISOString(),
+      submittedAt: new Date().toISOString(),
     }
 
     submittingRef.current = true
@@ -239,7 +257,13 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
   let screen: ReactNode
   switch (step.kind) {
     case 'intro':
-      screen = <IntroScreen focusOnMount={hasNavigated} onStart={() => go({ kind: 'question', index: 0 }, 1)} />
+      screen = (
+        <IntroScreen
+          focusOnMount={hasNavigated}
+          resumeAt={answers.some((a) => a != null) ? resumeStep(answers) : null}
+          onStart={(next) => go(next, 1)}
+        />
+      )
       break
     case 'question': {
       const i = step.index
@@ -250,20 +274,21 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
           selected={answers[i]}
           onSelect={(option) => selectAnswer(i, option)}
           onBack={() => go(i === 0 ? { kind: 'intro' } : { kind: 'question', index: i - 1 }, -1)}
-          onNext={() => go(i + 1 < TOTAL_QUESTIONS ? { kind: 'question', index: i + 1 } : { kind: 'email' }, 1)}
+          onNext={() => go(i + 1 < TOTAL_QUESTIONS ? { kind: 'question', index: i + 1 } : { kind: 'analysis' }, 1)}
         />
       )
       break
     }
+    case 'analysis':
+      screen = <AnalysisScreen focusOnMount={hasNavigated} onDone={() => go({ kind: 'email' }, 1)} />
+      break
     case 'email':
       screen = (
         <EmailScreen
           focusOnMount={hasNavigated}
           email={email}
-          consent={consent}
           status={submitStatus}
           onEmailChange={setEmail}
-          onConsentChange={setConsent}
           onBack={() => {
             setSubmitStatus('idle')
             go({ kind: 'question', index: TOTAL_QUESTIONS - 1 }, -1)
@@ -287,12 +312,7 @@ export default function OltresogliaQuiz({ onQuizComplete = placeholderOnQuizComp
         <header className="relative mx-auto w-full max-w-2xl px-4 pt-5 sm:px-8 sm:pt-8">
           {/* Text wordmark in Whiteout — swap for the official logo SVG when available. */}
           <p className="font-display text-sm font-black tracking-[0.22em] text-whiteout">OLTRESOGLIA</p>
-          {(step.kind === 'question' || step.kind === 'email') && <Progress step={step} />}
-          {showResumeNotice && (
-            <p role="status" className="mt-4 text-sm text-porcelain/70">
-              Bentornato: abbiamo ripreso da dove eri rimasto.
-            </p>
-          )}
+          {(step.kind === 'question' || step.kind === 'analysis' || step.kind === 'email') && <Progress step={step} />}
         </header>
 
         <main className="relative mx-auto flex w-full max-w-2xl flex-1 flex-col overflow-x-clip px-4 sm:px-8">
@@ -407,7 +427,7 @@ function Spinner() {
   )
 }
 
-function Progress({ step }: { step: Extract<Step, { kind: 'question' } | { kind: 'email' }> }) {
+function Progress({ step }: { step: Extract<Step, { kind: 'question' } | { kind: 'analysis' } | { kind: 'email' }> }) {
   const current = step.kind === 'question' ? step.index : TOTAL_QUESTIONS
   return (
     // The heading of each question carries the same info for screen readers.
@@ -418,7 +438,7 @@ function Progress({ step }: { step: Extract<Step, { kind: 'question' } | { kind:
             Domanda <span className="text-saffron">{current + 1}</span> di {TOTAL_QUESTIONS}
           </>
         ) : (
-          <span className="text-saffron">Ultimo passo</span>
+          <span className="text-saffron">{step.kind === 'analysis' ? 'Analisi in corso' : 'Ultimo passo'}</span>
         )}
       </p>
       <div className="mt-3 grid grid-cols-8 gap-1.5">
@@ -446,8 +466,17 @@ function ActionBar({ children }: { children: ReactNode }) {
 /* Screens                                                             */
 /* ------------------------------------------------------------------ */
 
-function IntroScreen({ focusOnMount, onStart }: { focusOnMount: boolean; onStart: () => void }) {
+interface IntroScreenProps {
+  focusOnMount: boolean
+  /** Where a returning visitor picks up, or null for a first visit. */
+  resumeAt: Step | null
+  onStart: (next: Step) => void
+}
+
+function IntroScreen({ focusOnMount, resumeAt, onStart }: IntroScreenProps) {
   const headingRef = useScreenHeading(focusOnMount)
+  const resumeLabel =
+    resumeAt?.kind === 'question' ? `Riprendi dalla domanda ${resumeAt.index + 1}` : resumeAt ? "Riprendi dall'ultimo passo" : null
   return (
     <section className="flex flex-1 flex-col justify-center py-12">
       <h1
@@ -457,14 +486,21 @@ function IntroScreen({ focusOnMount, onStart }: { focusOnMount: boolean; onStart
       >
         {QUIZ_TITLE}
       </h1>
-      <p className="mt-6 max-w-prose text-lg leading-relaxed text-porcelain/75">{INTRO_VALUE_PROP}</p>
-      <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-        <PrimaryButton onClick={onStart} className="w-full sm:w-auto">
-          Inizia
-          <span aria-hidden="true">→</span>
-        </PrimaryButton>
-        <p className="text-sm text-porcelain/55">{INTRO_META}</p>
+      <div className="mt-6 max-w-[60ch] space-y-4 text-base leading-relaxed text-porcelain/80 sm:text-[17px]">
+        {INTRO_PARAGRAPHS.map((text) => (
+          <p key={text}>
+            <Lines text={text} />
+          </p>
+        ))}
       </div>
+      <p className="mt-8 font-display text-xs font-normal tracking-[0.18em] text-saffron uppercase">{INTRO_META}</p>
+      <PrimaryButton
+        onClick={() => onStart(resumeAt ?? { kind: 'question', index: 0 })}
+        className="mt-5 w-full sm:w-auto sm:self-start"
+      >
+        {resumeLabel ?? 'Inizia'}
+        <span aria-hidden="true">→</span>
+      </PrimaryButton>
     </section>
   )
 }
@@ -482,24 +518,32 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
   const question = QUESTIONS[index]
   const headingRef = useScreenHeading(focusOnMount)
   const headingId = useId()
-  const hintId = useId()
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([])
-  const [nudged, setNudged] = useState(false)
   const hasSelection = selected != null
 
+  // Avanti stays focusable while inactive; pressing it sends focus to the answers.
   const tryNext = () => {
-    if (hasSelection) {
-      onNext()
-    } else {
-      setNudged(true)
-      optionRefs.current[0]?.focus()
-    }
+    if (hasSelection) onNext()
+    else optionRefs.current[0]?.focus()
   }
 
-  const choose = (option: number) => {
-    setNudged(false)
-    onSelect(option)
-  }
+  const choose = (option: number) => onSelect(option)
+
+  // Letter keys pick an answer (A, B, C, D), matching the letters on screen.
+  useEffect(() => {
+    const onKey = (event: globalThis.KeyboardEvent) => {
+      if (event.metaKey || event.ctrlKey || event.altKey) return
+      const target = event.target as HTMLElement | null
+      if (target?.closest('input, textarea')) return
+      const i = 'abcd'.indexOf(event.key.toLowerCase())
+      if (i >= 0 && i < question.options.length) {
+        onSelect(i)
+        optionRefs.current[i]?.focus()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onSelect, question.options.length])
 
   const onOptionKeyDown = (event: KeyboardEvent<HTMLButtonElement>, i: number) => {
     const count = question.options.length
@@ -562,7 +606,7 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
               aria-checked={isSelected}
               onClick={() => choose(i)}
               onKeyDown={(e) => onOptionKeyDown(e, i)}
-              className={`flex min-h-14 w-full cursor-pointer items-start gap-4 rounded-xl border px-4 py-4 text-left backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-200 sm:px-5 ${focusRingTight} ${
+              className={`flex min-h-14 w-full cursor-pointer items-center gap-4 rounded-xl border px-4 py-4 text-left backdrop-blur-sm transition-[border-color,background-color,box-shadow] duration-200 sm:px-5 ${focusRingTight} ${
                 isSelected
                   ? 'border-saffron bg-porcelain/[0.06] shadow-[inset_0_0_0_1px_var(--oltre-saffron-mango)]'
                   : 'border-porcelain/15 bg-porcelain/[0.03] hover:border-porcelain/40 hover:bg-porcelain/[0.05]'
@@ -570,7 +614,16 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
             >
               <span
                 aria-hidden="true"
-                className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-200 ${
+                className={`flex size-7 shrink-0 items-center justify-center rounded-md border text-xs font-semibold transition-colors duration-200 ${
+                  isSelected ? 'border-saffron bg-saffron text-charcoal' : 'border-porcelain/20 bg-charcoal/60 text-porcelain/80'
+                }`}
+              >
+                {'ABCD'[i]}
+              </span>
+              <span className="flex-1 text-base leading-snug font-normal text-porcelain">{option.label}</span>
+              <span
+                aria-hidden="true"
+                className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-200 ${
                   isSelected ? 'border-saffron' : 'border-porcelain/35'
                 }`}
               >
@@ -580,7 +633,6 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
                   }`}
                 />
               </span>
-              <span className="text-base leading-snug font-normal text-porcelain">{option.label}</span>
             </button>
           )
         })}
@@ -589,24 +641,63 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
       <ActionBar>
         <div className="flex items-center gap-3">
           <BackButton onClick={onBack} />
-          <PrimaryButton
-            inactive={!hasSelection}
-            aria-describedby={hintId}
-            onClick={tryNext}
-            className="flex-1 sm:flex-none"
-          >
+          <PrimaryButton inactive={!hasSelection} onClick={tryNext} className="flex-1 sm:flex-none">
             Avanti
             <span aria-hidden="true">→</span>
           </PrimaryButton>
         </div>
-        <p
-          id={hintId}
-          role="status"
-          className={`mt-2 min-h-5 text-sm transition-colors ${nudged ? 'text-porcelain' : 'text-porcelain/55'}`}
-        >
-          {hasSelection ? '' : 'Seleziona una risposta per continuare.'}
-        </p>
       </ActionBar>
+    </section>
+  )
+}
+
+function AnalysisScreen({ focusOnMount, onDone }: { focusOnMount: boolean; onDone: () => void }) {
+  const headingRef = useScreenHeading(focusOnMount)
+  const [done, setDone] = useState(0)
+  const onDoneRef = useRef(onDone)
+  useEffect(() => {
+    onDoneRef.current = onDone
+  })
+  useEffect(() => {
+    const last = done === ANALYSIS_STEPS.length
+    const timer = window.setTimeout(() => (last ? onDoneRef.current() : setDone(done + 1)), last ? 500 : ANALYSIS_STEP_MS)
+    return () => window.clearTimeout(timer)
+  }, [done])
+
+  return (
+    <section className="flex flex-1 flex-col items-center justify-center py-16 text-center" aria-busy="true">
+      {/* Placeholder mark: swap for the brand icon (Figma "Icon - Saffron Mango"). */}
+      <span aria-hidden="true" className="size-14 animate-spin rounded-full border-[3px] border-saffron/25 border-t-saffron" />
+      <h1
+        ref={headingRef}
+        tabIndex={-1}
+        className="mt-8 font-display text-[1.5rem] leading-[1.2] font-black text-balance outline-none sm:text-[2rem]"
+      >
+        Stiamo analizzando le tue risposte…
+      </h1>
+      <ul className="mt-6 space-y-3 text-left text-sm" role="status">
+        {ANALYSIS_STEPS.map((label, i) => {
+          const state = i < done ? 'done' : i === done ? 'active' : 'todo'
+          return (
+            <li key={label} className={`flex items-center gap-3 ${state === 'todo' ? 'text-porcelain/40' : 'text-porcelain'}`}>
+              <span
+                aria-hidden="true"
+                className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                  state === 'done' ? 'border-saffron bg-saffron' : state === 'active' ? 'border-saffron' : 'border-porcelain/25'
+                }`}
+              >
+                {state === 'done' && (
+                  <svg viewBox="0 0 16 16" className="size-3 text-charcoal">
+                    <path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </span>
+              {label}
+              <span className="sr-only">{state === 'done' ? ' (fatto)' : state === 'active' ? ' (in corso)' : ''}</span>
+            </li>
+          )
+        })}
+      </ul>
     </section>
   )
 }
@@ -614,59 +705,30 @@ function QuestionScreen({ focusOnMount, index, selected, onSelect, onBack, onNex
 interface EmailScreenProps {
   focusOnMount: boolean
   email: string
-  consent: boolean
   status: SubmitStatus
   onEmailChange: (value: string) => void
-  onConsentChange: (value: boolean) => void
   onBack: () => void
   onSubmit: () => void
 }
 
-function EmailScreen({
-  focusOnMount,
-  email,
-  consent,
-  status,
-  onEmailChange,
-  onConsentChange,
-  onBack,
-  onSubmit,
-}: EmailScreenProps) {
+function EmailScreen({ focusOnMount, email, status, onEmailChange, onBack, onSubmit }: EmailScreenProps) {
   const headingRef = useScreenHeading(focusOnMount)
   const emailRef = useRef<HTMLInputElement>(null)
-  const consentRef = useRef<HTMLInputElement>(null)
   const headingId = useId()
   const emailId = useId()
   const emailErrorId = useId()
-  const consentId = useId()
-  const consentErrorId = useId()
-  const hintId = useId()
+  const noticeId = useId()
 
   const emailValid = EMAIL_PATTERN.test(email.trim())
+  const suggestion = emailValid ? suggestEmail(email.trim()) : null
   // Once flagged, email errors track the value live; before that they wait for a short typing pause.
   const [emailFlagged, setEmailFlagged] = useState(() => email.trim() !== '' && !emailValid)
-  const [consentFlagged, setConsentFlagged] = useState(false)
   const flagTimer = useRef<number | undefined>(undefined)
   useEffect(() => () => window.clearTimeout(flagTimer.current), [])
 
   const submitting = status === 'submitting'
-  const ready = emailValid && consent
-
   const emailError =
-    emailFlagged && !emailValid
-      ? email.trim()
-        ? "Controlla l'indirizzo: sembra incompleto (es. nome@dominio.it)."
-        : 'Inserisci la tua email per continuare.'
-      : null
-  const consentError = consentFlagged && !consent ? 'Per continuare serve il tuo consenso.' : null
-
-  const hint = ready
-    ? ''
-    : !emailValid && !consent
-      ? "Inserisci un'email valida e spunta il consenso per continuare."
-      : !emailValid
-        ? "Inserisci un'email valida per continuare."
-        : 'Spunta il consenso per continuare.'
+    emailFlagged && !emailValid ? (email.trim() ? EMAIL_FORMAT_ERROR : 'Inserisci la tua email per continuare.') : null
 
   const handleEmailChange = (value: string) => {
     onEmailChange(value)
@@ -679,10 +741,9 @@ function EmailScreen({
   const handleSubmit = (event?: FormEvent) => {
     event?.preventDefault()
     if (submitting) return
-    if (!ready) {
+    if (!emailValid) {
       setEmailFlagged(true)
-      setConsentFlagged(true)
-      ;(emailValid ? consentRef : emailRef).current?.focus()
+      emailRef.current?.focus()
       return
     }
     onSubmit()
@@ -696,16 +757,17 @@ function EmailScreen({
         tabIndex={-1}
         className="font-display text-[1.5rem] leading-[1.15] font-black text-balance outline-none sm:text-[2.25rem]"
       >
-        Dove ti mandiamo il risultato?
+        Il tuo profilo è pronto. Dove te lo mandiamo?
       </h1>
       <p className="mt-4 text-base leading-relaxed text-porcelain/75">
-        Inserisci la tua email e il tuo profilo compare subito dopo.
+        Lo vedi subito nella pagina successiva. Via email ti arriva anche la guida pensata per il tuo profilo, da
+        rileggere con calma.
       </p>
 
       <form noValidate onSubmit={handleSubmit} className="flex flex-1 flex-col" aria-busy={submitting}>
         <div className="mt-8">
           <label htmlFor={emailId} className="block text-sm font-semibold text-porcelain">
-            Email
+            La tua email
           </label>
           <input
             ref={emailRef}
@@ -717,7 +779,7 @@ function EmailScreen({
             autoCapitalize="none"
             autoCorrect="off"
             spellCheck={false}
-            placeholder="nome@dominio.it"
+            placeholder="nome@email.it"
             value={email}
             readOnly={submitting}
             onChange={(e) => handleEmailChange(e.target.value)}
@@ -725,52 +787,27 @@ function EmailScreen({
               if (email.trim() && !emailValid) setEmailFlagged(true)
             }}
             aria-invalid={emailError ? true : undefined}
-            aria-describedby={emailError ? emailErrorId : undefined}
+            aria-describedby={`${emailError ? emailErrorId : ''} ${noticeId}`.trim()}
             className={`mt-2 block min-h-14 w-full rounded-xl border bg-porcelain/[0.04] px-4 backdrop-blur-sm text-base text-porcelain transition-colors duration-200 placeholder:text-porcelain/35 focus:outline-2 focus:outline-offset-2 focus:outline-saffron ${
               emailError ? 'border-saffron' : emailValid ? 'border-porcelain/40' : 'border-porcelain/20'
             }`}
           />
-          <p id={emailErrorId} aria-live="polite" className="min-h-6 pt-2 text-sm text-porcelain">
+          <div id={emailErrorId} aria-live="polite" className="min-h-6 pt-2 text-sm text-porcelain">
             {emailError && <FieldMessage>{emailError}</FieldMessage>}
-          </p>
-        </div>
-
-        <div className="mt-2">
-          <div className="flex items-start gap-3">
-            <span className="relative mt-0.5 flex size-6 shrink-0">
-              <input
-                ref={consentRef}
-                id={consentId}
-                type="checkbox"
-                checked={consent}
-                disabled={submitting}
-                required
-                onChange={(e) => onConsentChange(e.target.checked)}
-                aria-invalid={consentError ? true : undefined}
-                aria-describedby={consentError ? consentErrorId : undefined}
-                className={`peer size-6 cursor-pointer appearance-none rounded-md border-2 bg-transparent transition-colors duration-200 checked:border-saffron checked:bg-saffron ${focusRingTight} ${
-                  consentError ? 'border-saffron' : 'border-porcelain/40'
-                }`}
-              />
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 16 16"
-                className="pointer-events-none absolute inset-0 m-auto size-4 text-charcoal opacity-0 transition-opacity peer-checked:opacity-100"
-              >
-                <path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <label htmlFor={consentId} className="cursor-pointer text-sm leading-relaxed text-porcelain/80">
-              {/* [PIETRO TO PROVIDE — final GDPR consent wording + privacy policy link] */}
-              Acconsento al trattamento dei miei dati per ricevere il risultato e comunicazioni da OLTRESOGLIA.{' '}
-              <span className="text-porcelain/55">
-                [PIETRO TO PROVIDE — testo legale definitivo del consenso GDPR e link all'informativa privacy]
-              </span>
-            </label>
+            {suggestion && (
+              <p className="text-porcelain/75">
+                Intendevi{' '}
+                <button
+                  type="button"
+                  onClick={() => onEmailChange(suggestion)}
+                  className={`cursor-pointer font-semibold text-saffron underline-offset-4 hover:underline ${focusRingTight}`}
+                >
+                  {suggestion}
+                </button>
+                ?
+              </p>
+            )}
           </div>
-          <p id={consentErrorId} aria-live="polite" className="min-h-6 pt-2 pl-9 text-sm text-porcelain">
-            {consentError && <FieldMessage>{consentError}</FieldMessage>}
-          </p>
         </div>
 
         <ActionBar>
@@ -793,9 +830,8 @@ function EmailScreen({
             <BackButton onClick={onBack} disabled={submitting} />
             <PrimaryButton
               type="submit"
-              inactive={!ready}
+              inactive={!emailValid}
               loading={submitting}
-              aria-describedby={hintId}
               className="flex-1 sm:flex-none"
             >
               {submitting ? (
@@ -805,14 +841,24 @@ function EmailScreen({
                 </>
               ) : (
                 <>
-                  Scopri il risultato
+                  Mostrami il risultato
                   <span aria-hidden="true">→</span>
                 </>
               )}
             </PrimaryButton>
           </div>
-          <p id={hintId} role="status" className="mt-2 min-h-5 text-sm text-porcelain/55">
-            {submitting ? 'Stiamo preparando il tuo profilo…' : hint}
+          <p id={noticeId} className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-porcelain/60">
+            <svg aria-hidden="true" viewBox="0 0 16 16" className="mt-0.5 size-3.5 shrink-0 text-saffron">
+              <rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+            <span>
+              Usiamo la tua email solo per il risultato e la guida. Niente spam.{' '}
+              {/* Privacy policy URL pending. */}
+              <a href="#" className="text-porcelain/80 underline underline-offset-2 hover:text-porcelain">
+                Informativa privacy
+              </a>
+            </span>
           </p>
         </ActionBar>
       </form>
@@ -836,76 +882,41 @@ function FieldMessage({ children }: { children: ReactNode }) {
 
 function ResultScreen({ focusOnMount, profile }: { focusOnMount: boolean; profile: ProfileId }) {
   const headingRef = useScreenHeading(focusOnMount)
-  const copy = RESULT_COPY[profile]
   const name = PROFILE_NAMES[profile]
-  const slots = [
-    { label: 'Frase che definisce il profilo', text: copy.definingLine },
-    { label: 'La tua giornata, raccontata', text: copy.narratedDay },
-    { label: 'Cosa cambia', text: copy.whatChanges },
-  ]
-  const hasMissingCopy = slots.some((slot) => slot.text == null)
+  const description = PROFILE_DESCRIPTIONS[profile]
 
   return (
     <section className="flex flex-1 flex-col pt-10 pb-12 sm:pt-16">
       <h1 ref={headingRef} tabIndex={-1} className="outline-none">
-        <span className="block font-display text-xs font-normal tracking-[0.18em] text-porcelain/70 uppercase">
-          Il tuo profilo è
+        <span className="block font-display text-xs font-normal tracking-[0.18em] text-saffron uppercase">
+          Il tuo profilo
         </span>
-        <span className="mt-3 block font-display text-[3.25rem] leading-none font-black break-words text-porcelain sm:text-7xl">
+        <span className="mt-3 block font-display text-[3.25rem] leading-none font-black break-words text-porcelain uppercase sm:text-7xl">
           {name}
         </span>
       </h1>
 
-      <div
-        className={`mt-10 space-y-6 rounded-2xl bg-charcoal/60 p-5 backdrop-blur-md sm:p-7 ${
-          hasMissingCopy ? 'border border-dashed border-porcelain/30' : ''
-        }`}
-      >
-        {hasMissingCopy && (
-          <p className="text-xs font-semibold tracking-wide text-porcelain/70 uppercase">
-            [PIETRO TO PROVIDE — final result copy per profile not yet written]
-          </p>
-        )}
-        {slots.map((slot) =>
-          slot.text != null ? (
-            <p key={slot.label} className="text-lg leading-relaxed text-porcelain">
-              {slot.text}
+      <div className="mt-8 max-w-[62ch] space-y-4 text-base leading-relaxed text-porcelain/85 sm:text-[17px]">
+        {description ? (
+          description.map((text) => (
+            <p key={text}>
+              <Lines text={text} />
             </p>
-          ) : (
-            <div key={slot.label}>
-              <p className="text-sm font-semibold text-porcelain">{slot.label}</p>
-              <p className="mt-1 text-sm text-porcelain/55">[Testo per il profilo {name} da scrivere]</p>
-            </div>
-          ),
+          ))
+        ) : (
+          <p className="rounded-xl border border-dashed border-porcelain/30 p-4 text-sm text-porcelain/60">
+            [Descrizione del profilo {name}: testo in arrivo da Pietro]
+          </p>
         )}
       </div>
 
-      {/* Brand palette has no green: WhatsApp CTA uses the primary accent + WhatsApp-style glyph. */}
       <a
-        href={copy.whatsappHref}
-        className={`mt-10 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-saffron px-7 text-base font-semibold text-charcoal transition-[background-color,transform] duration-200 hover:bg-saffron/90 active:scale-[0.98] sm:w-auto sm:self-start ${focusRing}`}
+        href={RESULT_CTA_HREF[profile]}
+        className={`mt-10 inline-flex min-h-14 w-full items-center justify-center gap-2.5 rounded-full bg-saffron px-7 text-base font-semibold text-charcoal transition-[background-color,transform] duration-200 hover:bg-saffron/90 active:scale-[0.98] sm:w-auto sm:self-start ${focusRing}`}
       >
-        <ChatIcon />
-        {copy.whatsappLabel}
+        Vedi il tuo risultato
+        <span aria-hidden="true">→</span>
       </a>
     </section>
-  )
-}
-
-function ChatIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5">
-      <path
-        d="M12 3.25a8.75 8.75 0 0 0-7.6 13.07L3.25 20.75l4.55-1.12A8.75 8.75 0 1 0 12 3.25Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9.1 8.2c.2-.4.5-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.5.8c.2.1.3.3.3.5 0 .7-.4 1.4-1.1 1.7-.6.3-1.4.3-2.4-.1-2-.8-3.6-2.4-4.4-4.3-.4-1-.4-2.1.1-2.9Z"
-        fill="currentColor"
-      />
-    </svg>
   )
 }
