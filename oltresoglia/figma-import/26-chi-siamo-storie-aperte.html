@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>Chi siamo (storie aperte)</title>
+<!--
+  Prototype of the "Chi siamo" page for Framer. Same tokens, header, background and contrast settings as the
+  Contact page (../contact/index.html, client feedback round 1); see ../TOKENS.md and FRAMER-NOTES.md.
+  Layout follows the client's reference: two-column grid of coach cards, round portrait, name plate, bio.
+  Bios are verbatim from chi_siamo.pdf. Portraits are placeholders until the photos arrive.
+  Fonts: Manrope from Google Fonts. Bounded loads from ../fonts/ once added; Archivo stands in until then.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200&amp;family=Archivo+Black&amp;family=Manrope:wght@200..800&amp;display=swap">
+<style>
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-extralight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Bounded'; src: url('../fonts/bounded-black.ttf') format('truetype'); font-weight: 900; font-display: swap; }
+
+  :root {
+    /* Brand palette — identical to the test build */
+    --oltre-blackout: #000000;
+    --oltre-dark-charcoal: #050505;
+    --oltre-porcelain: #EBF0F2;
+    --oltre-whiteout: #FFFFFF;
+    --oltre-saffron-mango: #EFC04D;
+
+    /* Porcelain / charcoal opacities. Client feedback (round 1): more contrast, so these sit
+       one step brighter than the test (test values in comments). */
+    --text: var(--oltre-porcelain);
+    --text-body: color-mix(in srgb, var(--oltre-porcelain) 85%, transparent);        /* test 75% */
+    --text-label: color-mix(in srgb, var(--oltre-porcelain) 75%, transparent);       /* test 70% */
+    --text-muted: color-mix(in srgb, var(--oltre-porcelain) 65%, transparent);       /* test 55% */
+    --text-placeholder: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); /* test 35% */
+    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);        /* test 10% */
+    --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);       /* test 20% */
+    --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent);      /* test 40% */
+    --fill-field: color-mix(in srgb, var(--oltre-porcelain) 6%, transparent);        /* test 4% */
+    --fill-soft: color-mix(in srgb, var(--oltre-porcelain) 12%, transparent);
+    --fill-disabled: color-mix(in srgb, var(--oltre-porcelain) 10%, transparent);
+
+    /* Banner surface: dark grey (used by the Chi siamo cards); the Contact banner uses Porcelain below. */
+    --fill-banner: color-mix(in srgb, var(--oltre-porcelain) 13%, var(--oltre-dark-charcoal)); /* ≈ #232526 */
+    --panel: color-mix(in srgb, var(--oltre-dark-charcoal) 88%, transparent);
+
+    /* Outline buttons (client): black fill, saffron border and text, soft saffron glow */
+    --btn-fill: var(--oltre-blackout);
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout));
+    --btn-glow: 0 0 18px color-mix(in srgb, var(--oltre-saffron-mango) 35%, transparent);
+    --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
+
+    --font-display: 'Bounded', 'Archivo Black', ui-sans-serif, system-ui, sans-serif;
+    --font-display-light: 'Bounded', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+    --radius-field: 12px;
+    --radius-card: 16px;
+    --radius-banner: 24px;
+    --control-h: 56px;
+    --t: 200ms;
+
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { background: var(--oltre-dark-charcoal); color: var(--text); }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    isolation: isolate; /* keeps the fixed backdrop (z-index -1) above the body background */
+  }
+  ::selection { background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); }
+  a { color: inherit; }
+  [hidden] { display: none !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Background: the test's line artwork, grayscale, under a charcoal overlay (lighter than the test's 60%) */
+  .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--oltre-dark-charcoal); pointer-events: none; }
+  .backdrop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
+  .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .45; } /* test .6 */
+
+  .wrap { width: 100%; max-width: 1232px; margin-inline: auto; padding-inline: 16px; }
+  @media (min-width: 640px) { .wrap { padding-inline: 32px; } }
+
+  /* Focus — the test's saffron outline ring */
+  :where(a, button, input, textarea):focus-visible { outline: 2px solid var(--oltre-saffron-mango); outline-offset: 2px; }
+  .pill:focus-visible { outline-offset: 4px; }
+
+  /* ---------- Header (test header + site nav) ---------- */
+  .site-header { position: relative; padding-top: 20px; }
+  @media (min-width: 640px) { .site-header { padding-top: 32px; } }
+  .site-header__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .wordmark {
+    font-family: var(--font-display); font-weight: 900; font-size: 14px; letter-spacing: .22em;
+    color: var(--oltre-whiteout); text-decoration: none; white-space: nowrap;
+  }
+  .nav { display: flex; align-items: center; gap: 12px; }
+  .nav__links { display: none; list-style: none; margin: 0; padding: 0; gap: 28px; }
+  .nav__links a {
+    font-size: 14px; font-weight: 500; color: var(--text-body); text-decoration: none;
+    transition: color var(--t);
+  }
+  .nav__links a:hover { color: var(--text); }
+  .nav__menu {
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    border-radius: 999px; border: 1px solid var(--line-field); background: transparent; color: var(--text);
+    cursor: pointer; transition: border-color var(--t);
+  }
+  .nav__menu:hover { border-color: var(--line-strong); }
+  .nav__panel { margin-top: 16px; border-top: 1px solid var(--line-hair); }
+  .nav__panel ul { list-style: none; margin: 0; padding: 8px 0 0; }
+  .nav__panel a {
+    display: flex; align-items: center; min-height: 48px; font-size: 16px; font-weight: 500;
+    color: var(--text-body); text-decoration: none; border-bottom: 1px solid var(--line-hair);
+  }
+  @media (min-width: 960px) {
+    .nav { gap: 32px; }
+    .nav__links { display: flex; }
+    .nav__menu, .nav__panel { display: none !important; }
+  }
+
+  /* ---------- Buttons (the test's pill) ---------- */
+  .pill {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: var(--control-h); padding: 0 28px; border: 2px solid var(--oltre-saffron-mango); border-radius: 999px;
+    font-family: var(--font-sans); font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer;
+    background: var(--btn-fill); color: var(--oltre-saffron-mango); box-shadow: var(--btn-glow);
+    transition: background-color var(--t), color var(--t), box-shadow var(--t), transform var(--t);
+  }
+  .pill:hover { background: var(--btn-fill-hover); box-shadow: var(--btn-glow-hover); }
+  .pill:active { transform: scale(.98); }
+  .pill--sm { min-height: 44px; padding: 0 20px; font-size: 14px; }
+  .pill--caps { text-transform: uppercase; letter-spacing: .12em; }
+  .pill--submit { width: 100%; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .pill[aria-disabled="true"] { background: var(--btn-fill); border-color: var(--line-field); box-shadow: none; color: var(--text-muted); cursor: progress; transform: none; }
+  .pill svg { width: 20px; height: 20px; flex: none; }
+  .spinner {
+    width: 20px; height: 20px; border-radius: 999px; flex: none;
+    border: 2px solid color-mix(in srgb, var(--oltre-porcelain) 25%, transparent); border-top-color: var(--oltre-porcelain);
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+
+  /* ---------- Current page in the nav ---------- */
+  .nav__links a[aria-current="page"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--oltre-saffron-mango); padding-bottom: 4px; }
+  .nav__panel a[aria-current="page"] { color: var(--text); }
+
+  main { padding-block: 48px 64px; }
+  @media (min-width: 640px) { main { padding-block: 72px 96px; } }
+
+  /* ---------- Intro (same type as the Contact headline) ---------- */
+  .intro { max-width: 760px; }
+  .eyebrow {
+    margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 12px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--oltre-saffron-mango);
+  }
+  .headline { margin: 16px 0 0; color: var(--text); font-size: clamp(2.5rem, 4.4vw, 3.5rem); line-height: 1.05; text-wrap: balance; }
+  .headline span { display: block; }
+  .headline__light { font-family: var(--font-display-light); font-weight: 200; }
+  .headline__strong { font-family: var(--font-display); font-weight: 900; }
+  .lede { margin: 20px 0 0; max-width: 46ch; font-size: 18px; line-height: 1.6; color: var(--text-body); }
+  .placeholder { color: var(--text-muted); }
+
+  /* ---------- Founder: Pietro's story, larger type than the coaches (client request) ---------- */
+  .founder {
+    display: grid; gap: 28px; margin-top: 48px; padding: 32px 24px;
+    border-radius: var(--radius-card); background: var(--fill-banner); border: 1px solid var(--line-hair);
+  }
+  @media (min-width: 640px) { .founder { padding: 48px; } }
+  @media (min-width: 900px) { .founder { grid-template-columns: 280px 1fr; gap: 56px; align-items: start; margin-top: 64px; } }
+  .founder__photo { width: min(280px, 80%); margin-inline: auto; }
+  .founder__name { margin: 0; font-family: var(--font-display); font-weight: 900; font-size: clamp(26px, 3vw, 34px); line-height: 1.1; text-transform: uppercase; letter-spacing: .04em; }
+  .founder__role { margin: 8px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--oltre-saffron-mango); }
+  .founder__text { margin-top: 24px; font-size: 18px; line-height: 1.7; color: var(--text-body); }
+  @media (min-width: 640px) { .founder__text { font-size: 19px; } }
+  .founder__text p { margin: 0 0 18px; }
+  .founder__text p:last-child { margin-bottom: 0; }
+
+  /* ---------- Team grid: two columns, like the reference ---------- */
+  .team { list-style: none; margin: 48px 0 0; padding: 0; display: grid; gap: 24px; }
+  @media (min-width: 840px) {
+    /* cards in a row share a height (reference); "Leggi tutta la storia" sits on the same line */
+    .team { grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 64px; }
+    .team > li { display: flex; }
+    /* odd number of coaches: centre the last card */
+    .team > li:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 16px); }
+  }
+
+  .coach {
+    display: flex; flex-direction: column; width: 100%;
+    padding: 32px 24px 24px; border-radius: var(--radius-card);
+    background: var(--fill-banner); border: 1px solid var(--line-hair);
+  }
+  @media (min-width: 640px) { .coach { padding: 40px 40px 32px; } }
+
+  /* Round portrait; the name plate overlaps its lower edge (reference layout) */
+  .coach__photo {
+    position: relative; width: min(240px, 72%); aspect-ratio: 1; margin-inline: auto; border-radius: 999px; overflow: hidden;
+    display: grid; place-items: center; align-content: center; gap: 4px;
+    background: color-mix(in srgb, var(--oltre-porcelain) 10%, var(--oltre-dark-charcoal));
+  }
+  .coach__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .coach__initials { font-family: var(--font-display-light); font-weight: 200; font-size: 56px; line-height: 1; color: var(--text-body); margin-top: -18%; }
+  .coach__photo-note { font-size: 12px; color: var(--text-muted); }
+  .coach__name {
+    position: relative; margin: -28px auto 0; width: min(100%, 340px); padding: 14px 20px;
+    border-radius: var(--radius-field); background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal);
+    text-align: center; font-family: var(--font-display); font-weight: 900; font-size: clamp(17px, 1.7vw, 21px);
+    letter-spacing: .06em; line-height: 1.2; text-transform: uppercase;
+  }
+
+  .coach__bio { flex: 1; display: flex; flex-direction: column; margin-top: 28px; font-size: 16px; line-height: 1.65; color: var(--text-body); }
+  .coach__bio p { margin: 0 0 14px; }
+  .coach__more > p:last-child { margin-bottom: 0; }
+  .coach__toggle {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: auto; padding: 4px 0 0; align-self: flex-start;
+    border: 0; background: none; cursor: pointer;
+    font: 600 15px/1 var(--font-sans); color: var(--oltre-saffron-mango);
+    text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+  }
+  .coach__toggle svg { width: 16px; height: 16px; transition: transform var(--t); }
+  .coach__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .coach__toggle:hover { text-decoration-thickness: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <!-- Same artwork as the test and the Contact page. -->
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDE2MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIHNsaWNlIj48c3R5bGU+Knt2ZWN0b3ItZWZmZWN0Om5vbi1zY2FsaW5nLXN0cm9rZX08L3N0eWxlPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjE2MDAiIGZpbGw9IiMwNTA1MDUiLz48Y2lyY2xlIGN4PSIwLjEiIGN5PSIxNDczLjIiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIzMzYuOSIgY3k9IjExNjciIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI1MjYuOSIgY3k9IjEyMDMuMyIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI4NjguNiIgY3k9IjEwOTUuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzMDYuOCIgY3k9IjM4Ny4yIiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTEzMi42IiBjeT0iMTExNi45IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTA5NC4zIiBjeT0iNzQ4LjYiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxMjkxLjkiIGN5PSIxOTYuNSIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE0NzcuMSIgY3k9IjExMDEuNiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjU5NS42IiBjeT0iNTM2LjYiIHI9IjIuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI1MzEuNiIgY3k9IjI0NC4xIiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iNjg1LjYiIGN5PSI0NzEuOCIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9Ijg5MS44IiBjeT0iMTE2Ni44IiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iOTMuOCIgY3k9IjQzNy42IiByPSIxLjciIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODE0LjEiIGN5PSI2NzQuMyIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjE0NTQuNCIgY3k9Ijg3LjgiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI1NTAuNiIgY3k9IjEwNjMuMSIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjgyMy44IiBjeT0iMjY0LjkiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI0NTMuOCIgY3k9IjU4My4xIiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iNTMyLjEiIGN5PSI4NTAuNyIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzODAuOCIgY3k9IjEwMTYuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjgyNiIgY3k9IjgwNy45IiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTUwMy4zIiBjeT0iNjM0LjgiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI0MDEuOCIgY3k9IjkzOSIgcj0iMS40IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjUyOSIgY3k9IjYyNi4zIiByPSIyLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTQwNC4xIiBjeT0iMTc3LjciIHI9IjIuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMjQuNCIgY3k9IjY1MC45IiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEwMTEuOCIgY3k9IjIzMC44IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iOTQ4LjciIGN5PSIyMjAuNSIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjE0NTIuNCIgY3k9IjEyMTcuOCIgcj0iMS4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjE2LjgiIGN5PSIzOTcuMyIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjIuNSIgY3k9Ijk4Ni45IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTE4NS44IiBjeT0iNzgzIiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNzgyLjgiIGN5PSI0LjgiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNDQwLjEiIGN5PSIzMDEiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSI5MDQuNCIgY3k9IjEwODciIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIzNTYuNCIgY3k9IjMzNC4zIiByPSIxLjciIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODMuOCIgY3k9IjEyMzEuMSIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjExNDIuNSIgY3k9Ijc5Ny4xIiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTUyNi45IiBjeT0iMTIyMy44IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzk3LjEiIGN5PSIxMTY0LjMiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI2MzcuMyIgY3k9IjM3NS42IiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTQxOS4yIiBjeT0iODk0IiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iOTk0LjQiIGN5PSIxMTc1LjgiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTYwLjMiIGN5PSI2NzYuNCIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjMxOS4zIiBjeT0iMTAzMi4zIiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijc5NS45IiBjeT0iODkxLjgiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTUxMy4yIiBjeT0iNzcxLjMiIHI9IjEuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MTQuNyIgY3k9IjI2NS44IiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODM0LjgiIGN5PSI4OTguNCIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEyMTEuNCIgY3k9IjU3OS45IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjQxLjYiIGN5PSI0NzguMSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjMyNC40IiBjeT0iMTE1Ni43IiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzc3LjEiIGN5PSIxMDU1LjMiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMjAuNSIgY3k9IjEyMzYuNiIgcj0iMi4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE1MzQuMiIgY3k9IjQwLjMiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iOTYxLjciIGN5PSIxMTU4LjUiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSI1OS4yIiBjeT0iMjE3LjUiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxNzMuMiIgY3k9IjEzNS44IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMjEzLjgiIGN5PSIzMjMuNSIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjM4OS4yIiBjeT0iNzMwLjIiIHI9IjIuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSI2NzYuMiIgY3k9IjEwNzgiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNjM1IiBjeT0iNjY2LjMiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIzNjguMiIgY3k9IjEyOTIuMiIgcj0iMi40IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjE5NS41IiBjeT0iMzM2LjIiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIyNzIuOCIgY3k9IjEyNC45IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTAzNC41IiBjeT0iODg5LjgiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxNTkwLjEiIGN5PSIxMjAuNCIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjUwMy4xIiBjeT0iNi43IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNjYxLjUiIGN5PSIxNDYuMiIgcj0iMS4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjE0NzguNSIgY3k9IjEyNDMuOSIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMjgxLjUiIGN5PSIxMDU4LjkiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI1NTYuOSIgY3k9IjY1MS4yIiByPSIxLjYiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iNzkxLjciIGN5PSI5MDcuOSIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMDY0LjIiIGN5PSIxMDEyLjUiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTQxNS4yIiBjeT0iMTM1Mi4zIiByPSIyLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iNzAwLjkiIGN5PSI3NzkuMyIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjE1NjAuMSIgY3k9IjU3Mi40IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMzMxLjMiIGN5PSIzODEuMSIgcj0iMi4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEwMTYuMyIgY3k9IjExMzguMyIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzOTcuOSIgY3k9IjQzMi45IiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNjk0LjQiIGN5PSI2MzIuMSIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijk0Mi41IiBjeT0iMzcwLjMiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxMzE1LjMiIGN5PSI1NDAuOCIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE0MDMuOCIgY3k9IjE4NS41IiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTQ3My41IiBjeT0iMi4xIiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjYzNS42IiBjeT0iMzQuNSIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE0MzYuNiIgY3k9IjI3Ni44IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTUxNS43IiBjeT0iMTExOS43IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTg2LjkiIGN5PSIxMDAyLjUiIHI9IjAuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMjk5IiBjeT0iOTQ2LjUiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMjA0LjkiIGN5PSI1MzAiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNTI4LjEiIGN5PSI4NzYuNSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEyNDMuOSIgY3k9IjExMjQiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iOTU2LjEiIGN5PSIxNjAuNCIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijk4MS4yIiBjeT0iMzU5LjgiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI0MDEuNSIgY3k9IjM1Ni45IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMTQ0OC44IiBjeT0iODQuNCIgcj0iMS45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEyODcuNSIgY3k9IjE2Ny40IiByPSIyLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMTM4Ni4xIiBjeT0iMTI2NSIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNDUyLjUiIGN5PSIxMzczLjEiIHI9IjEuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMTUxLjUiIGN5PSIyNDcuMyIgcj0iMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMjMuMSIgY3k9IjQxOS4yIiByPSIyLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMzE3LjIiIGN5PSI0Ny42IiByPSIxLjYiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODk1LjEiIGN5PSIyMjYuNSIgcj0iMS4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijc2OS41IiBjeT0iMzYyLjgiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MSIgY3k9IjE0OS42IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODE3LjIiIGN5PSIxMTIwLjYiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNTM5LjIiIGN5PSIxMTM4LjQiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMjg0LjMiIGN5PSIyNzMuOSIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjExNjIuNSIgY3k9IjEwMzQuOCIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijg3MS43IiBjeT0iNjE5LjEiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxOTUuMSIgY3k9IjEwNi4yIiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNTY2LjciIGN5PSI1NTEuNCIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEwMjMuOSIgY3k9IjIwMC43IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMi42IiBjeT0iMTMzNy4yIiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iNzEuMSIgY3k9IjEyMjkiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMDI4LjYiIGN5PSI2ODQuMSIgcj0iMC45IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjI3Ni4zIiBjeT0iMTIwOC41IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjUwOC43IiBjeT0iNzM0LjgiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMDg1LjEiIGN5PSI3OTcuNiIgcj0iMi4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEzMTEuNiIgY3k9IjEzMDEiIHI9IjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTU1Mi42IiBjeT0iMTEwNi4xIiByPSIxLjMiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTEzOS40IiBjeT0iNTE4LjkiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMzA1LjYiIGN5PSI3NDcuMSIgcj0iMi4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjEzMjYuMSIgY3k9IjY4LjEiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIzMTIuOCIgY3k9IjM3LjQiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMjk5IiBjeT0iMTAwMy41IiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTM4NC43IiBjeT0iMTMwMS41IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iOTAwIiBjeT0iNzM1LjUiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI4NjEuMSIgY3k9IjEyMDEuNyIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjYxNC4xIiBjeT0iNzk5LjUiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTI1LjMiIGN5PSIxMjM0LjciIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI0MDcuMyIgY3k9Ijk4Mi40IiByPSIxLjciIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMTUwMS4xIiBjeT0iOTA5LjQiIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI5NjAuNCIgY3k9IjkxNy44IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iOTEzLjciIGN5PSIyNTguNCIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjE4OS4zIiBjeT0iNTMzLjYiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMzk5LjQiIGN5PSIxMDMwLjYiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI1NTUuNyIgY3k9IjYzNy4xIiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjI0Ny43IiBjeT0iODUiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI2MDEuNCIgY3k9IjE0Ni4zIiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iNjQ1LjgiIGN5PSI3MzIiIHI9IjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTM0NC40IiBjeT0iNDM4LjciIHI9IjEuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxOTQuNCIgY3k9IjMyNC43IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzE5LjQiIGN5PSI5NzIuMiIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEyMDYuMyIgY3k9IjEyNTUuNSIgcj0iMS42IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEzODcuMSIgY3k9IjEwOTUiIHI9IjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iOTk4LjMiIGN5PSIxMTc4LjEiIHI9IjIuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNTkxLjciIGN5PSI1OS45IiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjExNTcuNSIgY3k9Ijg3NC43IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTI5OSIgY3k9IjEwOTIuOSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE1MjEuNyIgY3k9IjQ5MC43IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTE3NS43IiBjeT0iODIzLjUiIHI9IjEuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxMTA3LjMiIGN5PSIxMDkwLjgiIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxMDg3LjYiIGN5PSI5MDcuMyIgcj0iMS4xIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEwMDguMSIgY3k9IjkwNy45IiByPSIxLjUiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzYuMiIgY3k9IjEzODAuNSIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE1NjIuMSIgY3k9IjQ5Mi40IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjE1MDEuMiIgY3k9IjkxMy42IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMzE2LjkiIGN5PSIzODcuMiIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjY5MS45IiBjeT0iNzUuNiIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjQ4OS43IiBjeT0iOTgzLjMiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI1MDcuOCIgY3k9IjQ2My45IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNTkxLjEiIGN5PSI2OTEuNCIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjgwNi41IiBjeT0iODY5LjgiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMDM3LjciIGN5PSI2NDcuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9Ijg0LjMiIGN5PSI0NTguNCIgcj0iMC44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEzNDUuMSIgY3k9IjE3OC42IiByPSIxLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTA2Ni4yIiBjeT0iMzU0LjQiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIyMjUuOCIgY3k9IjEyMTYuNCIgcj0iMS4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijk5OS4zIiBjeT0iMTIwOS4xIiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTUyNS45IiBjeT0iMTE2LjIiIHI9IjEuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI0NDIuNCIgY3k9IjgzNy40IiByPSIyLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTEzMi42IiBjeT0iMTI2NS4yIiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTgzLjIiIGN5PSI5ODYuOCIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNDAuNiIgY3k9IjQ2MCIgcj0iMS40IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjEyMzIuMiIgY3k9IjEwODEuMiIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9Ijk4OS40IiBjeT0iMTE1NC43IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTQyMi44IiBjeT0iMjU1LjQiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTE1LjEiIGN5PSI2NzMuOCIgcj0iMS41IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjE1NzYiIGN5PSI3MTYuNSIgcj0iMS43IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjEwNTcuMyIgY3k9IjE2My40IiByPSIxLjEiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTU5My40IiBjeT0iODY2IiByPSIxIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9Ijc2NS42IiBjeT0iODEyLjYiIHI9IjAuOCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIzMzguMyIgY3k9IjEwNyIgcj0iMS44IiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjY5Ny4yIiBjeT0iMjA3LjkiIHI9IjIuMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxNDIzLjkiIGN5PSIxMDcxIiByPSIxLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTM0NS44IiBjeT0iNDQwLjMiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSI3NDUuNCIgY3k9IjEuNyIgcj0iMSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxNDIuNyIgY3k9IjkzLjYiIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSIxOTEuMyIgY3k9IjM1NC42IiByPSIxLjQiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTA0Ny4xIiBjeT0iMzkxLjIiIHI9IjEuMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMTQ1LjYiIGN5PSIxMjAwLjQiIHI9IjEuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMzgwLjUiIGN5PSIyODguMyIgcj0iMS4yIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9Ijg3NC44IiBjeT0iNjQ2LjciIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI2NTAuOCIgY3k9Ijg4MS40IiByPSIyLjIiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTM2NC40IiBjeT0iNjUyLjciIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNTU3IiBjeT0iMTE4MyIgcj0iMi4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjExNDEuNSIgY3k9IjkwOC40IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iMTQzMS4xIiBjeT0iMjkxLjciIHI9IjEuNiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI3MDYuOCIgY3k9IjEyMzIuNyIgcj0iMiIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIxMTA3IiBjeT0iOTc5IiByPSIwLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNDc0LjYiIGN5PSIxMjE1LjkiIHI9IjEuNyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjQiLz48Y2lyY2xlIGN4PSI1My45IiBjeT0iODgyLjUiIHI9IjIuMyIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxNDY3LjciIGN5PSI4OC43IiByPSIyIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjU4MS4yIiBjeT0iMTExOC41IiByPSIwLjkiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iNjU5LjMiIGN5PSIxMjcuMSIgcj0iMS4zIiBmaWxsPSIjRUJGMEYyIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjU5MS4zIiBjeT0iNTA0LjUiIHI9IjEuNCIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxOS42IiBjeT0iNjM1LjIiIHI9IjEuNSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxMjgyLjEiIGN5PSIxMzEyLjciIHI9IjAuOSIgZmlsbD0iI0VCRjBGMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MDguNiIgY3k9IjkxNC44IiByPSIxLjgiIGZpbGw9IiNFQkYwRjIiIGZpbGwtb3BhY2l0eT0iMC40Ii8+PGNpcmNsZSBjeD0iODAwIiBjeT0iMjY1MCIgcj0iMTQ4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRUJGMEYyIiBzdHJva2Utb3BhY2l0eT0iMC4xNiIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjI2NTAiIHI9IjE1OTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0VCRjBGMiIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjI2NTAiIHI9IjE3MzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0VCRjBGMiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDYiLz48Y2lyY2xlIGN4PSI4MDAiIGN5PSIyNjUwIiByPSIxOTAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNFQkYwRjIiIHN0cm9rZS1vcGFjaXR5PSIwLjAzNSIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjI2NTAiIHI9IjE0MDAiIGZpbGw9IiMwMDAwMDAiLz48Y2lyY2xlIGN4PSI4MDAiIGN5PSIyNjUwIiByPSIxNDAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNFQkYwRjIiIHN0cm9rZS1vcGFjaXR5PSIuNTUiIHN0cm9rZS13aWR0aD0iMS41Ii8+PGNpcmNsZSBjeD0iODAwIiBjeT0iMjY1MCIgcj0iMTM5NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRUJGMEYyIiBzdHJva2Utb3BhY2l0eT0iLjEyIiBzdHJva2Utd2lkdGg9IjEwIi8+PGZpbHRlciBpZD0iZyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9Ii44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIxNjAwIiBmaWx0ZXI9InVybCgjZykiIG9wYWNpdHk9Ii4wNyIvPjwvc3ZnPg==" alt="">
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="site-header__row">
+        <!-- Wordmark as in the test (retyped). Replace with the logotype SVG from the logo pack. -->
+        <a class="wordmark" href="#">OLTRESOGLIA</a>
+        <nav class="nav" aria-label="Principale">
+          <ul class="nav__links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Metodo</a></li>
+            <li><a href="#">Programma</a></li>
+            <li><a href="#" aria-current="page">Chi siamo</a></li>
+            <li><a href="#">Guide</a></li>
+            <li><a href="#">Test</a></li>
+          </ul>
+          <a class="pill pill--sm" href="#">Fai il test</a>
+          <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-panel">
+            <span class="sr-only">Menu</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h14M3 13.5h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path></svg>
+          </button>
+        </nav>
+      </div>
+      <div class="nav__panel" id="nav-panel" hidden="">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Metodo</a></li>
+          <li><a href="#">Programma</a></li>
+          <li><a href="#" aria-current="page">Chi siamo</a></li>
+          <li><a href="#">Guide</a></li>
+          <li><a href="#">Test</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Chi siamo</p>
+        <!-- Draft headline, to confirm with Pietro. -->
+        <h1 class="headline" id="page-title">
+          <span class="headline__light">Le persone</span>
+          <span class="headline__strong">dietro OLTRESOGLIA.</span>
+        </h1>
+      </section>
+
+      <section class="founder" aria-labelledby="founder-name">
+        <!-- Photo pending: replace the placeholder with <img src="…" alt="Pietro Vecchi" /> -->
+        <div class="founder__photo coach__photo" role="img" aria-label="Foto di Pietro Vecchi in arrivo">
+          <span class="coach__initials" aria-hidden="true">PV</span>
+          <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+        </div>
+        <div class="founder__body">
+          <h2 class="founder__name" id="founder-name">Pietro Vecchi</h2>
+          <p class="founder__role">Biologo Nutrizionista · Fondatore di OLTRESOGLIA</p>
+          <div class="founder__text">
+            <p>Se sei qui per la prima volta, è giusto che tu sappia da dove vengo.</p>
+            <p>Mi chiamo Pietro Vecchi, sono Biologo Nutrizionista e fondatore di OLTRESOGLIA, il sistema per chi lavora ad alta pressione, non ha intenzione di rallentare con gli anni, ma ha lasciato indietro il corpo.<br>Per perdere grasso e costruire forza, fiato e una routine per performare ovunque.<br>A 14 anni ero il più piccolo del gruppo.<br>Mentre tutti si sviluppavano, io restavo indietro.<br>Spinto da mio padre, inizio ad allenarmi in palestra per compensare. Mai avrei immaginato che un'attività iniziata così controvoglia sarebbe diventata la mia passione, e un giorno il mio lavoro.</p>
+            <p>A 17 anni, tra la pubertà e ore di allenamento, il mio fisico cambia. Nel giro di un anno passo da "il più piccolo del gruppo", quello a cui fanno battute sul fisico, a quello con "il bel fisico di genetica".</p>
+            <p>Ho vissuto entrambi gli estremi. E ho visto in prima persona quanto il corpo influenzi il modo in cui gli altri ti considerano.</p>
+            <p>La direzione lavorativa arriva con la nutrizione e la teoria dell'allenamento. Divento nutrizionista. Il lavoro cresce, in poco tempo nasce un team, e passo dal fare al guidare altre persone ogni giorno.<br>Oggi non mi alleno più come a 20 anni, con ore libere e nessuna agenda. Non sono un atleta professionista e non vivo come tale.<br>Mi alleno dentro una settimana fatta di scadenze, un team da guidare, decisioni da prendere, viaggi e cene tardi.</p>
+            <p>Il mondo del coaching e della nutrizione è pieno di schede fotocopia e piani pensati per chi ha giornate standard e perfette. Così, chi vive settimane ad alta pressione passa da una dieta all'altra, da un programma all'altro, e ricomincia ogni lunedì.<br>OLTRESOGLIA nasce da qui.<br>Noi lavoriamo all'opposto.<br>Non ti chiediamo di stravolgere la tua settimana per far spazio al piano.<br>Partiamo dai tuoi impegni e cuciamo la struttura intorno ad essi: turni, riunioni che sforano, partenze all'ultimo e serate che non decidi.<br>Al centro del percorso ci sei tu, non il programma.<br>La nostra missione è offrire a chi sceglie OLTRESOGLIA un sistema costruito su misura, con un team che conosce i suoi impegni, si adatta alla sua agenda e a cui può delegare completamente la gestione del proprio fisico.<br>Per chi pretende dal proprio corpo lo stesso livello che pretende da tutto il resto.</p>
+          </div>
+        </div>
+      </section>
+
+      <ul class="team" aria-label="Il team">
+        <li>
+          <article class="coach" aria-labelledby="coach-marco">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Coach Marco" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Coach Marco in arrivo">
+              <span class="coach__initials" aria-hidden="true">M</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-marco">Coach Marco</h2>
+            <div class="coach__bio">
+              <p>Da ragazzo ho provato calcio e basket, ma non ero portato per nessuno dei due.</p>
+              <p>A 16 anni entro in palestra per la prima volta, quasi per obbligo: dovevo trovare uno sport da fare.</p>
+              <p>All'inizio era un modo per stare meglio con il mio corpo. Ero introverso e avevo più di un'insicurezza. Con il tempo è diventata la voglia di superarmi, fisicamente e mentalmente.</p>
+              <div class="coach__more" id="bio-marco-more">
+                <p>Negli ultimi anni ho aggiunto la corsa. E ogni volta penso al me di 13 anni, che non riusciva a correre un chilometro senza fermarsi. Se potessi parlargli, gli direi di fidarsi di sé e di non sottovalutare mai quello che si costruisce con costanza.</p>
+                <p>Durante l'istituto tecnico economico ho capito che un lavoro statico, da ufficio, non faceva per me. Così ho trovato la nutrizione.</p>
+                <p>Sono schematico: organizzazione, precisione, ordine. Difficilmente esco dai miei schemi, ma mi adatto in fretta.</p>
+                <p>È lo stesso equilibrio che cerco nei percorsi che costruisco: una struttura chiara che regge anche quando la settimana non va come previsto.</p>
+                <p>Amo viaggiare e mi affascinano gli sport estremi. Ma anche una passeggiata all'aria aperta, magari in riva al mare, basta a farmi sentire vivo.</p>
+                <p>Perché faccio il coach? Per aiutare le persone a scoprire cosa significa superare i propri limiti.</p>
+                <p>Qui siamo tutti sullo stesso piano. Niente filtri, niente scorciatoie. La differenza la fa l'impegno, ripetuto nel tempo.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="true" aria-controls="bio-marco-more"><span>Riduci</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-anna">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Coach Anna" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Coach Anna in arrivo">
+              <span class="coach__initials" aria-hidden="true">A</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-anna">Coach Anna</h2>
+            <div class="coach__bio">
+              <p>Lo sport ha sempre fatto parte della mia vita. Ho praticato diverse discipline, ma spesso avevo la sensazione che tanto impegno non venisse ripagato dai risultati.</p>
+              <p>Da adolescente ho lasciato gli sport di squadra per la palestra. Cercavo una sfida in cui il risultato dipendesse soprattutto da me, dal mio impegno e dalla mia costanza.</p>
+              <p>In poco tempo è diventata una passione, e l'allenamento il momento felice della mia giornata.</p>
+              <div class="coach__more" id="bio-anna-more">
+                <p>Per anni mi sono dedicata al bodybuilding. Oggi alterno i pesi al lavoro aerobico. Mi piace sentirmi forte e avere un corpo efficiente, prestante e pronto ad affrontare sfide diverse.</p>
+                <p>Nel mio percorso ho attraversato momenti che mi hanno insegnato quanto conti conoscere il proprio corpo, rispettarlo e prendersene cura. Da lì nasce la scelta di studiare Scienze Motorie e Scienze della Nutrizione, e di trasformare una passione in una professione.</p>
+                <p>Sono metodica, determinata e razionale. Mi piace avere una direzione e capire il perché di quello che faccio. Ma ho imparato che non tutto va secondo i piani. Adattarsi, concedersi un'eccezione e tornare subito concentrata fa parte del percorso.</p>
+                <p>È lo stesso approccio che porto nel lavoro. Nessun percorso è una linea retta: ci sono salite, discese, curve e momenti in cui serve rallentare. Conta continuare ad andare nella direzione giusta, anche nelle settimane che non vanno come previsto.</p>
+                <p>Per questo voglio conoscere davvero la persona che ho davanti e costruire un percorso che funzioni nella sua quotidianità, non solo sulla carta.</p>
+                <p>Diventare coach è stata una delle scelte più importanti che abbia fatto. Mi rende felice accompagnare chi decide di mettersi in gioco verso obiettivi che sembravano lontani, oltre i limiti che si era posto.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="true" aria-controls="bio-anna-more"><span>Riduci</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-giulio">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Coach Giulio" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Coach Giulio in arrivo">
+              <span class="coach__initials" aria-hidden="true">G</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-giulio">Coach Giulio</h2>
+            <div class="coach__bio">
+              <p>Fin da piccolo ho avuto una forte passione per lo sport, soprattutto per il calcio. Ero in sovrappeso, ma dentro avevo già una gran voglia di migliorare. Lo sport è stato il primo mezzo che mi ha insegnato a mettermi in gioco e a lavorare su me stesso.</p>
+              <p>Non ero il più pronto né il più avvantaggiato. Avevo però qualcosa che sarebbe diventato un punto fermo: la capacità di impegnarmi, cadere, rialzarmi e continuare.</p>
+              <p>Due infortuni importanti alle ginocchia hanno messo alla prova quella mentalità. Ho dovuto rientrare, ripartire e ritrovare le sensazioni di prima, più volte. Con il tempo ho capito che la passione stava cambiando, e accettarlo non è stato semplice.</p>
+              <div class="coach__more" id="bio-giulio-more">
+                <p>La disciplina però è rimasta, ed è diventata la base delle mie scelte successive.</p>
+                <p>Ho superato il concorso nell'esercito e affrontato due anni di formazione intensa. Lì ho imparato che la forza non è solo resistere: è anche sapersi guidare quando tutto intorno ti mette alla prova.</p>
+                <p>Poi il concorso in Polizia di Stato e cinque anni di volante. Situazioni difficili, persone diverse, tensione e responsabilità ogni giorno. Mi hanno formato come uomo, prima ancora che come professionista.</p>
+                <p>So cosa significa lavorare sotto pressione, giorno dopo giorno.</p>
+                <p>Eppure sentivo che mancava qualcosa. Avevo disciplina, esperienza, struttura mentale e voglia di aiutare gli altri. Mi mancava il modo più autentico per farlo.</p>
+                <p>Con la lettura e un percorso di crescita personale ho iniziato a guardarmi con più consapevolezza. E ho capito che la direzione che cercavo lontano l'avevo sempre avuta davanti agli occhi.</p>
+                <p>Per me oggi essere coach significa unire tutto quello che ho vissuto: sport, disciplina, ostacoli, ricostruzione, fatica e crescita mentale.</p>
+                <p>L'allenamento non è solo un mezzo per cambiare il corpo. È uno strumento per costruire identità, forza interiore e un modo diverso di affrontare la vita.</p>
+                <p>Ogni persona ha dentro molto più di quello che pensa. Il mio compito è aiutarla a tirarlo fuori.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="true" aria-controls="bio-giulio-more"><span>Riduci</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-yuri">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Coach Yuri" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Coach Yuri in arrivo">
+              <span class="coach__initials" aria-hidden="true">Y</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-yuri">Coach Yuri</h2>
+            <div class="coach__bio">
+              <p>Ho praticato calcio, rugby, pugilato e altri sport per gran parte della mia vita.</p>
+              <p>Allenatori e preparatori mi dicevano che avevo qualità atletiche importanti. Ero forte, performante, spesso tra quelli che fisicamente reggevano meglio il lavoro. Mi sono dedicato anche al powerlifting, fino a conquistare due podi in gara.</p>
+              <p>Eppure c'era una contraddizione.</p>
+              <div class="coach__more" id="bio-yuri-more">
+                <p>Per quanto fossi allenato, nel mio corpo non stavo davvero a mio agio.</p>
+                <p>Le situazioni più normali, come il mare, la piscina o togliermi la maglietta davanti agli altri, mi mettevano a disagio più di quanto volessi ammettere. Niente di enorme, ma era una sensazione costante. Quella vocina che ti fa scegliere la maglietta larga invece di quella aderente, o che ti fa sentire osservato quando probabilmente nessuno ti sta guardando.</p>
+                <p>Per anni ho pensato che bastasse essere forte. Non basta.</p>
+                <p>La sicurezza non nasce solo da quello che il tuo corpo sa fare. Nasce anche dal rapporto che hai con lui.</p>
+                <p>So cosa vuol dire essere bravo in un campo e non sentirsi a posto in un altro.</p>
+                <p>È questo che mi ha portato a studiare l'allenamento. Non per passione accademica, ma per trovare risposte pratiche a una domanda molto personale: come costruire un fisico che mi facesse sentire forte e atletico, ma anche in linea con l'immagine che avevo di me.</p>
+                <p>Ho studiato e sperimentato fino a trovare la mia risposta. Oggi aiuto altre persone a trovare la loro.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="true" aria-controls="bio-yuri-more"><span>Riduci</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="coach" aria-labelledby="coach-devid">
+            <!-- Photo pending: replace the placeholder with <img src="…" alt="Coach Devid" /> -->
+            <div class="coach__photo" role="img" aria-label="Foto di Coach Devid in arrivo">
+              <span class="coach__initials" aria-hidden="true">D</span>
+              <span class="coach__photo-note" aria-hidden="true">Foto in arrivo</span>
+            </div>
+            <h2 class="coach__name" id="coach-devid">Coach Devid</h2>
+            <div class="coach__bio">
+              <p>Lo sport fa parte della mia vita da sempre. Da bambino ho fatto nuoto e jiu-jitsu, e già lì avevo capito che stare fermo non faceva per me.</p>
+              <p>A nove anni è arrivato il calcio, nella squadra del mio paese. Non ho più smesso e ci gioco ancora oggi. Quella squadra mi ha dato più di uno sport: mi ha dato gli amici che ho ancora adesso.</p>
+              <p>Il 2019 ha cambiato la direzione. Mi allenavo a casa, senza un piano e senza sapere davvero cosa stessi facendo. Eppure il corpo cambiava, e questo mi ha preso. Ho capito che quella curiosità meritava un metodo, e che quel metodo poteva diventare il mio lavoro.</p>
+              <div class="coach__more" id="bio-devid-more">
+                <p>Poi il bivio: allenamento o nutrizione. Non ho scelto e ho portato avanti entrambe le strade. È quello che oggi mi permette di guardare la persona per intero.</p>
+                <p>Sono organizzato e metodico. Ma lo schema serve a me. Il percorso deve entrare nella vita vera di chi seguo, con il suo lavoro, i suoi orari e le cene fuori.</p>
+                <p>Non credo nei piani perfetti che crollano alla prima settimana storta. Credo in quelli che reggono per mesi.</p>
+                <p>Fuori dal lavoro viaggio, scopro posti nuovi e sto con gli amici. Oppure guardo semplicemente una partita in compagnia.</p>
+                <p>Quello che mi tiene legato a questo lavoro è semplice: mi piace aiutare le persone. Non c'è soddisfazione più grande che vedere qualcuno arrivare dove era convinto di non poter arrivare.</p>
+                <p>Perché il cambiamento vero non riguarda solo il corpo. Riguarda la fiducia che una persona ha in sé stessa.</p>
+              </div>
+              <button class="coach__toggle" type="button" aria-expanded="true" aria-controls="bio-devid-more"><span>Riduci</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- footer: pending homepage -->
+
+  
+
+
+</body></html>
