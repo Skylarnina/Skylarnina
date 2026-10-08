@@ -29,6 +29,7 @@ THEMES["heritage"] = {**ROOT, **HER}
 THEMES["heritage-rich"] = {**ROOT, **HER}
 THEMES["salon"] = {**ROOT, **HER, **block('[data-theme="salon"]')}
 THEMES["campus"] = {**ROOT, **HER, **block('[data-theme="campus"]')}
+THEMES["collection"] = {**ROOT, **block('[data-theme="collection"]')}
 ROOMS = {r: block(f':is([data-theme="venues"],[data-theme="venues-bold"]) .{r}') for r in ("room01", "room02", "room03", "room04")}
 AUDIT = json.load(open("content/contrast-audit.json"))
 ROOM_NAME = {"room01": "Room 01 · olive", "room02": "Room 02 · orange", "room03": "Room 03 · light blue", "room04": "Room 04 · red"}
@@ -92,7 +93,8 @@ WHERE = {
                "venues": "Light blue. Link text and its underline."},
 }
 NAMES = {"mono": "Mono (current build, baseline)", "cream": "Cream", "venues": "Venues", "cream-bold": "Cream bold", "venues-bold": "Venues bold",
-         "heritage": "Archive (heritage)", "heritage-rich": "Heritage rich", "salon": "Salon", "campus": "Campus"}
+         "heritage": "Archive (heritage)", "heritage-rich": "Heritage rich", "salon": "Salon", "campus": "Campus",
+         "collection": "Collection (from her photographs)"}
 
 
 def where(t, k):
@@ -440,6 +442,35 @@ def directions():
     return out
 
 
+def collection():
+    T = THEMES["collection"]
+    C = block('[data-theme="collection"] #contact')
+    G, G2, INK, ACC = T["--ground"], T["--ground-2"], T["--ink"], T["--accent"]
+    WAL, BRASS = C["background"], C["--link"]
+    out = ["## Collection (the colours in her own photographs)", "",
+           "Every value is sampled from Yasmin's portrait and her Snippets photographs (median-cut over the 22 images): linen and stone from the walls and "
+           "plinths, espresso and walnut from the wood and frames, one strong colour, oxblood, which recurs in the crown, the textiles, the violin case "
+           "and the diorama, and brass from the fittings. Board with each photo and the colours taken from it: `screenshots/her-colours.png` "
+           "(`brand/her-colours.html`). No colour from the business card; the project numbers are oxblood like every other accent.", "",
+           f"![collection swatches]({swatch_list('collection', [('linen', G), ('sand', G2), ('espresso ink', INK), ('oxblood', ACC), ('walnut', WAL), ('brass', BRASS)])})", "",
+           "| Section | Ground | Text | Accent |", "|---|---|---|---|",
+           f"| Header, hero, Projects, case studies, lock | linen `{G}` | espresso `{INK}` | oxblood `{ACC}`: \"Yasmin.\", links, project numbers, Enter |",
+           f"| Snippets, Reflection, logo tiles | sand `{G2}` | espresso | none |",
+           "| Four disciplines | photos (not desaturated) under espresso at 58% | white | none |",
+           f"| Contact | **walnut `{WAL}`** | linen | brass `{BRASS}` link underlines (walnut only) |",
+           "| Footer | linen | espresso 70% | none |", "",
+           "**Contrast (text)**", "", "| Pair | Text | Ground | Ratio |", "|---|---|---|---|"]
+    for name, fg, bg in [("Body text", INK, G), ("Muted labels on linen", T["--ink-muted"], G), ("Muted labels on sand", T["--ink-muted"], G2),
+                         ("Oxblood on linen (\"Yasmin.\", links, numbers)", ACC, G), ("Oxblood on sand", ACC, G2), ("White on oxblood (Enter)", "#FFFFFF", ACC),
+                         ("Linen on walnut (Contact)", G, WAL)]:
+        r = ratio(fg, bg)
+        assert r >= 4.5, (name, r)
+        out.append(f"| {name} | {hx(over(fg, bg))} | {hx(rgba(bg)[:3])} | **{r:.2f}:1** |")
+    out += ["", f"Rendered audit: Collection {fmt_audit('collection', None)}.", ""]
+    return out
+
+
+md += collection()
 md += heritage()
 md += directions()
 

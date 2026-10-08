@@ -41,7 +41,7 @@ Captions and labels use **62% ink, not 55%**. At 11px, 55% measures 4.4:1 on whi
 
 ### Site Styles per theme (theme comparison: the client picks one)
 
-The prototype can show nine palettes: the three colour directions Archive · Salon · Campus, the built Mono, and five earlier rounds (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all nine; only colours change. The first table covers the three calm palettes; the bold two follow. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
+The prototype can show ten palettes: **Collection** (the recommended direction, sampled from her own photographs; table at the end of this section), the three colour directions Archive · Salon · Campus, the built Mono, and five earlier rounds (switcher, top-right; values and contrast in `THEMES.md`; side by side in `screenshots/theme-compare.png`). **Squarespace gets only the chosen one.** Everything else in these notes (type, layout, blocks) is the same for all ten; only colours change. The first table covers the three calm palettes; the bold two follow. Squarespace colours are solid, so the translucent prototype values are given as their solid equivalent on the page ground.
 
 | Setting | Mono (built) | Cream | Venues |
 |---|---|---|---|
@@ -93,6 +93,25 @@ The prototype can show nine palettes: the three colour directions Archive · Sal
 | Case studies | cover overlay `#1C2635` 60%; project-colour numbers (*CSS* +4 or text colour) | cover overlay `#16140F` 60%; **Reflection on wine** (section theme) | cover overlay `#1C2635` 60%; chapter index top rule in the project colour; Reflection on the project tint |
 | Lock screen | paper, Enter wine | **wine ground** (*CSS* +1), paper layer, Enter wine | light-blue tint `#DEE1E0` (*CSS* +1), Enter navy |
 | CSS total (base 19) | about **28** | about **28** | about **34**: over budget unless the row tints and panel colours use Shape blocks |
+
+**Collection (recommended): the colours in her own photographs.** Reasoning and the photo-by-photo board: COLOUR-DIRECTIONS.md and `screenshots/her-colours.png`. No business-card colours and no stripe.
+
+| Where | Collection |
+|---|---|
+| Palette (five slots) | `#F2EDE5` linen · `#E6DDD0` sand · `#2A1C1B` espresso · `#3A2924` walnut · `#8E3A2F` oxblood |
+| Type colour / Paragraph 3 | `#2A1C1B` / `#665B58` (70% espresso on linen) |
+| Section theme **Light** (most sections: header, hero, Projects, chapters, footer, lock) | background `#F2EDE5`, text `#2A1C1B` |
+| Section theme **Sand** (Snippets, Reflection) | background `#E6DDD0`, text `#2A1C1B` |
+| Section theme **Walnut** (Contact) | background `#3A2924`, text `#F2EDE5`; link underline brass `#C9A46A` (*CSS* +1, optional; otherwise the native linen underline) |
+| Section theme **Ink** (discipline panels; the photos cover it) | background `#2A1C1B`, text `#FFFFFF` |
+| Links | `#8E3A2F`, underlined |
+| "Yasmin." in the hero, project numbers 01–04, chapter and FIG. numbers, PASSWORD PROTECTED | `#8E3A2F` (text colour from the palette, native) |
+| Four disciplines (CSS lines 15–16) | an espresso layer at 58% (hover 46%) instead of the black one; the photos keep their colour. Same two lines, rewritten as a `::after` layer of `rgba(42,28,27,.58)` |
+| Case covers (01, 02) | section background overlay `#2A1C1B` at 55%; title linen |
+| Lock screen (CSS lines 9, 14) | ground `#F2EDE5`; Enter `#8E3A2F` fill, `#fff` text |
+| Logo tile ground / hover (CSS lines 18–19) | `#E6DDD0` / `#DDD2C3` |
+| Hairlines and 62% greys in the base CSS | `rgba(42,28,27,.16)` and `#665B58` |
+| CSS total (base 19) | **19**, or **20** with the brass underline |
 
 **Not carried to Squarespace:** the theme switcher, the `?theme=` links and the `data-theme` attribute are prototype tools only.
 

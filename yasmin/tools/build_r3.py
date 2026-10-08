@@ -438,12 +438,12 @@ SPECIAL = {
 
 # ---------------------------------------------------------------- page shell
 # Theme comparison (prototype only; Squarespace gets one palette). THEMES.md has the values.
-THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold", "heritage", "heritage-rich", "salon", "campus"]
-DIRECTIONS = [("heritage", "Archive"), ("salon", "Salon"), ("campus", "Campus"), ("mono", "Mono")]          # the three colour directions + the build
+THEMES = ["mono", "cream", "cream-bold", "venues", "venues-bold", "heritage", "heritage-rich", "salon", "campus", "collection"]
+DIRECTIONS = [("collection", "Collection"), ("heritage", "Archive"), ("salon", "Salon"), ("campus", "Campus"), ("mono", "Mono")]          # the three colour directions + the build
 EARLIER = [("cream", "Cream"), ("cream-bold", "Cream bold"), ("venues", "Venues"), ("venues-bold", "Venues bold"), ("heritage-rich", "Heritage rich")]
 THEME_HEAD_JS = ("(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}"
                  "if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}"
-                 "if(['mono','cream','cream-bold','venues','venues-bold','heritage','heritage-rich','salon','campus'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
+                 "if(['mono','cream','cream-bold','venues','venues-bold','heritage','heritage-rich','salon','campus','collection'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();")
 THEME_JS = r"""
 /* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
    the internal links so it survives where storage is blocked). Not part of the Squarespace build. */

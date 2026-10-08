@@ -253,6 +253,16 @@ html:not([data-theme="mono"]) .chindex a.is-active{color:var(--index-active);tex
 [data-theme="campus"] .row:has(.room02){background:#F2E7D9;box-shadow:0 0 0 100vmax #F2E7D9;clip-path:inset(0 -100vmax)}
 [data-theme="campus"] .row:has(.room03){background:#E3E5E2;box-shadow:0 0 0 100vmax #E3E5E2;clip-path:inset(0 -100vmax)}
 [data-theme="campus"] .row:has(.room04){background:#EBDCD6;box-shadow:0 0 0 100vmax #EBDCD6;clip-path:inset(0 -100vmax);--index-no:#983A35}   /* red number a shade deeper on its own tint: 4.5:1 */
+/* Collection: the palette taken from Yasmin's own photographs (her portrait and the 21 Snippets): gallery linen and sand,
+   walnut and espresso wood, and the one strong colour that recurs in them, an oxblood red (the crown on red velvet,
+   the diorama, Violins of Hope), close to the wine already in the Figma file. No venue colours. */
+[data-theme="collection"]{--ground:#F2EDE5;--ground-2:#E6DDD0;--ink:#2A1C1B;--ink-muted:rgba(42,28,27,.7);--ink-low:rgba(42,28,27,.45);--hairline:rgba(42,28,27,.16);
+  --accent:#8E3A2F;--accent-2:#8E3A2F;--link:#8E3A2F;--active:var(--ink);--tile:#E6DDD0;--tile-hover:#DDD2C3;--photo-scrim:rgba(42,28,27,.55);--on-photo-2:#FFFFFF}
+[data-theme="collection"] .hero__hi em{color:#8E3A2F}
+[data-theme="collection"] .panel .m{filter:none}
+[data-theme="collection"] .panel .m::after{content:"";position:absolute;inset:0;background:rgba(42,28,27,.58);transition:opacity .3s ease}
+[data-theme="collection"] .panel:hover .m::after{opacity:.8}
+[data-theme="collection"] #contact{--ink:#F2EDE5;--ink-muted:#F2EDE5;--hairline:rgba(242,237,229,.25);--link:#C9A46A;--link-ink:#F2EDE5;background:#3A2924;color:#F2EDE5}
 /* theme switcher (prototype only, not part of the Squarespace build) */
 .theme-sw details{display:contents}
 .theme-sw summary{list-style:none;cursor:pointer;font:500 11px/1 var(--font);letter-spacing:.08em;text-transform:uppercase;padding:7px 8px;color:var(--ink-muted)}

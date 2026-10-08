@@ -235,6 +235,34 @@ Room 02's title and nav are **navy**, not white: white on orange is 2.13:1, navy
 
 **Signature stripe:** kept under the hero and above the footer, drawn as five flat segments (no gradient). Above the navy footer it sits on the section before it (white on case pages and Projects), so all five segments show; on the homepage that section is orange, so there it sits on the footer's top edge and its navy segment runs into the footer.
 
+## Collection (the colours in her own photographs)
+
+Every value is sampled from Yasmin's portrait and her Snippets photographs (median-cut over the 22 images): linen and stone from the walls and plinths, espresso and walnut from the wood and frames, one strong colour, oxblood, which recurs in the crown, the textiles, the violin case and the diorama, and brass from the fittings. Board with each photo and the colours taken from it: `screenshots/her-colours.png` (`brand/her-colours.html`). No colour from the business card; the project numbers are oxblood like every other accent.
+
+![collection swatches](screenshots/themes/swatch-collection.png)
+
+| Section | Ground | Text | Accent |
+|---|---|---|---|
+| Header, hero, Projects, case studies, lock | linen `#F2EDE5` | espresso `#2A1C1B` | oxblood `#8E3A2F`: "Yasmin.", links, project numbers, Enter |
+| Snippets, Reflection, logo tiles | sand `#E6DDD0` | espresso | none |
+| Four disciplines | photos (not desaturated) under espresso at 58% | white | none |
+| Contact | **walnut `#3A2924`** | linen | brass `#C9A46A` link underlines (walnut only) |
+| Footer | linen | espresso 70% | none |
+
+**Contrast (text)**
+
+| Pair | Text | Ground | Ratio |
+|---|---|---|---|
+| Body text | #2A1C1B | #F2EDE5 | **14.07:1** |
+| Muted labels on linen | #665B58 | #F2EDE5 | **5.63:1** |
+| Muted labels on sand | #625651 | #E6DDD0 | **5.26:1** |
+| Oxblood on linen ("Yasmin.", links, numbers) | #8E3A2F | #F2EDE5 | **6.44:1** |
+| Oxblood on sand | #8E3A2F | #E6DDD0 | **5.58:1** |
+| White on oxblood (Enter) | #FFFFFF | #8E3A2F | **7.51:1** |
+| Linen on walnut (Contact) | #F2EDE5 | #3A2924 | **11.84:1** |
+
+Rendered audit: Collection worst **5.04:1** (needs 4.5:1), 1234 items, all pass.
+
 ## Archive (the `heritage` theme) and Heritage rich
 
 ![heritage swatches](screenshots/themes/swatch-heritage.png)
@@ -334,6 +362,8 @@ Every visible piece of text on the seven prototype pages, in every theme, at 144
 | Salon | 390 | 617 | 617 | 0 | 5.04:1 (#contact, needs 4.5) |
 | Campus | 1440 | 617 | 617 | 0 | 4.52:1 (.reflection-sec, needs 4.5) |
 | Campus | 390 | 617 | 617 | 0 | 4.52:1 (.reflection-sec, needs 4.5) |
+| Collection | 1440 | 617 | 617 | 0 | 5.04:1 (panel 4, needs 4.5) |
+| Collection | 390 | 617 | 617 | 0 | 5.26:1 (.reflection-sec, needs 4.5) |
 
 In both bold themes **every** text item passes **4.5:1**, large text included (lowest: 4.55:1, .cover on room-01-jackson-home at 1440, venues-bold).
 

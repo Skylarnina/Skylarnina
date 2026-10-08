@@ -1,4 +1,32 @@
-# Colour directions: three ways to use cream, wine and The Henry Ford's colours
+# Colour directions
+
+## Start here: Collection (the colours in her own photographs)
+
+The earlier directions borrowed their colours from outside Yasmin: The Henry Ford's wayfinding colours on her business card, a cream and a wine from the Figma file, a mockup. **Collection** takes every colour from her own pictures instead: her portrait and the 21 photographs in *Snippets About My Life*, sampled with median-cut (`screenshots/her-colours.png` shows each photo next to the colours taken from it; source `brand/her-colours.html`).
+
+What the photographs hold: linen and stone walls and plinths, walnut and espresso wood and frames, brass fittings, and **one strong colour, oxblood**, which recurs in the crown, the textiles, the Violins of Hope case and the diorama. It is very close to the Figma wine, so her instinct for wine was right; the photographs just set its exact shade. The card's orange, olive and light blue barely appear in them at all.
+
+| Role | Colour | Where it comes from | Where it goes |
+|---|---|---|---|
+| Ground | linen `#F2EDE5` | gallery walls, the portrait backdrop | every section not listed below |
+| Ground 2 | sand `#E6DDD0` | plinths, stone, paper labels | Snippets, Reflection, logo tiles |
+| Ink | espresso `#2A1C1B` | dark wood, frames, the crown's shadows | all text, rules; 58% layer over the four discipline photos |
+| Band | walnut `#3A2924` | the column installation, display cases | Contact only (linen text) |
+| Accent | oxblood `#8E3A2F` | the crown, textiles, the violin case | "Yasmin.", links, project numbers, chapter numbers, Enter |
+| Detail | brass `#C9A46A` | fittings, gilt frames | link underlines on the walnut band only |
+
+**Share of the page:** linen ~72% · sand ~12% · espresso ~12% · walnut ~3% · oxblood ~1%.
+**Never:** a second strong colour; oxblood as a section ground; brass as text on linen (it fails contrast there); recolouring the photographs (the panels keep full colour under the espresso layer).
+**Contrast:** every text item passes 4.5:1 on the rendered pages at 1440 and 390 (worst 5.04:1); values in `THEMES.md`.
+**See it:** the switcher's first option, **Collection**, or any page with `?theme=collection`.
+
+**In Squarespace** (the cheapest direction to build): palette = the five colours above minus brass (`#F2EDE5` `#E6DDD0` `#2A1C1B` `#3A2924` `#8E3A2F`); three section themes: linen (most sections), sand (Snippets, Reflection), walnut (Contact). Links and the project numbers take oxblood from the palette natively. The base custom CSS keeps its 19 lines with new values: the hairlines and 62% greys become espresso, the lock-screen Enter becomes oxblood, the logo tiles sand; the two panel lines darken with an espresso layer instead of black (same two lines). The brass underline on Contact is optional (+1 line). **19–20 lines**, the only direction with room to spare under the 30-line budget. Full table: SQUARESPACE-BUILD-NOTES.md, *Site Styles per theme*.
+
+**Why I recommend it:** it needs no explanation to Yasmin. She can look at the board and see her own work in the palette, and none of the colours compete with the photographs because they *are* the photographs.
+
+---
+
+## Three earlier directions: cream, wine and The Henry Ford's colours
 
 Three distinct directions for the same site (same layout, copy and photographs), so Yasmin chooses a **mood**, not a swatch. Each gives the same colours different jobs.
 
@@ -9,7 +37,7 @@ Three distinct directions for the same site (same layout, copy and photographs),
 | Feels | Calm, scholarly, gallery | Warm, personal, confident | Colourful, optimistic, still premium |
 | Best if she wants | The work to carry all the colour | The site to feel like *her* | The site to feel like The Henry Ford's world |
 
-- **See them:** the prototype's theme switcher, top-right (**Archive · Salon · Campus**; Mono is the uncoloured build; *Earlier* holds the previous rounds). Or open any page with `?theme=heritage` (Archive), `?theme=salon` or `?theme=campus`.
+- **See them:** the prototype's theme switcher, top-right (**Collection · Archive · Salon · Campus**; Mono is the uncoloured build; *Earlier* holds the previous rounds). Or open any page with `?theme=heritage` (Archive), `?theme=salon` or `?theme=campus`.
 - **Usage guide** (one board, section-by-section colour map for each): `screenshots/colour-directions.png`, also `brand/colour-directions.html`.
 - **Values and contrast:** `THEMES.md`. Every piece of text in all three passes 4.5:1, checked on the rendered pages at desktop and phone widths, text on photos included.
 
@@ -114,4 +142,4 @@ The three directions use the same blocks; only section themes and a few colour v
 | Coloured section themes | Navy (Contact) | Wine (Snippets, Reflection) | Orange tint (hero), olive tint (Snippets), navy (Contact) |
 | Extra CSS beyond the base 19 lines | ~9 (panel layer, row bars, project numbers, link underline) | ~9 (as Archive + slideshow frame, lock ground) | ~15 (panel colours ×4, row tints ×4, project numbers): **over the 30-line budget** unless the row tints are Shape blocks behind each row |
 
-**My recommendation:** **Archive** if the client wants the work to lead; **Salon** if she wants the site to feel personal. Campus is the most distinctive but the most expensive to build and maintain in Squarespace.
+**My recommendation:** **Collection** (above). Of these three: **Archive** if the client wants the work to lead; **Salon** if she wants the site to feel personal. Campus is the most distinctive but the most expensive to build and maintain in Squarespace.
