@@ -1,0 +1,830 @@
+<title>Kóda Evening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;500&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --navy:#0D1F2D; --bone:#F0EBE3; --paper:#FAFAF8; --stone:#C8BCA8;
+  --blue-rich:#1B3A5C; --blue-mid:#2D5F8A;
+  --stone-hover:#B8AC98; --navy-hover:#163043;
+  --stone-50:rgba(200,188,168,.5);
+  --serif:'Cormorant Garamond','Cormorant',Garamond,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --bar:64px; --gut:24px;
+  --r:0px;                                  /* photo cards and panels: 0 in brand, 20px in enhanced */
+  --fg:var(--navy); --muted:rgba(13,31,45,.62); --low:rgba(13,31,45,.38);
+  --line:var(--stone); --line-soft:var(--stone-50); --label:rgba(13,31,45,.62); --link:var(--blue-mid);
+}
+@media (min-width:900px){ :root{ --bar:72px; --gut:32px; } }
+html[data-motion="enhanced"]{ --r:20px; }
+.theme-dark{
+  --fg:var(--bone); --muted:rgba(240,235,227,.62); --low:rgba(240,235,227,.38);
+  --line:rgba(240,235,227,.22); --line-soft:rgba(240,235,227,.14); --label:var(--stone); --link:var(--bone);
+  color:var(--fg);
+}
+.theme-bone{ --muted:rgba(13,31,45,.64); --label:rgba(13,31,45,.64); }
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{ margin:0; background:var(--paper); color:var(--fg); font:300 15px/1.7 var(--sans); font-synthesis:none; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:clip; }
+@media (min-width:900px){ body{ font-size:16px; } }
+img,video,canvas,svg{ display:block; max-width:100%; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+a{ color:inherit; }
+h1,h2,h3,p,ol,ul,dl,dd,figure,blockquote{ margin:0; }
+ol,ul{ padding:0; list-style:none; }
+:focus-visible{ outline:1px solid var(--blue-mid); outline-offset:3px; }
+.theme-dark :focus-visible{ outline-color:var(--bone); }
+
+.wrap{ width:100%; max-width:1264px; margin-inline:auto; padding-inline:var(--gut); position:relative; z-index:2; }
+.grid{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; }
+@media (max-width:899px){ .grid{ grid-template-columns:minmax(0,1fr); } .grid > *{ grid-column:1 / -1 !important; } }
+
+.eyebrow{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--label); }
+.eyebrow .ix{ color:var(--low); margin-right:.9em; }
+.display{ font-family:var(--serif); font-weight:300; letter-spacing:-.01em; line-height:1; text-wrap:balance; color:var(--fg); }
+.display em, .serif-em{ font-style:italic; font-weight:400; }
+.h-sec{ font-size:clamp(40px,5.2vw,72px); }
+.body{ font:300 15px/1.7 var(--sans); color:var(--muted); text-wrap:pretty; max-width:58ch; }
+@media (min-width:900px){ .body{ font-size:16px; } br.m{ display:none; } }
+@media (max-width:899px){ br.d{ display:none; } }
+.link{ position:relative; font:300 15px/1 var(--sans); color:var(--link); text-decoration:underline; text-decoration-thickness:.5px; text-underline-offset:5px; transition:color 220ms ease,opacity 220ms ease; }
+.link::after{ content:""; position:absolute; inset:-15px -6px; }
+.link:hover{ opacity:.8; }
+.cap{ font:300 11px/1.4 var(--sans); color:var(--muted); letter-spacing:.01em; }
+.centred{ text-align:center; }
+.centred .body{ margin-inline:auto; }
+.sec-head{ display:flex; flex-direction:column; align-items:center; gap:20px; }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 32px; border-radius:999px; white-space:nowrap; font:500 12px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; text-decoration:none; transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease,opacity 220ms ease; }
+.btn:active{ opacity:.85; }
+.btn-navy{ background:var(--navy); color:var(--bone); }
+.btn-navy:hover{ background:var(--navy-hover); }
+.btn-stone{ background:var(--stone); color:var(--navy); height:54px; }
+.btn-stone:hover{ background:var(--stone-hover); }
+.btn-ghost{ background:transparent; border:.5px solid var(--navy); color:var(--navy); height:48px; }
+.btn-ghost:hover{ background:var(--navy); color:var(--bone); }
+.theme-dark .btn-ghost{ border-color:var(--stone); color:var(--bone); height:54px; }
+.theme-dark .btn-ghost:hover{ background:var(--stone); color:var(--navy); }
+.btn-sm{ height:44px; padding:0 20px; }
+.price-note{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+
+.ph{ position:relative; overflow:hidden; background:var(--blue-rich); background-size:cover; background-position:center; }
+.ph-note{ position:absolute; left:20px; top:20px; right:20px; max-width:34ch; font:300 11px/1.5 var(--sans); color:rgba(240,235,227,.62); }
+.ph-note b{ display:block; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; margin-bottom:2px; }
+.ph.has-media .ph-note{ display:none; }
+.photo-card{ position:relative; overflow:hidden; border-radius:var(--r); }
+.photo-card .ph{ position:absolute; inset:0; }
+.will-fade{ opacity:0; } .fade{ transition:opacity 320ms ease; }
+
+/* ---------- facts strip (replaces the reference's logo strip) ---------- */
+.facts{ border-top:.5px solid var(--line); border-bottom:.5px solid var(--line); padding-block:22px; display:flex; justify-content:center; flex-wrap:wrap; gap:12px 0; }
+.facts span{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--label); }
+.facts .dot{ color:var(--stone); padding-inline:28px; }
+@media (max-width:899px){ .facts{ flex-direction:column; align-items:center; gap:10px; } .facts .dot{ display:none; } }
+
+/* ======================================================
+   0 · TOP BAR — wordmark left, links centre, pill right
+   ====================================================== */
+.bar{ position:fixed; inset:0 0 auto 0; z-index:60; background:var(--paper); border-bottom:.5px solid var(--stone); padding-top:env(safe-area-inset-top,0px); }
+.bar-in{ height:var(--bar); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }
+.lockup{ display:inline-flex; flex-direction:column; align-items:center; gap:5px; text-decoration:none; color:var(--navy); padding:10px 12px 10px 0; justify-self:start; }
+.wm{ font:300 20px/1 var(--serif); letter-spacing:.42em; margin-right:-.42em; text-transform:uppercase; }
+.wm-city{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); margin-right:-.18em; }
+.bar-nav{ display:flex; gap:32px; }
+.bar-nav a{ position:relative; font:300 14px/1 var(--sans); color:rgba(13,31,45,.62); text-decoration:none; padding:12px 0; transition:color 220ms ease; }
+.bar-nav a:hover{ color:var(--navy); }
+.bar-act{ justify-self:end; display:flex; align-items:center; gap:24px; }
+.bar-time{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); font-variant-numeric:tabular-nums; }
+.bar-act .short{ display:none; }
+@media (max-width:899px){ .bar-nav, .bar-time, .bar-act .full{ display:none; } .bar-act .short{ display:inline; } .bar-in{ grid-template-columns:1fr auto; } }
+main{ padding-top:calc(var(--bar) + env(safe-area-inset-top,0px)); }
+
+/* ======================================================
+   1 · HERO — full-bleed photo, centred, navy 60% wash (flat, not a gradient)
+   ====================================================== */
+.hero{ position:relative; height:max(640px, calc(100svh - var(--bar))); max-height:960px; display:grid; place-items:center; overflow:hidden; background:var(--navy); }
+.hero > .ph{ position:absolute; inset:0; }
+.hero video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 400ms ease; }
+.hero video.is-playing{ opacity:1; }
+.hero-wash{ position:absolute; inset:0; background:rgba(13,31,45,.6); }
+.hero-in{ position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; gap:24px; max-width:900px; padding-inline:var(--gut); }
+.hero-in .eyebrow{ color:var(--stone); display:inline-flex; align-items:center; gap:14px; }
+.hero-in .eyebrow .sep{ width:24px; border-top:.5px solid var(--stone); }
+.hero h1{ font-size:clamp(46px,7.2vw,104px); line-height:.98; color:var(--bone); }
+.hero-sub{ font:300 16px/1.65 var(--sans); color:var(--bone); max-width:46ch; }
+.hero-cta{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
+.hero-cta .link{ color:var(--bone); }
+.hero-cap{ position:absolute; z-index:2; right:var(--gut); bottom:24px; font:300 11px/1.4 var(--sans); color:rgba(240,235,227,.62); }
+@media (max-width:899px){ .hero-in{ gap:18px; } .hero h1{ font-size:46px; } .hero-sub{ font-size:15px; } .hero-cap{ left:var(--gut); right:auto; } }
+
+/* ======================================================
+   1b · STRIP — Camospace's running line
+   ====================================================== */
+.strip{ overflow:hidden; border-bottom:.5px solid var(--stone); padding-block:22px; background:var(--paper); }
+.strip-track{ display:flex; width:max-content; white-space:nowrap; }
+.strip-track span{ font:300 26px/1 var(--serif); letter-spacing:.3em; text-transform:uppercase; color:var(--navy); padding-inline:18px; }
+.strip-track .dot{ color:var(--stone); padding-inline:0; }
+html[data-motion="enhanced"] .strip-track{ animation:strip 60s linear infinite; }
+@keyframes strip{ to{ transform:translateX(-50%); } }
+@media (max-width:899px){ .strip-track span{ font-size:20px; } }
+
+/* ======================================================
+   2 · STATEMENT — centred head, two photo cards with overlaid text
+   ====================================================== */
+.statement{ padding-block:128px 80px; }
+.statement h2{ font-size:clamp(40px,5.2vw,72px); }
+.cards2{ margin-top:64px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.cards2 .photo-card{ aspect-ratio:4 / 4.4; }
+.pc-txt{ position:absolute; left:0; right:0; z-index:2; padding:32px; display:flex; flex-direction:column; gap:12px; }
+.pc-txt.bottom{ bottom:0; background:rgba(13,31,45,.6); }
+.pc-txt.top{ top:0; background:rgba(13,31,45,.6); }
+.pc-txt h3{ font:300 34px/1.05 var(--serif); color:var(--bone); text-wrap:balance; }
+.pc-txt p{ font:300 14px/1.6 var(--sans); color:rgba(240,235,227,.62); max-width:38ch; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ position:relative; height:38px; padding:0 16px; border-radius:999px; border:.5px solid var(--stone); font:300 13px/1 var(--sans); color:var(--navy); display:inline-flex; align-items:center; transition:background-color 220ms ease,color 220ms ease,border-color 220ms ease; }
+.chip::after{ content:""; position:absolute; inset:-3px 0; }
+.chip[aria-pressed="true"], .chip.on{ background:var(--navy); border-color:var(--navy); color:var(--bone); }
+.pc-txt .chip{ border-color:var(--stone); color:var(--bone); height:34px; }
+.pc-txt .chip.on{ background:var(--bone); border-color:var(--bone); color:var(--navy); }
+.pc-cap{ position:absolute; right:16px; bottom:14px; z-index:2; font:300 11px/1.4 var(--sans); color:rgba(240,235,227,.62); }
+.pc-txt.bottom ~ .pc-cap{ bottom:auto; top:14px; }
+@media (max-width:899px){ .statement{ padding-block:88px 56px; } .cards2{ grid-template-columns:1fr; margin-top:40px; } .cards2 .photo-card{ aspect-ratio:4 / 4.6; } .pc-txt{ padding:22px var(--gut); } .pc-txt h3{ font-size:28px; } }
+
+/* ======================================================
+   3 · WHO A KÓDA IS — headline + CTA row, accordion left, photo right
+   ====================================================== */
+.who{ padding-block:112px 128px; }
+.row-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:32px; flex-wrap:wrap; }
+.row-head .t{ display:flex; flex-direction:column; gap:20px; max-width:620px; }
+.who-grid{ margin-top:72px; align-items:center; }
+.acc{ grid-column:1 / 6; border-top:.5px solid var(--stone); }
+.acc-item{ border-bottom:.5px solid var(--stone-50); }
+.acc-q{ width:100%; min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:24px; text-align:left; padding-block:18px; font:300 15px/1.4 var(--sans); color:rgba(13,31,45,.62); transition:color 220ms ease; }
+.acc-item.is-open .acc-q{ color:var(--navy); }
+.acc-q .st{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--blue-mid); flex:none; }
+.acc-a{ display:grid; grid-template-rows:0fr; opacity:0; transition:opacity 220ms ease; }
+.acc-a > div{ overflow:hidden; }
+.acc-a p{ padding:0 0 24px; font:400 24px/1.3 var(--serif); color:var(--navy); }
+.acc-a .body{ font:300 15px/1.6 var(--sans); padding-bottom:24px; }
+.acc-item.is-open .acc-a{ grid-template-rows:1fr; opacity:1; }
+html[data-motion="enhanced"] .acc-a{ transition:grid-template-rows 300ms ease,opacity 300ms ease; }
+.who-photo{ grid-column:7 / 13; aspect-ratio:4 / 4.2; }
+.who-photo .ph{ opacity:0; transition:opacity 220ms ease; }
+.who-photo .ph.is-active{ opacity:1; }
+html[data-motion="enhanced"] .who-photo .ph{ transition:opacity 600ms ease; }
+@media (max-width:899px){ .who{ padding-block:80px 88px; } .who-grid{ margin-top:40px; } .who-photo{ margin-top:32px; aspect-ratio:4 / 4.6; } }
+
+/* ======================================================
+   4 · BUILT AROUND YOUR EVENING — big photo, floating summary, four features
+   ====================================================== */
+.built{ padding-block:40px 128px; }
+.built-photo{ margin-top:56px; aspect-ratio:16 / 8.4; }
+.float{ position:absolute; z-index:3; left:50%; top:50%; transform:translate(-50%,-50%); width:min(360px, calc(100% - 48px)); background:var(--bone); border:.5px solid var(--stone); border-radius:var(--r); padding:22px 24px 20px; color:var(--navy); }
+.float .eyebrow{ color:rgba(13,31,45,.64); }
+.float .big{ font:300 32px/1.05 var(--serif); margin:10px 0 14px; }
+.float dl{ border-top:.5px solid var(--stone); }
+.float .fr{ display:flex; justify-content:space-between; gap:16px; padding-block:10px; border-bottom:.5px solid var(--stone-50); font:300 12.5px/1.5 var(--sans); color:rgba(13,31,45,.64); }
+.float .fr dd{ color:var(--navy); text-align:right; font-family:var(--serif); font-size:16px; font-weight:400; }
+.float .st{ margin-top:12px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--blue-mid); }
+.feats4{ margin-top:72px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.feat{ border-top:.5px solid var(--stone); padding-top:20px; display:flex; flex-direction:column; gap:10px; }
+.feat h3{ font:300 28px/1.08 var(--serif); color:var(--navy); text-wrap:balance; }
+.feat p{ font:300 14px/1.6 var(--sans); color:rgba(13,31,45,.62); }
+.feat .flag{ color:var(--stone); }
+@media (max-width:899px){ .built{ padding-block:24px 88px; } .built-photo{ aspect-ratio:4 / 5; margin-top:36px; } .float{ padding:18px 18px 16px; } .float .big{ font-size:26px; } .feats4{ grid-template-columns:1fr 1fr; gap:32px 20px; margin-top:48px; } }
+
+/* ======================================================
+   5 · ONE EVENING, HANDLED — scrolling photo cards, big times
+   ====================================================== */
+.story{ padding-block:40px 112px; }
+.story-row{ margin-top:56px; display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding-inline:max(var(--gut), calc((100vw - 1200px) / 2)); scroll-padding-inline:max(var(--gut), calc((100vw - 1200px) / 2)); }
+.story-row::-webkit-scrollbar{ display:none; }
+.scard{ flex:none; width:min(380px, 78vw); aspect-ratio:3 / 4; scroll-snap-align:start; }
+.scard .wash{ position:absolute; inset:0; background:rgba(13,31,45,.45); z-index:1; }
+.scard .t{ position:absolute; left:24px; top:22px; z-index:2; font:300 72px/1 var(--serif); font-variant-numeric:lining-nums tabular-nums; letter-spacing:-.02em; color:var(--bone); }
+.scard .s{ position:absolute; left:24px; right:24px; bottom:24px; z-index:2; font:300 22px/1.25 var(--serif); color:var(--bone); text-wrap:balance; }
+.scard .cap{ position:absolute; left:24px; bottom:0; z-index:2; color:rgba(240,235,227,.62); transform:translateY(calc(100% + 10px)); }
+.story-ctrl{ margin-top:28px; display:flex; justify-content:flex-end; gap:16px; }
+.car-btn{ height:44px; padding:0 22px; border-radius:999px; border:.5px solid var(--navy); font:500 11px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--navy); transition:background-color 220ms ease,color 220ms ease; }
+.car-btn:hover{ background:var(--navy); color:var(--bone); }
+@media (max-width:899px){ .story{ padding-block:24px 80px; } .story-row{ margin-top:36px; gap:12px; } .scard .t{ font-size:56px; } .scard .s{ font-size:20px; } .story-ctrl{ display:none; } }
+
+/* ======================================================
+   6 · HOW IT WORKS — booking screen mock-up left, four steps right
+   ====================================================== */
+.how{ background:var(--bone); padding-block:120px; }
+.how-phone{ grid-column:1 / 7; align-self:center; display:flex; justify-content:center; }
+.how-txt{ grid-column:8 / 13; align-self:center; display:flex; flex-direction:column; gap:24px; }
+.steps{ border-top:.5px solid var(--stone); margin-top:8px; }
+.step{ display:grid; grid-template-columns:56px 1fr; gap:16px; padding-block:20px; border-bottom:.5px solid var(--stone-50); }
+.step .n{ font:300 40px/1 var(--serif); color:var(--navy); }
+.step h3{ font:400 20px/1.3 var(--serif); color:var(--navy); }
+.step p{ margin-top:4px; font:300 14px/1.6 var(--sans); color:rgba(13,31,45,.64); }
+@media (max-width:899px){ .how{ padding-block:80px; } .iphone{ width:min(340px,100%); } .how-txt{ margin-top:48px; } }
+
+/* ======================================================
+   IPHONE FRAME — shared by the How-it-works mock-up and the booking overlay (desktop)
+   ====================================================== */
+.iphone{ position:relative; width:380px; max-width:100%; aspect-ratio:380 / 790; background:var(--navy); border-radius:58px; padding:12px; margin-inline:auto; }
+.iphone::before{ content:""; position:absolute; inset:3px; border-radius:55px; border:1px solid rgba(240,235,227,.16); pointer-events:none; }
+.iphone .screen{ position:absolute; inset:12px; border-radius:46px; background:var(--paper); color:var(--navy); overflow:hidden; display:flex; flex-direction:column; padding:14px 22px 0; }
+.iphone .island{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:118px; height:34px; border-radius:999px; background:var(--navy); z-index:3; }
+.iphone .status{ height:54px; display:flex; justify-content:space-between; align-items:center; padding:0 6px 0 10px; font:500 15px/1 var(--sans); color:var(--navy); font-variant-numeric:tabular-nums; }
+.iphone .status .bars{ display:flex; align-items:flex-end; gap:2px; }
+.iphone .status .bars i{ display:block; width:3px; background:var(--navy); border-radius:1px; }
+.iphone .status .bars i:nth-child(1){ height:4px; } .iphone .status .bars i:nth-child(2){ height:6px; } .iphone .status .bars i:nth-child(3){ height:8px; } .iphone .status .bars i:nth-child(4){ height:10px; }
+.iphone .status .bat{ position:relative; width:26px; height:12px; border:1px solid rgba(13,31,45,.5); border-radius:4px; margin-left:8px; }
+.iphone .status .bat::before{ content:""; position:absolute; inset:2px 7px 2px 2px; background:var(--navy); border-radius:2px; }
+.iphone .status .bat::after{ content:""; position:absolute; right:-4px; top:3px; width:2px; height:5px; background:rgba(13,31,45,.5); border-radius:1px; }
+.iphone .status .right{ display:flex; align-items:center; }
+.iphone .home{ position:absolute; left:50%; bottom:9px; transform:translateX(-50%); width:134px; height:5px; border-radius:999px; background:var(--navy); }
+.iphone .app{ flex:1; display:flex; flex-direction:column; min-height:0; padding-bottom:30px; }
+.iphone .mk-top{ display:flex; justify-content:space-between; font:500 10px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.iphone .mk-prog{ border-top:.5px solid rgba(200,188,168,.45); position:relative; margin-top:12px; }
+.iphone .mk-prog span{ position:absolute; left:0; top:-.5px; width:12.5%; border-top:1px solid var(--navy); }
+.iphone .mk-body{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; padding-block:24px; }
+.iphone .mk-q{ font:300 30px/1.1 var(--serif); color:var(--navy); }
+.iphone .mk-hint{ font:300 12.5px/1.55 var(--sans); color:rgba(13,31,45,.62); max-width:260px; }
+.iphone .chips{ margin-top:10px; gap:7px; }
+.iphone .chip{ height:34px; padding:0 13px; font-size:12.5px; }
+.iphone .mk-foot{ font:300 10.5px/1.5 var(--sans); color:rgba(13,31,45,.62); word-break:break-word; }
+
+/* ======================================================
+   7 · THREE WAYS — pricing table, Night highlighted
+   ====================================================== */
+.ways{ padding-block:128px 112px; }
+.plans{ margin-top:64px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch; }
+.plan{ border:.5px solid var(--stone); border-radius:var(--r); padding:36px 32px 32px; display:flex; flex-direction:column; gap:0; background:transparent; color:var(--navy); }
+.plan.is-main{ background:var(--navy); border-color:var(--navy); color:var(--bone); }
+.plan .name{ font:300 44px/1 var(--serif); margin-top:10px; }
+.plan .tag{ margin-top:10px; font:300 14px/1.5 var(--sans); color:rgba(13,31,45,.62); }
+.plan.is-main .tag{ color:rgba(240,235,227,.62); }
+.plan .price{ margin-top:28px; padding-block:18px; border-top:.5px solid var(--stone-50); border-bottom:.5px solid var(--stone-50); }
+.plan.is-main .price{ border-color:rgba(240,235,227,.22); }
+.plan.is-main .price-note{ color:rgba(240,235,227,.62); }
+.plan dl{ margin-top:8px; }
+.plan .grp{ margin-top:20px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.plan.is-main .grp{ color:var(--stone); }
+.plan dd{ padding-block:9px; border-bottom:.5px solid var(--stone-50); font:400 17px/1.4 var(--serif); }
+.plan.is-main dd{ border-color:rgba(240,235,227,.14); }
+.plan .btn{ margin-top:auto; align-self:stretch; }
+.plan .btn-ghost{ margin-top:32px; }
+.plan.is-main .btn{ margin-top:32px; }
+@media (max-width:1100px) and (min-width:900px){ .plan{ padding:28px 22px 24px; } .plan .name{ font-size:38px; } }
+@media (max-width:899px){ .ways{ padding-block:88px 80px; } .plans{ grid-template-columns:1fr; margin-top:40px; } .plan.is-main{ order:-1; } }
+
+/* ======================================================
+   8 · FOUNDER — the reference's quote block
+   ====================================================== */
+.founder{ background:var(--bone); padding-block:128px; text-align:center; }
+.founder blockquote{ margin:32px auto 0; max-width:24em; font:italic 400 clamp(24px,2.6vw,36px)/1.35 var(--serif); color:var(--navy); text-wrap:pretty; }
+.founder .todo{ margin-top:28px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.64); }
+.sig{ margin:40px auto 0; display:inline-flex; flex-direction:column; gap:6px; padding-top:22px; border-top:.5px solid var(--stone); min-width:220px; }
+.sig .n{ font:300 44px/1 var(--serif); color:var(--navy); }
+.sig .r{ font:300 13px/1.5 var(--sans); color:rgba(13,31,45,.64); }
+@media (max-width:899px){ .founder{ padding-block:88px; } }
+
+/* ======================================================
+   9 · IF PLANS CHANGE — the reference's dark three-stat row
+   ====================================================== */
+.plansec{ background:var(--navy); padding-block:128px; }
+.tiers{ margin-top:72px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px; text-align:center; }
+.tier{ border-top:.5px solid rgba(240,235,227,.22); padding-top:28px; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.tier .v{ font:300 clamp(44px,5vw,72px)/1 var(--serif); color:var(--bone); }
+.tier .k{ font:300 15px/1.6 var(--sans); color:rgba(240,235,227,.62); }
+.plansec .foot{ margin-top:48px; text-align:center; font:300 13px/1.6 var(--sans); color:rgba(240,235,227,.62); }
+@media (max-width:899px){ .plansec{ padding-block:88px; } .tiers{ grid-template-columns:1fr; margin-top:40px; gap:32px; } }
+
+/* ======================================================
+   10 · ANSWERS — headline left + CTA right, rows
+   ====================================================== */
+.answers{ padding-block:120px 128px; background:var(--paper); }
+.faq{ margin-top:56px; border-top:.5px solid var(--stone); }
+.qa{ border-bottom:.5px solid var(--stone-50); }
+.q{ width:100%; min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:24px; text-align:left; padding-block:22px; font:400 24px/1.25 var(--serif); color:var(--navy); }
+.q .pm{ font:300 22px/1 var(--sans); color:rgba(13,31,45,.62); width:20px; text-align:center; flex:none; }
+.a{ display:grid; grid-template-rows:0fr; opacity:0; transition:opacity 220ms ease; }
+.a > div{ overflow:hidden; }
+.a p{ padding:0 48px 28px 0; }
+.qa.is-open .a{ grid-template-rows:1fr; opacity:1; }
+html[data-motion="enhanced"] .a{ transition:grid-template-rows 300ms ease,opacity 300ms ease; }
+@media (max-width:899px){ .answers{ padding-block:80px 88px; } .q{ font-size:21px; } .a p{ padding-right:0; } }
+
+/* ======================================================
+   11 · CLOSE + FOOTER — dark photo, centred CTA, link columns
+   ====================================================== */
+.night{ position:relative; background:var(--navy); overflow:hidden; }
+.night > .ph{ position:absolute; inset:0; }
+.night .wash{ position:absolute; inset:0; background:rgba(13,31,45,.6); }
+.close{ position:relative; z-index:2; padding-block:168px 120px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.close h2{ font-size:clamp(56px,7.6vw,112px); line-height:.96; }
+.close .body{ color:rgba(240,235,227,.62); }
+.close .facts{ margin-top:48px; width:100%; max-width:1200px; }
+footer{ position:relative; z-index:2; padding-block:56px 48px; }
+.foot-grid{ row-gap:40px; align-items:start; }
+.foot-col{ display:flex; flex-direction:column; gap:14px; }
+.foot-col .eyebrow{ color:var(--stone); margin-bottom:6px; }
+.foot-col .link{ align-self:flex-start; padding-block:4px; font-size:14px; text-decoration:none; color:rgba(240,235,227,.62); }
+.foot-col .link:hover{ color:var(--bone); }
+.foot-c{ grid-column:4 / 10; text-align:center; align-self:center; display:flex; flex-direction:column; align-items:center; gap:14px; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(240,235,227,.62); }
+.foot-l{ grid-column:1 / 4; } .foot-r{ grid-column:10 / 13; align-items:flex-end; text-align:right; }
+.foot-r .link{ align-self:flex-end; }
+.foot-legal{ grid-column:1 / -1; margin-top:16px; padding-top:20px; border-top:.5px solid rgba(240,235,227,.14); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font:300 11px/1.6 var(--sans); color:rgba(240,235,227,.62); }
+@media (max-width:899px){ .close{ padding-block:112px 72px; } .close .facts{ margin-top:24px; } footer{ padding-block:40px 140px; } .foot-r{ align-items:flex-start; text-align:left; } .foot-r .link{ align-self:flex-start; } .foot-c{ align-items:flex-start; text-align:left; } }
+
+/* ======================================================
+   LOOK — graded (cool, low saturation, grain) · colour (saturated, no grain; black/white gradients instead of navy washes)
+   ====================================================== */
+html[data-look="colour"] .hero-wash{ background:linear-gradient(to bottom, rgba(0,0,0,.10) 0%, rgba(0,0,0,.36) 50%, rgba(0,0,0,.74) 100%); }
+html[data-look="colour"] .hero-cap{ color:rgba(255,255,255,.75); }
+html[data-look="colour"] .pc-txt.bottom{ background:linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,0) 100%); padding-top:88px; }
+html[data-look="colour"] .pc-txt.top{ background:linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,0) 100%); padding-bottom:88px; }
+html[data-look="colour"] .scard .wash{ background:linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 38%, rgba(0,0,0,0) 52%, rgba(0,0,0,.82) 100%); }
+html[data-look="colour"] .night .wash{ background:linear-gradient(to bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,.88) 100%); }
+html[data-look="colour"] .built-photo::after, html[data-look="colour"] .who-photo::after{ content:""; position:absolute; inset:0 0 auto 0; height:34%; z-index:2; pointer-events:none; background:linear-gradient(to bottom, rgba(250,250,248,.85) 0%, rgba(250,250,248,0) 100%); }
+html[data-look="colour"] .built-photo::before{ content:""; position:absolute; inset:auto 0 0 0; height:34%; z-index:2; pointer-events:none; background:linear-gradient(to top, rgba(250,250,248,.85) 0%, rgba(250,250,248,0) 100%); }
+html[data-look="colour"] .float{ z-index:3; }
+.proto .sep{ width:0; height:20px; border-left:.5px solid var(--stone); margin:0 4px; }
+
+/* ---------- mobile sticky bar ---------- */
+.sticky{ position:fixed; left:0; right:0; bottom:0; z-index:55; background:var(--bone); border-top:.5px solid var(--stone); padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; justify-content:space-between; gap:16px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 240ms ease,visibility 0s linear 240ms; }
+.sticky.is-on{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity 240ms ease,visibility 0s; }
+.sticky p{ font:300 13px/1.4 var(--sans); color:rgba(13,31,45,.64); }
+@media (min-width:900px){ .sticky{ display:none; } }
+
+/* ---------- prototype switch ---------- */
+.proto{ position:fixed; right:16px; top:calc(var(--bar) + env(safe-area-inset-top,0px) + 12px); z-index:58; display:flex; align-items:center; gap:2px; padding:3px; border-radius:999px; background:var(--paper); border:.5px solid var(--stone); color:var(--navy); transition:opacity 240ms ease,visibility 0s; }
+.proto .lbl{ font:500 9.5px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); margin:0 6px 0 11px; }
+.proto button{ position:relative; height:44px; padding:0 12px; border-radius:999px; font:500 9.5px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:var(--navy); transition:background-color 220ms ease,color 220ms ease; }
+.proto button[aria-pressed="true"]{ background:var(--navy); color:var(--bone); }
+.proto button:hover:not([aria-pressed="true"]){ background:var(--bone); }
+@media (max-width:899px){ .proto{ right:12px; top:calc(var(--bar) + env(safe-area-inset-top,0px) + 10px); } .proto .lbl{ display:none; } .proto button{ height:36px; padding:0 10px; } .proto button::after{ content:""; position:absolute; inset:-4px 0; } html.sticky-on .proto{ opacity:0; visibility:hidden; pointer-events:none; transition:opacity 240ms ease,visibility 0s linear 240ms; } }
+
+/* ---------- booking overlay (Fillout stub) ---------- */
+.booking{ position:fixed; inset:0; z-index:80; opacity:0; transition:opacity 220ms ease; }
+.booking.is-open{ opacity:1; }
+.booking-scrim{ position:absolute; inset:0; background:rgba(13,31,45,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
+.booking-side{ position:absolute; top:0; right:0; bottom:0; width:min(640px,100%); background:var(--paper); display:grid; place-items:center; padding:32px; overflow-y:auto; }
+.booking-side .iphone{ width:min(380px,100%); }
+.booking-panel .screen{ padding-inline:24px; border:.5px solid var(--stone); }
+.booking-panel .app{ padding-bottom:34px; }
+@media (max-width:899px){
+  .booking-scrim{ display:none; }
+  .booking-side{ width:100%; padding:0; display:block; }
+  .booking-panel.iphone{ position:absolute; inset:0; width:auto; aspect-ratio:auto; border-radius:0; padding:0; background:var(--paper); }
+  .booking-panel.iphone::before, .booking-panel .island, .booking-panel .status, .booking-panel .home{ display:none; }
+  .booking-panel .screen{ position:absolute; inset:0; border-radius:0; border:0; padding:calc(20px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px)); }
+  .booking-panel .app{ padding-bottom:0; }
+}
+.bk-top{ display:flex; justify-content:space-between; align-items:center; min-height:44px; }
+.booking-panel .bk-top button{ font:500 10px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:rgba(13,31,45,.62); min-height:44px; padding-right:12px; }
+.bk-top button, .bk-top span{ font:500 10px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; color:rgba(13,31,45,.62); }
+.bk-top button{ min-height:44px; padding-right:12px; }
+.bk-progress{ border-top:.5px solid rgba(200,188,168,.45); position:relative; margin-top:8px; }
+.bk-progress span{ position:absolute; left:0; top:-.5px; border-top:1px solid var(--navy); width:12.5%; }
+.bk-body{ flex:1; display:flex; flex-direction:column; justify-content:center; padding-block:28px; min-height:0; }
+.bk-kind{ margin-bottom:18px; }
+.bk-q{ font:300 32px/1.1 var(--serif); letter-spacing:-.005em; color:var(--navy); }
+.bk-hint{ margin-top:16px; font:300 13px/1.6 var(--sans); color:rgba(13,31,45,.62); max-width:290px; }
+.bk-body .chips{ margin-top:24px; }
+.bk-after{ margin-top:24px; min-height:1.6em; font:300 13px/1.6 var(--sans); color:rgba(13,31,45,.62); }
+.bk-foot{ font:300 11px/1.5 var(--sans); color:rgba(13,31,45,.62); word-break:break-word; }
+
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{ transition-duration:0ms !important; animation:none !important; } .will-fade{ opacity:1 !important; } }
+</style>
+
+<!-- ============================ TOP BAR ============================ -->
+<header class="bar" id="bar">
+  <div class="wrap bar-in">
+    <a class="lockup" href="#top" aria-label="Kóda Barcelona, back to top"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></a>
+    <nav class="bar-nav" aria-label="Sections">
+      <a href="#ways">Three ways</a><a href="#evening">The evening</a><a href="#who">Who a Kóda is</a><a href="#answers">Answers</a>
+    </nav>
+    <div class="bar-act">
+      <p class="bar-time" aria-label="Local time in Barcelona">Barcelona · <span data-bcn-time>21:40</span></p>
+      <button class="btn btn-navy btn-sm" id="bar-book" data-book><span class="full">Plan your evening</span><span class="short">Plan</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============================ 1 · HERO ============================ -->
+<section class="hero theme-dark" id="top" aria-label="Kóda, Barcelona">
+  <div class="ph" data-src="media/hero-street.jpg" data-pos="50% 55%"><p class="ph-note"><b>Hero film / still</b>A small group from behind, walking up a lit street at blue hour.</p></div>
+  <video muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"><source src="media/hero.mp4" type="video/mp4"></video>
+  <div class="hero-wash"></div>
+  <div class="hero-in">
+    <p class="eyebrow"><span class="sep"></span>Barcelona · <span data-bcn-time>21:40</span><span class="sep"></span></p>
+    <h1 class="display">Someone who knows the city, <br class="d"><em>start to finish.</em></h1>
+    <p class="hero-sub">A composed local stays with your group for the evening, the day or the whole weekend, so nobody has to think about how the night gets home.</p>
+    <div class="hero-cta">
+      <button class="btn btn-stone" id="hero-book" data-book>Plan your evening</button>
+      <a class="link" href="#contact">or message us first</a>
+    </div>
+  </div>
+  <span class="hero-cap">Eixample · 21:20</span>
+</section>
+
+<!-- ============================ 1b · STRIP ============================ -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" id="strip-track">
+    <span>Tell us when</span><span class="dot">·</span><span>We arrange who</span><span class="dot">·</span><span>Everyone gets home</span><span class="dot">·</span>
+    <span>Tell us when</span><span class="dot">·</span><span>We arrange who</span><span class="dot">·</span><span>Everyone gets home</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- ============================ 2 · STATEMENT ============================ -->
+<section class="statement" id="statement">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow"><span class="ix">01</span>What a Kóda is</p>
+      <h2 class="display">Tell us when. <br class="d">We arrange <em>who.</em></h2>
+      <p class="body">A Kóda comes from Barcelona's front-of-house world: hotel desks, restaurant floors, guiding, events. They know the rooms, the staff, and the way home.</p>
+    </div>
+    <div class="cards2 fade-in">
+      <div class="photo-card">
+        <div class="ph" data-src="media/lane-vertical.jpg" data-pos="50% 40%"></div>
+        <div class="pc-txt bottom"><h3>Someone who knows the city</h3><p>Which street is quicker, which table is worth the wait, and who to call when dinner runs long.</p></div>
+        <span class="pc-cap">Carrer del Bisbe · 00:40</span>
+      </div>
+      <div class="photo-card">
+        <div class="ph" data-src="media/strip-walk.jpg" data-pos="50% 50%"></div>
+        <div class="pc-txt top"><h3>Everyone gets home</h3><p>From the first meeting point to the last door. Your Kóda stays until everyone is in.</p><div class="chips" aria-label="Languages"><span class="chip on">English</span><span class="chip on">Spanish</span></div></div>
+        <span class="pc-cap">Eixample · 02:10</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="facts fade-in"><span>48 hours' notice</span><span class="dot">·</span><span>One Kóda for up to six</span><span class="dot">·</span><span>Barcelona municipality</span></div></div>
+
+<!-- ============================ 3 · WHO A KÓDA IS ============================ -->
+<section class="who" id="who" aria-labelledby="who-h">
+  <div class="wrap">
+    <div class="row-head fade-in">
+      <div class="t">
+        <p class="eyebrow"><span class="ix">02</span>Who a Kóda is</p>
+        <h2 class="display h-sec" id="who-h">Chosen for judgement, <em>not for looks.</em></h2>
+        <p class="body">Most come from hospitality. People who notice the table running late before you do, and who know the city after midnight as well as by day.</p>
+      </div>
+      <button class="btn btn-navy" id="who-book" data-book>Plan your evening</button>
+    </div>
+    <div class="grid who-grid">
+      <div class="acc" id="who-acc">
+        <div class="acc-item is-open" data-photo="0"><button class="acc-q" id="wq1" aria-expanded="true">Background<span class="st">Pending verification</span></button><div class="acc-a"><div><p>Hotel front desks, restaurant floors, guest services.</p></div></div></div>
+        <div class="acc-item" data-photo="1"><button class="acc-q" id="wq2" aria-expanded="false">Languages<span class="st">Confirmed</span></button><div class="acc-a"><div><p>English · Spanish</p></div></div></div>
+        <div class="acc-item" data-photo="2"><button class="acc-q" id="wq3" aria-expanded="false">Vetting<span class="st">Pending verification</span></button><div class="acc-a"><div><p>[Vetting steps — pending client]</p></div></div></div>
+        <div class="acc-item" data-photo="3"><button class="acc-q" id="wq4" aria-expanded="false">Training<span class="st">Pending verification</span></button><div class="acc-a"><div><p>[Training programme — pending client]</p></div></div></div>
+      </div>
+      <div class="photo-card who-photo fade-in">
+        <div class="ph is-active" data-src="media/lobby.jpg" data-pos="40% 50%"></div>
+        <div class="ph" data-src="media/strip-dinner.jpg" data-pos="60% 50%"></div>
+        <div class="ph" data-src="media/strip-home.jpg" data-pos="45% 50%"></div>
+        <div class="ph" data-src="media/eixample-day.jpg" data-pos="50% 60%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4 · BUILT AROUND YOUR EVENING ============================ -->
+<section class="built" id="built" aria-labelledby="built-h">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow"><span class="ix">03</span>Built around your evening</p>
+      <h2 class="display h-sec" id="built-h">One evening. <br class="d"><em>Arranged once.</em></h2>
+      <p class="body">Tell us the plans, the people and the language. We choose the person, and the night takes care of itself.</p>
+    </div>
+    <div class="photo-card built-photo fade-in">
+      <div class="ph" data-src="media/hero-cathedral.jpg" data-pos="50% 62%"></div>
+      <div class="float" aria-label="Example booking summary">
+        <p class="eyebrow">Your evening</p>
+        <p class="big">Saturday · 20:30</p>
+        <dl>
+          <div class="fr"><dt>Kind</dt><dd>Kóda Night</dd></div>
+          <div class="fr"><dt>Group</dt><dd>Four people</dd></div>
+          <div class="fr"><dt>Language</dt><dd>English</dd></div>
+          <div class="fr"><dt>Meeting point</dt><dd>Hotel lobby</dd></div>
+        </dl>
+        <p class="st">Being assigned · confirmation by email</p>
+      </div>
+    </div>
+    <ul class="feats4 fade-in">
+      <li class="feat"><h3>Groups of one to twelve</h3><p>One Kóda for up to six, two for up to twelve.</p></li>
+      <li class="feat"><h3>English and Spanish</h3><p>Matched to your group's language.</p></li>
+      <li class="feat"><h3>Day, night, <span class="serif-em">or the weekend</span></h3><p>Four to eight hours, or three occasions across Friday and Saturday. <span class="flag">[confirm against spec]</span></p></li>
+      <li class="feat"><h3>Arranged 48 hours ahead</h3><p>Sooner? <a class="link" href="#contact">Message us directly.</a></p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ 5 · ONE EVENING, HANDLED ============================ -->
+<section class="story" id="evening" aria-labelledby="story-h">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow"><span class="ix">04</span>One evening, handled</p>
+      <h2 class="display h-sec" id="story-h">The night, <em>start to finish.</em></h2>
+      <p class="body">Five moments from one Saturday. This is what a Kóda does without ever having to say so.</p>
+    </div>
+  </div>
+  <div class="story-row" id="story-row" tabindex="0" aria-label="Five moments of one evening">
+    <article class="photo-card scard"><div class="ph" data-src="media/lobby.jpg"></div><div class="wash"></div><span class="t">20:30</span><p class="s">Your Kóda meets you in the hotel lobby. The table is under your name.</p></article>
+    <article class="photo-card scard"><div class="ph" data-src="media/strip-dinner.jpg" data-pos="70% 50%"></div><div class="wash"></div><span class="t">22:15</span><p class="s">Dinner runs long. They've already spoken to the next place.</p></article>
+    <article class="photo-card scard"><div class="ph" data-src="media/lane-vertical.jpg"></div><div class="wash"></div><span class="t">00:40</span><p class="s">The street is unfamiliar. It doesn't feel that way.</p></article>
+    <article class="photo-card scard"><div class="ph" data-src="media/taxi-night.jpg" data-pos="72% 50%"></div><div class="wash"></div><span class="t">02:10</span><p class="s">A taxi, an address confirmed, everyone counted in.</p></article>
+    <article class="photo-card scard"><div class="ph" data-src="media/strip-home.jpg" data-pos="42% 50%"></div><div class="wash"></div><span class="t">02:30</span><p class="s">Everyone home. The evening simply ended well.</p></article>
+  </div>
+  <div class="wrap"><div class="story-ctrl"><button class="car-btn" id="st-prev">Previous</button><button class="car-btn" id="st-next">Next</button></div></div>
+</section>
+
+<!-- ============================ 6 · HOW IT WORKS ============================ -->
+<section class="how theme-bone" id="how" aria-labelledby="how-h">
+  <div class="wrap grid">
+    <div class="how-phone fade-in">
+      <div class="iphone" role="img" aria-label="The first question of the booking flow, shown on a phone">
+        <div class="island"></div>
+        <div class="screen">
+          <div class="status"><span data-bcn-time>21:40</span><span class="right"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+          <div class="app">
+            <div class="mk-top"><span>Back</span><span>1 / 8</span></div>
+            <div class="mk-prog"><span></span></div>
+            <div class="mk-body">
+              <p class="eyebrow" style="color:rgba(13,31,45,.62)">Kóda Night · pre-set</p>
+              <p class="mk-q">What do you need a Kóda for?</p>
+              <p class="mk-hint">So we can choose the right person for your group.</p>
+              <div class="chips"><span class="chip">Dinner</span><span class="chip on">A night out</span><span class="chip">The walk home</span><span class="chip">A family visit</span><span class="chip">Getting around the city</span><span class="chip">Something else</span></div>
+            </div>
+            <p class="mk-foot">Eight questions, one per page. No account, no sign-in.</p>
+          </div>
+          <div class="home"></div>
+        </div>
+      </div>
+    </div>
+    <div class="how-txt fade-in">
+      <p class="eyebrow"><span class="ix">05</span>How it works</p>
+      <h2 class="display h-sec" id="how-h">Four steps, <em>most of them ours.</em></h2>
+      <ol class="steps">
+        <li class="step"><span class="n">1</span><div><h3>Tell us about the evening</h3><p>Where, when, how many of you, and anything we should know.</p></div></li>
+        <li class="step"><span class="n">2</span><div><h3>48 hours' notice</h3><p>Two days lets us choose the right person for your group. Sooner than that, message us first.</p></div></li>
+        <li class="step"><span class="n">3</span><div><h3>We assign your Kóda</h3><p>Chosen for your plans, your group and your language. Confirmation arrives by email.</p></div></li>
+        <li class="step"><span class="n">4</span><div><h3>They stay until the end</h3><p>From the first meeting point to everyone home.</p></div></li>
+      </ol>
+      <button class="btn btn-navy" id="how-book" data-book style="align-self:flex-start">Plan your evening</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 7 · THREE WAYS ============================ -->
+<section class="ways" id="ways" aria-labelledby="ways-h">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow"><span class="ix">06</span>Three ways</p>
+      <h2 class="display h-sec" id="ways-h">An evening, a day, <br class="d"><em>or the whole weekend.</em></h2>
+      <p class="body">Every booking has the same person, the same care and the same notice. Choose how much of your time in Barcelona you'd like handled.</p>
+    </div>
+    <div class="plans fade-in">
+      <article class="plan" aria-labelledby="p-day">
+        <p class="eyebrow">Kóda</p><h3 class="name" id="p-day">Day</h3>
+        <p class="tag">From a late breakfast to the last gallery.</p>
+        <div class="price"><span class="price-note" data-price-note>[PRICE — pending client]</span></div>
+        <dl>
+          <dt class="grp">When</dt><dd>Daytime · Barcelona</dd>
+          <dt class="grp">Included</dt><dd>Someone who knows which street is quicker</dd><dd>Which café is worth the wait</dd><dd>Up to six people</dd>
+        </dl>
+        <button class="btn btn-ghost" id="book-day" data-book data-kind="day">Plan your day</button>
+      </article>
+      <article class="plan is-main theme-dark" aria-labelledby="p-night">
+        <p class="eyebrow">Kóda</p><h3 class="name" id="p-night">Night</h3>
+        <p class="tag">Dinner, the place after, and the walk home.</p>
+        <div class="price"><span class="price-note" data-price-note>[PRICE — pending client]</span></div>
+        <dl>
+          <dt class="grp">When</dt><dd>Evening into night</dd>
+          <dt class="grp">Included</dt><dd>The table under your name</dd><dd>The next place, already spoken to</dd><dd>They stay until everyone is in</dd>
+        </dl>
+        <button class="btn btn-stone" id="book-night" data-book data-kind="night">Plan your night</button>
+      </article>
+      <article class="plan" aria-labelledby="p-weekend">
+        <p class="eyebrow">Kóda</p><h3 class="name" id="p-weekend">Weekend</h3>
+        <p class="tag">One Kóda, three windows, arranged once.</p>
+        <div class="price"><span class="price-note" data-price-note>[PRICE — pending client]</span></div>
+        <dl>
+          <dt class="grp">When</dt><dd>Friday 20:00–01:00</dd><dd>Saturday 12:00–16:00</dd><dd>Saturday 21:00–02:00</dd>
+          <dt class="grp">Included</dt><dd>The same Kóda all weekend</dd>
+        </dl>
+        <button class="btn btn-ghost" id="book-weekend" data-book data-kind="weekend">Plan your weekend</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 8 · FOUNDER ============================ -->
+<section class="founder theme-bone" id="founder" aria-labelledby="founder-h">
+  <div class="wrap">
+    <p class="eyebrow" id="founder-h"><span class="ix">07</span>A note from the founder</p>
+    <blockquote class="fade-in">I started Kóda after too many evenings where one person in the group spent the whole night quietly counting heads: the route back, the last metro, the friend who wandered off. That person deserves the dinner too.</blockquote>
+    <p class="todo">[Replace with founder's own words]</p>
+    <div class="sig"><span class="n">Ana</span><span class="r">[Surname] · Founder, Kóda</span></div>
+  </div>
+</section>
+
+<!-- ============================ 9 · IF PLANS CHANGE ============================ -->
+<section class="plansec theme-dark" id="cancellations" aria-labelledby="plans-h">
+  <div class="wrap">
+    <div class="sec-head centred fade-in">
+      <p class="eyebrow"><span class="ix">08</span>Cancellation</p>
+      <h2 class="display h-sec" id="plans-h">If plans <em>change.</em></h2>
+      <p class="body">Refunds follow how far ahead you let us know.</p>
+    </div>
+    <div class="tiers fade-in">
+      <div class="tier"><span class="v">Full refund</span><span class="k">More than 72 hours before</span></div>
+      <div class="tier"><span class="v">50%</span><span class="k">72 to 24 hours before</span></div>
+      <div class="tier"><span class="v">No refund</span><span class="k">Less than 24 hours before</span></div>
+    </div>
+    <p class="foot">Full terms in Cancellations below.</p>
+  </div>
+</section>
+
+<!-- ============================ 10 · ANSWERS ============================ -->
+<section class="answers" id="answers" aria-labelledby="answers-h">
+  <div class="wrap">
+    <div class="row-head fade-in">
+      <div class="t">
+        <p class="eyebrow"><span class="ix">09</span>Answers</p>
+        <h2 class="display h-sec" id="answers-h">Before <em>you ask.</em></h2>
+        <p class="body">If your question isn't here, message us. We answer like people.</p>
+      </div>
+      <button class="btn btn-navy" id="faq-book" data-book>Plan your evening</button>
+    </div>
+    <div class="faq" id="faq">
+      <div class="qa"><button class="q" id="q1" aria-expanded="false" aria-controls="a1">Is a Kóda a guide, or something more?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a1" role="region" aria-labelledby="q1"><div><p class="body">More than a guide. A Kóda knows the city and stays with your group for the whole booking: reading the evening, handling the small things, making sure everyone gets home. They won't recite the history of every façade unless you ask.</p></div></div></div>
+      <div class="qa"><button class="q" id="q2" aria-expanded="false" aria-controls="a2">How much notice do you need?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a2" role="region" aria-labelledby="q2"><div><p class="body">At least 48 hours. If your plans are sooner, message us first and we'll tell you honestly what's possible.</p></div></div></div>
+      <div class="qa"><button class="q" id="q3" aria-expanded="false" aria-controls="a3">How many people can one Kóda look after?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a3" role="region" aria-labelledby="q3"><div><p class="body">Up to six. For seven to twelve people we arrange two. For larger groups, message us.</p></div></div></div>
+      <div class="qa"><button class="q" id="q4" aria-expanded="false" aria-controls="a4">What if the evening runs long?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a4" role="region" aria-labelledby="q4"><div><p class="body">Your Kóda can arrange more time on the night.</p></div></div></div>
+      <div class="qa"><button class="q" id="q5" aria-expanded="false" aria-controls="a5">Where do you operate?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a5" role="region" aria-labelledby="q5"><div><p class="body">Within the municipality of Barcelona. If your plans take you further, message us before booking.</p></div></div></div>
+      <div class="qa"><button class="q" id="q6" aria-expanded="false" aria-controls="a6">Which languages do Kódas speak?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a6" role="region" aria-labelledby="q6"><div><p class="body">English and Spanish.</p></div></div></div>
+      <div class="qa"><button class="q" id="q7" aria-expanded="false" aria-controls="a7">Can we choose our Kóda?<span class="pm" aria-hidden="true">+</span></button><div class="a" id="a7" role="region" aria-labelledby="q7"><div><p class="body">We choose for you, based on your group and your plans. It's the part we take most seriously.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 11 · CLOSE + FOOTER ============================ -->
+<section class="night theme-dark" id="night" aria-labelledby="night-h">
+  <div class="ph" data-src="media/hero-rooftops.jpg" data-pos="50% 40%"></div>
+  <div class="wash"></div>
+  <div class="wrap close">
+    <p class="eyebrow" style="color:var(--stone)"><span class="ix">10</span>Night</p>
+    <h2 class="display" id="night-h">Everyone <em>home.</em></h2>
+    <p class="body">Tell us the evening. We'll arrange the rest.</p>
+    <div class="hero-cta"><button class="btn btn-stone" id="close-book" data-book>Plan your evening</button><a class="link" href="#contact" style="color:var(--bone)">or message us first</a></div>
+    <div class="facts"><span>48 hours' notice</span><span class="dot">·</span><span>One Kóda for up to six</span><span class="dot">·</span><span>Barcelona municipality</span></div>
+  </div>
+  <footer id="contact">
+    <div class="wrap grid foot-grid">
+      <div class="foot-col foot-l">
+        <p class="eyebrow">Kóda</p>
+        <a class="link" href="#ways">Three ways</a><a class="link" href="#evening">The evening</a><a class="link" href="#who">Who a Kóda is</a><a class="link" href="#answers">Answers</a><a class="link" href="#">Corporate &amp; congress</a>
+      </div>
+      <div class="foot-c">
+        <a class="lockup" href="#top" aria-label="Kóda Barcelona, back to top" style="color:var(--bone);justify-self:center;padding:0"><span class="wm">Kóda</span><span class="wm-city" style="color:var(--stone)">Barcelona</span></a>
+        <span>WhatsApp [+34 — pending] &nbsp;·&nbsp; Email [pending]</span>
+        <span style="text-transform:none;letter-spacing:.01em;font-weight:300;font-size:13px">[Legal entity name] · [Registered address], Barcelona</span>
+      </div>
+      <div class="foot-col foot-r">
+        <p class="eyebrow">Legal</p>
+        <a class="link" href="#">Terms</a><a class="link" href="#">Privacy</a><a class="link" href="#cancellations">Cancellations</a>
+      </div>
+      <div class="foot-legal"><span>[Legal disclaimer line — from Ana's homepage]</span><span>Prototype · copy marked [ ] is pending</span></div>
+    </div>
+  </footer>
+</section>
+</main>
+
+<div class="sticky" id="sticky" aria-hidden="true"><p>48 hours' notice · Barcelona</p><button class="btn btn-navy btn-sm" id="sticky-book" data-book tabindex="-1">Check a date</button></div>
+
+<div class="proto" role="group" aria-label="Prototype controls"><span class="lbl">Motion</span><button id="m-brand" data-mode="brand" aria-pressed="false">Brand</button><button id="m-enh" data-mode="enhanced" aria-pressed="true">Enh.</button><span class="sep" aria-hidden="true"></span><span class="lbl">Look</span><button id="l-graded" data-look="graded" aria-pressed="false">Graded</button><button id="l-colour" data-look="colour" aria-pressed="true">Colour</button></div>
+
+<div class="booking" id="booking" hidden>
+  <div class="booking-scrim" data-close></div>
+  <div class="booking-side" role="dialog" aria-modal="true" aria-labelledby="bk-q">
+  <div class="booking-panel iphone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="status"><span data-bcn-time>21:40</span><span class="right"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+      <div class="app">
+        <div class="bk-top"><button id="bk-back" data-close>Back</button><span id="bk-count">1 / 8</span></div>
+        <div class="bk-progress"><span></span></div>
+        <div class="bk-body">
+          <p class="eyebrow bk-kind" id="bk-kind" hidden></p>
+          <h2 class="bk-q" id="bk-q">What do you need a Kóda for?</h2>
+          <p class="bk-hint">So we can choose the right person for your group.</p>
+          <div class="chips" id="chips">
+            <button class="chip" id="c1" aria-pressed="false">Dinner</button><button class="chip" id="c2" aria-pressed="false">A night out</button><button class="chip" id="c3" aria-pressed="false">The walk home</button><button class="chip" id="c4" aria-pressed="false">A family visit</button><button class="chip" id="c5" aria-pressed="false">Getting around the city</button><button class="chip" id="c6" aria-pressed="false">Something else</button>
+          </div>
+          <p class="bk-after" id="bk-after" aria-live="polite"></p>
+        </div>
+        <p class="bk-foot" id="bk-foot">Prototype stub · live embed: forms.fillout.com/t/[FORM_ID]</p>
+      </div>
+      <div class="home"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  const SHOW_PRICE_NOTE = true, DEFAULT_MOTION = 'enhanced';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const root = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+  const store = { get(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch (e) {} } };
+  if (!SHOW_PRICE_NOTE) $$('[data-price-note]').forEach(el => { el.hidden = true; });
+
+  const fmt = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/Madrid', hour:'2-digit', minute:'2-digit', hour12:false });
+  const tick = () => { const t = fmt.format(new Date()); $$('[data-bcn-time]').forEach(el => { el.textContent = t; }); };
+  tick(); setTimeout(() => { tick(); setInterval(tick, 60000); }, (60 - new Date().getSeconds()) * 1000 + 50);
+
+  /* look: 'graded' loads media/<name>, 'colour' loads media/colour/<name> */
+  const DEFAULT_LOOK = 'colour';
+  function loadMedia(look){
+    $$('.ph[data-src]').forEach(ph => {
+      const src = look === 'colour' ? ph.dataset.src.replace('media/', 'media/colour/') : ph.dataset.src;
+      const img = new Image();
+      img.onload = () => { ph.style.backgroundImage = 'url("' + src + '")'; if (ph.dataset.pos) ph.style.backgroundPosition = ph.dataset.pos; ph.classList.add('has-media'); };
+      img.src = src;
+    });
+  }
+  function applyLook(look){
+    root.dataset.look = look;
+    $$('.proto [data-look]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.look === look)));
+    loadMedia(look);
+  }
+  $$('.proto [data-look]').forEach(b => b.addEventListener('click', () => { store.set('koda-look', b.dataset.look); applyLook(b.dataset.look); }));
+  applyLook(['graded','colour'].includes(store.get('koda-look')) ? store.get('koda-look') : DEFAULT_LOOK);
+  const video = $('.hero video');
+  if (video) { video.addEventListener('playing', () => video.classList.add('is-playing')); video.addEventListener('error', () => video.remove(), true); const pr = video.play && video.play(); if (pr && pr.catch) pr.catch(() => {}); }
+
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('will-fade'); io.unobserve(e.target); } }), { rootMargin:'0px 0px -8% 0px' });
+    $$('.fade-in').forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('fade', 'will-fade'); io.observe(el); } });
+  }
+
+  /* FAQ */
+  $$('.qa').forEach(qa => { const b = $('.q', qa), pm = $('.pm', qa); b.addEventListener('click', () => { const open = !qa.classList.contains('is-open'); qa.classList.toggle('is-open', open); b.setAttribute('aria-expanded', String(open)); pm.textContent = open ? '−' : '+'; }); });
+
+  /* Who accordion: one open at a time, the photo follows */
+  const items = $$('#who-acc .acc-item'), whoPh = $$('.who-photo .ph');
+  items.forEach(it => $('.acc-q', it).addEventListener('click', () => {
+    items.forEach(x => { const on = x === it; x.classList.toggle('is-open', on); $('.acc-q', x).setAttribute('aria-expanded', String(on)); });
+    whoPh.forEach((p, k) => p.classList.toggle('is-active', String(k) === it.dataset.photo));
+  }));
+
+  /* story scroller */
+  const row = $('#story-row'); const step = () => ($('.scard').getBoundingClientRect().width + 24);
+  $('#st-prev').addEventListener('click', () => row.scrollBy({ left:-step(), behavior: root.dataset.motion === 'enhanced' ? 'smooth' : 'auto' }));
+  $('#st-next').addEventListener('click', () => row.scrollBy({ left:step(), behavior: root.dataset.motion === 'enhanced' ? 'smooth' : 'auto' }));
+  row.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); $('#st-next').click(); } if (e.key === 'ArrowLeft') { e.preventDefault(); $('#st-prev').click(); } });
+
+  /* booking overlay */
+  const booking = $('#booking'); let bookingOpen = false, lastTrigger = null, lenis = null;
+  const KIND = { day:'Kóda Day', night:'Kóda Night', weekend:'Kóda Weekend' };
+  function openBooking(kind, trigger){
+    lastTrigger = trigger; bookingOpen = true; const k = $('#bk-kind');
+    if (kind && KIND[kind]) { k.textContent = KIND[kind] + ' · pre-set'; k.hidden = false; } else k.hidden = true;
+    $('#bk-foot').textContent = 'Prototype stub · live embed: forms.fillout.com/t/[FORM_ID]' + (kind ? '?kind=' + kind : '');
+    $$('#chips .chip').forEach(c => c.setAttribute('aria-pressed','false')); $('#bk-after').textContent = '';
+    booking.hidden = false; document.body.style.overflow = 'hidden'; lenis && lenis.stop();
+    requestAnimationFrame(() => { booking.classList.add('is-open'); $('#bk-back').focus(); }); checkSticky();
+  }
+  function closeBooking(){ booking.classList.remove('is-open'); bookingOpen = false; setTimeout(() => { booking.hidden = true; }, 220); document.body.style.overflow = ''; lenis && lenis.start(); if (lastTrigger) lastTrigger.focus({ preventScroll:true }); checkSticky(); }
+  $$('[data-book]').forEach(b => b.addEventListener('click', () => openBooking(b.dataset.kind, b)));
+  $$('[data-close]', booking).forEach(b => b.addEventListener('click', closeBooking));
+  document.addEventListener('keydown', e => { if (!bookingOpen) return; if (e.key === 'Escape') closeBooking();
+    if (e.key === 'Tab') { const f = $$('button, a[href]', $('.booking-side')).filter(x => !x.hidden && x.offsetParent !== null);
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); } } });
+  $$('#chips .chip').forEach(c => c.addEventListener('click', () => { $$('#chips .chip').forEach(x => x.setAttribute('aria-pressed', String(x === c))); setTimeout(() => { $('#bk-after').textContent = 'In the live site, Fillout continues to the next question.'; }, 190); }));
+
+  /* sticky bar (mobile) */
+  const sticky = $('#sticky'), ways = $('#statement'), night = $('#night'); let stickyOn = null;
+  function checkSticky(){ const on = ways.getBoundingClientRect().top < 0 && night.getBoundingClientRect().top > innerHeight * .55 && !bookingOpen; if (on === stickyOn) return; stickyOn = on;
+    sticky.classList.toggle('is-on', on); root.classList.toggle('sticky-on', on && innerWidth < 900); sticky.setAttribute('aria-hidden', String(!on)); $('#sticky-book').tabIndex = on ? 0 : -1; }
+  let raf = 0; addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; checkSticky(); }); }, { passive:true });
+
+  /* motion levels: brand = 220ms colour/opacity + fades; enhanced = + smooth scroll, running strip, 20px radii, 300ms accordions */
+  let lenisRaf = null;
+  function readMode(){ if (reduce) return 'brand'; const h = location.hash.slice(1); if (h === 'brand' || h === 'enhanced') return h; const s = store.get('koda-motion'); return (s === 'brand' || s === 'enhanced') ? s : DEFAULT_MOTION; }
+  function applyMotion(mode){
+    if (lenis) { gsap.ticker.remove(lenisRaf); lenis.destroy(); lenis = null; }
+    root.dataset.motion = mode;
+    $$('.proto [data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    if (mode === 'enhanced' && hasGsap && !reduce) { gsap.registerPlugin(ScrollTrigger); lenis = new Lenis({ lerp:.1, smoothWheel:true }); lenis.on('scroll', ScrollTrigger.update); lenisRaf = t => lenis.raf(t * 1000); gsap.ticker.add(lenisRaf); gsap.ticker.lagSmoothing(0); }
+  }
+  $$('.proto [data-mode]').forEach(b => b.addEventListener('click', () => { store.set('koda-motion', b.dataset.mode); const y = scrollY; applyMotion(b.dataset.mode); requestAnimationFrame(() => { scrollTo(0, y); stickyOn = null; checkSticky(); }); }));
+  if (reduce) { const e = $('#m-enh'); e.disabled = true; e.title = 'Reduced motion is on: brand level only'; }
+  applyMotion(readMode()); checkSticky();
+})();
+</script>
