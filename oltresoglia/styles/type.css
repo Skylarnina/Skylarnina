@@ -1,0 +1,75 @@
+/* OLTRESOGLIA type system. Spec: ../TYPOGRAPHY.md
+   The ONLY file allowed to set font-size, line-height, letter-spacing, font-weight or text-transform.
+   Every text element on every page carries exactly one role class: .t-display … .t-nav.
+   A size that isn't a role doesn't exist: use the nearest role. */
+
+/* Stand-ins until the Bounded files arrive: Archivo (200 / 400 / 900). Manrope is the real font,
+   served by Google Fonts until self-hosted copies are added to ../fonts/. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;900&family=Manrope:wght@300;400;500;600&display=swap');
+
+/* Bounded: drop the three files into oltresoglia/fonts/ with these names and every page switches over. */
+@font-face { font-family: 'Bounded'; src: url('../fonts/bounded-black.woff2') format('woff2'), url('../fonts/bounded-black.ttf') format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bounded'; src: url('../fonts/bounded-regular.woff2') format('woff2'), url('../fonts/bounded-regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bounded'; src: url('../fonts/bounded-extralight.woff2') format('woff2'), url('../fonts/bounded-extralight.ttf') format('truetype'); font-weight: 200; font-style: normal; font-display: swap; }
+
+:root {
+  /* Families */
+  --font-display: 'Bounded', 'Archivo', sans-serif;
+  --font-text: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+  /* The 12 role sizes (1440 / 1024 / 390 resolve to the table in TYPOGRAPHY.md) */
+  --t-display: clamp(52px, 7.8vw, 112px);
+  --t-h1: clamp(36px, 4.5vw, 64px);
+  --t-h2: clamp(28px, 2.8vw, 40px);
+  --t-h3: clamp(20px, 1.7vw, 24px);
+  --t-statement: clamp(30px, 3.4vw, 48px);
+  --t-numeral: var(--t-h1);
+  --t-eyebrow: 11px;
+  --t-lead: clamp(17px, 1.4vw, 20px);
+  --t-body: 16px;
+  --t-small: 13px;
+  --t-button: 13px;
+  --t-nav: 14px;
+
+  /* Spacing tied to the type */
+  --space-section: clamp(72px, 11vw, 160px);
+  --space-eyebrow: 16px;   /* eyebrow → heading */
+  --space-heading: clamp(16px, 1.7vw, 24px);   /* heading → lead / body */
+
+  /* Ink: the colour the opacities are taken from. Uses the page's own Porcelain / Saffron tokens
+     when they exist (colours are not this file's job); the spec hexes are the fallback. */
+  --type-ink: var(--oltre-porcelain, #F4F1EA);
+  --type-accent: var(--oltre-saffron-mango, #EFC04E);
+  --type-ink-read: color-mix(in srgb, var(--type-ink) 64%, transparent);   /* lead, body */
+  --type-ink-quiet: color-mix(in srgb, var(--type-ink) 40%, transparent);  /* small, eyebrow, placeholders */
+}
+
+/* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead. */
+.on-light { --type-ink: var(--oltre-dark-charcoal, #050505); }
+
+/* ---------- Roles ---------- */
+.t-display   { font: 900 var(--t-display)/0.92 var(--font-display); text-transform: uppercase; letter-spacing: -0.02em; max-width: 10ch; }
+.t-h1        { font: 900 var(--t-h1)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.01em; max-width: 14ch; }
+.t-h2        { font: 900 var(--t-h2)/1.05 var(--font-display); text-transform: uppercase; letter-spacing: 0; max-width: 18ch; }
+.t-h3        { font: 400 var(--t-h3)/1.2 var(--font-display); text-transform: none; letter-spacing: 0; max-width: 28ch; }
+.t-statement { font: 200 var(--t-statement)/1.1 var(--font-display); text-transform: none; letter-spacing: -0.01em; max-width: 24ch; }
+.t-numeral   { font: 900 var(--t-numeral)/1 var(--font-display); letter-spacing: -0.02em; }
+.t-eyebrow   { font: 500 var(--t-eyebrow)/1.4 var(--font-text); text-transform: uppercase; letter-spacing: 0.14em; color: var(--type-ink-quiet); }
+.t-lead      { font: 300 var(--t-lead)/1.5 var(--font-text); text-transform: none; letter-spacing: 0; max-width: 56ch; color: var(--type-ink-read); }
+.t-body      { font: 400 var(--t-body)/1.6 var(--font-text); text-transform: none; letter-spacing: 0; max-width: 64ch; color: var(--type-ink-read); }
+.t-small     { font: 400 var(--t-small)/1.5 var(--font-text); text-transform: none; letter-spacing: 0.01em; max-width: 48ch; color: var(--type-ink-quiet); }
+.t-button    { font: 600 var(--t-button)/1 var(--font-text); text-transform: uppercase; letter-spacing: 0.12em; }
+.t-nav       { font: 400 var(--t-nav)/1 var(--font-text); text-transform: none; letter-spacing: 0; }
+
+/* Saffron eyebrow, only when it sits above an H1 */
+.t-eyebrow.on-dark-accent { color: var(--type-accent); }
+
+/* Placeholders follow the quiet opacity */
+::placeholder { color: var(--type-ink-quiet); opacity: 1; }
+
+/* One accent phrase per section, inside an H1 or Statement only */
+.accent { color: var(--type-accent); }
+
+/* Spacing helpers tied to the type */
+.t-eyebrow + :is(.t-display, .t-h1, .t-h2) { margin-top: var(--space-eyebrow); }
+:is(.t-display, .t-h1, .t-h2, .t-h3, .t-statement) + :is(.t-lead, .t-body) { margin-top: var(--space-heading); }
