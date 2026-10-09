@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { color-scheme: light; --font-pjs: "Plus Jakarta Sans"; }
+body { @apply bg-white text-ink font-sans antialiased; }
+h1,h2,h3,h4 { @apply font-extrabold tracking-tight text-azure; }
+.wrap { @apply max-w-6xl mx-auto px-5; }
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition whitespace-nowrap; }
+.btn-primary { @apply bg-sky text-white hover:bg-azure; }
+.btn-outline { @apply border-2 border-azure text-azure hover:bg-tint; }
+.btn-white { @apply bg-white text-azure hover:bg-tint; }
+.btn-amber { @apply bg-amber text-ink hover:brightness-95; }
+.card { @apply bg-white border border-line rounded-2xl p-5; }
+.input { @apply w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-sky; }
+.label { @apply block text-xs font-bold text-muted mb-1.5; }
+.pill { @apply inline-block rounded-full px-2.5 py-0.5 text-xs font-bold; }
+.eyebrow { @apply text-xs font-bold tracking-[.2em] uppercase text-sky; }
+.hero { background: linear-gradient(135deg,#0075BD 0%,#15AAF8 100%); }
+.pattern { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23fff' stroke-width='4'%3E%3Ccircle cx='20' cy='20' r='9'/%3E%3Cpath d='M70 10v20M60 20h20'/%3E%3Cpath d='M92 92l16 16M92 108l16-16'/%3E%3Ccircle cx='20' cy='90' r='9' fill='%23fff' stroke='none'/%3E%3Cpath d='M55 70h30M55 80h30M55 90h30'/%3E%3C/g%3E%3C/svg%3E"); background-size:120px; }
