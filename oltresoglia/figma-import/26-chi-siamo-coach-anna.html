@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#050505">
-<title>Chi siamo (Coach Marco)</title>
+<title>Chi siamo (Coach Anna)</title>
 <!--
   "Chi siamo" v3 for Framer, designed on Sky's references. Concept: "Oltre la soglia", a four-step journey
   that ends at the threshold (the test). All copy verbatim from the ABOUT US WEBSITE Google Doc.
@@ -452,37 +452,37 @@
     </div>
     <!-- Depth carousel: active card centred and full size, neighbours smaller and dimmed, peeking at the edges. -->
     <div class="carousel" role="tablist" aria-label="Scegli un coach">
-      <button class="card" type="button" role="tab" id="card-marco" aria-selected="true" aria-controls="panel-marco" data-i="0" tabindex="0" style="transform: translateX(0px) translateY(0px) scale(1); opacity: 1; z-index: 10;">
+      <button class="card" type="button" role="tab" id="card-marco" aria-selected="false" aria-controls="panel-marco" data-i="0" tabindex="-1" style="transform: translateX(-286.38px) translateY(22px) scale(0.8); opacity: 0.55; z-index: 9;">
         <div class="photo " role="img" aria-label="Coach Marco (foto in arrivo)"><div class="photo__ph" aria-hidden="true"><span>M</span><span>Foto in arrivo</span></div></div>
         <span class="card__label"><strong>Coach Marco</strong><span>01 / 05</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-anna" aria-selected="false" aria-controls="panel-anna" data-i="1" tabindex="-1" style="transform: translateX(286.38px) translateY(22px) scale(0.8); opacity: 0.55; z-index: 9;">
+      <button class="card" type="button" role="tab" id="card-anna" aria-selected="true" aria-controls="panel-anna" data-i="1" tabindex="0" style="transform: translateX(0px) translateY(0px) scale(1); opacity: 1; z-index: 10;">
         <div class="photo " role="img" aria-label="Coach Anna (foto in arrivo)"><div class="photo__ph" aria-hidden="true"><span>A</span><span>Foto in arrivo</span></div></div>
         <span class="card__label"><strong>Coach Anna</strong><span>02 / 05</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-giulio" aria-selected="false" aria-controls="panel-giulio" data-i="2" tabindex="-1" style="transform: translateX(586.08px) translateY(44px) scale(0.66); opacity: 0.25; z-index: 8;">
+      <button class="card" type="button" role="tab" id="card-giulio" aria-selected="false" aria-controls="panel-giulio" data-i="2" tabindex="-1" style="transform: translateX(286.38px) translateY(22px) scale(0.8); opacity: 0.55; z-index: 9;">
         <div class="photo " role="img" aria-label="Coach Giulio (foto in arrivo)"><div class="photo__ph" aria-hidden="true"><span>G</span><span>Foto in arrivo</span></div></div>
         <span class="card__label"><strong>Coach Giulio</strong><span>03 / 05</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-yuri" aria-selected="false" aria-controls="panel-yuri" data-i="3" tabindex="-1" style="transform: translateX(-586.08px) translateY(44px) scale(0.66); opacity: 0.25; z-index: 8;">
+      <button class="card" type="button" role="tab" id="card-yuri" aria-selected="false" aria-controls="panel-yuri" data-i="3" tabindex="-1" style="transform: translateX(586.08px) translateY(44px) scale(0.66); opacity: 0.25; z-index: 8;">
         <div class="photo " role="img" aria-label="Coach Yuri (foto in arrivo)"><div class="photo__ph" aria-hidden="true"><span>Y</span><span>Foto in arrivo</span></div></div>
         <span class="card__label"><strong>Coach Yuri</strong><span>04 / 05</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-devid" aria-selected="false" aria-controls="panel-devid" data-i="4" tabindex="-1" style="transform: translateX(-286.38px) translateY(22px) scale(0.8); opacity: 0.55; z-index: 9;">
+      <button class="card" type="button" role="tab" id="card-devid" aria-selected="false" aria-controls="panel-devid" data-i="4" tabindex="-1" style="transform: translateX(-586.08px) translateY(44px) scale(0.66); opacity: 0.25; z-index: 8;">
         <div class="photo " role="img" aria-label="Coach Devid (foto in arrivo)"><div class="photo__ph" aria-hidden="true"><span>D</span><span>Foto in arrivo</span></div></div>
         <span class="card__label"><strong>Coach Devid</strong><span>05 / 05</span></span>
       </button>
     </div>
     <div class="story">
       <nav aria-label="Coach"><ul class="tabs">
-          <li><button type="button" data-i="0" aria-selected="true" aria-controls="panel-marco">Marco</button></li>
-          <li><button type="button" data-i="1" aria-selected="false" aria-controls="panel-anna">Anna</button></li>
+          <li><button type="button" data-i="0" aria-selected="false" aria-controls="panel-marco">Marco</button></li>
+          <li><button type="button" data-i="1" aria-selected="true" aria-controls="panel-anna">Anna</button></li>
           <li><button type="button" data-i="2" aria-selected="false" aria-controls="panel-giulio">Giulio</button></li>
           <li><button type="button" data-i="3" aria-selected="false" aria-controls="panel-yuri">Yuri</button></li>
           <li><button type="button" data-i="4" aria-selected="false" aria-controls="panel-devid">Devid</button></li>
       </ul></nav>
       <div>
-        <article class="panel" id="panel-marco" aria-labelledby="name-marco">
+        <article class="panel" id="panel-marco" aria-labelledby="name-marco" hidden="">
           <h3 class="display panel__name" id="name-marco">Coach Marco</h3>
           <p class="label panel__index"><b>01</b> / 05</p>
           <div class="panel__body">
@@ -498,7 +498,7 @@
             <p>Qui siamo tutti sullo stesso piano. Niente filtri, niente scorciatoie. La differenza la fa l'impegno, ripetuto nel tempo.</p>
           </div>
         </article>
-        <article class="panel" id="panel-anna" aria-labelledby="name-anna" hidden="">
+        <article class="panel" id="panel-anna" aria-labelledby="name-anna">
           <h3 class="display panel__name" id="name-anna">Coach Anna</h3>
           <p class="label panel__index"><b>02</b> / 05</p>
           <div class="panel__body">
