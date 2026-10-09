@@ -1,6 +1,8 @@
 # Chi siamo (v3): Framer handoff
 
 Prototype: `oltresoglia/chi-siamo/index.html` (`?coach=anna` opens on a given coach).
+**IT / EN switch** (bottom left, preview only): reads the page in English. The site copy is Italian; the English is a reading aid
+kept in `translation-en.json` (`?lang=en` opens in English). Not part of the design: don't build it in Framer.
 Same tokens, nav, buttons and contrast settings as the Contact page (`../contact/FRAMER-NOTES.md`).
 All copy is verbatim from the "ABOUT US WEBSITE" Google Doc; the generator checks every line of Pietro's text is used once.
 
