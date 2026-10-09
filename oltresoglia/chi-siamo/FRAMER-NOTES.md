@@ -9,7 +9,7 @@ All copy is verbatim from the "ABOUT US WEBSITE" Google Doc; the generator check
 
 | # | Section | Reference move | Build in Framer |
 | --- | --- | --- | --- |
-| 1 | Hero: "CHI SIAMO" at 15vw behind Pietro's cut-out in an arch frame, over the horizon artwork | Musclefit hero + depth-layered type | Stack: wordmark (z 0) → transparent PNG of Pietro in an arch-masked frame (z 1). Scroll transform: portrait moves up ~8% faster than the word |
+| 1 | Hero: "CHI SIAMO" at 15vw behind Pietro's portrait in an arch frame, over the horizon artwork | Musclefit hero + depth-layered type | Stack: wordmark (z 0) → `pietro-hero.jpg` in an arch-masked frame (z 1). Scroll transform: portrait moves up ~8% faster than the word. With a transparent cut-out the arch can go and Pietro stands directly in front of the letters |
 | 2 | Founder: portrait + caption left, intro right; then a timeline 14 anni → 17 anni → pull quote "Ho vissuto entrambi gli estremi." → La direzione → Oggi | Prestix "Delivering excellence" + "story in numbers", journey timeline | 2-column Stack; timeline = vertical Stack with a 1px line and saffron-ring dots |
 | 3 | Why (light Porcelain ground): problem paragraph, then "OLTRESOGLIA NASCE DA QUI." full width, "da qui." underlined in Saffron | Untitled UI light statement, scale contrast | Text at 10vw; underline = text decoration, Saffron |
 | 4 | How: "Partiamo dai tuoi impegni…", then four full-width strips TURNI / RIUNIONI CHE SFORANO / PARTENZE ALL'ULTIMO / SERATE CHE NON DECIDI, then "AL CENTRO DEL PERCORSO CI SEI TU, NON IL PROGRAMMA." + mission | Musclefit marquee band, as stacked photo strips | Each strip: image fill (profile artwork now, photography later) + 50% Charcoal overlay; hover zooms the image 6% over 1.1s |
@@ -19,9 +19,14 @@ All copy is verbatim from the "ABOUT US WEBSITE" Google Doc; the generator check
 
 Type scale: hero word 15vw (max 240) · section headlines 96–168px · timeline numerals 128px · body 17–19px · labels 11px, tracked 0.2em.
 
-## Photos needed (drop into `assets/team/` with these names; the page picks them up)
-- `pietro-scontornato.png`: Pietro cut out, transparent background, for the hero arch
-- `pietro.jpg`: portrait 4:5 for the founder section
-- `marco.jpg`, `anna.jpg`, `giulio.jpg`, `yuri.jpg`, `devid.jpg`: portraits 4:5
+## Photos (in `assets/team/`; the page picks them up by name)
+- `pietro-hero.jpg` (3:4): Pietro standing, for the hero arch
+- `pietro.jpg` (4:5): Pietro at the desk with the book, for the founder section
+- `marco.jpg`, `anna.jpg`, `giulio.jpg`, `yuri.jpg`, `devid.jpg` (4:5): coach portraits
+- Optional later: `pietro-scontornato.png`, Pietro cut out on a transparent background, to drop the arch in the hero
+
+Before launch: the coach polos carry other brands' logos ("le 360"), the backgrounds differ from shot to shot,
+Yuri's photo is lower resolution, and the Apple logo is visible on Pietro's laptop in the founder photo
+(retouch or crop it out in Framer).
 
 All photos are shown in grayscale so the set reads as one shoot.
