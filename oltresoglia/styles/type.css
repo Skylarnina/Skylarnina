@@ -40,12 +40,15 @@
      when they exist (colours are not this file's job); the spec hexes are the fallback. */
   --type-ink: var(--oltre-porcelain, #F4F1EA);
   --type-accent: var(--oltre-saffron-mango, #EFC04E);
+}
+
+/* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead.
+   The mixes are declared on every element (not once on :root) so this override reaches them. */
+.on-light { --type-ink: var(--oltre-dark-charcoal, #050505); }
+* {
   --type-ink-read: color-mix(in srgb, var(--type-ink) 64%, transparent);   /* lead, body */
   --type-ink-quiet: color-mix(in srgb, var(--type-ink) 40%, transparent);  /* small, eyebrow, placeholders */
 }
-
-/* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead. */
-.on-light { --type-ink: var(--oltre-dark-charcoal, #050505); }
 
 /* ---------- Roles ---------- */
 .t-display   { font: 900 var(--t-display)/0.92 var(--font-display); text-transform: uppercase; letter-spacing: -0.02em; max-width: 10ch; }
@@ -60,6 +63,9 @@
 .t-small     { font: 400 var(--t-small)/1.5 var(--font-text); text-transform: none; letter-spacing: 0.01em; max-width: 48ch; color: var(--type-ink-quiet); }
 .t-button    { font: 600 var(--t-button)/1 var(--font-text); text-transform: uppercase; letter-spacing: 0.12em; }
 .t-nav       { font: 400 var(--t-nav)/1 var(--font-text); text-transform: none; letter-spacing: 0; }
+
+/* Headings break into even lines (no single word left on the last line) */
+:is(.t-display, .t-h1, .t-h2, .t-h3, .t-statement) { text-wrap: balance; }
 
 /* Saffron eyebrow, only when it sits above an H1 */
 .t-eyebrow.on-dark-accent { color: var(--type-accent); }
