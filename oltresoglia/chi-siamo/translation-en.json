@@ -100,7 +100,6 @@
   "Scopri che tipo di professionista ad alta pressione sei": "Find out what kind of high-pressure professional you are",
   "Principale": "Main",
   "La storia di Pietro": "Pietro's story",
-  "La storia di Pietro, oggi": "Pietro's story, today",
   "Gli impegni da cui partiamo": "The commitments we start from",
   "Coach precedente": "Previous coach",
   "Coach successivo": "Next coach",
@@ -109,10 +108,11 @@
   "01 · Da dove vengo": "01 · Where I come from",
   "02 · Perché nasce": "02 · Why it exists",
   "03 · Come lavoriamo": "03 · How we work",
-  "Biologo Nutrizionista · Fondatore": "Biologist and Nutritionist · Founder",
   "Turni": "Shifts",
   "Riunioni che sforano": "Meetings that run over",
   "Partenze all'ultimo": "Last-minute trips",
-  "Serate che non decidi": "Evenings you don't decide"
+  "Serate che non decidi": "Evenings you don't decide",
+  "Biologo Nutrizionista": "Biologist and Nutritionist",
+  "Fondatore": "Founder"
  }
 }

@@ -19,11 +19,10 @@
     --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout));
     --btn-glow: 0 0 18px color-mix(in srgb, var(--oltre-saffron-mango) 35%, transparent);
     --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
-    --radius-card: 16px;
+    --radius-card: 6px;
     --t: 200ms;
     --ease: cubic-bezier(.76, 0, .24, 1);
     --edge: max(clamp(16px, 4vw, 48px), calc((100vw - 1232px) / 2 + 32px));
-    --arch-w: clamp(240px, 30vw, 440px);
     color-scheme: dark;
   }
   *, *::before, *::after { box-sizing: border-box; }
@@ -40,7 +39,7 @@
   :where(a, button):focus-visible { outline: 2px solid var(--oltre-saffron-mango); outline-offset: 3px; }
 
   .photo { position: relative; overflow: hidden; background: color-mix(in srgb, var(--oltre-porcelain) 7%, var(--oltre-dark-charcoal)); }
-  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05) brightness(.88); }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; filter: grayscale(1) contrast(1.05) brightness(.88); }
 
   .rule { display: flex; align-items: center; gap: 14px; }
   .rule::after { content: ''; flex: 0 1 64px; min-width: 16px; height: 1px; background: currentColor; opacity: .7; }
@@ -54,16 +53,17 @@
   .pill:hover { background: var(--btn-fill-hover); box-shadow: var(--btn-glow-hover); }
   .pill:active { transform: scale(.98); }
   .pill--sm { min-height: 44px; padding: 0 20px; }
-
+  .tag { display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 999px; }
   .site-header { position: absolute; inset: 0 0 auto; z-index: 5; padding: 20px var(--edge) 0; }
   @media (min-width: 640px) { .site-header { padding-top: 32px; } }
   .site-header__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
   .wordmark { color: var(--oltre-whiteout); white-space: nowrap; max-width: none; }
   .nav { display: flex; align-items: center; gap: 12px; }
-  .nav__links { display: none; gap: 28px; }
-  .nav__links a { display: block; padding: 6px 0; color: color-mix(in srgb, var(--oltre-porcelain) 80%, transparent); transition: color var(--t); }
-  .nav__links a:hover, .nav__links a[aria-current="page"] { color: var(--oltre-porcelain); }
-  .nav__links a[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--oltre-saffron-mango); }
+  .nav__links { display: none; gap: 4px; }
+  .nav__links a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid transparent;
+    color: color-mix(in srgb, var(--oltre-porcelain) 80%, transparent); transition: color var(--t), background-color var(--t); }
+  .nav__links a:hover { color: var(--oltre-porcelain); background: color-mix(in srgb, var(--oltre-porcelain) 8%, transparent); }
+  .nav__links a[aria-current="page"] { color: var(--oltre-porcelain); border-color: var(--line-strong); }
   .nav__menu {
     display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; cursor: pointer;
     border: 1px solid var(--line-field); background: transparent; transition: border-color var(--t);
@@ -73,95 +73,90 @@
   .nav__panel a { display: flex; align-items: center; min-height: 48px; border-bottom: 1px solid var(--line-hair); }
   .nav__panel a[aria-current="page"] { color: var(--oltre-saffron-mango); }
   @media (min-width: 960px) {
-    .nav { gap: 32px; }
+    .nav { gap: 24px; }
     .nav__links { display: flex; }
     .nav__menu, .nav__panel { display: none !important; }
-  }
-  .hero { position: relative; isolation: isolate; overflow: clip; min-height: min(100svh, 920px);
-    display: flex; flex-direction: column; justify-content: flex-end; padding: 152px var(--edge) clamp(40px, 5vw, 72px); }
-  .hero__bg { position: absolute; inset: 0; z-index: -3; }
-  .hero__bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
-  .hero__bg::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .35; }
-  .hero__stage { position: relative; min-height: calc(var(--arch-w) * 4 / 3); display: flex; align-items: flex-end; }
-  .hero__stage .t-display { position: relative; z-index: -1; transform: translateY(.08em); }
-  .hero__arch { position: absolute; bottom: 0; left: calc(var(--t-display) * 5.02); width: var(--arch-w); aspect-ratio: 3 / 4;
-    border-radius: 999px 999px 0 0; border: 1px solid var(--line-field); border-bottom: 0; }
-  .hero__floor { border-top: 1px solid var(--line-strong); padding-top: 24px; }
-  .hero__floor .t-lead { margin-top: var(--space-eyebrow); color: var(--oltre-porcelain); }
-  @media (max-width: 759px) {
-    .hero { min-height: 0; padding-top: 120px; }
-    .hero__stage { display: block; min-height: 0; }
-    .hero__arch { position: relative; left: auto; width: 64vw; margin: calc(var(--t-display) * -.4) 0 0 auto; }
   }
 
   .block { padding: var(--space-section) var(--edge); }
   .split { display: grid; gap: 32px; }
-  @media (min-width: 960px) { .split { grid-template-columns: 4fr 8fr; gap: 80px; } }
+  @media (min-width: 960px) { .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 80px; } .how .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .split > * { align-self: start; }
-  .founder__intro { display: grid; gap: 40px; }
-  @media (min-width: 960px) { .founder__intro { grid-template-columns: 5fr 7fr; gap: 80px; align-items: end; } }
-  .founder__portrait { aspect-ratio: 4 / 5; border-radius: var(--radius-card); max-width: 460px; }
-  .founder figcaption { margin-top: 16px; }
+  .sticky { position: sticky; top: 112px; }
+  @media (max-width: 959px) { .sticky { position: static; } }
+  .rows > li { display: grid; gap: 16px; padding: 40px 0; border-top: 1px solid var(--line-hair); }
+  .rows > li:last-child { border-bottom: 1px solid var(--line-hair); }
+  @media (min-width: 640px) { .rows > li { grid-template-columns: 180px 1fr; gap: 40px; } }
+  .rows .t-body + .t-body { margin-top: 14px; }
+  .hero { position: relative; isolation: isolate; overflow: clip; padding: 168px 0 clamp(64px, 8vw, 120px); }
+  .hero__bg { position: absolute; inset: 0; z-index: -2; }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
+  .hero__bg::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .55; }
+  .hero__head { display: grid; gap: 24px; padding: 0 var(--edge); }
+  @media (min-width: 960px) { .hero__head { grid-template-columns: 7fr 5fr; gap: 80px; align-items: end; } }
+  .hero__head .t-lead { color: var(--oltre-porcelain); }
+  .faces { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1vw, 16px); padding: clamp(48px, 6vw, 88px) clamp(16px, 2vw, 32px) 0; }
+  .faces li { transition: transform .9s var(--ease); }
+  .faces li:nth-child(1) { transform: rotate(-3deg) translateY(10px); }
+  .faces li:nth-child(2) { transform: rotate(2deg) translateY(-14px); }
+  .faces li:nth-child(3) { transform: rotate(-1.5deg) translateY(6px); }
+  .faces li:nth-child(4) { transform: rotate(2.5deg) translateY(-8px); }
+  .faces li:nth-child(5) { transform: rotate(-2deg) translateY(12px); }
+  .faces li:nth-child(6) { transform: rotate(1.5deg) translateY(-6px); }
+  .faces li:hover { transform: rotate(0) translateY(-16px); }
+  .faces .photo { aspect-ratio: 4 / 5; border-radius: var(--radius-card); border: 1px solid var(--line-hair); }
+  @media (max-width: 759px) {
+    .faces { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 40px 16px 20px; scrollbar-width: none; }
+    .faces::-webkit-scrollbar { display: none; }
+    .faces li { flex: 0 0 42vw; scroll-snap-align: start; }
+  }
+  .founder__figure .photo { aspect-ratio: 4 / 5; border-radius: var(--radius-card); }
+  .founder__figure figcaption { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .founder__text .t-h2 { margin-top: var(--space-eyebrow); }
   .founder__text .t-body { margin-top: 20px; }
-
-  .timeline { position: relative; margin-top: clamp(80px, 9vw, 128px); }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 1px; background: var(--line-field); }
-  .timeline li { position: relative; display: grid; gap: 16px; padding: 0 0 56px 32px; }
-  .timeline li::before { content: ''; position: absolute; left: -4px; top: 14px; width: 9px; height: 9px; border-radius: 99px;
-    background: var(--oltre-dark-charcoal); border: 1px solid var(--oltre-saffron-mango); }
-  @media (min-width: 960px) { .timeline li { grid-template-columns: 5fr 7fr; gap: 80px; padding-left: 56px; } }
+  .founder__text .rows { margin-top: clamp(56px, 6vw, 88px); }
   .timeline__mark .t-eyebrow { margin-top: 8px; }
-  .timeline__text .t-body + .t-body { margin-top: 14px; }
-
-  .pullquote { margin: 0 0 56px; padding: clamp(56px, 7vw, 96px) 0; border-block: 1px solid var(--line-hair); display: grid; gap: 28px; }
-  @media (min-width: 960px) { .pullquote .t-body { margin-left: auto; max-width: 46ch; } }
+  .rows > li.rows__statement { display: grid; grid-template-columns: 1fr; gap: 24px; padding: clamp(48px, 6vw, 80px) 0; }
   .why { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); }
   .why .t-h1 { margin-top: clamp(48px, 6vw, 80px); }
   .mark { background: linear-gradient(transparent 58%, var(--oltre-saffron-mango) 58%, var(--oltre-saffron-mango) 90%, transparent 90%); color: inherit; }
   .why__turn { margin-top: clamp(48px, 6vw, 72px); padding-top: 32px; border-top: 1px solid color-mix(in srgb, var(--oltre-dark-charcoal) 18%, transparent); }
-  .how { padding-top: var(--space-section); }
-  .how__head { padding: 0 var(--edge) 48px; }
-  .strip { position: relative; isolation: isolate; overflow: hidden; min-height: clamp(96px, 10vw, 152px);
-    display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 var(--edge); border-top: 1px solid var(--line-hair); }
-  .strip:last-child { border-bottom: 1px solid var(--line-hair); }
-  .strip img { position: absolute; top: -40%; right: 0; z-index: -2; width: 62%; height: 180%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%); mask-image: linear-gradient(90deg, transparent, #000 30%); object-fit: cover; filter: grayscale(1); transition: transform 1.1s var(--ease); }
-  .strip::after { content: ''; position: absolute; inset: 0; z-index: -1;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--oltre-dark-charcoal) 92%, transparent) 0%, color-mix(in srgb, var(--oltre-dark-charcoal) 80%, transparent) 30%,
-      color-mix(in srgb, var(--oltre-dark-charcoal) 45%, transparent) 60%, color-mix(in srgb, var(--oltre-dark-charcoal) 80%, transparent) 100%); }
-  .strip:hover img { transform: scale(1.06); }
-  @media (max-width: 639px) { .strip img { width: 48%; } }
-  .center-line { padding: var(--space-section) var(--edge) 0; }
-  .center-line .split { margin-top: 56px; }
+  .how .t-h1 { margin-top: var(--space-eyebrow); }
+  .how__list { margin-top: 40px; }
+  .how__list > li { grid-template-columns: 40px 1fr 112px; align-items: center; padding: 28px 0; }
+  @media (max-width: 639px) { .how__list > li { grid-template-columns: 32px 1fr 72px; gap: 16px; } }
+  .how__thumb { aspect-ratio: 7 / 5; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--line-hair); }
+  .how__thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: transform 1.1s var(--ease); }
+  .how__list > li:hover .how__thumb img { transform: scale(1.12); }
+  .mission { margin-top: 48px; display: grid; gap: 12px; }
   .team__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; }
-  .carousel { position: relative; height: clamp(420px, 44vw, 600px); margin: 56px calc(-1 * var(--edge)) 0; overflow: clip; }
-  .card {
-    position: absolute; top: 0; left: 50%; width: clamp(240px, 26vw, 380px); aspect-ratio: 4 / 5; margin-left: calc(clamp(240px, 26vw, 380px) / -2);
-    border-radius: var(--radius-card); border: 1px solid var(--line-hair); cursor: pointer; padding: 0; background: none; text-align: left;
-    transition: transform 1s var(--ease), opacity 1s var(--ease), border-color var(--t);
-  }
-  .card .photo { position: absolute; inset: 0; border-radius: inherit; }
-  .card__label { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 14px 16px; border-radius: 12px; display: grid; gap: 4px;
-    background: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); border: 1px solid var(--line-hair); }
-  .card[aria-selected="true"] { border-color: var(--oltre-saffron-mango); }
-  .carousel__nav { display: flex; gap: 10px; }
+  .team .t-h1 { margin-top: var(--space-eyebrow); }
+  .slices { display: flex; gap: clamp(6px, 1vw, 14px); height: clamp(420px, 40vw, 580px); margin-top: 48px; }
+  .slice { position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: 0; background: none; cursor: pointer; overflow: hidden;
+    border-radius: var(--radius-card); transition: flex-grow .9s var(--ease); text-align: left; }
+  .slice[aria-selected="true"] { flex-grow: 4.2; cursor: default; }
+  .slice .photo { position: absolute; inset: 0; }
+  .slice:not([aria-selected="true"]) .photo img { filter: grayscale(1) contrast(1.05) brightness(.62); }
+  .slice:not([aria-selected="true"]):hover .photo img { filter: grayscale(1) contrast(1.05) brightness(.8); }
+  .slice__label { position: absolute; left: 20px; right: 20px; bottom: 20px; display: grid; gap: 4px; opacity: 0; transform: translateY(8px);
+    transition: opacity .4s var(--ease), transform .4s var(--ease); }
+  .slice[aria-selected="true"] .slice__label { opacity: 1; transform: none; transition-delay: .45s; }
+  .slice__label::before { content: ''; position: absolute; inset: -80px -20px -20px; z-index: -1;
+    background: linear-gradient(transparent, color-mix(in srgb, var(--oltre-dark-charcoal) 85%, transparent)); }
+  .slice__label .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 70%, transparent); }
+  @media (max-width: 639px) { .slices { height: 440px; } .slice[aria-selected="true"] { flex-grow: 7; } }
+  .bio { margin-top: 56px; }
+  .bio__side .t-small { margin-top: 8px; }
+  .bio__nav { display: flex; gap: 10px; margin-top: 24px; }
   .round { width: 52px; height: 52px; border-radius: 99px; border: 1px solid var(--line-field); background: none; display: grid; place-items: center;
     cursor: pointer; transition: border-color var(--t), color var(--t); }
   .round:hover { border-color: var(--oltre-saffron-mango); color: var(--oltre-saffron-mango); }
   .round svg { width: 18px; height: 18px; }
-  .story { margin-top: 56px; }
-  .tabs { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-  @media (min-width: 960px) { .tabs { flex-direction: column; } }
-  .tabs button { background: none; border: 0; padding: 4px 0; cursor: pointer; text-align: left;
-    color: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); transition: color var(--t), padding var(--t); }
-  .tabs button:hover { color: var(--oltre-porcelain); }
-  .tabs button[aria-selected="true"] { color: var(--oltre-porcelain); box-shadow: inset 3px 0 0 var(--oltre-saffron-mango); padding-left: 16px; }
-  .panel .t-small { margin-top: 8px; }
-  .panel .t-lead { margin-top: 24px; color: var(--oltre-porcelain); }
-  .panel__body { margin-top: 24px; columns: 2 300px; column-gap: 48px; }
+  .panel .t-lead { color: var(--oltre-porcelain); }
+  .panel__body { margin-top: 24px; columns: 2 260px; column-gap: 40px; }
   .panel__body .t-body { margin-bottom: 14px; break-inside: avoid; }
-  .closing { text-align: center; }
-  .closing .t-statement, .closing .t-small { margin-inline: auto; }
-  .closing figcaption { margin-top: 32px; }
+  .closing { border-top: 1px solid var(--line-hair); }
+  .closing figcaption { margin-top: 28px; }
   .threshold { position: relative; overflow: clip; isolation: isolate; border-top: 1px solid var(--line-hair); }
   .threshold > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
   .threshold::after { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--oltre-dark-charcoal); opacity: .3; }
@@ -207,62 +202,62 @@
   <main>
   <section class="hero" aria-labelledby="page-title">
     <div class="hero__bg" aria-hidden="true"><img src="assets/soglia.svg" alt="" /></div>
-    <div class="hero__stage">
+    <div class="hero__head">
       <h1 class="t-display" id="page-title">Chi siamo</h1>
-      <div class="photo hero__arch"><img src="assets/team/pietro-hero.jpg" alt="Pietro Vecchi" /></div>
-    </div>
-    <div class="hero__floor">
-      <p class="t-eyebrow on-dark-accent rule">01 · Da dove vengo</p>
       <p class="t-lead">Se sei qui per la prima volta, è giusto che tu sappia da dove vengo.</p>
     </div>
+    <ul class="faces" aria-label="Il team">
+      <li><div class="photo "><img src="assets/team/pietro-hero.jpg" alt="Pietro Vecchi" /></div></li>
+      <li><div class="photo "><img src="assets/team/marco.jpg" alt="Coach Marco" /></div></li>
+      <li><div class="photo "><img src="assets/team/anna.jpg" alt="Coach Anna" /></div></li>
+      <li><div class="photo "><img src="assets/team/giulio.jpg" alt="Coach Giulio" /></div></li>
+      <li><div class="photo "><img src="assets/team/yuri.jpg" alt="Coach Yuri" /></div></li>
+      <li><div class="photo "><img src="assets/team/devid.jpg" alt="Coach Devid" /></div></li>
+    </ul>
   </section>
 
   <section class="block founder" aria-labelledby="founder-name">
-    <div class="founder__intro">
-      <figure>
-        <div class="photo founder__portrait"><img src="assets/team/pietro.jpg" alt="Pietro Vecchi" /></div>
-        <figcaption class="t-small">Biologo Nutrizionista · Fondatore</figcaption>
+    <div class="split">
+      <figure class="founder__figure sticky">
+        <div class="photo "><img src="assets/team/pietro.jpg" alt="Pietro Vecchi" /></div>
+        <figcaption><span class="tag t-nav">Biologo Nutrizionista</span><span class="tag t-nav">Fondatore</span></figcaption>
       </figure>
       <div class="founder__text">
+        <p class="t-eyebrow on-dark-accent rule">01 · Da dove vengo</p>
         <h2 class="t-h2" id="founder-name">Pietro Vecchi</h2>
         <p class="t-lead">Mi chiamo Pietro Vecchi, sono Biologo Nutrizionista e fondatore di OLTRESOGLIA, il sistema per chi lavora ad alta pressione, non ha intenzione di rallentare con gli anni, ma ha lasciato indietro il corpo.</p>
         <p class="t-body">Per perdere grasso e costruire forza, fiato e una routine per performare ovunque.</p>
+        <ol class="rows" aria-label="La storia di Pietro">
+          <li>
+            <div class="timeline__mark"><p class="t-numeral">14</p><p class="t-eyebrow">anni</p></div>
+            <div>
+              <p class="t-body">A 14 anni ero il più piccolo del gruppo.</p>
+              <p class="t-body">Mentre tutti si sviluppavano, io restavo indietro.</p>
+              <p class="t-body">Spinto da mio padre, inizio ad allenarmi in palestra per compensare. Mai avrei immaginato che un'attività iniziata così controvoglia sarebbe diventata la mia passione, e un giorno il mio lavoro.</p>
+            </div>
+          </li>
+          <li>
+            <div class="timeline__mark"><p class="t-numeral">17</p><p class="t-eyebrow">anni</p></div>
+            <div><p class="t-body">A 17 anni, tra la pubertà e ore di allenamento, il mio fisico cambia. Nel giro di un anno passo da "il più piccolo del gruppo", quello a cui fanno battute sul fisico, a quello con "il bel fisico di genetica".</p></div>
+          </li>
+          <li class="rows__statement">
+            <p class="t-statement">Ho vissuto entrambi gli estremi.</p>
+            <p class="t-body">E ho visto in prima persona quanto il corpo influenzi il modo in cui gli altri ti considerano.</p>
+          </li>
+          <li>
+            <h3 class="t-h3">La direzione</h3>
+            <div><p class="t-body">La direzione lavorativa arriva con la nutrizione e la teoria dell'allenamento. Divento nutrizionista. Il lavoro cresce, in poco tempo nasce un team, e passo dal fare al guidare altre persone ogni giorno.</p></div>
+          </li>
+          <li>
+            <h3 class="t-h3">Oggi</h3>
+            <div>
+              <p class="t-body">Oggi non mi alleno più come a 20 anni, con ore libere e nessuna agenda. Non sono un atleta professionista e non vivo come tale.</p>
+              <p class="t-body">Mi alleno dentro una settimana fatta di scadenze, un team da guidare, decisioni da prendere, viaggi e cene tardi.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
-
-    <ol class="timeline" aria-label="La storia di Pietro">
-      <li>
-        <div class="timeline__mark"><p class="t-numeral">14</p><p class="t-eyebrow">anni</p></div>
-        <div class="timeline__text">
-          <p class="t-body">A 14 anni ero il più piccolo del gruppo.</p>
-          <p class="t-body">Mentre tutti si sviluppavano, io restavo indietro.</p>
-          <p class="t-body">Spinto da mio padre, inizio ad allenarmi in palestra per compensare. Mai avrei immaginato che un'attività iniziata così controvoglia sarebbe diventata la mia passione, e un giorno il mio lavoro.</p>
-        </div>
-      </li>
-      <li>
-        <div class="timeline__mark"><p class="t-numeral">17</p><p class="t-eyebrow">anni</p></div>
-        <div class="timeline__text"><p class="t-body">A 17 anni, tra la pubertà e ore di allenamento, il mio fisico cambia. Nel giro di un anno passo da "il più piccolo del gruppo", quello a cui fanno battute sul fisico, a quello con "il bel fisico di genetica".</p></div>
-      </li>
-    </ol>
-
-    <figure class="pullquote">
-      <p class="t-statement">Ho vissuto entrambi gli estremi.</p>
-      <p class="t-body">E ho visto in prima persona quanto il corpo influenzi il modo in cui gli altri ti considerano.</p>
-    </figure>
-
-    <ol class="timeline" style="margin-top:0" aria-label="La storia di Pietro, oggi">
-      <li>
-        <div class="timeline__mark"><h3 class="t-h3">La direzione</h3></div>
-        <div class="timeline__text"><p class="t-body">La direzione lavorativa arriva con la nutrizione e la teoria dell'allenamento. Divento nutrizionista. Il lavoro cresce, in poco tempo nasce un team, e passo dal fare al guidare altre persone ogni giorno.</p></div>
-      </li>
-      <li>
-        <div class="timeline__mark"><h3 class="t-h3">Oggi</h3></div>
-        <div class="timeline__text">
-          <p class="t-body">Oggi non mi alleno più come a 20 anni, con ore libere e nessuna agenda. Non sono un atleta professionista e non vivo come tale.</p>
-          <p class="t-body">Mi alleno dentro una settimana fatta di scadenze, un team da guidare, decisioni da prendere, viaggi e cene tardi.</p>
-        </div>
-      </li>
-    </ol>
   </section>
 
   <section class="block why on-light" aria-labelledby="why-title">
@@ -277,22 +272,24 @@
     </div>
   </section>
 
-  <section class="how" aria-labelledby="how-title">
-    <div class="how__head split">
-      <p class="t-eyebrow rule">03 · Come lavoriamo</p>
-      <p class="t-lead">Partiamo dai tuoi impegni e cuciamo la struttura intorno ad essi: turni, riunioni che sforano, partenze all'ultimo e serate che non decidi.</p>
-    </div>
-    <ul class="strips" aria-label="Gli impegni da cui partiamo">
-      <li class="strip"><img src="assets/orbita.svg" alt="" /><p class="t-h3">Turni</p><span class="t-small">01</span></li>
-      <li class="strip"><img src="assets/zenit.svg" alt="" /><p class="t-h3">Riunioni che sforano</p><span class="t-small">02</span></li>
-      <li class="strip"><img src="assets/afelio.svg" alt="" /><p class="t-h3">Partenze all'ultimo</p><span class="t-small">03</span></li>
-      <li class="strip"><img src="assets/eclissi.svg" alt="" /><p class="t-h3">Serate che non decidi</p><span class="t-small">04</span></li>
-    </ul>
-    <div class="center-line">
-      <h2 class="t-h1" id="how-title">Al centro del percorso <span class="accent">ci sei tu,</span> non il programma.</h2>
-      <div class="split">
-        <p class="t-eyebrow">La nostra missione</p>
-        <p class="t-body">La nostra missione è offrire a chi sceglie OLTRESOGLIA un sistema costruito su misura, con un team che conosce i suoi impegni, si adatta alla sua agenda e a cui può delegare completamente la gestione del proprio fisico.</p>
+  <section class="block how" aria-labelledby="how-title">
+    <div class="split">
+      <div class="sticky">
+        <p class="t-eyebrow on-dark-accent rule">03 · Come lavoriamo</p>
+        <h2 class="t-h1" id="how-title">Al centro del percorso <span class="accent">ci sei tu,</span> non il programma.</h2>
+      </div>
+      <div>
+        <p class="t-lead">Partiamo dai tuoi impegni e cuciamo la struttura intorno ad essi: turni, riunioni che sforano, partenze all'ultimo e serate che non decidi.</p>
+        <ol class="rows how__list" aria-label="Gli impegni da cui partiamo">
+        <li><span class="t-small">01</span><p class="t-h3">Turni</p><div class="how__thumb"><img src="assets/orbita.svg" alt="" /></div></li>
+        <li><span class="t-small">02</span><p class="t-h3">Riunioni che sforano</p><div class="how__thumb"><img src="assets/zenit.svg" alt="" /></div></li>
+        <li><span class="t-small">03</span><p class="t-h3">Partenze all'ultimo</p><div class="how__thumb"><img src="assets/afelio.svg" alt="" /></div></li>
+        <li><span class="t-small">04</span><p class="t-h3">Serate che non decidi</p><div class="how__thumb"><img src="assets/eclissi.svg" alt="" /></div></li>
+        </ol>
+        <div class="mission">
+          <p class="t-eyebrow">La nostra missione</p>
+          <p class="t-body">La nostra missione è offrire a chi sceglie OLTRESOGLIA un sistema costruito su misura, con un team che conosce i suoi impegni, si adatta alla sua agenda e a cui può delegare completamente la gestione del proprio fisico.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -301,47 +298,42 @@
     <div class="team__head">
       <div>
         <p class="t-eyebrow rule">04</p>
-        <h2 class="t-h2" id="team-title">Il team</h2>
-      </div>
-      <div class="carousel__nav">
-        <button class="round" type="button" data-dir="-1" aria-label="Coach precedente"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
-        <button class="round" type="button" data-dir="1" aria-label="Coach successivo"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <h2 class="t-h1" id="team-title">Il team</h2>
       </div>
     </div>
-    <div class="carousel" role="tablist" aria-label="Scegli un coach">
-      <button class="card" type="button" role="tab" id="card-marco" aria-selected="false" aria-controls="panel-marco" data-i="0">
+    <div class="slices" role="tablist" aria-label="Scegli un coach">
+      <button class="slice" type="button" role="tab" id="slice-marco" aria-selected="false" aria-controls="panel-marco" data-i="0">
         <div class="photo "><img src="assets/team/marco.jpg" alt="Coach Marco" /></div>
-        <span class="card__label"><span class="t-h3">Coach Marco</span><span class="t-small">01 / 05</span></span>
+        <span class="slice__label"><span class="t-small">01 / 05</span><span class="t-h3">Coach Marco</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-anna" aria-selected="false" aria-controls="panel-anna" data-i="1">
+      <button class="slice" type="button" role="tab" id="slice-anna" aria-selected="false" aria-controls="panel-anna" data-i="1">
         <div class="photo "><img src="assets/team/anna.jpg" alt="Coach Anna" /></div>
-        <span class="card__label"><span class="t-h3">Coach Anna</span><span class="t-small">02 / 05</span></span>
+        <span class="slice__label"><span class="t-small">02 / 05</span><span class="t-h3">Coach Anna</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-giulio" aria-selected="false" aria-controls="panel-giulio" data-i="2">
+      <button class="slice" type="button" role="tab" id="slice-giulio" aria-selected="false" aria-controls="panel-giulio" data-i="2">
         <div class="photo "><img src="assets/team/giulio.jpg" alt="Coach Giulio" /></div>
-        <span class="card__label"><span class="t-h3">Coach Giulio</span><span class="t-small">03 / 05</span></span>
+        <span class="slice__label"><span class="t-small">03 / 05</span><span class="t-h3">Coach Giulio</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-yuri" aria-selected="false" aria-controls="panel-yuri" data-i="3">
+      <button class="slice" type="button" role="tab" id="slice-yuri" aria-selected="false" aria-controls="panel-yuri" data-i="3">
         <div class="photo "><img src="assets/team/yuri.jpg" alt="Coach Yuri" /></div>
-        <span class="card__label"><span class="t-h3">Coach Yuri</span><span class="t-small">04 / 05</span></span>
+        <span class="slice__label"><span class="t-small">04 / 05</span><span class="t-h3">Coach Yuri</span></span>
       </button>
-      <button class="card" type="button" role="tab" id="card-devid" aria-selected="false" aria-controls="panel-devid" data-i="4">
+      <button class="slice" type="button" role="tab" id="slice-devid" aria-selected="false" aria-controls="panel-devid" data-i="4">
         <div class="photo "><img src="assets/team/devid.jpg" alt="Coach Devid" /></div>
-        <span class="card__label"><span class="t-h3">Coach Devid</span><span class="t-small">05 / 05</span></span>
+        <span class="slice__label"><span class="t-small">05 / 05</span><span class="t-h3">Coach Devid</span></span>
       </button>
     </div>
-    <div class="story split">
-      <nav aria-label="Coach"><ul class="tabs">
-          <li><button class="t-h3" type="button" data-i="0" aria-selected="false" aria-controls="panel-marco">Marco</button></li>
-          <li><button class="t-h3" type="button" data-i="1" aria-selected="false" aria-controls="panel-anna">Anna</button></li>
-          <li><button class="t-h3" type="button" data-i="2" aria-selected="false" aria-controls="panel-giulio">Giulio</button></li>
-          <li><button class="t-h3" type="button" data-i="3" aria-selected="false" aria-controls="panel-yuri">Yuri</button></li>
-          <li><button class="t-h3" type="button" data-i="4" aria-selected="false" aria-controls="panel-devid">Devid</button></li>
-      </ul></nav>
+    <div class="bio split">
+      <div class="bio__side">
+        <h3 class="t-h3" id="bio-name">Coach Marco</h3>
+        <p class="t-small" id="bio-index">01 / 05</p>
+        <div class="bio__nav">
+          <button class="round" type="button" data-dir="-1" aria-label="Coach precedente"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <button class="round" type="button" data-dir="1" aria-label="Coach successivo"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        </div>
+      </div>
       <div>
-        <article class="panel" id="panel-marco" aria-labelledby="name-marco">
-          <h3 class="t-h3" id="name-marco">Coach Marco</h3>
-          <p class="t-small">01 / 05</p>
+        <article class="panel" id="panel-marco" role="tabpanel" aria-labelledby="slice-marco">
           <p class="t-lead">Da ragazzo ho provato calcio e basket, ma non ero portato per nessuno dei due.</p>
           <div class="panel__body">
             <p class="t-body">A 16 anni entro in palestra per la prima volta, quasi per obbligo: dovevo trovare uno sport da fare.</p>
@@ -355,9 +347,7 @@
             <p class="t-body">Qui siamo tutti sullo stesso piano. Niente filtri, niente scorciatoie. La differenza la fa l'impegno, ripetuto nel tempo.</p>
           </div>
         </article>
-        <article class="panel" id="panel-anna" aria-labelledby="name-anna" hidden>
-          <h3 class="t-h3" id="name-anna">Coach Anna</h3>
-          <p class="t-small">02 / 05</p>
+        <article class="panel" id="panel-anna" role="tabpanel" aria-labelledby="slice-anna" hidden>
           <p class="t-lead">Lo sport ha sempre fatto parte della mia vita. Ho praticato diverse discipline, ma spesso avevo la sensazione che tanto impegno non venisse ripagato dai risultati.</p>
           <div class="panel__body">
             <p class="t-body">Da adolescente ho lasciato gli sport di squadra per la palestra. Cercavo una sfida in cui il risultato dipendesse soprattutto da me, dal mio impegno e dalla mia costanza.</p>
@@ -370,9 +360,7 @@
             <p class="t-body">Diventare coach è stata una delle scelte più importanti che abbia fatto. Mi rende felice accompagnare chi decide di mettersi in gioco verso obiettivi che sembravano lontani, oltre i limiti che si era posto.</p>
           </div>
         </article>
-        <article class="panel" id="panel-giulio" aria-labelledby="name-giulio" hidden>
-          <h3 class="t-h3" id="name-giulio">Coach Giulio</h3>
-          <p class="t-small">03 / 05</p>
+        <article class="panel" id="panel-giulio" role="tabpanel" aria-labelledby="slice-giulio" hidden>
           <p class="t-lead">Fin da piccolo ho avuto una forte passione per lo sport, soprattutto per il calcio. Ero in sovrappeso, ma dentro avevo già una gran voglia di migliorare. Lo sport è stato il primo mezzo che mi ha insegnato a mettermi in gioco e a lavorare su me stesso.</p>
           <div class="panel__body">
             <p class="t-body">Non ero il più pronto né il più avvantaggiato. Avevo però qualcosa che sarebbe diventato un punto fermo: la capacità di impegnarmi, cadere, rialzarmi e continuare.</p>
@@ -388,9 +376,7 @@
             <p class="t-body">Ogni persona ha dentro molto più di quello che pensa. Il mio compito è aiutarla a tirarlo fuori.</p>
           </div>
         </article>
-        <article class="panel" id="panel-yuri" aria-labelledby="name-yuri" hidden>
-          <h3 class="t-h3" id="name-yuri">Coach Yuri</h3>
-          <p class="t-small">04 / 05</p>
+        <article class="panel" id="panel-yuri" role="tabpanel" aria-labelledby="slice-yuri" hidden>
           <p class="t-lead">Ho praticato calcio, rugby, pugilato e altri sport per gran parte della mia vita.</p>
           <div class="panel__body">
             <p class="t-body">Allenatori e preparatori mi dicevano che avevo qualità atletiche importanti. Ero forte, performante, spesso tra quelli che fisicamente reggevano meglio il lavoro. Mi sono dedicato anche al powerlifting, fino a conquistare due podi in gara.</p>
@@ -404,9 +390,7 @@
             <p class="t-body">Ho studiato e sperimentato fino a trovare la mia risposta. Oggi aiuto altre persone a trovare la loro.</p>
           </div>
         </article>
-        <article class="panel" id="panel-devid" aria-labelledby="name-devid" hidden>
-          <h3 class="t-h3" id="name-devid">Coach Devid</h3>
-          <p class="t-small">05 / 05</p>
+        <article class="panel" id="panel-devid" role="tabpanel" aria-labelledby="slice-devid" hidden>
           <p class="t-lead">Lo sport fa parte della mia vita da sempre. Da bambino ho fatto nuoto e jiu-jitsu, e già lì avevo capito che stare fermo non faceva per me.</p>
           <div class="panel__body">
             <p class="t-body">A nove anni è arrivato il calcio, nella squadra del mio paese. Non ho più smesso e ci gioco ancora oggi. Quella squadra mi ha dato più di uno sport: mi ha dato gli amici che ho ancora adesso.</p>
@@ -440,39 +424,28 @@
 
   <script>
   (() => {
-    const cards = [...document.querySelectorAll('.card')]
-    const tabs = [...document.querySelectorAll('.tabs button')]
+    const slices = [...document.querySelectorAll('.slice')]
     const panels = [...document.querySelectorAll('.panel')]
-    const n = cards.length
+    const titles = ["Coach Marco", "Coach Anna", "Coach Giulio", "Coach Yuri", "Coach Devid"]
+    const name = document.getElementById('bio-name')
+    const index = document.getElementById('bio-index')
+    const n = slices.length
     let active = 0
-    function layout() {
-      const w = cards[0].offsetWidth
-      cards.forEach((card, i) => {
-        let d = i - active
-        if (d > n / 2) d -= n
-        if (d < -n / 2) d += n
-        const a = Math.abs(d)
-        const scale = a === 0 ? 1 : a === 1 ? 0.8 : 0.66
-        const x = d * w * (a === 0 ? 0 : 0.86) + Math.sign(d) * (a > 1 ? w * 0.04 : 0)
-        card.style.transform = `translateX(${x}px) translateY(${a * 22}px) scale(${scale})`
-        card.style.opacity = a === 0 ? 1 : a === 1 ? 0.55 : 0.25
-        card.style.zIndex = String(10 - a)
-        card.tabIndex = a === 0 ? 0 : -1
-        card.setAttribute('aria-selected', String(a === 0))
-      })
-      tabs.forEach((t, i) => t.setAttribute('aria-selected', String(i === active)))
-      panels.forEach((p, i) => (p.hidden = i !== active))
+    function go(i, focus) {
+      active = (i + n) % n
+      slices.forEach((s, j) => { s.setAttribute('aria-selected', String(j === active)); s.tabIndex = j === active ? 0 : -1 })
+      panels.forEach((p, j) => (p.hidden = j !== active))
+      name.textContent = titles[active]
+      index.textContent = String(active + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0')
+      if (focus) slices[active].focus()
     }
-    function go(i) { active = (i + n) % n; layout() }
-    cards.forEach((c) => c.addEventListener('click', () => go(+c.dataset.i)))
-    tabs.forEach((t) => t.addEventListener('click', () => go(+t.dataset.i)))
+    slices.forEach((s) => s.addEventListener('click', () => go(+s.dataset.i)))
     document.querySelectorAll('.round').forEach((b) => b.addEventListener('click', () => go(active + +b.dataset.dir)))
-    document.querySelector('.carousel').addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(active + (e.key === 'ArrowRight' ? 1 : -1)); cards[active].focus() }
+    document.querySelector('.slices').addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(active + (e.key === 'ArrowRight' ? 1 : -1), true) }
     })
-    window.addEventListener('resize', layout)
     const start = new URLSearchParams(location.search).get('coach')
-    go(Math.max(0, cards.findIndex((c) => c.id === 'card-' + start)))
+    go(Math.max(0, slices.findIndex((s) => s.id === 'slice-' + start)))
 
     const menuBtn = document.querySelector('.nav__menu')
     const menu = document.getElementById('nav-panel')
