@@ -40,7 +40,7 @@ Note: the CSS prototype resolves Tablet slightly smaller than this table (see TY
 | 2 | Founder: sticky portrait + tag pills "Biologo Nutrizionista" / "Fondatore" left; right Eyebrow 01 (Saffron), H2 "Pietro Vecchi", Lead, Body, then ruled rows 14 / 17 (Numeral + Eyebrow "anni"), Statement row, La direzione / Oggi (H3) | "About Me" (photo + tags, "My Process" rows) | Eyebrow, H2, Lead, Body, Numeral, Statement, H3, Nav (tags) | 2-column Stack; left column Sticky (top 112). Rows: 1px top border, 180px label column |
 | 3 | Why (Porcelain ground): Eyebrow + Body, H1 "OLTRESOGLIA nasce da qui." with "da qui." on a Saffron marker, ruled H3 + Body | "About Me" light page | Eyebrow, Body, H1, H3 | Marker = Saffron fill behind the lower 32% of the phrase |
 | 4 | How: sticky Eyebrow 03 (Saffron) + H1 "Al centro del percorso ci sei tu, non il programma." left; Lead, numbered list 01–04 (Small + H3 + artwork thumbnail) and mission right | Sonora "We provide various services" | Eyebrow, H1, Lead, Small, H3, Body | Two equal columns; list rows ruled; thumbnail zooms 12% on hover |
-| 5 | Team: Eyebrow 04 + H1 "Il team"; five photo slices, the selected one 4× wider with Small "01 / 05" + H3 name; below, the bio (H3 + Small + arrows left, Lead + Body in two columns right) | Sonora "Professional team" | Eyebrow, H1, Small, H3, Lead, Body | Slices = component with 5 variants (one open), width transition 0.9s cubic-bezier(.76,0,.24,1); closed slices dimmed |
+| 5 | Team: Eyebrow 04 + H1 "Il team"; five photo slices in original colour, the selected one 4× wider with Small "01 / 05" + H3 name; below, the bio (H3 + Small + arrows left, Lead + Body in two columns right) | Sonora "Professional team" | Eyebrow, H1, Small, H3, Lead, Body | Slices = component with 5 variants (one open), width transition 0.9s cubic-bezier(.76,0,.24,1) |
 | 6 | Closing: Statement "Per chi pretende…" left-aligned on a hairline, Small "Pietro Vecchi · Fondatore" | "About Me" closing line | Statement, Small | — |
 | 7 | Threshold CTA: Eyebrow "Il primo passo" (Saffron), H1, Button "Fai il test →" over the horizon artwork | — | Eyebrow, H1, Button | Same pill as the nav |
 
@@ -53,7 +53,7 @@ Spacing: section padding 160 / 96 / 72 (Desktop / Tablet / Phone); Eyebrow → h
 - `marco.jpg`, `anna.jpg`, `giulio.jpg`, `yuri.jpg`, `devid.jpg` (4:5): coach portraits
 - Optional later: `pietro-scontornato.png`, Pietro cut out on a transparent background, to drop the arch in the hero
 
-All photos are shown in grayscale so the set reads as one shoot. Before launch: the coach polos carry other brands' logos ("le 360"),
+Photos are used in their original colours, as supplied (no grayscale, contrast or brightness changes). Before launch: the coach polos carry other brands' logos ("le 360"),
 the backgrounds differ from shot to shot, Yuri's photo is lower resolution, and the Apple logo is visible on Pietro's laptop.
 
 ## Pending

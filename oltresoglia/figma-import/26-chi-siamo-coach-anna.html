@@ -119,7 +119,7 @@
   :where(a, button):focus-visible { outline: 2px solid var(--oltre-saffron-mango); outline-offset: 3px; }
 
   .photo { position: relative; overflow: hidden; background: color-mix(in srgb, var(--oltre-porcelain) 7%, var(--oltre-dark-charcoal)); }
-  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; filter: grayscale(1) contrast(1.05) brightness(.88); }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
 
   .rule { display: flex; align-items: center; gap: 14px; }
   .rule::after { content: ''; flex: 0 1 64px; min-width: 16px; height: 1px; background: currentColor; opacity: .7; }
@@ -216,8 +216,6 @@
     border-radius: var(--radius-card); transition: flex-grow .9s var(--ease); text-align: left; }
   .slice[aria-selected="true"] { flex-grow: 4.2; cursor: default; }
   .slice .photo { position: absolute; inset: 0; }
-  .slice:not([aria-selected="true"]) .photo img { filter: grayscale(1) contrast(1.05) brightness(.62); }
-  .slice:not([aria-selected="true"]):hover .photo img { filter: grayscale(1) contrast(1.05) brightness(.8); }
   .slice__label { position: absolute; left: 20px; right: 20px; bottom: 20px; display: grid; gap: 4px; opacity: 0; transform: translateY(8px);
     transition: opacity .4s var(--ease), transform .4s var(--ease); }
   .slice[aria-selected="true"] .slice__label { opacity: 1; transform: none; transition-delay: .45s; }
