@@ -1,4 +1,4 @@
-# Chi siamo (v6): Framer handoff
+# Chi siamo (v7): Framer handoff
 
 Prototype: `oltresoglia/chi-siamo/index.html` (`?coach=anna` opens on a given coach).
 Built on the type system in `../TYPOGRAPHY.md` / `../styles/type.css`: every text layer is one of the 12 Text Styles below,
@@ -9,23 +9,23 @@ The site is Italian only. (The preview link has an IT / EN reading switch for re
 that ends at the threshold: the test. v5 is laid out on Sky's three references: KOS Visuals (hero face row), the "About Me"
 portfolio (sticky portrait + tags, ruled rows, light page, left-aligned closing) and Sonora (numbered list, expanding team slices).
 
-## Black / white treatment (same as the Contact page)
+## Black / white treatment
 
-The page sits on the black starry backdrop (fixed, like Contact). Content alternates between black sections and
-**Porcelain panels**: radius 24 (20 on phone), padding 64 / 40 / 24, dark text, inset to the page margins. Inside a panel,
-lists sit in a **black card** (radius 20) with Porcelain text, exactly like the form card on Contact.
+Full-width sections, edge to edge, alternating black and white (Porcelain). No rounded panels.
+Inside the white sections, lists sit in a **black card** (radius 20) with Porcelain text, like the form card on Contact.
+The black sections show the starry backdrop (fixed, as on Contact).
 
 | Section | Ground |
 |---|---|
 | Hero (title + six faces) | Black |
-| 01 Founder | Porcelain panel; the story rows (14 / 17 / statement / La direzione / Oggi) in a black card |
+| 01 Founder | White; the story rows (14 / 17 / statement / La direzione / Oggi) in a black card |
 | 02 Perché nasce | Black; "da qui." in Saffron |
-| 03 Come lavoriamo | Porcelain panel: H1 full width ("ci sei tu," on a Saffron marker), Lead + mission left, numbered list in a black card right |
-| 04 Il team | Black slices; the open slice's name on a small black label; the bio in a Porcelain panel below |
-| Closing line | Black |
-| CTA | Porcelain panel: text left, horizon artwork in a black card right; button black with Saffron border, no glow on Porcelain |
+| 03 Come lavoriamo | White: H1 full width ("ci sei tu," on a Saffron marker), Lead + mission left, numbered list in a black card right |
+| 04 Il team | Black: slices (open slice's name on a small black label) and the bio |
+| Closing line | White |
+| CTA | Black: text left, horizon artwork right; Saffron eyebrow and glowing pill |
 
-On Porcelain the text styles use Dark Charcoal at the same opacities; Saffron is used only as a marker or button border there.
+On white the text styles use Dark Charcoal at the same opacities; Saffron is used only as a marker there.
 
 ## Text Styles (create these 12 in Framer)
 

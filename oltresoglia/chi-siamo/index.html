@@ -31,16 +31,13 @@
   .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--oltre-dark-charcoal); pointer-events: none; }
   .backdrop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
   .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .45; }
-  .panel-section { padding: clamp(24px, 3vw, 40px) var(--edge); }
-  .banner { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); border-radius: 20px; padding: 24px;
+  .is-white { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); --type-ink: var(--oltre-dark-charcoal);
     --line-hair: color-mix(in srgb, var(--oltre-dark-charcoal) 14%, transparent);
     --line-field: color-mix(in srgb, var(--oltre-dark-charcoal) 28%, transparent);
     --line-strong: color-mix(in srgb, var(--oltre-dark-charcoal) 45%, transparent);
     --btn-glow: 0 0 0 transparent; --btn-glow-hover: 0 0 0 transparent;
     --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 22%, var(--oltre-blackout)); }
-  @media (min-width: 640px) { .banner { padding: 40px; border-radius: 24px; } }
-  @media (min-width: 960px) { .banner { padding: 64px; } }
-  .banner :focus-visible { outline-color: var(--oltre-dark-charcoal); }
+  .is-white :focus-visible { outline-color: var(--oltre-dark-charcoal); }
   .card-dark { --type-ink: var(--oltre-porcelain); background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); border-radius: 20px; padding: 8px 24px;
     --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
     --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);
@@ -159,7 +156,7 @@
   .slice[aria-selected="true"] .slice__label { opacity: 1; transform: none; transition-delay: .45s; }
   .slice__label .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 70%, transparent); }
   @media (max-width: 639px) { .slices { height: 440px; } .slice[aria-selected="true"] { flex-grow: 7; } }
-  .bio { margin-top: 32px; }
+  .bio { margin-top: 56px; }
   .bio__side .t-small { margin-top: 8px; }
   .bio__nav { display: flex; gap: 10px; margin-top: 24px; }
   .round { width: 52px; height: 52px; border-radius: 99px; border: 1px solid var(--line-field); background: none; display: grid; place-items: center;
@@ -169,12 +166,11 @@
   .panel .t-lead { color: var(--type-ink); }
   .panel__body { margin-top: 24px; columns: 2 260px; column-gap: 40px; }
   .panel__body .t-body { margin-bottom: 14px; break-inside: avoid; }
-  .closing { border-top: 1px solid var(--line-hair); }
   .closing figcaption { margin-top: 28px; }
-  .threshold { padding-bottom: clamp(48px, 6vw, 96px); }
+
   .threshold .pill { margin-top: 40px; }
-  @media (min-width: 960px) { .cta { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: stretch; } .cta > * { align-self: stretch; } }
-  .cta__art { position: relative; overflow: hidden; padding: 0; min-height: 280px; }
+  @media (min-width: 960px) { .cta { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); align-items: stretch; } .cta > * { align-self: stretch; } }
+  .cta__art { position: relative; overflow: hidden; padding: 0; min-height: 280px; border: 1px solid var(--line-hair); }
   .cta__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
 
   @media (prefers-reduced-motion: reduce) {
@@ -231,8 +227,8 @@
     </ul>
   </section>
 
-  <section class="panel-section founder" aria-labelledby="founder-name">
-    <div class="banner on-light split">
+  <section class="block founder is-white" aria-labelledby="founder-name">
+    <div class="split">
       <figure class="founder__figure sticky">
         <div class="photo "><img src="assets/team/pietro.jpg" alt="Pietro Vecchi" /></div>
         <figcaption><span class="tag t-nav">Biologo Nutrizionista</span><span class="tag t-nav">Fondatore</span></figcaption>
@@ -287,8 +283,8 @@
     </div>
   </section>
 
-  <section class="panel-section how" aria-labelledby="how-title">
-    <div class="banner on-light">
+  <section class="block how is-white" aria-labelledby="how-title">
+    <div>
       <p class="t-eyebrow rule">03 · Come lavoriamo</p>
       <h2 class="t-h1" id="how-title">Al centro del percorso <span class="accent mark">ci sei tu,</span> non il programma.</h2>
       <div class="split how__body">
@@ -339,7 +335,7 @@
         <span class="slice__label"><span class="t-small">05 / 05</span><span class="t-h3">Coach Devid</span></span>
       </button>
     </div>
-    <div class="bio banner on-light split">
+    <div class="bio split">
       <div class="bio__side">
         <h3 class="t-h3" id="bio-name">Coach Marco</h3>
         <p class="t-small" id="bio-index">01 / 05</p>
@@ -423,17 +419,17 @@
     </div>
   </section>
 
-  <section class="block closing" aria-label="In una frase">
+  <section class="block closing is-white" aria-label="In una frase">
     <figure>
       <blockquote><p class="t-statement">Per chi pretende dal proprio corpo lo stesso livello che pretende da tutto il resto.</p></blockquote>
       <figcaption class="t-small">Pietro Vecchi · Fondatore</figcaption>
     </figure>
   </section>
 
-  <section class="panel-section threshold" aria-labelledby="cta-title">
-    <div class="banner on-light split cta">
+  <section class="block threshold" aria-labelledby="cta-title">
+    <div class="split cta">
       <div>
-        <p class="t-eyebrow">Il primo passo</p>
+        <p class="t-eyebrow on-dark-accent">Il primo passo</p>
         <h2 class="t-h1" id="cta-title">Scopri che tipo di professionista ad alta pressione sei</h2>
         <a class="pill t-button" href="#">Fai il test <span aria-hidden="true">→</span></a>
       </div>
