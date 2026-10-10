@@ -1,4 +1,4 @@
-# Chi siamo (v7): Framer handoff
+# Chi siamo (v8): Framer handoff
 
 Prototype: `oltresoglia/chi-siamo/index.html` (`?coach=anna` opens on a given coach).
 Built on the type system in `../TYPOGRAPHY.md` / `../styles/type.css`: every text layer is one of the 12 Text Styles below,
@@ -12,15 +12,15 @@ portfolio (sticky portrait + tags, ruled rows, light page, left-aligned closing)
 ## Black / white treatment
 
 Full-width sections, edge to edge, alternating black and white (Porcelain). No rounded panels.
-Inside the white sections, lists sit in a **black card** (radius 20) with Porcelain text, like the form card on Contact.
+In the white sections all text is dark (Dark Charcoal), directly on white, separated by thin dark hairlines; no black cards.
 The black sections show the starry backdrop (fixed, as on Contact).
 
 | Section | Ground |
 |---|---|
 | Hero (title + six faces) | Black |
-| 01 Founder | White; the story rows (14 / 17 / statement / La direzione / Oggi) in a black card |
+| 01 Founder | White; the story rows (14 / 17 / statement / La direzione / Oggi) in dark text with hairlines |
 | 02 Perché nasce | Black; "da qui." in Saffron |
-| 03 Come lavoriamo | White: H1 full width ("ci sei tu," on a Saffron marker), Lead + mission left, numbered list in a black card right |
+| 03 Come lavoriamo | White: H1 full width ("ci sei tu," on a Saffron marker), Lead + mission left, numbered list (dark text, hairlines) right |
 | 04 Il team | Black: slices (open slice's name on a small black label) and the bio |
 | Closing line | White |
 | CTA | Black: text left, horizon artwork right; Saffron eyebrow and glowing pill |
