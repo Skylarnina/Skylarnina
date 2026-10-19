@@ -198,14 +198,23 @@
   .book__cover > p { position: relative; z-index: 1; max-width: none; }
   .book__cover .t-eyebrow { color: var(--oltre-saffron-mango); }
   .book__cover .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 70%, transparent); }
-  .shelf-wrap { padding: 0 clamp(16px, 3.4vw, 48px) var(--space-section); }
+  .is-white { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); --type-ink: var(--oltre-dark-charcoal);
+    --line-hair: color-mix(in srgb, var(--oltre-dark-charcoal) 14%, transparent);
+    --line-field: color-mix(in srgb, var(--oltre-dark-charcoal) 28%, transparent);
+    --line-strong: color-mix(in srgb, var(--oltre-dark-charcoal) 45%, transparent);
+    --btn-glow: 0 0 0 transparent; --btn-glow-hover: 0 0 0 transparent;
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 22%, var(--oltre-blackout)); }
+  .is-white :focus-visible { outline-color: var(--oltre-dark-charcoal); }
+  .head-solid .site-header { position: relative; padding-bottom: 20px; background: var(--oltre-dark-charcoal); }
+  @media (min-width: 640px) { .head-solid .site-header { padding-bottom: 32px; } }
+  .shelf-wrap { padding: var(--space-section) clamp(16px, 3.4vw, 48px); }
   .shelf { display: grid; gap: 20px; padding: clamp(12px, 2.4vw, 32px); border-radius: 24px; border: 1px solid var(--line-hair);
-    background: radial-gradient(120% 70% at 50% 115%, color-mix(in srgb, var(--oltre-saffron-mango) 14%, transparent), transparent 62%),
-                color-mix(in srgb, var(--oltre-porcelain) 3%, var(--oltre-dark-charcoal)); }
+    background: radial-gradient(120% 70% at 50% 115%, color-mix(in srgb, var(--oltre-saffron-mango) 22%, transparent), transparent 62%),
+                color-mix(in srgb, var(--oltre-whiteout) 45%, var(--oltre-porcelain)); }
   @media (min-width: 960px) { .shelf { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .ecard { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 2.4vw, 32px); align-items: center; padding: clamp(20px, 2.4vw, 32px);
-    border-radius: 16px; border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 26%, transparent);
-    background: linear-gradient(180deg, color-mix(in srgb, var(--oltre-porcelain) 2%, var(--oltre-dark-charcoal)) 30%, color-mix(in srgb, var(--oltre-saffron-mango) 9%, var(--oltre-dark-charcoal)));
+    border-radius: 16px; border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 45%, transparent);
+    background: linear-gradient(180deg, var(--oltre-whiteout) 35%, color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-whiteout)));
     --book-w: clamp(116px, 10.5vw, 156px); }
   .ecard__text { display: grid; justify-items: start; gap: 16px; }
   .ecard__text .t-h2::before, .ebook__text .t-h1::before { content: ''; display: block; width: 32px; height: 2px; margin-bottom: 16px; background: var(--oltre-saffron-mango); }
@@ -215,6 +224,8 @@
     .ecard__text { justify-items: stretch; }
     .ecard .pill { width: 100%; }
   }
+  .ebook-more { padding: var(--space-section) var(--edge); }
+  .grazie { padding: clamp(64px, 8vw, 120px) var(--edge) var(--space-section); min-height: 0; }
   .ebook { min-height: min(100svh, 860px); display: grid; align-items: center; gap: 48px; padding: 168px var(--edge) var(--space-section); --book-w: clamp(200px, 24vw, 320px); }
   @media (min-width: 960px) { .ebook { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 80px; } }
   .ebook__media { display: grid; place-items: center; }
@@ -288,8 +299,17 @@
       <p class="t-eyebrow on-dark-accent"><a class="crumb" href="index.html">Ebook gratuiti</a></p>
       <h1 class="t-h1" id="ebook-title">Gestire la pressione</h1>
       <p class="t-lead">Come evitare che una giornata pesante decida cosa mangi la sera. Il metodo per perdere grasso quando il lavoro chiede tutto, costruito sui quattro tipi di settimana ad alta pressione.</p>
-      <p class="t-body">[IT — pending client]</p>
       <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica gratis ora <span aria-hidden="true">→</span></button>
+    </div>
+  </section>
+
+  <section class="ebook-more is-white" aria-label="Gestire la pressione">
+    <div class="split">
+      <p class="t-eyebrow rule">Gestire la pressione</p>
+      <div>
+        <p class="t-lead">[IT — pending client]</p>
+        <p class="t-body">[IT — pending client]</p>
+      </div>
     </div>
   </section>
 

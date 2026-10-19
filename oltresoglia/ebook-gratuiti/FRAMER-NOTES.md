@@ -4,12 +4,17 @@ Prototype: `oltresoglia/ebook-gratuiti/index.html` (listing) → `<ebook>.html` 
 Built on the type system (`../TYPOGRAPHY.md`, `../styles/type.css`) and the same header, buttons and starry backdrop as Chi siamo.
 Layout from Bibi's references of 17 October. Listing copy is Pietro's "EBOOK GRATUITI - PAGE 1", verbatim.
 
+**Black / white, as on Chi siamo:** full-width black and white (Porcelain) sections; on white, all text is dark and there are no
+black blocks. Listing: black header with the title and intro, then the white section with the banner (white, subtle Saffron
+gradient at the bottom) and white cards (Saffron border, Saffron tint at the bottom). Ebook page: black hero with the book and
+button, white section below for the extra copy. Thank-you page: black header bar, white page. The pop-up stays dark, as in the reference.
+
 ## Pages
 
 | Page | Content | Styles |
 |---|---|---|
-| Listing | Display "Ebook gratuiti" + Lead (intro); a banner (radius 24, subtle Saffron gradient at the bottom) holding 5 cards in two columns: 3 left, 2 right. Card: book left; Saffron rule, title, description, button right | Display, Lead, H2 (card title), Body, Button |
-| 1–5 · Ebook page | Large book left (Saffron glow); eyebrow link "Ebook gratuiti", H1 title, Lead (description), Body (extra copy from Pietro's email), button "Scarica gratis ora →" opens the pop-up | Eyebrow, H1, Lead, Body, Button |
+| Listing | Black: Display "Ebook gratuiti" + Lead (intro). White: a banner (radius 24, subtle Saffron gradient at the bottom) holding 5 cards in two columns: 3 left, 2 right. Card: book left; Saffron rule, title, description, button right | Display, Lead, H2 (card title), Body, Button |
+| 1–5 · Ebook page | Large book left (Saffron glow); eyebrow link "Ebook gratuiti", H1 title, Lead (description), button "Scarica gratis ora →" opens the pop-up. White section below: eyebrow + Lead + Body (extra copy from Pietro's email) | Eyebrow, H1, Lead, Body, Button |
 | Pop-up | Porcelain frame (8px) around a dark panel; "Ci siamo quasi.." (H3), subtitle (Lead), ebook title in Saffron (H1); book left, form right: Nome, Email (icons inside the fields), button "Ricevi l'ebook gratuito ora →", note (Small) | H3, Lead, H1, Body (inputs), Button, Small |
 | 6–10 · Thank-you | Book left; eyebrow with the ebook title, H1 + Lead from Pietro's email, button back to the listing | Eyebrow, H1, Lead, Button |
 
