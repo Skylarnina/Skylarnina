@@ -100,11 +100,6 @@
   .rows > li:last-child { border-bottom: 1px solid var(--line-hair); }
   @media (min-width: 640px) { .rows > li { grid-template-columns: 180px 1fr; gap: 40px; } }
   .rows .t-body + .t-body { margin-top: 14px; }
-
-
-  .page-head { padding: 168px var(--edge) clamp(40px, 5vw, 64px); display: grid; gap: 24px; }
-  @media (min-width: 960px) { .page-head { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 80px; align-items: end; } }
-  .page-head .t-lead { color: var(--oltre-porcelain); }
   .book { position: relative; width: var(--book-w, 180px); aspect-ratio: 2 / 3; flex: none; transform: perspective(900px) rotateY(-14deg); transform-origin: left center; }
   .book::before { content: ''; position: absolute; inset: -6% -22% -10% -16%; z-index: -1; border-radius: 50%;
     background: radial-gradient(closest-side, color-mix(in srgb, var(--oltre-saffron-mango) 34%, transparent), transparent); filter: blur(22px); }
@@ -117,40 +112,103 @@
   .book__cover > p { position: relative; z-index: 1; max-width: none; }
   .book__cover .t-eyebrow { color: var(--oltre-saffron-mango); }
   .book__cover .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 70%, transparent); }
-  .is-white { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); --type-ink: var(--oltre-dark-charcoal);
-    --line-hair: color-mix(in srgb, var(--oltre-dark-charcoal) 14%, transparent);
-    --line-field: color-mix(in srgb, var(--oltre-dark-charcoal) 28%, transparent);
+  body.light { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); }
+  .light, .is-light { --type-ink: var(--oltre-dark-charcoal);
+    --line-hair: color-mix(in srgb, var(--oltre-dark-charcoal) 12%, transparent);
+    --line-field: color-mix(in srgb, var(--oltre-dark-charcoal) 26%, transparent);
     --line-strong: color-mix(in srgb, var(--oltre-dark-charcoal) 45%, transparent);
     --btn-glow: 0 0 0 transparent; --btn-glow-hover: 0 0 0 transparent;
     --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 22%, var(--oltre-blackout)); }
-  .is-white :focus-visible { outline-color: var(--oltre-dark-charcoal); }
-  .head-solid .site-header { position: relative; padding-bottom: 20px; background: var(--oltre-dark-charcoal); }
-  @media (min-width: 640px) { .head-solid .site-header { padding-bottom: 32px; } }
-  .shelf-wrap { padding: var(--space-section) clamp(16px, 3.4vw, 48px); }
-  .shelf { display: grid; gap: 20px; padding: clamp(12px, 2.4vw, 32px); border-radius: 24px; border: 1px solid var(--line-hair);
-    background: radial-gradient(120% 70% at 50% 115%, color-mix(in srgb, var(--oltre-saffron-mango) 22%, transparent), transparent 62%),
-                color-mix(in srgb, var(--oltre-whiteout) 45%, var(--oltre-porcelain)); }
-  @media (min-width: 960px) { .shelf { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-  .ecard { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 2.4vw, 32px); align-items: center; padding: clamp(20px, 2.4vw, 32px);
-    border-radius: 16px; border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 45%, transparent);
-    background: linear-gradient(180deg, var(--oltre-whiteout) 35%, color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-whiteout)));
-    --book-w: clamp(116px, 10.5vw, 156px); }
-  .ecard__text { display: grid; justify-items: start; gap: 16px; }
-  .ecard__text .t-h2::before, .ebook__text .t-h1::before { content: ''; display: block; width: 32px; height: 2px; margin-bottom: 16px; background: var(--oltre-saffron-mango); }
-  .ecard .pill { margin-top: 4px; }
+  .light .backdrop { display: none; }
+  .light :focus-visible { outline-color: var(--oltre-dark-charcoal); }
+  .light .wordmark { color: var(--oltre-dark-charcoal); }
+  .light .nav__links a { color: color-mix(in srgb, var(--oltre-dark-charcoal) 70%, transparent); }
+  .light .nav__links a:hover { color: var(--oltre-dark-charcoal); background: color-mix(in srgb, var(--oltre-dark-charcoal) 6%, transparent); }
+  .light .nav__links a[aria-current="page"] { color: var(--oltre-dark-charcoal); }
+  .light .nav__panel { background: var(--oltre-porcelain); }
+  .is-dark { background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); --type-ink: var(--oltre-porcelain);
+    --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
+    --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);
+    --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent);
+    --btn-glow: 0 0 18px color-mix(in srgb, var(--oltre-saffron-mango) 35%, transparent);
+    --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
+    --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout)); }
+  .is-dark :focus-visible { outline-color: var(--oltre-saffron-mango); }
+  .doodle { position: absolute; pointer-events: none; color: currentColor; }
+  .e-hero { padding: 152px var(--edge) clamp(56px, 7vw, 104px); display: grid; gap: 64px; align-items: center; }
+  @media (min-width: 960px) { .e-hero { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 56px; } }
+  .e-hero__text { position: relative; display: grid; justify-items: start; gap: 28px; }
+  .e-hero__text .doodle--star { width: clamp(40px, 4vw, 60px); top: -28px; left: calc(var(--t-display) * 4.9); transform: rotate(12deg); }
+  .stage { position: relative; height: clamp(380px, 36vw, 500px); }
+  .stage__block { position: absolute; inset: 30% 0 0; border-radius: 28px; overflow: hidden; }
+  .stage__block img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: .8; }
+  .fan { position: absolute; left: 0; right: 0; top: 0; height: 58%; display: flex; justify-content: center; align-items: flex-end; }
+  .fan .book { --book-w: clamp(92px, 9vw, 136px); margin-inline: clamp(-26px, -1.8vw, -14px); transform: rotate(var(--r)) translateY(var(--y)); transform-origin: 50% 100%; transition: transform .6s var(--ease); }
+  .fan .book:nth-child(1) { --r: -14deg; --y: 26px; }
+  .fan .book:nth-child(2) { --r: -7deg; --y: 8px; }
+  .fan .book:nth-child(3) { --r: 0deg; --y: 0px; z-index: 2; }
+  .fan .book:nth-child(4) { --r: 7deg; --y: 8px; }
+  .fan .book:nth-child(5) { --r: 14deg; --y: 26px; }
+  .stage:hover .fan .book { --y: -6px; }
+  .tags { position: absolute; left: 6%; right: 6%; bottom: 6%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 8px; }
+  .tags a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 999px; background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal);
+    transform: rotate(var(--r, 0deg)); transition: transform .4s var(--ease), background-color var(--t); }
+  .tags a:nth-child(1) { --r: -6deg; } .tags a:nth-child(2) { --r: 4deg; } .tags a:nth-child(3) { --r: -3deg; } .tags a:nth-child(4) { --r: 5deg; } .tags a:nth-child(5) { --r: -4deg; }
+  .tags a:hover { --r: 0deg; background: var(--oltre-saffron-mango); }
+  @media (max-width: 759px) { .e-hero { gap: 40px; } .stage { height: 230px; overflow-x: clip; } .tags { display: none; } .stage__block { inset: 36% 0 0; } .fan { height: 78%; } .fan .book { --book-w: 84px; margin-inline: -12px; } }
+  .board-wrap { position: relative; padding: clamp(48px, 6vw, 96px) var(--edge) var(--space-section); }
+  .board-wrap .doodle--path { inset: 4% 8% 10%; width: 84%; height: 86%; color: color-mix(in srgb, var(--oltre-dark-charcoal) 30%, transparent); }
+  .board { position: relative; display: grid; gap: 88px 56px; }
+  @media (min-width: 960px) { .board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .board__col:nth-child(2) { padding-top: 160px; } }
+  .board__col { display: grid; gap: 96px; align-content: start; }
+  .ecard { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: start; padding: 28px 28px 32px; border-radius: 22px;
+    background: var(--oltre-whiteout); box-shadow: 0 1px 0 rgba(5,5,5,.04), 0 28px 60px -24px rgba(5,5,5,.28); transform: rotate(var(--r, 0deg));
+    transition: transform .6s var(--ease), box-shadow .6s var(--ease); --book-w: clamp(108px, 9.5vw, 140px); scroll-margin-top: 120px; }
+  .ecard:hover { --r: 0deg; transform: rotate(0) translateY(-6px); box-shadow: 0 1px 0 rgba(5,5,5,.04), 0 36px 70px -24px rgba(5,5,5,.34); }
+  .ecard::before { content: ''; position: absolute; top: -10px; left: 50%; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #9a9a9a, #1d1d1d 70%); box-shadow: 0 4px 8px rgba(5,5,5,.35); }
+  .ecard .book { margin-top: -72px; transform: rotate(-5deg); }
+  .ecard__text { display: grid; justify-items: start; gap: 14px; }
+  .ecard__text .t-h2::before, .feature__text .t-h1::before { content: ''; display: block; width: 32px; height: 2px; margin-bottom: 16px; background: var(--oltre-saffron-mango); }
+  .ecard .pill { margin-top: 6px; }
+  @media (max-width: 959px) {
+    .board__col { display: contents; }
+    .ecard { order: var(--o); }
+  }
   @media (max-width: 639px) {
-    .ecard { grid-template-columns: 1fr; justify-items: center; text-align: left; --book-w: 150px; }
+    .ecard { grid-template-columns: 1fr; justify-items: center; padding: 24px 20px 28px; transform: rotate(calc(var(--r) * .4)); }
+    .ecard .book { margin-top: -64px; --book-w: 128px; }
     .ecard__text { justify-items: stretch; }
     .ecard .pill { width: 100%; }
+    .board-wrap .doodle--path { display: none; }
   }
-  .ebook-more { padding: var(--space-section) var(--edge); }
-  .grazie { padding: clamp(64px, 8vw, 120px) var(--edge) var(--space-section); min-height: 0; }
-  .ebook { min-height: min(100svh, 860px); display: grid; align-items: center; gap: 48px; padding: 168px var(--edge) var(--space-section); --book-w: clamp(200px, 24vw, 320px); }
-  @media (min-width: 960px) { .ebook { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 80px; } }
-  .ebook__media { display: grid; place-items: center; }
-  .ebook__text { display: grid; justify-items: start; gap: 24px; }
-  .ebook__text .t-eyebrow { margin-bottom: -8px; }
+  .block-wrap { padding: 0 clamp(16px, 3.4vw, 48px) var(--space-section); }
+  .dblock { position: relative; border-radius: 28px; padding: clamp(40px, 6vw, 88px); overflow: hidden; isolation: isolate; }
+  .dblock > img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: .7; }
+  .dblock .t-h1 { margin-top: var(--space-eyebrow); }
+  .dblock .pill { margin-top: 36px; }
+  .dblock__text { max-width: 600px; }
+  .dblock .doodle--squiggle { width: clamp(80px, 9vw, 130px); right: 8%; top: 18%; color: var(--oltre-saffron-mango); }
+  .feature-wrap { padding: 132px clamp(16px, 3.4vw, 48px) 0; }
+  .feature { position: relative; border-radius: 28px; padding: clamp(32px, 5vw, 72px) clamp(24px, 5vw, 72px) clamp(130px, 13vw, 180px); display: grid; gap: 40px; align-items: center; isolation: isolate; }
+  @media (min-width: 960px) { .feature { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; } }
+  .feature__bg { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden;
+    background: radial-gradient(50% 60% at 78% 40%, color-mix(in srgb, var(--oltre-saffron-mango) 18%, transparent), transparent 70%), var(--oltre-dark-charcoal); }
+  .feature__bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: .55; }
+  .feature__text { display: grid; justify-items: start; gap: 24px; }
+  .feature__text .t-eyebrow { margin-bottom: -8px; }
+  .feature__book { justify-self: center; --book-w: clamp(190px, 21vw, 290px); }
+  .feature__book .book { transform: rotate(5deg); margin-top: calc(-1 * clamp(56px, 7vw, 120px)); }
+  @media (max-width: 959px) { .feature__book { order: -1; } .feature__book .book { margin-top: 0; } }
   .crumb { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .others { position: relative; z-index: 1; display: flex; gap: clamp(16px, 2.4vw, 32px); margin-top: calc(-1 * clamp(100px, 10vw, 140px)); padding: 0 clamp(24px, 5vw, 72px) 8px; overflow-x: auto; scrollbar-width: none; }
+  .others::-webkit-scrollbar { display: none; }
+  .others a { flex: none; display: grid; gap: 14px; width: clamp(104px, 9.5vw, 136px); --book-w: 100%; transition: transform .5s var(--ease); }
+  .others a .book { transform: rotate(var(--r, 0deg)); }
+  .others a:nth-child(odd) { --r: -3deg; } .others a:nth-child(even) { --r: 3deg; }
+  .others a:hover { transform: translateY(-10px); }
+  .others > a > .t-small { color: var(--oltre-dark-charcoal); }
+  .more { padding: var(--space-section) var(--edge); }
   .pop { width: min(940px, calc(100vw - 32px)); max-height: calc(100svh - 32px); padding: 8px; border: 0; border-radius: 28px; background: var(--oltre-porcelain); color: var(--oltre-porcelain); overflow: auto; }
   .pop::backdrop { background: color-mix(in srgb, var(--oltre-dark-charcoal) 72%, transparent); backdrop-filter: blur(3px); }
   .pop__panel { position: relative; border-radius: 22px; padding: clamp(28px, 4vw, 48px); display: grid; gap: 32px;
@@ -177,7 +235,7 @@
   .pop__note { text-align: center; margin-inline: auto; }
 </style>
 </head>
-<body class="head-solid">
+<body class="light">
   <div class="backdrop" aria-hidden="true"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
   <div class="backdrop" aria-hidden="true"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
   <header class="site-header">
@@ -212,15 +270,20 @@
   </header>
 
   <main>
-  <section class="ebook grazie is-white" aria-labelledby="thanks-title">
-    <div class="ebook__media"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/orbita.svg" alt="" /><p class="t-eyebrow">Gestire la fame</p><p class="t-small">Copertina in arrivo</p></div></div></div>
-    <div class="ebook__text">
-      <p class="t-eyebrow">Gestire la fame</p>
-      <h1 class="t-h1" id="thanks-title">[IT — pending client]</h1>
-      <p class="t-lead">[IT — pending client]</p>
-      <a class="pill t-button" href="index.html">Ebook gratuiti <span aria-hidden="true">→</span></a>
+  <section class="feature-wrap" aria-labelledby="thanks-title">
+    <div class="feature is-dark">
+      <div class="feature__bg"><img src="../chi-siamo/assets/orbita.svg" alt="" /></div>
+      <div class="feature__text">
+        <p class="t-eyebrow on-dark-accent">Gestire la fame</p>
+        <h1 class="t-h1" id="thanks-title">[IT — pending client]</h1>
+        <p class="t-lead">[IT — pending client]</p>
+        <a class="pill t-button" href="index.html">Ebook gratuiti <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature__book"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/orbita.svg" alt="" /><p class="t-eyebrow">Gestire la fame</p><p class="t-small">Copertina in arrivo</p></div></div></div>
     </div>
+    <nav class="others" aria-label="Ebook gratuiti"><a href="allenarsi-con-continuita.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/zenit.svg" alt="" /><p class="t-eyebrow">Allenarsi con continuità - Vol.1</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Allenarsi con continuità - Vol.1</span></a><a href="gestire-la-pressione.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/afelio.svg" alt="" /><p class="t-eyebrow">Gestire la pressione</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Gestire la pressione</span></a><a href="proteggere-il-sonno.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/eclissi.svg" alt="" /><p class="t-eyebrow">Proteggere il sonno</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Proteggere il sonno</span></a><a href="migliorare-la-digestione.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/soglia.svg" alt="" /><p class="t-eyebrow">Migliorare la digestione</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Migliorare la digestione</span></a></nav>
   </section>
+  <div class="more" aria-hidden="true"></div>
   </main>
 
   <script>
