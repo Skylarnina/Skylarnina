@@ -134,53 +134,48 @@
     --btn-glow-hover: 0 0 26px color-mix(in srgb, var(--oltre-saffron-mango) 50%, transparent);
     --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-blackout)); }
   .is-dark :focus-visible { outline-color: var(--oltre-saffron-mango); }
-  .doodle { position: absolute; pointer-events: none; color: currentColor; }
+  .light .book::before { opacity: 0; }
+  .light .is-dark .book::before { opacity: 1; }
+  .light .book__cover { box-shadow: 0 2px 4px rgba(5,5,5,.18), 0 18px 34px -10px rgba(5,5,5,.38); }
+  .light .is-dark .book__cover { box-shadow: 0 18px 40px rgba(0,0,0,.55); }
   .e-hero { padding: 152px var(--edge) clamp(56px, 7vw, 104px); display: grid; gap: 64px; align-items: center; }
   @media (min-width: 960px) { .e-hero { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 56px; } }
   .e-hero__text { position: relative; display: grid; justify-items: start; gap: 28px; }
-  .e-hero__text .doodle--star { width: clamp(40px, 4vw, 60px); top: -28px; left: calc(var(--t-display) * 4.9); transform: rotate(12deg); }
   .stage { position: relative; height: clamp(380px, 36vw, 500px); }
-  .stage__block { position: absolute; inset: 30% 0 0; border-radius: 28px; overflow: hidden; }
+  .stage__block { position: absolute; inset: 34% 0 0; border-radius: 28px; overflow: hidden; }
   .stage__block img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); opacity: .8; }
-  .fan { position: absolute; left: 0; right: 0; top: 0; height: 58%; display: flex; justify-content: center; align-items: flex-end; }
-  .fan .book { --book-w: clamp(92px, 9vw, 136px); margin-inline: clamp(-26px, -1.8vw, -14px); transform: rotate(var(--r)) translateY(var(--y)); transform-origin: 50% 100%; transition: transform .6s var(--ease); }
-  .fan .book:nth-child(1) { --r: -14deg; --y: 26px; }
-  .fan .book:nth-child(2) { --r: -7deg; --y: 8px; }
+  .fan { position: absolute; left: 0; right: 0; top: 0; height: 56%; display: flex; justify-content: center; align-items: flex-end; }
+  .fan .book { --book-w: clamp(78px, 7.2vw, 104px); margin-inline: clamp(-8px, -.5vw, -4px); transform: rotate(var(--r)) translateY(var(--y)); transform-origin: 50% 100%; transition: transform .6s var(--ease); }
+  .fan .book:nth-child(1) { --r: -6deg; --y: 14px; }
+  .fan .book:nth-child(2) { --r: -3deg; --y: 4px; }
   .fan .book:nth-child(3) { --r: 0deg; --y: 0px; z-index: 2; }
-  .fan .book:nth-child(4) { --r: 7deg; --y: 8px; }
-  .fan .book:nth-child(5) { --r: 14deg; --y: 26px; }
-  .stage:hover .fan .book { --y: -6px; }
-  .tags { position: absolute; left: 6%; right: 6%; bottom: 6%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 8px; }
-  .tags a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 999px; background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal);
-    transform: rotate(var(--r, 0deg)); transition: transform .4s var(--ease), background-color var(--t); }
-  .tags a:nth-child(1) { --r: -6deg; } .tags a:nth-child(2) { --r: 4deg; } .tags a:nth-child(3) { --r: -3deg; } .tags a:nth-child(4) { --r: 5deg; } .tags a:nth-child(5) { --r: -4deg; }
-  .tags a:hover { --r: 0deg; background: var(--oltre-saffron-mango); }
-  @media (max-width: 759px) { .e-hero { gap: 40px; } .stage { height: 230px; overflow-x: clip; } .tags { display: none; } .stage__block { inset: 36% 0 0; } .fan { height: 78%; } .fan .book { --book-w: 84px; margin-inline: -12px; } }
-  .board-wrap { position: relative; padding: clamp(48px, 6vw, 96px) var(--edge) var(--space-section); }
-  .board-wrap .doodle--path { inset: 4% 8% 10%; width: 84%; height: 86%; color: color-mix(in srgb, var(--oltre-dark-charcoal) 30%, transparent); }
-  .board { position: relative; display: grid; gap: 88px 56px; }
-  @media (min-width: 960px) { .board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .board__col:nth-child(2) { padding-top: 160px; } }
-  .board__col { display: grid; gap: 96px; align-content: start; }
-  .ecard { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: start; padding: 28px 28px 32px; border-radius: 22px;
-    background: var(--oltre-whiteout); box-shadow: 0 1px 0 rgba(5,5,5,.04), 0 28px 60px -24px rgba(5,5,5,.28); transform: rotate(var(--r, 0deg));
-    transition: transform .6s var(--ease), box-shadow .6s var(--ease); --book-w: clamp(108px, 9.5vw, 140px); scroll-margin-top: 120px; }
-  .ecard:hover { --r: 0deg; transform: rotate(0) translateY(-6px); box-shadow: 0 1px 0 rgba(5,5,5,.04), 0 36px 70px -24px rgba(5,5,5,.34); }
-  .ecard::before { content: ''; position: absolute; top: -10px; left: 50%; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #9a9a9a, #1d1d1d 70%); box-shadow: 0 4px 8px rgba(5,5,5,.35); }
-  .ecard .book { margin-top: -72px; transform: rotate(-5deg); }
-  .ecard__text { display: grid; justify-items: start; gap: 14px; }
-  .ecard__text .t-h2::before, .feature__text .t-h1::before { content: ''; display: block; width: 32px; height: 2px; margin-bottom: 16px; background: var(--oltre-saffron-mango); }
-  .ecard .pill { margin-top: 6px; }
+  .fan .book:nth-child(4) { --r: 3deg; --y: 4px; }
+  .fan .book:nth-child(5) { --r: 6deg; --y: 14px; }
+  @media (max-width: 759px) { .e-hero { gap: 40px; } .stage { height: 240px; overflow-x: clip; } .stage__block { inset: 34% 0 0; } .fan { height: 72%; } .fan .book { --book-w: 66px; margin-inline: -3px; } }
+  .board-wrap { padding: clamp(40px, 5vw, 80px) var(--edge) var(--space-section); }
+  .board { display: grid; gap: 24px; }
+  @media (min-width: 960px) { .board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; } .board__col:nth-child(2) { padding-top: 96px; } }
+  .board__col { display: grid; gap: 24px; align-content: start; }
+  .ecard { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 2.6vw, 36px); align-items: center;
+    padding: clamp(24px, 2.6vw, 36px); border-radius: 20px; background: var(--oltre-whiteout); border: 1px solid var(--line-hair);
+    box-shadow: 0 1px 2px rgba(5,5,5,.04); transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .6s var(--ease);
+    --book-w: clamp(104px, 9vw, 128px); scroll-margin-top: 120px; }
+  .ecard:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--oltre-saffron-mango) 55%, transparent); box-shadow: 0 24px 48px -28px rgba(5,5,5,.35); }
+  .ecard .book { transform: none; }
+  .ecard__num { position: absolute; top: clamp(20px, 2.2vw, 28px); right: clamp(24px, 2.6vw, 36px); }
+  .ecard__text { display: grid; justify-items: start; gap: 12px; }
+  .ecard__text .t-h3 { padding-right: 32px; }
+  .ecard__text .t-h3::before, .feature__text .t-h1::before { content: ''; display: block; width: 28px; height: 2px; margin-bottom: 14px; background: var(--oltre-saffron-mango); }
+  .ecard .pill { margin-top: 8px; }
   @media (max-width: 959px) {
     .board__col { display: contents; }
     .ecard { order: var(--o); }
   }
   @media (max-width: 639px) {
-    .ecard { grid-template-columns: 1fr; justify-items: center; padding: 24px 20px 28px; transform: rotate(calc(var(--r) * .4)); }
-    .ecard .book { margin-top: -64px; --book-w: 128px; }
+    .ecard { grid-template-columns: 1fr; justify-items: center; padding: 28px 20px; }
+    .ecard .book { --book-w: 120px; }
     .ecard__text { justify-items: stretch; }
     .ecard .pill { width: 100%; }
-    .board-wrap .doodle--path { display: none; }
   }
   .block-wrap { padding: 0 clamp(16px, 3.4vw, 48px) var(--space-section); }
   .dblock { position: relative; border-radius: 28px; padding: clamp(40px, 6vw, 88px); overflow: hidden; isolation: isolate; }
@@ -188,7 +183,6 @@
   .dblock .t-h1 { margin-top: var(--space-eyebrow); }
   .dblock .pill { margin-top: 36px; }
   .dblock__text { max-width: 600px; }
-  .dblock .doodle--squiggle { width: clamp(80px, 9vw, 130px); right: 8%; top: 18%; color: var(--oltre-saffron-mango); }
   .feature-wrap { padding: 132px clamp(16px, 3.4vw, 48px) 0; }
   .feature { position: relative; border-radius: 28px; padding: clamp(32px, 5vw, 72px) clamp(24px, 5vw, 72px) clamp(130px, 13vw, 180px); display: grid; gap: 40px; align-items: center; isolation: isolate; }
   @media (min-width: 960px) { .feature { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; } }
@@ -198,15 +192,14 @@
   .feature__text { display: grid; justify-items: start; gap: 24px; }
   .feature__text .t-eyebrow { margin-bottom: -8px; }
   .feature__book { justify-self: center; --book-w: clamp(190px, 21vw, 290px); }
-  .feature__book .book { transform: rotate(5deg); margin-top: calc(-1 * clamp(56px, 7vw, 120px)); }
+  .feature__book .book { transform: rotate(2deg); margin-top: calc(-1 * clamp(56px, 7vw, 120px)); }
   @media (max-width: 959px) { .feature__book { order: -1; } .feature__book .book { margin-top: 0; } }
   .crumb { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
   .others { position: relative; z-index: 1; display: flex; gap: clamp(16px, 2.4vw, 32px); margin-top: calc(-1 * clamp(100px, 10vw, 140px)); padding: 0 clamp(24px, 5vw, 72px) 8px; overflow-x: auto; scrollbar-width: none; }
   .others::-webkit-scrollbar { display: none; }
   .others a { flex: none; display: grid; gap: 14px; width: clamp(104px, 9.5vw, 136px); --book-w: 100%; transition: transform .5s var(--ease); }
   .others a .book { transform: rotate(var(--r, 0deg)); }
-  .others a:nth-child(odd) { --r: -3deg; } .others a:nth-child(even) { --r: 3deg; }
-  .others a:hover { transform: translateY(-10px); }
+  .others a:hover { transform: translateY(-6px); }
   .others > a > .t-small { color: var(--oltre-dark-charcoal); }
   .more { padding: var(--space-section) var(--edge); }
   .pop { width: min(940px, calc(100vw - 32px)); max-height: calc(100svh - 32px); padding: 8px; border: 0; border-radius: 28px; background: var(--oltre-porcelain); color: var(--oltre-porcelain); overflow: auto; }
@@ -272,61 +265,63 @@
   <main>
   <section class="e-hero" aria-labelledby="page-title">
     <div class="e-hero__text">
-      <svg class="doodle doodle--star" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 4c2 14 6 20 26 26-20 4-24 10-26 26-2-16-8-22-26-26 18-4 24-10 26-26Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
       <h1 class="t-display" id="page-title">Ebook gratuiti</h1>
       <p class="t-lead">Questi ebook ti danno le strategie pratiche per perdere grasso e costruire forza, fiato e un corpo che duri, dentro la settimana di chi vive ad alta pressione. Ogni manuale affronta una leva diversa. Scegli da dove partire.</p>
     </div>
     <div class="stage">
       <div class="stage__block is-dark"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
       <div class="fan"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/orbita.svg" alt="" /><p class="t-eyebrow">Gestire la fame</p><p class="t-small">Copertina in arrivo</p></div></div><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/zenit.svg" alt="" /><p class="t-eyebrow">Allenarsi con continuità - Vol.1</p><p class="t-small">Copertina in arrivo</p></div></div><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/afelio.svg" alt="" /><p class="t-eyebrow">Gestire la pressione</p><p class="t-small">Copertina in arrivo</p></div></div><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/eclissi.svg" alt="" /><p class="t-eyebrow">Proteggere il sonno</p><p class="t-small">Copertina in arrivo</p></div></div><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/soglia.svg" alt="" /><p class="t-eyebrow">Migliorare la digestione</p><p class="t-small">Copertina in arrivo</p></div></div></div>
-      <nav class="tags" aria-label="Ebook gratuiti"><a class="t-nav" href="#card-gestire-la-fame">Gestire la fame</a><a class="t-nav" href="#card-allenarsi-con-continuita">Allenarsi con continuità - Vol.1</a><a class="t-nav" href="#card-gestire-la-pressione">Gestire la pressione</a><a class="t-nav" href="#card-proteggere-il-sonno">Proteggere il sonno</a><a class="t-nav" href="#card-migliorare-la-digestione">Migliorare la digestione</a></nav>
     </div>
   </section>
 
   <section class="board-wrap" aria-label="Ebook gratuiti">
-    <svg class="doodle doodle--path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M18 6C40 10 70 8 78 22S40 44 30 54s34 22 50 30" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 8" vector-effect="non-scaling-stroke"/></svg>
     <div class="board">
       <div class="board__col">
-      <article class="ecard" id="card-gestire-la-fame" style="--o:0; --r:-2deg">
+      <article class="ecard" id="card-gestire-la-fame" style="--o:0">
+        <span class="ecard__num t-small" aria-hidden="true">01</span>
         <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/orbita.svg" alt="" /><p class="t-eyebrow">Gestire la fame</p><p class="t-small">Copertina in arrivo</p></div></div>
         <div class="ecard__text">
-          <h2 class="t-h2">Gestire la fame</h2>
+          <h2 class="t-h3">Gestire la fame</h2>
           <p class="t-body">Come perdere grasso con piatti che ti saziano, anche nelle giornate piene. Cosa mettere nel piatto, quando mangiarlo e come tenere il ritmo quando la settimana non va come previsto.</p>
-          <a class="pill t-button" href="gestire-la-fame.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
+          <a class="pill pill--sm t-button" href="gestire-la-fame.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
         </div>
       </article>
-      <article class="ecard" id="card-gestire-la-pressione" style="--o:2; --r:1.5deg">
+      <article class="ecard" id="card-gestire-la-pressione" style="--o:2">
+        <span class="ecard__num t-small" aria-hidden="true">03</span>
         <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/afelio.svg" alt="" /><p class="t-eyebrow">Gestire la pressione</p><p class="t-small">Copertina in arrivo</p></div></div>
         <div class="ecard__text">
-          <h2 class="t-h2">Gestire la pressione</h2>
+          <h2 class="t-h3">Gestire la pressione</h2>
           <p class="t-body">Come evitare che una giornata pesante decida cosa mangi la sera. Il metodo per perdere grasso quando il lavoro chiede tutto, costruito sui quattro tipi di settimana ad alta pressione.</p>
-          <a class="pill t-button" href="gestire-la-pressione.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
+          <a class="pill pill--sm t-button" href="gestire-la-pressione.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
         </div>
       </article>
-      <article class="ecard" id="card-migliorare-la-digestione" style="--o:4; --r:-1deg">
+      <article class="ecard" id="card-migliorare-la-digestione" style="--o:4">
+        <span class="ecard__num t-small" aria-hidden="true">05</span>
         <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/soglia.svg" alt="" /><p class="t-eyebrow">Migliorare la digestione</p><p class="t-small">Copertina in arrivo</p></div></div>
         <div class="ecard__text">
-          <h2 class="t-h2">Migliorare la digestione</h2>
+          <h2 class="t-h3">Migliorare la digestione</h2>
           <p class="t-body">Come far tornare regolare l’intestino senza stravolgere la tua settimana. Un percorso in tre fasi per ridurre il gonfiore e avere una pancia che a fine giornata non ti tradisce.</p>
-          <a class="pill t-button" href="migliorare-la-digestione.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
+          <a class="pill pill--sm t-button" href="migliorare-la-digestione.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
         </div>
       </article>
       </div>
       <div class="board__col">
-      <article class="ecard" id="card-allenarsi-con-continuita" style="--o:1; --r:2deg">
+      <article class="ecard" id="card-allenarsi-con-continuita" style="--o:1">
+        <span class="ecard__num t-small" aria-hidden="true">02</span>
         <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/zenit.svg" alt="" /><p class="t-eyebrow">Allenarsi con continuità - Vol.1</p><p class="t-small">Copertina in arrivo</p></div></div>
         <div class="ecard__text">
-          <h2 class="t-h2">Allenarsi con continuità - Vol.1</h2>
+          <h2 class="t-h3">Allenarsi con continuità - Vol.1</h2>
           <p class="t-body">Come perdere grasso costruendo forza e fiato, con un allenamento che si accorcia senza rompersi quando l’agenda salta. Il punto di partenza per un fisico forte, definito e capace.</p>
-          <a class="pill t-button" href="allenarsi-con-continuita.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
+          <a class="pill pill--sm t-button" href="allenarsi-con-continuita.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
         </div>
       </article>
-      <article class="ecard" id="card-proteggere-il-sonno" style="--o:3; --r:-1.5deg">
+      <article class="ecard" id="card-proteggere-il-sonno" style="--o:3">
+        <span class="ecard__num t-small" aria-hidden="true">04</span>
         <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/eclissi.svg" alt="" /><p class="t-eyebrow">Proteggere il sonno</p><p class="t-small">Copertina in arrivo</p></div></div>
         <div class="ecard__text">
-          <h2 class="t-h2">Proteggere il sonno</h2>
+          <h2 class="t-h3">Proteggere il sonno</h2>
           <p class="t-body">Come costruire un sonno che regga una settimana piena: l’ordine giusto per intervenire su orari, caffè, alcol e serata. La base su cui si costruisce tutto il resto, dall’energia al grasso che scende.</p>
-          <a class="pill t-button" href="proteggere-il-sonno.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
+          <a class="pill pill--sm t-button" href="proteggere-il-sonno.html">Scarica gratis ora <span aria-hidden="true">→</span></a>
         </div>
       </article>
       </div>
@@ -336,7 +331,6 @@
   <section class="block-wrap" aria-labelledby="cta-title">
     <div class="dblock is-dark">
       <img src="../chi-siamo/assets/soglia.svg" alt="" />
-      <svg class="doodle doodle--squiggle" viewBox="0 0 130 60" aria-hidden="true"><path d="M4 40c14-26 24-26 30 0s18 24 28 0 20-24 30 0 16 20 34-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
       <div class="dblock__text">
         <p class="t-eyebrow on-dark-accent">Il primo passo</p>
         <h2 class="t-h1" id="cta-title">Scopri che tipo di professionista ad alta pressione sei</h2>

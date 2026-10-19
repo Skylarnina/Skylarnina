@@ -4,19 +4,21 @@ Prototype: `oltresoglia/ebook-gratuiti/index.html` (listing) → `<ebook>.html` 
 Built on the type system (`../TYPOGRAPHY.md`, `../styles/type.css`) and the same header, buttons and starry backdrop as Chi siamo.
 Layout from Bibi's references of 17 October. Listing copy is Pietro's "EBOOK GRATUITI - PAGE 1", verbatim.
 
-**v2: looser layout** on Sky's references (Creatiwise light/black flow, a dark book-app feature panel, books with depth).
-Light Porcelain page with black rounded blocks; nothing sits on a rigid grid.
+**v3: refined.** Light Porcelain page with black rounded blocks and a calm flow: no tilts, pins or hand-drawn marks.
 
 ## Pages
 
 | Page | Content | Styles | Build in Framer |
 |---|---|---|---|
-| Listing · hero | Left: Display "Ebook gratuiti" with a hand-drawn star, Lead (intro). Right: a black rounded block (horizon artwork) with the five books fanned out over its top edge (−14° to +14°) and the five titles as rotated pill tags that jump to each card | Display, Lead, Nav (tags) | Fan = 5 book images in a Stack, each rotated, centre one on top; hover lifts the fan 6px. Tags: pills, rotation per pill, hover straightens and fills Saffron |
-| Listing · board | Five white cards, pinned (dark pin at the top), tilted −2° to +2°, left column 3 / right column 2 offset 160px down, dashed path behind. Each card: book popping out of the top-left corner (−5°), Saffron rule, title, description, button | H2, Body, Button | Cards as a component with a Rotation variable; hover: rotation 0, lift 6px, deeper shadow (0.6s, cubic-bezier(.76,0,.24,1)). Phone: one column, tilt reduced to 40% |
-| Listing · CTA | Black rounded block: "Il primo passo", "Scopri che tipo di professionista ad alta pressione sei", "Fai il test →", Saffron squiggle | Eyebrow, H1, Button | — |
-| 1–5 · Ebook page | Black rounded feature panel: eyebrow link, H1 title, Lead, "Scarica gratis ora →" (opens the pop-up); the big book on the right breaks out of the panel's top edge (+5°). The other four books peek over the panel's bottom edge with their titles below (links). Then a light section for the extra copy | Eyebrow, H1, Lead, Body, Small, Button | Panel overflow visible; "others" row with negative top margin so it overlaps the panel edge; hover lifts a book 10px |
+| Listing · hero | Left: Display "Ebook gratuiti", Lead (intro). Right: a black rounded block (horizon artwork) with the five books in a gentle fan (−6° to +6°) rising over its top edge | Display, Lead | Fan = 5 book images in a Stack, slight rotation each, centre on top |
+| Listing · cards | Five white cards with a 1px hairline and a soft shadow; left column 3, right column 2 offset 96px down. Each card: small index 01–05 top right, book left, Saffron rule, title, description, small button | Small (index), H3 (title), Body, Button | Hover: lift 4px, border turns Saffron 55%, deeper soft shadow (0.6s, cubic-bezier(.76,0,.24,1)). Phone: one column in order 01–05 |
+| Listing · CTA | Black rounded block: "Il primo passo", "Scopri che tipo di professionista ad alta pressione sei", "Fai il test →" | Eyebrow, H1, Button | — |
+| 1–5 · Ebook page | Black rounded feature panel: eyebrow link, H1 title, Lead, "Scarica gratis ora →" (opens the pop-up); the big book breaks out of the panel's top edge (+2°). The other four books sit over the panel's bottom edge with their titles below (links). Then a light section for the extra copy | Eyebrow, H1, Lead, Body, Small, Button | Panel overflow visible; "others" row overlaps the panel edge; hover lifts a book 6px |
 | Pop-up | Unchanged: Porcelain frame around a dark panel; "Ci siamo quasi..", subtitle, ebook title in Saffron, book, Nome / Email, button, note | H3, Lead, H1, Body, Button, Small | — |
-| 6–10 · Thank-you | Same feature panel: eyebrow (ebook title), H1 + Lead from Pietro's email, button back to the listing; the other four books peek below | Eyebrow, H1, Lead, Button, Small | — |
+| 6–10 · Thank-you | Same feature panel: eyebrow (ebook title), H1 + Lead from Pietro's email, button back to the listing; the other four books below | Eyebrow, H1, Lead, Button, Small | — |
+
+Card titles use H3 (Bounded Regular, sentence case) for a quieter, more editorial look than the bold caps in Bibi's first reference.
+On the light page the books get a soft cast shadow; the Saffron glow behind books is kept only on the black panels.
 
 Order of the cards: Gestire la fame · Allenarsi con continuità – Vol.1 · Gestire la pressione · Proteggere il sonno · Migliorare la digestione
 (left: 1, 3, 5; right: 2, 4). "Allenarsi per un fisico completo – Vol.2" (coming soon) is left out for now, as Bibi asked.
