@@ -107,7 +107,7 @@ html[data-motion="enhanced"] .route path.draw{ stroke-dasharray:1; stroke-dashof
 .bar-nav a{ position:relative; font:300 14px/1 var(--sans); color:rgba(13,31,45,.62); text-decoration:none; padding:12px 0; transition:color 220ms ease; }
 .bar-nav a:hover{ color:var(--navy); }
 .bar-act{ justify-self:end; display:flex; align-items:center; gap:24px; }
-.bar-time{ font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); font-variant-numeric:tabular-nums; }
+.bar-time{ white-space:nowrap; font:500 9.5px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; color:rgba(13,31,45,.62); font-variant-numeric:tabular-nums; }
 .bar-act .short{ display:none; }
 @media (max-width:899px){ .bar-nav, .bar-time, .bar-act .full{ display:none; } .bar-act .short{ display:inline; } .bar-in{ grid-template-columns:1fr auto; } }
 main{ padding-top:calc(var(--bar) + env(safe-area-inset-top,0px)); }
@@ -492,7 +492,7 @@ html[data-look="colour"] .bk-tag{ background:rgba(0,0,0,.55); }
   <div class="wrap bar-in">
     <a class="lockup" href="#top" aria-label="Kóda Barcelona, back to top"><span class="wm">Kóda</span><span class="wm-city">Barcelona</span></a>
     <nav class="bar-nav" aria-label="Sections">
-      <a href="#ways">Three ways</a><a href="#evening">The night</a><a href="#who">Who a Kóda is</a><a href="#answers">Answers</a>
+      <a href="#ways">Three ways</a><a href="#evening">The night</a><a href="#who">Who a Kóda is</a><a href="#answers">Answers</a><a href="blog.html">Journal</a>
     </nav>
     <div class="bar-act">
       <p class="bar-time" aria-label="Local time in Barcelona">Barcelona · <span data-bcn-time>21:40</span></p>
@@ -867,7 +867,7 @@ html[data-look="colour"] .bk-tag{ background:rgba(0,0,0,.55); }
       <p>A composed local for the evening, the day or the weekend. Someone who knows the city, start to finish.</p>
       <p style="font:500 9.5px/1.6 var(--sans);letter-spacing:.18em;text-transform:uppercase">WhatsApp [+34 — pending] · Email [pending]</p>
     </div>
-    <div class="foot-col fc1"><p class="eyebrow">Kóda</p><a class="link" href="#ways">Three ways</a><a class="link" href="#evening">The night</a><a class="link" href="#who">Who a Kóda is</a><a class="link" href="#how">How it works</a></div>
+    <div class="foot-col fc1"><p class="eyebrow">Kóda</p><a class="link" href="#ways">Three ways</a><a class="link" href="#evening">The night</a><a class="link" href="#who">Who a Kóda is</a><a class="link" href="#how">How it works</a><a class="link" href="blog.html">Journal</a></div>
     <div class="foot-col fc2"><p class="eyebrow">Company</p><a class="link" href="#founder">The founder</a><a class="link" href="#">Corporate &amp; congress</a><a class="link" href="#contact">Contact</a></div>
     <div class="foot-col fc3"><p class="eyebrow">Legal</p><a class="link" href="#">Terms</a><a class="link" href="#">Privacy</a><a class="link" href="#cancellations">Cancellations</a><a class="link" href="#answers">Answers</a></div>
     <div class="foot-legal"><span>[Legal entity name] · [Registered address], Barcelona · [Legal disclaimer line — from Ana's homepage]</span><span>Prototype · copy marked [ ] is pending</span></div>
