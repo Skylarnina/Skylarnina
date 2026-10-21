@@ -226,66 +226,210 @@
   .field__msg svg { width: 16px; height: 16px; margin-top: 2px; flex: none; color: var(--oltre-saffron-mango); }
   .pop .pill { width: 100%; margin-top: 8px; }
   .pop__note { text-align: center; margin-inline: auto; }
+
+  body.lp { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); --type-ink: var(--oltre-dark-charcoal);
+    --line-hair: color-mix(in srgb, var(--oltre-dark-charcoal) 14%, transparent);
+    --line-field: color-mix(in srgb, var(--oltre-dark-charcoal) 28%, transparent);
+    --line-strong: color-mix(in srgb, var(--oltre-dark-charcoal) 45%, transparent); }
+  body.lp :focus-visible { outline-color: var(--oltre-dark-charcoal); }
+  body.lp .is-dark :focus-visible { outline-color: var(--oltre-saffron-mango); }
+  .lp-inside__side .t-eyebrow + .t-h2, .lp-stories > .t-eyebrow + .t-h2 { margin-top: 0; }
+  .lp .backdrop { display: none; }
+  .lp .book { transform: none; }
+  .lp .book::before { opacity: 0; }
+  .lp .book__cover { border-radius: 2px 4px 4px 2px; box-shadow: 18px 18px 0 rgba(255,255,255,.06), 0 30px 60px rgba(0,0,0,.45); }
+  .lp .book__pages { display: none; }
+  .book__cover img.cover { filter: none; opacity: 1; mix-blend-mode: normal; }
+  .stripes { background: repeating-linear-gradient(90deg, transparent 0 79px, color-mix(in srgb, var(--oltre-porcelain) 4%, transparent) 79px 80px), var(--oltre-dark-charcoal); }
+  .topline { height: 6px; background: var(--oltre-saffron-mango); }
+  .lp-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--edge) 0; }
+  .lp-head .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 60%, transparent); text-align: right; }
+  .yrule { display: block; width: 72px; height: 3px; background: var(--oltre-saffron-mango); }
+  .check { list-style: none; display: grid; gap: 10px; }
+  .check li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; }
+  .check svg { width: 18px; height: 18px; margin-top: 3px; color: var(--oltre-saffron-mango); }
+
+  .lp-hero__grid { display: grid; gap: 48px; align-items: center; padding: clamp(48px, 6vw, 84px) var(--edge) clamp(64px, 8vw, 112px); --book-w: clamp(220px, 22vw, 300px); }
+  @media (min-width: 960px) {
+    .lp-hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; }
+    .lp-hero__grid.book-left { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+    .lp-hero__grid.book-left .lp-hero__media { order: -1; }
+  }
+  .lp-hero__media { display: grid; place-items: center; }
+  .lp-hero__text { display: grid; justify-items: start; gap: 24px; }
+  .lp-hero__text .t-h1 { max-width: 20ch; }
+  .lp-hero__text .t-lead { color: var(--oltre-porcelain); }
+  .lp-hero__text .t-small { margin-top: -8px; color: color-mix(in srgb, var(--oltre-porcelain) 55%, transparent); }
+  @media (max-width: 959px) { .lp-hero__media { order: 2; } }
+
+  .lp-stats { background: color-mix(in srgb, var(--oltre-dark-charcoal) 6%, var(--oltre-porcelain)); padding: 32px var(--edge); display: grid; gap: 24px 32px; }
+  @media (min-width: 640px) { .lp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .lp-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .lp-stats > div { display: grid; gap: 6px; align-content: start; }
+  .lp-stats .t-small { color: color-mix(in srgb, var(--oltre-dark-charcoal) 62%, transparent); }
+
+  .lp-inside { padding: var(--space-section) var(--edge); display: grid; gap: 40px; }
+  @media (min-width: 960px) { .lp-inside { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 64px; } }
+  .lp-inside__side { display: grid; justify-items: start; gap: 20px; align-content: start; }
+  @media (min-width: 960px) { .lp-inside__side { position: sticky; top: 40px; } }
+  .lp-inside__list { list-style: none; }
+  .lp-inside__list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line-hair); }
+  .lp-inside__list li:first-child { padding-top: 0; }
+  .lp-inside__list svg { width: 18px; height: 18px; margin-top: 4px; color: var(--oltre-dark-charcoal); }
+  .lp-inside__list .t-body, .lp-fit .t-body, .lp-stories .t-body { color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); max-width: none; }
+
+  .lp-stories { padding: 0 var(--edge) var(--space-section); }
+  .lp-stories > .t-h2 { margin: var(--space-eyebrow) 0 40px; max-width: 26ch; }
+  .lp-inside__side .t-h2 { margin-top: -4px; }
+  .lp-cards { display: grid; gap: 20px; align-items: start; }
+  @media (min-width: 760px) { .lp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .lp-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .scard { background: var(--oltre-whiteout); border-radius: 16px; padding: 28px; display: grid; gap: 14px; }
+  .scard__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; }
+  .scard__tag { color: color-mix(in srgb, var(--oltre-dark-charcoal) 70%, transparent); }
+  .scard__role { margin-top: -6px; color: color-mix(in srgb, var(--oltre-dark-charcoal) 55%, transparent); }
+  .scard blockquote { margin: 4px 0 0; padding-left: 16px; border-left: 2px solid var(--oltre-saffron-mango); }
+  .scard blockquote .t-body { font-style: italic; }
+  .lp-stories__note { margin: 28px 0 28px; max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 60%, transparent); }
+
+  .lp-fit { padding: var(--space-section) var(--edge); background: color-mix(in srgb, var(--oltre-whiteout) 60%, var(--oltre-porcelain)); display: grid; gap: 20px; }
+  @media (min-width: 960px) { .lp-fit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .fit { border-radius: 16px; padding: clamp(24px, 3vw, 36px); display: grid; gap: 14px; align-content: start; }
+  .fit--yes { background: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-whiteout)); }
+  .fit--no { background: color-mix(in srgb, var(--oltre-dark-charcoal) 6%, var(--oltre-whiteout)); }
+
+  .lp-foot { padding: 48px var(--edge) 40px; display: grid; gap: 16px; }
+  .lp-foot .t-small { max-width: none; color: color-mix(in srgb, var(--oltre-porcelain) 62%, transparent); }
+  .lp-foot nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .lp-foot nav a { text-decoration: underline; text-underline-offset: 3px; }
+  .sticky-cta { position: fixed; left: 0; bottom: 0; z-index: 40; border-radius: 0 16px 0 0; }
+  @media (max-width: 639px) { .sticky-cta { right: 0; border-radius: 0; } }
+
+  .ty-banner { background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 48px; padding: 0 16px; }
+  .ty-banner svg { width: 18px; height: 18px; }
+  .ty-col { width: min(900px, 100%); margin-inline: auto; }
+  .ty-box-wrap { background: var(--oltre-whiteout); padding: clamp(56px, 7vw, 88px) var(--edge); }
+  .ty-box { display: grid; gap: 16px; padding: clamp(24px, 3.4vw, 40px); border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 60%, transparent);
+    background: color-mix(in srgb, var(--oltre-saffron-mango) 12%, var(--oltre-whiteout)); border-radius: 16px; }
+  .ty-box .t-body { max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); }
+  .ty-next { border-top: 6px solid var(--oltre-saffron-mango); padding: var(--space-section) var(--edge); }
+  .ty-next .ty-col { display: grid; justify-items: start; gap: 20px; }
+  .ty-next .t-lead { color: var(--oltre-porcelain); }
+  .ty-next .strong { color: var(--oltre-porcelain); max-width: none; }
+  .arrows { list-style: none; display: grid; gap: 10px; }
+  .arrows li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; }
+  .arrows li > span:first-child { color: var(--oltre-saffron-mango); }
+  .ty-next .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 55%, transparent); }
+  .ty-miss { padding: var(--space-section) var(--edge); }
+  .ty-miss .ty-col { display: grid; gap: 16px; }
+  .ty-miss .t-body { max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); }
+  .ty-miss ol { list-style: none; display: grid; gap: 10px; }
+  .ty-miss ol li { display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: baseline; }
+  .ty-miss a { text-decoration: underline; text-underline-offset: 3px; }
+  .ty-sign { border-top: 1px solid var(--line-hair); padding-top: 24px; margin-top: 8px; display: grid; gap: 4px; }
+  .ty-hero__grid { --book-w: clamp(180px, 18vw, 250px); }
 </style>
 </head>
-<body class="light">
-  <div class="backdrop" aria-hidden="true"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
-  <div class="backdrop" aria-hidden="true"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
-  <header class="site-header">
-    <div class="site-header__row">
-      <a class="wordmark t-h3" href="#">OLTRESOGLIA</a>
-      <nav class="nav" aria-label="Principale">
-        <ul class="nav__links">
-          <li><a class="t-nav" href="#">Home</a></li>
-          <li><a class="t-nav" href="#">Metodo</a></li>
-          <li><a class="t-nav" href="#">Programma</a></li>
-          <li><a class="t-nav" href="#">Chi siamo</a></li>
-          <li><a class="t-nav" href="#" aria-current="page">Guide</a></li>
-          <li><a class="t-nav" href="#">Test</a></li>
-        </ul>
-        <a class="pill pill--sm t-button" href="#">Fai il test</a>
-        <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-panel">
-          <span class="sr-only t-nav">Menu</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h14M3 13.5h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </button>
-      </nav>
+<body class="lp">
+  <div class="is-dark stripes">
+    <div class="topline"></div>
+    <div class="lp-head">
+      <a class="wordmark t-h3" href="index.html">OLTRESOGLIA</a>
+      <p class="t-small">COLLANA GUIDE GRATUITE · DIGESTIONE</p>
     </div>
-    <div class="nav__panel" id="nav-panel" hidden>
-      <ul>
-        <li><a class="t-nav" href="#">Home</a></li>
-        <li><a class="t-nav" href="#">Metodo</a></li>
-        <li><a class="t-nav" href="#">Programma</a></li>
-        <li><a class="t-nav" href="#">Chi siamo</a></li>
-        <li><a class="t-nav" href="#" aria-current="page">Guide</a></li>
-        <li><a class="t-nav" href="#">Test</a></li>
-      </ul>
-    </div>
-  </header>
+    <section class="lp-hero__grid book-left" aria-labelledby="ebook-title">
+      <div class="lp-hero__text">
+        <p class="t-eyebrow on-dark-accent">Ebook gratuito PER PROFESSIONISTI AD ALTA PRESSIONE</p>
+        <h1 class="t-h1" id="ebook-title">Hai già tolto glutine, latticini e la pizza del sabato. Il gonfiore è ancora lì.</h1>
+        <span class="yrule" aria-hidden="true"></span>
+        <p class="t-lead">Il tuo intestino non reagisce solo a cosa mangi. Reagisce alla settimana in cui lo mangi.</p>
+        <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica GRATIS ora <span aria-hidden="true">↓</span></button>
+        <p class="t-small">PDF · 12 CAPITOLI · TEST DA 15 DOMANDE INCLUSO</p>
+      </div>
+      <div class="lp-hero__media"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img class="cover" src="assets/covers/migliorare-la-digestione.jpg" alt="" /></div></div></div>
+    </section>
+  </div>
 
   <main>
-  <section class="feature-wrap" aria-labelledby="ebook-title">
-    <div class="feature is-dark">
-      <div class="feature__bg"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
-      <div class="feature__text">
-        <p class="t-eyebrow on-dark-accent"><a class="crumb" href="index.html">Ebook gratuiti</a></p>
-        <h1 class="t-h1" id="ebook-title">Migliorare la digestione</h1>
-        <p class="t-lead">Come far tornare regolare l’intestino senza stravolgere la tua settimana. Un percorso in tre fasi per ridurre il gonfiore e avere una pancia che a fine giornata non ti tradisce.</p>
-        <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica gratis ora <span aria-hidden="true">→</span></button>
-      </div>
-      <div class="feature__book"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/soglia.svg" alt="" /><p class="t-eyebrow">Migliorare la digestione</p><p class="t-small">Copertina in arrivo</p></div></div></div>
-    </div>
-    <nav class="others" aria-label="Ebook gratuiti"><a href="gestire-la-fame.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/orbita.svg" alt="" /><p class="t-eyebrow">Gestire la fame</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Gestire la fame</span></a><a href="allenarsi-con-continuita.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/zenit.svg" alt="" /><p class="t-eyebrow">Allenarsi con continuità - Vol.1</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Allenarsi con continuità - Vol.1</span></a><a href="gestire-la-pressione.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/afelio.svg" alt="" /><p class="t-eyebrow">Gestire la pressione</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Gestire la pressione</span></a><a href="proteggere-il-sonno.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/eclissi.svg" alt="" /><p class="t-eyebrow">Proteggere il sonno</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Proteggere il sonno</span></a></nav>
+  <section class="lp-stats" aria-label="In breve">
+    <div><p class="t-h3">Biologo Nutrizionista e fondatore OLTRESOGLIA</p><p class="t-small">Pietro Vecchi</p></div>
+    <div><p class="t-h3">+500</p><p class="t-small">professionisti ad alta pressione trasformati con OLTRESOGLIA</p></div>
+    <div><p class="t-h3">3 quadri, 3 fasi</p><p class="t-small">il tuo intestino letto per com’è, non per sentito dire</p></div>
+    <div><p class="t-h3">4 settimane tipo</p><p class="t-small">Consigli pratici per le 4 tipologie di Professionisti ad alta pressione</p></div>
   </section>
 
-  <section class="more" aria-label="Migliorare la digestione">
-    <div class="split">
-      <p class="t-eyebrow rule">Migliorare la digestione</p>
-      <div>
-        <p class="t-lead">[IT — pending client]</p>
-        <p class="t-body">[IT — pending client]</p>
-      </div>
+  <section class="lp-inside" aria-labelledby="inside-title">
+    <div class="lp-inside__side">
+      <p class="t-eyebrow">DENTRO LA GUIDA</p>
+      <h2 class="t-h2" id="inside-title">Tra le cose che trovi nei 12 capitoli:</h2>
+      <p class="t-body">Parametri precisi, non consigli da rivista. Ogni leva ha un numero, un momento e un criterio per capire se sta funzionando.</p>
+      <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica GRATIS ora</button>
     </div>
+    <ul class="lp-inside__list">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">I <strong>3 quadri intestinali</strong> e come riconoscere il tuo: il consiglio che sblocca uno peggiora l’altro.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Il <strong>test da 15 domande</strong> che ti dice in che fascia sei. E, se sei sopra soglia, perché una guida da sola non basta.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Le <strong>7 leve</strong> con i loro parametri: grammi di fibra, millilitri d’acqua per chilo, passi, numero di piante diverse a settimana.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Come arrivare a 30 g di fibra al giorno con <strong>4 aggiunte mirate</strong>, senza cambiare dieta.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Il riflesso che, senza volerlo, <strong>hai insegnato al tuo corpo a ignorare</strong>. E l’intervento più economico della guida per riattivarlo.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Perché il <strong>probiotico da banco</strong> finora ha fatto ben poco.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">La <strong>regola delle 20 piante</strong>: l’unica leva che aggiunge invece di togliere.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Docce fredde, nervo vago, detox: <strong>cosa funziona davvero sullo stress</strong> e cosa è solo rumore.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">La <strong>cena alle 21:30</strong> gestita dalle 17 al mattino dopo, e cosa fare il giorno dopo una serata fuori (e cosa non fare).</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body"><strong>Integratori</strong>: i 5 che hanno senso, con dose, momento e criterio per sospenderli. E i test da evitare.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">La <strong>versione per la tua settimana</strong>: cosa cambia se sei ORBITA, ZENIT, AFELIO o ECLISSI.</p></li>
+    </ul>
   </section>
+
+  <section class="lp-stories" aria-labelledby="stories-title">
+    <p class="t-eyebrow">STORIE DI CHI CI HA LAVORATO CON NOI</p>
+    <h2 class="t-h2" id="stories-title">Nessuno di loro ha risolto togliendo un altro alimento.</h2>
+    <div class="lp-cards">
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Lucia</h3><span class="scard__tag t-small">QUADRO ALTERNANTE</span></div>
+        <p class="scard__role t-small">Responsabile HR, due figli</p>
+        <p class="t-body"><strong>Prima:</strong> bloccata dal lunedì al mercoledì, scariche improvvise tra giovedì e venerdì. Glutine tolto per quattro mesi, probiotici, test delle intolleranze.</p>
+        <p class="t-body"><strong>Cosa è cambiato:</strong> acqua e dieci minuti di margine dopo colazione, cene che funzionano alle 20 come alle 22, fibre +3–5 g a settimana, caffè da sei a tre entro le 14. Al terzo mese stava bene, poi le reintroduzioni, un alimento alla volta.</p>
+        <blockquote><p class="t-body">«Erano le mie giornate a essere imprevedibili, non il mio intestino.»</p></blockquote>
+      </article>
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Lorenzo</h3><span class="scard__tag t-small">24 SETTIMANE</span></div>
+        <p class="scard__role t-small">Educatore, vegetariano</p>
+        <p class="t-body"><strong>Prima:</strong> convinto di un’intolleranza al glutine. Pasti saltati di giorno, latte e biscotti alle 22, una o due scariche ogni mattina prima di mezzogiorno.</p>
+        <p class="t-body"><strong>Dopo 24 settimane:</strong> routine più stabile, pasti distribuiti meglio. Consistenza stabilizzata, scariche mattutine rientrate del tutto.</p>
+        <blockquote><p class="t-body">«Ho imparato ad aggiungere verdure, spezie e cibi nuovi senza dover fare i conti col bagno.»</p></blockquote>
+      </article>
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Clara</h3><span class="scard__tag t-small">ORBITA · 6 GIORNI</span></div>
+        <p class="scard__role t-small">Infermiera su turni</p>
+        <p class="t-body"><strong>Prima:</strong> routine che reggevano qualche settimana, poi un cambio turno faceva saltare tutto. E ogni volta un alimento in meno.</p>
+        <p class="t-body"><strong>La ricaduta:</strong> notti consecutive, gonfiore di ritorno. Nessun alimento tolto, solo tre priorità da difendere. In circa sei giorni era rientrata, senza ricominciare da zero.</p>
+        <blockquote><p class="t-body">«Prima, quando cambiavano i turni, era un casino. Adesso so cosa devo difendere.»</p></blockquote>
+      </article>
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Rudy</h3><span class="scard__tag t-small">6 MESI</span></div>
+        <p class="scard__role t-small">Runner, diventato papà durante il percorso</p>
+        <p class="t-body"><strong>Prima:</strong> motilità così accelerata da decidere cosa mangiare, quando uscire, se correre. Un percorso nutrizionale alle spalle, nessuno che avesse isolato le variabili.</p>
+        <p class="t-body"><strong>Dopo 6 mesi:</strong> intestino molto più regolare e, alla fine, più varietà nel piatto rispetto all’inizio, non meno.</p>
+        <blockquote><p class="t-body">«Ho raggiunto risultati mai visti.»</p></blockquote>
+      </article>
+    </div>
+    <p class="lp-stories__note t-small">Percorsi individuali seguiti dal team OLTRESOGLIA. Ogni intestino risponde in modo diverso: la guida è il punto di partenza, non una promessa di risultato.</p>
+    <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica GRATIS ora</button>
+  </section>
+
+  <section class="lp-fit" aria-label="Per chi è questa guida">
+    <div class="fit fit--yes"><h2 class="t-h3">È per te se</h2><p class="t-body">Sul lavoro reggi tutto, ma l’intestino ti condiziona le giornate.</p><p class="t-body">Hai già provato a togliere alimenti, con risultati che durano poche settimane.</p><p class="t-body">I tuoi orari cambiano, viaggi, o ceni tardi più volte a settimana.</p><p class="t-body">Vuoi una base solida per perdere grasso e costruire un fisico che regge.</p></div>
+    <div class="fit fit--no"><h2 class="t-h3">Non è per te se</h2><p class="t-body">Cerchi un detox di sette giorni o una lista di cibi proibiti.</p><p class="t-body">Vuoi cambiare tutto da lunedì e vedere cosa succede.</p><p class="t-body">Hai sintomi mai valutati da un medico, come sangue nelle feci, calo di peso senza motivo o dolore che ti sveglia di notte. Lì il primo passo è il medico, non una guida.</p></div>
+  </section>
+  </main>
+
+  <footer class="lp-foot is-dark">
+    <p class="wordmark t-h3">OLTRESOGLIA</p>
+    <p class="t-small">Dott. Pietro Vecchi, Biologo Nutrizionista. I contenuti della guida hanno scopo informativo e non sostituiscono una valutazione medica.</p>
+    <nav aria-label="Note legali"><a class="t-small" href="#">Privacy</a><a class="t-small" href="#">Cookie</a><span class="t-small">© 2026 OLTRESOGLIA</span></nav>
+  </footer>
+  <div class="topline" aria-hidden="true"></div>
+  <button class="pill t-button sticky-cta" type="button" data-open-pop aria-haspopup="dialog">Voglio la guida</button>
 
   <dialog class="pop" id="pop" aria-labelledby="pop-title">
     <div class="pop__panel is-dark">
@@ -296,7 +440,7 @@
         <h2 class="t-h1"><span class="accent">Migliorare la digestione</span></h2>
       </div>
       <div class="pop__body">
-        <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/soglia.svg" alt="" /><p class="t-eyebrow">Migliorare la digestione</p><p class="t-small">Copertina in arrivo</p></div></div>
+        <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img class="cover" src="assets/covers/migliorare-la-digestione.jpg" alt="" /></div></div>
         <form novalidate data-next="grazie-migliorare-la-digestione.html" aria-label="Ricevi l'ebook">
           <template id="msg-icon"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.25" r=".9" fill="currentColor"/></svg></template>
           <div class="field"><label class="sr-only t-small" for="f-nome">Nome</label>
@@ -310,17 +454,8 @@
       </div>
     </div>
   </dialog>
-  </main>
-
   <script>
   (() => {
-    const menuBtn = document.querySelector('.nav__menu')
-    const menu = document.getElementById('nav-panel')
-    menuBtn.addEventListener('click', () => {
-      const open = menuBtn.getAttribute('aria-expanded') !== 'true'
-      menuBtn.setAttribute('aria-expanded', String(open))
-      menu.hidden = !open
-    })
     const REQUIRED = "Campo obbligatorio."
     const BAD_EMAIL = "Controlla l'indirizzo: sembra incompleto (es. nome@dominio.it)."
     const dialog = document.getElementById('pop')

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>OLTRESOGLIA Allenarsi con continuità - Vol.1</title>
+<title>OLTRESOGLIA Allenarsi con continuità</title>
 <link rel="stylesheet" href="../styles/type.css" />
 <style>
   :root {
@@ -226,66 +226,211 @@
   .field__msg svg { width: 16px; height: 16px; margin-top: 2px; flex: none; color: var(--oltre-saffron-mango); }
   .pop .pill { width: 100%; margin-top: 8px; }
   .pop__note { text-align: center; margin-inline: auto; }
+
+  body.lp { background: var(--oltre-porcelain); color: var(--oltre-dark-charcoal); --type-ink: var(--oltre-dark-charcoal);
+    --line-hair: color-mix(in srgb, var(--oltre-dark-charcoal) 14%, transparent);
+    --line-field: color-mix(in srgb, var(--oltre-dark-charcoal) 28%, transparent);
+    --line-strong: color-mix(in srgb, var(--oltre-dark-charcoal) 45%, transparent); }
+  body.lp :focus-visible { outline-color: var(--oltre-dark-charcoal); }
+  body.lp .is-dark :focus-visible { outline-color: var(--oltre-saffron-mango); }
+  .lp-inside__side .t-eyebrow + .t-h2, .lp-stories > .t-eyebrow + .t-h2 { margin-top: 0; }
+  .lp .backdrop { display: none; }
+  .lp .book { transform: none; }
+  .lp .book::before { opacity: 0; }
+  .lp .book__cover { border-radius: 2px 4px 4px 2px; box-shadow: 18px 18px 0 rgba(255,255,255,.06), 0 30px 60px rgba(0,0,0,.45); }
+  .lp .book__pages { display: none; }
+  .book__cover img.cover { filter: none; opacity: 1; mix-blend-mode: normal; }
+  .stripes { background: repeating-linear-gradient(90deg, transparent 0 79px, color-mix(in srgb, var(--oltre-porcelain) 4%, transparent) 79px 80px), var(--oltre-dark-charcoal); }
+  .topline { height: 6px; background: var(--oltre-saffron-mango); }
+  .lp-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px var(--edge) 0; }
+  .lp-head .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 60%, transparent); text-align: right; }
+  .yrule { display: block; width: 72px; height: 3px; background: var(--oltre-saffron-mango); }
+  .check { list-style: none; display: grid; gap: 10px; }
+  .check li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; }
+  .check svg { width: 18px; height: 18px; margin-top: 3px; color: var(--oltre-saffron-mango); }
+
+  .lp-hero__grid { display: grid; gap: 48px; align-items: center; padding: clamp(48px, 6vw, 84px) var(--edge) clamp(64px, 8vw, 112px); --book-w: clamp(220px, 22vw, 300px); }
+  @media (min-width: 960px) {
+    .lp-hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; }
+    .lp-hero__grid.book-left { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+    .lp-hero__grid.book-left .lp-hero__media { order: -1; }
+  }
+  .lp-hero__media { display: grid; place-items: center; }
+  .lp-hero__text { display: grid; justify-items: start; gap: 24px; }
+  .lp-hero__text .t-h1 { max-width: 20ch; }
+  .lp-hero__text .t-lead { color: var(--oltre-porcelain); }
+  .lp-hero__text .t-small { margin-top: -8px; color: color-mix(in srgb, var(--oltre-porcelain) 55%, transparent); }
+  @media (max-width: 959px) { .lp-hero__media { order: 2; } }
+
+  .lp-stats { background: color-mix(in srgb, var(--oltre-dark-charcoal) 6%, var(--oltre-porcelain)); padding: 32px var(--edge); display: grid; gap: 24px 32px; }
+  @media (min-width: 640px) { .lp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .lp-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .lp-stats > div { display: grid; gap: 6px; align-content: start; }
+  .lp-stats .t-small { color: color-mix(in srgb, var(--oltre-dark-charcoal) 62%, transparent); }
+
+  .lp-inside { padding: var(--space-section) var(--edge); display: grid; gap: 40px; }
+  @media (min-width: 960px) { .lp-inside { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 64px; } }
+  .lp-inside__side { display: grid; justify-items: start; gap: 20px; align-content: start; }
+  @media (min-width: 960px) { .lp-inside__side { position: sticky; top: 40px; } }
+  .lp-inside__list { list-style: none; }
+  .lp-inside__list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line-hair); }
+  .lp-inside__list li:first-child { padding-top: 0; }
+  .lp-inside__list svg { width: 18px; height: 18px; margin-top: 4px; color: var(--oltre-dark-charcoal); }
+  .lp-inside__list .t-body, .lp-fit .t-body, .lp-stories .t-body { color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); max-width: none; }
+
+  .lp-stories { padding: 0 var(--edge) var(--space-section); }
+  .lp-stories > .t-h2 { margin: var(--space-eyebrow) 0 40px; max-width: 26ch; }
+  .lp-inside__side .t-h2 { margin-top: -4px; }
+  .lp-cards { display: grid; gap: 20px; align-items: start; }
+  @media (min-width: 760px) { .lp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .lp-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .scard { background: var(--oltre-whiteout); border-radius: 16px; padding: 28px; display: grid; gap: 14px; }
+  .scard__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; }
+  .scard__tag { color: color-mix(in srgb, var(--oltre-dark-charcoal) 70%, transparent); }
+  .scard__role { margin-top: -6px; color: color-mix(in srgb, var(--oltre-dark-charcoal) 55%, transparent); }
+  .scard blockquote { margin: 4px 0 0; padding-left: 16px; border-left: 2px solid var(--oltre-saffron-mango); }
+  .scard blockquote .t-body { font-style: italic; }
+  .lp-stories__note { margin: 28px 0 28px; max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 60%, transparent); }
+
+  .lp-fit { padding: var(--space-section) var(--edge); background: color-mix(in srgb, var(--oltre-whiteout) 60%, var(--oltre-porcelain)); display: grid; gap: 20px; }
+  @media (min-width: 960px) { .lp-fit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .fit { border-radius: 16px; padding: clamp(24px, 3vw, 36px); display: grid; gap: 14px; align-content: start; }
+  .fit--yes { background: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-whiteout)); }
+  .fit--no { background: color-mix(in srgb, var(--oltre-dark-charcoal) 6%, var(--oltre-whiteout)); }
+
+  .lp-foot { padding: 48px var(--edge) 40px; display: grid; gap: 16px; }
+  .lp-foot .t-small { max-width: none; color: color-mix(in srgb, var(--oltre-porcelain) 62%, transparent); }
+  .lp-foot nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .lp-foot nav a { text-decoration: underline; text-underline-offset: 3px; }
+  .sticky-cta { position: fixed; left: 0; bottom: 0; z-index: 40; border-radius: 0 16px 0 0; }
+  @media (max-width: 639px) { .sticky-cta { right: 0; border-radius: 0; } }
+
+  .ty-banner { background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 48px; padding: 0 16px; }
+  .ty-banner svg { width: 18px; height: 18px; }
+  .ty-col { width: min(900px, 100%); margin-inline: auto; }
+  .ty-box-wrap { background: var(--oltre-whiteout); padding: clamp(56px, 7vw, 88px) var(--edge); }
+  .ty-box { display: grid; gap: 16px; padding: clamp(24px, 3.4vw, 40px); border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 60%, transparent);
+    background: color-mix(in srgb, var(--oltre-saffron-mango) 12%, var(--oltre-whiteout)); border-radius: 16px; }
+  .ty-box .t-body { max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); }
+  .ty-next { border-top: 6px solid var(--oltre-saffron-mango); padding: var(--space-section) var(--edge); }
+  .ty-next .ty-col { display: grid; justify-items: start; gap: 20px; }
+  .ty-next .t-lead { color: var(--oltre-porcelain); }
+  .ty-next .strong { color: var(--oltre-porcelain); max-width: none; }
+  .arrows { list-style: none; display: grid; gap: 10px; }
+  .arrows li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; }
+  .arrows li > span:first-child { color: var(--oltre-saffron-mango); }
+  .ty-next .t-small { color: color-mix(in srgb, var(--oltre-porcelain) 55%, transparent); }
+  .ty-miss { padding: var(--space-section) var(--edge); }
+  .ty-miss .ty-col { display: grid; gap: 16px; }
+  .ty-miss .t-body { max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); }
+  .ty-miss ol { list-style: none; display: grid; gap: 10px; }
+  .ty-miss ol li { display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: baseline; }
+  .ty-miss a { text-decoration: underline; text-underline-offset: 3px; }
+  .ty-sign { border-top: 1px solid var(--line-hair); padding-top: 24px; margin-top: 8px; display: grid; gap: 4px; }
+  .ty-hero__grid { --book-w: clamp(180px, 18vw, 250px); }
 </style>
 </head>
-<body class="light">
-  <div class="backdrop" aria-hidden="true"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
-  <div class="backdrop" aria-hidden="true"><img src="../chi-siamo/assets/soglia.svg" alt="" /></div>
-  <header class="site-header">
-    <div class="site-header__row">
-      <a class="wordmark t-h3" href="#">OLTRESOGLIA</a>
-      <nav class="nav" aria-label="Principale">
-        <ul class="nav__links">
-          <li><a class="t-nav" href="#">Home</a></li>
-          <li><a class="t-nav" href="#">Metodo</a></li>
-          <li><a class="t-nav" href="#">Programma</a></li>
-          <li><a class="t-nav" href="#">Chi siamo</a></li>
-          <li><a class="t-nav" href="#" aria-current="page">Guide</a></li>
-          <li><a class="t-nav" href="#">Test</a></li>
-        </ul>
-        <a class="pill pill--sm t-button" href="#">Fai il test</a>
-        <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-panel">
-          <span class="sr-only t-nav">Menu</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h14M3 13.5h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </button>
-      </nav>
+<body class="lp">
+  <div class="is-dark stripes">
+    <div class="topline"></div>
+    <div class="lp-head">
+      <a class="wordmark t-h3" href="index.html">OLTRESOGLIA</a>
+      <p class="t-small">COLLANA GUIDE GRATUITE · ALLENAMENTO</p>
     </div>
-    <div class="nav__panel" id="nav-panel" hidden>
-      <ul>
-        <li><a class="t-nav" href="#">Home</a></li>
-        <li><a class="t-nav" href="#">Metodo</a></li>
-        <li><a class="t-nav" href="#">Programma</a></li>
-        <li><a class="t-nav" href="#">Chi siamo</a></li>
-        <li><a class="t-nav" href="#" aria-current="page">Guide</a></li>
-        <li><a class="t-nav" href="#">Test</a></li>
-      </ul>
-    </div>
-  </header>
+    <section class="lp-hero__grid" aria-labelledby="ebook-title">
+      <div class="lp-hero__text">
+        <p class="t-eyebrow on-dark-accent">EBOOK GRATUITO PER PROFESSIONISTI AD ALTA PRESSIONE</p>
+        <h1 class="t-h1" id="ebook-title">Perdi grasso con un allenamento che regge anche quando non stacchi mai.</h1>
+        <span class="yrule" aria-hidden="true"></span>
+        <p class="t-lead">Hai ricominciato da capo più volte di quante vorresti ammettere. Non ti manca la volontà: stai seguendo un programma pensato per una settimana che non hai.</p>
+        <p class="t-body">In questa guida trovi come allenarti per perdere 5-20 kg dentro la settimana che hai davvero. Quando si restringe, l’allenamento si accorcia. Non si salta.</p>
+        <ul class="check"><li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-body">Da dove partire se hai più di 5 kg da perdere</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-body">Le 2-3 sedute a settimana che bastano per perdere grasso</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-body">Il piano di minima da 25 minuti per le settimane che saltano</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="t-body">Cosa fare se salti una seduta, sei in trasferta o hai metà delle energie</span></li></ul>
+        <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica GRATIS ora <span aria-hidden="true">↓</span></button>
+        <p class="t-small">PDF · 10 CAPITOLI · PIANO DI MINIMA DA 25 MINUTI INCLUSO</p>
+      </div>
+      <div class="lp-hero__media"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img class="cover" src="assets/covers/allenarsi-con-continuita.jpg" alt="" /></div></div></div>
+    </section>
+  </div>
 
   <main>
-  <section class="feature-wrap" aria-labelledby="ebook-title">
-    <div class="feature is-dark">
-      <div class="feature__bg"><img src="../chi-siamo/assets/zenit.svg" alt="" /></div>
-      <div class="feature__text">
-        <p class="t-eyebrow on-dark-accent"><a class="crumb" href="index.html">Ebook gratuiti</a></p>
-        <h1 class="t-h1" id="ebook-title">Allenarsi con continuità - Vol.1</h1>
-        <p class="t-lead">Come perdere grasso costruendo forza e fiato, con un allenamento che si accorcia senza rompersi quando l’agenda salta. Il punto di partenza per un fisico forte, definito e capace.</p>
-        <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica gratis ora <span aria-hidden="true">→</span></button>
-      </div>
-      <div class="feature__book"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/zenit.svg" alt="" /><p class="t-eyebrow">Allenarsi con continuità - Vol.1</p><p class="t-small">Copertina in arrivo</p></div></div></div>
-    </div>
-    <nav class="others" aria-label="Ebook gratuiti"><a href="gestire-la-fame.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/orbita.svg" alt="" /><p class="t-eyebrow">Gestire la fame</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Gestire la fame</span></a><a href="gestire-la-pressione.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/afelio.svg" alt="" /><p class="t-eyebrow">Gestire la pressione</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Gestire la pressione</span></a><a href="proteggere-il-sonno.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/eclissi.svg" alt="" /><p class="t-eyebrow">Proteggere il sonno</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Proteggere il sonno</span></a><a href="migliorare-la-digestione.html"><div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/soglia.svg" alt="" /><p class="t-eyebrow">Migliorare la digestione</p><p class="t-small">Copertina in arrivo</p></div></div><span class="t-small">Migliorare la digestione</span></a></nav>
+  <section class="lp-stats" aria-label="In breve">
+    <div><p class="t-h3">Biologo Nutrizionista e fondatore OLTRESOGLIA</p><p class="t-small">Pietro Vecchi</p></div>
+    <div><p class="t-h3">+500</p><p class="t-small">professionisti ad alta pressione hanno già perso grasso con OLTRESOGLIA</p></div>
+    <div><p class="t-h3">30 minuti</p><p class="t-small"><strong>il piano di minima per le settimane che saltano</strong></p></div>
+    <div><p class="t-h3">4 forme di settimana</p><p class="t-small">turni, giornate lunghe, trasferte, agenda senza spazi: riconosci la tua</p></div>
   </section>
 
-  <section class="more" aria-label="Allenarsi con continuità - Vol.1">
-    <div class="split">
-      <p class="t-eyebrow rule">Allenarsi con continuità - Vol.1</p>
-      <div>
-        <p class="t-lead">[IT — pending client]</p>
-        <p class="t-body">[IT — pending client]</p>
-      </div>
+  <section class="lp-inside" aria-labelledby="inside-title">
+    <div class="lp-inside__side">
+      <p class="t-eyebrow">DENTRO LA GUIDA</p>
+      <h2 class="t-h2" id="inside-title">Tra le cose che trovi nei 10 capitoli:</h2>
+      <p class="t-body">Criteri decisi prima, non alle 20:30 di un giovedì con la lucidità rimasta a fine giornata. Ogni scelta ha una regola: quanto, come, quando cambiare.</p>
+      <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica GRATIS ora</button>
     </div>
+    <ul class="lp-inside__list">
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Le <strong>4 forme della settimana ad alta pressione</strong>: riconosci la tua, e da lì parte un piano che dura.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body"><strong>Da dove partire se hai più di 5 kg da perdere</strong>, e perché l’ordine conta.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body"><strong>Quante sedute ti servono davvero</strong>: cosa ottieni con 2, con 3, con 4 o più.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Il <strong>piano di minima da 25-30 minuti</strong> e cosa fare in 5 situazioni, dalla seduta saltata alla settimana fuori.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">I <strong>3 stimoli</strong> che ogni settimana deve avere: forza, fiato e capacità di movimento.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">I <strong>6 movimenti fondamentali</strong> e come scegliere la variante giusta, anche se spalle o ginocchia ti danno fastidio.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body"><strong>Allenarti a casa</strong>: l’attrezzatura essenziale per una struttura efficace senza palestra.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">La <strong>regola della progressione di carico</strong>, e le 3 leve per sbloccarla quando si ferma. Quella che viene d’istinto è l’ultima da usare.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Il <strong>fiato senza obbligo di correre</strong>: le 3 intensità e cosa fare se odi la corsa.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">I <strong>gesti da non perdere mai</strong>, e 3 test da fare oggi per capire da dove partire.</p></li>
+        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="t-body">Le <strong>3 azioni da cui partire</strong> già da domani, senza aspettare lunedì.</p></li>
+    </ul>
   </section>
+
+  <section class="lp-stories" aria-labelledby="stories-title">
+    <p class="t-eyebrow">STORIE DI CHI HA LAVORATO CON NOI</p>
+    <h2 class="t-h2" id="stories-title">Sono venuti per la pancia. È stato solo l’inizio.</h2>
+    <div class="lp-cards">
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Roberto</h3><span class="scard__tag t-small">84 → 74 KG · 10 MESI</span></div>
+        <p class="scard__role t-small">Manager, guida un team di decine di persone.</p>
+        <p class="t-body"><strong>Prima:</strong> sei anni in palestra con lo stesso schema, schede iniziate e ricominciate. Si allenava, ma non cambiava.</p>
+        <p class="t-body"><strong>Oggi:</strong> dieci chili e 12 cm di girovita in meno. Cinque esercizi di forza con progressioni tracciate, due sedute aerobiche, e movimenti a corpo libero che non gli riuscivano nemmeno a vent’anni.</p>
+        <blockquote><p class="t-body">«Ero venuto per la pancia. Quella è andata. Alle sette di sera, quando rientro, ho energie che prima non avevo.»</p></blockquote>
+      </article>
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Francesca</h3><span class="scard__tag t-small">68 → 59 KG · 5 MESI</span></div>
+        <p class="scard__role t-small">Avvocato aziendale, ogni impegno preso rispettato.</p>
+        <p class="t-body"><strong>Prima:</strong> cinque anni tra corsi, cardio e app. Mai i pesi con un metodo, per paura di «diventare grossa».</p>
+        <p class="t-body"><strong>Oggi:</strong> nove chili, 11 cm sul punto vita e due taglie in meno. L’allenamento in agenda con lo stesso peso di una scadenza di lavoro, e ore in montagna senza pagarle nei giorni dopo.</p>
+        <blockquote><p class="t-body">«Avevo paura di diventare grossa. Sono più asciutta e più forte di quanto sia mai stata.»</p></blockquote>
+      </article>
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Gianluca</h3><span class="scard__tag t-small">86 → 69 KG · AFELIO</span></div>
+        <p class="scard__role t-small">Consulente finanziario, una settimana al mese all’estero.</p>
+        <p class="t-body"><strong>Prima:</strong> ogni hotel diverso. Non potendo fare quello che faceva a casa, in trasferta non faceva nulla, e al rientro ripartiva da capo.</p>
+        <p class="t-body"><strong>Oggi:</strong> diciassette chili in meno. Due piani, uno per casa e uno per la trasferta, con due sedute già definite più una jolly. Al rientro riprende da dove era: quel ritmo non lo perde più.</p>
+        <blockquote><p class="t-body">«Non vi fermate a scrivere una dieta e una scheda di allenamento, siete presenti per davvero.»</p></blockquote>
+      </article>
+      <article class="scard">
+        <div class="scard__head"><h3 class="t-h3">Carlos</h3><span class="scard__tag t-small">−28 KG · 18 MESI</span></div>
+        <p class="scard__role t-small">Già seguito in passato da nutrizionisti e personal trainer.</p>
+        <p class="t-body"><strong>Prima:</strong> la giornata finiva a tavola, tutti i giorni. Anche fare le scale era diventato faticoso.</p>
+        <p class="t-body"><strong>Oggi:</strong> ventotto chili in meno in un anno e mezzo, con un piano riscritto finché non ha funzionato per lui. È tornato a correre e a giocare a calcio con i suoi figli.</p>
+        <blockquote><p class="t-body">«Penso sia agli occhi di tutti: questo percorso mi ha cambiato la vita.»</p></blockquote>
+      </article>
+    </div>
+    <p class="lp-stories__note t-small">Percorsi individuali seguiti dal team OLTRESOGLIA. Ogni corpo risponde in modo diverso: la guida è il punto di partenza, non una promessa di risultato.</p>
+    <button class="pill t-button" type="button" data-open-pop aria-haspopup="dialog">Scarica GRATIS ora</button>
+  </section>
+
+  <section class="lp-fit" aria-label="Per chi è questa guida">
+    <div class="fit fit--yes"><h2 class="t-h3">È per te se</h2><p class="t-body">Hai 5-20 kg in eccesso e sei stanco di ripartire da zero ogni lunedì.</p><p class="t-body">La tua settimana cambia forma: turni, trasferte, giornate lunghe o agenda già piena.</p><p class="t-body">Tieni uno standard alto sul lavoro e vuoi tenerlo anche nel corpo.</p><p class="t-body">Vuoi criteri chiari per progredire, non l’ennesima scheda da seguire alla cieca.</p><p class="t-body">Vuoi perdere grasso e poi arrivare a un fisico atletico: più forza, più fiato, un corpo che duri.</p></div>
+    <div class="fit fit--no"><h2 class="t-h3">Non è per te se</h2><p class="t-body">Cerchi un dimagrimento lampo o una scheda da un muscolo al giorno.</p><p class="t-body">Ti interessa solo il numero sulla bilancia, non quello che il tuo corpo sa fare.</p><p class="t-body">Hai patologie cardiovascolari, metaboliche o articolari, infortuni non risolti o sei in gravidanza e non hai ancora parlato con un medico. Lì si parte dal medico, non da una guida.</p></div>
+  </section>
+  </main>
+
+  <footer class="lp-foot is-dark">
+    <p class="wordmark t-h3">OLTRESOGLIA</p>
+    <p class="t-small">Dott. Pietro Vecchi, Biologo Nutrizionista. I contenuti della guida hanno scopo informativo ed educativo e non sostituiscono il parere del medico. Prima di iniziare o riprendere un’attività fisica strutturata, in presenza di patologie o infortuni, serve un inquadramento medico.</p>
+    <nav aria-label="Note legali"><a class="t-small" href="#">Privacy</a><a class="t-small" href="#">Cookie</a><span class="t-small">© 2026 OLTRESOGLIA</span></nav>
+  </footer>
+  <div class="topline" aria-hidden="true"></div>
 
   <dialog class="pop" id="pop" aria-labelledby="pop-title">
     <div class="pop__panel is-dark">
@@ -293,10 +438,10 @@
       <div class="pop__head">
         <p class="t-h3" id="pop-title">Ci siamo quasi..</p>
         <p class="t-lead">Inserisci i tuoi dati per scaricare subito l'e-book</p>
-        <h2 class="t-h1"><span class="accent">Allenarsi con continuità - Vol.1</span></h2>
+        <h2 class="t-h1"><span class="accent">Allenarsi con continuità</span></h2>
       </div>
       <div class="pop__body">
-        <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img src="../chi-siamo/assets/zenit.svg" alt="" /><p class="t-eyebrow">Allenarsi con continuità - Vol.1</p><p class="t-small">Copertina in arrivo</p></div></div>
+        <div class="book" aria-hidden="true"><div class="book__pages"></div><div class="book__cover"><img class="cover" src="assets/covers/allenarsi-con-continuita.jpg" alt="" /></div></div>
         <form novalidate data-next="grazie-allenarsi-con-continuita.html" aria-label="Ricevi l'ebook">
           <template id="msg-icon"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.25" r=".9" fill="currentColor"/></svg></template>
           <div class="field"><label class="sr-only t-small" for="f-nome">Nome</label>
@@ -310,17 +455,8 @@
       </div>
     </div>
   </dialog>
-  </main>
-
   <script>
   (() => {
-    const menuBtn = document.querySelector('.nav__menu')
-    const menu = document.getElementById('nav-panel')
-    menuBtn.addEventListener('click', () => {
-      const open = menuBtn.getAttribute('aria-expanded') !== 'true'
-      menuBtn.setAttribute('aria-expanded', String(open))
-      menu.hidden = !open
-    })
     const REQUIRED = "Campo obbligatorio."
     const BAD_EMAIL = "Controlla l'indirizzo: sembra incompleto (es. nome@dominio.it)."
     const dialog = document.getElementById('pop')
