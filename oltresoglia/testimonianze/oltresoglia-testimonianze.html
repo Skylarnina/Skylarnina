@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OLTRESOGLIA Testimonianze</title>
+<style>/* OLTRESOGLIA type system. Spec: ../TYPOGRAPHY.md
+   The ONLY file allowed to set font-size, line-height, letter-spacing, font-weight or text-transform.
+   Every text element on every page carries exactly one role class: .t-display … .t-nav.
+   A size that isn't a role doesn't exist: use the nearest role. */
+
+/* Stand-ins until the Bounded files arrive: Archivo (200 / 400 / 900). Manrope is the real font,
+   served by Google Fonts until self-hosted copies are added to ../fonts/. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;900&family=Manrope:wght@300;400;500;600&display=swap');
+
+/* Bounded: drop the three files into oltresoglia/fonts/ with these names and every page switches over. */
+@font-face { font-family: 'Bounded'; src: url('../../fonts/bounded-black.woff2') format('woff2'), url('../../fonts/bounded-black.ttf') format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bounded'; src: url('../../fonts/bounded-regular.woff2') format('woff2'), url('../../fonts/bounded-regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bounded'; src: url('../../fonts/bounded-extralight.woff2') format('woff2'), url('../../fonts/bounded-extralight.ttf') format('truetype'); font-weight: 200; font-style: normal; font-display: swap; }
+
+:root {
+  /* Families */
+  --font-display: 'Bounded', 'Archivo', sans-serif;
+  --font-text: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+  /* The 12 role sizes (1440 / 1024 / 390 resolve to the table in TYPOGRAPHY.md) */
+  --t-display: clamp(52px, 7.8vw, 112px);
+  --t-h1: clamp(36px, 4.5vw, 64px);
+  --t-h2: clamp(28px, 2.8vw, 40px);
+  --t-h3: clamp(20px, 1.7vw, 24px);
+  --t-statement: clamp(30px, 3.4vw, 48px);
+  --t-numeral: var(--t-h1);
+  --t-eyebrow: 11px;
+  --t-lead: clamp(17px, 1.4vw, 20px);
+  --t-body: 16px;
+  --t-small: 13px;
+  --t-button: 13px;
+  --t-nav: 14px;
+
+  /* Spacing tied to the type */
+  --space-section: clamp(72px, 11vw, 160px);
+  --space-eyebrow: 16px;   /* eyebrow → heading */
+  --space-heading: clamp(16px, 1.7vw, 24px);   /* heading → lead / body */
+
+  /* Ink: the colour the opacities are taken from. Uses the page's own Porcelain / Saffron tokens
+     when they exist (colours are not this file's job); the spec hexes are the fallback. */
+  --type-ink: var(--oltre-porcelain, #F4F1EA);
+  --type-accent: var(--oltre-saffron-mango, #F9BF58);
+}
+
+/* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead.
+   The mixes are declared on every element (not once on :root) so this override reaches them. */
+.on-light { --type-ink: var(--oltre-dark-charcoal, #050505); }
+* {
+  --type-ink-read: color-mix(in srgb, var(--type-ink) 64%, transparent);   /* lead, body */
+  --type-ink-quiet: color-mix(in srgb, var(--type-ink) 40%, transparent);  /* small, eyebrow, placeholders */
+}
+
+/* ---------- Roles ---------- */
+.t-display   { font: 900 var(--t-display)/0.92 var(--font-display); text-transform: uppercase; letter-spacing: -0.02em; max-width: 10ch; }
+.t-h1        { font: 900 var(--t-h1)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.01em; max-width: 14ch; }
+.t-h2        { font: 900 var(--t-h2)/1.05 var(--font-display); text-transform: uppercase; letter-spacing: 0; max-width: 18ch; }
+.t-h3        { font: 400 var(--t-h3)/1.2 var(--font-display); text-transform: none; letter-spacing: 0; max-width: 28ch; }
+.t-statement { font: 200 var(--t-statement)/1.1 var(--font-display); text-transform: none; letter-spacing: -0.01em; max-width: 24ch; }
+.t-numeral   { font: 900 var(--t-numeral)/1 var(--font-display); letter-spacing: -0.02em; }
+.t-eyebrow   { font: 500 var(--t-eyebrow)/1.4 var(--font-text); text-transform: uppercase; letter-spacing: 0.14em; color: var(--type-ink-quiet); }
+.t-lead      { font: 300 var(--t-lead)/1.5 var(--font-text); text-transform: none; letter-spacing: 0; max-width: 56ch; color: var(--type-ink-read); }
+.t-body      { font: 400 var(--t-body)/1.6 var(--font-text); text-transform: none; letter-spacing: 0; max-width: 64ch; color: var(--type-ink-read); }
+.t-small     { font: 400 var(--t-small)/1.5 var(--font-text); text-transform: none; letter-spacing: 0.01em; max-width: 48ch; color: var(--type-ink-quiet); }
+.t-button    { font: 600 var(--t-button)/1 var(--font-text); text-transform: uppercase; letter-spacing: 0.12em; }
+.t-nav       { font: 400 var(--t-nav)/1 var(--font-text); text-transform: none; letter-spacing: 0; }
+
+/* Headings break into even lines (no single word left on the last line) */
+:is(.t-display, .t-h1, .t-h2, .t-h3, .t-statement) { text-wrap: balance; }
+
+/* Saffron eyebrow, only when it sits above an H1 */
+.t-eyebrow.on-dark-accent { color: var(--type-accent); }
+
+/* Placeholders follow the quiet opacity */
+::placeholder { color: var(--type-ink-quiet); opacity: 1; }
+
+/* One accent phrase per section, inside an H1 or Statement only */
+.accent { color: var(--type-accent); }
+
+/* Spacing helpers tied to the type */
+.t-eyebrow + :is(.t-display, .t-h1, .t-h2) { margin-top: var(--space-eyebrow); }
+:is(.t-display, .t-h1, .t-h2, .t-h3, .t-statement) + :is(.t-lead, .t-body) { margin-top: var(--space-heading); }
+</style>
+<style>
+  :root {
+    --oltre-dark-charcoal: #0D0D0D; --oltre-porcelain: #F5F3EE; --oltre-saffron-mango: #F9BF58;
+    --ink-2: color-mix(in srgb, var(--oltre-porcelain) 78%, transparent);
+    --line: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
+    --edge: max(clamp(16px, 4vw, 48px), calc((100vw - 1232px) / 2 + 32px));
+    --gap: 24px;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); }
+  body { font-family: var(--font-text); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  h2, p { margin: 0; }
+
+  .tst { padding: var(--space-section) 0; display: grid; gap: clamp(32px, 4vw, 56px); }
+  .tst__head { padding: 0 var(--edge); display: grid; justify-items: center; text-align: center; gap: var(--space-heading); }
+  .tst__head .t-h1 { max-width: 22ch; }
+  .tst__head .t-lead { max-width: 60ch; color: var(--ink-2); }
+
+  .rows { display: grid; gap: var(--gap); }
+  .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .track { display: flex; gap: var(--gap); width: max-content; padding-block: 4px; animation: slide var(--dur, 60s) linear infinite; }
+  .marquee--rev .track { animation-direction: reverse; }
+  .marquee:hover .track, .marquee:focus-within .track { animation-play-state: paused; }
+  @keyframes slide { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
+
+  .msg { width: clamp(280px, 26vw, 360px); min-height: clamp(280px, 26vw, 340px); padding: clamp(24px, 2.8vw, 40px); border-radius: 24px;
+    background: #141414; border: 2px solid var(--oltre-saffron-mango); display: flex; flex-direction: column; gap: 10px; }
+  .msg .t-body { color: var(--oltre-porcelain); max-width: none; white-space: pre-line; }
+  .msg .pending { color: color-mix(in srgb, var(--oltre-porcelain) 45%, transparent); }
+  .msg__tick { margin-top: auto; align-self: flex-end; width: 26px; height: 26px; color: var(--oltre-saffron-mango); }
+
+  .ba { width: clamp(280px, 26vw, 360px); aspect-ratio: 1; border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: var(--line); border: 1px solid var(--line); position: relative; }
+  .ba__half { position: relative; display: grid; place-items: center; background: #161616; }
+  .ba__half:last-child { background: #1d1d1d; }
+  .ba__half .t-small { position: absolute; top: 12px; left: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(5,5,5,.7); color: var(--oltre-porcelain); max-width: none; }
+  .ba__half svg { width: 40%; color: color-mix(in srgb, var(--oltre-porcelain) 18%, transparent); }
+  .ba__mark { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px; background: var(--oltre-saffron-mango); color: var(--oltre-dark-charcoal); border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; padding-inline: var(--edge); }
+    .track { animation: none; }
+    .track [aria-hidden="true"] { display: none; }
+  }
+</style>
+</head>
+<body>
+  <section class="tst" aria-labelledby="tst-title">
+    <div class="tst__head">
+      <h2 class="t-h1" id="tst-title">Meno grasso. Più atletici. Più forti nel lavoro e nella vita.</h2>
+      <p class="t-lead">Qui trovi le storie reali di chi ha scelto OLTRESOGLIA: ex sportivi con l’agenda piena, che hanno perso grasso e sono tornati atletici, senza fermare il lavoro né la vita.</p>
+    </div>
+    <div class="rows">
+      <div class="marquee" style="--dur: 70s" aria-label="Messaggi dei clienti"><div class="track"><figure class="msg" style="margin:0"><p class="t-body"><strong>Marco</strong></p><blockquote style="margin:0"><p class="t-body">"Forse anche più in discesa di quanto riportato poiché ero con altre bilancia.
+Ma ciò che conta per ora e' che mi sento con più energie e riesco ad allenarmi costantemente seguendo bene alimentazione. Per il peso credo calerà continuando così"</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" style="margin:0"><p class="t-body"><strong>Luca</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" style="margin:0"><p class="t-body"><strong>Andrea</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" style="margin:0"><p class="t-body"><strong>Davide</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" style="margin:0"><p class="t-body"><strong>Simone</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" style="margin:0"><p class="t-body"><strong>Matteo</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" aria-hidden="true" style="margin:0"><p class="t-body"><strong>Marco</strong></p><blockquote style="margin:0"><p class="t-body">"Forse anche più in discesa di quanto riportato poiché ero con altre bilancia.
+Ma ciò che conta per ora e' che mi sento con più energie e riesco ad allenarmi costantemente seguendo bene alimentazione. Per il peso credo calerà continuando così"</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" aria-hidden="true" style="margin:0"><p class="t-body"><strong>Luca</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" aria-hidden="true" style="margin:0"><p class="t-body"><strong>Andrea</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" aria-hidden="true" style="margin:0"><p class="t-body"><strong>Davide</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" aria-hidden="true" style="margin:0"><p class="t-body"><strong>Simone</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure><figure class="msg" aria-hidden="true" style="margin:0"><p class="t-body"><strong>Matteo</strong></p><blockquote style="margin:0"><p class="t-body pending">[Messaggio in arrivo dal gruppo FEEDBACK]</p></blockquote><svg class="msg__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></figure></div></div>
+      <div class="marquee marquee--rev" style="--dur: 80s" aria-label="Foto prima e dopo"><div class="track"><figure class="ba" style="margin:0" aria-label="Foto prima e dopo 1 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" style="margin:0" aria-label="Foto prima e dopo 2 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" style="margin:0" aria-label="Foto prima e dopo 3 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" style="margin:0" aria-label="Foto prima e dopo 4 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" style="margin:0" aria-label="Foto prima e dopo 5 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" style="margin:0" aria-label="Foto prima e dopo 6 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" aria-hidden="true" style="margin:0" aria-label="Foto prima e dopo 1 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" aria-hidden="true" style="margin:0" aria-label="Foto prima e dopo 2 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" aria-hidden="true" style="margin:0" aria-label="Foto prima e dopo 3 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" aria-hidden="true" style="margin:0" aria-label="Foto prima e dopo 4 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" aria-hidden="true" style="margin:0" aria-label="Foto prima e dopo 5 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure><figure class="ba" aria-hidden="true" style="margin:0" aria-label="Foto prima e dopo 6 (in arrivo)"><div class="ba__half"><span class="t-small">Prima</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><div class="ba__half"><span class="t-small">Dopo</span><svg viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="11" r="7" fill="currentColor"/><path d="M8 58V30c0-6 5-10 12-10s12 4 12 10v28z" fill="currentColor"/></svg></div><span class="ba__mark t-button">OLTRESOGLIA</span></figure></div></div>
+    </div>
+  </section>
+</body>
+</html>
