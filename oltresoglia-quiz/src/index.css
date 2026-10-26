@@ -28,15 +28,15 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* OLTRESOGLIA brand palette — exact hex from the official logo files. */
-/* Nothing outside this palette is used anywhere on the page.         */
+/* OLTRESOGLIA brand palette — values aligned with the Figma file      */
+/* (oltresoglia/LAYOUT.md, 26 Oct). Nothing outside it is used.       */
 /* ------------------------------------------------------------------ */
 :root {
   --oltre-blackout: #000000;
-  --oltre-dark-charcoal: #050505;
-  --oltre-porcelain: #ebf0f2;
+  --oltre-dark-charcoal: #0d0d0d;
+  --oltre-porcelain: #f5f3ee;
   --oltre-whiteout: #ffffff;
-  --oltre-saffron-mango: #efc04d;
+  --oltre-saffron-mango: #f9bf58;
 
   color-scheme: dark;
 }

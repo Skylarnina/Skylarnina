@@ -38,8 +38,8 @@
 
   /* Ink: the colour the opacities are taken from. Uses the page's own Porcelain / Saffron tokens
      when they exist (colours are not this file's job); the spec hexes are the fallback. */
-  --type-ink: var(--oltre-porcelain, #F4F1EA);
-  --type-accent: var(--oltre-saffron-mango, #EFC04E);
+  --type-ink: var(--oltre-porcelain, #F5F3EE);
+  --type-accent: var(--oltre-saffron-mango, #F9BF58);
 }
 
 /* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead.

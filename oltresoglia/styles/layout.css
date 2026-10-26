@@ -1,0 +1,20 @@
+/* OLTRESOGLIA layout tokens: Kehinde's Figma values (26 Oct). Spec: ../LAYOUT.md
+   Colours, box radii, inner padding and spacing shared by every page. Type lives in type.css. */
+:root {
+  /* Colours */
+  --page-base: #F5F3EE;      /* light page background (also the Porcelain text colour on dark) */
+  --box-white: #FFFFFF;      /* light boxes */
+  --box-dark: #0D0D0D;       /* dark boxes and dark sections */
+  --box-dark-2: #141414;     /* dark inner cards, dark box on dark */
+  --yellow: #F9BF58;         /* brand yellow (Saffron) */
+
+  /* Corner radius */
+  --radius-header: 28px;     /* header / hero panels */
+  --radius-box: 24px;        /* content boxes */
+  --radius-card: 18px;       /* inner cards */
+
+  /* Spacing */
+  --box-pad: clamp(24px, 2.8vw, 40px);   /* inner padding: ~40px desktop, 24px mobile */
+  --box-gap: clamp(24px, 3.3vw, 48px);   /* space between boxes: 24–48px */
+  --box-inset: 16px;                     /* boxes stay 16px in from the screen edges on mobile */
+}

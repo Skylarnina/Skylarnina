@@ -44,7 +44,7 @@
   /* Ink: the colour the opacities are taken from. Uses the page's own Porcelain / Saffron tokens
      when they exist (colours are not this file's job); the spec hexes are the fallback. */
   --type-ink: var(--oltre-porcelain, #F4F1EA);
-  --type-accent: var(--oltre-saffron-mango, #EFC04E);
+  --type-accent: var(--oltre-saffron-mango, #F9BF58);
 }
 
 /* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead.
@@ -88,10 +88,10 @@
 <style>
   :root {
     --oltre-blackout: #000000;
-    --oltre-dark-charcoal: #050505;
-    --oltre-porcelain: #EBF0F2;
+    --oltre-dark-charcoal: #0D0D0D;
+    --oltre-porcelain: #F5F3EE;
     --oltre-whiteout: #FFFFFF;
-    --oltre-saffron-mango: #EFC04D;
+    --oltre-saffron-mango: #F9BF58;
     --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
     --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);
     --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent);
@@ -118,7 +118,7 @@
     --btn-glow: 0 0 0 transparent; --btn-glow-hover: 0 0 0 transparent;
     --btn-fill-hover: color-mix(in srgb, var(--oltre-saffron-mango) 22%, var(--oltre-blackout)); }
   .is-white :focus-visible { outline-color: var(--oltre-dark-charcoal); }
-  .card-dark { --type-ink: var(--oltre-porcelain); background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); border-radius: 20px; padding: 8px 24px;
+  .card-dark { --type-ink: var(--oltre-porcelain); background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); border-radius: 24px; padding: 8px 24px;
     --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
     --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);
     --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent); }

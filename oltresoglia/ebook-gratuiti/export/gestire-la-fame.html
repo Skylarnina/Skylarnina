@@ -45,7 +45,7 @@
   /* Ink: the colour the opacities are taken from. Uses the page's own Porcelain / Saffron tokens
      when they exist (colours are not this file's job); the spec hexes are the fallback. */
   --type-ink: var(--oltre-porcelain, #F4F1EA);
-  --type-accent: var(--oltre-saffron-mango, #EFC04E);
+  --type-accent: var(--oltre-saffron-mango, #F9BF58);
 }
 
 /* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead.
@@ -89,10 +89,10 @@
 <style>
   :root {
     --oltre-blackout: #000000;
-    --oltre-dark-charcoal: #050505;
-    --oltre-porcelain: #EBF0F2;
+    --oltre-dark-charcoal: #0D0D0D;
+    --oltre-porcelain: #F5F3EE;
     --oltre-whiteout: #FFFFFF;
-    --oltre-saffron-mango: #EFC04D;
+    --oltre-saffron-mango: #F9BF58;
     --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
     --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);
     --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent);
@@ -113,7 +113,7 @@
   .backdrop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
   .backdrop::after { content: ''; position: absolute; inset: 0; background: var(--oltre-dark-charcoal); opacity: .45; }
 
-  .card-dark { --type-ink: var(--oltre-porcelain); background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); border-radius: 20px; padding: 8px 24px;
+  .card-dark { --type-ink: var(--oltre-porcelain); background: var(--oltre-dark-charcoal); color: var(--oltre-porcelain); border-radius: 24px; padding: 8px 24px;
     --line-hair: color-mix(in srgb, var(--oltre-porcelain) 14%, transparent);
     --line-field: color-mix(in srgb, var(--oltre-porcelain) 28%, transparent);
     --line-strong: color-mix(in srgb, var(--oltre-porcelain) 50%, transparent); }
@@ -238,7 +238,7 @@
   @media (min-width: 960px) { .board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; } .board__col:nth-child(2) { padding-top: 96px; } }
   .board__col { display: grid; gap: 24px; align-content: start; }
   .ecard { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 2.6vw, 36px); align-items: center;
-    padding: clamp(24px, 2.6vw, 36px); border-radius: 20px; background: var(--oltre-whiteout); border: 1px solid var(--line-hair);
+    padding: clamp(24px, 2.8vw, 40px); border-radius: 24px; background: var(--oltre-whiteout); border: 1px solid var(--line-hair);
     box-shadow: 0 1px 2px rgba(5,5,5,.04); transition: transform .6s var(--ease), box-shadow .6s var(--ease), border-color .6s var(--ease);
     --book-w: clamp(104px, 9vw, 128px); scroll-margin-top: 120px; }
   .ecard:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--oltre-saffron-mango) 55%, transparent); box-shadow: 0 24px 48px -28px rgba(5,5,5,.35); }
@@ -285,7 +285,7 @@
   .more { padding: var(--space-section) var(--edge); }
   .pop { width: min(940px, calc(100vw - 32px)); max-height: calc(100svh - 32px); padding: 8px; border: 0; border-radius: 28px; background: var(--oltre-porcelain); color: var(--oltre-porcelain); overflow: auto; }
   .pop::backdrop { background: color-mix(in srgb, var(--oltre-dark-charcoal) 72%, transparent); backdrop-filter: blur(3px); }
-  .pop__panel { position: relative; border-radius: 22px; padding: clamp(28px, 4vw, 48px); display: grid; gap: 32px;
+  .pop__panel { position: relative; border-radius: 18px; padding: clamp(28px, 4vw, 48px); display: grid; gap: 32px;
     background: radial-gradient(60% 50% at 25% 70%, color-mix(in srgb, var(--oltre-saffron-mango) 20%, transparent), transparent 70%), var(--oltre-dark-charcoal); }
   .pop__close { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 99px; border: 1px solid var(--line-field); background: none; cursor: pointer; display: grid; place-items: center; }
   .pop__close:hover { border-color: var(--oltre-saffron-mango); color: var(--oltre-saffron-mango); }
@@ -362,10 +362,10 @@
   .lp-stories { padding: 0 var(--edge) var(--space-section); }
   .lp-stories > .t-h2 { margin: var(--space-eyebrow) 0 40px; max-width: 26ch; }
   .lp-inside__side .t-h2 { margin-top: -4px; }
-  .lp-cards { display: grid; gap: 20px; align-items: start; }
+  .lp-cards { display: grid; gap: 24px; align-items: start; }
   @media (min-width: 760px) { .lp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1100px) { .lp-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .scard { background: var(--oltre-whiteout); border-radius: 16px; padding: 28px; display: grid; gap: 14px; }
+  .scard { background: var(--oltre-whiteout); border-radius: 18px; padding: 28px; display: grid; gap: 14px; }
   .scard__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; }
   .scard__tag { color: color-mix(in srgb, var(--oltre-dark-charcoal) 70%, transparent); }
   .scard__role { margin-top: -6px; color: color-mix(in srgb, var(--oltre-dark-charcoal) 55%, transparent); }
@@ -373,11 +373,12 @@
   .scard blockquote .t-body { font-style: italic; }
   .lp-stories__note { margin: 28px 0 28px; max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 60%, transparent); }
 
-  .lp-fit { padding: var(--space-section) var(--edge); background: color-mix(in srgb, var(--oltre-whiteout) 60%, var(--oltre-porcelain)); display: grid; gap: 20px; }
+  .lp-fit { padding: var(--space-section) var(--edge); background: var(--oltre-porcelain); display: grid; gap: 24px; }
   @media (min-width: 960px) { .lp-fit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-  .fit { border-radius: 16px; padding: clamp(24px, 3vw, 36px); display: grid; gap: 14px; align-content: start; }
-  .fit--yes { background: color-mix(in srgb, var(--oltre-saffron-mango) 14%, var(--oltre-whiteout)); }
-  .fit--no { background: color-mix(in srgb, var(--oltre-dark-charcoal) 6%, var(--oltre-whiteout)); }
+  .fit { border-radius: 24px; padding: clamp(24px, 2.8vw, 40px); display: grid; gap: 14px; align-content: start; }
+  .fit--yes { background: var(--oltre-whiteout); }
+  .fit--no { background: #141414; color: var(--oltre-porcelain); --type-ink: var(--oltre-porcelain); }
+  .lp-fit .fit--no .t-body { color: color-mix(in srgb, var(--oltre-porcelain) 82%, transparent); }
 
   .lp-foot { padding: 48px var(--edge) 40px; display: grid; gap: 16px; }
   .lp-foot .t-small { max-width: none; color: color-mix(in srgb, var(--oltre-porcelain) 62%, transparent); }
@@ -390,8 +391,8 @@
   .ty-banner svg { width: 18px; height: 18px; }
   .ty-col { width: min(900px, 100%); margin-inline: auto; }
   .ty-box-wrap { background: var(--oltre-whiteout); padding: clamp(56px, 7vw, 88px) var(--edge); }
-  .ty-box { display: grid; gap: 16px; padding: clamp(24px, 3.4vw, 40px); border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 60%, transparent);
-    background: color-mix(in srgb, var(--oltre-saffron-mango) 12%, var(--oltre-whiteout)); border-radius: 16px; }
+  .ty-box { display: grid; gap: 16px; padding: clamp(24px, 2.8vw, 40px); border: 1px solid color-mix(in srgb, var(--oltre-saffron-mango) 60%, transparent);
+    background: var(--oltre-whiteout); border-radius: 24px; }
   .ty-box .t-body { max-width: none; color: color-mix(in srgb, var(--oltre-dark-charcoal) 82%, transparent); }
   .ty-next { border-top: 6px solid var(--oltre-saffron-mango); padding: var(--space-section) var(--edge); }
   .ty-next .ty-col { display: grid; justify-items: start; gap: 20px; }
