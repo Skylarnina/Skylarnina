@@ -1,0 +1,204 @@
+<!--
+  "Snapshots of What I've Been Up To": moving photo strip (marquee), up to 4 photos in view, + lightbox
+  Squarespace 7.1: paste everything into one Code Block (Display Source: off).
+  Only edit the SETTINGS and PHOTOS below.
+-->
+<div class="ybmq" data-ybmq>
+  <div class="ybmq__view"><div class="ybmq__track"></div></div>
+  <div class="ybmq__bar">
+    <span class="ybmq__hint"></span>
+    <button type="button" class="ybmq__play" aria-label="Pause the moving photos"><span aria-hidden="true">Pause</span></button>
+  </div>
+</div>
+
+<style>
+.ybmq{--ybmq-gap:16px;--ybmq-ratio:4/5;position:relative;width:100%;color:inherit;font:inherit}
+.ybmq__view{overflow:hidden;width:100%;touch-action:pan-y;cursor:grab}
+.ybmq__view.is-drag{cursor:grabbing}
+.ybmq__track{display:flex;gap:var(--ybmq-gap);width:max-content;will-change:transform}
+.ybmq__item{flex:0 0 auto;display:block;margin:0;padding:0;border:0;border-radius:0;background:rgba(127,127,127,.12);
+  aspect-ratio:var(--ybmq-ratio);overflow:hidden;cursor:zoom-in;user-select:none;-webkit-user-drag:none}
+.ybmq__item img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transition:transform .6s ease}
+.ybmq__item:hover img{transform:scale(1.04)}
+.ybmq__item:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+.ybmq__bar{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.ybmq__hint{opacity:.7}
+.ybmq__play{background:none;border:0;border-bottom:1px solid currentColor;padding:2px 0;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+.ybmq__play:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+/* lightbox */
+.ybmq-lb{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;background:rgba(12,10,9,.94);touch-action:pan-y}
+.ybmq-lb.is-open{display:flex}
+.ybmq-lb__img{max-width:calc(100vw - 160px);max-height:calc(100vh - 120px);object-fit:contain;display:block;user-select:none}
+.ybmq-lb button{position:absolute;border:0;border-radius:0;background:none;color:#fff;cursor:pointer;font:inherit;padding:0;width:48px;height:48px;font-size:26px;line-height:48px;text-align:center}
+.ybmq-lb button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.ybmq-lb__close{top:16px;right:16px;font-size:32px!important}
+.ybmq-lb__prev{left:16px;top:50%;transform:translateY(-50%)}
+.ybmq-lb__next{right:16px;top:50%;transform:translateY(-50%)}
+.ybmq-lb__count{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;opacity:.75;font-size:12px;letter-spacing:.08em}
+@media (max-width:640px){.ybmq-lb__img{max-width:100vw;max-height:calc(100vh - 140px)}.ybmq-lb__prev,.ybmq-lb__next{top:auto!important;bottom:6px;transform:none!important}}
+html.ybmq-lock,html.ybmq-lock body{overflow:hidden}
+</style>
+
+<script>
+(function () {
+  /* ===================== SETTINGS ===================== */
+  var PHOTOS_IN_VIEW = 4;         // photos visible at once on a computer (tablets show 3, phones 2)
+  var SPEED = 40;                 // how fast the strip moves (pixels per second): 25 slow, 40 calm, 70 lively
+  var ASPECT_RATIO = '4/5';       // shape of each photo: '4/5' portrait, '1/1' square, '3/2' landscape
+  var GAP = 16;                   // space between photos (pixels)
+  var HINT = 'Click a photo to enlarge';   // small line under the strip ('Click' becomes 'Tap' on phones); '' to hide it
+  /* ===================== PHOTOS =======================
+     One line per photo: the image address, then a short description (used by screen readers).
+     Image addresses: see the instructions that came with this code.                        */
+  var PHOTOS = [
+    ['PASTE-IMAGE-ADDRESS-1', 'The Power & Energy column being installed'],
+    ['PASTE-IMAGE-ADDRESS-2', 'Street mural: a portrait with a lightbulb hat'],
+    ['PASTE-IMAGE-ADDRESS-3', 'A pastry case of custard tarts']
+  ];
+  /* ============ nothing below needs editing ============ */
+
+  var root = document.currentScript && document.currentScript.parentNode.querySelector('[data-ybmq]:not([data-ybmq-ready])')
+          || document.querySelector('[data-ybmq]:not([data-ybmq-ready])');
+  if (!root || !PHOTOS.length) return;
+  root.setAttribute('data-ybmq-ready', '');
+  root.style.setProperty('--ybmq-ratio', ASPECT_RATIO);
+  root.style.setProperty('--ybmq-gap', GAP + 'px');
+  root.setAttribute('role', 'region');
+  root.setAttribute('aria-label', 'Snapshots of What I’ve Been Up To');
+
+  var sqs = /squarespace(-cdn)?\.com/;
+  function sized(src, w) { return sqs.test(src) ? src.split('?')[0] + '?format=' + w + 'w' : src; }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var n = PHOTOS.length, view = root.querySelector('.ybmq__view'), track = root.querySelector('.ybmq__track'), playBtn = root.querySelector('.ybmq__play');
+  var playing = !reduce, hovering = false, visible = true, lbOpen = false, dragging = false;
+  var offset = 0, setWidth = 1, speedNow = 0, last = 0, items = [];
+
+  function inView() { var w = view.clientWidth; return w < 640 ? Math.min(2, PHOTOS_IN_VIEW) : w < 900 ? Math.min(3, PHOTOS_IN_VIEW) : PHOTOS_IN_VIEW; }
+
+  // Build the strip: one "set" (the photos, repeated if there are too few to fill the width), drawn twice for a seamless loop.
+  function build() {
+    if (!view.clientWidth) { setTimeout(build, 300); return; }   // not laid out yet (e.g. hidden): try again shortly
+    var k = inView(), w = (view.clientWidth - GAP * (k - 1)) / k, reps = Math.max(1, Math.ceil((k + 1) / n));
+    track.innerHTML = ''; items = [];
+    for (var copy = 0; copy < 2 * reps; copy++) {
+      PHOTOS.forEach(function (p, idx) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'ybmq__item'; b.style.width = w + 'px';
+        var img = document.createElement('img'); img.src = sized(p[0], 800); img.alt = p[1] || ''; img.loading = copy ? 'lazy' : 'eager'; img.decoding = 'async'; img.draggable = false;
+        b.appendChild(img);
+        if (copy) { b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1; }   // repeats are for the loop only
+        else b.setAttribute('aria-label', 'Enlarge photo ' + (idx + 1) + ' of ' + n + (p[1] ? ': ' + p[1] : ''));
+        b.setAttribute('data-i', idx);
+        b.addEventListener('click', function (e) { if (e.detail === 0) openLb(idx); });   // keyboard (Enter/Space); mouse and touch open on release below
+        b.addEventListener('focus', function () { view.scrollLeft = 0; offset = Math.min(b.offsetLeft, setWidth - 1); paint(); });
+        track.appendChild(b); items.push(b);
+      });
+    }
+    setWidth = (w + GAP) * n * reps;
+    offset = offset % setWidth; paint();
+  }
+  function paint() { track.style.transform = 'translate3d(' + (-offset) + 'px,0,0)'; }
+  function wrap() { offset = ((offset % setWidth) + setWidth) % setWidth; }
+
+  function frame(t) {
+    var dt = last ? Math.min(0.05, (t - last) / 1000) : 0; last = t;
+    var target = (playing && !hovering && visible && !lbOpen && !dragging && !document.hidden) ? SPEED : 0;
+    speedNow += (target - speedNow) * Math.min(1, dt * 4);          // ease in and out instead of stopping dead
+    if (Math.abs(speedNow) > 0.05 && !dragging) { offset += speedNow * dt; wrap(); paint(); }
+    requestAnimationFrame(frame);
+  }
+
+  function setPlaying(on) {
+    playing = on;
+    playBtn.setAttribute('aria-label', on ? 'Pause the moving photos' : 'Play the moving photos');
+    playBtn.firstChild.textContent = on ? 'Pause' : 'Play';
+  }
+
+  root.addEventListener('mouseenter', function () { hovering = true; });
+  root.addEventListener('mouseleave', function () { hovering = false; });
+  root.addEventListener('focusin', function () { hovering = true; });
+  root.addEventListener('focusout', function () { hovering = false; });
+  playBtn.addEventListener('click', function () { setPlaying(!playing); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(root);
+
+  // drag / swipe the strip by hand
+  var moved = false, x0 = 0, o0 = 0, pid = null, pressed = null;
+  view.addEventListener('pointerdown', function (e) {
+    if (e.button) return; pid = e.pointerId; x0 = e.clientX; o0 = offset; moved = false; dragging = true; speedNow = 0;   // stop at once under the finger
+    pressed = e.target.closest && e.target.closest('.ybmq__item');
+  });
+  view.addEventListener('pointermove', function (e) {
+    if (e.pointerId !== pid) return;
+    var dx = e.clientX - x0;
+    if (!moved && Math.abs(dx) > 6) { moved = true; view.classList.add('is-drag'); try { view.setPointerCapture(pid); } catch (er) {} }
+    if (moved) { offset = o0 - dx; wrap(); paint(); }
+  });
+  function endDrag(e) { if (e.pointerId !== pid) return; pid = null; dragging = false; view.classList.remove('is-drag'); }
+  view.addEventListener('pointerup', function (e) {
+    var tap = e.pointerId === pid && !moved && pressed;
+    endDrag(e);
+    if (tap) openLb(+pressed.getAttribute('data-i'));   // a press without dragging = open that photo
+    pressed = null;
+  });
+  view.addEventListener('pointercancel', function (e) { endDrag(e); pressed = null; });
+
+  var rw = view.clientWidth;
+  window.addEventListener('resize', function () { if (view.clientWidth !== rw) { rw = view.clientWidth; build(); } });
+
+  /* ---------- lightbox ---------- */
+  var lb = document.createElement('div'); lb.className = 'ybmq-lb';
+  lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Photo viewer');
+  lb.innerHTML = '<img class="ybmq-lb__img" alt="">' +
+    '<button type="button" class="ybmq-lb__prev" aria-label="Previous photo">&#8592;</button>' +
+    '<button type="button" class="ybmq-lb__next" aria-label="Next photo">&#8594;</button>' +
+    '<button type="button" class="ybmq-lb__close" aria-label="Close">&times;</button>' +
+    '<div class="ybmq-lb__count" aria-live="polite"></div>';
+  document.body.appendChild(lb);
+  var lbImg = lb.querySelector('.ybmq-lb__img'), lbCount = lb.querySelector('.ybmq-lb__count'), lbAt = 0, opener = null;
+  function lbShow(k) {
+    lbAt = (k + n) % n;
+    lbImg.src = sized(PHOTOS[lbAt][0], 2500); lbImg.alt = PHOTOS[lbAt][1] || '';
+    lbCount.textContent = (lbAt + 1) + ' / ' + n;
+    new Image().src = sized(PHOTOS[(lbAt + 1) % n][0], 2500);
+  }
+  function openLb(k) {
+    opener = document.activeElement; lbOpen = true;
+    lbShow(k); lb.classList.add('is-open'); document.documentElement.classList.add('ybmq-lock');
+    lb.querySelector('.ybmq-lb__close').focus();
+  }
+  function closeLb() {
+    lb.classList.remove('is-open'); document.documentElement.classList.remove('ybmq-lock'); lbOpen = false;
+    if (opener && opener.focus) opener.focus({ preventScroll: true });
+  }
+  lb.querySelector('.ybmq-lb__prev').addEventListener('click', function () { lbShow(lbAt - 1); });
+  lb.querySelector('.ybmq-lb__next').addEventListener('click', function () { lbShow(lbAt + 1); });
+  lb.querySelector('.ybmq-lb__close').addEventListener('click', closeLb);
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lbOpen) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft') lbShow(lbAt - 1);
+    else if (e.key === 'ArrowRight') lbShow(lbAt + 1);
+    else if (e.key === 'Tab') {   // keep keyboard focus inside the viewer
+      var b = lb.querySelectorAll('button'), first = b[0], lastB = b[b.length - 1];
+      if (e.shiftKey && document.activeElement === first) { lastB.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === lastB) { first.focus(); e.preventDefault(); }
+    }
+  });
+  var tx = null, ty = 0;
+  lb.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) lbShow(lbAt + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  if (n < 2) { lb.querySelector('.ybmq-lb__prev').hidden = lb.querySelector('.ybmq-lb__next').hidden = true; }
+
+  var hint = root.querySelector('.ybmq__hint');
+  hint.textContent = (window.matchMedia && matchMedia('(hover: none)').matches) ? HINT.replace(/^Click/, 'Tap') : HINT;
+  if (!HINT) hint.hidden = true;
+
+  build();
+  setPlaying(playing);
+  requestAnimationFrame(frame);
+})();
+</script>

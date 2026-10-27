@@ -1,13 +1,13 @@
-# Snapshots slideshow: setup
+# Snapshots marquee: setup
 
-Code: `snapshots-slideshow.html` (paste the whole file into one Code Block).
+Code: `snapshots-marquee.html` (paste the whole file into one Code Block).
 
 What it does:
-- Moves to the next photo every 4 seconds with a soft fade.
-- Pauses while the mouse is over it, while it is scrolled out of view, and while the enlarged view is open.
-- Visitors can still use the arrows (or swipe on a phone), plus a Pause / Play link under the photo.
-- Clicking a photo opens it large on a dark background (lightbox): arrows, keyboard ← → and Esc, swipe on phones, click outside to close.
-- People who have "reduce motion" switched on in their device settings get the slideshow paused; they can press Play.
+- A strip of photos that glides slowly and continuously to the left, looping without a gap: **4 photos in view on a computer**, 3 on a tablet, 2 on a phone.
+- Slows to a stop while the mouse is over it (so a visitor can pick a photo), while it is scrolled out of view, and while a photo is enlarged; then glides on again.
+- Visitors can drag it (mouse) or swipe it (phone) by hand. A Pause / Play link sits under the strip.
+- Clicking (tapping) a photo opens it large on a dark background (lightbox): arrows, keyboard ← → and Esc, swipe on phones, click outside to close.
+- People who have "reduce motion" switched on in their device settings get the strip standing still; they can press Play or drag it.
 
 ## 1. Get the image addresses (before removing the current slideshow)
 
@@ -28,16 +28,19 @@ What it does:
 
 ## 2. Add the code
 1. Edit the page → the Snapshots section.
-2. Add a **Code** block where the slideshow is, the same width. Paste the whole code. **Display Source: off.** Save.
+2. Add a **Code** block under the section heading and stretch it to the **full width of the section** (all 24 columns), so 4 photos have room. Paste the whole code. **Display Source: off.** Save.
 3. Remove the old slideshow (gallery) block.
 4. Open the page in a new tab, not in the editor: Squarespace doesn't run code inside the editor, so it may show "Script disabled" there. That's normal.
 
 ## Settings (top of the code)
-- `SECONDS_PER_PHOTO = 4` — change the speed.
-- `ASPECT_RATIO = '4/5'` — frame shape: `'1/1'` square, `'3/2'` landscape.
+- `PHOTOS_IN_VIEW = 4` — photos visible at once on a computer.
+- `SPEED = 40` — 25 slow, 40 calm, 70 lively.
+- `ASPECT_RATIO = '4/5'` — photo shape: `'1/1'` square, `'3/2'` landscape.
+- `GAP = 16` — space between photos.
+- `HINT` — the small line under the strip; `''` hides it.
 - To add a photo later: upload it anywhere on the site (e.g. an image block on a hidden page), copy its address, add a line to `PHOTOS`.
 
 ## Notes
 - JavaScript in Code Blocks needs a Squarespace **Core plan or higher** (it doesn't run on Personal/Basic).
-- Photos hosted on Squarespace are automatically requested at 1000px for the slideshow and 2500px for the enlarged view, so the page stays fast.
+- Photos hosted on Squarespace are automatically requested at 800px for the strip and 2500px for the enlarged view, so the page stays fast.
 - The text and controls take the section's own text colour and font, so they match whatever colour theme the section uses.
