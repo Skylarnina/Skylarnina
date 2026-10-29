@@ -512,7 +512,7 @@ def bar(over=None, here=""):
     cur = lambda k: ' aria-current="page"' if here == k else ""
     return (f'<header class="{cls}"><div class="wrap"><a class="bar__name" href="index.html" data-added="ui">Yasmin Bajwa</a>'
             f'<nav aria-label="Main" data-added="ui"><a href="projects.html"{cur("projects")}>Projects</a>'
-            f'<a href="index.html#snippets">About</a><a href="index.html#contact">Contact</a></nav></div></header>')
+            f'<a href="index.html#snippets">About</a><a href="contact.html"{cur("contact")}>Contact</a></nav></div></header>')
 
 
 def foot():
@@ -806,6 +806,46 @@ def lock():
     return page("Private View — Yasmin Bajwa", "Projects are shared by invitation.", b)
 
 
+# ---------------------------------------------------------------- contact page (Phase 3, client request)
+# Squarespace: a Blank page "Contact" (/contact) with one section: image block, text blocks, native Form block.
+# Text marked data-added="suggested" is NOT her copy: new wording for Yasmin to approve or replace.
+CONTACT_TOPICS = ["An exhibit or project", "UX design or research", "A collaboration", "Just saying hello"]
+
+
+def contact():
+    rows = "".join(
+        f'<div><dt class="label" data-added="ui">{E(c_["label"])}</dt><dd data-added="supplied">'
+        f'<a class="u{" pending" if c_.get("pending") else ""}" href="{E(c_["href"])}">{E(c_["value"])}</a></dd></div>'
+        for c_ in site["home"]["contact"])
+    opts = "".join(f"<option>{E(t)}</option>" for t in CONTACT_TOPICS)
+    b = f"""{bar(here="contact")}
+<main id="top">
+<section class="section cpage"><div class="wrap g24 cpage__grid">
+  <figure class="cpage__photo"><img src="{IMG}contact-yasmin.jpg" alt="Yasmin looking at a framed painting in a gallery"></figure>
+  <div class="cpage__head">
+    <h1 class="label" data-added="ui">Contact</h1>
+    <p class="cpage__title" data-added="supplied">{E(site["home"]["contact_heading"])}</p>
+    <p class="cpage__intro" data-added="suggested">Working on an exhibit, a digital experience or a research question? I’d love to hear about it.</p>
+  </div>
+  <form class="cpage__form" action="contact.html#sent" method="get" data-added="ui">
+    <fieldset class="cf__name"><legend class="label">Name <span class="cf__req">(required)</span></legend>
+      <div><label for="cf-first">First name</label><input id="cf-first" name="first" autocomplete="given-name" required></div>
+      <div><label for="cf-last">Last name</label><input id="cf-last" name="last" autocomplete="family-name" required></div>
+    </fieldset>
+    <div class="cf__field"><label class="label" for="cf-email">Email <span class="cf__req">(required)</span></label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+    <div class="cf__field"><label class="label" for="cf-topic">What’s it about?</label>
+      <div class="cf__select"><select id="cf-topic" name="topic" data-added="suggested">{opts}</select></div></div>
+    <div class="cf__field"><label class="label" for="cf-msg">Message <span class="cf__req">(required)</span></label><textarea id="cf-msg" name="message" rows="5" required></textarea></div>
+    <button class="btn btn--solid" type="submit">Send message</button>
+  </form>
+  <p class="cpage__sent" id="sent" role="status" data-added="suggested">Thank you. Your message is on its way, and I’ll get back to you soon.</p>
+  <dl class="contact__rows cpage__rows">{rows}</dl>
+</div></section>
+</main>
+{foot()}"""
+    return page("Contact — Yasmin Bajwa", site["home"]["contact_heading"], b)
+
+
 MODULE_NAMES = {"pair": "Plate pair", "board": "Board 2×2", "one3": "Board 1+3", "strip": "Strip",
                 "full": "Full plate", "video": "Video panel", "spread": "Spread (round-3 A14, kept)"}
 SQS = {"pair": "Fluid Engine row: image block 16 cols + image block 8 cols, same height",
@@ -895,6 +935,7 @@ if __name__ == "__main__":
     for r in ROOMS:
         open(f"site/{r['slug']}.html", "w").write(case(r))
     open("site/private-view.html", "w").write(lock())
+    open("site/contact.html", "w").write(contact())
     open("site/logo-compare.html", "w").write(logo_compare())
     json.dump(CAPTIONS, open("content/captions.json", "w"), indent=1, ensure_ascii=False)
     json.dump(FIGMAP, open("content/figmap.json", "w"), indent=1, ensure_ascii=False)

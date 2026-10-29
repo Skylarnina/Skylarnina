@@ -414,7 +414,7 @@ def site_styles():
     w("- [ ] **Home**: regular page, set as homepage.")
     w("- [ ] **Projects**: regular page, URL `/projects`, in the navigation as \"Projects\".")
     w("- [ ] **Case studies**: Portfolio page, URL `/projects-private`, **not linked** (not in the navigation). Its four project pages are built on pages 1–5.")
-    w("- [ ] Navigation links: **About** → `/#snippets`, **Contact** → `/#contact` (anchor links to Home sections).")
+    w("- [ ] Navigation links: **About** → `/#snippets` (anchor link to the Home section), **Contact** → `/contact` (the Contact page: `squarespace/CONTACT-PAGE.md`).")
     w("")
     w("**Header** (*Edit Site Header*)")
     w("- [ ] Layout: site title left, navigation right. Site title as text: \"Yasmin Bajwa\", Inter Tight 15px. Navigation 15px, gap about 28px; the current page underlined.")

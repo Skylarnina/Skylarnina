@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-theme="mono">
+<head>
+<meta charset="utf-8">
+<script>(function(){var t,d=document.documentElement;try{t=new URLSearchParams(location.search).get('theme')}catch(e){}if(!t){try{t=localStorage.getItem('yb-theme')}catch(e){}}if(['mono','cream','cream-bold','venues','venues-bold','heritage','heritage-rich','salon','campus','collection'].indexOf(t)>-1){d.setAttribute('data-theme',t)}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — Yasmin Bajwa</title>
+<meta name="description" content="Let’s create something people will remember.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter+Tight:ital,wght@0,400;0,500;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/css/r3.css">
+</head>
+<body>
+<header class="bar"><div class="wrap"><a class="bar__name" href="index.html" data-added="ui">Yasmin Bajwa</a><nav aria-label="Main" data-added="ui"><a href="projects.html">Projects</a><a href="index.html#snippets">About</a><a href="contact.html" aria-current="page">Contact</a></nav></div></header>
+<main id="top">
+<section class="section cpage"><div class="wrap g24 cpage__grid">
+  <figure class="cpage__photo"><img src="assets/img/contact-yasmin.jpg" alt="Yasmin looking at a framed painting in a gallery"></figure>
+  <div class="cpage__head">
+    <h1 class="label" data-added="ui">Contact</h1>
+    <p class="cpage__title" data-added="supplied">Let’s create something people will remember.</p>
+    <p class="cpage__intro" data-added="suggested">Working on an exhibit, a digital experience or a research question? I’d love to hear about it.</p>
+  </div>
+  <form class="cpage__form" action="contact.html#sent" method="get" data-added="ui">
+    <fieldset class="cf__name"><legend class="label">Name <span class="cf__req">(required)</span></legend>
+      <div><label for="cf-first">First name</label><input id="cf-first" name="first" autocomplete="given-name" required></div>
+      <div><label for="cf-last">Last name</label><input id="cf-last" name="last" autocomplete="family-name" required></div>
+    </fieldset>
+    <div class="cf__field"><label class="label" for="cf-email">Email <span class="cf__req">(required)</span></label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+    <div class="cf__field"><label class="label" for="cf-topic">What’s it about?</label>
+      <div class="cf__select"><select id="cf-topic" name="topic" data-added="suggested"><option>An exhibit or project</option><option>UX design or research</option><option>A collaboration</option><option>Just saying hello</option></select></div></div>
+    <div class="cf__field"><label class="label" for="cf-msg">Message <span class="cf__req">(required)</span></label><textarea id="cf-msg" name="message" rows="5" required></textarea></div>
+    <button class="btn btn--solid" type="submit">Send message</button>
+  </form>
+  <p class="cpage__sent" id="sent" role="status" data-added="suggested">Thank you. Your message is on its way, and I’ll get back to you soon.</p>
+  <dl class="contact__rows cpage__rows"><div><dt class="label" data-added="ui">Email</dt><dd data-added="supplied"><a class="u" href="mailto:yasminbajwa248@gmail.com">yasminbajwa248@gmail.com</a></dd></div><div><dt class="label" data-added="ui">Phone</dt><dd data-added="supplied"><a class="u" href="tel:+13139792205">(313) 979-2205</a></dd></div><div><dt class="label" data-added="ui">LinkedIn</dt><dd data-added="supplied"><a class="u pending" href="#linkedin">[URL — pending client]</a></dd></div></dl>
+</div></section>
+</main>
+<footer class="foot" data-added="ui"><div class="stripe-wrap"><div class="stripe" aria-hidden="true"><span><i></i><i></i><i></i><i></i><i></i></span></div></div><div class="wrap"><span>© Yasmin Bajwa</span><a class="u" href="#top">Back to top ↑</a></div></footer>
+
+<div class="theme-sw" role="group" aria-label="Colour theme (prototype only)" data-added="ui"><button type="button" data-t="collection" aria-pressed="false">Collection</button><button type="button" data-t="heritage" aria-pressed="false">Archive</button><button type="button" data-t="salon" aria-pressed="false">Salon</button><button type="button" data-t="campus" aria-pressed="false">Campus</button><button type="button" data-t="mono" aria-pressed="false">Mono</button><span class="sep" aria-hidden="true"></span><details><summary>Earlier</summary><button type="button" data-t="cream" aria-pressed="false">Cream</button><button type="button" data-t="cream-bold" aria-pressed="false">Cream bold</button><button type="button" data-t="venues" aria-pressed="false">Venues</button><button type="button" data-t="venues-bold" aria-pressed="false">Venues bold</button><button type="button" data-t="heritage-rich" aria-pressed="false">Heritage rich</button></details></div>
+<script>
+/* Prototype theme switcher: sets data-theme on <html>, remembers it (localStorage, and ?theme= on
+   the internal links so it survives where storage is blocked). Not part of the Squarespace build. */
+(function () {
+  var d = document.documentElement, bs = document.querySelectorAll('.theme-sw button');
+  function links(t) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href'), m = h.match(/^([\w-]+\.html|\.\/)(?:\?[^#]*)?(#.*)?$/);
+      if (m) a.setAttribute('href', m[1] + '?theme=' + t + (m[2] || ''));
+    });
+  }
+  function set(t) {
+    d.setAttribute('data-theme', t);
+    bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === t ? 'true' : 'false'); });
+    try { localStorage.setItem('yb-theme', t); } catch (e) {}
+    links(t);
+  }
+  bs.forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.t); }); });
+  set(d.getAttribute('data-theme') || 'mono');
+  /* the active chapter in the index = the chapter jumped to */
+  function chapter() {
+    document.querySelectorAll('.chindex a').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('href') === location.hash);
+    });
+  }
+  window.addEventListener('hashchange', chapter); chapter();
+})();
+</script>
+</body>
+</html>

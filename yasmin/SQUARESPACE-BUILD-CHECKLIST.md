@@ -53,7 +53,7 @@ Set these before building any page; every later page assumes them. Values are th
 - [ ] **Home**: regular page, set as homepage.
 - [ ] **Projects**: regular page, URL `/projects`, in the navigation as "Projects".
 - [ ] **Case studies**: Portfolio page, URL `/projects-private`, **not linked** (not in the navigation). Its four project pages are built on pages 1–5.
-- [ ] Navigation links: **About** → `/#snippets`, **Contact** → `/#contact` (anchor links to Home sections).
+- [ ] Navigation links: **About** → `/#snippets` (anchor link to the Home section), **Contact** → `/contact` (the Contact page: `squarespace/CONTACT-PAGE.md`).
 
 **Header** (*Edit Site Header*)
 - [ ] Layout: site title left, navigation right. Site title as text: "Yasmin Bajwa", Inter Tight 15px. Navigation 15px, gap about 28px; the current page underlined.
