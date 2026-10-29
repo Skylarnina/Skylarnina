@@ -37,8 +37,8 @@ DESKTOP = [
                       (48, "Map zoomed in to one distributor"), (49, "Distributor map, worldwide again"), (50, "Check Distributor Stock page")]),
     ("Search (Auto Suggest)", [(51, "Auto-suggestion: “0232 – Fuses”"), (52, "Auto-suggestion: “Cartridge”"), (53, "After the click: L3 · Cartridge Fuses"),
                                (54, "Auto-suggestion: part number “0232”")]),
-    ("Search (Results Pages)", [(55, "Results “Cartridge”: products"), (56, "Results “Cartridge”: technical documents"), (57, "Results “232”"),
-                                (58, "Interstitial: “Fuse”")]),
+    ("Search (Results Pages)", [(55, "Results “Cartridge”: products"), (56, "Results “Cartridge”: technical documents"), (57, "Results “232”: product type filter"),
+                                (58, "Interstitial: most-searched categories for “Fuse”")]),
 ]
 MOBILE = [
     ("Home & Mega Menu", [(61, "Home page"), (62, "Home page, longer version"), (63, "Home page, menu opening"), (64, "Menu"),
@@ -52,8 +52,9 @@ MOBILE = [
                         (90, "Log in to MyLittelfuse")]),
     ("Where to Buy", [(92, "Distributor list"), (93, "Filters"), (94, "Map view")]),
     ("Search Pages", [(96, "Auto-suggestion: “232”"), (97, "Auto-suggestion: “0232”"), (98, "Auto-suggestion: “cart”"),
-                      (99, "Results for “Cartridge”: products"), (100, "Results"), (101, "Results, continued"), (102, "Results: refine"),
-                      (103, "Product series"), (104, "Results: technical documents")]),
+                      (99, "Results for “Cartridge”: products"), (100, "Results for “Cartridge”: technical documents"),
+                (101, "Results for “Cartridge Fuses”"), (102, "Filter: product type"), (103, "Results for “250 VAC Cartridge”: parts"),
+                (104, "Results for “Fuse”: suggested keywords and categories")]),
 ]
 
 

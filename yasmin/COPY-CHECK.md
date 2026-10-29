@@ -337,7 +337,7 @@ Order check: ✔ every item appears after the one before it.
 | L-038 | H4 | Translated findings into design principles | The Approach | ✔ | ✔ |
 | L-039 | P | Insights from the audit were translated into design principles focused… | The Approach | ✔ | ✔ |
 | L-040 | P | The work also addressed gaps where the existing wireframes did not ful… | The Approach | ✔ | ✔ |
-| L-041 | NOTE | INSERT WIREFRAMES FROM PDF HERE | The Approach | ✔ → Littelfuse wireframes (placeholder) | ✔ |
+| L-041 | NOTE | INSERT WIREFRAMES FROM PDF HERE | The Approach | ✔ → Hi-fi screens: nine desktop flows and the mobile designs | ✔ |
 | L-042 | H2 | Results & Impact | Results & Impact | ✔ | ✔ |
 | L-043 | P | The redesigned experience streamlined product discovery and evaluation… | Results & Impact | ✔ | ✔ |
 | L-044 | H2 | Reflection | Reflection | ✔ | ✔ |
@@ -392,7 +392,7 @@ These are **not her words**. They're short factual captions the brief asked for 
 | room-04-littelfuse | Fig. 05 | User archetype: Procurement |
 | room-04-littelfuse | Fig. 06 | Engineering personas (video) |
 | room-04-littelfuse | Fig. 07 | Product-discovery journey map |
-| room-04-littelfuse | Fig. 08 | Littelfuse wireframes (placeholder) |
+| room-04-littelfuse | Fig. 08 | Hi-fi screens: nine desktop flows and the mobile designs |
 
 ## Supplied, not her copy
 

@@ -8,20 +8,20 @@
 **Files:**
 - `littelfuse-screens.html`: the Code Block.
 - `get-littelfuse-addresses.js`: the Console helper.
-- The screens themselves: `site/assets/img/lf/`, 98 JPGs, also zipped as `littelfuse-screens-images.zip`:
+- The screens themselves: `site/assets/img/lf/`, 97 JPGs: 58 desktop, 39 mobile (also sent as a zip):
   - `lf-d-<flow>-<screen>.jpg` (desktop)
   - `lf-m-<flow>-<screen>.jpg` (mobile)
 
 Captions are in `content/lf-screens.json`.
 
 ## Steps
-- [ ] **Upload the 98 screens.** Go to **Website → Assets** (Asset Library) → **Upload**, and select all the files in the zip at once. Keep the file names: the helper finds the screens by name.
+- [ ] **Upload the 97 screens.** Go to **Website → Assets** (Asset Library) → **Upload**, and select all the files in the zip at once. Keep the file names: the helper finds the screens by name.
 - [ ] **Copy their addresses.**
   1. Stay on the Asset Library page and scroll down until all the `lf-` screens have appeared.
   2. Open the browser Console: `Ctrl+Shift+J` on Windows, `Cmd+Option+J` on Mac. If Chrome asks, type `allow pasting` first.
-  3. Paste the contents of `get-littelfuse-addresses.js` and press Enter. It should say **"98 of 98 screens found and copied."**
+  3. Paste the contents of `get-littelfuse-addresses.js` and press Enter. It should say **"97 of 97 screens found and copied."**
   4. If it lists missing ones, scroll so they show and run it again.
-  5. If it finds none, the Asset Library doesn't show its images in a way the helper can read. Instead, make a hidden page (**Pages → Not Linked**), add a **Gallery** block with all 98 screens, open that page in its own tab, and run the helper there.
+  5. If it finds none, the Asset Library doesn't show its images in a way the helper can read. Instead, make a hidden page (**Pages → Not Linked**), add a **Gallery** block with all 97 screens, open that page in its own tab, and run the helper there.
 - [ ] **Fill in the code.** Open `littelfuse-screens.html` in a text editor. Select the two lines `var DESKTOP = [];` and `var MOBILE = [];` and paste over them.
 - [ ] **Add it to the page.**
   1. On the Littelfuse page, after the paragraph ending "…Below are the completed wire frames.", add a **Code** block across the **full width** (columns 1–24; on mobile, full width).

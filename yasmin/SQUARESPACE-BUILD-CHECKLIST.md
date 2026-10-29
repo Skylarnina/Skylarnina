@@ -2,13 +2,13 @@
 
 Tick each box as you build. Every block lists its **Fluid Engine columns** (desktop grid of 24, mobile grid of 8), its **Site Styles text style**, and the **exact text to paste** in a grey box (use the box's copy button; the text is her source spelling, so labels are typed in normal case and the Paragraph 3 style uppercases them). Images give the **file to upload** and the **shape to size the block to**.
 
-Generated from the current build (`site/`, the built **mono** palette) and SQUARESPACE-BUILD-NOTES.md by `tools/build_checklist.py`: the text, columns, files and ratios are read from the rendered pages, so they match the prototype exactly. Things Squarespace can't reproduce exactly are flagged **F1…F19** with the nearest native setting, all listed on Page 10. Where this checklist and the build notes differ (the lock-screen font, the CSS numbering), the checklist follows the current build.
+Generated from the current build (`site/`, the built **mono** palette) and SQUARESPACE-BUILD-NOTES.md by `tools/build_checklist.py`: the text, columns, files and ratios are read from the rendered pages, so they match the prototype exactly. Things Squarespace can't reproduce exactly are flagged **F1…F18** with the nearest native setting, all listed on Page 10. Where this checklist and the build notes differ (the lock-screen font, the CSS numbering), the checklist follows the current build.
 
 **Build order, and why:** Page 0 (Site Styles, header, footer) → **Pages 1–5 the Case studies Portfolio** (its four project URLs are what Projects and Home link to; Room 01 is built first and its sections saved for reuse) → **Page 6 Lock Screen** (password on, tested) → **Page 7 Projects** → **Page 8 Homepage** (links to everything above; built last so no link points at a page that doesn't exist yet) → **Page 9 Custom CSS** (pasted last: two of its rules need block and section IDs from Home and Projects) → Page 10 flags, Page 11 final checks.
 
 **Notation:** `cols 9–20 · mobile 1–8` = the block spans desktop columns 9 to 20 and mobile columns 1 to 8. "A → B" in a text block = several lines in one block, each in its own style. "Line block above" = a 1px Line block directly above, same columns. Spacing is given in px at 1440 (and phone) widths.
 
-**In this checklist:** 317 text pastes, 67 images (including 21 slideshow photos), 8 videos, 34 image captions, 19 lines of CSS, 19 flags.
+**In this checklist:** 317 text pastes, 67 images (including 21 slideshow photos), 8 videos, 34 image captions, 19 lines of CSS, 18 flags.
 
 <div style="page-break-after: always"></div>
 
@@ -1495,10 +1495,9 @@ Set these before building any page; every later page assumes them. Values are th
   ```text
   The work also addressed gaps where the existing wireframes did not fully support critical user tasks. New and expanded flows were designed for global search, product discovery, Check Stock, Where to Buy, and privacy/GDPR interactions, while missing states, error handling, filters, links, and responsive behaviors were defined to make the experience development-ready. Below are the completed wire frames.
   ```
-- [ ] **Module · Full plate**: one image block across cols 1–24. Space above: 56px. Build it once, save it (heart icon), reuse it.
-- [ ] **5.6.23 Placeholder: leave out** · cols 1–24 · mobile 1–8 · F11 · F12. The prototype's grey box reads "Littelfuse wireframes — pending export from Adobe XD". Its caption, for when the export arrives:
+- [ ] **5.6.23 Code Block** · cols 1–24 · mobile 1–8 · paste `squarespace/littelfuse-screens.html` (Display Source off), after uploading its screens and filling in their addresses (`squarespace/LITTELFUSE-SCREENS.md`). It draws the desktop flow viewer (9 flows: Home & Mega Menu, Product Flow (L0 – L7), Check Stock from Parametric Table, Check Stock from Global Navigation, Request Sample from Parametric Table, Request Sample from Global Navigation, Where to Buy, Search (Auto Suggest), Search (Results Pages)) and the mobile phone row (6 groups: Home & Mega Menu, Product Pages L0 – L7, Check Distributor Stock, Request Sample, Where to Buy, Search Pages), each screen opening full size. Then a Text block under it, Paragraph 3, for the caption:
   ```text
-  Fig. 08 — Littelfuse wireframes (placeholder)
+  Fig. 08 — Hi-fi screens: nine desktop flows and the mobile designs
   ```
 
 ### 5.7 · Chapter · Results & Impact
@@ -1564,7 +1563,7 @@ The lock screen is a settings panel, not a Fluid Engine page: no columns. *Case 
 
 - [ ] **Password** on the *Case studies* Portfolio (*Page settings → General → Password*). One password protects all four projects; Squarespace can't give each project its own.
 - [ ] Layout **centred**; lock icon **off**; background image **none** (nothing from the case studies may show before the password).
-- [ ] Colours: background `#FFFFFF`, text `#111111`. Field rule, button fill and error style come from CSS rules 7–14 (F13).
+- [ ] Colours: background `#FFFFFF`, text `#111111`. Field rule, button fill and error style come from CSS rules 7–14 (F11).
 - [ ] Site title / branding at the top (Inter Tight 15px), 24px from the top edge:
   ```text
   Yasmin Bajwa
@@ -1582,11 +1581,11 @@ The lock screen is a settings panel, not a Fluid Engine page: no columns. *Case 
   Password
   Enter
   ```
-- [ ] Below the form, a link line (14px) (F14): link "Email Yasmin →" → `mailto:` her address with subject "Portfolio access":
+- [ ] Below the form, a link line (14px) (F12): link "Email Yasmin →" → `mailto:` her address with subject "Portfolio access":
   ```text
   No password? Email Yasmin →
   ```
-- [ ] Wrong password: Squarespace's own message (F15). The prototype's text, for reference only:
+- [ ] Wrong password: Squarespace's own message (F13). The prototype's text, for reference only:
   ```text
   Incorrect password.
   ```
@@ -1607,7 +1606,7 @@ A **regular page** (not the Portfolio grid: that locks with the password). One B
   ```text
   Projects
   ```
-- [ ] Then four cards in a 2 × 2 grid (cols 1–12 / 13–24; mobile one column), **56px** between the rows of cards. Each card: the logo plate, then one text block. Link the image and the title to the project page (F16).
+- [ ] Then four cards in a 2 × 2 grid (cols 1–12 / 13–24; mobile one column), **56px** between the rows of cards. Each card: the logo plate, then one text block. Link the image and the title to the project page (F14).
 - [ ] **7.2.2 Image** · cols 1–12 · mobile 1–8 · upload `site/assets/img/logos/plate-the-henry-ford.png` · block shape **3:2** · **Fit**
   transparent 1200×800 plate, logo already sized inside it; ground and hover come from CSS rules 18–19 · clickthrough link → `/projects-private/jackson-home` (instead of the lightbox) · alt text: "The Henry Ford logo"
 - [ ] **7.2.3 Text** · cols 1–12 · mobile 1–8 · Paragraph 3 → Heading 4 (prototype: 26px, F3) → Paragraph 2 (prototype: 15px, F3) (one block, one line per style)
@@ -1720,7 +1719,7 @@ A **regular page** (not the Portfolio grid: that locks with the password). One B
   ```text
   History · Fashion · Art
   ```
-- [ ] **8.3.4 Gallery block → Slideshow** · cols 13–24 · mobile 1–8 · aspect ratio **4:5** · autoplay **on, 5 s** · arrows on · dots on if offered · captions off · lightbox off (F17)
+- [ ] **8.3.4 Gallery block → Slideshow** · cols 13–24 · mobile 1–8 · aspect ratio **4:5** · autoplay **on, 5 s** · arrows on · dots on if offered · captions off · lightbox off (F15)
   Upload in this order (21 photos; the five landscape ones are already letterboxed to 4:5 so they show whole):
   - [ ] 01 `site/assets/img/snippets/snippet-20.jpg` · alt "The Power & Energy column being installed"
   - [ ] 02 `site/assets/img/snippets/snippet-06.jpg` · alt "Street mural: a portrait with a lightbulb hat"
@@ -1742,11 +1741,11 @@ A **regular page** (not the Portfolio grid: that locks with the password). One B
   - [ ] 18 `site/assets/img/snippets/snippet-17.jpg` · alt "Bookshop shelves"
   - [ ] 19 `site/assets/img/snippets/snippet-04.jpg` · alt "An exhibit gallery with panels and cases"
   - [ ] 20 `site/assets/img/snippets/snippet-18.jpg` · alt "Measuring tape against a gallery wall"
-  - [ ] 21 `site/assets/img/snippets/snippet-21.jpg` · alt "A The Henry Ford cap on a notebook with a handwritten note" · **publish only once the client confirms it** (F12)
+  - [ ] 21 `site/assets/img/snippets/snippet-21.jpg` · alt "A The Henry Ford cap on a notebook with a handwritten note" · **publish only once the client confirms it** (F16)
 - [ ] **Mobile order** (drag blocks in the mobile view): 8.3.4, 8.3.1, 8.3.2, 8.3.3
 
 ### 8.4 · Four disciplines
-- [ ] **Section:** Blank section · content width **Full** · theme **Ink** · no space above or below · panels about 60% of the screen tall (540px at 1440; 42% on phones, 2 × 2) (F18)
+- [ ] **Section:** Blank section · content width **Full** · theme **Ink** · no space above or below · panels about 60% of the screen tall (540px at 1440; 42% on phones, 2 × 2) (F17)
 - [ ] Each panel: an **Image** block filling the panel (Fill), then two **Text** blocks layered on top of it (*Bring forward*): the number in the panel's top rows, the name in its bottom rows. A 1px, 14% white rule between panels (Shape block outline, or none if the gaps show). Mobile: 2 × 2, panels 1–2 in the first row, 3–4 in the second.
 - [ ] **8.4.1 Image** · cols 1–6 · mobile 1–4 · upload `site/assets/img/snippets/snippet-15.jpg` · block shape **2:3** · **Fill**
   alt text: "Marble figures installation with digital counters"
@@ -1800,7 +1799,7 @@ A **regular page** (not the Portfolio grid: that locks with the password). One B
   ```text
   All projects →
   ```
-- [ ] **Line** block · cols 1–24 · 1px ink · above the first row. Then four rows, each followed by a 1px, 14% ink Line block across cols 1–24; 22px above and below each row's content. Link each title and logo to its project page (F16; F19).
+- [ ] **Line** block · cols 1–24 · 1px ink · above the first row. Then four rows, each followed by a 1px, 14% ink Line block across cols 1–24; 22px above and below each row's content. Link each title and logo to its project page (F14; F18).
 - [ ] **8.5.3 Text** · cols 1–10 · mobile 1–8 · Paragraph 3 → Heading 3 (prototype: 32px, F3) (one block, one line per style)
   link the title → `/projects-private/jackson-home`
   ```text
@@ -1885,7 +1884,7 @@ A **regular page** (not the Portfolio grid: that locks with the password). One B
   (313) 979-2205
   ```
 - [ ] **8.6.5 Text** · cols 1–10 · mobile 1–8 · Paragraph 3 → Paragraph 2 (one block, one line per style)
-  **Line** block below (1px, 14% ink, same columns) · link "[URL — pending client]" → her LinkedIn profile URL (**pending**: the client hasn't supplied it, F12); until then paste the placeholder and leave it unlinked
+  **Line** block below (1px, 14% ink, same columns) · link "[URL — pending client]" → her LinkedIn profile URL (**pending**: the client hasn't supplied it, F16); until then paste the placeholder and leave it unlinked
   ```text
   LinkedIn
   [URL — pending client]
@@ -1902,7 +1901,7 @@ A **regular page** (not the Portfolio grid: that locks with the password). One B
 - [ ] `.I1`–`.I4`: right-click each **discipline photo** on Home → *Inspect* → copy the wrapper's `fe-block-…` class (rules 15–16).
 - [ ] `.T1`–`.T4`, `.N1`–`.N4`: the same for each panel's **name** and **number** text blocks (rule 17).
 - [ ] `.L`: the **Projects section on Home** and the **section on the Projects page**: `section[data-section-id="…"]`, both, comma-separated (rules 18–19).
-- [ ] Lock-screen rules 7–14: check each class in the inspector on her site (F13).
+- [ ] Lock-screen rules 7–14: check each class in the inspector on her site (F11).
 - [ ] Other palettes: only the hex values change (the build notes list them per palette); cream adds one line, venues three to seven.
 
 ```css
@@ -1943,15 +1942,14 @@ Each flag is cited next to the blocks it affects. **Nearest native setting** in 
 - [ ] **F8 · Captions above the image (the Strip module) and "Running time" lines.** Image block captions sit below. **Nearest native:** a Paragraph 3 **Text** block above each image in the strip; for videos, the caption and running time go in a Text block beside the video (listed). *Affects: Room 02 (1 place).*
 - [ ] **F9 · Her three quoted visitor stories have a 1px rule on the left and 20px italic text.** **Nearest native:** a **Quote** block (Squarespace styles it itself; no left rule) or Paragraph 2 in italic with a **Line** block set vertical (**verify** her editor offers vertical Line blocks). Keep the bold lead-in words bold. *Affects: Room 02 (3 places).*
 - [ ] **F10 · Vertical videos are capped at 78% of the screen height and centred in cols 1–16.** **Nearest native:** size the Video block by hand: about cols 5–12 at desktop, centred, so it isn't taller than the screen. *Affects: Room 02, Room 03 (2 places).*
-- [ ] **F11 · Littelfuse wireframes: a placeholder until she exports them from Adobe XD.** **Don't publish the grey placeholder.** Leave that figure out until the export arrives (ASSET-GAPS.md); the caption numbering after it stays as listed. *Affects: Room 04 (1 place).*
-- [ ] **F12 · Pending content from the client.** LinkedIn URL (Contact), Littelfuse wireframes (Room 04), and confirmation for snippet 21 (the handwritten note, last in the slideshow). Build the rest; fill these when they arrive. *Affects: Room 04, Homepage (3 places).*
-- [ ] **F13 · Lock-screen CSS class names.** The lock screen has no settings for the field rule, button fill or error style; CSS rules 7–14 do it, with class names taken from community examples, **not verified**. Check each in the browser inspector on her site; delete any that match nothing. *Affects: Lock Screen, Custom CSS (2 places).*
-- [ ] **F14 · The lock screen's "No password? Email Yasmin →" is a link.** Lock-screen text fields may not accept links (**verify**). **Nearest native:** write the line with her address in it: "No password? Email yasminbajwa248@gmail.com". *Affects: Lock Screen (1 place).*
-- [ ] **F15 · Wrong password: the prototype says "Incorrect password." under the field.** Squarespace shows its own message and wording. **Nearest native:** its message, restyled by CSS rule 10 (14px, 62% ink, no shake). *Affects: Lock Screen (1 place).*
-- [ ] **F16 · Whole project rows are one link in the prototype.** Fluid Engine can't group blocks into one link. **Nearest native:** link the title text and the logo image block to the project page (both listed). *Affects: Projects, Homepage (2 places).*
-- [ ] **F17 · The Snippets slideshow sits beside the text (cols 13–24), 4:5, with arrows, dots and a 400ms crossfade.** **Nearest native:** a **Gallery block** set to Slideshow inside the same section (**verify** her plan offers the Gallery block in Fluid Engine). If it doesn't, use a separate **Gallery section → Slideshow: Simple** directly below the text (it can't sit beside it). Transition timing and dots are Squarespace's own (**verify**). *Affects: Homepage (1 place).*
-- [ ] **F18 · The discipline panels are four equal full-bleed columns, 60% of the screen tall, with hairlines between.** **Nearest native:** a full-width section (content width **Full**) with four Image blocks at cols 1–6 / 7–12 / 13–18 / 19–24 set to **Fill**. The 45% darkening and the hover use CSS rules 15–16. Fluid Engine's own gaps may leave a thin gap between panels instead of a hairline (**verify**; set block spacing to 0 if offered). *Affects: Homepage (1 place).*
-- [ ] **F19 · Row hover: the logo tile darkens when the pointer is anywhere on the row.** No group hover in Fluid Engine. **Nearest native:** CSS rule 19 darkens the tile when the pointer is on the tile itself. *Affects: Homepage (1 place).*
+- [ ] **F11 · Lock-screen CSS class names.** The lock screen has no settings for the field rule, button fill or error style; CSS rules 7–14 do it, with class names taken from community examples, **not verified**. Check each in the browser inspector on her site; delete any that match nothing. *Affects: Lock Screen, Custom CSS (2 places).*
+- [ ] **F12 · The lock screen's "No password? Email Yasmin →" is a link.** Lock-screen text fields may not accept links (**verify**). **Nearest native:** write the line with her address in it: "No password? Email yasminbajwa248@gmail.com". *Affects: Lock Screen (1 place).*
+- [ ] **F13 · Wrong password: the prototype says "Incorrect password." under the field.** Squarespace shows its own message and wording. **Nearest native:** its message, restyled by CSS rule 10 (14px, 62% ink, no shake). *Affects: Lock Screen (1 place).*
+- [ ] **F14 · Whole project rows are one link in the prototype.** Fluid Engine can't group blocks into one link. **Nearest native:** link the title text and the logo image block to the project page (both listed). *Affects: Projects, Homepage (2 places).*
+- [ ] **F15 · The Snippets slideshow sits beside the text (cols 13–24), 4:5, with arrows, dots and a 400ms crossfade.** **Nearest native:** a **Gallery block** set to Slideshow inside the same section (**verify** her plan offers the Gallery block in Fluid Engine). If it doesn't, use a separate **Gallery section → Slideshow: Simple** directly below the text (it can't sit beside it). Transition timing and dots are Squarespace's own (**verify**). *Affects: Homepage (1 place).*
+- [ ] **F16 · Pending content from the client.** LinkedIn URL (Contact) and confirmation for snippet 21 (the handwritten note, last in the slideshow). Build the rest; fill these when they arrive. *Affects: Homepage (2 places).*
+- [ ] **F17 · The discipline panels are four equal full-bleed columns, 60% of the screen tall, with hairlines between.** **Nearest native:** a full-width section (content width **Full**) with four Image blocks at cols 1–6 / 7–12 / 13–18 / 19–24 set to **Fill**. The 45% darkening and the hover use CSS rules 15–16. Fluid Engine's own gaps may leave a thin gap between panels instead of a hairline (**verify**; set block spacing to 0 if offered). *Affects: Homepage (1 place).*
+- [ ] **F18 · Row hover: the logo tile darkens when the pointer is anywhere on the row.** No group hover in Fluid Engine. **Nearest native:** CSS rule 19 darkens the tile when the pointer is on the tile itself. *Affects: Homepage (1 place).*
 
 Not carried over at all: the theme switcher, the `?theme=` links, and the five-palette comparison (prototype tools). The prototype's one script stands in for the native slideshow.
 
@@ -1963,5 +1961,5 @@ Not carried over at all: the theme switcher, the `?theme=` links, and the five-p
 - [ ] Every text block against **COPY-CHECK.md**: her copy is verbatim; the captions are the ones listed under *Added captions* (she approves them).
 - [ ] Links: header (Projects, About, Contact), "View Projects →", every row and card (title + logo), chapter indexes (each `#ch-n` jumps to its chapter), prev / all / next on each project, Back to top, Email, Phone.
 - [ ] Lock screen: test the password in a private window (Page 6).
-- [ ] Pending before launch: LinkedIn URL, Littelfuse wireframes, snippet 21 confirmed (F12).
+- [ ] Pending before launch: LinkedIn URL, snippet 21 confirmed (F16).
 - [ ] Contrast spot-check: captions and labels stay at 62% ink (not lighter). The panel number "04" measures 3.6:1 on its photo in the prototype (THEMES.md, rendered audit): set that number's text to full white, or the darkening to 50% on that panel.

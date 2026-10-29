@@ -522,17 +522,17 @@
  {
   "page": "room-04-littelfuse",
   "chapter": "03 The Approach",
-  "module": "full",
+  "module": "screens",
   "tiles": [
    {
     "label": "Fig. 08",
-    "src": "—",
+    "src": "lf/ (97 screens)",
     "tile": "—",
-    "cap": "Littelfuse wireframes (placeholder)",
-    "kind": "placeholder",
+    "cap": "Hi-fi screens: nine desktop flows and the mobile designs",
+    "kind": "code",
     "src_id": "L-041"
    }
   ],
-  "note": "Placeholder until she exports the XD screens (ASSET-GAPS)."
+  "note": "Code Block (squarespace/littelfuse-screens.html); screens from her Adobe XD links."
  }
 ]

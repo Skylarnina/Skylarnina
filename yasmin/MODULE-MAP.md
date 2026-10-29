@@ -74,7 +74,7 @@ Sequence: Full plate → Full plate → Video panel → Video panel → Plate pa
 
 ## Littelfuse — `site/room-04-littelfuse.html`
 
-Sequence: Full plate → Board 2×2 → Video panel → Full plate → Full plate
+Sequence: Full plate → Board 2×2 → Video panel → Full plate → Screen viewer (Code Block)
 
 | # | Chapter | Module | Fig. | Caption | Her item | Source file | Tile (as placed) | Fit | Note |
 |---|---|---|---|---|---|---|---|---|---|
@@ -85,7 +85,7 @@ Sequence: Full plate → Board 2×2 → Video panel → Full plate → Full plat
 |  |  |  | Fig. 05 | User archetype: Procurement | L-026 | `r04-archetype-procurement.jpg` | `tiles/r04-archetype-procurement--1_000.jpg` | whole on #F4F3F0 |  |
 | 3 | 03 The Approach | Video panel | Fig. 06 | Engineering personas (video) | ➕ added | `r04-personas.mp4` | `poster-r04-personas.jpg` | video | Added media (Q6): directly under the archetype board. |
 | 4 | 03 The Approach | Full plate | Fig. 07 | Product-discovery journey map | L-029 | `r04-journey-full.jpg` | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |  |
-| 5 | 03 The Approach | Full plate | Fig. 08 | Littelfuse wireframes (placeholder) | L-041 | `—` | `—` | placeholder | Placeholder until she exports the XD screens (ASSET-GAPS). |
+| 5 | 03 The Approach | Screen viewer (Code Block) | Fig. 08 | Hi-fi screens: nine desktop flows and the mobile designs | L-041 | `lf/ (97 screens)` | `—` | Code Block | Code Block (squarespace/littelfuse-screens.html); screens from her Adobe XD links. |
 
 ## Homepage (not modules, listed for completeness)
 

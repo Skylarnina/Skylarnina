@@ -247,7 +247,7 @@ def note_html(pg, it):
         cap = "Hi-fi screens: nine desktop flows and the mobile designs"
         CAPTIONS.append((pg.name, lab, cap))
         FIGMAP.setdefault(pg.name, {}).setdefault(nid, []).append(cap)
-        pg.tiles.append(dict(label=lab, src="lf/ (98 screens)", tile="—", cap=cap, kind="code", src_id=nid))
+        pg.tiles.append(dict(label=lab, src="lf/ (97 screens)", tile="—", cap=cap, kind="code", src_id=nid))
         return module(pg, "screens", lf_screens() + f'<p class="lfx-cap" data-added="caption">{fig_no(lab)} — {E(cap)}</p>',
                       "Code Block (squarespace/littelfuse-screens.html); screens from her Adobe XD links.").replace(
                       'data-module="screens"', 'data-module="screens" data-codeblock="squarespace/littelfuse-screens.html"', 1)

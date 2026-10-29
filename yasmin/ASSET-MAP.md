@@ -250,6 +250,6 @@ Every image and video on the case-study pages, by source file, with the module i
 | `r04-archetype-procurement.jpg` | room-04-littelfuse | Fig. 05 | Board 2×2 | `tiles/r04-archetype-procurement--1_000.jpg` | whole on #F4F3F0 |
 | `r04-personas.mp4` | room-04-littelfuse | Fig. 06 | Video panel | `poster-r04-personas.jpg` | video |
 | `r04-journey-full.jpg` | room-04-littelfuse | Fig. 07 | Full plate | `tiles/r04-journey-full--1_929.jpg` | whole on #F4F3F0 |
-| `—` | room-04-littelfuse | Fig. 08 | Full plate | `—` | placeholder |
+| `lf/ (97 screens)` | room-04-littelfuse | Fig. 08 | Screen viewer (Code Block) | `—` | Code Block |
 
 Homepage (Phase 2): logo tiles from `site/assets/img/logos/` (rows + Projects grid), snippet photos for the disciplines and the Snippets About My Life slideshow (`tools/build_phase2_assets.py`); `r5-ri-five-screens.jpg` is the Rhode Island cover plate.

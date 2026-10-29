@@ -1,0 +1,760 @@
+{
+ "desktop": [
+  {
+   "flow": "Home & Mega Menu",
+   "screens": [
+    {
+     "file": "lf-d-01-01.jpg",
+     "caption": "Home page",
+     "w": 1366,
+     "h": 2674,
+     "xd": 0
+    },
+    {
+     "file": "lf-d-01-02.jpg",
+     "caption": "Mega menu",
+     "w": 1366,
+     "h": 768,
+     "xd": 1
+    }
+   ]
+  },
+  {
+   "flow": "Product Flow (L0 – L7)",
+   "screens": [
+    {
+     "file": "lf-d-02-01.jpg",
+     "caption": "L0 · All products",
+     "w": 1366,
+     "h": 1426,
+     "xd": 2
+    },
+    {
+     "file": "lf-d-02-02.jpg",
+     "caption": "L0 · All products, expanded",
+     "w": 1366,
+     "h": 2707,
+     "xd": 3
+    },
+    {
+     "file": "lf-d-02-03.jpg",
+     "caption": "L1 · Product super-category: Fuses & Overcurrent Protection",
+     "w": 1366,
+     "h": 2046,
+     "xd": 4
+    },
+    {
+     "file": "lf-d-02-04.jpg",
+     "caption": "L2 · Product category: Fuses",
+     "w": 1366,
+     "h": 2410,
+     "xd": 5
+    },
+    {
+     "file": "lf-d-02-05.jpg",
+     "caption": "L3 · Product sub-category: Cartridge Fuses",
+     "w": 1366,
+     "h": 4610,
+     "xd": 6
+    },
+    {
+     "file": "lf-d-02-06.jpg",
+     "caption": "L6 · Series 232, table collapsed",
+     "w": 1366,
+     "h": 4611,
+     "xd": 7
+    },
+    {
+     "file": "lf-d-02-07.jpg",
+     "caption": "L6 · Series 232, table expanded",
+     "w": 1366,
+     "h": 4121,
+     "xd": 8
+    },
+    {
+     "file": "lf-d-02-08.jpg",
+     "caption": "L7 · Part 02323.15",
+     "w": 1366,
+     "h": 2956,
+     "xd": 9
+    }
+   ]
+  },
+  {
+   "flow": "Check Stock from Parametric Table",
+   "screens": [
+    {
+     "file": "lf-d-03-01.jpg",
+     "caption": "Home page",
+     "w": 1366,
+     "h": 2674,
+     "xd": 11
+    },
+    {
+     "file": "lf-d-03-02.jpg",
+     "caption": "Check Distributor Stock page",
+     "w": 1366,
+     "h": 992,
+     "xd": 12
+    },
+    {
+     "file": "lf-d-03-03.jpg",
+     "caption": "Typing a part number: autocomplete",
+     "w": 1366,
+     "h": 992,
+     "xd": 13
+    },
+    {
+     "file": "lf-d-03-04.jpg",
+     "caption": "Part number entered",
+     "w": 1366,
+     "h": 992,
+     "xd": 14
+    },
+    {
+     "file": "lf-d-03-05.jpg",
+     "caption": "Stock results",
+     "w": 1366,
+     "h": 2386,
+     "xd": 15
+    },
+    {
+     "file": "lf-d-03-06.jpg",
+     "caption": "Results: several parts and distributors",
+     "w": 1366,
+     "h": 2436,
+     "xd": 16
+    },
+    {
+     "file": "lf-d-03-07.jpg",
+     "caption": "Inline error message",
+     "w": 1366,
+     "h": 980,
+     "xd": 17
+    }
+   ]
+  },
+  {
+   "flow": "Check Stock from Global Navigation",
+   "screens": [
+    {
+     "file": "lf-d-04-01.jpg",
+     "caption": "Home page",
+     "w": 1366,
+     "h": 2674,
+     "xd": 18
+    },
+    {
+     "file": "lf-d-04-02.jpg",
+     "caption": "Check Distributor Stock page",
+     "w": 1366,
+     "h": 992,
+     "xd": 19
+    },
+    {
+     "file": "lf-d-04-03.jpg",
+     "caption": "Typing a part number: autocomplete",
+     "w": 1366,
+     "h": 992,
+     "xd": 20
+    },
+    {
+     "file": "lf-d-04-04.jpg",
+     "caption": "Part number entered",
+     "w": 1366,
+     "h": 992,
+     "xd": 21
+    },
+    {
+     "file": "lf-d-04-05.jpg",
+     "caption": "Stock results",
+     "w": 1366,
+     "h": 2386,
+     "xd": 22
+    },
+    {
+     "file": "lf-d-04-06.jpg",
+     "caption": "Results: several parts and distributors",
+     "w": 1366,
+     "h": 2436,
+     "xd": 23
+    },
+    {
+     "file": "lf-d-04-07.jpg",
+     "caption": "Inline error message",
+     "w": 1366,
+     "h": 980,
+     "xd": 24
+    }
+   ]
+  },
+  {
+   "flow": "Request Sample from Parametric Table",
+   "screens": [
+    {
+     "file": "lf-d-05-01.jpg",
+     "caption": "L6 · Series 232",
+     "w": 1366,
+     "h": 4611,
+     "xd": 25
+    },
+    {
+     "file": "lf-d-05-02.jpg",
+     "caption": "L6 · Confirmation: part added to the sample list",
+     "w": 1366,
+     "h": 4611,
+     "xd": 26
+    },
+    {
+     "file": "lf-d-05-03.jpg",
+     "caption": "L6 · Sample list count updated",
+     "w": 1366,
+     "h": 4611,
+     "xd": 27
+    },
+    {
+     "file": "lf-d-05-04.jpg",
+     "caption": "Sample list",
+     "w": 1366,
+     "h": 1709,
+     "xd": 28
+    },
+    {
+     "file": "lf-d-05-05.jpg",
+     "caption": "Sample list: autosuggestion",
+     "w": 1366,
+     "h": 1709,
+     "xd": 29
+    },
+    {
+     "file": "lf-d-05-06.jpg",
+     "caption": "Sample list: product in the field",
+     "w": 1366,
+     "h": 1709,
+     "xd": 30
+    },
+    {
+     "file": "lf-d-05-07.jpg",
+     "caption": "Sample list: products added",
+     "w": 1366,
+     "h": 1947,
+     "xd": 31
+    },
+    {
+     "file": "lf-d-05-08.jpg",
+     "caption": "L0 · All products (continue browsing)",
+     "w": 1366,
+     "h": 1427,
+     "xd": 32
+    },
+    {
+     "file": "lf-d-05-09.jpg",
+     "caption": "Sample order fulfilment details",
+     "w": 1366,
+     "h": 2093,
+     "xd": 33
+    },
+    {
+     "file": "lf-d-05-10.jpg",
+     "caption": "Sample order: order summary",
+     "w": 1366,
+     "h": 3680,
+     "xd": 34
+    },
+    {
+     "file": "lf-d-05-11.jpg",
+     "caption": "Thank-you page",
+     "w": 1366,
+     "h": 1001,
+     "xd": 35
+    }
+   ]
+  },
+  {
+   "flow": "Request Sample from Global Navigation",
+   "screens": [
+    {
+     "file": "lf-d-06-01.jpg",
+     "caption": "Home page",
+     "w": 1366,
+     "h": 2674,
+     "xd": 36
+    },
+    {
+     "file": "lf-d-06-02.jpg",
+     "caption": "Sample list, from the global navigation",
+     "w": 1366,
+     "h": 1030,
+     "xd": 37
+    },
+    {
+     "file": "lf-d-06-03.jpg",
+     "caption": "Sample list: autosuggestion",
+     "w": 1366,
+     "h": 1030,
+     "xd": 38
+    },
+    {
+     "file": "lf-d-06-04.jpg",
+     "caption": "Sample list: product in the field",
+     "w": 1366,
+     "h": 1030,
+     "xd": 39
+    },
+    {
+     "file": "lf-d-06-05.jpg",
+     "caption": "Sample list: product added",
+     "w": 1366,
+     "h": 1231,
+     "xd": 40
+    },
+    {
+     "file": "lf-d-06-06.jpg",
+     "caption": "L0 · All products",
+     "w": 1366,
+     "h": 1427,
+     "xd": 41
+    }
+   ]
+  },
+  {
+   "flow": "Where to Buy",
+   "screens": [
+    {
+     "file": "lf-d-07-01.jpg",
+     "caption": "Starting point: Where to Buy in the header",
+     "w": 1366,
+     "h": 1427,
+     "xd": 42
+    },
+    {
+     "file": "lf-d-07-02.jpg",
+     "caption": "Where to Buy: distributor map, worldwide",
+     "w": 1366,
+     "h": 2266,
+     "xd": 43
+    },
+    {
+     "file": "lf-d-07-03.jpg",
+     "caption": "Distributor map, filtered",
+     "w": 1366,
+     "h": 2306,
+     "xd": 44
+    },
+    {
+     "file": "lf-d-07-04.jpg",
+     "caption": "Distributor map: North America",
+     "w": 1366,
+     "h": 2306,
+     "xd": 45
+    },
+    {
+     "file": "lf-d-07-05.jpg",
+     "caption": "Distributor map: Michigan",
+     "w": 1366,
+     "h": 2306,
+     "xd": 46
+    },
+    {
+     "file": "lf-d-07-06.jpg",
+     "caption": "Distributor details on the map",
+     "w": 1366,
+     "h": 2306,
+     "xd": 47
+    },
+    {
+     "file": "lf-d-07-07.jpg",
+     "caption": "Map zoomed in to one distributor",
+     "w": 1366,
+     "h": 2306,
+     "xd": 48
+    },
+    {
+     "file": "lf-d-07-08.jpg",
+     "caption": "Distributor map, worldwide again",
+     "w": 1366,
+     "h": 2071,
+     "xd": 49
+    },
+    {
+     "file": "lf-d-07-09.jpg",
+     "caption": "Check Distributor Stock page",
+     "w": 1366,
+     "h": 992,
+     "xd": 50
+    }
+   ]
+  },
+  {
+   "flow": "Search (Auto Suggest)",
+   "screens": [
+    {
+     "file": "lf-d-08-01.jpg",
+     "caption": "Auto-suggestion: “0232 – Fuses”",
+     "w": 1366,
+     "h": 1230,
+     "xd": 51
+    },
+    {
+     "file": "lf-d-08-02.jpg",
+     "caption": "Auto-suggestion: “Cartridge”",
+     "w": 1366,
+     "h": 768,
+     "xd": 52
+    },
+    {
+     "file": "lf-d-08-03.jpg",
+     "caption": "After the click: L3 · Cartridge Fuses",
+     "w": 1366,
+     "h": 1742,
+     "xd": 53
+    },
+    {
+     "file": "lf-d-08-04.jpg",
+     "caption": "Auto-suggestion: part number “0232”",
+     "w": 1366,
+     "h": 768,
+     "xd": 54
+    }
+   ]
+  },
+  {
+   "flow": "Search (Results Pages)",
+   "screens": [
+    {
+     "file": "lf-d-09-01.jpg",
+     "caption": "Results “Cartridge”: products",
+     "w": 1366,
+     "h": 3120,
+     "xd": 55
+    },
+    {
+     "file": "lf-d-09-02.jpg",
+     "caption": "Results “Cartridge”: technical documents",
+     "w": 1366,
+     "h": 2396,
+     "xd": 56
+    },
+    {
+     "file": "lf-d-09-03.jpg",
+     "caption": "Results “232”: product type filter",
+     "w": 1366,
+     "h": 2370,
+     "xd": 57
+    },
+    {
+     "file": "lf-d-09-04.jpg",
+     "caption": "Interstitial: most-searched categories for “Fuse”",
+     "w": 1366,
+     "h": 2035,
+     "xd": 58
+    }
+   ]
+  }
+ ],
+ "mobile": [
+  {
+   "flow": "Home & Mega Menu",
+   "screens": [
+    {
+     "file": "lf-m-01-01.jpg",
+     "caption": "Home page",
+     "w": 320,
+     "h": 2919,
+     "xd": 61
+    },
+    {
+     "file": "lf-m-01-02.jpg",
+     "caption": "Home page, longer version",
+     "w": 320,
+     "h": 3606,
+     "xd": 62
+    },
+    {
+     "file": "lf-m-01-03.jpg",
+     "caption": "Home page, menu opening",
+     "w": 320,
+     "h": 680,
+     "xd": 63
+    },
+    {
+     "file": "lf-m-01-04.jpg",
+     "caption": "Menu",
+     "w": 320,
+     "h": 680,
+     "xd": 64
+    },
+    {
+     "file": "lf-m-01-05.jpg",
+     "caption": "Menu: Products",
+     "w": 320,
+     "h": 680,
+     "xd": 65
+    },
+    {
+     "file": "lf-m-01-06.jpg",
+     "caption": "Menu: Fuses & Overcurrent Protection",
+     "w": 320,
+     "h": 680,
+     "xd": 66
+    },
+    {
+     "file": "lf-m-01-07.jpg",
+     "caption": "Menu: Fuses",
+     "w": 320,
+     "h": 680,
+     "xd": 67
+    }
+   ]
+  },
+  {
+   "flow": "Product Pages L0 – L7",
+   "screens": [
+    {
+     "file": "lf-m-02-01.jpg",
+     "caption": "L0 · All products",
+     "w": 320,
+     "h": 1826,
+     "xd": 69
+    },
+    {
+     "file": "lf-m-02-02.jpg",
+     "caption": "L0 · Introduction expanded",
+     "w": 320,
+     "h": 2989,
+     "xd": 70
+    },
+    {
+     "file": "lf-m-02-03.jpg",
+     "caption": "L0 · Introduction expanded, variant",
+     "w": 320,
+     "h": 3097,
+     "xd": 71
+    },
+    {
+     "file": "lf-m-02-04.jpg",
+     "caption": "L1 · Fuses & Overcurrent Protection",
+     "w": 320,
+     "h": 1946,
+     "xd": 72
+    },
+    {
+     "file": "lf-m-02-05.jpg",
+     "caption": "L1 · Introduction expanded",
+     "w": 320,
+     "h": 1946,
+     "xd": 73
+    },
+    {
+     "file": "lf-m-02-06.jpg",
+     "caption": "L2 · Fuses",
+     "w": 320,
+     "h": 2818,
+     "xd": 74
+    },
+    {
+     "file": "lf-m-02-07.jpg",
+     "caption": "L3 · Cartridge Fuses",
+     "w": 320,
+     "h": 6998,
+     "xd": 75
+    },
+    {
+     "file": "lf-m-02-08.jpg",
+     "caption": "L3 · Cartridge Fuses, variant",
+     "w": 320,
+     "h": 7838,
+     "xd": 76
+    },
+    {
+     "file": "lf-m-02-09.jpg",
+     "caption": "Sort",
+     "w": 320,
+     "h": 680,
+     "xd": 77
+    },
+    {
+     "file": "lf-m-02-10.jpg",
+     "caption": "Filters",
+     "w": 320,
+     "h": 1786,
+     "xd": 78
+    },
+    {
+     "file": "lf-m-02-11.jpg",
+     "caption": "L6 · Series 232",
+     "w": 320,
+     "h": 6725,
+     "xd": 79
+    },
+    {
+     "file": "lf-m-02-12.jpg",
+     "caption": "L6 · Series 232, continued",
+     "w": 320,
+     "h": 7281,
+     "xd": 80
+    },
+    {
+     "file": "lf-m-02-13.jpg",
+     "caption": "L7 · Part 02323.15",
+     "w": 320,
+     "h": 4140,
+     "xd": 81
+    },
+    {
+     "file": "lf-m-02-14.jpg",
+     "caption": "L7 · Part LCFE160804A180TG",
+     "w": 320,
+     "h": 4184,
+     "xd": 82
+    }
+   ]
+  },
+  {
+   "flow": "Check Distributor Stock",
+   "screens": [
+    {
+     "file": "lf-m-03-01.jpg",
+     "caption": "Check Distributors Stock: results",
+     "w": 320,
+     "h": 5694,
+     "xd": 84
+    },
+    {
+     "file": "lf-m-03-02.jpg",
+     "caption": "Filters",
+     "w": 320,
+     "h": 1244,
+     "xd": 85
+    }
+   ]
+  },
+  {
+   "flow": "Request Sample",
+   "screens": [
+    {
+     "file": "lf-m-04-01.jpg",
+     "caption": "Sample list: one item",
+     "w": 320,
+     "h": 1679,
+     "xd": 87
+    },
+    {
+     "file": "lf-m-04-02.jpg",
+     "caption": "Sample list: adding several part numbers",
+     "w": 320,
+     "h": 3003,
+     "xd": 88
+    },
+    {
+     "file": "lf-m-04-03.jpg",
+     "caption": "Sample list: eleven items",
+     "w": 320,
+     "h": 3666,
+     "xd": 89
+    },
+    {
+     "file": "lf-m-04-04.jpg",
+     "caption": "Log in to MyLittelfuse",
+     "w": 320,
+     "h": 1161,
+     "xd": 90
+    }
+   ]
+  },
+  {
+   "flow": "Where to Buy",
+   "screens": [
+    {
+     "file": "lf-m-05-01.jpg",
+     "caption": "Distributor list",
+     "w": 320,
+     "h": 3452,
+     "xd": 92
+    },
+    {
+     "file": "lf-m-05-02.jpg",
+     "caption": "Filters",
+     "w": 320,
+     "h": 1335,
+     "xd": 93
+    },
+    {
+     "file": "lf-m-05-03.jpg",
+     "caption": "Map view",
+     "w": 320,
+     "h": 1379,
+     "xd": 94
+    }
+   ]
+  },
+  {
+   "flow": "Search Pages",
+   "screens": [
+    {
+     "file": "lf-m-06-01.jpg",
+     "caption": "Auto-suggestion: “232”",
+     "w": 320,
+     "h": 1223,
+     "xd": 96
+    },
+    {
+     "file": "lf-m-06-02.jpg",
+     "caption": "Auto-suggestion: “0232”",
+     "w": 320,
+     "h": 680,
+     "xd": 97
+    },
+    {
+     "file": "lf-m-06-03.jpg",
+     "caption": "Auto-suggestion: “cart”",
+     "w": 320,
+     "h": 997,
+     "xd": 98
+    },
+    {
+     "file": "lf-m-06-04.jpg",
+     "caption": "Results for “Cartridge”: products",
+     "w": 320,
+     "h": 4374,
+     "xd": 99
+    },
+    {
+     "file": "lf-m-06-05.jpg",
+     "caption": "Results for “Cartridge”: technical documents",
+     "w": 320,
+     "h": 3634,
+     "xd": 100
+    },
+    {
+     "file": "lf-m-06-06.jpg",
+     "caption": "Results for “Cartridge Fuses”",
+     "w": 320,
+     "h": 3380,
+     "xd": 101
+    },
+    {
+     "file": "lf-m-06-07.jpg",
+     "caption": "Filter: product type",
+     "w": 320,
+     "h": 680,
+     "xd": 102
+    },
+    {
+     "file": "lf-m-06-08.jpg",
+     "caption": "Results for “250 VAC Cartridge”: parts",
+     "w": 320,
+     "h": 2728,
+     "xd": 103
+    },
+    {
+     "file": "lf-m-06-09.jpg",
+     "caption": "Results for “Fuse”: suggested keywords and categories",
+     "w": 320,
+     "h": 4464,
+     "xd": 104
+    }
+   ]
+  }
+ ]
+}
