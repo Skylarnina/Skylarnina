@@ -14,6 +14,11 @@
 
 Captions are in `content/lf-screens.json`.
 
+## Quick option: desktop flows only, nothing to upload
+`littelfuse-desktop-embed.html` is the desktop part on its own, ready to paste. Its 58 screens load from this portfolio's public GitHub repo through the jsDelivr CDN, pinned to a fixed commit, so there's nothing to upload or fill in.
+- [ ] On the Littelfuse page, add a full-width **Code** block after "…Below are the completed wire frames.". Paste the whole file, turn **Display Source** off, then check it on the live page.
+- **It depends on the GitHub repo staying public.** If the repo is made private or deleted, the screens stop loading. To host them on Squarespace instead, use the steps below.
+
 ## Steps
 - [ ] **Upload the 97 screens.** Go to **Website → Assets** (Asset Library) → **Upload**, and select all the files in the zip at once. Keep the file names: the helper finds the screens by name.
 - [ ] **Copy their addresses.**
