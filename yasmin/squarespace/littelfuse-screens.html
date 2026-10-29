@@ -103,7 +103,7 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
 <script>
 (function () {
   /* ===================== SCREENS =====================
-     [flow name, [[image address, caption, width, height], ...]]  (width/height: the screen's size in pixels)  */
+     [flow name, [[image address, caption, width, height, thumbnail address (optional)], ...]]  (width/height: the screen's size in pixels)  */
   var DESKTOP = [];
   var MOBILE = [];
   /* ============ nothing below needs editing ============ */
@@ -161,7 +161,7 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
 
   /* ---------- desktop: flow viewer ---------- */
   var D = root.querySelector('[data-part="desktop"]');
-  if (!DESKTOP.length) D.hidden = true; else {
+  if (D && !DESKTOP.length) D.hidden = true; else if (D) {
     var flow = 0, at = 0, vp = D.querySelector('.lfx__viewport'), scr = D.querySelector('.lfx__screen'), cap = D.querySelector('.lfx__cap'), steps = D.querySelector('.lfx__steps');
     var ftabs = tabs(D.querySelector('.lfx__flows'), DESKTOP.map(function (g) { return g[0]; }), function (k) { pickFlow(k); });
     var stepBtns = [];
@@ -169,7 +169,7 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
       flow = k; ftabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === k ? 'true' : 'false'); });
       steps.innerHTML = ''; stepBtns = DESKTOP[k][1].map(function (s, i) {
         var b = el('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', 'Screen ' + (i + 1) + ': ' + s[1]);
-        b.innerHTML = '<img loading="lazy" alt="" src="' + esc(sized(s[0], 300)) + '"><span>' + pad(i + 1) + '</span>';
+        b.innerHTML = '<img loading="lazy" alt="" src="' + esc(s[4] || sized(s[0], 300)) + '"><span>' + pad(i + 1) + '</span>';
         b.addEventListener('click', function () { show(i); }); steps.appendChild(b); return b;
       });
       show(0);
@@ -195,7 +195,7 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
 
   /* ---------- mobile: phone row ---------- */
   var M = root.querySelector('[data-part="mobile"]');
-  if (!MOBILE.length) M.hidden = true; else {
+  if (M && !MOBILE.length) M.hidden = true; else if (M) {
     var row = M.querySelector('.lfx__row'), all = toSet(MOBILE, true), mtabs = tabs(M.querySelector('.lfx__mflows'), ['All'].concat(MOBILE.map(function (g) { return g[0]; })), function (k) { pickGroup(k); });
     function pickGroup(k) {
       mtabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === k ? 'true' : 'false'); });
