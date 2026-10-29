@@ -95,7 +95,7 @@ F("lockcss", "Lock-screen CSS class names",
 F("placeholder", "Littelfuse wireframes: a placeholder until she exports them from Adobe XD",
   "**Don't publish the grey placeholder.** Leave that figure out until the export arrives (ASSET-GAPS.md); the caption numbering after it stays as listed.")
 F("pending", "Pending content from the client",
-  "LinkedIn URL (Contact), Littelfuse wireframes (Room 04), and confirmation for snippet 21 (the handwritten note, last in the slideshow). Build the rest; fill these when they arrive.")
+  "LinkedIn URL (Contact) and confirmation for snippet 21 (the handwritten note, last in the slideshow). Build the rest; fill these when they arrive.")
 F("caption", "Captions above the image (the Strip module) and \"Running time\" lines",
   "Image block captions sit below. **Nearest native:** a Paragraph 3 **Text** block above each image in the strip; for videos, the caption and running time go in a Text block beside the video (listed).")
 F("vertical", "Vertical videos are capped at 78% of the screen height and centred in cols 1–16",
@@ -336,6 +336,11 @@ def blocks_md(prefix, sec, msec, where):
         elif k == "placeholder":
             out.append(f"- [ ] **{ref(prefix)} Placeholder: leave out** · {cols(b, m)} · {fl('placeholder', where)} · {fl('pending', where)}. "
                        f"The prototype's grey box reads \"{b['label']}\". Its caption, for when the export arrives:")
+            out += fence([b["caption"]])
+        elif k == "codeblock":
+            out.append(f"- [ ] **{ref(prefix)} Code Block** · {cols(b, m)} · paste `{b['file']}` (Display Source off), after uploading its screens and filling in their addresses "
+                       f"(`squarespace/LITTELFUSE-SCREENS.md`). It draws the desktop flow viewer ({len(b['desktop'])} flows: {', '.join(b['desktop'])}) and the mobile phone row "
+                       f"({len(b['mobile'])} groups: {', '.join(b['mobile'])}), each screen opening full size. Then a Text block under it, Paragraph 3, for the caption:")
             out += fence([b["caption"]])
         elif k == "slideshow":
             out += slideshow(prefix, b, m, where)
@@ -704,7 +709,7 @@ w("- [ ] Every page in **Preview** at desktop width and in the mobile view; comp
 w("- [ ] Every text block against **COPY-CHECK.md**: her copy is verbatim; the captions are the ones listed under *Added captions* (she approves them).")
 w("- [ ] Links: header (Projects, About, Contact), \"View Projects →\", every row and card (title + logo), chapter indexes (each `#ch-n` jumps to its chapter), prev / all / next on each project, Back to top, Email, Phone.")
 w("- [ ] Lock screen: test the password in a private window (Page 6).")
-w("- [ ] Pending before launch: LinkedIn URL, Littelfuse wireframes, snippet 21 confirmed (" + fl("pending", "Final checks") + ").")
+w("- [ ] Pending before launch: LinkedIn URL, snippet 21 confirmed (" + fl("pending", "Final checks") + ").")
 w("- [ ] Contrast spot-check: captions and labels stay at 62% ink (not lighter). The panel number \"04\" measures 3.6:1 on its photo in the prototype (THEMES.md, rendered audit): set that number's text to full white, or the darkening to 50% on that panel.")
 
 text = "\n".join(OUT)

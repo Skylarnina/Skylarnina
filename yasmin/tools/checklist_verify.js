@@ -16,7 +16,7 @@ const flat = md.replace(/\s+/g, ' ');
       const out = []; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
       while ((n = w.nextNode())) {
         const t = n.textContent.replace(/\s+/g, ' ').trim(); if (!t) continue;
-        const el = n.parentElement; if (el.closest('script,style,.theme-sw,[aria-hidden="true"]')) continue;
+        const el = n.parentElement; if (el.closest('script,style,.theme-sw,[aria-hidden="true"],[data-lfx]')) continue;   // [data-lfx]: text drawn by the pasted Littelfuse Code Block
         // the wrong-password message is visible only in the #wrong state; checked too
         out.push(t);
       }

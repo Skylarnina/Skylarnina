@@ -8,7 +8,7 @@ Every element that carries Yasmin's copy has data-id="<inventory id>", so
 tools/copy_check.py can prove each item is on the page, exact, visible and in order.
 Words that are not hers carry data-added="caption|supplied|ui". No JavaScript.
 """
-import html, json
+import html, json, re
 
 c = json.load(open("content/copy.json"))
 site = json.load(open("content/site.json"))
@@ -241,16 +241,28 @@ def note_html(pg, it):
     if t.startswith("INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE"):
         return m_video(pg, "r03-wireframes.mp4", "poster-r03-wireframes.jpg", "Desktop wireframes", "0:23", src_id=nid)
     if t.startswith("INSERT WIREFRAMES FROM PDF HERE"):
+        # Her XD hi-fi screens (doc "Little Fuse Wireframes"): one Code Block in Squarespace, squarespace/littelfuse-screens.html
         start(pg)
         lab = pg.label()
-        CAPTIONS.append((pg.name, lab, "Littelfuse wireframes (placeholder)"))
-        FIGMAP.setdefault(pg.name, {}).setdefault(nid, []).append("Littelfuse wireframes (placeholder)")
-        pg.tiles.append(dict(label=lab, src="—", tile="—", cap="Littelfuse wireframes (placeholder)", kind="placeholder", src_id=nid))
-        return module(pg, "full", f'<figure class="t"><div class="m placeholder"><span class="label" data-added="placeholder">'
-                      f'Littelfuse wireframes — pending export from Adobe XD</span></div>'
-                      f'<figcaption data-added="caption">{fig_no(lab)} — Littelfuse wireframes (placeholder)</figcaption></figure>',
-                      "Placeholder until she exports the XD screens (ASSET-GAPS).")
+        cap = "Hi-fi screens: nine desktop flows and the mobile designs"
+        CAPTIONS.append((pg.name, lab, cap))
+        FIGMAP.setdefault(pg.name, {}).setdefault(nid, []).append(cap)
+        pg.tiles.append(dict(label=lab, src="lf/ (98 screens)", tile="—", cap=cap, kind="code", src_id=nid))
+        return module(pg, "screens", lf_screens() + f'<p class="lfx-cap" data-added="caption">{fig_no(lab)} — {E(cap)}</p>',
+                      "Code Block (squarespace/littelfuse-screens.html); screens from her Adobe XD links.").replace(
+                      'data-module="screens"', 'data-module="screens" data-codeblock="squarespace/littelfuse-screens.html"', 1)
     raise KeyError(t)
+
+
+def lf_screens():
+    """The Code Block's HTML with its DESKTOP / MOBILE data filled from content/lf-screens.json (local image paths)."""
+    code = open("squarespace/littelfuse-screens.html").read()
+    code = code[code.index("-->") + 3:].strip()
+    lf = json.load(open("content/lf-screens.json"))
+    js = lambda groups: json.dumps([[g["flow"], [[IMG + "lf/" + x["file"], x["caption"], x["w"], x["h"]] for x in g["screens"]]] for g in groups], ensure_ascii=False)
+    code = re.sub(r"var DESKTOP = \[.*?\];", lambda m: "var DESKTOP = " + js(lf["desktop"]) + ";", code, count=1, flags=re.S)
+    code = re.sub(r"var MOBILE = \[.*?\];", lambda m: "var MOBILE = " + js(lf["mobile"]) + ";", code, count=1, flags=re.S)
+    return code
 
 
 def note_id(room, prefix):
@@ -847,14 +859,15 @@ def contact():
 
 
 MODULE_NAMES = {"pair": "Plate pair", "board": "Board 2×2", "one3": "Board 1+3", "strip": "Strip",
-                "full": "Full plate", "video": "Video panel", "spread": "Spread (round-3 A14, kept)"}
+                "full": "Full plate", "video": "Video panel", "spread": "Spread (round-3 A14, kept)", "screens": "Screen viewer (Code Block)"}
 SQS = {"pair": "Fluid Engine row: image block 16 cols + image block 8 cols, same height",
        "board": "Gallery section → Grid: Simple, 2 columns, 1:1, lightbox on",
        "one3": "Fluid Engine row: one image block 16 cols × 3 rows tall + three image blocks 8 cols",
        "strip": "Gallery section → Grid: Simple, n columns, captions above (or a Fluid Engine row)",
        "full": "Fluid Engine row: one image block, 24 cols",
        "video": "Fluid Engine row: video block 16 cols + text block 8 cols",
-       "spread": "Fluid Engine: image block 11 cols beside text blocks"}
+       "spread": "Fluid Engine: image block 11 cols beside text blocks",
+       "screens": "Code Block, 24 cols: squarespace/littelfuse-screens.html (desktop flow viewer + mobile phone row)"}
 
 
 def rule_check():
@@ -895,7 +908,7 @@ def module_map():
               "|---|---|---|---|---|---|---|---|---|---|"]
         for k, m in enumerate(mods, 1):
             for j, t in enumerate(m["tiles"]):
-                fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder"}[t["kind"]]
+                fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder", "code": "Code Block"}[t["kind"]]
                 L.append(f"| {k if j == 0 else ''} | {m['chapter'] if j == 0 else ''} | {MODULE_NAMES[m['module']] if j == 0 else ''} | "
                          f"{t['label']} | {t['cap']} | {t['src_id'] or '➕ added'} | `{t['src']}` | `{t['tile']}` | {fit} | {m['note'] if j == 0 else ''} |")
         L.append("")
@@ -917,7 +930,7 @@ def asset_map_section():
          "| Source file | Page | Fig. | Module | Tile placed | Fit |", "|---|---|---|---|---|---|"]
     for m in MODLOG:
         for t in m["tiles"]:
-            fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder"}[t["kind"]]
+            fit = {"doc": "whole on #F4F3F0", "photo": "cropped to ratio", "video": "video", "placeholder": "placeholder", "code": "Code Block"}[t["kind"]]
             L.append(f"| `{t['src']}` | {m['page']} | {t['label']} | {MODULE_NAMES[m['module']]} | `{t['tile']}` | {fit} |")
     L += ["", "Homepage (Phase 2): logo tiles from `site/assets/img/logos/` (rows + Projects grid), snippet photos for the disciplines and "
           "the Snippets About My Life slideshow (`tools/build_phase2_assets.py`); `r5-ri-five-screens.jpg` is the Rhode Island cover plate.", ""]
