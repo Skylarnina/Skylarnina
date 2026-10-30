@@ -8,7 +8,7 @@ Generated from the current build (`site/`, the built **mono** palette) and SQUAR
 
 **Notation:** `cols 9–20 · mobile 1–8` = the block spans desktop columns 9 to 20 and mobile columns 1 to 8. "A → B" in a text block = several lines in one block, each in its own style. "Line block above" = a 1px Line block directly above, same columns. Spacing is given in px at 1440 (and phone) widths.
 
-**In this checklist:** 317 text pastes, 67 images (including 21 slideshow photos), 8 videos, 34 image captions, 19 lines of CSS, 18 flags.
+**In this checklist:** 317 text pastes, 67 images (including 21 slideshow photos), 7 videos, 34 image captions, 19 lines of CSS, 18 flags.
 
 <div style="page-break-after: always"></div>
 
@@ -1182,21 +1182,18 @@ Set these before building any page; every later page assumes them. Values are th
   Symptom Diary: An optional tool for anonymously reporting post-vaccination symptoms, providing the Rhode Island Department of Health with data to support public health monitoring.
   Testing Location Map: An interactive map helping users quickly locate nearby COVID-19 testing services.
   ```
-- [ ] **Module · Video panel**: the video in cols 1–16, its caption and running time in cols 17–24 under a Line. Space above: 56px. Build it once, save it (heart icon), reuse it.
-- [ ] **4.7.5 Video** · cols 1–16 · mobile 1–8 · upload `site/assets/video/r03-wireframes.mp4` · thumbnail `site/assets/img/poster-r03-wireframes.jpg` · controls on, autoplay off
-- [ ] **4.7.6 Text** · cols 17–24 · mobile 1–8 (below the video) · bottom-aligned · **Line** block above (1px ink) · Paragraph 3 → Paragraph 3
+- [ ] **4.7.5 Code Blocks** · cols 1–24 · mobile 1–8 · paste `squarespace/rhode-island-desktop-embed.html` then `squarespace/rhode-island-mobile-embed.html`, each in its own full-width Code Block (Display Source off). They're ready to paste: the screens load from the portfolio repo, nothing to upload or fill in. Desktop flow viewer (4 sections: Test Scheduling: Hi-Fi Designs, Portal Screenshots, Wireframes, Wireframe Notes & Options); phone mockups (8 groups: Onboarding, Home & Menu, Vaccine Record, Help & Resources, Symptom Diary, Screening Status, Household, Settings & Support); every screen opens full size. Then a Text block under them, Paragraph 3, for the caption:
   ```text
-  Fig. 04 — Desktop wireframes
-  Running time 0:23
+  Fig. 04 — Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app
   ```
 - [ ] **Module · Plate pair**: a wide image (16 cols) beside a tall one (8 cols), tops and bottoms aligned; on mobile stacked in the order listed. Space above: 56px. Build it once, save it (heart icon), reuse it.
-- [ ] **4.7.7 Image** · cols 1–16 · mobile 1–8 · upload `site/assets/img/tiles/r03-annotated--1_500.jpg` · block shape **3:2** · **Fit**
+- [ ] **4.7.6 Image** · cols 1–16 · mobile 1–8 · upload `site/assets/img/tiles/r03-annotated--1_500.jpg` · block shape **3:2** · **Fit**
   the tile already holds the light ground and padding, so nothing is cropped · lightbox on (opens the tile; full-size original: `site/assets/img/r03-annotated.jpg`) · alt text: "Vaccine details: annotated mobile screens"
   caption (**Caption: below**, Paragraph 3):
   ```text
   Fig. 05 — Vaccine details: annotated mobile screens
   ```
-- [ ] **4.7.8 Image** · cols 17–24 · mobile 1–8 · upload `site/assets/img/tiles/r4-ri-screens--0_750.jpg` · block shape **3:4** · **Fit**
+- [ ] **4.7.7 Image** · cols 17–24 · mobile 1–8 · upload `site/assets/img/tiles/r4-ri-screens--0_750.jpg` · block shape **3:4** · **Fit**
   the tile already holds the light ground and padding, so nothing is cropped · lightbox on (opens the tile; full-size original: `site/assets/img/r4-ri-screens.jpg`) · alt text: "Mobile wireframes: vaccination record and dose details"
   caption (**Caption: below**, Paragraph 3):
   ```text
@@ -1495,7 +1492,7 @@ Set these before building any page; every later page assumes them. Values are th
   ```text
   The work also addressed gaps where the existing wireframes did not fully support critical user tasks. New and expanded flows were designed for global search, product discovery, Check Stock, Where to Buy, and privacy/GDPR interactions, while missing states, error handling, filters, links, and responsive behaviors were defined to make the experience development-ready. Below are the completed wire frames.
   ```
-- [ ] **5.6.23 Code Block** · cols 1–24 · mobile 1–8 · paste `squarespace/littelfuse-screens.html` (Display Source off), after uploading its screens and filling in their addresses (`squarespace/LITTELFUSE-SCREENS.md`). It draws the desktop flow viewer (9 flows: Home & Mega Menu, Product Flow (L0 – L7), Check Stock from Parametric Table, Check Stock from Global Navigation, Request Sample from Parametric Table, Request Sample from Global Navigation, Where to Buy, Search (Auto Suggest), Search (Results Pages)) and the mobile phone row (6 groups: Home & Mega Menu, Product Pages L0 – L7, Check Distributor Stock, Request Sample, Where to Buy, Search Pages), each screen opening full size. Then a Text block under it, Paragraph 3, for the caption:
+- [ ] **5.6.23 Code Blocks** · cols 1–24 · mobile 1–8 · paste `squarespace/littelfuse-desktop-embed.html` then `squarespace/littelfuse-mobile-embed.html`, each in its own full-width Code Block (Display Source off). They're ready to paste: the screens load from the portfolio repo, nothing to upload or fill in. Desktop flow viewer (9 sections: Home & Mega Menu, Product Flow (L0 – L7), Check Stock from Parametric Table, Check Stock from Global Navigation, Request Sample from Parametric Table, Request Sample from Global Navigation, Where to Buy, Search (Auto Suggest), Search (Results Pages)); phone mockups (6 groups: Home & Mega Menu, Product Pages L0 – L7, Check Distributor Stock, Request Sample, Where to Buy, Search Pages); every screen opens full size. Then a Text block under them, Paragraph 3, for the caption:
   ```text
   Fig. 08 — Hi-fi screens: nine desktop flows and the mobile designs
   ```

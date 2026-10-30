@@ -22291,7 +22291,7 @@
        ]
       },
       {
-       "kind": "video",
+       "kind": "codeblock",
        "id": null,
        "cols": [
         1,
@@ -22299,32 +22299,29 @@
        ],
        "box": {
         "x": 20,
-        "y": 6816.75,
+        "y": 6643.265625,
         "w": 350,
-        "h": 280.875
+        "h": 1493.3125
        },
        "rules": [],
        "mt": 56,
-       "src": "assets/video/r03-wireframes.mp4",
-       "poster": "assets/img/poster-r03-wireframes.jpg",
-       "vertical": false,
-       "caption": "Fig. 04 — Desktop wireframes",
-       "runtime": "Running time 0:23",
-       "video_cols": [
-        1,
-        8
+       "file": "squarespace/rhode-island-desktop-embed.html + rhode-island-mobile-embed.html",
+       "caption": "Fig. 04 — Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app",
+       "desktop": [
+        "Test Scheduling: Hi-Fi Designs",
+        "Portal Screenshots",
+        "Wireframes",
+        "Wireframe Notes & Options"
        ],
-       "caption_cols": [
-        1,
-        8
-       ],
-       "caption_rules": [
-        {
-         "side": "top",
-         "color": "rgb(17, 17, 17)",
-         "width": 1,
-         "who": "self"
-        }
+       "mobile": [
+        "Onboarding",
+        "Home & Menu",
+        "Vaccine Record",
+        "Help & Resources",
+        "Symptom Diary",
+        "Screening Status",
+        "Household",
+        "Settings & Support"
        ]
       },
       {
@@ -24542,7 +24539,7 @@
        ]
       },
       {
-       "kind": "video",
+       "kind": "codeblock",
        "id": null,
        "cols": [
         1,
@@ -24550,32 +24547,29 @@
        ],
        "box": {
         "x": 48,
-        "y": 6283.265625,
+        "y": 6118.390625,
         "w": 1344,
-        "h": 495
+        "h": 1889
        },
        "rules": [],
        "mt": 56,
-       "src": "assets/video/r03-wireframes.mp4",
-       "poster": "assets/img/poster-r03-wireframes.jpg",
-       "vertical": false,
-       "caption": "Fig. 04 — Desktop wireframes",
-       "runtime": "Running time 0:23",
-       "video_cols": [
-        1,
-        16
+       "file": "squarespace/rhode-island-desktop-embed.html + rhode-island-mobile-embed.html",
+       "caption": "Fig. 04 — Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app",
+       "desktop": [
+        "Test Scheduling: Hi-Fi Designs",
+        "Portal Screenshots",
+        "Wireframes",
+        "Wireframe Notes & Options"
        ],
-       "caption_cols": [
-        17,
-        24
-       ],
-       "caption_rules": [
-        {
-         "side": "top",
-         "color": "rgb(17, 17, 17)",
-         "width": 1,
-         "who": "self"
-        }
+       "mobile": [
+        "Onboarding",
+        "Home & Menu",
+        "Vaccine Record",
+        "Help & Resources",
+        "Symptom Diary",
+        "Screening Status",
+        "Household",
+        "Settings & Support"
        ]
       },
       {
@@ -27128,7 +27122,7 @@
        },
        "rules": [],
        "mt": 56,
-       "file": "squarespace/littelfuse-screens.html",
+       "file": "squarespace/littelfuse-desktop-embed.html + littelfuse-mobile-embed.html",
        "caption": "Fig. 08 — Hi-fi screens: nine desktop flows and the mobile designs",
        "desktop": [
         "Home & Mega Menu",
@@ -29482,7 +29476,7 @@
        },
        "rules": [],
        "mt": 56,
-       "file": "squarespace/littelfuse-screens.html",
+       "file": "squarespace/littelfuse-desktop-embed.html + littelfuse-mobile-embed.html",
        "caption": "Fig. 08 — Hi-fi screens: nine desktop flows and the mobile designs",
        "desktop": [
         "Home & Mega Menu",
