@@ -19,6 +19,59 @@ a{color:#8A5A00}a:hover{color:#3B3B3B}
 .quote:hover{transform:translateY(-4px);border-color:#F9BF58;box-shadow:0 24px 48px -28px rgba(13,13,13,.35)}
 .ba{flex:1 1 300px;min-width:0;background:#141414;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:14px}
 @media (max-width:640px){.quote,.ba{flex-basis:100%}}
+.eyebrow{font-weight:600;font-size:13px;letter-spacing:.16em;color:#8A5A00}
+.h2{margin:0;font-family:'Bounded',sans-serif;font-weight:800;font-size:clamp(26px,3vw,38px);line-height:1.15;letter-spacing:-.01em;color:#0D0D0D;max-width:760px;text-wrap:balance}
+.rule{width:72px;height:3px;background:#F9BF58}
+.sec-head{display:flex;flex-direction:column;gap:22px}
+.sec-text{margin:0;font-size:17px;line-height:1.6;color:#5E5A52;max-width:640px}
+.jump{display:flex;align-items:baseline;gap:14px;padding:12px 0;border-top:1px solid #2A2A2A;color:#E8E4DC;text-decoration:none;font-size:15px}
+.jump:first-of-type{border-top:0}
+.jump b{font-family:'Bounded',sans-serif;font-weight:800;font-size:22px;color:#F9BF58;min-width:2ch}
+.jump:hover{color:#FFFFFF}
+/* 1 · video carousel */
+.vwrap{box-sizing:border-box;padding:0 20px}
+.vsec{border-radius:28px;background:#141414;color:#FFFFFF;padding:clamp(56px,7vw,96px) 0;display:flex;flex-direction:column;gap:40px;overflow:hidden}
+.vsec .eyebrow{color:#F9BF58}.vsec .h2{color:#FFFFFF}.vsec .sec-text{color:#BDB8AE}
+.vhead{max-width:1200px;width:100%;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 40px}
+.vctrl{display:flex;align-items:center;gap:12px}
+.vcount{font-size:14px;letter-spacing:.12em;color:#BDB8AE;font-variant-numeric:tabular-nums;min-width:7ch;text-align:right}
+.vctrl button{width:48px;height:48px;border-radius:999px;border:1px solid #4A4A4A;background:transparent;color:#FFFFFF;display:grid;place-items:center;cursor:pointer;transition:background .3s,border-color .3s,color .3s}
+.vctrl button:hover:not(:disabled){background:#F9BF58;border-color:#F9BF58;color:#0D0D0D}
+.vctrl button:disabled{opacity:.35;cursor:default}
+.vtrack{list-style:none;margin:0;display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none;
+  --edge:max(24px,calc((100% - 1200px) / 2 + 24px));padding:0 var(--edge);scroll-padding-inline:var(--edge)}
+.vtrack::-webkit-scrollbar{display:none}
+.vid{flex:0 0 clamp(230px,24vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;gap:14px}
+.vid__media{position:relative;aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:#1D1D1B;border:1px dashed #4A4A4A}
+.vid__media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.vid__play{position:absolute;inset:0;width:100%;border:0;padding:0;background:linear-gradient(180deg,transparent 55%,rgba(5,5,5,.75));cursor:pointer;display:grid;place-items:center;color:#0D0D0D}
+.vid__play span{width:64px;height:64px;border-radius:999px;background:#F9BF58;display:grid;place-items:center;transition:transform .4s ease}
+.vid__play:hover span{transform:scale(1.08)}
+.vid__no{position:absolute;top:14px;left:14px;font-size:12px;letter-spacing:.12em;color:#BDB8AE;pointer-events:none}
+.vid__cap{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:#E8E4DC}
+.vid__cap b{font-family:'Bounded',sans-serif;font-weight:700;color:#FFFFFF}
+.vbar{max-width:1200px;width:calc(100% - 48px);margin:0 auto;height:2px;background:#2A2A2A;position:relative}
+.vbar i{position:absolute;left:0;top:0;bottom:0;background:#F9BF58;width:0;transition:width .3s ease}
+/* 2 · before / after */
+.bagrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:20px}
+.ba2{margin:0;display:flex;flex-direction:column;gap:10px}
+.ba2__img{aspect-ratio:4/5;border-radius:18px;background:#141414;overflow:hidden;position:relative;display:grid;place-items:center}
+.ba2__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba2__ph{position:absolute;inset:12px;border:1px dashed #4A4A4A;border-radius:12px;display:flex;align-items:flex-start;justify-content:space-between;padding:12px;font-size:12px;letter-spacing:.12em;color:#8C877E}
+.ba2__ph span:last-child{color:#F9BF58}
+.ba2 figcaption{font-size:12px;letter-spacing:.12em;color:#8C877E}
+.js-on .ba2--more{display:none}
+.js-on.ba-open .ba2--more{display:flex}
+.more{align-self:center;display:none;align-items:center;gap:10px;background:#0D0D0D;color:#FFFFFF;border:2px solid #F9BF58;border-radius:999px;padding:16px 26px;min-height:48px;font:800 14px/1 'Manrope',sans-serif;letter-spacing:.06em;cursor:pointer}
+.js-on .more{display:inline-flex}.js-on.ba-open .more{display:none}
+.more:hover{background:#F9BF58;color:#0D0D0D}
+/* 3 · written */
+.quotes{columns:3 300px;column-gap:24px}
+.quotes .quote{break-inside:avoid;margin:0 0 24px!important;flex:none}
+.quote .who{font-family:'Bounded',sans-serif;font-weight:700;font-size:17px;color:#0D0D0D}
+:where(.vctrl button,.vid__play,.more,.jump):focus-visible{outline:2px solid #F9BF58;outline-offset:3px}
+@media (max-width:640px){.vwrap{padding:0 12px}.vsec{border-radius:24px}.vctrl button{width:44px;height:44px}}
+@media (prefers-reduced-motion:reduce){.vtrack{scroll-behavior:auto}.quote,.vid__play span{transition:none}}
 </style>
 </head>
 <body>
@@ -61,113 +114,526 @@ a{color:#8A5A00}a:hover{color:#3B3B3B}
 
   <!-- ============ INTRO ============ -->
   <section style="background: #F5F3EE;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 80px 24px 48px; display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 80px 24px 56px; display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end;">
       <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 22px;">
-        <div style="font-weight: 600; font-size: 13px; letter-spacing: 0.16em; color: #8A5A00;">STORIE REALI</div>
-        <h2 style="margin: 0; font-family: 'Bounded', sans-serif; font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; letter-spacing: -0.01em; color: #0D0D0D; max-width: 760px;">Meno grasso. Più atletici. Più forti nel lavoro e nella vita.</h2>
-        <div style="width: 72px; height: 3px; background: #F9BF58;"></div>
+        <div class="eyebrow">STORIE REALI</div>
+        <h2 class="h2">Meno grasso. Più atletici. Più forti nel lavoro e nella vita.</h2>
+        <div class="rule"></div>
         <p style="margin: 0; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; color: #2A2A2A; max-width: 680px;">Qui trovi le storie reali di chi ha scelto OLTRESOGLIA: ex sportivi con l’agenda piena, che hanno perso grasso e sono tornati atletici, senza fermare il lavoro né la vita.</p>
       </div>
-      <div style="flex: 1 1 280px; min-width: 0; background: #141414; border-radius: 20px; padding: 28px 32px; display: flex; flex-direction: column; gap: 10px; color: #FFFFFF;">
-        <div style="font-weight: 600; font-size: 13px; letter-spacing: 0.16em; color: #F9BF58;">DAL GRUPPO FEEDBACK</div>
-        <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #BDB8AE;">I messaggi qui sotto arrivano così come i clienti li hanno scritti, senza ritocchi.</p>
-      </div>
+      <nav aria-label="In questa pagina" style="flex: 1 1 280px; min-width: 0; background: #141414; border-radius: 20px; padding: 20px 32px; display: flex; flex-direction: column; color: #FFFFFF;">
+        <a class="jump" href="#video"><b>17</b>Video testimonianze</a>
+        <a class="jump" href="#prima-dopo"><b>45</b>Foto prima e dopo</a>
+        <a class="jump" href="#messaggi"><b>20</b>Testimonianze scritte</a>
+      </nav>
     </div>
   </section>
 
-  <!-- ============ MESSAGGI DEI CLIENTI ============ -->
-  <section style="background: #F5F3EE;" aria-label="Messaggi dei clienti">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-wrap: wrap; gap: 24px;">
+  <!-- ============ 1 · VIDEO TESTIMONIANZE (carosello orizzontale) ============ -->
+  <div class="vwrap" id="video">
+    <section class="vsec" aria-labelledby="video-title">
+      <div class="vhead">
+        <div class="sec-head">
+          <div class="eyebrow">VIDEO TESTIMONIANZE</div>
+          <h2 class="h2" id="video-title">Raccontato da loro.</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="vctrl">
+          <span class="vcount" aria-live="polite"><span data-vnow>01</span> / 17</span>
+          <button type="button" data-vprev aria-label="Video precedente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" data-vnext aria-label="Video successivo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <ul class="vtrack" aria-label="Video testimonianze" tabindex="0">
+        <li class="vid" aria-label="Video 1 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 01</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 01"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 2 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 02</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 02"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 3 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 03</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 03"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 4 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 04</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 04"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 5 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 05</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 05"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 6 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 06</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 06"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 7 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 07</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 07"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 8 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 08</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 08"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 9 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 09</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 09"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 10 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 10</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 10"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 11 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 11</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 11"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 12 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 12</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 12"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 13 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 13</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 13"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 14 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 14</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 14"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 15 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 15</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 15"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 16 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 16</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 16"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+        <li class="vid" aria-label="Video 17 di 17">
+          <div class="vid__media">
+            <span class="vid__no">VIDEO 17</span>
+            <button class="vid__play" type="button" data-src="" data-poster="" aria-label="Guarda il video 17"><span><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>
+          </div>
+          <div class="vid__cap"><b>[Nome]</b><span>[durata]</span></div>
+        </li>
+      </ul>
+      <div class="vbar" aria-hidden="true"><i data-vbar></i></div>
+    </section>
+  </div>
 
-      <figure class="quote" style="margin: 0;">
+  <!-- ============ 2 · PRIMA E DOPO ============ -->
+  <section id="prima-dopo" style="background: #F5F3EE;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px;">
+      <div class="sec-head">
+        <div class="eyebrow">PRIMA E DOPO</div>
+        <h2 class="h2">I cambiamenti, fotografati.</h2>
+        <div class="rule"></div>
+        <p class="sec-text">Le foto vengono pubblicate solo con il consenso del cliente.</p>
+      </div>
+      <div class="bagrid">
+        <figure class="ba2" aria-label="Foto prima e dopo 01 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 01 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 02 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 02 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 03 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 03 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 04 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 04 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 05 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 05 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 06 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 06 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 07 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 07 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 08 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 08 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 09 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 09 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 10 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 10 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 11 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 11 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2" aria-label="Foto prima e dopo 12 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 12 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 13 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 13 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 14 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 14 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 15 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 15 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 16 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 16 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 17 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 17 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 18 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 18 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 19 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 19 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 20 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 20 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 21 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 21 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 22 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 22 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 23 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 23 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 24 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 24 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 25 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 25 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 26 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 26 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 27 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 27 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 28 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 28 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 29 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 29 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 30 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 30 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 31 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 31 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 32 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 32 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 33 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 33 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 34 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 34 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 35 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 35 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 36 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 36 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 37 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 37 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 38 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 38 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 39 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 39 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 40 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 40 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 41 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 41 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 42 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 42 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 43 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 43 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 44 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 44 · PRIMA / DOPO]</figcaption>
+        </figure>
+        <figure class="ba2 ba2--more" aria-label="Foto prima e dopo 45 (in arrivo)">
+          <div class="ba2__img"><div class="ba2__ph"><span>PRIMA</span><span>DOPO</span></div></div>
+          <figcaption>[FOTO 45 · PRIMA / DOPO]</figcaption>
+        </figure>
+      </div>
+      <button class="more" type="button" data-bamore>MOSTRA TUTTE LE FOTO (45)</button>
+    </div>
+  </section>
+
+  <!-- ============ 3 · TESTIMONIANZE SCRITTE ============ -->
+  <section id="messaggi" style="background: #FFFFFF; border-top: 1px solid #E6E1D7; border-bottom: 1px solid #E6E1D7;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px;">
+      <div class="sec-head">
+        <div class="eyebrow">TESTIMONIANZE SCRITTE</div>
+        <h2 class="h2">Con le loro parole.</h2>
+        <div class="rule"></div>
+        <p class="sec-text">I messaggi arrivano così come i clienti li hanno scritti, senza ritocchi.</p>
+      </div>
+      <div class="quotes">
+      <figure class="quote">
         <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
         <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #2A2A2A;">Forse anche più in discesa di quanto riportato poiché ero con altre bilancia. Ma ciò che conta per ora e' che mi sento con più energie e riesco ad allenarmi costantemente seguendo bene alimentazione. Per il peso credo calerà continuando così</blockquote>
         <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
-          <span style="font-family: 'Bounded', sans-serif; font-weight: 700; font-size: 17px; color: #0D0D0D;">Marco</span>
+          <span class="who">Marco</span>
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </figcaption>
       </figure>
-
-      <figure class="quote" style="margin: 0;">
+      <figure class="quote">
         <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
-        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Messaggio in arrivo dal gruppo FEEDBACK]</blockquote>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 02 · copy da WeTransfer]</blockquote>
         <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
-          <span style="font-family: 'Bounded', sans-serif; font-weight: 700; font-size: 17px; color: #0D0D0D;">Luca</span>
+          <span class="who">[Nome]</span>
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </figcaption>
       </figure>
-
-      <figure class="quote" style="margin: 0;">
+      <figure class="quote">
         <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
-        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Messaggio in arrivo dal gruppo FEEDBACK]</blockquote>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 03 · copy da WeTransfer]</blockquote>
         <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
-          <span style="font-family: 'Bounded', sans-serif; font-weight: 700; font-size: 17px; color: #0D0D0D;">Andrea</span>
+          <span class="who">[Nome]</span>
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </figcaption>
       </figure>
-
-      <figure class="quote" style="margin: 0;">
+      <figure class="quote">
         <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
-        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Messaggio in arrivo dal gruppo FEEDBACK]</blockquote>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 04 · copy da WeTransfer]</blockquote>
         <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
-          <span style="font-family: 'Bounded', sans-serif; font-weight: 700; font-size: 17px; color: #0D0D0D;">Davide</span>
+          <span class="who">[Nome]</span>
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </figcaption>
       </figure>
-
-      <figure class="quote" style="margin: 0;">
+      <figure class="quote">
         <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
-        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Messaggio in arrivo dal gruppo FEEDBACK]</blockquote>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 05 · copy da WeTransfer]</blockquote>
         <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
-          <span style="font-family: 'Bounded', sans-serif; font-weight: 700; font-size: 17px; color: #0D0D0D;">Simone</span>
+          <span class="who">[Nome]</span>
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </figcaption>
       </figure>
-
-      <figure class="quote" style="margin: 0;">
+      <figure class="quote">
         <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
-        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Messaggio in arrivo dal gruppo FEEDBACK]</blockquote>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 06 · copy da WeTransfer]</blockquote>
         <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
-          <span style="font-family: 'Bounded', sans-serif; font-weight: 700; font-size: 17px; color: #0D0D0D;">Matteo</span>
+          <span class="who">[Nome]</span>
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </figcaption>
       </figure>
-
-    </div>
-  </section>
-
-  <!-- ============ PRIMA E DOPO ============ -->
-  <section style="background: #FFFFFF; border-top: 1px solid #E6E1D7; border-bottom: 1px solid #E6E1D7;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 88px 24px 96px; display: flex; flex-direction: column; gap: 40px;">
-      <div style="display: flex; flex-direction: column; gap: 22px;">
-        <div style="font-weight: 600; font-size: 13px; letter-spacing: 0.16em; color: #8A5A00;">PRIMA E DOPO</div>
-        <h2 style="margin: 0; font-family: 'Bounded', sans-serif; font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; letter-spacing: -0.01em; color: #0D0D0D; max-width: 760px;">I cambiamenti, fotografati.</h2>
-        <div style="width: 72px; height: 3px; background: #F9BF58;"></div>
-        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #5E5A52; max-width: 640px;">Le foto vengono pubblicate solo con il consenso del cliente.</p>
-      </div>
-
-      <div style="display: flex; flex-wrap: wrap; gap: 24px;">
-        <figure class="ba" style="margin: 0;" aria-label="Foto prima e dopo 1 (in arrivo)">
-          <div style="display: flex; gap: 8px; aspect-ratio: 4 / 3;">
-            <div style="flex: 1; border: 1px dashed #4A4A4A; border-radius: 12px; display: flex; align-items: flex-start; padding: 12px; font-size: 12px; letter-spacing: 0.12em; color: #8C877E;">PRIMA</div>
-            <div style="flex: 1; border: 1px dashed #4A4A4A; border-radius: 12px; display: flex; align-items: flex-start; padding: 12px; font-size: 12px; letter-spacing: 0.12em; color: #F9BF58;">DOPO</div>
-          </div>
-          <figcaption style="font-size: 12px; letter-spacing: 0.12em; color: #8C877E;">[FOTO PRIMA / DOPO · CLIENTE 1]</figcaption>
-        </figure>
-        <figure class="ba" style="margin: 0;" aria-label="Foto prima e dopo 2 (in arrivo)">
-          <div style="display: flex; gap: 8px; aspect-ratio: 4 / 3;">
-            <div style="flex: 1; border: 1px dashed #4A4A4A; border-radius: 12px; display: flex; align-items: flex-start; padding: 12px; font-size: 12px; letter-spacing: 0.12em; color: #8C877E;">PRIMA</div>
-            <div style="flex: 1; border: 1px dashed #4A4A4A; border-radius: 12px; display: flex; align-items: flex-start; padding: 12px; font-size: 12px; letter-spacing: 0.12em; color: #F9BF58;">DOPO</div>
-          </div>
-          <figcaption style="font-size: 12px; letter-spacing: 0.12em; color: #8C877E;">[FOTO PRIMA / DOPO · CLIENTE 2]</figcaption>
-        </figure>
-        <figure class="ba" style="margin: 0;" aria-label="Foto prima e dopo 3 (in arrivo)">
-          <div style="display: flex; gap: 8px; aspect-ratio: 4 / 3;">
-            <div style="flex: 1; border: 1px dashed #4A4A4A; border-radius: 12px; display: flex; align-items: flex-start; padding: 12px; font-size: 12px; letter-spacing: 0.12em; color: #8C877E;">PRIMA</div>
-            <div style="flex: 1; border: 1px dashed #4A4A4A; border-radius: 12px; display: flex; align-items: flex-start; padding: 12px; font-size: 12px; letter-spacing: 0.12em; color: #F9BF58;">DOPO</div>
-          </div>
-          <figcaption style="font-size: 12px; letter-spacing: 0.12em; color: #8C877E;">[FOTO PRIMA / DOPO · CLIENTE 3]</figcaption>
-        </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 07 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 08 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 09 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 10 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 11 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 12 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 13 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 14 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 15 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 16 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 17 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 18 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 19 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+      <figure class="quote">
+        <div style="font-family: 'Bounded', sans-serif; font-weight: 800; font-size: 44px; line-height: .6; color: #F9BF58;" aria-hidden="true">“</div>
+        <blockquote style="margin: 0; flex: 1; font-size: 17px; line-height: 1.6; color: #8C877E;">[Testimonianza scritta 20 · copy da WeTransfer]</blockquote>
+        <figcaption style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #E6E1D7;">
+          <span class="who">[Nome]</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5" fill="none" stroke="#F9BF58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
       </div>
     </div>
   </section>
@@ -201,5 +667,44 @@ a{color:#8A5A00}a:hover{color:#3B3B3B}
   </footer>
 
 </div>
+<script>
+(() => {
+  const root = document.querySelector('.vwrap').parentElement
+  root.classList.add('js-on')
+  // Before / after: first 12 visible, the rest on request
+  document.querySelector('[data-bamore]').addEventListener('click', () => root.classList.add('ba-open'))
+
+  // Video carousel: arrows, counter, progress bar
+  const track = document.querySelector('.vtrack')
+  const items = [...track.children]
+  const prev = document.querySelector('[data-vprev]'), next = document.querySelector('[data-vnext]')
+  const now = document.querySelector('[data-vnow]'), bar = document.querySelector('[data-vbar]')
+  const step = () => items[1].offsetLeft - items[0].offsetLeft
+  const update = () => {
+    const max = track.scrollWidth - track.clientWidth
+    const i = Math.min(items.length - 1, Math.round(track.scrollLeft / step()))
+    now.textContent = String(i + 1).padStart(2, '0')
+    bar.style.width = (max > 0 ? Math.max(track.clientWidth / track.scrollWidth, track.scrollLeft / max) * 100 : 100) + '%'
+    prev.disabled = track.scrollLeft <= 2
+    next.disabled = track.scrollLeft >= max - 2
+  }
+  prev.addEventListener('click', () => track.scrollBy({ left: -step() }))
+  next.addEventListener('click', () => track.scrollBy({ left: step() }))
+  track.addEventListener('scroll', update, { passive: true })
+  addEventListener('resize', update)
+  update()
+
+  // Play: swap the card for the video; only one plays at a time
+  track.addEventListener('click', (e) => {
+    const btn = e.target.closest('.vid__play')
+    if (!btn || !btn.dataset.src) return
+    const v = document.createElement('video')
+    Object.assign(v, { src: btn.dataset.src, controls: true, autoplay: true, playsInline: true })
+    if (btn.dataset.poster) v.poster = btn.dataset.poster
+    v.addEventListener('play', () => track.querySelectorAll('video').forEach((o) => o !== v && o.pause()))
+    btn.replaceWith(v)
+  })
+})()
+</script>
 </body>
 </html>

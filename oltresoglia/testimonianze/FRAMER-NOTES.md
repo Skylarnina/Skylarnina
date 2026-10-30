@@ -1,25 +1,31 @@
 # Testimonianze: Framer handoff
 
-Prototype: `oltresoglia/testimonianze/index.html`. Structure from the Apex Coaching Academy reference (auto-scrolling rows),
-message card from Bibi's visual (25 Oct). Copy: title and description from Bibi, verbatim.
+Page: `oltresoglia/testimonianze/oltresoglia-testimonianze-pagina.html` (self-contained, fonts inlined).
+Order from Bibi (30 Oct): **videos first, then before/after photos, then written testimonials.**
+Copy: title and description from Bibi (25 Oct), verbatim. The content (17 videos, 45 photos, 20 written testimonials) came by
+WeTransfer; every slot on the page is a numbered placeholder ready to swap.
+
+(`index.html` is the earlier two-row marquee version, kept for reference only.)
 
 ## Structure
 
-| Part | Content | Styles |
-|---|---|---|
-| Head (centred) | H1 "Meno grasso. Più atletici. Più forti nel lavoro e nella vita." + Lead (description) | H1, Lead |
-| Row 1 · messages | Cards scrolling left: black #111, 2px Saffron border, radius 26, padding 34. **Name in bold at the same size as the text** (Pietro), then the message, tick bottom right | Body (bold name), Body |
-| Row 2 · before / after | Square cards scrolling right: two halves "Prima" / "Dopo" with the photos, OLTRESOGLIA label bottom left | Small (labels), Button (label) |
+| # | Section | Content | Build in Framer |
+|---|---|---|---|
+| — | Header | Same as every page: dark box, nav, "Testimonianze", breadcrumb | Shared component |
+| — | Intro | Eyebrow "Storie reali", H2 "Meno grasso. Più atletici…", description. Right: dark box with jump links 17 Video · 45 Foto · 20 Scritte | Links scroll to the three sections |
+| 1 | **Video testimonianze** | Dark rounded box (radius 28, 20px inset). Eyebrow, H2 "Raccontato da loro.", counter "01 / 17" + prev/next arrows. **Horizontal carousel, not a grid**: 9:16 cards (230–300px wide, radius 20, gap 20), Saffron play button, name + duration under each card, Saffron progress line | Horizontal Stack, overflow scroll, snap to each card (or the Slideshow component with arrows on, autoplay off). Each card: Video component, poster image, controls on, no autoplay. Cards start aligned with the page content and run off the right edge |
+| 2 | **Prima e dopo** | Eyebrow, H2 "I cambiamenti, fotografati.", consent line. Grid of 4:5 cards (radius 18, gap 20; 4 / 3 / 2 / 1 columns by width). First 12 shown, then "Mostra tutte le foto (45)" reveals the rest | Grid, Fill images centred. "Mostra tutte" = variant switch or a second hidden grid |
+| 3 | **Testimonianze scritte** | White section. Eyebrow, H2 "Con le loro parole.", line "I messaggi arrivano così come…". 20 cards in a 3-column masonry: quote mark, text, **name underneath** (Bounded Bold) with the Saffron tick | Masonry: 3 vertical Stacks (Framer has no CSS columns); 1 column on phone |
+| — | CTA + footer | Unchanged | — |
 
-## Build in Framer
-- Each row is Framer's built-in **Ticker** component (Insert → Ticker): direction Left for messages, Right for photos;
-  speed ≈ 40 (messages) / 35 (photos); **Hover → Slow down 0** (pauses, like the reference); gap 22; fade edges on (6%).
-- Message card = one component with two text props (Nome, Messaggio); variable height up to the longest message, min 340.
-- Photo card = one component with two image props (Prima, Dopo), each Fill, centred on the face.
-- Reduced motion: Ticker respects the OS setting.
+## Swapping in the content
+- Videos: each card's play button has `data-src` (mp4) and `data-poster` (still). Fill them and the card plays inline;
+  starting one pauses the others. Compress before upload (1080 × 1920, H.264, ~5–8 MB each); in Framer host on the Video component.
+- Photos: put an `<img>` inside `.ba2__img` (it fills the 4:5 frame). 45 is an odd number, so these are treated as one
+  combined before/after image each, not pairs; if they are separate files, the card splits into Prima / Dopo halves.
+- Written: replace `[Testimonianza scritta NN]` and `[Nome]` with the copy and the name from the document. Card 01 already has
+  Marco's message from Bibi's first reference; check whether it is one of the 20.
 
-## Content (pending)
-- Messages: from the "FEEDBACK" WhatsApp group; client name only (first name). If the name isn't there, Pietro says to invent one.
-  Card 1 already has the message from Bibi's reference (typos kept as sent: "altre bilancia", "e' che").
-- Photos: before / after pairs, same crop for both halves.
-- The tick is Saffron here (the reference shows it green; the brand palette has no green). Easy to switch if they prefer green.
+## To confirm with Bibi
+- Section titles "Raccontato da loro." and "Con le loro parole." are proposals (not in Bibi's copy).
+- Video captions: name only, or name + role? Duration is optional.
