@@ -150,7 +150,7 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
       if (e.shiftKey && document.activeElement === f) { l.focus(); e.preventDefault(); } else if (!e.shiftKey && document.activeElement === l) { f.focus(); e.preventDefault(); } }
   });
 
-  function toSet(groups, mobile) { var out = []; groups.forEach(function (g) { g[1].forEach(function (s) { out.push({ flow: g[0], src: s[0], cap: s[1], w: s[2], h: s[3], mobile: mobile }); }); }); return out; }
+  function toSet(groups, mobile) { var out = []; groups.forEach(function (g) { g[1].forEach(function (s) { out.push({ flow: g[0], src: s[0], cap: s[1], w: s[2], h: s[3], small: s[4], mobile: mobile }); }); }); return out; }
   function tabs(box, names, onPick) {
     box.innerHTML = '';
     return names.map(function (nm, k) {
@@ -203,7 +203,7 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
       set.forEach(function (s, i) {
         var f = el('figure', 'lfx__phone');
         f.innerHTML = '<div class="lfx__device"><div class="lfx__pscreen" tabindex="0" role="button" aria-label="Enlarge: ' + esc(s.cap) + '">' +
-          '<img loading="lazy" alt="' + esc(s.cap) + '" width="' + s.w + '" height="' + s.h + '" src="' + esc(sized(s.src, 750)) + '"></div></div>' +
+          '<img loading="lazy" alt="' + esc(s.cap) + '" width="' + s.w + '" height="' + s.h + '" src="' + esc(s.small || sized(s.src, 750)) + '"></div></div>' +
           '<figcaption><b>' + esc(s.flow) + '</b>' + esc(s.cap) + '</figcaption>';
         var p = f.querySelector('.lfx__pscreen'), d0 = null;
         p.addEventListener('pointerdown', function (e) { d0 = [e.clientX, e.clientY]; });
