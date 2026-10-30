@@ -281,7 +281,7 @@ Removed duplicate: "Below are the CMS channels within App Space." appears **1×*
 | R-033 | LI | Household Management: The ability to add and manage household members … | UX Design/ Feature Prioritization | ✔ | ✔ |
 | R-034 | LI | Symptom Diary: An optional tool for anonymously reporting post-vaccina… | UX Design/ Feature Prioritization | ✔ | ✔ |
 | R-035 | LI | Testing Location Map: An interactive map helping users quickly locate … | UX Design/ Feature Prioritization | ✔ | ✔ |
-| R-036 | NOTE | INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE | UX Design/ Feature Prioritization | ✔ → Desktop wireframes (video); Mobile wireframes: vaccination record and dose details | ✔ |
+| R-036 | NOTE | INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE | UX Design/ Feature Prioritization | ✔ → Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app; Mobile wireframes: vaccination record and dose details | ✔ |
 | R-037 | FIG | doc-21: Vaccine details: annotated mobile screens | UX Design/ Feature Prioritization | ✔ shown | ✔ |
 | R-038 | H2 | Results & Impact | Results & Impact | ✔ | ✔ |
 | R-039 | P | The redesigned experience streamlined how Rhode Island residents acces… | Results & Impact | ✔ | ✔ |
@@ -382,7 +382,7 @@ These are **not her words**. They're short factual captions the brief asked for 
 | room-03-rhode-island | Fig. 01 | 401 Health app: five mobile screens |
 | room-03-rhode-island | Fig. 02 | Rhode Island Department of Health population health goals |
 | room-03-rhode-island | Fig. 03 | App Store and Google Play reviews (video) |
-| room-03-rhode-island | Fig. 04 | Desktop wireframes (video) |
+| room-03-rhode-island | Fig. 04 | Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app |
 | room-03-rhode-island | Fig. 05 | Vaccine details: annotated mobile screens |
 | room-03-rhode-island | Fig. 06 | Mobile wireframes: vaccination record and dose details |
 | room-04-littelfuse | Fig. 01 | Product-discovery journey map: overview |

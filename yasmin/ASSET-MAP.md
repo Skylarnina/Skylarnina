@@ -240,7 +240,7 @@ Every image and video on the case-study pages, by source file, with the module i
 | `r5-ri-five-screens.jpg` | room-03-rhode-island | Fig. 01 | Full plate | `tiles/r5-ri-five-screens--nat-p48.jpg` | whole on #F4F3F0 |
 | `r03-goals-full.jpg` | room-03-rhode-island | Fig. 02 | Full plate | `tiles/r03-goals-full--1_600.jpg` | whole on #F4F3F0 |
 | `r03-app-reviews.mp4` | room-03-rhode-island | Fig. 03 | Video panel | `poster-r03-app-reviews.jpg` | video |
-| `r03-wireframes.mp4` | room-03-rhode-island | Fig. 04 | Video panel | `poster-r03-wireframes.jpg` | video |
+| `ri/ (97 screens)` | room-03-rhode-island | Fig. 04 | Screen viewer (Code Block) | `—` | Code Block |
 | `r03-annotated.jpg` | room-03-rhode-island | Fig. 05 | Plate pair | `tiles/r03-annotated--1_500.jpg` | whole on #F4F3F0 |
 | `r4-ri-screens.jpg` | room-03-rhode-island | Fig. 06 | Plate pair | `tiles/r4-ri-screens--0_750.jpg` | whole on #F4F3F0 |
 | `r04-journey-full.jpg` | room-04-littelfuse | Fig. 01 | Full plate | `tiles/r04-journey-full--nat-p48.jpg` | whole on #F4F3F0 |

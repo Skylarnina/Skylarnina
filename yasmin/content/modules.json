@@ -394,18 +394,18 @@
  {
   "page": "room-03-rhode-island",
   "chapter": "04 UX Design/ Feature Prioritization",
-  "module": "video",
+  "module": "screens",
   "tiles": [
    {
     "label": "Fig. 04",
-    "src": "r03-wireframes.mp4",
-    "tile": "poster-r03-wireframes.jpg",
-    "cap": "Desktop wireframes (video)",
-    "kind": "video",
+    "src": "ri/ (97 screens)",
+    "tile": "—",
+    "cap": "Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app",
+    "kind": "code",
     "src_id": "R-036"
    }
   ],
-  "note": ""
+  "note": "Code Blocks (squarespace/rhode-island-desktop-embed.html, -mobile-embed.html); screens from her PDF."
  },
  {
   "page": "room-03-rhode-island",

@@ -338,9 +338,11 @@ def blocks_md(prefix, sec, msec, where):
                        f"The prototype's grey box reads \"{b['label']}\". Its caption, for when the export arrives:")
             out += fence([b["caption"]])
         elif k == "codeblock":
-            out.append(f"- [ ] **{ref(prefix)} Code Block** · {cols(b, m)} · paste `{b['file']}` (Display Source off), after uploading its screens and filling in their addresses "
-                       f"(`squarespace/LITTELFUSE-SCREENS.md`). It draws the desktop flow viewer ({len(b['desktop'])} flows: {', '.join(b['desktop'])}) and the mobile phone row "
-                       f"({len(b['mobile'])} groups: {', '.join(b['mobile'])}), each screen opening full size. Then a Text block under it, Paragraph 3, for the caption:")
+            files = [f.strip() for f in b["file"].replace("squarespace/", "").split("+")]
+            out.append(f"- [ ] **{ref(prefix)} Code Blocks** · {cols(b, m)} · paste " + " then ".join(f"`squarespace/{f}`" for f in files) +
+                       f", each in its own full-width Code Block (Display Source off). They're ready to paste: the screens load from the portfolio repo, nothing to upload or fill in. "
+                       f"Desktop flow viewer ({len(b['desktop'])} sections: {', '.join(b['desktop'])}); phone mockups ({len(b['mobile'])} groups: {', '.join(b['mobile'])}); "
+                       f"every screen opens full size. Then a Text block under them, Paragraph 3, for the caption:")
             out += fence([b["caption"]])
         elif k == "slideshow":
             out += slideshow(prefix, b, m, where)

@@ -106,12 +106,14 @@ html.lfx-lock,html.lfx-lock body{overflow:hidden}
      [flow name, [[image address, caption, width, height, thumbnail address (optional)], ...]]  (width/height: the screen's size in pixels)  */
   var DESKTOP = [];
   var MOBILE = [];
+  var SITE = 'littelfuse.com';   // the address shown in the browser frame
   /* ============ nothing below needs editing ============ */
 
   var root = document.currentScript && document.currentScript.parentNode.querySelector('[data-lfx]:not([data-lfx-ready])')
           || document.querySelector('[data-lfx]:not([data-lfx-ready])');
   if (!root) return;
   root.setAttribute('data-lfx-ready', '');
+  var bar = root.querySelector('.lfx__chrome span'); if (bar) bar.textContent = SITE;
   var sqs = /squarespace(-cdn)?\.com/;
   function sized(src, w) { return sqs.test(src) ? src.split('?')[0] + '?format=' + w + 'w' : src; }
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }

@@ -1,0 +1,745 @@
+{
+ "desktop": [
+  {
+   "flow": "Test Scheduling: Hi-Fi Designs",
+   "screens": [
+    {
+     "file": "ri-d-01-01.jpg",
+     "caption": "Welcome: log in or create an account",
+     "w": 1440,
+     "h": 1047,
+     "page": 1
+    },
+    {
+     "file": "ri-d-01-02.jpg",
+     "caption": "Portal home: schedule a test or update a profile",
+     "w": 1440,
+     "h": 765,
+     "page": 2
+    },
+    {
+     "file": "ri-d-01-03.jpg",
+     "caption": "Schedule a COVID-19 test: who is it for?",
+     "w": 1440,
+     "h": 765,
+     "page": 3
+    },
+    {
+     "file": "ri-d-01-04.jpg",
+     "caption": "Add a new dependent child",
+     "w": 1440,
+     "h": 765,
+     "page": 4
+    },
+    {
+     "file": "ri-d-01-05.jpg",
+     "caption": "Schedule a test: dependent added",
+     "w": 1440,
+     "h": 765,
+     "page": 5
+    },
+    {
+     "file": "ri-d-01-06.jpg",
+     "caption": "Add a new dependent child, with primary care provider",
+     "w": 1440,
+     "h": 1246,
+     "page": 6
+    },
+    {
+     "file": "ri-d-01-07.jpg",
+     "caption": "Insurance information",
+     "w": 1440,
+     "h": 1058,
+     "page": 7
+    },
+    {
+     "file": "ri-d-01-08.jpg",
+     "caption": "Reason for scheduling",
+     "w": 1440,
+     "h": 765,
+     "page": 8
+    },
+    {
+     "file": "ri-d-01-09.jpg",
+     "caption": "Select a testing facility on the map",
+     "w": 1440,
+     "h": 1249,
+     "page": 9
+    },
+    {
+     "file": "ri-d-01-10.jpg",
+     "caption": "Select an appointment time",
+     "w": 1440,
+     "h": 1209,
+     "page": 10
+    },
+    {
+     "file": "ri-d-01-11.jpg",
+     "caption": "Appointment confirmation",
+     "w": 1440,
+     "h": 765,
+     "page": 11
+    }
+   ]
+  },
+  {
+   "flow": "Portal Screenshots",
+   "screens": [
+    {
+     "file": "ri-d-02-01.jpg",
+     "caption": "Daily activities",
+     "w": 1440,
+     "h": 734,
+     "page": 12
+    },
+    {
+     "file": "ri-d-02-02.jpg",
+     "caption": "Schedule a COVID-19 test",
+     "w": 1440,
+     "h": 734,
+     "page": 13
+    },
+    {
+     "file": "ri-d-02-03.jpg",
+     "caption": "Insurance information",
+     "w": 1440,
+     "h": 734,
+     "page": 14
+    },
+    {
+     "file": "ri-d-02-04.jpg",
+     "caption": "Select a test facility",
+     "w": 1440,
+     "h": 734,
+     "page": 16
+    },
+    {
+     "file": "ri-d-02-05.jpg",
+     "caption": "Facility selected: available times",
+     "w": 1440,
+     "h": 734,
+     "page": 17
+    },
+    {
+     "file": "ri-d-02-06.jpg",
+     "caption": "Select a time",
+     "w": 1440,
+     "h": 734,
+     "page": 18
+    },
+    {
+     "file": "ri-d-02-07.jpg",
+     "caption": "Appointment confirmed",
+     "w": 1440,
+     "h": 734,
+     "page": 19
+    }
+   ]
+  },
+  {
+   "flow": "Wireframes",
+   "screens": [
+    {
+     "file": "ri-d-03-01.jpg",
+     "caption": "Welcome",
+     "w": 1440,
+     "h": 765,
+     "page": 20
+    },
+    {
+     "file": "ri-d-03-02.jpg",
+     "caption": "Portal home",
+     "w": 1440,
+     "h": 765,
+     "page": 21
+    },
+    {
+     "file": "ri-d-03-03.jpg",
+     "caption": "Schedule a COVID-19 test",
+     "w": 1440,
+     "h": 765,
+     "page": 22
+    },
+    {
+     "file": "ri-d-03-04.jpg",
+     "caption": "Add a new dependent child",
+     "w": 1440,
+     "h": 765,
+     "page": 23
+    },
+    {
+     "file": "ri-d-03-05.jpg",
+     "caption": "Demographic information",
+     "w": 1440,
+     "h": 765,
+     "page": 24
+    },
+    {
+     "file": "ri-d-03-06.jpg",
+     "caption": "Daily activities",
+     "w": 1440,
+     "h": 765,
+     "page": 25
+    },
+    {
+     "file": "ri-d-03-07.jpg",
+     "caption": "Insurance information",
+     "w": 1440,
+     "h": 765,
+     "page": 26
+    },
+    {
+     "file": "ri-d-03-08.jpg",
+     "caption": "Reasons for scheduling",
+     "w": 1440,
+     "h": 765,
+     "page": 27
+    },
+    {
+     "file": "ri-d-03-09.jpg",
+     "caption": "Select a testing facility",
+     "w": 1440,
+     "h": 765,
+     "page": 28
+    },
+    {
+     "file": "ri-d-03-10.jpg",
+     "caption": "Select an appointment time",
+     "w": 1440,
+     "h": 765,
+     "page": 29
+    },
+    {
+     "file": "ri-d-03-11.jpg",
+     "caption": "Appointment confirmation",
+     "w": 1440,
+     "h": 765,
+     "page": 30
+    },
+    {
+     "file": "ri-d-03-12.jpg",
+     "caption": "Home with the upcoming appointment",
+     "w": 1440,
+     "h": 765,
+     "page": 31
+    },
+    {
+     "file": "ri-d-03-13.jpg",
+     "caption": "Testing facilities with distances",
+     "w": 1440,
+     "h": 779,
+     "page": 32
+    },
+    {
+     "file": "ri-d-03-14.jpg",
+     "caption": "Appointment time selected",
+     "w": 1440,
+     "h": 765,
+     "page": 33
+    },
+    {
+     "file": "ri-d-03-15.jpg",
+     "caption": "Upcoming appointment details",
+     "w": 1440,
+     "h": 765,
+     "page": 34
+    }
+   ]
+  },
+  {
+   "flow": "Wireframe Notes & Options",
+   "screens": [
+    {
+     "file": "ri-d-04-01.jpg",
+     "caption": "Note: a progress bar for the scheduling steps",
+     "w": 1440,
+     "h": 765,
+     "page": 35
+    },
+    {
+     "file": "ri-d-04-02.jpg",
+     "caption": "Select a test facility: option",
+     "w": 1440,
+     "h": 779,
+     "page": 36
+    },
+    {
+     "file": "ri-d-04-03.jpg",
+     "caption": "Profile updated",
+     "w": 1440,
+     "h": 765,
+     "page": 37
+    },
+    {
+     "file": "ri-d-04-04.jpg",
+     "caption": "Testing facilities by zip code",
+     "w": 1440,
+     "h": 779,
+     "page": 38
+    },
+    {
+     "file": "ri-d-04-05.jpg",
+     "caption": "Note: two looks for the calendar selector",
+     "w": 1440,
+     "h": 765,
+     "page": 39
+    },
+    {
+     "file": "ri-d-04-06.jpg",
+     "caption": "Update contact information",
+     "w": 1440,
+     "h": 765,
+     "page": 40
+    },
+    {
+     "file": "ri-d-04-07.jpg",
+     "caption": "Note: using the map and shared location",
+     "w": 1440,
+     "h": 779,
+     "page": 41
+    },
+    {
+     "file": "ri-d-04-08.jpg",
+     "caption": "Update your details",
+     "w": 1440,
+     "h": 765,
+     "page": 42
+    }
+   ]
+  }
+ ],
+ "mobile": [
+  {
+   "flow": "Onboarding",
+   "screens": [
+    {
+     "file": "ri-m-01-01.jpg",
+     "caption": "Launch screen",
+     "w": 375,
+     "h": 812,
+     "page": 43
+    },
+    {
+     "file": "ri-m-01-02.jpg",
+     "caption": "Choose a language",
+     "w": 375,
+     "h": 812,
+     "page": 44
+    },
+    {
+     "file": "ri-m-01-03.jpg",
+     "caption": "Language options",
+     "w": 375,
+     "h": 812,
+     "page": 45
+    },
+    {
+     "file": "ri-m-01-04.jpg",
+     "caption": "English selected",
+     "w": 375,
+     "h": 812,
+     "page": 46
+    },
+    {
+     "file": "ri-m-01-05.jpg",
+     "caption": "Welcome: what the app does",
+     "w": 375,
+     "h": 812,
+     "page": 47
+    },
+    {
+     "file": "ri-m-01-06.jpg",
+     "caption": "Terms of use & privacy policy",
+     "w": 375,
+     "h": 812,
+     "page": 48
+    },
+    {
+     "file": "ri-m-01-07.jpg",
+     "caption": "Location and notification permissions",
+     "w": 375,
+     "h": 812,
+     "page": 49
+    },
+    {
+     "file": "ri-m-01-08.jpg",
+     "caption": "Set-up complete",
+     "w": 375,
+     "h": 812,
+     "page": 50
+    },
+    {
+     "file": "ri-m-01-09.jpg",
+     "caption": "Terms of use, expanded",
+     "w": 375,
+     "h": 812,
+     "page": 51
+    },
+    {
+     "file": "ri-m-01-10.jpg",
+     "caption": "Location permission prompt",
+     "w": 375,
+     "h": 812,
+     "page": 52
+    },
+    {
+     "file": "ri-m-01-11.jpg",
+     "caption": "Permissions updated",
+     "w": 375,
+     "h": 812,
+     "page": 53
+    },
+    {
+     "file": "ri-m-01-12.jpg",
+     "caption": "Notification permission prompt",
+     "w": 375,
+     "h": 812,
+     "page": 54
+    }
+   ]
+  },
+  {
+   "flow": "Home & Menu",
+   "screens": [
+    {
+     "file": "ri-m-02-01.jpg",
+     "caption": "Home dashboard",
+     "w": 375,
+     "h": 947,
+     "page": 55
+    },
+    {
+     "file": "ri-m-02-02.jpg",
+     "caption": "Menu",
+     "w": 375,
+     "h": 947,
+     "page": 56
+    }
+   ]
+  },
+  {
+   "flow": "Vaccine Record",
+   "screens": [
+    {
+     "file": "ri-m-03-01.jpg",
+     "caption": "COVID-19 vaccination record",
+     "w": 375,
+     "h": 835,
+     "page": 57
+    },
+    {
+     "file": "ri-m-03-02.jpg",
+     "caption": "Vaccination card with QR code",
+     "w": 375,
+     "h": 939,
+     "page": 58
+    },
+    {
+     "file": "ri-m-03-03.jpg",
+     "caption": "Vaccine doses",
+     "w": 375,
+     "h": 812,
+     "page": 96
+    },
+    {
+     "file": "ri-m-03-04.jpg",
+     "caption": "Vaccination record",
+     "w": 375,
+     "h": 812,
+     "page": 97
+    },
+    {
+     "file": "ri-m-03-05.jpg",
+     "caption": "QR code for verification",
+     "w": 375,
+     "h": 812,
+     "page": 98
+    }
+   ]
+  },
+  {
+   "flow": "Help & Resources",
+   "screens": [
+    {
+     "file": "ri-m-04-01.jpg",
+     "caption": "Get Help",
+     "w": 375,
+     "h": 835,
+     "page": 59
+    },
+    {
+     "file": "ri-m-04-02.jpg",
+     "caption": "Get Informed",
+     "w": 375,
+     "h": 674,
+     "page": 60
+    },
+    {
+     "file": "ri-m-04-03.jpg",
+     "caption": "Get Involved",
+     "w": 375,
+     "h": 674,
+     "page": 61
+    },
+    {
+     "file": "ri-m-04-04.jpg",
+     "caption": "Get Involved, expanded",
+     "w": 375,
+     "h": 774,
+     "page": 62
+    },
+    {
+     "file": "ri-m-04-05.jpg",
+     "caption": "Get Tested",
+     "w": 375,
+     "h": 926,
+     "page": 63
+    },
+    {
+     "file": "ri-m-04-06.jpg",
+     "caption": "Get Tested, expanded",
+     "w": 375,
+     "h": 970,
+     "page": 64
+    }
+   ]
+  },
+  {
+   "flow": "Symptom Diary",
+   "screens": [
+    {
+     "file": "ri-m-05-01.jpg",
+     "caption": "Symptom Diary",
+     "w": 375,
+     "h": 835,
+     "page": 65
+    },
+    {
+     "file": "ri-m-05-02.jpg",
+     "caption": "My Symptom Diary",
+     "w": 375,
+     "h": 835,
+     "page": 66
+    },
+    {
+     "file": "ri-m-05-03.jpg",
+     "caption": "Symptom survey: step 1",
+     "w": 375,
+     "h": 835,
+     "page": 67
+    },
+    {
+     "file": "ri-m-05-04.jpg",
+     "caption": "Symptom survey: step 2",
+     "w": 375,
+     "h": 835,
+     "page": 68
+    },
+    {
+     "file": "ri-m-05-05.jpg",
+     "caption": "Symptom survey: step 3",
+     "w": 375,
+     "h": 835,
+     "page": 69
+    },
+    {
+     "file": "ri-m-05-06.jpg",
+     "caption": "Symptom survey: step 4",
+     "w": 375,
+     "h": 835,
+     "page": 70
+    },
+    {
+     "file": "ri-m-05-07.jpg",
+     "caption": "Symptom survey: step 5",
+     "w": 375,
+     "h": 835,
+     "page": 71
+    },
+    {
+     "file": "ri-m-05-08.jpg",
+     "caption": "Symptom survey: step 6",
+     "w": 375,
+     "h": 1064,
+     "page": 72
+    },
+    {
+     "file": "ri-m-05-09.jpg",
+     "caption": "Symptom survey: step 7",
+     "w": 375,
+     "h": 1064,
+     "page": 73
+    },
+    {
+     "file": "ri-m-05-10.jpg",
+     "caption": "Symptom survey: step 8",
+     "w": 375,
+     "h": 1160,
+     "page": 74
+    },
+    {
+     "file": "ri-m-05-11.jpg",
+     "caption": "Survey, second version: step 1",
+     "w": 375,
+     "h": 835,
+     "page": 75
+    },
+    {
+     "file": "ri-m-05-12.jpg",
+     "caption": "Survey, second version: step 2",
+     "w": 375,
+     "h": 1020,
+     "page": 76
+    },
+    {
+     "file": "ri-m-05-13.jpg",
+     "caption": "Survey, second version: step 3",
+     "w": 375,
+     "h": 1180,
+     "page": 77
+    },
+    {
+     "file": "ri-m-05-14.jpg",
+     "caption": "Survey, second version: last step",
+     "w": 375,
+     "h": 1400,
+     "page": 78
+    },
+    {
+     "file": "ri-m-05-15.jpg",
+     "caption": "Survey, second version: step 4",
+     "w": 375,
+     "h": 1303,
+     "page": 79
+    },
+    {
+     "file": "ri-m-05-16.jpg",
+     "caption": "Survey, second version: step 5",
+     "w": 375,
+     "h": 1416,
+     "page": 80
+    },
+    {
+     "file": "ri-m-05-17.jpg",
+     "caption": "Survey, second version: step 6",
+     "w": 375,
+     "h": 1599,
+     "page": 83
+    },
+    {
+     "file": "ri-m-05-18.jpg",
+     "caption": "Survey, second version: step 7",
+     "w": 375,
+     "h": 1761,
+     "page": 84
+    },
+    {
+     "file": "ri-m-05-19.jpg",
+     "caption": "Survey, second version: step 8",
+     "w": 375,
+     "h": 1888,
+     "page": 85
+    }
+   ]
+  },
+  {
+   "flow": "Screening Status",
+   "screens": [
+    {
+     "file": "ri-m-06-01.jpg",
+     "caption": "My Screening Status",
+     "w": 375,
+     "h": 835,
+     "page": 81
+    },
+    {
+     "file": "ri-m-06-02.jpg",
+     "caption": "Screening status: choose a household member",
+     "w": 375,
+     "h": 835,
+     "page": 82
+    },
+    {
+     "file": "ri-m-06-03.jpg",
+     "caption": "Screening status: symptoms reported",
+     "w": 375,
+     "h": 835,
+     "page": 86
+    },
+    {
+     "file": "ri-m-06-04.jpg",
+     "caption": "Screening status: feeling well",
+     "w": 375,
+     "h": 835,
+     "page": 87
+    }
+   ]
+  },
+  {
+   "flow": "Household",
+   "screens": [
+    {
+     "file": "ri-m-07-01.jpg",
+     "caption": "Manage my household",
+     "w": 375,
+     "h": 835,
+     "page": 88
+    },
+    {
+     "file": "ri-m-07-02.jpg",
+     "caption": "Add a household member",
+     "w": 375,
+     "h": 835,
+     "page": 89
+    },
+    {
+     "file": "ri-m-07-03.jpg",
+     "caption": "Edit household members",
+     "w": 375,
+     "h": 835,
+     "page": 90
+    }
+   ]
+  },
+  {
+   "flow": "Settings & Support",
+   "screens": [
+    {
+     "file": "ri-m-08-01.jpg",
+     "caption": "Settings",
+     "w": 375,
+     "h": 835,
+     "page": 91
+    },
+    {
+     "file": "ri-m-08-02.jpg",
+     "caption": "Notifications",
+     "w": 375,
+     "h": 835,
+     "page": 92
+    },
+    {
+     "file": "ri-m-08-03.jpg",
+     "caption": "Contact us",
+     "w": 375,
+     "h": 835,
+     "page": 93
+    },
+    {
+     "file": "ri-m-08-04.jpg",
+     "caption": "FAQs",
+     "w": 375,
+     "h": 760,
+     "page": 94
+    },
+    {
+     "file": "ri-m-08-05.jpg",
+     "caption": "FAQ: app privacy",
+     "w": 375,
+     "h": 796,
+     "page": 95
+    }
+   ]
+  }
+ ]
+}

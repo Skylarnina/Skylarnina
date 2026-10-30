@@ -61,14 +61,14 @@ Sequence: Strip → Plate pair → Full plate → Full plate → Video panel →
 
 ## Rhode Island — `site/room-03-rhode-island.html`
 
-Sequence: Full plate → Full plate → Video panel → Video panel → Plate pair
+Sequence: Full plate → Full plate → Video panel → Screen viewer (Code Block) → Plate pair
 
 | # | Chapter | Module | Fig. | Caption | Her item | Source file | Tile (as placed) | Fit | Note |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | Cover | Full plate | Fig. 01 | 401 Health app: five mobile screens | ➕ added | `r5-ri-five-screens.jpg` | `tiles/r5-ri-five-screens--nat-p48.jpg` | whole on #F4F3F0 | Round 5: the document cover, shown whole under the chapter index (no image behind the title). |
 | 2 | 03 The Approach/ Discovery & Stakeholder Alignment | Full plate | Fig. 02 | Rhode Island Department of Health population health goals | R-024 | `r03-goals-full.jpg` | `tiles/r03-goals-full--1_600.jpg` | whole on #F4F3F0 |  |
 | 3 | 03 The Approach/ Discovery & Stakeholder Alignment | Video panel | Fig. 03 | App Store and Google Play reviews (video) | R-025 | `r03-app-reviews.mp4` | `poster-r03-app-reviews.jpg` | video |  |
-| 4 | 04 UX Design/ Feature Prioritization | Video panel | Fig. 04 | Desktop wireframes (video) | R-036 | `r03-wireframes.mp4` | `poster-r03-wireframes.jpg` | video |  |
+| 4 | 04 UX Design/ Feature Prioritization | Screen viewer (Code Block) | Fig. 04 | Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app | R-036 | `ri/ (97 screens)` | `—` | Code Block | Code Blocks (squarespace/rhode-island-desktop-embed.html, -mobile-embed.html); screens from her PDF. |
 | 5 | 04 UX Design/ Feature Prioritization | Plate pair | Fig. 05 | Vaccine details: annotated mobile screens | R-037 | `r03-annotated.jpg` | `tiles/r03-annotated--1_500.jpg` | whole on #F4F3F0 | Tall slot: the frameless mobile screens from her vector PDF (Q7). |
 |  |  |  | Fig. 06 | Mobile wireframes: vaccination record and dose details | R-036 | `r4-ri-screens.jpg` | `tiles/r4-ri-screens--0_750.jpg` | whole on #F4F3F0 |  |
 

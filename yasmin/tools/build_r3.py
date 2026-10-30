@@ -239,7 +239,16 @@ def note_html(pg, it):
     if t.startswith("INSERT VIDEO OF APP STORE REVIEWS HERE"):
         return m_video(pg, "r03-app-reviews.mp4", "poster-r03-app-reviews.jpg", "App Store and Google Play reviews", "0:23", vertical=True, src_id=nid)
     if t.startswith("INSERT PDF OR VIDEO OF DESKTOP & MOBILE WIRE FRAMES HERE"):
-        return m_video(pg, "r03-wireframes.mp4", "poster-r03-wireframes.jpg", "Desktop wireframes", "0:23", src_id=nid)
+        # Her PDF "Rhode Island Dept of Health" (98 pages): desktop portal + 401 Health app, one Code Block
+        start(pg)
+        lab = pg.label()
+        cap = "Desktop and mobile designs: the COVID-19 test scheduling portal and the 401 Health app"
+        CAPTIONS.append((pg.name, lab, cap))
+        FIGMAP.setdefault(pg.name, {}).setdefault(nid, []).append(cap)
+        pg.tiles.append(dict(label=lab, src="ri/ (97 screens)", tile="—", cap=cap, kind="code", src_id=nid))
+        return module(pg, "screens", lf_screens("ri", "health.ri.gov") + f'<p class="lfx-cap" data-added="caption">{fig_no(lab)} — {E(cap)}</p>',
+                      "Code Blocks (squarespace/rhode-island-desktop-embed.html, -mobile-embed.html); screens from her PDF.").replace(
+                      'data-module="screens"', 'data-module="screens" data-codeblock="squarespace/rhode-island-desktop-embed.html + rhode-island-mobile-embed.html"', 1)
     if t.startswith("INSERT WIREFRAMES FROM PDF HERE"):
         # Her XD hi-fi screens (doc "Little Fuse Wireframes"): one Code Block in Squarespace, squarespace/littelfuse-screens.html
         start(pg)
@@ -250,16 +259,18 @@ def note_html(pg, it):
         pg.tiles.append(dict(label=lab, src="lf/ (97 screens)", tile="—", cap=cap, kind="code", src_id=nid))
         return module(pg, "screens", lf_screens() + f'<p class="lfx-cap" data-added="caption">{fig_no(lab)} — {E(cap)}</p>',
                       "Code Block (squarespace/littelfuse-screens.html); screens from her Adobe XD links.").replace(
-                      'data-module="screens"', 'data-module="screens" data-codeblock="squarespace/littelfuse-screens.html"', 1)
+                      'data-module="screens"', 'data-module="screens" data-codeblock="squarespace/littelfuse-desktop-embed.html + littelfuse-mobile-embed.html"', 1)
     raise KeyError(t)
 
 
-def lf_screens():
-    """The Code Block's HTML with its DESKTOP / MOBILE data filled from content/lf-screens.json (local image paths)."""
+def lf_screens(key="lf", site_label="littelfuse.com"):
+    """The screens Code Block's HTML with its DESKTOP / MOBILE data filled from content/<key>-screens.json (local image paths).
+    key "lf": Littelfuse (Room 04, from her Adobe XD links); "ri": Rhode Island (Room 03, from her PDF)."""
     code = open("squarespace/littelfuse-screens.html").read()
     code = code[code.index("-->") + 3:].strip()
-    lf = json.load(open("content/lf-screens.json"))
-    js = lambda groups: json.dumps([[g["flow"], [[IMG + "lf/" + x["file"], x["caption"], x["w"], x["h"]] for x in g["screens"]]] for g in groups], ensure_ascii=False)
+    lf = json.load(open(f"content/{key}-screens.json"))
+    code = code.replace("var SITE = 'littelfuse.com';", f"var SITE = '{site_label}';", 1)
+    js = lambda groups: json.dumps([[g["flow"], [[IMG + key + "/" + x["file"], x["caption"], x["w"], x["h"]] for x in g["screens"]]] for g in groups], ensure_ascii=False)
     code = re.sub(r"var DESKTOP = \[.*?\];", lambda m: "var DESKTOP = " + js(lf["desktop"]) + ";", code, count=1, flags=re.S)
     code = re.sub(r"var MOBILE = \[.*?\];", lambda m: "var MOBILE = " + js(lf["mobile"]) + ";", code, count=1, flags=re.S)
     return code
