@@ -14,9 +14,9 @@
 
 Captions are in `content/lf-screens.json`.
 
-## Quick option: desktop flows only, nothing to upload
-`littelfuse-desktop-embed.html` is the desktop part on its own, ready to paste. Its 58 screens load from this portfolio's public GitHub repo through the jsDelivr CDN, pinned to a fixed commit, so there's nothing to upload or fill in.
-- [ ] On the Littelfuse page, add a full-width **Code** block after "…Below are the completed wire frames.". Paste the whole file, turn **Display Source** off, then check it on the live page.
+## Quick option: two ready-to-paste embeds, nothing to upload
+`littelfuse-desktop-embed.html` (the desktop flows) and `littelfuse-mobile-embed.html` (the phone mockups) are each one Code Block, ready to paste; use both, one under the other. Their 97 screens load from this portfolio's public GitHub repo through the jsDelivr CDN, pinned to a fixed commit, so there's nothing to upload or fill in.
+- [ ] On the Littelfuse page, after "…Below are the completed wire frames.", add a full-width **Code** block with the desktop file, then a second one under it with the mobile file. **Display Source** off on both; check them on the live page.
 - **It depends on the GitHub repo staying public.** If the repo is made private or deleted, the screens stop loading. To host them on Squarespace instead, use the steps below.
 
 ## Steps

@@ -1,0 +1,206 @@
+<!--
+  Littelfuse hi-fi screens, mobile designs in phone mockups (Room 04, Fig. 08). Ready to paste: Squarespace 7.1, one Code Block,
+  full width of the section, Display Source off. Nothing to fill in: the 39 screens load from the portfolio's
+  GitHub repo through the jsDelivr CDN, pinned to commit 915455c.
+-->
+<div class="lfx" data-lfx>
+  <div class="lfx__part" data-part="mobile">
+    <p class="lfx__label">Mobile</p>
+    <div class="lfx__flows lfx__mflows" role="tablist" aria-label="Mobile flows"></div>
+    <div class="lfx__rowwrap">
+      <div class="lfx__row" tabindex="0" aria-label="Mobile screens, scroll sideways"></div>
+      <button type="button" class="lfx__btn lfx__rprev" aria-label="Scroll left">&#8592;</button>
+      <button type="button" class="lfx__btn lfx__rnext" aria-label="Scroll right">&#8594;</button>
+    </div>
+    <p class="lfx__hint">Scroll inside a phone to see the whole screen; click or tap to enlarge.</p>
+  </div>
+</div>
+
+<style>
+.lfx{color:inherit;font:inherit;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(56px,7vw,96px)}
+.lfx__part,.lfx__rowwrap,.lfx__nav > *{min-width:0}
+.lfx button{font:inherit;color:inherit}
+.lfx__label{margin:0 0 14px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.lfx__flows{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.lfx__flows button{border:1px solid currentColor;border-radius:999px;background:transparent;padding:7px 14px;font-size:13px;line-height:1.2;cursor:pointer;opacity:.62;transition:opacity .2s,background-color .2s}
+.lfx__flows button:hover{opacity:1}
+.lfx__flows button[aria-selected="true"]{opacity:1;background:currentColor}
+.lfx__flows button[aria-selected="true"] span{color:var(--lfx-ground,#fff);filter:none}
+.lfx__browser{border:1px solid rgba(127,127,127,.35);background:#fff;box-shadow:0 18px 50px -24px rgba(0,0,0,.35)}
+.lfx__chrome{display:flex;align-items:center;gap:7px;height:34px;padding:0 14px;background:#ECECEC;border-bottom:1px solid #DADADA}
+.lfx__chrome i{width:10px;height:10px;border-radius:50%;background:#C9C9C9}
+.lfx__chrome span{margin-left:14px;flex:1;max-width:340px;height:20px;border-radius:5px;background:#fff;font:12px/20px system-ui,sans-serif;color:#777;padding:0 10px}
+.lfx__viewport{aspect-ratio:16/9;overflow-y:auto;overflow-x:hidden;background:#F7F7F7;cursor:zoom-in;overscroll-behavior:contain}
+.lfx__viewport:focus-visible{outline:2px solid #111;outline-offset:-2px}
+.lfx__screen{display:block;width:100%;height:auto}
+.lfx__nav{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:12px;margin-top:14px}
+.lfx__cap{margin:0;font-size:14px;line-height:1.4}
+.lfx__cap b{font-weight:500;margin-right:8px;font-variant-numeric:tabular-nums;opacity:.7}
+.lfx__btn{width:40px;height:40px;border:1px solid currentColor;border-radius:0;background:transparent;cursor:pointer;font-size:16px;line-height:1}
+.lfx__btn:disabled{opacity:.25;cursor:default}
+.lfx__full{border:0;border-bottom:1px solid currentColor;background:none;padding:2px 0;font-size:12px!important;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-left:8px}
+.lfx__steps{display:flex;gap:10px;margin-top:18px;overflow-x:auto;padding-bottom:6px}
+.lfx__steps button{flex:0 0 auto;width:118px;padding:0;border:0;background:none;cursor:pointer;text-align:left;opacity:.55;transition:opacity .2s}
+.lfx__steps button:hover,.lfx__steps button[aria-selected="true"]{opacity:1}
+.lfx__steps img{display:block;width:118px;height:74px;object-fit:cover;object-position:top;border:1px solid rgba(127,127,127,.35);background:#fff}
+.lfx__steps button[aria-selected="true"] img{outline:2px solid currentColor;outline-offset:2px}
+.lfx__steps span{display:block;margin-top:6px;font-size:11px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.lfx button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+/* mobile row */
+.lfx__rowwrap{position:relative}
+.lfx__row{display:flex;gap:clamp(18px,2.4vw,32px);overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:thin}
+.lfx__phone{flex:0 0 auto;width:clamp(200px,17vw,236px);scroll-snap-align:start;margin:0}
+.lfx__device{position:relative;border:9px solid #161616;border-radius:34px;background:#161616;box-shadow:0 16px 40px -20px rgba(0,0,0,.45)}
+.lfx__device::before{content:"";position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:34%;height:16px;background:#161616;border-radius:0 0 12px 12px;z-index:2}
+.lfx__pscreen{display:block;aspect-ratio:320/680;overflow-y:auto;overflow-x:hidden;border-radius:25px;background:#fff;scrollbar-width:none;cursor:zoom-in;overscroll-behavior:contain}
+.lfx__pscreen::-webkit-scrollbar{display:none}
+.lfx__pscreen img{display:block;width:100%;height:auto}
+.lfx__phone figcaption{margin-top:12px;font-size:12px;line-height:1.35}
+.lfx__phone figcaption b{display:block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
+.lfx__rprev,.lfx__rnext{position:absolute;top:calc(50% - 40px);background:rgba(255,255,255,.92)!important;color:#111!important;border-color:#111!important;z-index:3}
+.lfx__rprev{left:-8px}.lfx__rnext{right:-8px}
+.lfx__hint{margin:6px 0 0;font-size:12px;opacity:.7}
+@media (hover:none){.lfx__rprev,.lfx__rnext{display:none}}
+@media (max-width:767px){
+  .lfx__flows{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .lfx__flows button{flex:0 0 auto}
+  .lfx__viewport{aspect-ratio:4/5}
+  .lfx__nav{grid-template-columns:auto 1fr auto}
+  .lfx__full{grid-column:1/-1;justify-self:start;margin:4px 0 0}
+  .lfx__steps button{width:92px}.lfx__steps img{width:92px;height:58px}
+}
+/* full-screen viewer */
+.lfx-lb{position:fixed;inset:0;z-index:2147483000;display:none;background:rgba(12,10,9,.95);color:#fff}
+.lfx-lb.is-open{display:block}
+.lfx-lb__scroll{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding:64px 72px 72px}
+.lfx-lb__img{display:block;margin:0 auto;width:100%;height:auto;max-width:1366px;background:#fff}
+.lfx-lb.is-mobile .lfx-lb__img{max-width:400px;border-radius:18px}
+.lfx-lb__bar{position:fixed;left:0;right:0;top:0;height:56px;display:flex;align-items:center;gap:16px;padding:0 16px 0 24px;background:rgba(12,10,9,.9);font-size:13px;z-index:2}
+.lfx-lb__cap{flex:1;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lfx-lb button{width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer;font-size:22px;line-height:44px;padding:0}
+.lfx-lb button:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+.lfx-lb__side{position:fixed;top:50%;transform:translateY(-50%);z-index:2;background:rgba(12,10,9,.78)!important;border-radius:50%}
+.lfx-lb__prev{left:12px}.lfx-lb__next{right:12px}
+@media (max-width:640px){.lfx-lb__scroll{padding:64px 0 72px}.lfx-lb__side{top:auto;bottom:12px;transform:none}}
+html.lfx-lock,html.lfx-lock body{overflow:hidden}
+</style>
+
+<script>
+(function () {
+  /* ===================== SCREENS =====================
+     [flow name, [[image address, caption, width, height, thumbnail address (optional)], ...]]  (width/height: the screen's size in pixels)  */
+  var DESKTOP = [];
+  var MOBILE = [["Home & Mega Menu", [["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-01.jpg", "Home page", 320, 2919, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-01.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-02.jpg", "Home page, longer version", 320, 3606, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-02.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-03.jpg", "Home page, menu opening", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-03.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-04.jpg", "Menu", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-04.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-05.jpg", "Menu: Products", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-05.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-06.jpg", "Menu: Fuses & Overcurrent Protection", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-06.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-01-07.jpg", "Menu: Fuses", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-01-07.jpg"]]], ["Product Pages L0 – L7", [["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-01.jpg", "L0 · All products", 320, 1826, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-01.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-02.jpg", "L0 · Introduction expanded", 320, 2989, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-02.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-03.jpg", "L0 · Introduction expanded, variant", 320, 3097, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-03.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-04.jpg", "L1 · Fuses & Overcurrent Protection", 320, 1946, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-04.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-05.jpg", "L1 · Introduction expanded", 320, 1946, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-05.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-06.jpg", "L2 · Fuses", 320, 2818, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-06.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-07.jpg", "L3 · Cartridge Fuses", 320, 6998, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-07.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-08.jpg", "L3 · Cartridge Fuses, variant", 320, 7838, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-08.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-09.jpg", "Sort", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-09.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-10.jpg", "Filters", 320, 1786, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-10.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-11.jpg", "L6 · Series 232", 320, 6725, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-11.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-12.jpg", "L6 · Series 232, continued", 320, 7281, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-12.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-13.jpg", "L7 · Part 02323.15", 320, 4140, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-13.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-02-14.jpg", "L7 · Part LCFE160804A180TG", 320, 4184, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-02-14.jpg"]]], ["Check Distributor Stock", [["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-03-01.jpg", "Check Distributors Stock: results", 320, 5694, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-03-01.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-03-02.jpg", "Filters", 320, 1244, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-03-02.jpg"]]], ["Request Sample", [["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-04-01.jpg", "Sample list: one item", 320, 1679, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-04-01.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-04-02.jpg", "Sample list: adding several part numbers", 320, 3003, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-04-02.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-04-03.jpg", "Sample list: eleven items", 320, 3666, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-04-03.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-04-04.jpg", "Log in to MyLittelfuse", 320, 1161, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-04-04.jpg"]]], ["Where to Buy", [["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-05-01.jpg", "Distributor list", 320, 3452, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-05-01.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-05-02.jpg", "Filters", 320, 1335, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-05-02.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-05-03.jpg", "Map view", 320, 1379, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-05-03.jpg"]]], ["Search Pages", [["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-01.jpg", "Auto-suggestion: “232”", 320, 1223, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-01.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-02.jpg", "Auto-suggestion: “0232”", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-02.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-03.jpg", "Auto-suggestion: “cart”", 320, 997, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-03.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-04.jpg", "Results for “Cartridge”: products", 320, 4374, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-04.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-05.jpg", "Results for “Cartridge”: technical documents", 320, 3634, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-05.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-06.jpg", "Results for “Cartridge Fuses”", 320, 3380, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-06.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-07.jpg", "Filter: product type", 320, 680, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-07.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-08.jpg", "Results for “250 VAC Cartridge”: parts", 320, 2728, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-08.jpg"], ["https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/lf-m-06-09.jpg", "Results for “Fuse”: suggested keywords and categories", 320, 4464, "https://cdn.jsdelivr.net/gh/Skylarnina/Skylarnina@915455c8656923786672bd014211c3354a904ff7/yasmin/site/assets/img/lf/phone/lf-m-06-09.jpg"]]]];
+  /* ============ nothing below needs editing ============ */
+
+  var root = document.currentScript && document.currentScript.parentNode.querySelector('[data-lfx]:not([data-lfx-ready])')
+          || document.querySelector('[data-lfx]:not([data-lfx-ready])');
+  if (!root) return;
+  root.setAttribute('data-lfx-ready', '');
+  var sqs = /squarespace(-cdn)?\.com/;
+  function sized(src, w) { return sqs.test(src) ? src.split('?')[0] + '?format=' + w + 'w' : src; }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  // the pill text sits on the page ground when selected
+  var g = getComputedStyle(document.body).backgroundColor; root.style.setProperty('--lfx-ground', g && g !== 'rgba(0, 0, 0, 0)' ? g : '#fff');
+
+  /* ---------- full-screen viewer (shared) ---------- */
+  var lb = el('div', 'lfx-lb'); lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Screen viewer');
+  lb.innerHTML = '<div class="lfx-lb__bar"><p class="lfx-lb__cap"></p><button type="button" class="lfx-lb__close" aria-label="Close">&times;</button></div>' +
+    '<div class="lfx-lb__scroll"><img class="lfx-lb__img" alt=""></div>' +
+    '<button type="button" class="lfx-lb__side lfx-lb__prev" aria-label="Previous screen">&#8592;</button>' +
+    '<button type="button" class="lfx-lb__side lfx-lb__next" aria-label="Next screen">&#8594;</button>';
+  document.body.appendChild(lb);
+  var lbSet = [], lbAt = 0, lbOpener = null, lbImg = lb.querySelector('.lfx-lb__img'), lbScroll = lb.querySelector('.lfx-lb__scroll');
+  function lbShow(k) {
+    lbAt = (k + lbSet.length) % lbSet.length; var s = lbSet[lbAt];
+    lbImg.src = sized(s.src, s.mobile ? 1000 : 2500); lbImg.alt = s.cap; lbImg.width = s.w; lbImg.height = s.h;
+    lb.classList.toggle('is-mobile', !!s.mobile);
+    lb.querySelector('.lfx-lb__cap').textContent = s.flow + ' · ' + (lbAt + 1) + ' / ' + lbSet.length + ' · ' + s.cap;
+    lbScroll.scrollTop = 0;
+  }
+  function lbOpen(set, k) { lbSet = set; lbOpener = document.activeElement; lbShow(k); lb.classList.add('is-open'); document.documentElement.classList.add('lfx-lock'); lb.querySelector('.lfx-lb__close').focus(); }
+  function lbClose() { lb.classList.remove('is-open'); document.documentElement.classList.remove('lfx-lock'); if (lbOpener && lbOpener.focus) lbOpener.focus({ preventScroll: true }); }
+  lb.querySelector('.lfx-lb__close').addEventListener('click', lbClose);
+  lb.querySelector('.lfx-lb__prev').addEventListener('click', function () { lbShow(lbAt - 1); });
+  lb.querySelector('.lfx-lb__next').addEventListener('click', function () { lbShow(lbAt + 1); });
+  lbScroll.addEventListener('click', function (e) { if (e.target === lbScroll) lbClose(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') lbClose();
+    else if (e.key === 'ArrowLeft') lbShow(lbAt - 1);
+    else if (e.key === 'ArrowRight') lbShow(lbAt + 1);
+    else if (e.key === 'Tab') { var b = lb.querySelectorAll('button'), f = b[0], l = b[b.length - 1];
+      if (e.shiftKey && document.activeElement === f) { l.focus(); e.preventDefault(); } else if (!e.shiftKey && document.activeElement === l) { f.focus(); e.preventDefault(); } }
+  });
+
+  function toSet(groups, mobile) { var out = []; groups.forEach(function (g) { g[1].forEach(function (s) { out.push({ flow: g[0], src: s[0], cap: s[1], w: s[2], h: s[3], small: s[4], mobile: mobile }); }); }); return out; }
+  function tabs(box, names, onPick) {
+    box.innerHTML = '';
+    return names.map(function (nm, k) {
+      var b = el('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.innerHTML = '<span>' + esc(nm) + '</span>';
+      b.addEventListener('click', function () { onPick(k); }); box.appendChild(b); return b;
+    });
+  }
+
+  /* ---------- desktop: flow viewer ---------- */
+  var D = root.querySelector('[data-part="desktop"]');
+  if (D && !DESKTOP.length) D.hidden = true; else if (D) {
+    var flow = 0, at = 0, vp = D.querySelector('.lfx__viewport'), scr = D.querySelector('.lfx__screen'), cap = D.querySelector('.lfx__cap'), steps = D.querySelector('.lfx__steps');
+    var ftabs = tabs(D.querySelector('.lfx__flows'), DESKTOP.map(function (g) { return g[0]; }), function (k) { pickFlow(k); });
+    var stepBtns = [];
+    function pickFlow(k) {
+      flow = k; ftabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === k ? 'true' : 'false'); });
+      steps.innerHTML = ''; stepBtns = DESKTOP[k][1].map(function (s, i) {
+        var b = el('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', 'Screen ' + (i + 1) + ': ' + s[1]);
+        b.innerHTML = '<img loading="lazy" alt="" src="' + esc(s[4] || sized(s[0], 300)) + '"><span>' + pad(i + 1) + '</span>';
+        b.addEventListener('click', function () { show(i); }); steps.appendChild(b); return b;
+      });
+      show(0);
+    }
+    function show(i) {
+      var list = DESKTOP[flow][1]; at = Math.max(0, Math.min(list.length - 1, i)); var s = list[at];
+      scr.src = sized(s[0], 1500); scr.alt = s[1]; scr.width = s[2]; scr.height = s[3]; vp.scrollTop = 0;
+      cap.innerHTML = '<b>' + pad(at + 1) + ' / ' + pad(list.length) + '</b>' + esc(s[1]);
+      stepBtns.forEach(function (b, j) { b.setAttribute('aria-selected', j === at ? 'true' : 'false'); });
+      D.querySelector('.lfx__prev').disabled = at === 0; D.querySelector('.lfx__next').disabled = at === list.length - 1;
+      if (list[at + 1]) new Image().src = sized(list[at + 1][0], 1500);
+    }
+    D.querySelector('.lfx__prev').addEventListener('click', function () { show(at - 1); });
+    D.querySelector('.lfx__next').addEventListener('click', function () { show(at + 1); });
+    function openFull() { var set = toSet([DESKTOP[flow]], false); lbOpen(set, at); }
+    D.querySelector('.lfx__full').addEventListener('click', openFull);
+    var down = null;
+    vp.addEventListener('pointerdown', function (e) { down = [e.clientX, e.clientY]; });
+    vp.addEventListener('click', function (e) { if (down && Math.abs(e.clientX - down[0]) + Math.abs(e.clientY - down[1]) < 6) openFull(); });
+    vp.addEventListener('keydown', function (e) { if (e.key === 'Enter') openFull(); });
+    pickFlow(0);
+  }
+
+  /* ---------- mobile: phone row ---------- */
+  var M = root.querySelector('[data-part="mobile"]');
+  if (M && !MOBILE.length) M.hidden = true; else if (M) {
+    var row = M.querySelector('.lfx__row'), all = toSet(MOBILE, true), mtabs = tabs(M.querySelector('.lfx__mflows'), ['All'].concat(MOBILE.map(function (g) { return g[0]; })), function (k) { pickGroup(k); });
+    function pickGroup(k) {
+      mtabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === k ? 'true' : 'false'); });
+      var set = k ? toSet([MOBILE[k - 1]], true) : all; row.innerHTML = ''; row.scrollLeft = 0;
+      set.forEach(function (s, i) {
+        var f = el('figure', 'lfx__phone');
+        f.innerHTML = '<div class="lfx__device"><div class="lfx__pscreen" tabindex="0" role="button" aria-label="Enlarge: ' + esc(s.cap) + '">' +
+          '<img loading="lazy" alt="' + esc(s.cap) + '" width="' + s.w + '" height="' + s.h + '" src="' + esc(s.small || sized(s.src, 750)) + '"></div></div>' +
+          '<figcaption><b>' + esc(s.flow) + '</b>' + esc(s.cap) + '</figcaption>';
+        var p = f.querySelector('.lfx__pscreen'), d0 = null;
+        p.addEventListener('pointerdown', function (e) { d0 = [e.clientX, e.clientY]; });
+        p.addEventListener('click', function (e) { if (d0 && Math.abs(e.clientX - d0[0]) + Math.abs(e.clientY - d0[1]) < 6) lbOpen(set, i); });
+        p.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lbOpen(set, i); } });
+        row.appendChild(f);
+      });
+    }
+    function page(dir) { row.scrollBy({ left: dir * row.clientWidth * 0.9, behavior: 'smooth' }); }
+    M.querySelector('.lfx__rprev').addEventListener('click', function () { page(-1); });
+    M.querySelector('.lfx__rnext').addEventListener('click', function () { page(1); });
+    pickGroup(0);
+  }
+})();
+</script>
