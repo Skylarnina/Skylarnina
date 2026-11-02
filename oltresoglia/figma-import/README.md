@@ -15,3 +15,5 @@ Import at **1280 px** wide for desktop (390 px for mobile; the layouts are respo
 | 18–21 | Test · result Orbita, Zenit, Afelio, Eclissi (Afelio/Eclissi text pending) |
 | 22–24 | Contatti · default, error, sent |
 | 25–26 | Chi siamo · Coach Marco selected, Coach Anna selected (carousel states) |
+| 27–39 | Ebook gratuiti · listing, 5 landing pages, pop-up (default, error), 5 confirmation pages |
+| 40 | Home · Il team section (redesign: 5 equal portraits) |

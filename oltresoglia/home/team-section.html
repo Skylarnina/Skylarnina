@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OLTRESOGLIA Home · Il team</title>
+<link rel="stylesheet" href="../styles/layout.css" />
+<link rel="stylesheet" href="../styles/type.css" />
+<style>
+  /* Home · "Il team" teaser. Spec: FRAMER-NOTES.md (team section).
+     One dark box: big title left, text + button right; below, the five coaches as equal 4:5 portraits with their names. */
+  :root {
+    --oltre-dark-charcoal: var(--box-dark); --oltre-porcelain: var(--page-base); --oltre-saffron-mango: var(--yellow);
+    --line: color-mix(in srgb, var(--page-base) 14%, transparent);
+    --ease: cubic-bezier(.76, 0, .24, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--page-base); color: var(--page-base); font-family: var(--font-text); -webkit-font-smoothing: antialiased; }
+  h2, p, ul { margin: 0; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 40px; }
+  .team { --pad: clamp(32px, 4.4vw, 64px); background: var(--box-dark); border-radius: var(--radius-box); padding: var(--pad);
+    display: grid; gap: clamp(40px, 4.4vw, 64px); overflow: hidden; }
+
+  .team__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 64px; align-items: end; }
+  .team__title { color: var(--page-base); }
+  .team__copy { display: grid; gap: 32px; justify-items: start; }
+  .team__copy .t-lead { color: color-mix(in srgb, var(--page-base) 82%, transparent); }
+
+  .pill { display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 0 28px; border-radius: 999px;
+    border: 2px solid var(--yellow); background: var(--box-dark); color: var(--yellow); text-decoration: none;
+    box-shadow: 0 0 18px color-mix(in srgb, var(--yellow) 35%, transparent); transition: background-color .3s, box-shadow .3s; }
+  .pill:hover { background: color-mix(in srgb, var(--yellow) 14%, var(--box-dark)); box-shadow: 0 0 26px color-mix(in srgb, var(--yellow) 50%, transparent); }
+
+  .team__grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  .coach { display: grid; gap: 16px; color: inherit; text-decoration: none; }
+  .coach__photo { aspect-ratio: 4 / 5; border-radius: var(--radius-card); overflow: hidden; background: var(--box-dark-2); }
+  .coach__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; transition: transform .9s var(--ease); }
+  .coach__name { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .coach__name .t-h3 { color: var(--page-base); transition: color .3s; }
+  .coach__name svg { width: 18px; height: 18px; color: var(--yellow); transform: translateX(-4px); opacity: 0; transition: opacity .3s, transform .3s; }
+  .coach:hover img { transform: scale(1.05); }
+  .coach:hover .t-h3 { color: var(--yellow); }
+  .coach:hover svg { opacity: 1; transform: none; }
+  :where(a):focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+
+  @media (max-width: 1023px) {
+    .wrap { padding: 32px 24px; }
+    .team__head { grid-template-columns: 1fr; align-items: start; }
+  }
+  /* Phone: the portraits become a swipe row that runs to the box edge */
+  @media (max-width: 760px) {
+    .wrap { padding: 24px var(--box-inset); }
+    .team { --pad: var(--box-pad); }
+    .pill { width: 100%; justify-content: center; padding: 0 18px; white-space: nowrap; }
+    .pill span { display: none; }
+    .team__grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+      margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); scroll-padding-inline: var(--pad); }
+    .team__grid::-webkit-scrollbar { display: none; }
+    .team__grid li { flex: 0 0 62%; scroll-snap-align: start; }
+  }
+  @media (prefers-reduced-motion: reduce) { .coach__photo img, .coach__name svg { transition: none; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="team" aria-labelledby="team-title">
+      <div class="team__head">
+        <h2 class="t-display team__title" id="team-title">Il team</h2>
+        <div class="team__copy">
+          <p class="t-lead">Un solo team per allenamento e alimentazione, con una psicologa quando serve. Ogni settimana ti scriviamo noi, senza aspettare che qualcosa si complichi.</p>
+          <a class="pill t-button" href="../chi-siamo/index.html">Scopri il team OLTRESOGLIA <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <ul class="team__grid" aria-label="I coach">
+        <li><a class="coach" href="../chi-siamo/index.html?coach=marco"><div class="coach__photo"><img src="../chi-siamo/assets/team/marco.jpg" alt="Coach Marco" /></div><div class="coach__name"><span class="t-h3">Marco</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div></a></li>
+        <li><a class="coach" href="../chi-siamo/index.html?coach=anna"><div class="coach__photo"><img src="../chi-siamo/assets/team/anna.jpg" alt="Coach Anna" /></div><div class="coach__name"><span class="t-h3">Anna</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div></a></li>
+        <li><a class="coach" href="../chi-siamo/index.html?coach=giulio"><div class="coach__photo"><img src="../chi-siamo/assets/team/giulio.jpg" alt="Coach Giulio" /></div><div class="coach__name"><span class="t-h3">Giulio</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div></a></li>
+        <li><a class="coach" href="../chi-siamo/index.html?coach=yuri"><div class="coach__photo"><img src="../chi-siamo/assets/team/yuri.jpg" alt="Coach Yuri" /></div><div class="coach__name"><span class="t-h3">Yuri</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div></a></li>
+        <li><a class="coach" href="../chi-siamo/index.html?coach=devid"><div class="coach__photo"><img src="../chi-siamo/assets/team/devid.jpg" alt="Coach Devid" /></div><div class="coach__name"><span class="t-h3">Devid</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div></a></li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
