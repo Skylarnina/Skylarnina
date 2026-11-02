@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OLTRESOGLIA Home · Il credo</title>
+<style>/* OLTRESOGLIA layout tokens: Kehinde's Figma values (26 Oct). Spec: ../LAYOUT.md
+   Colours, box radii, inner padding and spacing shared by every page. Type lives in type.css. */
+:root {
+  /* Colours */
+  --page-base: #F5F3EE;      /* light page background (also the Porcelain text colour on dark) */
+  --box-white: #FFFFFF;      /* light boxes */
+  --box-dark: #0D0D0D;       /* dark boxes and dark sections */
+  --box-dark-2: #141414;     /* dark inner cards, dark box on dark */
+  --yellow: #F9BF58;         /* brand yellow (Saffron) */
+
+  /* Corner radius */
+  --radius-header: 28px;     /* header / hero panels */
+  --radius-box: 24px;        /* content boxes */
+  --radius-card: 18px;       /* inner cards */
+
+  /* Spacing */
+  --box-pad: clamp(24px, 2.8vw, 40px);   /* inner padding: ~40px desktop, 24px mobile */
+  --box-gap: clamp(24px, 3.3vw, 48px);   /* space between boxes: 24–48px */
+  --box-inset: 16px;                     /* boxes stay 16px in from the screen edges on mobile */
+}
+</style>
+<style>/* OLTRESOGLIA type system. Spec: ../TYPOGRAPHY.md
+   The ONLY file allowed to set font-size, line-height, letter-spacing, font-weight or text-transform.
+   Every text element on every page carries exactly one role class: .t-display … .t-nav.
+   A size that isn't a role doesn't exist: use the nearest role. */
+
+/* Stand-ins until the Bounded files arrive: Archivo (200 / 400 / 900). Manrope is the real font,
+   served by Google Fonts until self-hosted copies are added to ../fonts/. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;900&family=Manrope:wght@300;400;500;600&display=swap');
+
+/* Bounded: drop the three files into oltresoglia/fonts/ with these names and every page switches over. */
+@font-face { font-family: 'Bounded'; src: url('../fonts/bounded-black.woff2') format('woff2'), url('../fonts/bounded-black.ttf') format('truetype'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bounded'; src: url('../fonts/bounded-regular.woff2') format('woff2'), url('../fonts/bounded-regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bounded'; src: url('../fonts/bounded-extralight.woff2') format('woff2'), url('../fonts/bounded-extralight.ttf') format('truetype'); font-weight: 200; font-style: normal; font-display: swap; }
+
+:root {
+  /* Families */
+  --font-display: 'Bounded', 'Archivo', sans-serif;
+  --font-text: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+  /* The 12 role sizes (1440 / 1024 / 390 resolve to the table in TYPOGRAPHY.md) */
+  --t-display: clamp(52px, 7.8vw, 112px);
+  --t-h1: clamp(36px, 4.5vw, 64px);
+  --t-h2: clamp(28px, 2.8vw, 40px);
+  --t-h3: clamp(20px, 1.7vw, 24px);
+  --t-statement: clamp(30px, 3.4vw, 48px);
+  --t-numeral: var(--t-h1);
+  --t-eyebrow: 11px;
+  --t-lead: clamp(17px, 1.4vw, 20px);
+  --t-body: 16px;
+  --t-small: 13px;
+  --t-button: 13px;
+  --t-nav: 14px;
+
+  /* Spacing tied to the type */
+  --space-section: clamp(72px, 11vw, 160px);
+  --space-eyebrow: 16px;   /* eyebrow → heading */
+  --space-heading: clamp(16px, 1.7vw, 24px);   /* heading → lead / body */
+
+  /* Ink: the colour the opacities are taken from. Uses the page's own Porcelain / Saffron tokens
+     when they exist (colours are not this file's job); the spec hexes are the fallback. */
+  --type-ink: var(--oltre-porcelain, #F5F3EE);
+  --type-accent: var(--oltre-saffron-mango, #F9BF58);
+}
+
+/* On a light (Porcelain) ground the same opacities are taken from Dark Charcoal instead.
+   The mixes are declared on every element (not once on :root) so this override reaches them. */
+.on-light { --type-ink: var(--oltre-dark-charcoal, #050505); }
+* {
+  --type-ink-read: color-mix(in srgb, var(--type-ink) 64%, transparent);   /* lead, body */
+  --type-ink-quiet: color-mix(in srgb, var(--type-ink) 40%, transparent);  /* small, eyebrow, placeholders */
+}
+
+/* ---------- Roles ---------- */
+.t-display   { font: 900 var(--t-display)/0.92 var(--font-display); text-transform: uppercase; letter-spacing: -0.02em; max-width: 10ch; }
+.t-h1        { font: 900 var(--t-h1)/1 var(--font-display); text-transform: uppercase; letter-spacing: -0.01em; max-width: 14ch; }
+.t-h2        { font: 900 var(--t-h2)/1.05 var(--font-display); text-transform: uppercase; letter-spacing: 0; max-width: 18ch; }
+.t-h3        { font: 400 var(--t-h3)/1.2 var(--font-display); text-transform: none; letter-spacing: 0; max-width: 28ch; }
+.t-statement { font: 200 var(--t-statement)/1.1 var(--font-display); text-transform: none; letter-spacing: -0.01em; max-width: 24ch; }
+.t-numeral   { font: 900 var(--t-numeral)/1 var(--font-display); letter-spacing: -0.02em; }
+.t-eyebrow   { font: 500 var(--t-eyebrow)/1.4 var(--font-text); text-transform: uppercase; letter-spacing: 0.14em; color: var(--type-ink-quiet); }
+.t-lead      { font: 300 var(--t-lead)/1.5 var(--font-text); text-transform: none; letter-spacing: 0; max-width: 56ch; color: var(--type-ink-read); }
+.t-body      { font: 400 var(--t-body)/1.6 var(--font-text); text-transform: none; letter-spacing: 0; max-width: 64ch; color: var(--type-ink-read); }
+.t-small     { font: 400 var(--t-small)/1.5 var(--font-text); text-transform: none; letter-spacing: 0.01em; max-width: 48ch; color: var(--type-ink-quiet); }
+.t-button    { font: 600 var(--t-button)/1 var(--font-text); text-transform: uppercase; letter-spacing: 0.12em; }
+.t-nav       { font: 400 var(--t-nav)/1 var(--font-text); text-transform: none; letter-spacing: 0; }
+
+/* Headings break into even lines (no single word left on the last line) */
+:is(.t-display, .t-h1, .t-h2, .t-h3, .t-statement) { text-wrap: balance; }
+
+/* Saffron eyebrow, only when it sits above an H1 */
+.t-eyebrow.on-dark-accent { color: var(--type-accent); }
+
+/* Placeholders follow the quiet opacity */
+::placeholder { color: var(--type-ink-quiet); opacity: 1; }
+
+/* One accent phrase per section, inside an H1 or Statement only */
+.accent { color: var(--type-accent); }
+
+/* Spacing helpers tied to the type */
+.t-eyebrow + :is(.t-display, .t-h1, .t-h2) { margin-top: var(--space-eyebrow); }
+:is(.t-display, .t-h1, .t-h2, .t-h3, .t-statement) + :is(.t-lead, .t-body) { margin-top: var(--space-heading); }
+</style>
+<style>
+  /* Home · "Il credo". One white box read top to bottom: the question, the belief, the video.
+     1 · eyebrow + H1 left, the story (Lead) right, bottom-aligned
+     2 · the credo as a large Statement with a Saffron marker on its turn, the answer (Lead) beside it
+     3 · the VSL full width, the invitation on the play button. Copy verbatim from the current section. */
+  :root {
+    --oltre-dark-charcoal: var(--box-dark); --oltre-porcelain: var(--page-base); --oltre-saffron-mango: var(--yellow);
+    --gold: #8A5A00;
+    --hair: color-mix(in srgb, var(--box-dark) 12%, transparent);
+    --ease: cubic-bezier(.76, 0, .24, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--page-base); font-family: var(--font-text); -webkit-font-smoothing: antialiased; }
+  h2, p, blockquote { margin: 0; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 40px; }
+  .credo { --pad: clamp(32px, 4.4vw, 64px); background: var(--box-white); color: var(--box-dark); border-radius: var(--radius-box); padding: var(--pad);
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: clamp(48px, 5.5vw, 80px); }
+
+  /* 1 · question + story */
+  .credo__q { grid-column: 1 / span 7; }
+  .credo__q .t-eyebrow { color: var(--gold); }
+  .credo__q .t-h1 { color: var(--box-dark); max-width: 16ch; }
+  .credo__story { grid-column: 9 / -1; align-self: end; }
+  .t-lead { color: color-mix(in srgb, var(--box-dark) 80%, transparent); }
+
+  /* 2 · the belief */
+  .credo__belief { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; padding-top: clamp(40px, 4.4vw, 64px); border-top: 1px solid var(--hair); row-gap: 32px; }
+  .credo__belief blockquote { grid-column: 1 / span 8; }
+  .credo__belief .t-statement { color: var(--box-dark); max-width: 26ch; }
+  .mark { background: linear-gradient(transparent 58%, color-mix(in srgb, var(--yellow) 70%, transparent) 58% 92%, transparent 92%);
+    -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .credo__answer { grid-column: 9 / -1; align-self: end; display: grid; gap: 16px; }
+  .credo__answer::before { content: ''; width: 48px; height: 3px; background: var(--yellow); }
+
+  /* 3 · the video */
+  .vsl { grid-column: 1 / -1; position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-card); overflow: hidden;
+    background: var(--box-dark-2) radial-gradient(120% 90% at 50% 110%, color-mix(in srgb, var(--yellow) 14%, transparent), transparent 60%); color: var(--page-base); }
+  .vsl__play { position: absolute; inset: 0; width: 100%; border: 0; background: none; color: inherit; cursor: pointer;
+    display: grid; place-content: center; justify-items: center; gap: 24px; padding: 24px; }
+  .vsl__btn { width: clamp(72px, 7vw, 104px); aspect-ratio: 1; border-radius: 999px; background: var(--yellow); color: var(--box-dark);
+    display: grid; place-items: center; box-shadow: 0 0 0 0 color-mix(in srgb, var(--yellow) 40%, transparent); transition: transform .6s var(--ease), box-shadow .6s var(--ease); }
+  .vsl__btn svg { width: 30%; margin-left: 6%; }
+  .vsl__play:hover .vsl__btn { transform: scale(1.06); box-shadow: 0 0 0 14px color-mix(in srgb, var(--yellow) 18%, transparent); }
+  .vsl__play .t-h3 { color: var(--page-base); text-align: center; max-width: 34ch; }
+  .vsl__tag { position: absolute; left: 20px; bottom: 16px; color: color-mix(in srgb, var(--page-base) 45%, transparent); }
+  :where(button):focus-visible { outline: 2px solid var(--yellow); outline-offset: -6px; }
+
+  @media (max-width: 1023px) {
+    .wrap { padding: 32px 24px; }
+    .credo__q, .credo__story, .credo__belief blockquote, .credo__answer { grid-column: 1 / -1; }
+    .credo { row-gap: 40px; }
+  }
+  @media (max-width: 760px) {
+    .wrap { padding: 24px var(--box-inset); }
+    .credo { --pad: var(--box-pad); }
+    .vsl { aspect-ratio: 4 / 5; margin-inline: calc(-1 * var(--pad) + 8px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .vsl__btn { transition: none; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="credo on-light" aria-labelledby="credo-title">
+      <div class="credo__q">
+        <p class="t-eyebrow">Il credo</p>
+        <h2 class="t-h1" id="credo-title">E se il problema non fosse la tua volontà?</h2>
+      </div>
+      <p class="t-lead credo__story">Quando facevi sport c'erano un allenatore e un calendario, e non dovevi decidere niente. Poi sono arrivati il lavoro e le responsabilità, il calendario è sparito e un chilo alla volta se n'è andato anche il fisico.</p>
+
+      <div class="credo__belief">
+        <blockquote><p class="t-statement">Noi crediamo che non esistano professionisti senza costanza. Esistono <span class="mark">settimane su cui nessuno ha mai costruito un piano.</span></p></blockquote>
+        <p class="t-lead credo__answer">Non ti serve più motivazione. Ti serve di nuovo un calendario, costruito sulla tua settimana, anche sulla peggiore.</p>
+      </div>
+
+      <div class="vsl">
+        <button class="vsl__play" type="button" aria-label="Guarda il video e scopri come lavoriamo">
+          <span class="vsl__btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span>
+          <span class="t-h3">Guarda il video e scopri come lavoriamo.</span>
+        </button>
+        <span class="vsl__tag t-small">[VSL ASPECIFICA]</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OLTRESOGLIA Home · Il credo</title>
+<link rel="stylesheet" href="../styles/layout.css" />
+<link rel="stylesheet" href="../styles/type.css" />
+<style>
+  /* Home · "Il credo". One white box read top to bottom: the question, the belief, the video.
+     1 · eyebrow + H1 left, the story (Lead) right, bottom-aligned
+     2 · the credo as a large Statement with a Saffron marker on its turn, the answer (Lead) beside it
+     3 · the VSL full width, the invitation on the play button. Copy verbatim from the current section. */
+  :root {
+    --oltre-dark-charcoal: var(--box-dark); --oltre-porcelain: var(--page-base); --oltre-saffron-mango: var(--yellow);
+    --gold: #8A5A00;
+    --hair: color-mix(in srgb, var(--box-dark) 12%, transparent);
+    --ease: cubic-bezier(.76, 0, .24, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--page-base); font-family: var(--font-text); -webkit-font-smoothing: antialiased; }
+  h2, p, blockquote { margin: 0; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 48px 40px; }
+  .credo { --pad: clamp(32px, 4.4vw, 64px); background: var(--box-white); color: var(--box-dark); border-radius: var(--radius-box); padding: var(--pad);
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: clamp(48px, 5.5vw, 80px); }
+
+  /* 1 · question + story */
+  .credo__q { grid-column: 1 / span 7; }
+  .credo__q .t-eyebrow { color: var(--gold); }
+  .credo__q .t-h1 { color: var(--box-dark); max-width: 16ch; }
+  .credo__story { grid-column: 9 / -1; align-self: end; }
+  .t-lead { color: color-mix(in srgb, var(--box-dark) 80%, transparent); }
+
+  /* 2 · the belief */
+  .credo__belief { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; padding-top: clamp(40px, 4.4vw, 64px); border-top: 1px solid var(--hair); row-gap: 32px; }
+  .credo__belief blockquote { grid-column: 1 / span 8; }
+  .credo__belief .t-statement { color: var(--box-dark); max-width: 26ch; }
+  .mark { background: linear-gradient(transparent 58%, color-mix(in srgb, var(--yellow) 70%, transparent) 58% 92%, transparent 92%);
+    -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .credo__answer { grid-column: 9 / -1; align-self: end; display: grid; gap: 16px; }
+  .credo__answer::before { content: ''; width: 48px; height: 3px; background: var(--yellow); }
+
+  /* 3 · the video */
+  .vsl { grid-column: 1 / -1; position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius-card); overflow: hidden;
+    background: var(--box-dark-2) radial-gradient(120% 90% at 50% 110%, color-mix(in srgb, var(--yellow) 14%, transparent), transparent 60%); color: var(--page-base); }
+  .vsl__play { position: absolute; inset: 0; width: 100%; border: 0; background: none; color: inherit; cursor: pointer;
+    display: grid; place-content: center; justify-items: center; gap: 24px; padding: 24px; }
+  .vsl__btn { width: clamp(72px, 7vw, 104px); aspect-ratio: 1; border-radius: 999px; background: var(--yellow); color: var(--box-dark);
+    display: grid; place-items: center; box-shadow: 0 0 0 0 color-mix(in srgb, var(--yellow) 40%, transparent); transition: transform .6s var(--ease), box-shadow .6s var(--ease); }
+  .vsl__btn svg { width: 30%; margin-left: 6%; }
+  .vsl__play:hover .vsl__btn { transform: scale(1.06); box-shadow: 0 0 0 14px color-mix(in srgb, var(--yellow) 18%, transparent); }
+  .vsl__play .t-h3 { color: var(--page-base); text-align: center; max-width: 34ch; }
+  .vsl__tag { position: absolute; left: 20px; bottom: 16px; color: color-mix(in srgb, var(--page-base) 45%, transparent); }
+  :where(button):focus-visible { outline: 2px solid var(--yellow); outline-offset: -6px; }
+
+  @media (max-width: 1023px) {
+    .wrap { padding: 32px 24px; }
+    .credo__q, .credo__story, .credo__belief blockquote, .credo__answer { grid-column: 1 / -1; }
+    .credo { row-gap: 40px; }
+  }
+  @media (max-width: 760px) {
+    .wrap { padding: 24px var(--box-inset); }
+    .credo { --pad: var(--box-pad); }
+    .vsl { aspect-ratio: 4 / 5; margin-inline: calc(-1 * var(--pad) + 8px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .vsl__btn { transition: none; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="credo on-light" aria-labelledby="credo-title">
+      <div class="credo__q">
+        <p class="t-eyebrow">Il credo</p>
+        <h2 class="t-h1" id="credo-title">E se il problema non fosse la tua volontà?</h2>
+      </div>
+      <p class="t-lead credo__story">Quando facevi sport c'erano un allenatore e un calendario, e non dovevi decidere niente. Poi sono arrivati il lavoro e le responsabilità, il calendario è sparito e un chilo alla volta se n'è andato anche il fisico.</p>
+
+      <div class="credo__belief">
+        <blockquote><p class="t-statement">Noi crediamo che non esistano professionisti senza costanza. Esistono <span class="mark">settimane su cui nessuno ha mai costruito un piano.</span></p></blockquote>
+        <p class="t-lead credo__answer">Non ti serve più motivazione. Ti serve di nuovo un calendario, costruito sulla tua settimana, anche sulla peggiore.</p>
+      </div>
+
+      <div class="vsl">
+        <button class="vsl__play" type="button" aria-label="Guarda il video e scopri come lavoriamo">
+          <span class="vsl__btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span>
+          <span class="t-h3">Guarda il video e scopri come lavoriamo.</span>
+        </button>
+        <span class="vsl__tag t-small">[VSL ASPECIFICA]</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
