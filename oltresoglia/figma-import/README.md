@@ -18,4 +18,4 @@ Import at **1280 px** wide for desktop (390 px for mobile; the layouts are respo
 | 27–39 | Ebook gratuiti · listing, 5 landing pages, pop-up (default, error), 5 confirmation pages |
 | 40 | Home · Il team section (redesign: 5 equal portraits) |
 | 41 | Home · Il credo section (redesign: question, belief, full-width video) |
-| 42 | Home · full page (3 Nov: Pietro's content order, our style, Bibi's hero + navbar) |
+| 42 | Home · full page v2 (3 Nov: layouts from Kehinde's references, Pietro's gym photo in the hero) |
