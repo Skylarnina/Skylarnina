@@ -10,7 +10,7 @@
 <style>
   /* OLTRESOGLIA Home v2 (3 Nov). Content + order: Pietro's scratch. Layouts: Kehinde's references
      (FitNova, FitNova AI, Steel Fit, FITNE). Styling: ours (tokens from Kehinde's Figma).
-     [testo dal Figma] = copy unreadable in the scratch screenshot; [Foto · …] = photo slot for Bibi. */
+     Copy: Homepage.pdf (3 Nov), verbatim. [Foto · …] = photo slot for Bibi; [VIDEO n] = video slot. */
   @font-face { font-family: 'Bounded'; src: url('../fonts/Bounded-Variable.ttf') format('truetype'); font-weight: 200 900; font-display: swap; }
   :root {
     --page: #F5F3EE; --white: #FFFFFF; --dark: #0D0D0D; --dark-2: #141414; --dark-3: #1F1F1F; --card-d: #2A2A2A; --yellow: #F9BF58; --gold: #8A5A00;
@@ -142,8 +142,8 @@
   .res__side { grid-column: 2 / -1; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 
   /* 4 · VIDEO (Steel Fit staggered) */
-  .vrow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
-  .vrow .vc:nth-child(2) { margin-top: 64px; } .vrow .vc:nth-child(3) { margin-top: 24px; } .vrow .vc:nth-child(4) { margin-top: 88px; }
+  .vrow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1000px; margin-inline: auto; gap: var(--gap); align-items: start; }
+  .vrow .vc:nth-child(2) { margin-top: 72px; } .vrow .vc:nth-child(3) { margin-top: 28px; }
   .vc { display: grid; gap: 14px; }
   .vc__media { position: relative; aspect-ratio: 9 / 14; border-radius: var(--r-card); overflow: hidden; background: var(--dark-2); display: grid; place-items: center; }
   .vc__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,5,5,.55), transparent 30%, transparent 70%, rgba(5,5,5,.6)); }
@@ -218,7 +218,7 @@
   .perc__more p { font: 700 17px/1.3 var(--display); }
 
   /* 10 · CONFRONTO (FitNova pricing: featured dark card) */
-  .vs { display: grid; grid-template-columns: 1fr 1.08fr; gap: var(--gap); max-width: 1040px; margin-inline: auto; align-items: center; }
+  .vs { display: grid; grid-template-columns: 1fr 1.08fr; gap: var(--gap); max-width: 1100px; margin-inline: auto; align-items: center; }
   .plan { border-radius: var(--r-box); padding: clamp(24px, 3vw, 36px); display: grid; gap: 20px; }
   .plan--std { background: var(--white); }
   .plan--us { background: var(--dark); color: var(--on-dark); padding-block: clamp(36px, 4vw, 52px); box-shadow: 0 40px 60px -40px rgba(13,13,13,.6); }
@@ -274,6 +274,7 @@
   .guar { display: grid; grid-template-columns: 240px minmax(0, 1fr) auto; gap: 32px; align-items: center; margin-top: var(--gap); background: var(--dark); color: var(--on-dark); border-radius: var(--r-box); padding: 12px clamp(20px, 3vw, 40px) 12px 12px; }
   .guar .ph { border-radius: var(--r-card); aspect-ratio: 4 / 3; }
   .guar__txt { display: grid; gap: 10px; }
+  .guar__txt .body { color: var(--on-dark-2); }
   .guar__txt .h3 { color: #fff; font-size: clamp(19px, 1.7vw, 24px); }
   .seal { width: 112px; height: 112px; border-radius: 999px; border: 2px solid var(--yellow); display: grid; place-items: center; color: #fff; position: relative; justify-self: end; }
   .seal::before { content: ''; position: absolute; inset: 6px; border-radius: 999px; border: 1px dashed color-mix(in srgb, var(--yellow) 50%, transparent); }
@@ -305,7 +306,6 @@
   /* Responsive */
   @media (max-width: 1100px) {
     .nav__links { display: none; } .nav__menu { display: grid; }
-    .vrow { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vrow .vc { margin-top: 0 !important; } .vrow .vc:nth-child(even) { margin-top: 48px !important; }
     .guar { grid-template-columns: 200px minmax(0, 1fr); } .seal { display: none; } .guar__cta { grid-column: 2; }
   }
   @media (max-width: 860px) {
@@ -334,7 +334,7 @@
   @media (max-width: 560px) {
     .numbers { grid-template-columns: 1fr; } .numbers .stat { border-left: 0; border-top: 1px solid var(--hair-l); padding: 18px 0; }
     .res { grid-template-columns: 1fr; }
-    .vrow { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .vrow { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; } .vrow .vc { flex: 0 0 72%; scroll-snap-align: start; margin-top: 0 !important; }
     .hero__cta .btn { width: 100%; }
     .foot__word { font-size: 10.6vw; }
     .fam__img { display: none; }
@@ -375,7 +375,7 @@
     </div>
     <div class="chip chip--proof">
       <div class="faces"><img src="../chi-siamo/assets/team/marco.jpg" alt="" /><img src="../chi-siamo/assets/team/anna.jpg" alt="" /><img src="../chi-siamo/assets/team/giulio.jpg" alt="" /><img src="../chi-siamo/assets/team/devid.jpg" alt="" /></div>
-      <div><b>+500</b><span class="small tbd">professionisti seguiti</span></div>
+      <div><b>+500</b><span class="small">professionisti seguiti</span></div>
     </div>
     <a class="chip chip--video" href="#credo">Guarda il video <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span></a>
   </header>
@@ -383,9 +383,9 @@
   <!-- 2 · NUMBERS -->
   <section class="box box--open numbers" aria-label="In numeri">
     <p class="numbers__who"><img src="../chi-siamo/assets/team/pietro.jpg" alt="" />Pietro Vecchi, Biologo Nutrizionista e fondatore di OLTRESOGLIA.</p>
-    <div class="stat"><span class="num">+500</span><span class="small"><span class="tbd">professionisti seguiti</span></span></div>
-    <div class="stat"><span class="num">+10 anni</span><span class="small"><span class="tbd">di esperienza sul campo</span></span></div>
-    <div class="stat"><span class="num">100%</span><span class="small"><span class="tbd">[testo dal Figma]</span></span></div>
+    <div class="stat"><span class="num">+500</span><span class="small">professionisti seguiti</span></div>
+    <div class="stat"><span class="num">+10 anni</span><span class="small">di esperienza sul campo</span></div>
+    <div class="stat"><span class="num">100%</span><span class="small">rimborso garantito sul metodo concordato</span></div>
   </section>
 
   <!-- 3 · RISULTATI -->
@@ -395,14 +395,14 @@
     </div>
     <div class="res">
       <article class="rcard rcard--big"><div class="ph"><div><span>PRIMA</span></div><div><span>DOPO</span></div></div>
-        <div class="rcard__label"><div><b>92 <i>→</i> 80 kg</b><span class="small">Marco, <span class="tbd">[ruolo · ex sport]</span></span></div><span class="pill tbd" style="color:var(--dark)">[in X mesi]</span></div></article>
+        <div class="rcard__label"><div><b>92 <i>→</i> 80 kg</b><span class="small">Marco, manager di una multinazionale ed ex nuotatore</span></div><span class="pill">in 8 mesi</span></div></article>
       <div style="display:grid;gap:var(--gap)">
         <article class="rcard rcard--sm"><div class="ph"><div><span>PRIMA</span></div><div><span>DOPO</span></div></div>
-          <div class="rcard__label"><div><b>72 <i>→</i> 67 kg</b><span class="small">Clara, <span class="tbd">[ruolo]</span></span></div><span class="pill">[mesi]</span></div></article>
+          <div class="rcard__label"><div><b>72 <i>→</i> 61 kg</b><span class="small">Clara, infermiera su tre turni ed ex pallavolista</span></div><span class="pill">in 8 mesi</span></div></article>
       </div>
       <div style="display:grid;gap:var(--gap)">
         <article class="rcard rcard--sm"><div class="ph"><div><span>PRIMA</span></div><div><span>DOPO</span></div></div>
-          <div class="rcard__label"><div><b>86 <i>→</i> 69 kg</b><span class="small">Gianluca, <span class="tbd">[ruolo]</span></span></div><span class="pill">[mesi]</span></div></article>
+          <div class="rcard__label"><div><b>86 <i>→</i> 69 kg</b><span class="small">Gianluca, consulente finanziario in trasferta ed ex rugbista</span></div><span class="pill">in un anno</span></div></article>
       </div>
       <div class="res__side"><a class="btn btn--d" href="#">Scopri cosa dicono di noi →</a><div class="arrows"><button class="round" type="button" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="round round--d" type="button" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
     </div>
@@ -410,14 +410,14 @@
 
   <!-- 4 · VIDEO TESTIMONIANZE -->
   <section class="box box--open" aria-label="Video testimonianze">
-    <div class="split">
+    <div class="split" style="align-items:center">
       <div><p class="eyebrow">Video testimonianze</p></div>
+      <p class="small" style="justify-self:end;font-weight:700;color:var(--ink)">Scorri →</p>
     </div>
     <div class="vrow">
-      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Cosa ha ottenuto]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
-      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Cosa ha ottenuto]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
-      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Cosa ha ottenuto]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
-      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Cosa ha ottenuto]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
+      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span><span class="small" style="position:absolute;left:14px;bottom:12px;z-index:1;color:#8C877E">[VIDEO 1]</span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Una riga sul risultato]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
+      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span><span class="small" style="position:absolute;left:14px;bottom:12px;z-index:1;color:#8C877E">[VIDEO 2]</span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Una riga sul risultato]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
+      <article class="vc"><div class="vc__media"><p class="vc__title">[Titolo in sovraimpressione]</p><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z" fill="currentColor"/></svg></span><span class="small" style="position:absolute;left:14px;bottom:12px;z-index:1;color:#8C877E">[VIDEO 3]</span></div><div class="vc__who"><div><b>[Nome]</b><span class="small">[Una riga sul risultato]</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></article>
     </div>
   </section>
 
@@ -426,9 +426,9 @@
     <div>
       <div class="head" style="margin-bottom:36px"><p class="eyebrow">Ti riconosci?</p><h2 class="h2" id="fam-t">Ti suona familiare?</h2><div class="rule"></div></div>
       <ol class="fam__list">
-        <li><span class="fam__ic">01</span><div><h3 class="h3">Parti forte. Dopo pochi giorni molli.</h3><p class="body tbd">[testo dal Figma]</p></div></li>
-        <li><span class="fam__ic">02</span><div><h3 class="h3">Hai provato di tutto. Ma niente era costruito per te.</h3><p class="body tbd">[testo dal Figma]</p></div></li>
-        <li><span class="fam__ic">03</span><div><h3 class="h3">Quando la giornata finisce, non hai più niente da dare.</h3><p class="body tbd">[testo dal Figma]</p></div></li>
+        <li><span class="fam__ic">01</span><div><h3 class="h3">Parti forte. Dopo pochi giorni molli.</h3><p class="body">Cinque allenamenti a settimana, dieta drastica, sveglia all’alba. Poi arriva una settimana pesante, salta tutto e ricominci da capo.</p><p class="body" style="margin-top:8px;font-weight:600;color:var(--ink)">Ogni volta con le stesse promesse.<br />Ogni volta con lo stesso risultato.</p></div></li>
+        <li><span class="fam__ic">02</span><div><h3 class="h3">Hai provato di tutto. Ma niente era costruito per te.</h3><p class="body">Diete drastiche, solo cardio, schede da culturista, app da 9,99 € e corsi di gruppo. Persino coach e nutrizionisti che ti seguivano separatamente, senza mai confrontarsi.</p><p class="body" style="margin-top:8px;font-weight:600;color:var(--ink)">Hai investito tempo e denaro. Ma il fisico che volevi è ancora lontano.</p></div></li>
+        <li><span class="fam__ic">03</span><div><h3 class="h3">Quando la giornata finisce, non hai più niente da dare.</h3><p class="body">Hai dato tutto al lavoro. Torni a casa stanco, senza energie per allenarti, goderti la famiglia o dedicarti alle tue passioni.</p><p class="body" style="margin-top:8px;font-weight:600;color:var(--ink)">E domani ricomincia tutto da capo.</p></div></li>
       </ol>
     </div>
     <div class="fam__img"><div class="ph"><span style="left:auto;right:14px">[Foto · professionista scarico a fine giornata]</span></div></div>
@@ -437,8 +437,7 @@
   <!-- 6 · BAND -->
   <section class="box box--d on-dark band">
     <div style="display:grid;gap:28px;justify-items:start">
-      <p class="statement">Il fisico che avevi non l'hai perso in un giorno. <span class="y">L'hai messo da parte, una settimana alla volta.</span></p>
-      <a class="btn btn--y" href="#">Ricevi gratis la strategia da cui ripartire →</a>
+      <p class="statement">Il fisico che avevi non l’hai perso in un giorno. <span class="y">L’hai messo da parte, una settimana alla volta.</span></p>
     </div>
     <div class="band__imgs">
       <div class="ph"><span>[Foto · ex sportivo oggi]</span></div>
@@ -450,7 +449,7 @@
   <section class="box box--w" id="credo" aria-labelledby="credo-t">
     <div class="split">
       <div><p class="eyebrow">Il credo</p><h2 class="h2" id="credo-t">E se il problema non fosse la tua volontà?</h2><div class="rule"></div></div>
-      <p class="lead">Quando facevi sport c'erano un allenatore e un calendario, e non dovevi decidere niente. Poi sono arrivati il lavoro e le responsabilità, il calendario è sparito e un chilo alla volta se n'è andato anche il fisico.</p>
+      <p class="lead">Quando facevi sport c’erano un allenatore e un calendario, e non dovevi decidere niente. Poi sono arrivati il lavoro e le responsabilità, il calendario è sparito e un chilo alla volta se n’è andato anche il fisico.</p>
     </div>
     <div class="credo__cards">
       <div class="vsl">
@@ -470,11 +469,11 @@
   <section class="box box--open" aria-labelledby="piano-t">
     <div class="head head--c"><p class="eyebrow">Ogni settimana è diversa</p><h2 class="h2" id="piano-t" style="max-width:24ch">Se il tuo piano funziona solo nelle settimane perfette, non funziona davvero.</h2><div class="rule"></div></div>
     <div class="grid3">
-      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><p class="body tbd">[testo dal Figma]</p></article>
-      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 20V9l9-5 9 5v11"/><path d="M9 20v-6h6v6"/></svg></span><p class="body tbd">[testo dal Figma]</p></article>
-      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 16l20-8-6 12-3-5z"/></svg></span><p class="body tbd">[testo dal Figma]</p></article>
-      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><p class="body tbd">[testo dal Figma]</p></article>
-      <article class="svc svc--y"><p class="lead"><span class="tbd" style="color:var(--ink)">[Ogni settimana ha una forma… testo dal Figma]</span></p><div class="row"><a class="btn btn--d" href="#">Ricevi gratis la strategia da cui ripartire →</a><span class="small">Test immediato · meno di 2'</span></div></article>
+      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><p class="lead" style="color:var(--ink)">C’è chi finisce quando lo decide il lavoro, mai alle sei.</p></article>
+      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 20V9l9-5 9 5v11"/><path d="M9 20v-6h6v6"/></svg></span><p class="lead" style="color:var(--ink)">C’è chi passa più sere in albergo che nel proprio letto.</p></article>
+      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 16l20-8-6 12-3-5z"/></svg></span><p class="lead" style="color:var(--ink)">C’è chi fa le notti e scopre la turnistica il venerdì.</p></article>
+      <article class="svc"><span class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><p class="lead" style="color:var(--ink)">E c’è chi ha orari regolari, ma ogni ora dell’agenda è già di qualcun altro.</p></article>
+      <article class="svc svc--y"><div><p class="h3">Ogni settimana ha una forma.</p><p class="lead" style="margin-top:6px">Con il nostro test capisci dove si rompe la tua e da dove ripartire.</p></div><div class="row"><a class="btn btn--d" href="#">Ricevi gratis la strategia da cui ripartire →</a><span class="small">Test immediato · meno di 2'</span></div></article>
     </div>
   </section>
 
@@ -482,17 +481,17 @@
   <section class="box box--w perc" aria-labelledby="perc-t">
     <div class="perc__txt">
       <p class="eyebrow">Il percorso</p>
-      <h2 class="h2" id="perc-t">Perdere grasso è solo l'inizio.</h2>
+      <h2 class="h2" id="perc-t">Perdere grasso è solo l’inizio.</h2>
       <div class="rule"></div>
       <p class="note"><b>Non si salta, si accorcia.</b> Quando la settimana salta, il piano si accorcia e non riparte da zero.</p>
-      <div class="perc__more"><p>Vuoi saperne di più?</p><a class="btn btn--o" href="#">Scrivici su WhatsApp e scopri da dove ripartire →</a></div>
+      <div class="perc__more"><p>Vuoi saperne di più?</p><a class="btn btn--o" href="#">Scrivici su WhatsApp e scopri da dove ripartire</a></div>
     </div>
     <div class="perc__vis">
       <div class="perc__photo ph"><span style="top:auto;bottom:14px">[Foto · cliente in allenamento]</span></div>
       <ol class="perc__cards">
-        <li class="phase"><p class="k">Fase 1</p><h3 class="h3">Fondamenta</h3><p class="body">Il corpo entra in agenda. Perdi il grasso in eccesso e dai una struttura alla settimana, con obiettivi, dati e un responsabile.</p></li>
-        <li class="phase"><p class="k">Fase 2</p><h3 class="h3">Costruzione</h3><p class="body">Il grasso è sceso e la routine regge. I carichi salgono, il fiato torna e ti muovi di nuovo senza fatica nella vita di tutti i giorni. Ogni mese dei test personali ti mostrano quanta strada hai fatto e qual è la prossima soglia.</p></li>
-        <li class="phase"><p class="k">Fase 3</p><h3 class="h3">Padronanza</h3><p class="body">Il fisico smette di essere un progetto e diventa un punto di forza. Una sfida personale, una gara, una montagna: tieni il risultato e continui a migliorare.</p></li>
+        <li class="phase"><p class="k">Fase 1:</p><h3 class="h3">Fondamenta</h3><p class="body">Il corpo entra in agenda. Perdi il grasso in eccesso e dai una struttura alla settimana, con obiettivi, dati e un responsabile.</p></li>
+        <li class="phase"><p class="k">Fase 2:</p><h3 class="h3">Costruzione</h3><p class="body">Il grasso è sceso e la routine regge. I carichi salgono, il fiato torna e ti muovi di nuovo senza fatica nella vita di tutti i giorni. Ogni mese dei test personali ti mostrano quanta strada hai fatto e qual è la prossima soglia.</p></li>
+        <li class="phase"><p class="k">Fase 3:</p><h3 class="h3">Padronanza</h3><p class="body">Il fisico smette di essere un progetto e diventa un punto di forza. Una sfida personale, una gara, una montagna: tieni il risultato e continui a migliorare.</p></li>
       </ol>
     </div>
   </section>
@@ -504,21 +503,20 @@
       <div class="plan plan--std">
         <div class="plan__h"><b>Le soluzioni standard</b></div>
         <ul>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Sei tu a doverti adattare al programma.</b> Schede e diete che non tengono conto dei tuoi orari, delle trasferte e degli imprevisti.</span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Solo pesi o solo cardio.</b> Ti rendono più leggero o più grosso, non di nuovo atletico.</span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Alla prima settimana storta, perdi il ritmo.</b> Salti gli allenamenti, perdi continuità e ti ritrovi a ricominciare da capo.</span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Se hai bisogno, devi farti sentire tu.</b> Il supporto arriva quando lo chiedi. Nel frattempo, la settimana storta passa e nessuno se ne accorge.</span></li>
         </ul>
       </div>
       <div class="plan plan--us">
-        <div class="plan__h"><b>OLTRESOGLIA</b><span class="tag">Il metodo</span></div>
+        <div class="plan__h"><b>OLTRESOGLIA</b></div>
         <ul>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd">[testo dal Figma]</span></li>
+          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b style="color:#fff">È il programma che si adatta alla tua vita.</b> Partiamo dalla tua settimana più difficile, non da quella ideale.</span></li>
+          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b style="color:#fff">Forza e fiato insieme.</b> Come ti allenavi quando facevi sport, dentro la settimana che hai oggi.</span></li>
+          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b style="color:#fff">Il percorso continua anche quando il tempo manca.</b> Per le settimane più complicate hai sempre pronta una versione ridotta del programma, e non riparti mai da zero.</span></li>
+          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b style="color:#fff">Siamo noi a cercarti, ogni settimana.</b> Monitoriamo i tuoi progressi e interveniamo senza aspettare che sia tu a chiedere aiuto.</span></li>
         </ul>
-        <a class="btn btn--y" href="#">Ricevi gratis la strategia da cui ripartire →</a>
       </div>
     </div>
   </section>
@@ -530,12 +528,12 @@
       <div><p class="lead">Un solo team per allenamento e alimentazione, con una psicologa quando serve. Ogni settimana ti scriviamo noi, senza aspettare che qualcosa si complichi.</p><a class="btn btn--o" href="#">Scopri il team OLTRESOGLIA →</a></div>
     </div>
     <div class="trow">
-      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/pietro.jpg" alt="Pietro Vecchi" /><div class="tcard__label"><div><b>Pietro Vecchi</b><span class="small">Biologo Nutrizionista · Fondatore</span></div><span class="pill">Scopri</span></div></a>
-      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/marco.jpg" alt="Coach Marco" /><div class="tcard__label"><div><b>Marco</b><span class="small">Coach</span></div><span class="pill">Scopri</span></div></a>
-      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/anna.jpg" alt="Coach Anna" /><div class="tcard__label"><div><b>Anna</b><span class="small">Coach</span></div><span class="pill">Scopri</span></div></a>
-      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/giulio.jpg" alt="Coach Giulio" /><div class="tcard__label"><div><b>Giulio</b><span class="small">Coach</span></div><span class="pill">Scopri</span></div></a>
-      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/yuri.jpg" alt="Coach Yuri" /><div class="tcard__label"><div><b>Yuri</b><span class="small">Coach</span></div><span class="pill">Scopri</span></div></a>
-      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/devid.jpg" alt="Coach Devid" /><div class="tcard__label"><div><b>Devid</b><span class="small">Coach</span></div><span class="pill">Scopri</span></div></a>
+      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/pietro.jpg" alt="Pietro Vecchi" /><div class="tcard__label"><div><b>Pietro Vecchi</b><span class="small">Biologo Nutrizionista · Fondatore</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></a>
+      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/marco.jpg" alt="Coach Marco" /><div class="tcard__label"><div><b>Marco</b><span class="small">Coach</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></a>
+      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/anna.jpg" alt="Coach Anna" /><div class="tcard__label"><div><b>Anna</b><span class="small">Coach</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></a>
+      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/giulio.jpg" alt="Coach Giulio" /><div class="tcard__label"><div><b>Giulio</b><span class="small">Coach</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></a>
+      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/yuri.jpg" alt="Coach Yuri" /><div class="tcard__label"><div><b>Yuri</b><span class="small">Coach</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></a>
+      <a class="tcard" href="#"><img src="../chi-siamo/assets/team/devid.jpg" alt="Coach Devid" /><div class="tcard__label"><div><b>Devid</b><span class="small">Coach</span></div><span class="vc__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div></a>
     </div>
     <div class="team__foot"><div class="arrows"><button class="round" type="button" data-t="-1" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="round" type="button" data-t="1" aria-label="Successivo" style="background:var(--yellow);border-color:var(--yellow)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
   </section>
@@ -549,36 +547,31 @@
       <div class="fit__img ph"><span>[Foto · cliente che si allena]</span></div>
       <div class="fcard fcard--yes">
         <h3 class="h3">È per te se:</h3>
-        <ul>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd" style="color:var(--ink)">[testo dal Figma]</span></li>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd" style="color:var(--ink)">[testo dal Figma]</span></li>
-          <li><span class="ic ic--ok"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="tbd" style="color:var(--ink)">[testo dal Figma]</span></li>
-        </ul>
       </div>
       <div class="fcard fcard--no">
         <h3 class="h3">Non è per te se:</h3>
         <ul>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Cerchi scorciatoie.</b> <span class="tbd">[testo dal Figma]</span></span></li>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Aspetti il momento perfetto.</b> <span class="tbd">[testo dal Figma]</span></span></li>
-          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Vuoi sentirti dire quello che ti fa comodo.</b> <span class="tbd">[testo dal Figma]</span></span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Cerchi scorciatoie.</b> Vuoi risultati immediati senza cambiare le tue abitudini.</span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Aspetti il momento perfetto.</b> Continui a rimandare perché il lavoro viene sempre prima.</span></li>
+          <li><span class="ic ic--x"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.8"/></svg></span><span><b>Vuoi sentirti dire quello che ti fa comodo.</b> Non sei disposto a metterti in discussione.</span></li>
         </ul>
       </div>
     </div>
-    <div class="fit__foot"><p>Se ti riconosci, è il momento di partire.</p><a class="btn btn--y" href="#">Scrivici su WhatsApp e scopri da dove ripartire</a></div>
+    <div class="fit__foot"><p>Se ti riconosci, è il momento di parlarne.</p><a class="btn btn--y" href="#">Scrivici su WhatsApp e scopri da dove ripartire</a></div>
   </section>
 
   <!-- 13 · COME FUNZIONA -->
   <section class="box box--open" aria-labelledby="come-t">
     <div class="head"><h2 class="h2" id="come-t">Come funziona</h2><div class="rule"></div></div>
     <ol class="steps">
-      <li class="step"><span class="step__n">01</span><h3 class="h3">Scrivimi su WhatsApp.</h3><p class="body tbd">[testo dal Figma]</p></li>
-      <li class="step"><span class="step__n">02</span><h3 class="h3">Prenota una video consulenza gratuita.</h3><p class="body tbd">[testo dal Figma]</p></li>
-      <li class="step"><span class="step__n">03</span><h3 class="h3">Decidi se partire.</h3><p class="body tbd">[testo dal Figma]</p></li>
+      <li class="step"><span class="step__n">01</span><h3 class="h3">Scrivimi su WhatsApp.</h3><p class="body">Ti rispondiamo noi e capiamo insieme da dove parti.</p></li>
+      <li class="step"><span class="step__n">02</span><h3 class="h3">Fissiamo una video consulenza gratuita</h3><p class="body">In 35 minuti analizziamo la tua settimana, i tuoi obiettivi e ti spieghiamo come costruiremmo il percorso intorno alla tua vita.</p></li>
+      <li class="step"><span class="step__n">03</span><h3 class="h3">Decidi se partire.</h3><p class="body">Se il metodo fa per te, si parte. Se non partiamo, esci comunque con una strategia da usare.</p></li>
     </ol>
     <div class="guar">
       <div class="ph"><img src="../chi-siamo/assets/team/pietro-hero.jpg" alt="" style="object-position:50% 25%" /></div>
-      <div class="guar__txt"><h3 class="h3">L'unico rischio è continuare a rimandare.</h3><p class="body tbd">[testo dal Figma]</p><a class="btn btn--o" href="#" style="justify-self:start;margin-top:8px">Scrivici su WhatsApp ora</a></div>
-      <div class="seal"><b>100%</b></div>
+      <div class="guar__txt"><h3 class="h3">L’unico rischio è continuare a rimandare.</h3><p class="body">Se entri nel programma, esegui con precisione il metodo concordato e non ottieni i risultati definiti insieme, hai diritto a un rimborso del 100%. Non è uno slogan di marketing. È una clausola del nostro contratto.</p><a class="btn btn--o" href="#" style="justify-self:start;margin-top:8px">Scrivimi su WhatsApp ora</a></div>
+      <div class="seal"><span style="display:grid;justify-items:center;gap:4px"><b>100%</b><span style="font:700 10px/1 var(--text);letter-spacing:.14em">RIMBORSO</span></span></div>
     </div>
   </section>
 
@@ -605,7 +598,7 @@
       <a class="logo" href="#">OLTRESOGLIA</a>
       <nav class="foot__links" aria-label="Footer"><a href="#">Home</a><a href="#">Il team</a><a href="#">La strategia</a><a href="#">Ebook gratuiti</a><a href="#">Testimonianze</a><a href="#">Contatti</a></nav>
     </div>
-    <div class="foot__bottom"><span>Dott. Pietro Vecchi, Biologo Nutrizionista</span><span><a href="#">Privacy Policy</a> · <a href="#">Termini e condizioni</a> · © 2026 OLTRESOGLIA</span></div>
+    <div class="foot__bottom"><span>Dott. Pietro Vecchi, Biologo Nutrizionista</span><span><a href="#">Privacy Policy</a> · <a href="#">Termini di Servizio</a> · © 2026 OLTRESOGLIA</span></div>
     <div class="foot__bar"></div>
   </footer>
 </div>
