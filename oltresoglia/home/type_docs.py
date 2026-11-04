@@ -4,26 +4,26 @@ R = '/home/user/Skylarnina/oltresoglia'
 
 # name, token, family, weight, (desktop, tablet, phone), line height, letter spacing, case, colour note, used for, sample
 STYLES = [
-    ('Display', '--t-display', 'Bounded', 'Black 900', (120, 80, 38), '1.0', '-3%', 'UPPER', 'Outline only (1.5px yellow 55% / #3A3A3A on footer)', 'OLTRESOGLIA wordmark behind Pietro in the hero; footer wordmark', 'OLTRESOGLIA'),
-    ('H1', '--t-h1', 'Bounded', 'ExtraBold 800', (40, 36, 30), '1.1', '-1.5%', 'Sentence', 'White; last line yellow', 'Hero headline (one per page)', 'Eri uno sportivo. Il lavoro si è preso tutto.'),
-    ('H2', '--t-h2', 'Bounded', 'ExtraBold 800', (36, 30, 26), '1.12', '-1%', 'Sentence', 'Charcoal on light, white on dark', 'Section titles; the "Il fisico che avevi…" band', 'Risultati reali, senza filtri'),
-    ('Statement', '--t-stmt', 'Bounded', 'Light 300', (30, 26, 22), '1.25', '-1%', 'Sentence', 'Charcoal on yellow', 'The credo sentence (yellow card)', 'Noi crediamo che non esistano professionisti senza costanza.'),
-    ('H3', '--t-h3', 'Bounded', 'Bold 700', (22, 20, 19), '1.25', '0', 'Sentence', 'Charcoal / white', 'Card and step titles, phase names, plan titles, kg results (800), "Se ti riconosci…"', 'Parti forte. Dopo pochi giorni molli.'),
-    ('H4', '--t-h4', 'Bounded', 'Bold 700', (17, 16, 16), '1.25', '0', 'Sentence', 'Charcoal / white', 'Names on cards (team, videos, Pietro), "Vuoi saperne di più?", +500 chip, 01–03 badges (800)', 'Pietro Vecchi'),
-    ('Numeral L', '--t-num', 'Bounded', 'ExtraBold 800 / Black 900', (56, 44, 40), '1.0', '-2%', '—', 'Charcoal; outline on the Come funziona rows', 'Numbers row (+500, +10 anni, 100%); 01–03 in Come funziona', '+10 anni'),
-    ('Numeral XL', '--t-numxl', 'Bounded', 'Black 900', (92, 80, 64), '0.82', '-4%', '—', 'Charcoal on yellow', '100% in the guarantee card', '100%'),
-    ('Logo', '--t-logo', 'Bounded', 'ExtraBold 800 Italic', (20, 18, 17), '1.0', '+8%', 'UPPER', 'White', 'Wordmark in the nav (17 in the sticky bar and phone menu) until the logo SVG is in', 'OLTRESOGLIA'),
-    ('Menu link', '--t-menu', 'Bounded', 'Bold 700', (24, 24, 24), '1.1', '-1%', 'Sentence', 'White; current page yellow', 'Links in the phone/tablet menu', 'Ebook gratuiti'),
-    ('Caption caps', '--t-cap', 'Bounded', 'ExtraBold 800', (13, 13, 13), '1.25', '0', 'UPPER', 'White on video', 'Title over the video thumbnails', '[TITOLO IN SOVRAIMPRESSIONE]'),
-    ('Eyebrow', '--t-eyebrow', 'Manrope', 'SemiBold 600', (13, 13, 12), '1.3', '+16%', 'UPPER', 'Gold #8A5A00 on light, yellow on dark', 'Small label above each section title', 'RISULTATI E TESTIMONIANZE'),
-    ('Lead', '--t-lead', 'Manrope', 'Regular 400', (20, 18, 17), '1.55', '0', 'Sentence', 'Charcoal 80% / #BDB8AE on dark', 'Intro paragraphs (hero, credo, team), the four week types', 'Nel lavoro reggi tutto e tutti. Il tuo corpo è finito in fondo alla lista.'),
-    ('Body L', '--t-bodyl', 'Manrope', 'Bold 700', (18, 17, 16), '1.5', '0', 'Sentence', 'White', 'The bold hero sentence', 'OLTRESOGLIA è il sistema per perdere grasso e tornare atletico'),
-    ('Body', '--t-body', 'Manrope', 'Regular 400 (bold leads 700)', (16, 16, 15), '1.6', '0', 'Sentence', 'Charcoal 70% / #BDB8AE on dark', 'All running text: cards, steps, phases, comparison, lists, guarantee, note', 'Ti rispondiamo noi e capiamo insieme da dove parti.'),
-    ('Small', '--t-small', 'Manrope', 'Medium 500', (13, 13, 13), '1.45', '0', 'Sentence', '#8C877E', 'Stat labels, captions under names, "Test immediato · meno di 2\'", footer line', "Test immediato · meno di 2'"),
-    ('Label', '--t-label', 'Manrope', 'Bold 700', (12, 12, 11), '1.0', '+12% (caps)', 'UPPER or Sentence', 'Gold / grey / charcoal on yellow pill', 'PRIMA / DOPO, FASE 1:, RIMBORSO, pills ("in 8 mesi"), menu numbers, photo-slot labels', 'FASE 1:'),
-    ('Button', '--t-btn', 'Manrope', 'Bold 700', (15, 15, 14), '1.2', '0', 'Sentence', 'Charcoal on yellow', 'Yellow buttons (14 in the nav and sticky bar)', 'Ricevi gratis la strategia da cui ripartire →'),
-    ('Button caps', '--t-btncaps', 'Manrope', 'Bold 700', (13, 13, 12), '1.2', '+10%', 'UPPER', 'Yellow on black', 'Outline and black buttons', 'SCOPRI IL TEAM OLTRESOGLIA →'),
-    ('Nav', '--t-nav', 'Manrope', 'Medium 500', (15, 15, 15), '1.0', '0', 'Sentence', '#E8E4DC; current yellow + 2px underline', 'Navbar links (14 in the sticky bar and footer)', 'La strategia'),
+    ('Display', '--t-display', 'Bounded', 'Black 900', (120, 80, 38), '1.0', '-0.03em', 'UPPER', 'Outline only (1.5px yellow 55% / #3A3A3A on footer)', 'OLTRESOGLIA wordmark behind Pietro in the hero; footer wordmark', 'OLTRESOGLIA'),
+    ('H1', '--t-h1', 'Bounded', 'ExtraBold 800', (40, 36, 30), '1.1', '-0.015em', 'Sentence', 'White; last line yellow', 'Hero headline (one per page)', 'Eri uno sportivo. Il lavoro si è preso tutto.'),
+    ('H2', '--t-h2', 'Bounded', 'ExtraBold 800', (36, 30, 26), '1.12', '-0.01em', 'Sentence', 'Charcoal on light, white on dark', 'Section titles; the "Il fisico che avevi…" band', 'Risultati reali, senza filtri'),
+    ('Statement', '--t-stmt', 'Bounded', 'Light 300', (30, 26, 22), '1.25', '-0.01em', 'Sentence', 'Charcoal on yellow', 'The credo sentence (yellow card)', 'Noi crediamo che non esistano professionisti senza costanza.'),
+    ('H3', '--t-h3', 'Bounded', 'Bold 700', (22, 20, 19), '1.25', '0em', 'Sentence', 'Charcoal / white', 'Card and step titles, phase names, plan titles, kg results (800), "Se ti riconosci…"', 'Parti forte. Dopo pochi giorni molli.'),
+    ('H4', '--t-h4', 'Bounded', 'Bold 700', (17, 16, 16), '1.25', '0em', 'Sentence', 'Charcoal / white', 'Names on cards (team, videos, Pietro), "Vuoi saperne di più?", +500 chip, 01–03 badges (800)', 'Pietro Vecchi'),
+    ('Numeral L', '--t-num', 'Bounded', 'ExtraBold 800 / Black 900', (56, 44, 40), '1.0', '-0.02em', '—', 'Charcoal; outline on the Come funziona rows', 'Numbers row (+500, +10 anni, 100%); 01–03 in Come funziona', '+10 anni'),
+    ('Numeral XL', '--t-numxl', 'Bounded', 'Black 900', (92, 80, 64), '0.82', '-0.04em', '—', 'Charcoal on yellow', '100% in the guarantee card', '100%'),
+    ('Logo', '--t-logo', 'Bounded', 'ExtraBold 800 Italic', (20, 18, 17), '1.0', '0.08em', 'UPPER', 'White', 'Wordmark in the nav (17 in the sticky bar and phone menu) until the logo SVG is in', 'OLTRESOGLIA'),
+    ('Menu link', '--t-menu', 'Bounded', 'Bold 700', (24, 24, 24), '1.1', '-0.01em', 'Sentence', 'White; current page yellow', 'Links in the phone/tablet menu', 'Ebook gratuiti'),
+    ('Caption caps', '--t-cap', 'Bounded', 'ExtraBold 800', (13, 13, 13), '1.25', '0em', 'UPPER', 'White on video', 'Title over the video thumbnails', '[TITOLO IN SOVRAIMPRESSIONE]'),
+    ('Eyebrow', '--t-eyebrow', 'Manrope', 'SemiBold 600', (13, 13, 12), '1.3', '0.16em', 'UPPER', 'Gold #8A5A00 on light, yellow on dark', 'Small label above each section title', 'RISULTATI E TESTIMONIANZE'),
+    ('Lead', '--t-lead', 'Manrope', 'Regular 400', (20, 18, 17), '1.55', '0em', 'Sentence', 'Charcoal 80% / #BDB8AE on dark', 'Intro paragraphs (hero, credo, team), the four week types', 'Nel lavoro reggi tutto e tutti. Il tuo corpo è finito in fondo alla lista.'),
+    ('Body L', '--t-bodyl', 'Manrope', 'Bold 700', (18, 17, 16), '1.5', '0em', 'Sentence', 'White', 'The bold hero sentence', 'OLTRESOGLIA è il sistema per perdere grasso e tornare atletico'),
+    ('Body', '--t-body', 'Manrope', 'Regular 400 (bold leads 700)', (16, 16, 15), '1.6', '0em', 'Sentence', 'Charcoal 70% / #BDB8AE on dark', 'All running text: cards, steps, phases, comparison, lists, guarantee, note', 'Ti rispondiamo noi e capiamo insieme da dove parti.'),
+    ('Small', '--t-small', 'Manrope', 'Medium 500', (13, 13, 13), '1.45', '0em', 'Sentence', '#8C877E', 'Stat labels, captions under names, "Test immediato · meno di 2\'", footer line', "Test immediato · meno di 2'"),
+    ('Label', '--t-label', 'Manrope', 'Bold 700', (12, 12, 11), '1.0', '0.12em (caps only)', 'UPPER or Sentence', 'Gold / grey / charcoal on yellow pill', 'PRIMA / DOPO, FASE 1:, RIMBORSO, pills ("in 8 mesi"), menu numbers, photo-slot labels', 'FASE 1:'),
+    ('Button', '--t-btn', 'Manrope', 'Bold 700', (15, 15, 14), '1.2', '0em', 'Sentence', 'Charcoal on yellow', 'Yellow buttons (14 in the nav and sticky bar)', 'Ricevi gratis la strategia da cui ripartire →'),
+    ('Button caps', '--t-btncaps', 'Manrope', 'Bold 700', (13, 13, 12), '1.2', '0.1em', 'UPPER', 'Yellow on black', 'Outline and black buttons', 'SCOPRI IL TEAM OLTRESOGLIA →'),
+    ('Nav', '--t-nav', 'Manrope', 'Medium 500', (15, 15, 15), '1.0', '0em', 'Sentence', '#E8E4DC; current yellow + 2px underline', 'Navbar links (14 in the sticky bar and footer)', 'La strategia'),
 ]
 
 FONT_CSS = {'Bounded': "'Bounded', 'Archivo Black', sans-serif", 'Manrope': "'Manrope', system-ui, sans-serif"}
@@ -34,7 +34,7 @@ md = ['# OLTRESOGLIA Home: text hierarchy across breakpoints', '',
       'One Text Style per row. Breakpoints match the Framer file: **Desktop ≥ 1280**, **Tablet 810–1279**, **Phone < 810**.',
       'Sizes are fixed per breakpoint (no fluid scaling), so they can be set exactly in Framer. In the prototype they are the',
       '`--t-*` tokens at the top of `home/index.html`; every text on the page uses one of them.', '',
-      '| Style | Font | Weight | Desktop | Tablet | Phone | Line height | Letter spacing | Case | Colour | Used for |',
+      '| Style | Font | Weight | Desktop | Tablet | Phone | Line height | Letter spacing (em) | Case | Colour | Used for |',
       '|---|---|---|---|---|---|---|---|---|---|---|']
 for n, tok, fam, w, (d, tb, ph), lh, ls, case, col, use, _ in STYLES:
     md.append(f'| **{n}** | {fam} | {w} | {d} | {tb} | {ph} | {lh} | {ls} | {case} | {col} | {use} |')
@@ -46,7 +46,7 @@ md += ['', '## Rules', '',
        '- Line length: Lead and Body max ~60 characters per line on desktop.',
        '- Wordmarks are decorative outlines (aria-hidden); the real logo SVG replaces the Logo style when it arrives.', '',
        '## Framer setup', '',
-       '1. Create the 20 Text Styles above (Assets → Text Styles), each with three breakpoint sizes.',
+       '1. Create the 20 Text Styles above (Assets → Text Styles), each with three breakpoint sizes. Set letter spacing in **em** (in Framer, switch the unit to em), so it scales with the size at every breakpoint.',
        '2. Name them exactly as in the table, so they match this document and the prototype tokens.',
        '3. Colours are separate colour styles (already set up in Framer); apply them per use, not inside the text style.', '']
 open(f'{R}/home/HOME-TYPOGRAPHY.md', 'w').write('\n'.join(md))
@@ -54,8 +54,7 @@ open(f'{R}/home/HOME-TYPOGRAPHY.md', 'w').write('\n'.join(md))
 # ---------- visual board ----------
 rows = []
 for n, tok, fam, w, (d, tb, ph), lh, ls, case, col, use, sample in STYLES:
-    ls_css = ls.split(' ')[0].replace('%', '')
-    ls_css = f'{float(ls_css) / 100}em' if ls_css not in ('0', '—') else '0'
+    ls_css = ls.split(' ')[0]
     tt = 'uppercase' if case.startswith('UPPER') else 'none'
     ital = 'italic' if 'Italic' in w else 'normal'
     outline = n == 'Display'
