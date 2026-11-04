@@ -20,3 +20,4 @@ Import at **1280 px** wide for desktop (390 px for mobile; the layouts are respo
 | 41 | Home · Il credo section (redesign: question, belief, full-width video) |
 | 42 | Home · full page v2 (3 Nov: layouts from Kehinde's references, Pietro's gym photo in the hero) |
 | 43 | Navigation menu · desktop over the hero, desktop sticky while scrolling, phone closed, phone menu open |
+| 44 | Home · text styles: 20 styles with Desktop / Tablet / Phone sizes (spec: home/HOME-TYPOGRAPHY.md) |

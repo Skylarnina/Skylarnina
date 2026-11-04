@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OLTRESOGLIA · Home text styles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" />
+<style>
+  /* Text hierarchy board for Figma (html.to.design). Source of truth: HOME-TYPOGRAPHY.md */
+  @font-face { font-family: 'Bounded'; src: url('../fonts/Bounded-Variable.ttf') format('truetype'); font-weight: 200 900; font-style: normal; font-display: swap; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #F5F3EE; color: #0D0D0D; font-family: 'Manrope', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  p { margin: 0; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 56px 40px 80px; }
+  .top { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding-bottom: 28px; border-bottom: 2px solid #0D0D0D; }
+  .top h1 { margin: 0; font: 800 40px/1.1 'Bounded', sans-serif; letter-spacing: -.015em; }
+  .top p { font: 500 14px/1.5 'Manrope', sans-serif; color: #4A4740; max-width: 46ch; text-align: right; }
+  .legend { display: grid; grid-template-columns: 260px 210px 1fr; gap: 32px; padding: 14px 0; border-bottom: 1px solid #DDD7CB; font: 700 11px/1 'Manrope', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #8A5A00; }
+  .row { display: grid; grid-template-columns: 260px 210px 1fr; gap: 32px; align-items: center; padding: 26px 0; border-bottom: 1px solid #DDD7CB; }
+  .meta { display: grid; gap: 4px; }
+  .meta b { font: 700 17px/1.2 'Bounded', sans-serif; }
+  .meta span { font: 500 12.5px/1.4 'Manrope', sans-serif; color: #6E6A62; }
+  .sizes { display: flex; gap: 8px; }
+  .sizes span { display: grid; justify-items: center; gap: 4px; width: 62px; padding: 10px 0; border-radius: 12px; background: #fff; font: 800 18px/1 'Bounded', sans-serif; }
+  .sizes i { font: 700 10px/1 'Manrope', sans-serif; font-style: normal; letter-spacing: .12em; color: #8C877E; }
+  .sample { display: grid; gap: 8px; min-width: 0; }
+  .sample p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sample small { font: 500 12.5px/1.4 'Manrope', sans-serif; color: #8C877E; }
+  .group { margin-top: 40px; font: 700 12px/1 'Manrope', sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #0D0D0D; padding: 8px 12px; background: #F9BF58; border-radius: 999px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>Home · text styles</h1><p>20 Text Styles. Sizes in px for Desktop (≥ 1280) · Tablet (810–1279) · Phone (&lt; 810). Bounded for titles, numbers and names; Manrope for reading, labels and buttons.</p></div>
+  <p class="group">Bounded</p>
+  <div class="legend"><span>Style</span><span>D · T · P (px)</span><span>Sample · where it is used</span></div>
+    <div class="row">
+      <div class="meta"><b>Display</b><span>Bounded · Black 900</span><span>LH 1.0 · LS -3% · UPPER</span></div>
+      <div class="sizes"><span><i>D</i>120</span><span><i>T</i>80</span><span><i>P</i>38</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:900;font-style:normal;font-size:72px;line-height:1.0;letter-spacing:-0.03em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px #C99A3E;">OLTRESOGLIA</p><small>OLTRESOGLIA wordmark behind Pietro in the hero; footer wordmark · shown at 72px</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H1</b><span>Bounded · ExtraBold 800</span><span>LH 1.1 · LS -1.5% · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>40</span><span><i>T</i>36</span><span><i>P</i>30</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:800;font-style:normal;font-size:40px;line-height:1.1;letter-spacing:-0.015em;text-transform:none;">Eri uno sportivo. Il lavoro si è preso tutto.</p><small>Hero headline (one per page)</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H2</b><span>Bounded · ExtraBold 800</span><span>LH 1.12 · LS -1% · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>36</span><span><i>T</i>30</span><span><i>P</i>26</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:800;font-style:normal;font-size:36px;line-height:1.12;letter-spacing:-0.01em;text-transform:none;">Risultati reali, senza filtri</p><small>Section titles; the &quot;Il fisico che avevi…&quot; band</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Statement</b><span>Bounded · Light 300</span><span>LH 1.25 · LS -1% · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>30</span><span><i>T</i>26</span><span><i>P</i>22</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:300;font-style:normal;font-size:30px;line-height:1.25;letter-spacing:-0.01em;text-transform:none;">Noi crediamo che non esistano professionisti senza costanza.</p><small>The credo sentence (yellow card)</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H3</b><span>Bounded · Bold 700</span><span>LH 1.25 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>22</span><span><i>T</i>20</span><span><i>P</i>19</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:700;font-style:normal;font-size:22px;line-height:1.25;letter-spacing:0;text-transform:none;">Parti forte. Dopo pochi giorni molli.</p><small>Card and step titles, phase names, plan titles, kg results (800), &quot;Se ti riconosci…&quot;</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H4</b><span>Bounded · Bold 700</span><span>LH 1.25 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>17</span><span><i>T</i>16</span><span><i>P</i>16</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:700;font-style:normal;font-size:17px;line-height:1.25;letter-spacing:0;text-transform:none;">Pietro Vecchi</p><small>Names on cards (team, videos, Pietro), &quot;Vuoi saperne di più?&quot;, +500 chip, 01–03 badges (800)</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Numeral L</b><span>Bounded · ExtraBold 800 / Black 900</span><span>LH 1.0 · LS -2% · —</span></div>
+      <div class="sizes"><span><i>D</i>56</span><span><i>T</i>44</span><span><i>P</i>40</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:800;font-style:normal;font-size:56px;line-height:1.0;letter-spacing:-0.02em;text-transform:none;">+10 anni</p><small>Numbers row (+500, +10 anni, 100%); 01–03 in Come funziona</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Numeral XL</b><span>Bounded · Black 900</span><span>LH 0.82 · LS -4% · —</span></div>
+      <div class="sizes"><span><i>D</i>92</span><span><i>T</i>80</span><span><i>P</i>64</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:900;font-style:normal;font-size:72px;line-height:0.82;letter-spacing:-0.04em;text-transform:none;">100%</p><small>100% in the guarantee card · shown at 72px</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Logo</b><span>Bounded · ExtraBold 800 Italic</span><span>LH 1.0 · LS +8% · UPPER</span></div>
+      <div class="sizes"><span><i>D</i>20</span><span><i>T</i>18</span><span><i>P</i>17</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:800;font-style:italic;font-size:20px;line-height:1.0;letter-spacing:0.08em;text-transform:uppercase;">OLTRESOGLIA</p><small>Wordmark in the nav (17 in the sticky bar and phone menu) until the logo SVG is in</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Menu link</b><span>Bounded · Bold 700</span><span>LH 1.1 · LS -1% · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>24</span><span><i>T</i>24</span><span><i>P</i>24</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:700;font-style:normal;font-size:24px;line-height:1.1;letter-spacing:-0.01em;text-transform:none;">Ebook gratuiti</p><small>Links in the phone/tablet menu</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Caption caps</b><span>Bounded · ExtraBold 800</span><span>LH 1.25 · LS 0 · UPPER</span></div>
+      <div class="sizes"><span><i>D</i>13</span><span><i>T</i>13</span><span><i>P</i>13</span></div>
+      <div class="sample"><p style="font-family:'Bounded', 'Archivo Black', sans-serif;font-weight:800;font-style:normal;font-size:13px;line-height:1.25;letter-spacing:0;text-transform:uppercase;">[TITOLO IN SOVRAIMPRESSIONE]</p><small>Title over the video thumbnails</small></div>
+    </div>
+  <p class="group">Manrope</p>
+  <div class="legend"><span>Style</span><span>D · T · P (px)</span><span>Sample · where it is used</span></div>
+    <div class="row">
+      <div class="meta"><b>Eyebrow</b><span>Manrope · SemiBold 600</span><span>LH 1.3 · LS +16% · UPPER</span></div>
+      <div class="sizes"><span><i>D</i>13</span><span><i>T</i>13</span><span><i>P</i>12</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:600;font-style:normal;font-size:13px;line-height:1.3;letter-spacing:0.16em;text-transform:uppercase;">RISULTATI E TESTIMONIANZE</p><small>Small label above each section title</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Lead</b><span>Manrope · Regular 400</span><span>LH 1.55 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>20</span><span><i>T</i>18</span><span><i>P</i>17</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:400;font-style:normal;font-size:20px;line-height:1.55;letter-spacing:0;text-transform:none;">Nel lavoro reggi tutto e tutti. Il tuo corpo è finito in fondo alla lista.</p><small>Intro paragraphs (hero, credo, team), the four week types</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Body L</b><span>Manrope · Bold 700</span><span>LH 1.5 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>18</span><span><i>T</i>17</span><span><i>P</i>16</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:700;font-style:normal;font-size:18px;line-height:1.5;letter-spacing:0;text-transform:none;">OLTRESOGLIA è il sistema per perdere grasso e tornare atletico</p><small>The bold hero sentence</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Body</b><span>Manrope · Regular 400 (bold leads 700)</span><span>LH 1.6 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>16</span><span><i>T</i>16</span><span><i>P</i>15</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:400700;font-style:normal;font-size:16px;line-height:1.6;letter-spacing:0;text-transform:none;">Ti rispondiamo noi e capiamo insieme da dove parti.</p><small>All running text: cards, steps, phases, comparison, lists, guarantee, note</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Small</b><span>Manrope · Medium 500</span><span>LH 1.45 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>13</span><span><i>T</i>13</span><span><i>P</i>13</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:500;font-style:normal;font-size:13px;line-height:1.45;letter-spacing:0;text-transform:none;">Test immediato · meno di 2&#x27;</p><small>Stat labels, captions under names, &quot;Test immediato · meno di 2&#x27;&quot;, footer line</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Label</b><span>Manrope · Bold 700</span><span>LH 1.0 · LS +12% (caps) · UPPER or Sentence</span></div>
+      <div class="sizes"><span><i>D</i>12</span><span><i>T</i>12</span><span><i>P</i>11</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:700;font-style:normal;font-size:12px;line-height:1.0;letter-spacing:0.12em;text-transform:uppercase;">FASE 1:</p><small>PRIMA / DOPO, FASE 1:, RIMBORSO, pills (&quot;in 8 mesi&quot;), menu numbers, photo-slot labels</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Button</b><span>Manrope · Bold 700</span><span>LH 1.2 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>15</span><span><i>T</i>15</span><span><i>P</i>14</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:700;font-style:normal;font-size:15px;line-height:1.2;letter-spacing:0;text-transform:none;">Ricevi gratis la strategia da cui ripartire →</p><small>Yellow buttons (14 in the nav and sticky bar)</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Button caps</b><span>Manrope · Bold 700</span><span>LH 1.2 · LS +10% · UPPER</span></div>
+      <div class="sizes"><span><i>D</i>13</span><span><i>T</i>13</span><span><i>P</i>12</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:700;font-style:normal;font-size:13px;line-height:1.2;letter-spacing:0.1em;text-transform:uppercase;">SCOPRI IL TEAM OLTRESOGLIA →</p><small>Outline and black buttons</small></div>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Nav</b><span>Manrope · Medium 500</span><span>LH 1.0 · LS 0 · Sentence</span></div>
+      <div class="sizes"><span><i>D</i>15</span><span><i>T</i>15</span><span><i>P</i>15</span></div>
+      <div class="sample"><p style="font-family:'Manrope', system-ui, sans-serif;font-weight:500;font-style:normal;font-size:15px;line-height:1.0;letter-spacing:0;text-transform:none;">La strategia</p><small>Navbar links (14 in the sticky bar and footer)</small></div>
+    </div>
+</div>
+</body>
+</html>
